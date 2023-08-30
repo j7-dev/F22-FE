@@ -13,6 +13,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2 # 使用官方的Checkout action來檢出你的代碼
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.15.0' # 指定要使用的 Node.js 版本
+
       - name: Yarn Install & Build
         run: yarn install && yarn build
 
