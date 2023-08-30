@@ -1,0 +1,18 @@
+.pnpm-store
+**/dist/**
+**/build/**
+**/node_modules/**
+**/vendor/**
+**/**/coverage
+php/**
+.snapshots/
+*.min.js
+**/*.d.ts
+
+# Built files
+/index.d.ts
+/index.cjs
+/index.mjs
+/plugins
+/shared
+/utils

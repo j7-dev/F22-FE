@@ -39,11 +39,11 @@ Refine offers lots of out-of-the box functionality for rapid development, withou
 
 To learn more about **refine**, please check out the [Documentation](https://refine.dev/docs)
 
-- **Strapi v4 Data Provider** [Docs](https://refine.dev/docs/core/providers/data-provider/#overview)
-- **Ant Design** [Docs](https://refine.dev/docs/ui-frameworks/antd/tutorial/)
-- **Inferencer** [Docs](https://refine.dev/docs/packages/documentation/inferencer)
-- **React Router** [Docs](https://refine.dev/docs/core/providers/router-provider/)
-- **i18n** [Docs](https://refine.dev/docs/core/providers/i18n-provider/)
+-   **Strapi v4 Data Provider** [Docs](https://refine.dev/docs/core/providers/data-provider/#overview)
+-   **Ant Design** [Docs](https://refine.dev/docs/ui-frameworks/antd/tutorial/)
+-   **Inferencer** [Docs](https://refine.dev/docs/packages/documentation/inferencer)
+-   **React Router** [Docs](https://refine.dev/docs/core/providers/router-provider/)
+-   **i18n** [Docs](https://refine.dev/docs/core/providers/i18n-provider/)
 
 ## License
 
