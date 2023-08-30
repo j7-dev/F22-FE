@@ -12,7 +12,7 @@ import {
     CatchAllNavigate,
     NavigateToResource,
 } from '@refinedev/react-router-v6';
-import Header from '../components/Header';
+import Header from '../components/Header/index';
 import {
     BlogPostCreate,
     BlogPostEdit,
