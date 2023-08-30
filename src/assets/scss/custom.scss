@@ -1,0 +1,174 @@
+body {
+	font-family: sans-serif, Graphik;
+	* {
+		box-sizing: border-box;
+		position: relative;
+		display: block;
+	}
+}
+a {
+	text-decoration: none;
+}
+li {
+	list-style: none;
+}
+//Header Menu A
+.navMenuItem.active {
+	color: #78d39d !important;
+}
+.navMenuItem {
+	a:hover ~ ul.submenu {
+		display: block !important;
+	}
+	& ul.submenu:hover {
+		display: block !important;
+	}
+	a.hasSubmenu {
+		&:after {
+			content: url("src/assets/images/dropdown-icon.svg");
+			margin-left: 5px;
+		}
+		&:hover:after {
+			content: url("src/assets/images/dropdown-hover-icon.svg");
+		}
+	}
+}
+
+.sideNav.overflow-y-scroll::-webkit-scrollbar {
+	width: 0;
+}
+.slick-prev,
+.slick-next {
+	width: 48px;
+	height: 48px;
+	top: 75%;
+	z-index: 1;
+}
+.slick-prev:before {
+	content: url("src/assets/images/prev-white-icon.svg") !important;
+}
+.slick-next:before {
+	content: url("src/assets/images/next-white-icon.svg") !important;
+}
+//Promotions自定義頁碼
+
+.ExclusivePromotions {
+	.navSlider {
+		.slick-slider {
+			display: flex;
+			align-items: center;
+			.slick-arrow {
+				display: block;
+				position: relative;
+				top: auto;
+				left: auto;
+				right: auto;
+				transform: translate(0, 0);
+			}
+			.slick-list {
+				.slick-current {
+					span {
+						background: #4ba1fa;
+						border-color: #4ba1fa;
+						color: #fff !important;
+					}
+				}
+			}
+		}
+	}
+}
+
+// terms-of-service css
+.terms-content__container {
+	p {
+		margin: 0;
+	}
+	p:first-child {
+		margin: 20px 0px;
+	}
+}
+
+//customer css
+.tableContent {
+	.contentList {
+		&:nth-child(even) {
+			background: #f3f3f4;
+		}
+	}
+}
+
+//wallet css
+.balanceListContainer:not(:last-child) {
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #dadce0;
+}
+
+$MyBalanceIcon: url("src/assets/images/credit-icon.svg");
+$MyBalanceHoverIcon: url("src/assets/images/credit-icon-hover.svg");
+$DepositIcon: url("src/assets/images/deposit-icon.svg");
+$DepositHoverIcon: url("src/assets/images/deposit-icon-hover.svg");
+$WithdrawIcon: url("src/assets/images/withdraw-icon.svg");
+$WithdrawHoverIcon: url("src/assets/images/withdraw-icon-hover.svg");
+
+.transactionButtonContainer {
+	.transactionButton {
+		background-color: #f3f3f4;
+		cursor: pointer;
+		span {
+			color: #2b3240;
+		}
+		&.MyBalance {
+			.transactionIcon {
+				background-image: $MyBalanceIcon;
+			}
+		}
+		&.Deposit {
+			.transactionIcon {
+				background-image: $DepositIcon;
+			}
+		}
+		&.Withdraw {
+			.transactionIcon {
+				background-image: $WithdrawIcon;
+			}
+		}
+
+		&:hover,
+		&.active {
+			background-color: #f9a318;
+			span {
+				color: #ffffff;
+			}
+
+			&.MyBalance {
+				.transactionIcon {
+					background-image: $MyBalanceHoverIcon;
+				}
+			}
+			&.Deposit {
+				.transactionIcon {
+					background-image: $DepositHoverIcon;
+				}
+			}
+			&.Withdraw {
+				.transactionIcon {
+					background-image: $WithdrawHoverIcon;
+				}
+			}
+		}
+	}
+}
+
+.ant-input {
+	text-align: right;
+}
+
+//languageSwitch
+.languageSwitchContain {
+	&:hover {
+		.languageSwitch {
+			display: flex !important;
+		}
+	}
+}

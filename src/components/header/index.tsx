@@ -25,9 +25,7 @@ type IUser = {
   avatar: string;
 };
 
-export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
-  sticky,
-}) => {
+const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
   const { token } = useToken();
   const { i18n } = useTranslation();
   const locale = useGetLocale();
@@ -96,3 +94,5 @@ export const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({
     </AntdLayout.Header>
   );
 };
+
+export default Header;
