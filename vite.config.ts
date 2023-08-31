@@ -6,7 +6,7 @@ export default defineConfig({
     plugins: [react(), tsconfigPaths()],
     build: {
         rollupOptions: {
-            external: [/^@\/assets\/images\/.*\.(jpg|png|jpeg|gif)$/],
+            external: [/^.\/src\/\/assets\/images\/.*\.(jpg|png|jpeg|gif)$/],
         },
     },
 });
