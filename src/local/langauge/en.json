@@ -1,6 +1,7 @@
 {
     "Home": "Home",
     "Live Casino": "Live Casino",
+    "Casino": "Casino",
     "Slot Game": "Slot Game",
     "Promotion": "Promotion",
     "Responsible Gaming": "Responsible Gaming",
@@ -8,6 +9,14 @@
     "Withdraw": "Withdraw",
     "Credit Transfer": "Credit Transfer",
     "Rollover": "Rollover",
+    "Baccarat": "Baccarat",
+    "Blackjack": "Blackjack",
+    "Roulette": "Roulette",
+    "Game Show": "Game Show",
+    "Dragon Tiger": "Dragon Tiger",
+    "Table Game": "Table Game",
+    "Dice": "Dice",
+    "All": "All",
     "Terms of Service": "Terms of Service",
     "Service Center": "Service Center",
     "Notice": "Notice",
@@ -103,5 +112,6 @@
     "Before Content": "Faithfully follow the rules you set for yourself<br>Judge based on overall wins and losses, not just the immediate loss<br>Know when to quit and when to attack<br>Calmly analyze the reasons for your losses",
     "Normal response time (approximate): 72 hours": "Normal response time (approximate): 72 hours",
     "Please contact us from your registered email address.": "Please contact us from your registered email address.",
-    "Please Select a game": "Please Select a game"
+    "Please Select a game": "Please Select a game",
+    "© Widus Royal Casino.": "© Widus Royal Casino. ALL RIGHTS RESERVED. <br>Owned and operated by Widus Royal Casino, and is regulated in compliance with the authorization License No. 8048/JAZ from the Government of Curacao, Netherlands territory."
 }

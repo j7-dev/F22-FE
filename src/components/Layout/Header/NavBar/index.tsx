@@ -6,11 +6,18 @@ import { useTranslation } from 'react-i18next';
 import { popupIsOpenAtom, IsLoginAtom } from '@/components/Layout/LoginPopUp';
 import SubMenuUI from './SubMenu';
 import logo from '@/assets/images/logo.png';
+import pragmaticplayFavicon from '@/assets/images/pragmaticplay_favicon.ico';
+import evolutionFavicon from '@/assets/images/evolution_favicon.png';
+import golfFavicon from '@/assets/images/golf_favicon.ico';
+import btiFavicon from '@/assets/images/bti_favicon.ico';
+import mgFavicon from '@/assets/images/mg_favicon.png';
+import agFavicon from '@/assets/images/ag_favicon.ico';
 
 export interface MenuItem {
     title: string;
-    path: string;
+    path?: string;
     submenu?: MenuItem[];
+    imgSrc?: string;
 }
 const NavBar: React.FC = () => {
     const { t } = useTranslation();
@@ -23,21 +30,71 @@ const NavBar: React.FC = () => {
         { title: 'Home', path: '/' },
         {
             title: 'Live Casino',
-            path: '/live',
+            // path: '/live',
             submenu: [
                 {
                     title: 'Evolution',
-                    path: '/evolution',
+                    path: '/evolution/live',
+                    imgSrc: evolutionFavicon,
                 },
                 {
                     title: 'Pragmatic Play',
-                    path: '/pragmatic',
+                    path: '/pragmatic/live',
+                    imgSrc: pragmaticplayFavicon,
+                },
+                {
+                    title: 'Soft Gamings',
+                    path: '/softgamings/live',
+                    imgSrc: agFavicon,
+                },
+                {
+                    title: 'Micro Gaming',
+                    path: '/microgaming/live',
+                    imgSrc: mgFavicon,
                 },
             ],
         },
         {
             title: 'Slot Game',
-            path: '/slots',
+            // path: '/slots',
+            submenu: [
+                {
+                    title: 'Evolution',
+                    path: '/evolution/slot',
+                    imgSrc: evolutionFavicon,
+                },
+                {
+                    title: 'Pragmatic Play',
+                    path: '/pragmatic/slot',
+                    imgSrc: pragmaticplayFavicon,
+                },
+                {
+                    title: 'Soft Gamings',
+                    path: '/softgamings/slot',
+                    imgSrc: agFavicon,
+                },
+                {
+                    title: 'Micro Gaming',
+                    path: '/microgaming/slot',
+                    imgSrc: mgFavicon,
+                },
+            ],
+        },
+        {
+            title: 'Sports',
+            // path: '/Sports',
+            submenu: [
+                {
+                    title: 'BTI',
+                    path: '/bti',
+                    imgSrc: btiFavicon,
+                },
+                {
+                    title: 'GIGX',
+                    path: '/gigx',
+                    imgSrc: golfFavicon,
+                },
+            ],
         },
         {
             title: 'Promotion',
@@ -47,10 +104,10 @@ const NavBar: React.FC = () => {
             title: 'Responsible Gaming',
             path: '/about',
         },
-        {
-            title: 'Terms of Service',
-            path: '/terms-of-service',
-        },
+        // {
+        //     title: 'Terms of Service',
+        //     path: '/terms-of-service',
+        // },
         {
             title: 'Service Center',
             path: '/customer',
@@ -103,8 +160,8 @@ const NavBar: React.FC = () => {
                         <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-between md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
                             <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-start md:gap-y-0 md:gap-x-7 md:mt-0 ">
                                 {fakeData.map((item) => {
-                                    const title = item?.title;
-                                    const path = item?.path;
+                                    const title = item?.title as string;
+                                    const path = item?.path as string;
                                     // 如果 item.submenu 存在（非空）則將 hasSubmenu 設置為 true
                                     const hasSubmenu = !!item?.submenu;
 

@@ -3,10 +3,16 @@ import Layout from '@/components/Layout';
 import Home from '@/pages/Home';
 import About from '@/pages/About';
 import PromotionPage from '@/pages/Promotion';
-import Live from '@/pages/Taxonomy/Live';
-import Evolution from '@/pages/Taxonomy/Evolution';
-import Pragmatic from '@/pages/Taxonomy/Pragmatic';
-import Slot from '@/pages/Taxonomy/Slot';
+import EvolutionLive from '@/pages/Taxonomy/Live/Evolution';
+import PragmaticLive from '@/pages/Taxonomy/Live/Pragmatic';
+import SoftGamingsLive from '@/pages/Taxonomy/Live/SoftGamings';
+import MicroGamingLive from '@/pages/Taxonomy/Live/MicroGaming';
+import EvolutionSlot from '@/pages/Taxonomy/Slot/Evolution';
+import PragmaticSlot from '@/pages/Taxonomy/Slot/Pragmatic';
+import SoftGamingsSlot from '@/pages/Taxonomy/Slot/SoftGamings';
+import MicroGamingSlot from '@/pages/Taxonomy/Slot/MicroGaming';
+import Bti from '@/pages/Taxonomy/Sports/BTI';
+import Gigx from '@/pages/Taxonomy/Sports/GIGX';
 import TermsOfService from '@/pages/TermsOfService';
 import Customer from '@/pages/Customer';
 import Wallet from '@/pages/Wallet';
@@ -29,25 +35,50 @@ const router = createBrowserRouter([
                 element: <PromotionPage />,
             },
             {
-                path: '/live',
-                element: <Live />,
+                path: '/evolution/live',
+                element: <EvolutionLive />,
             },
             {
-                path: '/evolution',
-                element: <Evolution />,
+                path: '/pragmatic/live',
+                element: <PragmaticLive />,
             },
             {
-                path: '/pragmatic',
-                element: <Pragmatic />,
+                path: '/softgamings/live',
+                element: <SoftGamingsLive />,
             },
             {
-                path: '/slots',
-                element: <Slot />,
+                path: '/microgaming/live',
+                element: <MicroGamingLive />,
+            },
+            {
+                path: '/evolution/slot',
+                element: <EvolutionSlot />,
+            },
+            {
+                path: '/pragmatic/slot',
+                element: <PragmaticSlot />,
+            },
+            {
+                path: '/softgamings/slot',
+                element: <SoftGamingsSlot />,
+            },
+            {
+                path: '/microgaming/slot',
+                element: <MicroGamingSlot />,
+            },
+            {
+                path: '/bti',
+                element: <Bti />,
+            },
+            {
+                path: '/gigx',
+                element: <Gigx />,
             },
             {
                 path: '/terms-of-service',
                 element: <TermsOfService />,
             },
+
             {
                 path: '/customer',
                 element: <Customer />,

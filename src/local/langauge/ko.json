@@ -1,6 +1,7 @@
 {
     "Home": "집",
     "Live Casino": "라이브 카지노",
+    "Casino": "카지노",
     "Slot Game": "슬롯 게임",
     "Promotion": "프로모션",
     "Responsible Gaming": "책임 게임",
@@ -8,6 +9,14 @@
     "Withdraw": "출금",
     "Credit Transfer": "크레딧 이체",
     "Rollover": "롤오버",
+    "Baccarat": "바카라",
+    "Blackjack": "블랙잭",
+    "Roulette": "룰렛",
+    "Game Show": "게임쇼",
+    "Dragon Tiger": "드래곤 타이거",
+    "Table Game": "테이블 게임",
+    "Dice": "주사위",
+    "All": "모두",
     "Terms of Service": "이용 약관",
     "Service Center": "서비스 센터",
     "Notice": "공지",
@@ -103,5 +112,6 @@
     "Before Content": "여러분을 위한 몇 가지 유용한 정보가 있습니다. 본인이 설정한 규칙을 충실히 따르십시오 즉각적인 손실만이 아닌 전체의 이기고 지는 것을 기준으로 판단하십시오 언제 그만둘지와 언제 공격할지 알아야 합니다 손실의 원인을 차분히 분석하십시오",
     "Normal response time (approximate): 72 hours": "정상적인 응답 시간 (대략): 72시간 ",
     "Please contact us from your registered email address.": "등록된 이메일 주소로 저희에게 연락해 주세요.",
-    "Please Select a game": "게임을 선택해 주세요"
+    "Please Select a game": "게임을 선택해 주세요",
+    "© Widus Royal Casino.": "© Widus Royal Casino. 모든 권리 보유. <br>Widus Royal Casino 이 소유하고 운영하며, 네덜란드령 큐라소 정부의 허가 번호 8048/JAZ에 따라 규제를 받고 있습니다."
 }

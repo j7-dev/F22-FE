@@ -1,53 +1,156 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
-import { useSetAtom } from 'jotai';
-import { popupIsOpenAtom } from '@/components/Layout/LoginPopUp';
+import { useTranslation, Trans } from 'react-i18next';
+// import { useSetAtom } from 'jotai';
+import { Link } from 'react-router-dom';
+import { MenuItem } from '@/components/Layout/Header/NavBar';
+// import { popupIsOpenAtom } from '@/components/Layout/LoginPopUp';
 import fakeFooterImg from '@/assets/images/fakeFooterImg.png';
 import gcLogoImg from '@/assets/images/gc-logo.png';
+import pragmaticplayFavicon from '@/assets/images/pragmaticplay_favicon.ico';
+import evolutionFavicon from '@/assets/images/evolution_favicon.png';
+import golfFavicon from '@/assets/images/golf_favicon.ico';
+import btiFavicon from '@/assets/images/bti_favicon.ico';
+import mgFavicon from '@/assets/images/mg_favicon.png';
+import agFavicon from '@/assets/images/ag_favicon.ico';
+import { fakeProviderData } from '@/pages/Home/Provider/ProviderData';
 
 export const Footer: React.FC = () => {
-    const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
+    const { t } = useTranslation();
+    // TODO 要改成從後端拿
+    const fakeData: MenuItem[] = [
+        {
+            title: 'Live Casino',
+            // path: '/live',
+            submenu: [
+                {
+                    title: 'Evolution',
+                    path: '/evolution/live',
+                    imgSrc: evolutionFavicon,
+                },
+                {
+                    title: 'Pragmatic Play',
+                    path: '/pragmatic/live',
+                    imgSrc: pragmaticplayFavicon,
+                },
+                {
+                    title: 'Soft Gamings',
+                    path: '/softgamings/live',
+                    imgSrc: agFavicon,
+                },
+                {
+                    title: 'Micro Gaming',
+                    path: '/microgaming/live',
+                    imgSrc: mgFavicon,
+                },
+            ],
+        },
+        {
+            title: 'Slot Game',
+            // path: '/slots',
+            submenu: [
+                {
+                    title: 'Evolution',
+                    path: '/evolution/slot',
+                    imgSrc: evolutionFavicon,
+                },
+                {
+                    title: 'Pragmatic Play',
+                    path: '/pragmatic/slot',
+                    imgSrc: pragmaticplayFavicon,
+                },
+                {
+                    title: 'Soft Gamings',
+                    path: '/softgamings/slot',
+                    imgSrc: agFavicon,
+                },
+                {
+                    title: 'Micro Gaming',
+                    path: '/microgaming/slot',
+                    imgSrc: mgFavicon,
+                },
+            ],
+        },
+        {
+            title: 'Sports',
+            // path: '/Sports',
+            submenu: [
+                {
+                    title: 'BTI',
+                    path: '/bti',
+                    imgSrc: btiFavicon,
+                },
+                {
+                    title: 'GIGX',
+                    path: '/gigx',
+                    imgSrc: golfFavicon,
+                },
+            ],
+        },
+    ];
+    const ProviderData = fakeProviderData;
+    // const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     // const popupIsOpen = useAtomValue(popupIsOpenAtom);
-    const handleClick = () => {
-        setPopupIsOpen((prevValue) => !prevValue);
-        // console.log('popupIsOpenAtom', popupIsOpen);
-    };
+    // const handleClick = () => {
+    //     setPopupIsOpen((prevValue) => !prevValue);
+    //     // console.log('popupIsOpenAtom', popupIsOpen);
+    // };
     return (
         <div className="bg-[#f3F3F4] w-full pt-5 pb-20 text-black font-bold">
             <div className="border-solid border-b-[1px] border-0 border-[#48516066]">
-                <div className="flex flex-row justify-between max-w-6xl mx-auto  pb-20">
-                    {new Array(4).fill(0).map(() => (
-                        <div key={nanoid()} className="footer-section">
-                            <h3 className="font-base ">Game Categories</h3>
-                            <ul className="px-0">
-                                {new Array(5).fill(0).map(() => (
-                                    <li key={nanoid()} className="py-1">
-                                        <span
-                                            className="text-sm text-black hover:text-[#78D39D] cursor-pointer"
-                                            onClick={handleClick}
-                                        >
-                                            Baccarat
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
+                <div className="flex flex-row justify-between max-w-3xl mx-auto  pb-20">
+                    {fakeData.map((item) => {
+                        const subMenu = item?.submenu as MenuItem[];
+                        const hasSubmenu = !!item?.submenu;
+                        return (
+                            <div key={nanoid()} className="footer-section">
+                                <h3 className="font-base ">{t(item.title)}</h3>
+                                <ul className="px-0 submenu flex flex-col gap-2.5 w-auto my-0 h-auto">
+                                    {hasSubmenu && (
+                                        <>
+                                            {subMenu.map((subItem) => (
+                                                <li
+                                                    key={nanoid()}
+                                                    className="flex items-center gap-2.5 cursor-pointer"
+                                                >
+                                                    <img
+                                                        src={subItem.imgSrc}
+                                                        alt=""
+                                                        className="w-[24px] h-[24px]"
+                                                    />
+                                                    <Link
+                                                        className="text-gray-500 hover:text-[#78d39d]"
+                                                        to={
+                                                            subItem.path as string
+                                                        }
+                                                    >
+                                                        {subItem.title}
+                                                    </Link>
+                                                </li>
+                                            ))}
+                                        </>
+                                    )}
+                                </ul>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
             <div className="footerImgWarp max-w-5xl flex justify-between mx-auto items-center gap-4 mt-4">
-                {new Array(5).fill(0).map(() => (
+                {ProviderData.map((item) => (
                     <div key={nanoid()} className="footerImg">
-                        <img src={fakeFooterImg} alt="" />
+                        <img
+                            src={item.ProviderImg}
+                            alt=""
+                            className="max-w-[120px]"
+                        />
                     </div>
                 ))}
             </div>
-            <div className="footerImgWarp max-w-5xl flex justify-center mx-auto h-12 items-center gap-8 mt-4">
-                <img className="h-full" src={gcLogoImg} alt="" />
-                <img className="h-full" src={gcLogoImg} alt="" />
-                <span>© 2023 F22 . All rights reserved</span>
-                <img className="h-full" src={gcLogoImg} alt="" />
-                <img className="h-full" src={gcLogoImg} alt="" />
+            <div className="footerImgWarp max-w-5xl flex justify-center mx-auto h-auto items-center gap-8 mt-4">
+                <span className="text-center">
+                    <Trans i18nKey="© Widus Royal Casino." />
+                </span>
             </div>
         </div>
     );
