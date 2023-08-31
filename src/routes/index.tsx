@@ -12,7 +12,7 @@ import {
     CatchAllNavigate,
     NavigateToResource,
 } from '@refinedev/react-router-v6';
-import Header from '../components/Header/index';
+import AdminHeader from '@/components/AdminHeader';
 import {
     BlogPostCreate,
     BlogPostEdit,
@@ -48,7 +48,7 @@ const index = () => {
                         fallback={<CatchAllNavigate to="/refine/login" />}
                     >
                         <ThemedLayoutV2
-                            Header={() => <Header sticky />}
+                            Header={() => <AdminHeader sticky />}
                             Sider={(props) => (
                                 <ThemedSiderV2 {...props} fixed />
                             )}
