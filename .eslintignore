@@ -16,3 +16,4 @@ php/**
 /plugins
 /shared
 /utils
+*.config.js
