@@ -68,9 +68,11 @@ li {
 			.slick-list {
 				.slick-current {
 					span {
-						background: #4ba1fa;
-						border-color: #4ba1fa;
-						color: #fff !important;
+						span {
+							background: #4ba1fa;
+							border-color: #4ba1fa;
+							color: #fff !important;
+						}
 					}
 				}
 			}

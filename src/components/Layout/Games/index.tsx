@@ -1,9 +1,11 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
+import { useTranslation } from 'react-i18next';
 import Game from './Game';
 import gameImg from '@/assets/images/messageImage_1693412354632.jpg';
 
 const Games: React.FC = () => {
+    const { t } = useTranslation();
     const fakeGames = [
         { title: 'Game1', imgSrc: gameImg },
         { title: 'Game2', imgSrc: gameImg },
@@ -17,7 +19,7 @@ const Games: React.FC = () => {
         <div className="my-20 max-w-3xl mx-auto ">
             <div className="gameHeader flex flex-row justify-between my-2">
                 <span className="gameTaxonomyTitle text-base tracking-wide font-bold ">
-                    Top Games
+                    {t('Top Games')}
                 </span>
                 <span className="gameLink text-[#357ACB] text-sm tracking-wide">
                     View All

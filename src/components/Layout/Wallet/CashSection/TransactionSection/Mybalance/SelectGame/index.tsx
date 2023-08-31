@@ -1,5 +1,6 @@
 import React from 'react';
 import { Select, Form } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 interface SelectGameProps {
     label?: string;
@@ -7,6 +8,7 @@ interface SelectGameProps {
     className?: string;
 }
 const index: React.FC<SelectGameProps> = ({ label, itemName, className }) => {
+    const { t } = useTranslation();
     const fakeSelect = [
         {
             label: 'Manager',
@@ -29,7 +31,7 @@ const index: React.FC<SelectGameProps> = ({ label, itemName, className }) => {
                 <Select
                     className="w-full"
                     showSearch
-                    placeholder="Please Select a game"
+                    placeholder={t('Please Select a game')}
                     optionFilterProp="children"
                     filterOption={(input, option) =>
                         (option?.label ?? '')

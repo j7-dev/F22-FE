@@ -1,11 +1,13 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { nanoid } from 'nanoid';
+import { useTranslation } from 'react-i18next';
 import { GrFormClose } from 'react-icons/gr';
 import { FilterGamesIsOpenAtom } from '../index';
 import Game from '../../Games/Game';
 
 const FilterGames: React.FC = () => {
+    const { t } = useTranslation();
     const [
         FilterGamesIsOpen,
         setFilterGamesIsOpen,
@@ -27,10 +29,10 @@ const FilterGames: React.FC = () => {
                     <GrFormClose size={40} />
                 </div>
                 <div className="gamesCategoryInfo w-auto text-center">
-                    <h3 className="gamesCategory mb-2">
-                        All Games (Evolution)
-                    </h3>
-                    <span className="gamesCategoryDes">242 Games found</span>
+                    <h3 className="gamesCategory mb-2">{t('All Games')}</h3>
+                    <span className="gamesCategoryDes">
+                        242 {t('Games found')}
+                    </span>
                 </div>
                 <div className="gamesWrap">
                     <ul className="m-0 p-0 flex justify-start items-center flex-wrap gap-y-2.5">

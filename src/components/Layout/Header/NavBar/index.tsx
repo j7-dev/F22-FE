@@ -44,7 +44,7 @@ const NavBar: React.FC = () => {
             path: '/promotion',
         },
         {
-            title: 'About',
+            title: 'Responsible Gaming',
             path: '/about',
         },
         {
@@ -52,7 +52,7 @@ const NavBar: React.FC = () => {
             path: '/terms-of-service',
         },
         {
-            title: 'Customer',
+            title: 'Service Center',
             path: '/customer',
         },
     ];

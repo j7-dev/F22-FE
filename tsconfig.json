@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"target": "ESNext",
+		"target": "ES2020",
 		"useDefineForClassFields": true,
 		"lib": [
 			"DOM",
@@ -9,27 +9,30 @@
 		],
 		"allowJs": false,
 		"skipLibCheck": true,
-		"esModuleInterop": false,
+		"declaration": true,
+		"preserveSymlinks": true,
+		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,
-		"module": "ESNext",
+		"module": "ES2020",
 		"moduleResolution": "Node",
 		"resolveJsonModule": true,
+		"noUnusedLocals": true,
+		"outDir": "dist",
+		"sourceMap": true,
 		"isolatedModules": true,
 		"noEmit": true,
 		"jsx": "react-jsx",
-		"baseUrl": "src/",
+		"baseUrl": "./src/",
 		"paths": {
 			"@/*": [
 				"./*"
-			],
+			]
 		}
 	},
 	"include": [
-		"src/**/*.ts",
-		"src/**/*.tsx",
-		"vite.config.ts"
+		"src"
 	],
 	"references": [
 		{

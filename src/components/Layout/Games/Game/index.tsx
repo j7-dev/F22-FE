@@ -15,8 +15,16 @@ const index: React.FC = () => (
         </div>
         <div className="gameInfo bg-[#363F4E] px-2 py-2">
             <div className="games-provider flex justify-between">
-                <img className="gamePlatform" src={wallet1058} alt="" />
-                <img className="tooltip-img" src={tooltipIcon} alt="" />
+                <img
+                    className="gamePlatform"
+                    src={wallet1058 as unknown as string}
+                    alt=""
+                />
+                <img
+                    className="tooltip-img"
+                    src={tooltipIcon as unknown as string}
+                    alt=""
+                />
             </div>
             <span className="gameName text-white line-clamp-1 mt-2 text-sm">
                 Japanese Speed Baccarat A

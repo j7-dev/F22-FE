@@ -1,11 +1,13 @@
 import React from 'react';
 import Slider from 'react-slick';
 import { nanoid } from 'nanoid';
+import { useTranslation } from 'react-i18next';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Promotion from './Promotion';
 
 const Promotions: React.FC = () => {
+    const { t } = useTranslation();
     const settings = {
         accessibility: true,
         dots: false,
@@ -18,7 +20,7 @@ const Promotions: React.FC = () => {
         <div className="my-20 max-w-7xl mx-auto ">
             <div className="PromotionHeader flex flex-row justify-between my-2">
                 <span className="PromotionTaxonomyTitle text-base tracking-wide font-bold ">
-                    Top Promotions
+                    {t('Exclusive Promotions')}
                 </span>
                 <span className="PromotionLink text-[#357ACB] text-sm tracking-wide">
                     View All
