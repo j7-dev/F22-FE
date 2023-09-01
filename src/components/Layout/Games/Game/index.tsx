@@ -6,14 +6,14 @@ import baccaratImg from '@/assets/images/baccaratImg.png';
 import dragontigerImg from '@/assets/images/dragontigerImg.png';
 
 type GameProps = {
-    data: {
+    data?: {
         'Table Name': string;
         'Table ID': string;
         'Direct Launch Table ID': string;
         'Game Type': string;
     };
 };
-const index: React.FC<GameProps> = ({ data }) => (
+const index: React.FC<GameProps> = ({ data = {} }) => (
     <div className="gameWrap w-full px-1">
         <div className="gameImg w-full aspect-square relative">
             <img
