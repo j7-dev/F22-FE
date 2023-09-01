@@ -2,7 +2,7 @@ import { nanoid } from 'nanoid';
 import { useTranslation } from 'react-i18next';
 import Banner from '../../components/Layout/Banner';
 import Provider from './Provider';
-import Promotions from '../../components/Layout/Promotions';
+// import Promotions from '../../components/Layout/Promotions';
 import { fakeProviderData } from './Provider/ProviderData';
 
 const Home = () => {
@@ -27,7 +27,7 @@ const Home = () => {
                     </div>
                 ))}
             </div>
-            <Promotions />
+            {/* <Promotions /> */}
         </div>
     );
 };

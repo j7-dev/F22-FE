@@ -3,89 +3,19 @@ import { nanoid } from 'nanoid';
 import { useTranslation, Trans } from 'react-i18next';
 // import { useSetAtom } from 'jotai';
 import { Link } from 'react-router-dom';
-import { MenuItem } from '@/components/Layout/Header/NavBar';
+import { MenuItem, fakeMenuData } from '@/components/Layout/Header/MenuData';
 // import { popupIsOpenAtom } from '@/components/Layout/LoginPopUp';
-import pragmaticplayFavicon from '@/assets/images/pragmaticplay_favicon.ico';
-import evolutionFavicon from '@/assets/images/evolution_favicon.png';
-import golfFavicon from '@/assets/images/golf_favicon.ico';
-import btiFavicon from '@/assets/images/bti_favicon.ico';
-import mgFavicon from '@/assets/images/mg_favicon.png';
-import agFavicon from '@/assets/images/ag_favicon.ico';
 import { fakeProviderData } from '@/pages/Home/Provider/ProviderData';
 
 export const Footer: React.FC = () => {
     const { t } = useTranslation();
     // TODO 要改成從後端拿
-    const fakeData: MenuItem[] = [
-        {
-            title: 'Live Casino',
-            // path: '/live',
-            submenu: [
-                {
-                    title: 'Evolution',
-                    path: '/evolution/live',
-                    imgSrc: evolutionFavicon,
-                },
-                {
-                    title: 'Pragmatic Play',
-                    path: '/pragmatic/live',
-                    imgSrc: pragmaticplayFavicon,
-                },
-                {
-                    title: 'Soft Gamings',
-                    path: '/softgamings/live',
-                    imgSrc: agFavicon,
-                },
-                {
-                    title: 'Micro Gaming',
-                    path: '/microgaming/live',
-                    imgSrc: mgFavicon,
-                },
-            ],
-        },
-        {
-            title: 'Slot Game',
-            // path: '/slots',
-            submenu: [
-                {
-                    title: 'Evolution',
-                    path: '/evolution/slot',
-                    imgSrc: evolutionFavicon,
-                },
-                {
-                    title: 'Pragmatic Play',
-                    path: '/pragmatic/slot',
-                    imgSrc: pragmaticplayFavicon,
-                },
-                {
-                    title: 'Soft Gamings',
-                    path: '/softgamings/slot',
-                    imgSrc: agFavicon,
-                },
-                {
-                    title: 'Micro Gaming',
-                    path: '/microgaming/slot',
-                    imgSrc: mgFavicon,
-                },
-            ],
-        },
-        {
-            title: 'Sports',
-            // path: '/Sports',
-            submenu: [
-                {
-                    title: 'BTI',
-                    path: '/bti',
-                    imgSrc: btiFavicon,
-                },
-                {
-                    title: 'GIGX',
-                    path: '/gigx',
-                    imgSrc: golfFavicon,
-                },
-            ],
-        },
-    ];
+    const fakeData = fakeMenuData.filter(
+        (item) =>
+            item.title === 'Live Casino' ||
+            item.title === 'Slot Game' ||
+            item.title === 'Sports',
+    );
     const ProviderData = fakeProviderData;
     // const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     // const popupIsOpen = useAtomValue(popupIsOpenAtom);
@@ -147,7 +77,7 @@ export const Footer: React.FC = () => {
             </div>
             <div className="footerImgWarp max-w-5xl flex justify-center mx-auto h-auto items-center gap-8 mt-4">
                 <span className="text-center">
-                    <Trans i18nKey="© Widus Royal Casino." />
+                    <Trans i18nKey="© Smart Bet Casino" />
                 </span>
             </div>
         </div>

@@ -12,12 +12,20 @@ import Game from '@/components/Layout/Games/Game';
 import fakeGameData from './fakeGameData.json';
 
 const Evolution: React.FC = () => {
-    // TODO 未來須重新設計atom
+    const { t } = useTranslation();
+
     const [
         GameTypeValue,
         setGameType,
     ] = useAtom(GameTypeAtom);
     const setGameCategoryState = useSetAtom(GameCategoryStateAtom);
+
+    const games =
+        GameTypeValue !== 'all'
+            ? fakeGameData.data.filter(
+                  (item) => item['Game Type'] === GameTypeValue,
+              )
+            : fakeGameData.data;
 
     useEffect(() => {
         setGameType('all');
@@ -25,13 +33,6 @@ const Evolution: React.FC = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    const { t } = useTranslation();
-    const games =
-        GameTypeValue !== 'all'
-            ? fakeGameData.data.filter(
-                  (item) => item['Game Type'] === GameTypeValue,
-              )
-            : fakeGameData.data;
     return (
         <div className="w-full h-auto bg-[#F6F7F7] pb-20">
             <div className="h-20 bg-white" />
@@ -54,14 +55,23 @@ const Evolution: React.FC = () => {
                         </div>
                         <div className="gamesWrap w-full">
                             <ul className="m-0 p-0 flex justify-start items-center flex-wrap gap-y-2.5">
-                                {games.map((item) => (
-                                    <li
-                                        key={nanoid()}
-                                        className="w-[calc(100%/7)] flex flex-col justify-center items-center cursor-pointer "
-                                    >
-                                        <Game data={item} />
-                                    </li>
-                                ))}
+                                {games.map((item, index) => {
+                                    // TODO 目前是放假圖片
+                                    const fakePic = `/src/assets/images/fakeGamePic/exsamplePic (${
+                                        index + 1
+                                    }).png`;
+                                    return (
+                                        <li
+                                            key={nanoid()}
+                                            className="w-[calc(100%/7)] flex flex-col justify-center items-center cursor-pointer "
+                                        >
+                                            <Game
+                                                data={item}
+                                                fakePic={fakePic}
+                                            />
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         </div>
                     </div>

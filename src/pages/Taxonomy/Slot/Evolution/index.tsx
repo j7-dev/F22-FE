@@ -1,36 +1,40 @@
 import React, { useEffect } from 'react';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { useTranslation } from 'react-i18next';
-import { useAtom, useSetAtom } from 'jotai';
 import {
-    GameTypeAtom,
+    // useAtom,
+    useSetAtom,
+} from 'jotai';
+import {
+    // GameTypeAtom,
     GameCategoryStateAtom,
 } from '@/pages/Taxonomy/AtomSetting';
 import GameType from '@/components/Layout/SearchBar/GameType';
 import GameCategory from '@/components/Layout/SearchBar/GameCategory';
-import Game from '@/components/Layout/Games/Game';
-import fakeGameData from './fakeGameData.json';
+// import Game from '@/components/Layout/Games/Game';
+// import fakeGameData from './fakeGameData.json';
+import MaintainImg from '@/assets/images/maintain.png';
 
 const Evolution: React.FC = () => {
     // TODO 未來須重新設計atom
-    const [
-        GameTypeValue,
-        setGameType,
-    ] = useAtom(GameTypeAtom);
+    // const [
+    //     GameTypeValue,
+    //     setGameType,
+    // ] = useAtom(GameTypeAtom);
     const setGameCategoryState = useSetAtom(GameCategoryStateAtom);
     useEffect(() => {
-        setGameType('all');
+        // setGameType('all');
         setGameCategoryState('slot');
         window.scrollTo(0, 0);
     }, []);
 
     const { t } = useTranslation();
-    const games =
-        GameTypeValue !== 'all'
-            ? fakeGameData.data.filter(
-                  (item) => item['Game Type'] === GameTypeValue,
-              )
-            : fakeGameData.data;
+    // const games =
+    //     GameTypeValue !== 'all'
+    //         ? fakeGameData.data.filter(
+    //               (item) => item['Game Type'] === GameTypeValue,
+    //           )
+    //         : fakeGameData.data;
     return (
         <div className="w-full h-auto bg-[#F6F7F7] pb-20">
             <div className="h-20 bg-white" />
@@ -48,19 +52,24 @@ const Evolution: React.FC = () => {
                                 Evolution {t('Slot Game')}
                             </h3>
                             <span className="gamesCategoryDes">
-                                {games.length} {t('Games found')}
+                                {/* {games.length} {t('Games found')} */}
                             </span>
                         </div>
                         <div className="gamesWrap w-full">
                             <ul className="m-0 p-0 flex justify-start items-center flex-wrap gap-y-2.5">
-                                {games.map((item) => (
+                                <img
+                                    src={MaintainImg}
+                                    alt=""
+                                    className="m-auto"
+                                />
+                                {/* {games.map((item) => (
                                     <li
                                         key={nanoid()}
                                         className="w-[calc(100%/7)] flex flex-col justify-center items-center cursor-pointer "
                                     >
                                         <Game data={item} />
                                     </li>
-                                ))}
+                                ))} */}
                             </ul>
                         </div>
                     </div>
