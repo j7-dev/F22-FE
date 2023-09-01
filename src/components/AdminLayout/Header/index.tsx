@@ -14,7 +14,7 @@ import {
 import { Layout as AntdLayout, Avatar, Dropdown, MenuProps } from 'antd';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ColorModeContext } from '../../../contexts/color-mode';
+import { ColorModeContext } from '@/contexts/color-mode';
 import useColor from '@/hooks/useColor';
 import { useQueryClient } from '@tanstack/react-query';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ITreeMenu, CanAccess, useMenu } from '@refinedev/core';
 import { Link } from 'react-router-dom';
 import { Sider, ThemedTitleV2 } from '@refinedev/antd';
