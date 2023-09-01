@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 // import GameCategory from '@/components/Layout/SearchBar/GameCategory';
 // import Game from '@/components/Layout/Games/Game';
 // import fakeGameData from './fakeGameData.json';
-import MaintainImg from '@/assets/images/maintain.png';
+import MaintainImg from '@/assets/images/Maintain.png';
 
 const Evolution: React.FC = () => {
     const { t } = useTranslation();

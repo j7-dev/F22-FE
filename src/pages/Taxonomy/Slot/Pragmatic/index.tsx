@@ -13,7 +13,7 @@ import GameType from '@/components/Layout/SearchBar/GameType';
 import GameCategory from '@/components/Layout/SearchBar/GameCategory';
 // import Game from '@/components/Layout/Games/Game';
 // import fakeGameData from './fakeGameData.json';
-import MaintainImg from '@/assets/images/maintain.png';
+import MaintainImg from '@/assets/images/Maintain.png';
 
 const Evolution: React.FC = () => {
     // TODO 未來須重新設計atom
