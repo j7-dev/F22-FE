@@ -1,11 +1,11 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import { useTranslation } from 'react-i18next';
-import { atom, useAtomValue } from 'jotai';
-import GameType from '@/components/Layout/SearchBar/GameType';
-import GameCategory from '@/components/Layout/SearchBar/GameCategory';
-import Game from '@/components/Layout/Games/Game';
-import fakeGameData from './fakeGameData.json';
+import { atom } from 'jotai';
+// import GameType from '@/components/Layout/SearchBar/GameType';
+// import GameCategory from '@/components/Layout/SearchBar/GameCategory';
+// import Game from '@/components/Layout/Games/Game';
+// import fakeGameData from './fakeGameData.json';
 
 export const GameTypeAtom = atom('all');
 

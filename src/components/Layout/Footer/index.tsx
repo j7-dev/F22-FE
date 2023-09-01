@@ -5,8 +5,6 @@ import { useTranslation, Trans } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MenuItem } from '@/components/Layout/Header/NavBar';
 // import { popupIsOpenAtom } from '@/components/Layout/LoginPopUp';
-import fakeFooterImg from '@/assets/images/fakeFooterImg.png';
-import gcLogoImg from '@/assets/images/gc-logo.png';
 import pragmaticplayFavicon from '@/assets/images/pragmaticplay_favicon.ico';
 import evolutionFavicon from '@/assets/images/evolution_favicon.png';
 import golfFavicon from '@/assets/images/golf_favicon.ico';
