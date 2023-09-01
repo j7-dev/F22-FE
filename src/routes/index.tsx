@@ -1,4 +1,3 @@
-import React from 'react';
 import { Outlet, Routes, Route } from 'react-router-dom';
 import { Authenticated } from '@refinedev/core';
 import { AuthPage, ErrorComponent, ThemedLayoutV2 } from '@refinedev/antd';
@@ -20,7 +19,7 @@ import {
     CategoryList,
     CategoryShow,
 } from '@/pages/Admin/categories';
-import ContentLayout from '@/components/Layout';
+import ContentLayout from '@/components/ContentLayout';
 import contentRoutes from '@/routes/content';
 import refineRoutes from '@/routes/refine';
 

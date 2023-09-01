@@ -1,57 +1,86 @@
-import React from 'react';
 import { TRoute } from '@/types';
-import ContentAbout from '@/pages/Content/About';
-import ContentHome from '@/pages/Content/Home';
-import ContentPromotionPage from '@/pages/Content/Promotion';
-import ContentLive from '@/pages/Content/Taxonomy/Live';
-import ContentEvolution from '@/pages/Content/Taxonomy/Evolution';
-import ContentPragmatic from '@/pages/Content/Taxonomy/Pragmatic';
-import ContentSlot from '@/pages/Content/Taxonomy/Slot';
-import ContentTermsOfService from '@/pages/Content/TermsOfService';
-import ContentCustomer from '@/pages/Content/Customer';
-import ContentWallet from '@/pages/Content/Wallet';
+import About from '@/pages/Content/About';
+import Home from '@/pages/Content/Home';
+import PromotionPage from '@/pages/Content/Promotion';
+import EvolutionLive from '@/pages/Content/Taxonomy/Live/Evolution';
+import PragmaticLive from '@/pages/Content/Taxonomy/Live/Pragmatic';
+import SoftGamingsLive from '@/pages/Content/Taxonomy/Live/SoftGamings';
+import MicroGamingLive from '@/pages/Content/Taxonomy/Live/MicroGaming';
+import EvolutionSlot from '@/pages/Content/Taxonomy/Slot/Evolution';
+import PragmaticSlot from '@/pages/Content/Taxonomy/Slot/Pragmatic';
+import SoftGamingsSlot from '@/pages/Content/Taxonomy/Slot/SoftGamings';
+import MicroGamingSlot from '@/pages/Content/Taxonomy/Slot/MicroGaming';
+import Bti from '@/pages/Content/Taxonomy/Sports/BTI';
+import Gigx from '@/pages/Content/Taxonomy/Sports/GIGX';
+import TermsOfService from '@/pages/Content/TermsOfService';
+import Customer from '@/pages/Content/Customer';
+import Wallet from '@/pages/Content/Wallet';
 
-const contentRoutes: TRoute[] = [
+const Routes: TRoute[] = [
     {
         path: '/',
-        element: <ContentHome />,
+        element: <Home />,
     },
     {
         path: '/about',
-        element: <ContentAbout />,
+        element: <About />,
     },
     {
         path: '/promotion',
-        element: <ContentPromotionPage />,
+        element: <PromotionPage />,
     },
     {
-        path: '/live',
-        element: <ContentLive />,
+        path: '/evolution/live',
+        element: <EvolutionLive />,
     },
     {
-        path: '/evolution',
-        element: <ContentEvolution />,
+        path: '/pragmatic/live',
+        element: <PragmaticLive />,
     },
     {
-        path: '/pragmatic',
-        element: <ContentPragmatic />,
+        path: '/softgamings/live',
+        element: <SoftGamingsLive />,
     },
     {
-        path: '/slots',
-        element: <ContentSlot />,
+        path: '/microgaming/live',
+        element: <MicroGamingLive />,
+    },
+    {
+        path: '/evolution/slot',
+        element: <EvolutionSlot />,
+    },
+    {
+        path: '/pragmatic/slot',
+        element: <PragmaticSlot />,
+    },
+    {
+        path: '/softgamings/slot',
+        element: <SoftGamingsSlot />,
+    },
+    {
+        path: '/microgaming/slot',
+        element: <MicroGamingSlot />,
+    },
+    {
+        path: '/bti',
+        element: <Bti />,
+    },
+    {
+        path: '/gigx',
+        element: <Gigx />,
     },
     {
         path: '/terms-of-service',
-        element: <ContentTermsOfService />,
+        element: <TermsOfService />,
     },
     {
         path: '/customer',
-        element: <ContentCustomer />,
+        element: <Customer />,
     },
     {
         path: '/wallet',
-        element: <ContentWallet />,
+        element: <Wallet />,
     },
 ];
 
-export default contentRoutes;
+export default Routes;
