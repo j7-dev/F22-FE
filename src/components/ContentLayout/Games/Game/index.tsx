@@ -11,15 +11,15 @@ type GameProps = {
         'Table ID'?: string;
         'Direct Launch Table ID'?: string;
         'Game Type'?: string;
+        GameImg?: string;
     };
-    fakePic?: string;
 };
-const index: React.FC<GameProps> = ({ data = {}, fakePic }) => (
+const index: React.FC<GameProps> = ({ data = {} }) => (
     <div className="gameWrap w-full px-1">
         <div className="gameImg w-full aspect-square relative">
             <img
                 className="w-full aspect-square align-top object-cover"
-                src={fakePic}
+                src={data.GameImg}
                 alt=""
             />
         </div>

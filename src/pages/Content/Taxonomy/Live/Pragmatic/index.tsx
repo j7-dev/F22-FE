@@ -9,7 +9,7 @@ import {
 import GameType from '@/components/ContentLayout/SearchBar/GameType';
 import GameCategory from '@/components/ContentLayout/SearchBar/GameCategory';
 import Game from '@/components/ContentLayout/Games/Game';
-import fakeGameData from './fakeGameData.json';
+import { fakeGameData } from './fakeGameData';
 
 const Evolution: React.FC = () => {
     const { t } = useTranslation();
@@ -19,10 +19,8 @@ const Evolution: React.FC = () => {
 
     const games =
         GameTypeValue !== 'all'
-            ? fakeGameData.data.filter(
-                  (item) => item['Game Type'] === GameTypeValue,
-              )
-            : fakeGameData.data;
+            ? fakeGameData.filter((item) => item['Game Type'] === GameTypeValue)
+            : fakeGameData;
 
     useEffect(() => {
         setGameType('all');
@@ -52,20 +50,15 @@ const Evolution: React.FC = () => {
                         </div>
                         <div className="gamesWrap w-full">
                             <ul className="m-0 p-0 flex justify-start items-center flex-wrap gap-y-2.5">
-                                {games.map((item, index) => {
+                                {games.map((item) => {
                                     // TODO 目前是放假圖片
-                                    const fakePic = `/src/assets/images/fakeGamePic/exsamplePic (${
-                                        20 - index
-                                    }).png`;
+
                                     return (
                                         <li
                                             key={nanoid()}
                                             className="w-[calc(100%/7)] flex flex-col justify-center items-center cursor-pointer "
                                         >
-                                            <Game
-                                                data={item}
-                                                fakePic={fakePic}
-                                            />
+                                            <Game data={item} />
                                         </li>
                                     );
                                 })}
