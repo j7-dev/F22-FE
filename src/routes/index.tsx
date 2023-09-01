@@ -6,7 +6,7 @@ import {
     CatchAllNavigate,
     NavigateToResource,
 } from '@refinedev/react-router-v6';
-import { Header, Sider } from '@/components/RefineLayout';
+import { Header, Sider } from '@/components/AdminLayout';
 import {
     BlogPostCreate,
     BlogPostEdit,
@@ -21,7 +21,7 @@ import {
 } from '@/pages/Admin/categories';
 import ContentLayout from '@/components/ContentLayout';
 import contentRoutes from '@/routes/content';
-import refineRoutes from '@/routes/refine';
+import adminRoutes from '@/routes/admin';
 
 const index = () => {
     return (
@@ -41,7 +41,7 @@ const index = () => {
                     </Authenticated>
                 }
             >
-                {refineRoutes.map((route) => (
+                {adminRoutes.map((route) => (
                     <Route
                         key={route.path}
                         path={route.path}
