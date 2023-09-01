@@ -1,0 +1,84 @@
+{
+    "data": [
+        {
+            "Game Type": "baccarat",
+            "Table Name": "Baccarat Lobby"
+        },
+        {
+            "Game Type": "baccarat",
+            "Table Name": "Baccarat 1"
+        },
+        {
+            "Game Type": "baccarat",
+            "Table Name": "Baccarat 2"
+        },
+        {
+            "Game Type": "baccarat",
+            "Table Name": "Baccarat 3"
+        },
+        {
+            "Game Type": "baccarat",
+            "Table Name": "Baccarat 5"
+        },
+        {
+            "Game Type": "roulette",
+            "Table Name": "Roulette Lobby"
+        },
+        {
+            "Game Type": "roulette",
+            "Table Name": "Roulette 1 - Azure "
+        },
+        {
+            "Game Type": "roulette",
+            "Table Name": "Roulette 2"
+        },
+        {
+            "Game Type": "roulette",
+            "Table Name": "Roulette 3 - Macao "
+        },
+        {
+            "Game Type": "roulette",
+            "Table Name": "Roulette 4 - Russian "
+        },
+        {
+            "Game Type": "dragontiger",
+            "Table Name": "Dragon Tiger Lobby"
+        },
+        {
+            "Game Type": "dragontiger",
+            "Table Name": "Dragon Tiger"
+        },
+        {
+            "Game Type": "blackjack",
+            "Table Name": "Blackjack Lobby"
+        },
+        {
+            "Game Type": "blackjack",
+            "Table Name": "One Blackjack"
+        },
+        {
+            "Game Type": "blackjack",
+            "Table Name": "ONE Blackjack 2 - Ruby"
+        },
+        {
+            "Game Type": "blackjack",
+            "Table Name": "ONE Blackjack 3 - Dutch"
+        },
+        {
+            "Game Type": "blackjack",
+            "Table Name": "ONE Blackjack 5 - Turkish"
+        },
+        {
+            "Game Type": "blackjack",
+            "Table Name": "Blackjack 17 - Azure"
+        },
+        {
+            "Game Type": "blackjack",
+            "Table Name": "Blackjack 18 - Azure"
+        },
+        {
+            "Game Type": "blackjack",
+            "Table Name": "Blackjack 19 - Azure"
+        }
+    ]
+}

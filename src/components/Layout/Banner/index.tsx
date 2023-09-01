@@ -1,7 +1,8 @@
 import React, { useRef } from 'react';
 import { Carousel } from 'antd';
 import { FaCircleChevronRight, FaCircleChevronLeft } from 'react-icons/fa6';
-import fakeBannerImg from '@/assets/images/fakeBannerImg.webp';
+import Banner1 from '@/assets/images/Banner1.png';
+import Banner2 from '@/assets/images/Banner2.png';
 
 const Banner: React.FC = () => {
     const contentStyle: React.CSSProperties = {
@@ -30,10 +31,10 @@ const Banner: React.FC = () => {
         <div className="relative">
             <Carousel ref={carouselRef} dots={false}>
                 <div>
-                    <img src={fakeBannerImg} alt="" style={contentStyle} />
+                    <img src={Banner1} alt="" style={contentStyle} />
                 </div>
                 <div>
-                    <img src={fakeBannerImg} alt="" style={contentStyle} />
+                    <img src={Banner2} alt="" style={contentStyle} />
                 </div>
             </Carousel>
 

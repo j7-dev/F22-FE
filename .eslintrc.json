@@ -1,0 +1,127 @@
+{
+	"env": {
+		"browser": true,
+		"es6": true,
+		"jest": true,
+		"amd": true,
+		"commonjs": true
+	},
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"plugins": [
+		"react",
+		"@typescript-eslint",
+		"prettier"
+	],
+	"extends": [
+		"plugin:react/recommended",
+		"airbnb",
+		"prettier"
+	],
+	"rules": {
+		"indent": "off",
+		"linebreak-style": "off",
+		"quotes": [
+			"error",
+			"single"
+		],
+		"react/no-unescaped-entities": "off",
+		"react/no-unused-prop-types": "off",
+		"react/require-default-props": "off",
+		"react/jsx-filename-extension": [
+			"warn",
+			{
+				"extensions": [
+					".tsx",
+					".jsx",
+					".js",
+					".ts"
+				]
+			}
+		],
+		"react/destructuring-assignment": "off",
+		"react/button-has-type": "off",
+		"no-use-before-define": "off",
+		"no-underscore-dangle": "off",
+		"@typescript-eslint/no-use-before-define": [
+			"error"
+		],
+		"import/no-unresolved": "off",
+		"import/no-extraneous-dependencies": "off",
+		"import/extensions": "off",
+		"react/jsx-props-no-spreading": "off",
+		"@typescript-eslint/no-unused-vars": [
+			"error",
+			{
+				"argsIgnorePattern": "^_",
+				"varsIgnorePattern": "^_"
+			}
+		],
+		"no-unused-vars": "off",
+		"no-nested-ternary": "off",
+		"no-param-reassign": [
+			2,
+			{
+				"props": false
+			}
+		],
+		"no-shadow": "off",
+		"@typescript-eslint/no-shadow": "error",
+		"import/prefer-default-export": "off",
+		"no-console": "warn",
+		"implicit-arrow-linebreak": "off",
+		"max-len": [
+			"error",
+			{
+				"ignoreComments": true,
+				"ignoreUrls": true,
+				"ignoreStrings": true,
+				"ignoreTemplateLiterals": true,
+				"ignoreRegExpLiterals": true,
+				"code": 150
+			}
+		],
+		"no-duplicate-imports": "error",
+		"@typescript-eslint/ban-types": "off",
+		"@typescript-eslint/interface-name-prefix": "off",
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"react/prop-types": "off",
+		"react/react-in-jsx-scope": "off",
+		"react/function-component-definition": "off",
+		"react/jsx-no-useless-fragment": "off",
+		"operator-linebreak": "off",
+		"no-mixed-operators": "off",
+		"jsx-a11y/control-has-associated-label": "off",
+		"jsx-a11y/anchor-is-valid": "off",
+		"jsx-a11y/click-events-have-key-events": "off",
+		"jsx-a11y/no-static-element-interactions": "off"
+	},
+	"overrides": [
+		{
+			"files": [
+				"*.js, *.d.ts, *.cy.tsx, *.cy.ts, *.spec.tsx, *.spec.ts"
+			],
+			"rules": {
+				"no-undef": "off",
+				"@typescript-eslint/no-var-requires": "off",
+				"no-unused-vars": "off"
+			}
+		}
+	],
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	},
+	"globals": {
+		"React": "writable",
+		"sessionStorage": "writable",
+		"document": "writable",
+		"window": "writable",
+		"Blob": "writable",
+		"HTMLElement": "readonly",
+		"FileReader": "writable",
+		"JSX": "readonly",
+		"cy": "readonly"
+	}
+}

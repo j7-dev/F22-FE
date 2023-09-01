@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form } from 'antd';
+import { useTranslation } from 'react-i18next';
 import SelectGame from '@/components/Layout/Wallet/CashSection/TransactionSection/Mybalance/SelectGame';
 import AmountInput from '@/components/Layout/Wallet/CashSection/TransactionSection/Mybalance/AmountInput';
 import SendButton from '@/components/Layout/Wallet/CashSection/TransactionSection/Mybalance/SendButton';
@@ -7,6 +8,7 @@ import CompBonus from './CompBonus';
 import RollingBonus from './RollingBonus';
 
 const index: React.FC = () => {
+    const { t } = useTranslation();
     const [form] = Form.useForm();
 
     const [
@@ -20,7 +22,7 @@ const index: React.FC = () => {
     return (
         <div className="w-full bg-white rounded-lg shadow-[0_0px_29px_0px_rgba(43, 50, 64, 0.09)] flex flex-col gap-2.5 p-4">
             <div className="bonusPointTitle h-10 text-sm font-bold text-[#2B3240] flex items-center">
-                Bonus Point
+                {t('Bonus Point')}
             </div>
             <div className="BPSwichButton flex gap-1 ">
                 <div
@@ -31,7 +33,7 @@ const index: React.FC = () => {
                     } CompBonusButton w-full flex justify-center items-center h-[45px] rounded-lg font-bold bg-[#F3F3F4] hover:bg-[#F9A318] hover:text-white cursor-pointer`}
                     onClick={() => handleSelectSection('CompBonus')}
                 >
-                    Comp Bonus
+                    {t('Comp Bonus')}
                 </div>
                 <div
                     className={`${
@@ -41,13 +43,13 @@ const index: React.FC = () => {
                     } RollingBonusButton w-full flex justify-center items-center h-[45px] rounded-lg font-bold bg-[#F3F3F4] hover:bg-[#F9A318] hover:text-white cursor-pointer`}
                     onClick={() => handleSelectSection('RollingBonus')}
                 >
-                    Rolling Bonus
+                    {t('Rolling Bonus')}
                 </div>
             </div>
             <div className="tableHeader h-10 w-full items-center flex flex-row bg-[#2B3240] text-white p-2 font-bold text-[13px] text-center">
-                <div className="w-1/3">Remaining Bonus</div>
-                <div className="w-1/3">Used Bonus</div>
-                <div className="w-1/3">Total Bonus</div>
+                <div className="w-1/3"> {t('Remaining Bonus')}</div>
+                <div className="w-1/3"> {t('Used Bonus')} </div>
+                <div className="w-1/3">{t('Total Bonus')}</div>
             </div>
             <div className="tableContent h-10 w-full text-center flex flex-row font-bold py-2 px-4 border-0 border-solid border-b border-[#F3F3F4]">
                 <div className="w-1/3">0</div>
@@ -66,7 +68,7 @@ const index: React.FC = () => {
                         ifShowButton={false}
                         className="w-2/5 mb-0"
                     />
-                    <SendButton label="Use Point" className="w-1/5 mb-0" />
+                    <SendButton label={t('Use Point')} className="w-1/5 mb-0" />
                     {/* TODO: 這個組件是否可以沿用? */}
                 </Form>
             </div>

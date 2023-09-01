@@ -1,9 +1,11 @@
 import React from 'react';
 import { useSetAtom } from 'jotai';
+import { useTranslation } from 'react-i18next';
 import { AiOutlineDown, AiOutlineSearch } from 'react-icons/ai';
 import { dropdownIsOpenAtom } from '../index';
 
 const SearchInput: React.FC = () => {
+    const { t } = useTranslation();
     const setDropdownIsOpen = useSetAtom(dropdownIsOpenAtom);
 
     const handleClick = () => {
@@ -16,7 +18,9 @@ const SearchInput: React.FC = () => {
                 className="providerSelect flex justify-between items-center p-5 w-[160px] cursor-pointer"
                 onClick={handleClick}
             >
-                <p className="providerTitle font-semibold">All Provider</p>
+                <p className="providerTitle font-semibold">
+                    {t('All Provider')}
+                </p>
                 <AiOutlineDown />
             </div>
             <div className="searchInputDiv py-5 w-[calc(100%-220px)]">

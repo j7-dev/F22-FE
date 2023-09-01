@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { atom, useAtom } from 'jotai';
 import WallerContainer from './WallerContainer';
 import GameNavContainer from './GameNavContainer';
-import fakeLogo2 from '@/assets/images/LOGO2.png';
-import fakeLogo from '@/assets/images/LOGO.png';
+import favicon from '@/assets/images/favicon.png';
+import fakeLogo from '@/assets/images/logo.png';
 
 export const sidebarIsOpenAtom = atom(false);
 
@@ -19,7 +19,7 @@ export const Sidebar: React.FC = () => {
               backgroundImage: `url(${fakeLogo})`,
           }
         : {
-              backgroundImage: `url(${fakeLogo2})`,
+              backgroundImage: `url(${favicon})`,
           };
 
     const handleMouseEnter = () => {

@@ -6,12 +6,8 @@ import { useTranslation } from 'react-i18next';
 import { popupIsOpenAtom, IsLoginAtom } from '@/components/Layout/LoginPopUp';
 import SubMenuUI from './SubMenu';
 import logo from '@/assets/images/logo.png';
+import { fakeMenuData, MenuItem } from '@/components/Layout/Header/MenuData';
 
-export interface MenuItem {
-    title: string;
-    path: string;
-    submenu?: MenuItem[];
-}
 const NavBar: React.FC = () => {
     const { t } = useTranslation();
     const [
@@ -19,43 +15,7 @@ const NavBar: React.FC = () => {
         setIsLogin,
     ] = useAtom(IsLoginAtom);
     const Navigate = useNavigate();
-    const fakeData: MenuItem[] = [
-        { title: 'Home', path: '/' },
-        {
-            title: 'Live Casino',
-            path: '/live',
-            submenu: [
-                {
-                    title: 'Evolution',
-                    path: '/evolution',
-                },
-                {
-                    title: 'Pragmatic Play',
-                    path: '/pragmatic',
-                },
-            ],
-        },
-        {
-            title: 'Slot Game',
-            path: '/slots',
-        },
-        {
-            title: 'Promotion',
-            path: '/promotion',
-        },
-        {
-            title: 'About',
-            path: '/about',
-        },
-        {
-            title: 'Terms of Service',
-            path: '/terms-of-service',
-        },
-        {
-            title: 'Customer',
-            path: '/customer',
-        },
-    ];
+    const fakeData = fakeMenuData;
 
     // LoginButton
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
@@ -103,8 +63,8 @@ const NavBar: React.FC = () => {
                         <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-between md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
                             <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-start md:gap-y-0 md:gap-x-7 md:mt-0 ">
                                 {fakeData.map((item) => {
-                                    const title = item?.title;
-                                    const path = item?.path;
+                                    const title = item?.title as string;
+                                    const path = item?.path as string;
                                     // 如果 item.submenu 存在（非空）則將 hasSubmenu 設置為 true
                                     const hasSubmenu = !!item?.submenu;
 

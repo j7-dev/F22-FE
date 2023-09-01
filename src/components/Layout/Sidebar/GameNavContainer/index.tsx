@@ -1,37 +1,34 @@
 import React from 'react';
 import { useAtomValue } from 'jotai';
 import { nanoid } from 'nanoid';
+import { Link } from 'react-router-dom';
 import { sidebarIsOpenAtom } from '@/components/Layout/Sidebar';
-import creaditImg from '@/assets/images/credit-icon-hover.svg';
+import { fakeProviderData } from '@/pages/Home/Provider/ProviderData';
 
 const index: React.FC = () => {
     const sidebarIsOpen = useAtomValue(sidebarIsOpenAtom);
-    const fakeGames = [
-        { title: 'Game1', imgSrc: creaditImg },
-        { title: 'Game2', imgSrc: creaditImg },
-        { title: 'Game3', imgSrc: creaditImg },
-        { title: 'Game4', imgSrc: creaditImg },
-        { title: 'Game5', imgSrc: creaditImg },
-        { title: 'Game6', imgSrc: creaditImg },
-    ];
+    const fakeGames = fakeProviderData;
     return (
         <ul className=" w-full bg-[#2e3135] text-white rounded-md py-4 px-4">
             {fakeGames.map((game) => (
-                <li
-                    key={nanoid()}
-                    className="py-4 border-0 border-b-[1px] border-solid border-[#485160] "
-                >
-                    <span className="flex items-center gap-x-3.5 text-sm hover:text-[#78D39D] text-white dark:bg-gray-900 dark:text-white">
-                        <img src={game.imgSrc} alt="" />
-                        <span
-                            className={`${
-                                sidebarIsOpen ? 'block' : 'hidden'
-                            } text-lg font-semibold tracking-wider`}
-                        >
-                            {game.title}
+                <Link to={game.ProviderPath} key={nanoid()}>
+                    <li className="py-4 border-0 border-b-[1px] border-solid border-[#485160] ">
+                        <span className="flex items-center gap-x-3.5 text-sm hover:text-[#78D39D] text-white dark:bg-gray-900 dark:text-white">
+                            <img
+                                src={game.ProviderFavicon}
+                                alt=""
+                                className="w-[30px] h-[30px]"
+                            />
+                            <span
+                                className={`${
+                                    sidebarIsOpen ? 'block' : 'hidden'
+                                } text-lg font-semibold tracking-wider`}
+                            >
+                                {game.ProviderName}
+                            </span>
                         </span>
-                    </span>
-                </li>
+                    </li>
+                </Link>
             ))}
         </ul>
     );
