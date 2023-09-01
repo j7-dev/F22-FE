@@ -1,72 +1,82 @@
 {
-  "name": "F22-FE",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "dependencies": {
-    "@ant-design/icons": "^5.0.1",
-    "@refinedev/antd": "^5.7.0",
-    "@refinedev/cli": "^2.7.4",
-    "@refinedev/core": "^4.28.2",
-    "@refinedev/inferencer": "^4.3.2",
-    "@refinedev/kbar": "^1.1.2",
-    "@refinedev/react-router-v6": "^4.1.0",
-    "@refinedev/strapi-v4": "5.2.0",
-    "antd": "^5.0.5",
-    "axios": "^0.26.1",
-    "i18next": "^20.1.0",
-    "i18next-browser-languagedetector": "^6.1.1",
-    "i18next-xhr-backend": "^3.2.2",
-    "jotai": "^2.4.0",
-    "nanoid": "^4.0.2",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-i18next": "^11.8.11",
-    "react-icons": "^4.10.1",
-    "react-router-dom": "^6.8.1",
-    "react-slick": "^0.29.0",
-    "slick-carousel": "^1.8.1"
-  },
-  "devDependencies": {
-    "@types/node": "^18.16.2",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@types/react-slick": "^0.23.10",
-    "@typescript-eslint/eslint-plugin": "^5.57.1",
-    "@typescript-eslint/parser": "^5.57.1",
-    "@vitejs/plugin-react": "^4.0.0",
-    "autoprefixer": "^10.4.15",
-    "eslint": "^8.38.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.3.4",
-    "postcss": "^8.4.29",
-    "postcss-import": "^15.1.0",
-    "postcss-nesting": "^12.0.1",
-    "sass": "^1.66.1",
-    "tailwindcss": "^3.3.3",
-    "typescript": "^4.7.4",
-    "vite": "^4.3.1",
-    "vite-tsconfig-paths": "^4.2.0"
-  },
-  "scripts": {
-    "dev": "refine dev",
-    "build": "tsc && refine build",
-    "preview": "refine start",
-    "refine": "refine"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+    "name": "F22-FE",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "dependencies": {
+        "@ant-design/icons": "^5.0.1",
+        "@refinedev/antd": "^5.7.0",
+        "@refinedev/cli": "^2.7.4",
+        "@refinedev/core": "^4.28.2",
+        "@refinedev/inferencer": "^4.3.2",
+        "@refinedev/kbar": "^1.1.2",
+        "@refinedev/react-router-v6": "^4.1.0",
+        "@refinedev/strapi-v4": "5.2.0",
+        "antd": "^5.0.5",
+        "axios": "^0.26.1",
+        "i18next": "^20.1.0",
+        "i18next-browser-languagedetector": "^6.1.1",
+        "i18next-xhr-backend": "^3.2.2",
+        "jotai": "^2.4.0",
+        "nanoid": "^4.0.2",
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0",
+        "react-highlight-words": "^0.20.0",
+        "react-i18next": "^11.8.11",
+        "react-icons": "^4.10.1",
+        "react-router-dom": "^6.8.1",
+        "react-slick": "^0.29.0",
+        "slick-carousel": "^1.8.1"
+    },
+    "devDependencies": {
+        "@types/node": "^18.16.2",
+        "@types/react": "^18.0.0",
+        "@types/react-dom": "^18.0.0",
+        "@types/react-highlight-words": "^0.16.4",
+        "@types/react-slick": "^0.23.10",
+        "@typescript-eslint/eslint-plugin": "^5.57.1",
+        "@typescript-eslint/parser": "^5.57.1",
+        "@vitejs/plugin-react": "^4.0.0",
+        "autoprefixer": "^10.4.15",
+        "env-cmd": "^10.1.0",
+        "eslint": "^8.38.0",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-refresh": "^0.3.4",
+        "postcss": "^8.4.29",
+        "postcss-import": "^15.1.0",
+        "postcss-nesting": "^12.0.1",
+        "pre-commit": "^1.2.2",
+        "sass": "^1.66.1",
+        "tailwindcss": "^3.3.3",
+        "typescript": "^4.7.4",
+        "vite": "^4.3.1",
+        "vite-tsconfig-paths": "^4.2.0"
+    },
+    "scripts": {
+        "dev": "env-cmd -f ./env/.env.test refine dev",
+        "build": "env-cmd -f ./env/.env.prod tsc && refine build",
+        "push:prod": "env-cmd -f ./env/.env.prod tsc && refine build",
+        "preview": "refine start",
+        "refine": "refine",
+        "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
+        "lint:fix": "eslint --fix src/**/*.{ts,tsx,js,jsx}"
+    },
+    "pre-commit": [
+        "lint:fix"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "refine": {
-    "projectId": "DFwDAg-3y0BW1-GbOkSm"
-  }
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "refine": {
+        "projectId": "DFwDAg-3y0BW1-GbOkSm"
+    }
 }

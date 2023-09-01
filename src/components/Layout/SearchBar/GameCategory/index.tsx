@@ -15,7 +15,6 @@ const GameCategory: React.FC = () => {
             <div className="grid grid-cols-8 max-w-5xl mx-auto">
                 {new Array(8).fill(0).map(() => (
                     <div
-                        // eslint-disable-next-line react/no-array-index-key
                         key={nanoid()}
                         className="flex flex-col items-center cursor-pointer"
                         onClick={handleClick}

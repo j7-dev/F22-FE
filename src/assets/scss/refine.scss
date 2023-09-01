@@ -1,0 +1,8 @@
+.ant-dropdown-menu-submenu {
+	&.ant-dropdown-menu-submenu-vertical {
+		.ant-dropdown-menu-submenu-title {
+			display: flex;
+			align-items: center;
+		}
+	}
+}
