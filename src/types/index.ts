@@ -12,7 +12,7 @@ export type TUserIdentity = {
 export type TRoute = {
     path: string;
     element?: JSX.Element;
-    children?: TRoute[];
+    children?: React.ReactNode | null;
 };
 
 export type TGetColumnFilterProps<T> = {
