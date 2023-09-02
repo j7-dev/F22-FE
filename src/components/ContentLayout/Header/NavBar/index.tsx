@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { useSetAtom, useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
+import { AiOutlineMenuUnfold, AiOutlineMenuFold } from 'react-icons/ai';
 import {
     popupIsOpenAtom,
     IsLoginAtom,
@@ -13,10 +14,16 @@ import {
     fakeMenuData,
     MenuItem,
 } from '@/components/ContentLayout/Header/MenuData';
+import { mbSidebarAtom } from '@/components/ContentLayout';
+import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
 
 const NavBar: React.FC = () => {
     const { t } = useTranslation();
     const [isLogin, setIsLogin] = useAtom(IsLoginAtom);
+    const [mbSidebar, setMbSidebar] = useAtom(mbSidebarAtom);
+    const setsidebarIsOpen = useSetAtom(sidebarIsOpenAtom);
+    // const sidebarIsOpen = useAtomValue(sidebarIsOpenAtom);
+
     const Navigate = useNavigate();
     const fakeData = fakeMenuData;
 
@@ -37,6 +44,14 @@ const NavBar: React.FC = () => {
         const location = useLocation();
         return location.pathname === path ? 'active' : '';
     }
+
+    //手機版選單
+    const handleMbSidebar = () => {
+        setsidebarIsOpen((prevValue) => !prevValue);
+        setMbSidebar((prevValue) => !prevValue);
+        // console.log('mbSidebar', mbSidebar);
+        // console.log('sidebarIsOpen', sidebarIsOpen);
+    };
     return (
         <>
             {/* <!-- Navbar --> */}
@@ -58,11 +73,18 @@ const NavBar: React.FC = () => {
                         <div className="md:hidden">
                             <button
                                 type="button"
-                                className=" p-2 inline-flex justify-center items-center gap-2 rounded-full border font-bold bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm "
-                            />
+                                className="inline-flex justify-center items-center gap-2 rounded-full bg-transparent border-transparent  shadow-sm align-middle transition-all"
+                                onClick={handleMbSidebar}
+                            >
+                                {mbSidebar ? (
+                                    <AiOutlineMenuFold size={40} />
+                                ) : (
+                                    <AiOutlineMenuUnfold size={40} />
+                                )}
+                            </button>
                         </div>
                     </div>
-                    <div className=" hidden  transition-all duration-300 basis-full grow md:block">
+                    <div className=" hidden transition-all duration-300 basis-full grow md:block">
                         <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-between md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
                             <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-start md:gap-y-0 md:gap-x-7 md:mt-0 ">
                                 {fakeData.map((item) => {

@@ -16,7 +16,6 @@ const Evolution: React.FC = () => {
 
     const [GameTypeValue, setGameType] = useAtom(GameTypeAtom);
     const setGameCategoryState = useSetAtom(GameCategoryStateAtom);
-
     const games =
         GameTypeValue !== 'all'
             ? fakeGameData.filter((item) => item['Game Type'] === GameTypeValue)
@@ -54,7 +53,7 @@ const Evolution: React.FC = () => {
                                     return (
                                         <li
                                             key={nanoid()}
-                                            className="w-[calc(100%/7)] flex flex-col justify-center items-center cursor-pointer "
+                                            className="w-[calc(100%/2)] flex flex-col justify-center items-center cursor-pointer md:w-[calc(100%/7)]"
                                         >
                                             <Game data={item} />
                                         </li>

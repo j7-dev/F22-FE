@@ -30,16 +30,32 @@ const Routes: TRoute[] = [
         element: <PromotionPage />,
     },
     {
+        path: '/evolution',
+        element: <EvolutionLive />,
+    },
+    {
         path: '/evolution/live',
         element: <EvolutionLive />,
+    },
+    {
+        path: '/pragmatic',
+        element: <PragmaticLive />,
     },
     {
         path: '/pragmatic/live',
         element: <PragmaticLive />,
     },
     {
+        path: '/softgamings',
+        element: <SoftGamingsLive />,
+    },
+    {
         path: '/softgamings/live',
         element: <SoftGamingsLive />,
+    },
+    {
+        path: '/microgaming',
+        element: <MicroGamingLive />,
     },
     {
         path: '/microgaming/live',

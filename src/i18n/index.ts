@@ -6,7 +6,7 @@ import resources from './resources';
 i18n.use(LanguageDetector)
     .use(initReactI18next)
     .init({
-        debug: true,
+        debug: false,
         fallbackLng: 'EN', // 若當前語言沒有對應的翻譯則使用這個語言
         lng: 'EN', // 預設語言
         resources, // 引入字典檔

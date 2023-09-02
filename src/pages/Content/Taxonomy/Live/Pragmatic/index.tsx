@@ -56,7 +56,7 @@ const Evolution: React.FC = () => {
                                     return (
                                         <li
                                             key={nanoid()}
-                                            className="w-[calc(100%/7)] flex flex-col justify-center items-center cursor-pointer "
+                                            className="w-[calc(100%/2)] flex flex-col justify-center items-center cursor-pointer md:w-[calc(100%/7)]"
                                         >
                                             <Game data={item} />
                                         </li>

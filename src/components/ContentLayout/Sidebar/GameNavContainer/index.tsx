@@ -4,14 +4,16 @@ import { nanoid } from 'nanoid';
 import { Link } from 'react-router-dom';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
 import { fakeProviderData } from '@/pages/Content/Home/Provider/ProviderData';
+import { ProviderPathAtom } from '@/pages/Content/Home/AtomSetting/index';
 
 const index: React.FC = () => {
     const sidebarIsOpen = useAtomValue(sidebarIsOpenAtom);
+    const ProviderPath = useAtomValue(ProviderPathAtom);
     const fakeGames = fakeProviderData;
     return (
         <ul className=" w-full bg-[#2e3135] text-white rounded-md py-4 px-4">
             {fakeGames.map((game) => (
-                <Link to={game.ProviderPath} key={nanoid()}>
+                <Link to={game.ProviderPath + ProviderPath} key={nanoid()}>
                     <li className="py-4 border-0 border-b-[1px] border-solid border-[#485160] ">
                         <span className="flex items-center gap-x-3.5 text-sm hover:text-[#78D39D] text-white dark:bg-gray-900 dark:text-white">
                             <img

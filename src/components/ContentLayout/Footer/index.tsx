@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
     //     // console.log('popupIsOpenAtom', popupIsOpen);
     // };
     return (
-        <div className="bg-[#f3F3F4] w-full pt-5 pb-20 text-black font-bold">
+        <div className="bg-[#f3F3F4] w-full pt-5 pb-20 px-5 text-black font-bold">
             <div className="border-solid border-b-[1px] border-0 border-[#48516066]">
                 <div className="flex flex-row justify-between max-w-3xl mx-auto  pb-20">
                     {fakeData.map((item) => {
@@ -67,7 +67,7 @@ export const Footer: React.FC = () => {
                     })}
                 </div>
             </div>
-            <div className="footerImgWarp max-w-5xl flex justify-between mx-auto items-center gap-4 mt-4">
+            <div className="footerImgWarp max-w-5xl flex flex-wrap w-full justify-center mx-auto items-center gap-4 mt-4 md:justify-between">
                 {ProviderData.map((item) => (
                     <div key={nanoid()} className="footerImg">
                         <img
@@ -78,7 +78,7 @@ export const Footer: React.FC = () => {
                     </div>
                 ))}
             </div>
-            <div className="footerImgWarp max-w-5xl flex justify-center mx-auto h-auto items-center gap-8 mt-4">
+            <div className="footerImgWarp max-w-5xl flex w-full justify-center mx-auto h-auto items-center gap-8 mt-4">
                 <span className="text-center">
                     <Trans i18nKey="© Smart Bet Casino" />
                 </span>
