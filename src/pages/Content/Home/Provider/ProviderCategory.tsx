@@ -16,6 +16,11 @@ const index: React.FC = () => {
     // const Navigate = useNavigate();
     const ProviderCategory = [
         {
+            img: SportsImg,
+            name: 'Sports',
+            path: '',
+        },
+        {
             img: LiveCasinoImg,
             name: 'Live Casino',
             path: '/live',
@@ -24,11 +29,6 @@ const index: React.FC = () => {
             img: SlotImg,
             name: 'Slot Game',
             path: '/slot',
-        },
-        {
-            img: SportsImg,
-            name: 'Sports',
-            path: '',
         },
     ];
 
