@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
                                                     <img
                                                         src={subItem.imgSrc}
                                                         alt=""
-                                                        className="w-[24px] h-[24px]"
+                                                        className="w-[24px] h-[24px] object-contain"
                                                     />
                                                     <Link
                                                         className="text-gray-500 hover:text-[#78d39d]"

@@ -10,7 +10,7 @@ import {
 } from '@/components/ContentLayout/LoginPopUp';
 import depositImg from '@/assets/images/deposit-icon-hover.svg';
 import withdrawImg from '@/assets/images/withdraw-icon-hover.svg';
-import creaditImg from '@/assets/images/credit-icon-hover.svg';
+// import creaditImg from '@/assets/images/credit-icon-hover.svg';
 import historyImg from '@/assets/images/history-icon-hover.svg';
 
 const index: React.FC = () => {
@@ -63,7 +63,7 @@ const index: React.FC = () => {
                 </span>
             </li>
 
-            <li className="py-4 border-0 border-b-[1px] border-solid border-[#485160]">
+            {/* <li className="py-4 border-0 border-b-[1px] border-solid border-[#485160]">
                 <span className="flex items-center gap-x-3.5 text-sm hover:text-[#78D39D] text-white dark:bg-gray-900 dark:text-white">
                     <img src={creaditImg as unknown as string} alt="" />
                     <span
@@ -77,7 +77,7 @@ const index: React.FC = () => {
                         {t('Credit Transfer')}
                     </span>
                 </span>
-            </li>
+            </li> */}
 
             <li className="py-4 ">
                 <span className="flex items-center gap-x-3.5 hover:text-[#78D39D] text-sm text-white dark:bg-gray-900 dark:text-white">

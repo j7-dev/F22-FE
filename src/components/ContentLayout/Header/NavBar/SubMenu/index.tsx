@@ -14,7 +14,11 @@ const SubMenu: React.FC<{ submenu: MenuItem[] }> = ({ submenu }) => (
                     key={nanoid()}
                     className="submenu flex flex-row justify-start gap-2.5 items-center h-10 px-2.5 cursor-pointer hover:bg-[#EFEFEF] hover:rounded"
                 >
-                    <img src={imgSrc} alt="" className="w-[24px] h-[24px]" />
+                    <img
+                        src={imgSrc}
+                        alt=""
+                        className="w-[24px] h-[24px] object-contain"
+                    />
                     <Link to={path}>
                         <span className="navMenuItem font-bold text-gray-500  whitespace-nowrap">
                             {title}

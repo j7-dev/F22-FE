@@ -1,5 +1,5 @@
 import React from 'react';
-import BalanceSection from './BalanceSection';
+// import BalanceSection from './BalanceSection';
 import TransactionSection from './TransactionSection';
 
 interface CashSectionProps {
@@ -7,7 +7,7 @@ interface CashSectionProps {
 }
 const index: React.FC<CashSectionProps> = ({ section }) => (
     <>
-        <BalanceSection />
+        {/* <BalanceSection /> */}
         <TransactionSection section={section} />
     </>
 );

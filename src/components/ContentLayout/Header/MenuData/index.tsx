@@ -1,9 +1,9 @@
 import pragmaticplayFavicon from '@/assets/images/pragmaticplay_favicon.ico';
 import evolutionFavicon from '@/assets/images/evolution_favicon.png';
-import golfFavicon from '@/assets/images/golf_favicon.ico';
-import btiFavicon from '@/assets/images/bti_favicon.ico';
+import golfFavicon from '@/assets/images/gigxProviderImg.png';
+import btiFavicon from '@/assets/images/btiProviderImg.png';
 import mgFavicon from '@/assets/images/mg_favicon.png';
-import agFavicon from '@/assets/images/ag_favicon.ico';
+import agFavicon from '@/assets/images/ag_favicon.png';
 
 export interface MenuItem {
     title: string;
@@ -14,6 +14,22 @@ export interface MenuItem {
 
 export const fakeMenuData: MenuItem[] = [
     { title: 'Home', path: '/' },
+    {
+        title: 'Sports',
+        // path: '/Sports',
+        submenu: [
+            {
+                title: 'BTI',
+                path: '/bti',
+                imgSrc: btiFavicon,
+            },
+            {
+                title: 'IGX Golf',
+                path: '/gigx',
+                imgSrc: golfFavicon,
+            },
+        ],
+    },
     {
         title: 'Live Casino',
         // path: '/live',
@@ -66,22 +82,7 @@ export const fakeMenuData: MenuItem[] = [
             },
         ],
     },
-    {
-        title: 'Sports',
-        // path: '/Sports',
-        submenu: [
-            {
-                title: 'BTI',
-                path: '/bti',
-                imgSrc: btiFavicon,
-            },
-            {
-                title: 'IGX Golf',
-                path: '/gigx',
-                imgSrc: golfFavicon,
-            },
-        ],
-    },
+
     // {
     //     title: 'Promotion',
     //     path: '/promotion',

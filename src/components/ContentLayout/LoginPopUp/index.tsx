@@ -5,7 +5,7 @@ import { Input, Form, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
-import logoLogin from '@/assets/images/logo-login.png';
+import logoLogin from '@/assets/images/logo.png';
 
 export const popupIsOpenAtom = atom(false);
 export const IsLoginAtom = atom(false);
@@ -75,7 +75,7 @@ const Popup: React.FC = () => {
                     <GrFormClose size={40} />
                 </div>
                 <div className="w-full h-full flex flex-col justify-center items-center gap-10 p-16">
-                    <img src={logoLogin} alt="" />
+                    <img src={logoLogin} alt="" className="w-full" />
                     <div className="loginFrom text-center flex flex-col gap-2.5 w-full">
                         <span>Available After Login.</span>
                         <Form form={form} onFinish={handleLogin}>

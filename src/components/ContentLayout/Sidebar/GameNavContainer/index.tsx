@@ -17,7 +17,7 @@ const index: React.FC = () => {
                             <img
                                 src={game.ProviderFavicon}
                                 alt=""
-                                className="w-[30px] h-[30px]"
+                                className="w-[30px] h-[30px] object-contain"
                             />
                             <span
                                 className={`${
