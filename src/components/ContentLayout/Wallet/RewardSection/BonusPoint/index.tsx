@@ -57,15 +57,18 @@ const index: React.FC = () => {
                 <Form
                     form={form}
                     initialValues={{ amount: '0' }}
-                    className="w-full flex gap-2 justify-between items-center py-3 px-5 bg-[#F3F3F4]"
+                    className="w-full flex gap-2 flex-col md:flex-row justify-between items-center py-3 px-5 bg-[#F3F3F4]"
                 >
-                    <SelectGame className="w-2/5 my-0" />
+                    <SelectGame className="w-full md:w-2/5 my-0" />
                     <AmountInput
                         itemName="amount"
                         ifShowButton={false}
-                        className="w-2/5 mb-0"
+                        className="w-full md:w-2/5 mb-0"
                     />
-                    <SendButton label={t('Use Point')} className="w-1/5 mb-0" />
+                    <SendButton
+                        label={t('Use Point')}
+                        className="w-auto md:w-1/5 mb-0"
+                    />
                     {/* TODO: 這個組件是否可以沿用? */}
                 </Form>
             </div>
