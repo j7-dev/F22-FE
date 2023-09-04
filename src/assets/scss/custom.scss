@@ -1,17 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 body {
-	font-family: sans-serif, Graphik;
+	font-family: "Poppins", arial, sans-serif, Graphik;
+	font-weight: 100;
+	line-height: 1.5;
+	font-size: 16px;
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-weight: 600;
+		letter-spacing: 0.05em;
+	}
 	* {
 		box-sizing: border-box;
 		position: relative;
 		display: block;
 	}
+	a {
+		text-decoration: none;
+	}
+	li {
+		list-style: none;
+	}
 }
-a {
-	text-decoration: none;
-}
-li {
-	list-style: none;
-}
+
 //Header Menu A
 .navMenuItem.active {
 	color: #78d39d !important;
