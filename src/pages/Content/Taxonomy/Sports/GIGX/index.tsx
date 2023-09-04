@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 // import Game from '@/components/ContentLayout/Games/Game';
 // import fakeGameData from './fakeGameData.json';
 import MaintainImg from '@/assets/images/Maintain.png';
+import gigxProviderImg from '@/assets/images/gigxProviderImg.png';
 
 const Evolution: React.FC = () => {
     const { t } = useTranslation();
@@ -50,6 +51,11 @@ const Evolution: React.FC = () => {
                             <h3 className="gamesCategory mb-2">
                                 IGX Golf {t('Sports')}
                             </h3>
+                            <img
+                                src={gigxProviderImg}
+                                alt=""
+                                className="m-auto h-36"
+                            />
                             <img src={MaintainImg} alt="" className="m-auto" />
                             <span className="gamesCategoryDes">
                                 {/* {games.length} {t('Games found')} */}

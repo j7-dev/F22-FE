@@ -10,17 +10,12 @@ interface SelectGameProps {
 const index: React.FC<SelectGameProps> = ({ label, itemName, className }) => {
     const { t } = useTranslation();
     const fakeSelect = [
-        {
-            label: 'Manager',
-            options: [
-                { label: 'Jack', value: 'jack' },
-                { label: 'Lucy', value: 'lucy' },
-            ],
-        },
-        {
-            label: 'Engineer',
-            options: [{ label: 'yiminghe', value: 'Yiminghe' }],
-        },
+        { label: 'Evolution', value: 'Evolution' },
+        { label: 'Pragmatic Play', value: 'Pragmatic Play' },
+        { label: 'Asia Gaming', value: 'Asia Gaming' },
+        { label: 'Micro Gaming', value: 'Micro Gaming' },
+        { label: 'BTI', value: 'BTI' },
+        { label: 'IGX Golf', value: 'IGX Golf' },
     ];
     return (
         <>

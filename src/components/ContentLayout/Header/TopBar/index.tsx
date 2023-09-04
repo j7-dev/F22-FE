@@ -42,7 +42,7 @@ const TopBar: React.FC = () => {
                     </div>
                     <div className="languageSwitchContain w-[150px] text-center">
                         <div className="nowLanguage cursor-pointer">
-                            <span className="h-10 px-2.5 inline-flex justify-center items-center gap-2 font-bold text-slate-400 hover:text-slate-300 text-sm dark:text-slate-600 dark:hover:text-slate-500">
+                            <span className="h-10 px-2.5 inline-flex justify-center items-center gap-2 font-bold text-slate-400 hover:text-slate-300 text-sm">
                                 <svg
                                     className="w-3 h-3"
                                     xmlns="http://www.w3.org/2000/svg"

@@ -4,11 +4,11 @@ import Home from '@/pages/Content/Home';
 import PromotionPage from '@/pages/Content/Promotion';
 import EvolutionLive from '@/pages/Content/Taxonomy/Live/Evolution';
 import PragmaticLive from '@/pages/Content/Taxonomy/Live/Pragmatic';
-import SoftGamingsLive from '@/pages/Content/Taxonomy/Live/SoftGamings';
+import AsiaGamingLive from '@/pages/Content/Taxonomy/Live/AsiaGaming';
 import MicroGamingLive from '@/pages/Content/Taxonomy/Live/MicroGaming';
 import EvolutionSlot from '@/pages/Content/Taxonomy/Slot/Evolution';
 import PragmaticSlot from '@/pages/Content/Taxonomy/Slot/Pragmatic';
-import SoftGamingsSlot from '@/pages/Content/Taxonomy/Slot/SoftGamings';
+import AsiaGamingSlot from '@/pages/Content/Taxonomy/Slot/AsiaGaming';
 import MicroGamingSlot from '@/pages/Content/Taxonomy/Slot/MicroGaming';
 import Bti from '@/pages/Content/Taxonomy/Sports/BTI';
 import Gigx from '@/pages/Content/Taxonomy/Sports/GIGX';
@@ -46,12 +46,12 @@ const Routes: TRoute[] = [
         element: <PragmaticLive />,
     },
     {
-        path: '/softgamings',
-        element: <SoftGamingsLive />,
+        path: '/asiagaming',
+        element: <AsiaGamingLive />,
     },
     {
-        path: '/softgamings/live',
-        element: <SoftGamingsLive />,
+        path: '/asiagaming/live',
+        element: <AsiaGamingLive />,
     },
     {
         path: '/microgaming',
@@ -70,8 +70,8 @@ const Routes: TRoute[] = [
         element: <PragmaticSlot />,
     },
     {
-        path: '/softgamings/slot',
-        element: <SoftGamingsSlot />,
+        path: '/asiagaming/slot',
+        element: <AsiaGamingSlot />,
     },
     {
         path: '/microgaming/slot',

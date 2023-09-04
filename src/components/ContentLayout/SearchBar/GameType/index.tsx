@@ -46,11 +46,11 @@ const GameType: React.FC = () => {
     };
     return (
         <div className="w-full GameType">
-            <div className="flex flex-nowrap gap-2.5 justify-center max-w-5xl mx-auto">
+            <div className="flex flex-wrap gap-2.5 px-8 my-5 justify-center max-w-5xl mx-auto md:flex-nowrap">
                 {GameTypeData.map((item) => (
                     <div
                         key={nanoid()}
-                        className="flex flex-col items-center cursor-pointer"
+                        className="flex flex-col items-center cursor-pointer my-1"
                         onClick={() => handleClick(item.gameType)}
                     >
                         <img src={item.img} alt="" className="w-20" />

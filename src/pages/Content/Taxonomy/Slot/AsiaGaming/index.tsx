@@ -1,16 +1,20 @@
 import React, { useEffect } from 'react';
 // import { nanoid } from 'nanoid';
 import { useTranslation } from 'react-i18next';
-// import { useAtom, useSetAtom } from 'jotai';
-// import {
-//     GameTypeAtom,
-//     GameCategoryStateAtom,
-// } from '@/pages/Content/Taxonomy/AtomSetting';
+import {
+    // useAtom,
+    useSetAtom,
+} from 'jotai';
+import {
+    // GameTypeAtom,
+    GameCategoryStateAtom,
+} from '@/pages/Content/Taxonomy/AtomSetting';
 // import GameType from '@/components/ContentLayout/SearchBar/GameType';
-// import GameCategory from '@/components/ContentLayout/SearchBar/GameCategory';
+import GameCategory from '@/components/ContentLayout/SearchBar/GameCategory';
 // import Game from '@/components/ContentLayout/Games/Game';
 // import fakeGameData from './fakeGameData.json';
 import MaintainImg from '@/assets/images/Maintain.png';
+import asiagamingProviderImg from '@/assets/images/asiagamingProviderImg.png';
 
 const Evolution: React.FC = () => {
     const { t } = useTranslation();
@@ -19,7 +23,7 @@ const Evolution: React.FC = () => {
     //     GameTypeValue,
     //     setGameType,
     // ] = useAtom(GameTypeAtom);
-    // const setGameCategoryState = useSetAtom(GameCategoryStateAtom);
+    const setGameCategoryState = useSetAtom(GameCategoryStateAtom);
 
     // const games =
     //     GameTypeValue !== 'all'
@@ -30,7 +34,7 @@ const Evolution: React.FC = () => {
 
     useEffect(() => {
         // setGameType('all');
-        // setGameCategoryState('live');
+        setGameCategoryState('slot');
         window.scrollTo(0, 0);
     }, []);
 
@@ -38,7 +42,7 @@ const Evolution: React.FC = () => {
         <div className="w-full h-auto bg-[#F6F7F7] pb-20">
             <div className="h-20 bg-white" />
             <div className="w-full h-auto flex mx-auto flex-col items-center mt-[-2.5rem] mb-6 z-10 ">
-                {/* <GameCategory Provider="evolution" /> */}
+                <GameCategory Provider="asiagaming" />
             </div>
             <div className="w-full h-auto flex mx-auto flex-col items-center  z-10 ">
                 {/* <GameType /> */}
@@ -50,6 +54,11 @@ const Evolution: React.FC = () => {
                             <h3 className="gamesCategory mb-2">
                                 Asia Gaming {t('Slot Game')}
                             </h3>
+                            <img
+                                src={asiagamingProviderImg}
+                                alt=""
+                                className="m-auto md:h-28 w-full object-contain my-10"
+                            />
                             <img src={MaintainImg} alt="" className="m-auto" />
                             <span className="gamesCategoryDes">
                                 {/* {games.length} {t('Games found')} */}

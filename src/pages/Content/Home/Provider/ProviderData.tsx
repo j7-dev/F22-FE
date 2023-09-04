@@ -50,7 +50,7 @@ export const fakeProviderData = [
     {
         ProviderImg: asiagamingProviderImg,
         ProviderName: 'Asia Gaming',
-        ProviderPath: '/softgamings',
+        ProviderPath: '/asiagaming',
         ProviderFavicon: agFavicon,
         ProviderType: ['Live Casino', 'Slot Game'],
     },

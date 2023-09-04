@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { useSetAtom, useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
-import { AiOutlineMenuUnfold, AiOutlineMenuFold } from 'react-icons/ai';
+import { AiOutlineMenu, AiOutlinePlus } from 'react-icons/ai';
 import {
     popupIsOpenAtom,
     IsLoginAtom,
@@ -16,6 +16,7 @@ import {
 } from '@/components/ContentLayout/Header/MenuData';
 import { mbSidebarAtom } from '@/components/ContentLayout';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
+import { BiSolidUser } from 'react-icons/bi';
 
 const NavBar: React.FC = () => {
     const { t } = useTranslation();
@@ -70,17 +71,23 @@ const NavBar: React.FC = () => {
                                 />
                             </span>
                         </Link>
-                        <div className="md:hidden">
+                        <div className="md:hidden mobileBtn">
                             <button
                                 type="button"
                                 className="inline-flex justify-center items-center gap-2 rounded-full bg-transparent border-transparent  shadow-sm align-middle transition-all"
                                 onClick={handleMbSidebar}
                             >
-                                {mbSidebar ? (
-                                    <AiOutlineMenuFold size={40} />
-                                ) : (
-                                    <AiOutlineMenuUnfold size={40} />
-                                )}
+                                <div
+                                    className={`menuBtn transition-all ${
+                                        mbSidebar ? 'rotate-45' : ''
+                                    }`}
+                                >
+                                    {mbSidebar ? (
+                                        <AiOutlinePlus size={40} />
+                                    ) : (
+                                        <AiOutlineMenu size={40} />
+                                    )}
+                                </div>
                             </button>
                         </div>
                     </div>
@@ -126,21 +133,12 @@ const NavBar: React.FC = () => {
                             </div>
                             {/* TODO 把登入登出拆成組件 */}
                             <span
-                                className={`loginBtn flex items-center rounded-lg border-white gap-x-2 font-bold bg-[#F9A318] text-white hover:opacity-80  md:my-3 md:px-6 md:py-3 cursor-pointer ${
+                                className={`loginBtn whitespace-nowrap flex items-center rounded-lg border-white gap-x-2 font-bold bg-[#F9A318] text-white hover:opacity-80  md:my-3 md:px-6 md:py-3 cursor-pointer ${
                                     isLogin === false ? 'block' : 'hidden'
                                 } `}
                                 onClick={handleClick}
                             >
-                                <svg
-                                    className="w-4 h-4"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    fill="currentColor"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                                </svg>
+                                <BiSolidUser size={20} />
                                 Log in
                             </span>
                             <div
@@ -149,7 +147,7 @@ const NavBar: React.FC = () => {
                                 }`}
                             >
                                 <Link to="/wallet">
-                                    <span className="flex items-center rounded-lg border-white gap-x-2 font-bold bg-[#F9A318] text-white hover:opacity-80  md:my-3 md:px-6 md:py-3 ">
+                                    <span className="flex whitespace-nowrap  items-center rounded-lg border-white gap-x-2 font-bold bg-[#F9A318] text-white hover:opacity-80  md:my-3 md:px-6 md:py-3 ">
                                         <svg
                                             className="w-4 h-4"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -164,7 +162,7 @@ const NavBar: React.FC = () => {
                                     </span>
                                 </Link>
                                 <span
-                                    className="logoutBtn flex items-center rounded-lg border-white gap-x-2 font-bold bg-[#e5e5e5] text-black hover:opacity-80  md:my-3 md:px-6 md:py-3 cursor-pointer"
+                                    className="logoutBtn whitespace-nowrap  flex items-center rounded-lg border-white gap-x-2 font-bold bg-[#e5e5e5] text-black hover:opacity-80  md:my-3 md:px-6 md:py-3 cursor-pointer"
                                     onClick={handleLogout}
                                 >
                                     Log out
