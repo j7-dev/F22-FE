@@ -4,10 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
-import {
-    popupIsOpenAtom,
-    IsLoginAtom,
-} from '@/components/ContentLayout/LoginPopUp';
+import { popupIsOpenAtom, IsLoginAtom } from '@/components/ContentLayout/LoginPopUp';
 import depositImg from '@/assets/images/deposit-icon-hover.svg';
 import withdrawImg from '@/assets/images/withdraw-icon-hover.svg';
 // import creaditImg from '@/assets/images/credit-icon-hover.svg';
@@ -35,9 +32,7 @@ const index: React.FC = () => {
                 <span className="flex items-center gap-x-3.5 text-sm hover:text-[#78D39D] text-white dark:bg-gray-900 dark:text-white">
                     <img src={depositImg as unknown as string} alt="" />
                     <span
-                        className={`${
-                            sidebarIsOpen ? 'block' : 'hidden'
-                        } text-lg font-semibold tracking-wider cursor-pointer`}
+                        className={`${sidebarIsOpen ? 'block' : 'hidden'} text-lg font-normal tracking-wider cursor-pointer`}
                         onClick={() => {
                             handleClick('Deposit');
                         }}
@@ -51,9 +46,7 @@ const index: React.FC = () => {
                 <span className="flex items-center gap-x-3.5 text-sm  text-white hover:text-[#78D39D] dark:bg-gray-900 dark:text-white">
                     <img src={withdrawImg as unknown as string} alt="" />
                     <span
-                        className={`${
-                            sidebarIsOpen ? 'block' : 'hidden'
-                        } text-lg font-semibold tracking-wider cursor-pointer`}
+                        className={`${sidebarIsOpen ? 'block' : 'hidden'} text-lg font-normal tracking-wider cursor-pointer`}
                         onClick={() => {
                             handleClick('Withdraw');
                         }}
@@ -69,7 +62,7 @@ const index: React.FC = () => {
                     <span
                         className={`${
                             sidebarIsOpen ? 'block' : 'hidden'
-                        } text-lg font-semibold tracking-wider cursor-pointer`}
+                        } text-lg font-normal tracking-wider cursor-pointer`}
                         onClick={() => {
                             handleClick('MyBalance');
                         }}
@@ -83,9 +76,7 @@ const index: React.FC = () => {
                 <span className="flex items-center gap-x-3.5 hover:text-[#78D39D] text-sm text-white dark:bg-gray-900 dark:text-white">
                     <img src={historyImg as unknown as string} alt="" />
                     <span
-                        className={`${
-                            sidebarIsOpen ? 'block' : 'hidden'
-                        } text-lg font-semibold tracking-wider cursor-pointer`}
+                        className={`${sidebarIsOpen ? 'block' : 'hidden'} text-lg font-normal tracking-wider cursor-pointer`}
                         onClick={() => {
                             handleClick('RolloverHistory');
                         }}

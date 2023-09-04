@@ -54,7 +54,7 @@ export const Footer: React.FC = () => {
                     </div>
                 ))}
             </div>
-            <div className="footerImgWarp max-w-5xl flex w-full justify-center mx-auto h-auto items-center gap-8 mt-12 mb-4">
+            <div className="footerImgWarp max-w-5xl flex w-full justify-center mx-auto h-auto items-center gap-8 mt-12 pb-20 md:pb-4">
                 <span className="text-xs md:text-base text-center font-normal text-gray-500">
                     <Trans i18nKey="© Smart Bet Casino" />
                 </span>
