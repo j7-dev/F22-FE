@@ -47,22 +47,10 @@ const index: React.FC = () => {
                             handleClick(item.name, item.path);
                         }}
                     >
-                        <div className="w-24 h-24 m-2.5 p-5 bg-white shadow-[0_0px_30px_0px_rgba(194,127,228,0.3)] border border-solid border-[#99BDE8] rounded-full">
-                            <img
-                                src={item.img as unknown as string}
-                                alt=""
-                                className="w-full h-full"
-                            />
+                        <div className="w-16 h-16 md:w-24 md:h-24 m-2.5 p-5 bg-white shadow-[0_0px_30px_0px_rgba(194,127,228,0.3)] border border-solid border-[#99BDE8] rounded-full">
+                            <img src={item.img as unknown as string} alt="" className="w-full h-full" />
                         </div>
-                        <span
-                            className={`font-bold ${
-                                ProviderState === item.name
-                                    ? 'text-[#78d39d]'
-                                    : ''
-                            }`}
-                        >
-                            {t(item.name)}
-                        </span>
+                        <span className={`font-normal text-xs md:text-base ${ProviderState === item.name ? 'text-[#78d39d]' : ''}`}>{t(item.name)}</span>
                     </div>
                 ))}
             </div>

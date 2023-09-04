@@ -1,9 +1,9 @@
-import pragmaticplayFavicon from '@/assets/images/pragmaticplay_favicon.ico';
+import pragmaticplayFavicon from '@/assets/images/game_provider/pragmaticplay_icon.png';
 import evolutionFavicon from '@/assets/images/evolution_favicon.png';
-import golfFavicon from '@/assets/images/gigxProviderImg.png';
-import btiFavicon from '@/assets/images/btiProviderImg.png';
-import mgFavicon from '@/assets/images/mg_favicon.png';
-import agFavicon from '@/assets/images/ag_favicon.png';
+import golfFavicon from '@/assets/images/game_provider/igx_icon.png';
+import btiFavicon from '@/assets/images/game_provider/bti_icon.png';
+import mgFavicon from '@/assets/images/game_provider/microgaming_icon.png';
+import agFavicon from '@/assets/images/game_provider/asiagaming_icon.png';
 
 export interface MenuItem {
     title: string;

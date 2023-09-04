@@ -14,12 +14,7 @@ const Home = () => {
     const [ProviderPath, setProviderPath] = useAtom(ProviderPathAtom);
 
     const { t } = useTranslation();
-    const ProviderData =
-        ProviderState !== 'All'
-            ? fakeProviderData.filter((item) =>
-                  item['ProviderType'].includes(ProviderState),
-              )
-            : fakeProviderData;
+    const ProviderData = ProviderState !== 'All' ? fakeProviderData.filter((item) => item['ProviderType'].includes(ProviderState)) : fakeProviderData;
     useEffect(() => {
         setProviderState('All');
         setProviderPath('');
@@ -30,20 +25,15 @@ const Home = () => {
             <Banner />
 
             <div className="flex max-w-4xl mx-auto gap-2.5 flex-wrap py-10 px-5 md:px-0">
-                <h2 className="w-full text-center text-3xl">
-                    {t('All Provider')}
-                </h2>
+                <h2 className="w-full text-center text-3xl">{t('All Provider')}</h2>
                 <ProviderCategory />
-                {ProviderData.map((Item) => (
-                    <div key={nanoid()} className="w-[calc(50%-5px)]">
-                        <Provider
-                            key={nanoid()}
-                            ProviderImg={Item.ProviderImg}
-                            ProviderName={Item.ProviderName}
-                            ProviderPath={Item.ProviderPath + ProviderPath}
-                        />
-                    </div>
-                ))}
+                <div className="grid grid-cols-2 gap-16 my-16">
+                    {ProviderData.map((Item) => (
+                        <div key={nanoid()}>
+                            <Provider key={nanoid()} ProviderImg={Item.ProviderImg} ProviderName={Item.ProviderName} ProviderPath={Item.ProviderPath + ProviderPath} />
+                        </div>
+                    ))}
+                </div>
             </div>
             {/* <Promotions /> */}
         </div>

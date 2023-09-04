@@ -18,14 +18,10 @@ const Games: React.FC = () => {
     return (
         <div className="my-20 max-w-3xl mx-auto ">
             <div className="gameHeader flex flex-row justify-between my-2">
-                <span className="gameTaxonomyTitle text-base tracking-wide font-bold ">
-                    {t('Top Games')}
-                </span>
-                <span className="gameLink text-[#357ACB] text-sm tracking-wide">
-                    View All
-                </span>
+                <span className="gameTaxonomyTitle text-base tracking-wide font-bold ">{t('Top Games')}</span>
+                <span className="gameLink text-[#357ACB] text-sm tracking-wide">View All</span>
             </div>
-            <div className="flex gap-2.5 flex-wrap ">
+            <div className="flex gap-2.5 flex-wrap">
                 {fakeGames.map(() => (
                     <div key={nanoid()} className="w-[calc(50%-5px)]">
                         <Game key={nanoid()} />

@@ -1,15 +1,15 @@
-import evolutionProviderImg from '@/assets/images/evolutionProviderImg.svg';
-import pragmaticplayProviderImg from '@/assets/images/pragmaticplayProviderImg.png';
-import microgamingProviderImg from '@/assets/images/microgamingProviderImg.png';
-import asiagamingProviderImg from '@/assets/images/asiagamingProviderImg.png';
-import btiProviderImg from '@/assets/images/btiProviderImg.png';
-import gigxProviderImg from '@/assets/images/gigxProviderImg.png';
-import pragmaticplayFavicon from '@/assets/images/pragmaticplay_favicon.ico';
-import evolutionFavicon from '@/assets/images/evolution_favicon.png';
+import evolutionProviderImg from '@/assets/images/game_provider/evo.png';
+import pragmaticplayProviderImg from '@/assets/images/game_provider/pragmaticplay.png';
+import microgamingProviderImg from '@/assets/images/game_provider/microgaming.png';
+import asiagamingProviderImg from '@/assets/images/game_provider/asiagaming.png';
+import btiProviderImg from '@/assets/images/game_provider/bti.png';
+import gigxProviderImg from '@/assets/images/game_provider/igx.png';
+import pragmaticplayFavicon from '@/assets/images/game_provider/pragmaticplay_icon.png';
+import evolutionFavicon from '@/assets/images/game_provider/evo_icon.png';
 // import golfFavicon from '@/assets/images/golf_favicon.ico';
 // import btiFavicon from '@/assets/images/bti_favicon.ico';
-import mgFavicon from '@/assets/images/mg_favicon.png';
-import agFavicon from '@/assets/images/ag_favicon.png';
+import mgFavicon from '@/assets/images/game_provider/microgaming_icon.png';
+import agFavicon from '@/assets/images/game_provider/asiagaming_icon.png';
 
 export const fakeProviderData = [
     {

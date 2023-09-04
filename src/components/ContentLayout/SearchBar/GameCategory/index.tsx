@@ -35,27 +35,11 @@ const index: React.FC<GameCategoryProps> = ({ Provider }) => {
         <div className="w-full GameCategory">
             <div className="flex flex-nowrap gap-2.5 justify-center max-w-5xl mx-auto">
                 {GameCategoryData.map((item) => (
-                    <div
-                        key={nanoid()}
-                        className="flex flex-col items-center cursor-pointer"
-                        onClick={() => handleClick(item.toPath)}
-                    >
-                        <div className="w-24 h-24 m-2.5 p-5 bg-white shadow-[0_0px_30px_0px_rgba(194,127,228,0.3)] border border-solid border-[#99BDE8] rounded-full">
-                            <img
-                                src={item.img as unknown as string}
-                                alt=""
-                                className="w-full h-full"
-                            />
+                    <div key={nanoid()} className="flex flex-col items-center cursor-pointer" onClick={() => handleClick(item.toPath)}>
+                        <div className="w-16 h-16 md:w-24 md:h-24 m-2.5 p-5 bg-white shadow-[0_0px_30px_0px_rgba(194,127,228,0.3)] border border-solid border-[#99BDE8] rounded-full">
+                            <img src={item.img as unknown as string} alt="" className="w-full h-full" />
                         </div>
-                        <span
-                            className={`font-bold ${
-                                GameCategoryState === item.toPath
-                                    ? 'text-[#78d39d]'
-                                    : ''
-                            }`}
-                        >
-                            {t(item.name)}
-                        </span>
+                        <span className={`font-bold text-xs md:text-base ${GameCategoryState === item.toPath ? 'text-[#78d39d]' : ''}`}>{t(item.name)}</span>
                     </div>
                 ))}
             </div>
