@@ -66,7 +66,7 @@ const Popup: React.FC = () => {
         >
             <div
                 ref={popupContainerRef}
-                className="popupContainer m-auto w-[530px] h-[500px] bg-white rounded-3xl "
+                className="popupContainer m-auto w-full md:w-[530px] h-[500px] bg-white rounded-3xl "
             >
                 <div
                     className="closeBtn absolute right-5 top-5 z-10 cursor-pointer w-10 h-10 flex justify-center items-center text-2xl rounded-md bg-[#F6F7F7] hover:bg-[#e5e5e5]"
@@ -74,7 +74,7 @@ const Popup: React.FC = () => {
                 >
                     <GrFormClose size={40} />
                 </div>
-                <div className="w-full h-full flex flex-col justify-center items-center gap-10 p-16">
+                <div className="w-full h-full flex flex-col justify-center items-center gap-10 p-8 md:p-16">
                     <img src={logoLogin} alt="" className="w-full" />
                     <div className="loginFrom text-center flex flex-col gap-2.5 w-full">
                         <span>Available After Login.</span>
