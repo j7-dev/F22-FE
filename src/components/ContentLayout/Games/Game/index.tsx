@@ -17,16 +17,10 @@ type GameProps = {
 const index: React.FC<GameProps> = ({ data = {} }) => (
     <div className="gameWrap w-full px-1">
         <div className="gameImg w-full aspect-square relative">
-            <img
-                className="w-full aspect-square align-top object-cover"
-                src={data.GameImg}
-                alt=""
-            />
+            <img className="w-full aspect-square align-top object-cover" src={data.GameImg} alt="" />
         </div>
         <div className="gameInfo bg-[#363F4E] px-2 py-2">
-            <span className="gameName text-white line-clamp-1  text-sm">
-                {data['Table Name']}
-            </span>
+            <span className="gameName text-white line-clamp-1 text-sm">{data['Table Name']}</span>
         </div>
         {/* 如果有登入才出現 */}
         <div className="gameBalance flex justify-end gap-2 items-center bg-[#2B3240] px-2 py-1">

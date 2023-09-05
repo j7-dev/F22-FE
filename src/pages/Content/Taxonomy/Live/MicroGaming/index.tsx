@@ -50,7 +50,7 @@ const Evolution: React.FC = () => {
                     <div className="w-[1360px] flex flex-col justify-center flex-wrap gap-4  py-5 px-10 ">
                         <div className="gamesCategoryInfo w-auto text-center">
                             <h3 className="gamesCategory mb-2">Micro Gaming {t('Live Casino')}</h3>
-                            <img src={microgamingProviderImg} alt="" className="m-auto w-auto object-contain my-10" />
+                            <img src={microgamingProviderImg} alt="" className="m-auto w-full md:w-auto object-contain my-10" />
                             <img src={MaintainImg} alt="" className="m-auto" />
                             <span className="gamesCategoryDes">{/* {games.length} {t('Games found')} */}</span>
                         </div>

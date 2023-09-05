@@ -14,7 +14,7 @@ const index: React.FC<ProviderProps> = ({ ProviderImg, ProviderName, ProviderPat
                     <img className=" align-center object-contain w-full h-full object-center" src={ProviderImg} alt={ProviderName} />
                 </div>
                 <div className="gameInfo bg-[#363F4E] px-2 py-2">
-                    <span className="gameName text-white line-clamp-1 text-sm text-center">{ProviderName}</span>
+                    <span className="gameName text-white line-clamp-1 text-sm font-bold text-center">{ProviderName}</span>
                 </div>
             </Link>
         </div>

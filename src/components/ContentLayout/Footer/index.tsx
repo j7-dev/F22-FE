@@ -35,7 +35,7 @@ export const Footer: React.FC = () => {
                                                 <li key={nanoid()} className="flex items-center gap-2.5 cursor-pointer">
                                                     <img src={subItem.imgSrc} alt="" className="w-[18px] h-[18px] md:w-[24px] md:h-[24px] object-contain" />
                                                     <Link to={subItem.path as string}>
-                                                        <span className="text-xs md:text-base font-normal text-gray-500 hover:text-[#78d39d]">{subItem.title}</span>
+                                                        <span className="text-sm md:text-base font-normal text-gray-500 hover:text-[#78d39d]">{subItem.title}</span>
                                                     </Link>
                                                 </li>
                                             ))}
