@@ -58,12 +58,12 @@ const NavBar: React.FC = () => {
                     <div className="flex items-center justify-between">
                         <Link to="/">
                             <span className="flex-none text-xl font-semibold text-white ">
-                                <img src={logo} alt="" className="max-w-[250px]" />
+                                <img src={logo} alt="" className="max-w-[250px] xl:max-h-none max-h-[40px]" />
                             </span>
                         </Link>
                         <div className="xl:hidden mobileBtn">
                             <button type="button" className="inline-flex justify-center items-center gap-2 rounded-full bg-transparent border-transparent  shadow-sm align-middle transition-all" onClick={handleMbSidebar}>
-                                <div className={`menuBtn transition-all ${mbSidebar ? 'rotate-45' : ''}`}>{mbSidebar ? <AiOutlinePlus size={40} /> : <AiOutlineMenu size={40} />}</div>
+                                <div className={`menuBtn transition-all ${mbSidebar ? 'rotate-45' : ''}`}>{mbSidebar ? <AiOutlinePlus size={30} /> : <AiOutlineMenu size={30} />}</div>
                             </button>
                         </div>
                     </div>
