@@ -29,14 +29,12 @@ const Layout = () => {
     return (
         <>
             <div
-                className={`z-50 leftContent overflow-hidden h-screen fixed left-0 top-0 md:min-w-[80px] transition-all ${
-                    windowWidth <= 768 ? (mbSidebar ? 'w-64' : 'w-0') : ''
-                }
+                className={`z-50 leftContent overflow-hidden h-screen fixed left-0 top-0 xl:min-w-[80px] transition-all ${windowWidth <= 1280 ? (mbSidebar ? 'w-64' : 'w-0') : ''}
 								`}
             >
                 <Sidebar />
             </div>
-            <div className="rightContent relative md:pl-20 ">
+            <div className="rightContent relative xl:pl-20 ">
                 <Header />
                 <Outlet />
                 <Footer />

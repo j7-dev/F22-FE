@@ -24,31 +24,23 @@ export const Sidebar: React.FC = () => {
           };
 
     const handleMouseEnter = () => {
-        windowWidth >= 768 && setSidebarIsOpen(true);
+        windowWidth >= 1280 && setSidebarIsOpen(true);
     };
     const handleMouseLeave = () => {
-        windowWidth >= 768 && setSidebarIsOpen(false);
+        windowWidth >= 1280 && setSidebarIsOpen(false);
     };
 
     const handleMbSidebar = () => {
-        if (windowWidth <= 768) {
+        if (windowWidth <= 1280) {
             setsidebarIsOpen((prevValue) => !prevValue);
             setMbSidebar((prevValue) => !prevValue);
         }
     };
     return (
-        <div
-            className={`sideBar text-white  h-full bg-[#0b0b11] z-50 w-full md:w-20 md:hover:w-64 transition-all duration-300`}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            onClick={handleMbSidebar}
-        >
+        <div className={`sideBar text-white  h-full bg-[#0b0b11] z-50 xl:w-20 xl:hover:w-64 transition-all duration-300`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleMbSidebar}>
             <div className="w-full logo h-1/6 flex justify-center items-center">
                 <Link to="/" className="w-full">
-                    <span
-                        className="relative w-full block h-12 bg-center bg-no-repeat bg-contain"
-                        style={logoSrc}
-                    >
+                    <span className="relative w-full block h-12 bg-center bg-no-repeat bg-contain" style={logoSrc}>
                         <span className="sr-only">跳轉到首頁</span>
                     </span>
                 </Link>

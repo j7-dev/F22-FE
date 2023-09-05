@@ -20,52 +20,22 @@ const index: React.FC = () => {
     };
     return (
         <div className="cashContainer flex flex-col">
-            <div
-                className="flex justify-between items-center"
-                onClick={handleDown}
-            >
-                <span className="text-sm font-bold text-[#2b324080] p-2.5">
-                    {t('Cash')}
-                </span>
-                {window.innerWidth < 768 && <AiOutlineDown />}
+            <div className="flex justify-between items-center" onClick={handleDown}>
+                <span className="text-sm font-bold text-[#2b324080] p-2.5">{t('Cash')}</span>
+                {window.innerWidth < 810 && <AiOutlineDown />}
             </div>
-            <div
-                className={`cashListContainer flex flex-col gap-4 overflow-hidden transition-all md:h-full ${
-                    window.innerWidth < 768 && down ? 'h-[150px]' : 'h-0'
-                }`}
-            >
-                <div
-                    className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${
-                        selectedSection === 'MyBalance' ? 'bg-[#F3F3F4]' : ''
-                    }`}
-                    onClick={() => handleClick('MyBalance')}
-                >
+            <div className={`cashListContainer flex flex-col gap-4 overflow-hidden transition-all md:h-full ${window.innerWidth < 810 && down ? 'h-[150px]' : 'h-0'}`}>
+                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'MyBalance' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('MyBalance')}>
                     <img src={creditIcon as unknown as string} alt="" />
-                    <span className="text-sm font-bold text-[#2B3240]">
-                        {t('My Balance & Transfer')}
-                    </span>
+                    <span className="text-sm font-bold text-[#2B3240]">{t('My Balance & Transfer')}</span>
                 </div>
-                <div
-                    className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${
-                        selectedSection === 'Deposit' ? 'bg-[#F3F3F4]' : ''
-                    }`}
-                    onClick={() => handleClick('Deposit')}
-                >
+                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'Deposit' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('Deposit')}>
                     <img src={depositIcon as unknown as string} alt="" />
-                    <span className="text-sm font-bold text-[#2B3240]">
-                        {t('Deposit')}
-                    </span>
+                    <span className="text-sm font-bold text-[#2B3240]">{t('Deposit')}</span>
                 </div>
-                <div
-                    className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${
-                        selectedSection === 'Withdraw' ? 'bg-[#F3F3F4]' : ''
-                    }`}
-                    onClick={() => handleClick('Withdraw')}
-                >
+                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'Withdraw' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('Withdraw')}>
                     <img src={withdrawIcon as unknown as string} alt="" />
-                    <span className="text-sm font-bold text-[#2B3240]">
-                        {t('Withdraw')}
-                    </span>
+                    <span className="text-sm font-bold text-[#2B3240]">{t('Withdraw')}</span>
                 </div>
             </div>
         </div>

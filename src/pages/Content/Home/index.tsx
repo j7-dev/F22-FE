@@ -25,7 +25,6 @@ const Home = () => {
             <Banner />
 
             <div className="flex max-w-4xl mx-auto gap-2.5 flex-wrap py-10 px-5 md:px-0">
-                <h2 className="w-full text-center text-3xl">{t('All Provider')}</h2>
                 <ProviderCategory />
                 <div className="grid grid-cols-2 gap-16 my-16">
                     {ProviderData.map((Item) => (

@@ -54,23 +54,23 @@ const NavBar: React.FC = () => {
         <>
             {/* <!-- Navbar --> */}
             <div className="relative w-full bg-white md:flex md:items-center md:justify-between px-4 sm:px-6 lg:px-8">
-                <nav className="relative max-w-7xl w-full py-3  md:flex md:items-center md:justify-between md:py-0  xl:mx-auto " aria-label="Global">
+                <nav className="relative max-w-7xl w-full py-3 xl:flex md:items-center xl:justify-between md:py-0  xl:mx-auto " aria-label="Global">
                     <div className="flex items-center justify-between">
                         <Link to="/">
                             <span className="flex-none text-xl font-semibold text-white ">
                                 <img src={logo} alt="" className="max-w-[250px]" />
                             </span>
                         </Link>
-                        <div className="md:hidden mobileBtn">
+                        <div className="xl:hidden mobileBtn">
                             <button type="button" className="inline-flex justify-center items-center gap-2 rounded-full bg-transparent border-transparent  shadow-sm align-middle transition-all" onClick={handleMbSidebar}>
                                 <div className={`menuBtn transition-all ${mbSidebar ? 'rotate-45' : ''}`}>{mbSidebar ? <AiOutlinePlus size={40} /> : <AiOutlineMenu size={40} />}</div>
                             </button>
                         </div>
                     </div>
                     {/* 桌機選單 */}
-                    <div className="hidden transition-all duration-300 basis-full grow md:block">
+                    <div className="hidden transition-all duration-300 basis-full grow xl:block">
                         <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-between md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
-                            <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-start md:gap-y-0 md:gap-x-7 md:mt-0 ">
+                            <div className="hidden xl:flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-start md:gap-y-0 md:gap-x-7 md:mt-0 ">
                                 {fakeData.map((item) => {
                                     const title = item?.title as string;
                                     const path = item?.path as string;
@@ -110,7 +110,7 @@ const NavBar: React.FC = () => {
                         </div>
                     </div>
                     {/* 手機選單 */}
-                    <div className="flex md:hidden bg-white fixed bottom-0 left-0 justify-between w-full px-8 pt-3 pb-2" style={{ borderTop: '1px solid #999' }}>
+                    <div className="flex xl:hidden bg-white fixed bottom-0 left-0 justify-between w-full px-8 pt-3 pb-2" style={{ borderTop: '1px solid #999' }}>
                         <Link to="/">
                             <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
                                 <GiPokerHand className="text-[1.5rem]" />
