@@ -194,3 +194,17 @@ $WithdrawHoverIcon: url("@/assets/images/withdraw-icon-hover.svg");
 		}
 	}
 }
+
+//gameImg
+.LazyLoadImage {
+	img {
+		object-fit: cover;
+		vertical-align: top;
+	}
+}
+.ProviderImg {
+	img {
+		object-fit: contain;
+		object-position: center;
+	}
+}

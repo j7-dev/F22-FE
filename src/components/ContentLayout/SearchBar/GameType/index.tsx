@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { GameTypeAtom } from '@/pages/Content/Taxonomy/AtomSetting';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 // import { FilterGamesIsOpenAtom } from '../index';
 import allImg from '@/assets/images/allImg.png';
 import blackjackImg from '@/assets/images/blackjackImg.png';
@@ -48,21 +49,12 @@ const GameType: React.FC = () => {
         <div className="w-full GameType">
             <div className="flex flex-wrap gap-2.5 px-8 my-5 justify-center max-w-5xl mx-auto md:flex-nowrap">
                 {GameTypeData.map((item) => (
-                    <div
-                        key={nanoid()}
-                        className="flex flex-col items-center cursor-pointer my-1"
-                        onClick={() => handleClick(item.gameType)}
-                    >
-                        <img src={item.img} alt="" className="w-20" />
-                        <span
-                            className={`${
-                                GameTypeValue === item.gameType
-                                    ? 'text-[#78d39d]'
-                                    : ''
-                            }`}
-                        >
-                            {t(item.name)}
-                        </span>
+                    <div key={nanoid()} className="flex flex-col items-center cursor-pointer my-1 GameType" onClick={() => handleClick(item.gameType)}>
+                        <div className="LazyLoadImage">
+                            <LazyLoadImage src={item.img} alt="" width="80px" height="80px" />
+                        </div>
+                        {/* <img src={item.img} alt="" className="w-20" /> */}
+                        <span className={`${GameTypeValue === item.gameType ? 'text-[#78d39d]' : ''}`}>{t(item.name)}</span>
                     </div>
                 ))}
             </div>

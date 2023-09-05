@@ -1,5 +1,6 @@
 import React from 'react';
 import coinIcon from '@/assets/images/coin-icon.png';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 // import blackjackImg from '@/assets/images/blackjackImg.png';
 // import rouletteImg from '@/assets/images/rouletteImg.png';
 // import baccaratImg from '@/assets/images/baccaratImg.png';
@@ -16,8 +17,9 @@ type GameProps = {
 };
 const index: React.FC<GameProps> = ({ data = {} }) => (
     <div className="gameWrap w-full px-1">
-        <div className="gameImg w-full aspect-square relative">
-            <img className="w-full aspect-square align-top object-cover" src={data.GameImg} alt="" />
+        <div className="gameImg w-full aspect-square relative align-top object-cover LazyLoadImage">
+            <LazyLoadImage src={data.GameImg} width="100%" height="100%" />
+            {/* <img className="w-full aspect-square align-top object-cover" src={data.GameImg} alt="" /> */}
         </div>
         <div className="gameInfo bg-[#363F4E] px-2 py-2">
             <span className="gameName text-white line-clamp-1 text-sm">{data['Table Name']}</span>

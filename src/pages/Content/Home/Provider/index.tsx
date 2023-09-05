@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 type ProviderProps = {
     ProviderImg?: string;
@@ -8,13 +9,14 @@ type ProviderProps = {
 };
 const index: React.FC<ProviderProps> = ({ ProviderImg, ProviderName, ProviderPath }) => {
     return (
-        <div className="gameWrap w-full px-1">
+        <div className="ProviderWrap w-full px-1">
             <Link to={ProviderPath as string}>
-                <div className="gameImg w-full aspect-[3/2]  relative">
-                    <img className=" align-center object-contain w-full h-full object-center" src={ProviderImg} alt={ProviderName} />
+                <div className="ProviderImg w-full aspect-[3/2] relative">
+                    <LazyLoadImage width="100%" height="100%" src={ProviderImg} alt={ProviderName} />
+                    {/* <img className=" align-center object-contain w-full h-full object-center" src={ProviderImg} alt={ProviderName} /> */}
                 </div>
-                <div className="gameInfo bg-[#363F4E] px-2 py-2">
-                    <span className="gameName text-white line-clamp-1 text-sm font-bold text-center">{ProviderName}</span>
+                <div className="ProviderInfo bg-[#363F4E] px-2 py-2">
+                    <span className="ProviderName text-white line-clamp-1 text-sm font-bold text-center">{ProviderName}</span>
                 </div>
             </Link>
         </div>

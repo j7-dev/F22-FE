@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Carousel } from 'antd';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FaCircleChevronRight, FaCircleChevronLeft } from 'react-icons/fa6';
 import Banner1 from '@/assets/images/Banner1.png';
 import Banner2 from '@/assets/images/Banner2.png';
@@ -30,24 +31,19 @@ const Banner: React.FC = () => {
     return (
         <div className="relative">
             <Carousel ref={carouselRef} dots={false}>
-                <div>
-                    <img src={Banner1} alt="" style={contentStyle} />
+                <div className="LazyLoadImage">
+                    <LazyLoadImage src={Banner1} alt="" style={contentStyle} />
+                    {/* //TODO 需要確認這邊build 到線上能不能正常顯示*/}
+                    {/* <img src={Banner1} alt="" style={contentStyle} /> */}
                 </div>
                 <div>
-                    <img src={Banner2} alt="" style={contentStyle} />
+                    {<LazyLoadImage src={Banner2} alt="" style={contentStyle} />}
+                    {/* <img src={Banner2} alt="" style={contentStyle} /> */}
                 </div>
             </Carousel>
 
-            <FaCircleChevronLeft
-                style={{ fontSize: '48px', color: '#fff' }}
-                className="absolute top-2/4 left-[10%] translate-y-[-50%] px-0 border-0 py-0 bg-transparent cursor-pointer"
-                onClick={handlePrev}
-            />
-            <FaCircleChevronRight
-                style={{ fontSize: '48px', color: '#fff' }}
-                className="absolute top-2/4 right-[10%] translate-y-[-50%] px-0 border-0 py-0 bg-transparent cursor-pointer"
-                onClick={handleNext}
-            />
+            <FaCircleChevronLeft style={{ fontSize: '48px', color: '#fff' }} className="absolute top-2/4 left-[10%] translate-y-[-50%] px-0 border-0 py-0 bg-transparent cursor-pointer" onClick={handlePrev} />
+            <FaCircleChevronRight style={{ fontSize: '48px', color: '#fff' }} className="absolute top-2/4 right-[10%] translate-y-[-50%] px-0 border-0 py-0 bg-transparent cursor-pointer" onClick={handleNext} />
         </div>
     );
 };
