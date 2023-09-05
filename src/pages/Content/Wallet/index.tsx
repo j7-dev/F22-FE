@@ -22,11 +22,11 @@ const Wallet: React.FC = () => {
     const selectSection = selectedSection;
     return (
         <div className="walletPage w-full bg-[#F6F7F7]">
-            <div className="wallerSection max-w-7xl mx-auto flex justify-start items-start p-5 gap-5">
-                <div className="userMenu max-w-[300px] w-full">
+            <div className="wallerSection max-w-7xl mx-auto flex justify-start items-start p-5 gap-5 md:flex-row flex-col">
+                <div className="userMenu md:max-w-[300px] w-full">
                     <UserSection />
                 </div>
-                <div className="userContent max-w-[900px] w-full flex justify-start items-start gap-5">
+                <div className="userContent  md:max-w-[900px] w-full flex justify-start items-start gap-5">
                     {/* {switchSection[selectSection]} */}
                     {switchSection?.[selectSection]}
                 </div>

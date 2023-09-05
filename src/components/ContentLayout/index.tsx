@@ -29,8 +29,9 @@ const Layout = () => {
     return (
         <>
             <div
-                className={`z-50 leftContent overflow-hidden h-screen fixed left-0 top-0 md:min-w-[80px]
-								${windowWidth <= 768 ? (mbSidebar ? '' : 'w-0') : ''}
+                className={`z-50 leftContent overflow-hidden h-screen fixed left-0 top-0 md:min-w-[80px] transition-all ${
+                    windowWidth <= 768 ? (mbSidebar ? 'w-64' : 'w-0') : ''
+                }
 								`}
             >
                 <Sidebar />

@@ -121,12 +121,12 @@ body {
 	border-bottom: 1px solid #dadce0;
 }
 
-$MyBalanceIcon: url("src/assets/images/credit-icon.svg");
-$MyBalanceHoverIcon: url("src/assets/images/credit-icon-hover.svg");
-$DepositIcon: url("src/assets/images/deposit-icon.svg");
-$DepositHoverIcon: url("src/assets/images/deposit-icon-hover.svg");
-$WithdrawIcon: url("src/assets/images/withdraw-icon.svg");
-$WithdrawHoverIcon: url("src/assets/images/withdraw-icon-hover.svg");
+$MyBalanceIcon: url("@/assets/images/credit-icon.svg");
+$MyBalanceHoverIcon: url("@/assets/images/credit-icon-hover.svg");
+$DepositIcon: url("@/assets/images/deposit-icon.svg");
+$DepositHoverIcon: url("@/assets/images/deposit-icon-hover.svg");
+$WithdrawIcon: url("@/assets/images/withdraw-icon.svg");
+$WithdrawHoverIcon: url("@/assets/images/withdraw-icon-hover.svg");
 
 .transactionButtonContainer {
 	.transactionButton {

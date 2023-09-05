@@ -46,7 +46,7 @@ export const fakeMenuData: MenuItem[] = [
             },
             {
                 title: 'Asia Gaming',
-                path: '/softgamings/live',
+                path: '/asiagaming/live',
                 imgSrc: agFavicon,
             },
             {
@@ -72,7 +72,7 @@ export const fakeMenuData: MenuItem[] = [
             },
             {
                 title: 'Asia Gaming',
-                path: '/softgamings/slot',
+                path: '/asiagaming/slot',
                 imgSrc: agFavicon,
             },
             {

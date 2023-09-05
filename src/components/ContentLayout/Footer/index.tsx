@@ -5,13 +5,13 @@ import { useTranslation, Trans } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { MenuItem, fakeMenuData } from '@/components/ContentLayout/Header/MenuData';
 // import { popupIsOpenAtom } from '@/components/ContentLayout/LoginPopUp';
-import { fakeProviderData } from '@/pages/Content/Home/Provider/ProviderData';
+// import { fakeProviderData } from '@/pages/Content/Home/Provider/ProviderData';
 
 export const Footer: React.FC = () => {
     const { t } = useTranslation();
     // TODO 要改成從後端拿
     const fakeData = fakeMenuData.filter((item) => item.title === 'Live Casino' || item.title === 'Slot Game' || item.title === 'Sports');
-    const ProviderData = fakeProviderData;
+    // const ProviderData = fakeProviderData;
     // const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     // const popupIsOpen = useAtomValue(popupIsOpenAtom);
     // const handleClick = () => {
@@ -47,13 +47,13 @@ export const Footer: React.FC = () => {
                     })}
                 </div>
             </div>
-            <div className="footerImgWarp max-w-5xl flex flex-wrap w-full justify-center mx-auto items-center gap-4 mt-16 md:justify-between">
+            {/* <div className="footerImgWarp max-w-5xl flex flex-wrap w-full justify-center mx-auto items-center gap-4 mt-4 md:justify-between">
                 {ProviderData.map((item) => (
                     <div key={nanoid()} className="footerImg">
                         <img src={item.ProviderImg} alt="" className="max-w-[120px]" />
                     </div>
                 ))}
-            </div>
+            </div> */}
             <div className="footerImgWarp max-w-5xl flex w-full justify-center mx-auto h-auto items-center gap-8 mt-12 pb-20 md:pb-4">
                 <span className="text-xs md:text-base text-center font-normal text-gray-500">
                     <Trans i18nKey="© Smart Bet Casino" />

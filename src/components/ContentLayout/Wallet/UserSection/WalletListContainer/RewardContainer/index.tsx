@@ -1,22 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
 import couponIcon from '@/assets/images/coupon-icon.svg';
 import pointsIcon from '@/assets/images/points-icon.svg';
+import { AiOutlineDown } from 'react-icons/ai';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const [selectedSection, setSelectedSection] = useAtom(selectedSectionAtom);
+    const [down, setDown] = useState(false);
     const handleClick = (data: string) => {
         setSelectedSection(data);
     };
+    const handleDown = () => {
+        setDown(!down);
+    };
     return (
         <div className="rewardContainer flex flex-col">
-            <span className="text-sm font-bold text-[#2b324080] p-2.5">
-                {t('Reward')}
-            </span>
-            <div className="rewardListContainer flex flex-col gap-4">
+            <div
+                className="flex justify-between items-center"
+                onClick={handleDown}
+            >
+                <span className="text-sm font-bold text-[#2b324080] p-2.5">
+                    {t('Reward')}
+                </span>
+                {window.innerWidth < 768 && <AiOutlineDown />}
+            </div>
+            <div
+                className={`cashListContainer flex flex-col gap-4 overflow-hidden transition-all md:h-full ${
+                    window.innerWidth < 768 && down ? 'h-[100px]' : 'h-0'
+                }`}
+            >
                 <div
                     className={`h-10 gap-2.5  rounded-lg flex justify-between items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${
                         selectedSection === 'CouponHistory'

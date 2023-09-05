@@ -38,9 +38,7 @@ export const Sidebar: React.FC = () => {
     };
     return (
         <div
-            className={`${
-                sidebarIsOpen ? 'w-64' : 'w-full'
-            } text-white  h-full bg-[#0b0b11] z-50`}
+            className={`sideBar text-white  h-full bg-[#0b0b11] z-50 w-full md:w-20 md:hover:w-64 transition-all duration-300`}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             onClick={handleMbSidebar}
@@ -55,7 +53,7 @@ export const Sidebar: React.FC = () => {
                     </span>
                 </Link>
             </div>
-            <div className="overflow-y-scroll h-5/6 sideNav  px-2 w-full flex flex-col flex-nowrap">
+            <div className="overflow-y-scroll h-5/6 sideNav px-2 w-full flex flex-col">
                 <GameNavContainer />
                 <WallerContainer />
             </div>

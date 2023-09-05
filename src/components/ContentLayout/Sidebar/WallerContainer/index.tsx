@@ -27,12 +27,12 @@ const index: React.FC = () => {
         }
     };
     return (
-        <ul className=" w-full bg-[#2e3135] text-white rounded-md py-4 px-4">
+        <ul className=" w-full bg-[#2e3135] text-white rounded-md py-4 px-4 transition-all duration-300">
             <li className="py-4 border-0 border-b-[1px] border-solid border-[#485160] ">
-                <span className="flex items-center gap-x-3.5 text-sm hover:text-[#78D39D] text-white dark:bg-gray-900 dark:text-white">
+                <span className="flex items-center gap-x-3.5 text-sm hover:text-[#78D39D] text-white overflow-hidden">
                     <img src={depositImg as unknown as string} alt="" />
                     <span
-                        className={`${sidebarIsOpen ? 'block' : 'hidden'} text-lg font-normal tracking-wider cursor-pointer`}
+                        className={`${sidebarIsOpen ? 'w-full' : 'w-0'} text-lg font-semibold tracking-wider cursor-pointer`}
                         onClick={() => {
                             handleClick('Deposit');
                         }}
@@ -43,10 +43,10 @@ const index: React.FC = () => {
             </li>
 
             <li className="py-4 border-0 border-b-[1px] border-solid border-[#485160]">
-                <span className="flex items-center gap-x-3.5 text-sm  text-white hover:text-[#78D39D] dark:bg-gray-900 dark:text-white">
+                <span className="flex items-center gap-x-3.5 text-sm  text-white hover:text-[#78D39D] overflow-hidden">
                     <img src={withdrawImg as unknown as string} alt="" />
                     <span
-                        className={`${sidebarIsOpen ? 'block' : 'hidden'} text-lg font-normal tracking-wider cursor-pointer`}
+                        className={`${sidebarIsOpen ? 'w-full' : 'w-0'} text-lg font-normal tracking-wider cursor-pointer`}
                         onClick={() => {
                             handleClick('Withdraw');
                         }}
@@ -57,12 +57,12 @@ const index: React.FC = () => {
             </li>
 
             {/* <li className="py-4 border-0 border-b-[1px] border-solid border-[#485160]">
-                <span className="flex items-center gap-x-3.5 text-sm hover:text-[#78D39D] text-white dark:bg-gray-900 dark:text-white">
+                <span className="flex items-center gap-x-3.5 text-sm hover:text-[#78D39D] text-white ">
                     <img src={creaditImg as unknown as string} alt="" />
                     <span
                         className={`${
-                            sidebarIsOpen ? 'block' : 'hidden'
-                        } text-lg font-normal tracking-wider cursor-pointer`}
+                            sidebarIsOpen ? 'w-full' : 'w-0'
+                        } text-lg font-semibold tracking-wider cursor-pointer`}
                         onClick={() => {
                             handleClick('MyBalance');
                         }}
@@ -73,10 +73,10 @@ const index: React.FC = () => {
             </li> */}
 
             <li className="py-4 ">
-                <span className="flex items-center gap-x-3.5 hover:text-[#78D39D] text-sm text-white dark:bg-gray-900 dark:text-white">
+                <span className="flex items-center gap-x-3.5 hover:text-[#78D39D] text-sm text-white overflow-hidden">
                     <img src={historyImg as unknown as string} alt="" />
                     <span
-                        className={`${sidebarIsOpen ? 'block' : 'hidden'} text-lg font-normal tracking-wider cursor-pointer`}
+                        className={`${sidebarIsOpen ? 'w-full' : 'w-0'} text-lg font-semibold tracking-wider cursor-pointer`}
                         onClick={() => {
                             handleClick('RolloverHistory');
                         }}

@@ -33,7 +33,7 @@ const Evolution: React.FC = () => {
             <div className="w-full h-auto flex mx-auto flex-col items-center mt-[-2.5rem] mb-6 z-10 ">
                 <GameCategory Provider="evolution" />
             </div>
-            <div className="w-full h-auto flex mx-auto flex-col items-center  z-10 ">
+            <div className="w-full h-auto flex mx-auto flex-col items-center z-10 ">
                 <GameType />
             </div>
             <div>
