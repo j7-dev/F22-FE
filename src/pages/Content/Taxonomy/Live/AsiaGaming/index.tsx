@@ -14,7 +14,7 @@ import GameCategory from '@/components/ContentLayout/SearchBar/GameCategory';
 // import Game from '@/components/ContentLayout/Games/Game';
 // import fakeGameData from './fakeGameData.json';
 import MaintainImg from '@/assets/images/Maintain.png';
-import asiagamingProviderImg from '@/assets/images/asiagamingProviderImg.png';
+import asiagamingProviderImg from '@/assets/images/game_provider/asiagaming.png';
 
 const Evolution: React.FC = () => {
     const { t } = useTranslation();
@@ -44,25 +44,15 @@ const Evolution: React.FC = () => {
             <div className="w-full h-auto flex mx-auto flex-col items-center mt-[-2.5rem] mb-6 z-10 ">
                 <GameCategory Provider="asiagaming" />
             </div>
-            <div className="w-full h-auto flex mx-auto flex-col items-center  z-10 ">
-                {/* <GameType /> */}
-            </div>
+            <div className="w-full h-auto flex mx-auto flex-col items-center  z-10 ">{/* <GameType /> */}</div>
             <div>
                 <div className="FilterGames dropdown-menu w-full flex justify-center items-center mt-10">
                     <div className="w-[1360px] flex flex-col justify-center flex-wrap gap-4  py-5 px-10 ">
                         <div className="gamesCategoryInfo w-auto text-center">
-                            <h3 className="gamesCategory mb-2">
-                                Asia Gaming {t('Live Casino')}
-                            </h3>
-                            <img
-                                src={asiagamingProviderImg}
-                                alt=""
-                                className="m-auto md:h-28 w-full object-contain my-10"
-                            />
+                            <h3 className="gamesCategory mb-2">Asia Gaming {t('Live Casino')}</h3>
+                            <img src={asiagamingProviderImg} alt="" className="m-auto w-auto object-contain my-10" />
                             <img src={MaintainImg} alt="" className="m-auto" />
-                            <span className="gamesCategoryDes">
-                                {/* {games.length} {t('Games found')} */}
-                            </span>
+                            <span className="gamesCategoryDes">{/* {games.length} {t('Games found')} */}</span>
                         </div>
                         <div className="gamesWrap w-full">
                             <ul className="m-0 p-0 flex justify-start items-center flex-wrap gap-y-2.5">
