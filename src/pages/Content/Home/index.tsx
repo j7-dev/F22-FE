@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { useAtom } from 'jotai';
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next';
 import Banner from '@/components/ContentLayout/Banner';
 import Provider from './Provider';
 // import Promotions from '../../components/Layout/Promotions';
@@ -13,7 +13,7 @@ const Home = () => {
     const [ProviderState, setProviderState] = useAtom(ProviderStateAtom);
     const [ProviderPath, setProviderPath] = useAtom(ProviderPathAtom);
 
-    const { t } = useTranslation();
+    // const { t } = useTranslation();
     const ProviderData = ProviderState !== 'All' ? fakeProviderData.filter((item) => item['ProviderType'].includes(ProviderState)) : fakeProviderData;
     useEffect(() => {
         setProviderState('All');
