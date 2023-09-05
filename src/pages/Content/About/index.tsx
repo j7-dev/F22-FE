@@ -1,5 +1,7 @@
 import React from 'react';
+import { useSetAtom } from 'jotai';
 import { useTranslation, Trans } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import slot from '@/assets/images/slot.png';
 import emoji from '@/assets/images/emoji.png';
 import bubble from '@/assets/images/bubble.png';
@@ -18,9 +20,17 @@ import emailImg from '@/assets/images/email-img.png';
 import inquiriesEn from '@/assets/images/inquiries-en_US.png';
 import slotMachine from '@/assets/images/slot-machine.png';
 import bgImg from '@/assets/images/bg.jpg';
+import { serviceCenterAtom } from '@/components/ContentLayout/Customer/ServiceCenter';
 
 const About: React.FC = () => {
     const { t } = useTranslation();
+    const Navigate = useNavigate();
+    const serviceCenterValue = useSetAtom(serviceCenterAtom);
+    const handleClickToInquiry = () => {
+        serviceCenterValue('1:1 Inquiry');
+        Navigate('/customer');
+    };
+
     return (
         <>
             <div className="aboutSection w-full">
@@ -39,7 +49,9 @@ const About: React.FC = () => {
                     <div className="title w-full md:w-[750px] flex flex-col justify-center items-center gap-5 mb-12 z-90 relative">
                         <img className="h-auto w-full md:h-[70px] md:w-auto" src={smartplayEn} />
                         <span className="text-center px-8 bg-gradient-to-b from-[#1EC3F9] to-[#2F80ED] bg-clip-text text-transparent font-bold text-3xl">{t('Learn the standards of responsible play!')}</span>
-                        <button className="bg-[#4BA1FA] border-0 rounded-lg w-[145px] h-10 flex justify-center items-center text-white font-bold text-sm">{t('Inquiry')}</button>
+                        <button className="bg-[#4BA1FA] border-0 rounded-lg w-[145px] h-10 flex justify-center items-center text-white font-bold text-sm cursor-pointer" onClick={handleClickToInquiry}>
+                            {t('Inquiry')}
+                        </button>
                     </div>
                 </div>
             </div>
