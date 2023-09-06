@@ -208,3 +208,14 @@ $WithdrawHoverIcon: url("@/assets/images/withdraw-icon-hover.svg");
 		object-position: center;
 	}
 }
+//Banner
+.banner {
+	.LazyLoadImage {
+		aspect-ratio: 4 / 3;
+	}
+	@media (min-width: 810px) {
+		.LazyLoadImage {
+			aspect-ratio: 21 / 9;
+		}
+	}
+}

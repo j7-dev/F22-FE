@@ -2,15 +2,16 @@ import React, { useRef } from 'react';
 import { Carousel } from 'antd';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FaCircleChevronRight, FaCircleChevronLeft } from 'react-icons/fa6';
-import Banner1 from '@/assets/images/Banner1.png';
-import Banner2 from '@/assets/images/Banner2.png';
+import newBanner1 from '@/assets/images/newBanner1.png';
+import newBanner2 from '@/assets/images/newBanner2.png';
+import newBanner3 from '@/assets/images/newBanner3.png';
 
 const Banner: React.FC = () => {
     const contentStyle: React.CSSProperties = {
         margin: 0,
-        height: '430px',
+        height: '100%',
         color: '#fff',
-        lineHeight: '430px',
+        // lineHeight: '430px',
         textAlign: 'center',
         background: '#364d79',
         width: '100%',
@@ -29,16 +30,16 @@ const Banner: React.FC = () => {
     };
 
     return (
-        <div className="relative">
+        <div className="relative banner md:w-full">
             <Carousel ref={carouselRef} dots={false}>
                 <div className="LazyLoadImage">
-                    <LazyLoadImage src={Banner1} alt="" style={contentStyle} />
-                    {/* //TODO 需要確認這邊build 到線上能不能正常顯示*/}
-                    {/* <img src={Banner1} alt="" style={contentStyle} /> */}
+                    <LazyLoadImage src={newBanner1} alt="" style={contentStyle} />
                 </div>
-                <div>
-                    {<LazyLoadImage src={Banner2} alt="" style={contentStyle} />}
-                    {/* <img src={Banner2} alt="" style={contentStyle} /> */}
+                <div className="LazyLoadImage">
+                    <LazyLoadImage src={newBanner2} alt="" style={contentStyle} />
+                </div>
+                <div className="LazyLoadImage">
+                    <LazyLoadImage src={newBanner3} alt="" style={contentStyle} />
                 </div>
             </Carousel>
 
