@@ -1,11 +1,11 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { useSetAtom, useAtom } from 'jotai';
+import { useSetAtom, useAtom, useAtomValue } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { AiOutlineMenu, AiOutlinePlus } from 'react-icons/ai';
-import { popupIsOpenAtom, IsLoginAtom } from '@/components/ContentLayout/LoginPopUp';
 import SubMenuUI from './SubMenu';
+import LoginNodule, { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
 import logo from '@/assets/images/logo.png';
 import { fakeMenuData, MenuItem } from '@/components/ContentLayout/Header/MenuData';
 import { mbSidebarAtom } from '@/components/ContentLayout';
@@ -13,29 +13,17 @@ import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
 import { UserOutlined } from '@ant-design/icons';
 import { GiPokerHand } from 'react-icons/gi';
 import { RiCustomerService2Fill } from 'react-icons/ri';
-import { BiCheckShield, BiSolidUser } from 'react-icons/bi';
+import { BiCheckShield } from 'react-icons/bi';
 
 const NavBar: React.FC = () => {
     const { t } = useTranslation();
-    const [isLogin, setIsLogin] = useAtom(IsLoginAtom);
     const [mbSidebar, setMbSidebar] = useAtom(mbSidebarAtom);
     const setsidebarIsOpen = useSetAtom(sidebarIsOpenAtom);
     // const sidebarIsOpen = useAtomValue(sidebarIsOpenAtom);
-
+    const isLogin = useAtomValue(IsLoginAtom);
+    const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const Navigate = useNavigate();
     const fakeData = fakeMenuData;
-
-    // LoginButton
-    const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
-    const handleClick = () => {
-        setPopupIsOpen((prevValue) => !prevValue);
-        // console.log('popupIsOpenAtom', popupIsOpen);
-    };
-    // LogOutButton
-    const handleLogout = () => {
-        setIsLogin(false);
-        Navigate('/');
-    };
 
     // 自訂 Hook 來判斷是否為當前路徑
     function isActive(path: string) {
@@ -49,6 +37,13 @@ const NavBar: React.FC = () => {
         setMbSidebar((prevValue) => !prevValue);
         // console.log('mbSidebar', mbSidebar);
         // console.log('sidebarIsOpen', sidebarIsOpen);
+    };
+    const handleProfile = () => {
+        if (isLogin) {
+            Navigate('/wallet');
+        } else {
+            setPopupIsOpen(true);
+        }
     };
     return (
         <>
@@ -91,22 +86,7 @@ const NavBar: React.FC = () => {
                                     );
                                 })}
                             </div>
-                            {/* TODO 把登入登出拆成組件 */}
-                            <span className={`loginBtn whitespace-nowrap flex items-center rounded-lg border-white gap-x-2 font-bold bg-[#F9A318] text-white hover:opacity-80  md:my-3 md:px-6 md:py-3 cursor-pointer ${isLogin === false ? 'block' : 'hidden'} `} onClick={handleClick}>
-                                <BiSolidUser size={20} />
-                                Log in
-                            </span>
-                            <div className={`walletBtn flex flex-row gap-2.5 ${isLogin === true ? 'block' : 'hidden'}`}>
-                                <Link to="/wallet">
-                                    <span className="flex whitespace-nowrap  items-center rounded-lg border-white gap-x-2 font-bold bg-[#F9A318] text-white hover:opacity-80  md:my-3 md:px-6 md:py-3 ">
-                                        <BiSolidUser size={20} />
-                                        My Wallet
-                                    </span>
-                                </Link>
-                                <span className="logoutBtn whitespace-nowrap  flex items-center rounded-lg border-white gap-x-2 font-bold bg-[#e5e5e5] text-black hover:opacity-80  md:my-3 md:px-6 md:py-3 cursor-pointer" onClick={handleLogout}>
-                                    Log out
-                                </span>
-                            </div>
+                            <LoginNodule />
                         </div>
                     </div>
                     {/* 手機選單 */}
@@ -129,12 +109,12 @@ const NavBar: React.FC = () => {
                                 <span className="text-xs font-normal">Service</span>
                             </div>
                         </Link>
-                        <Link to="/wallet">
+                        <div onClick={handleProfile}>
                             <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
                                 <UserOutlined className="text-[1.5rem]" />
                                 <span className="text-xs font-normal">Profile</span>
                             </div>
-                        </Link>
+                        </div>
                     </div>
                 </nav>
             </div>

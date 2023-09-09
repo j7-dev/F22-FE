@@ -7,19 +7,17 @@ export * from '@/authProvider/axiosInstance';
 const strapiAuthHelper = AuthHelper(API_URL + '/api');
 
 export const authProvider: AuthBindings = {
-    login: async ({ email, password }) => {
+    login: async ({ email, password, redirectPath }) => {
         const { data, status } = await strapiAuthHelper.login(email, password);
         if (status === 200) {
             localStorage.setItem(API_TOKEN, data.jwt);
 
             // set header axios instance
-            axiosInstance.defaults.headers.common[
-                'Authorization'
-            ] = `Bearer ${data.jwt}`;
+            axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${data.jwt}`;
 
             return {
                 success: true,
-                redirectTo: '/',
+                redirectTo: redirectPath,
             };
         }
         return {
@@ -30,11 +28,11 @@ export const authProvider: AuthBindings = {
             },
         };
     },
-    logout: async () => {
+    logout: async ({ redirectPath }) => {
         localStorage.removeItem(API_TOKEN);
         return {
             success: true,
-            redirectTo: '/login',
+            redirectTo: redirectPath,
         };
     },
     onError: async (error) => {
@@ -44,9 +42,7 @@ export const authProvider: AuthBindings = {
     check: async () => {
         const token = localStorage.getItem(API_TOKEN);
         if (token) {
-            axiosInstance.defaults.headers.common[
-                'Authorization'
-            ] = `Bearer ${token}`;
+            axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             return {
                 authenticated: true,
             };
