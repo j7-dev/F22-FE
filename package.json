@@ -26,6 +26,7 @@
         "react-i18next": "^11.8.11",
         "react-icons": "^4.10.1",
         "react-lazy-load-image-component": "^1.6.0",
+        "react-query": "^3.39.3",
         "react-router-dom": "^6.8.1",
         "react-slick": "^0.29.0",
         "slick-carousel": "^1.8.1"
