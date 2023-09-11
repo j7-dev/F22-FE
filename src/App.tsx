@@ -2,10 +2,7 @@ import { Refine } from '@refinedev/core';
 import { RefineKbar, RefineKbarProvider } from '@refinedev/kbar';
 import { notificationProvider } from '@refinedev/antd';
 import '@refinedev/antd/dist/reset.css';
-import routerBindings, {
-    DocumentTitleHandler,
-    UnsavedChangesNotifier,
-} from '@refinedev/react-router-v6';
+import routerBindings, { UnsavedChangesNotifier } from '@refinedev/react-router-v6';
 import { DataProvider } from '@refinedev/strapi-v4';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
@@ -30,10 +27,7 @@ function App() {
                 <ColorModeContextProvider>
                     <Refine
                         authProvider={authProvider}
-                        dataProvider={DataProvider(
-                            API_URL + `/api`,
-                            axiosInstance,
-                        )}
+                        dataProvider={DataProvider(API_URL + `/api`, axiosInstance)}
                         notificationProvider={notificationProvider}
                         routerProvider={routerBindings}
                         i18nProvider={i18nProvider}
@@ -69,7 +63,6 @@ function App() {
 
                         <RefineKbar />
                         <UnsavedChangesNotifier />
-                        <DocumentTitleHandler />
                     </Refine>
                 </ColorModeContextProvider>
             </RefineKbarProvider>

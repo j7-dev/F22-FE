@@ -1,34 +1,20 @@
-import {
-    LoginOutlined,
-    UserOutlined,
-    TranslationOutlined,
-    CheckOutlined,
-} from '@ant-design/icons';
+import { LoginOutlined, UserOutlined, TranslationOutlined, CheckOutlined } from '@ant-design/icons';
 import type { RefineThemedLayoutV2HeaderProps } from '@refinedev/antd';
-import {
-    useGetIdentity,
-    useGetLocale,
-    useSetLocale,
-    useLogout,
-} from '@refinedev/core';
+import { useGetIdentity, useGetLocale, useSetLocale, useLogout } from '@refinedev/core';
 import { Layout as AntdLayout, Avatar, Dropdown, MenuProps } from 'antd';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ColorModeContext } from '@/contexts/color-mode';
 import useColor from '@/hooks/useColor';
 import { useQueryClient } from '@tanstack/react-query';
-
-type IUser = {
-    id: number;
-    name: string;
-    email: string;
-};
+import { TUser } from '@/types';
 
 const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
     const { i18n } = useTranslation();
+    console.log('⭐  i18n', i18n.languages);
     const locale = useGetLocale();
     const changeLanguage = useSetLocale();
-    const { data: user } = useGetIdentity<IUser>();
+    const { data: user } = useGetIdentity<TUser>();
     const { mode, setMode } = useContext(ColorModeContext);
 
     const currentLocale = locale();
@@ -57,12 +43,17 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
         queryClient.clear();
     };
 
+    const displayName = user?.display_name || user?.username || 'Unknown';
+
     const userOptions: MenuProps['items'] = [
         {
             key: 'userName',
-            label: user?.name || 'Unknown',
+            label: (
+                <p className="m-0 cursor-default relative">
+                    {displayName} <span className="absolute bottom-0 right-0 text-xs">#{user?.username}</span>
+                </p>
+            ),
             icon: <UserOutlined className="w-4" />,
-            disabled: true,
         },
         {
             type: 'divider',
@@ -70,44 +61,26 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
         {
             key: 'mode',
             label: (
-                <p
-                    className="m-0"
-                    onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}
-                >
+                <p className="m-0" onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}>
                     {mode === 'light' ? 'Dark Mode' : 'Light Mode'}
                 </p>
             ),
-            icon: (
-                <div className="inline-block w-4">
-                    {mode === 'light' ? '🌛' : '🔆'}
-                </div>
-            ),
+            icon: <div className="inline-block w-4">{mode === 'light' ? '🌛' : '🔆'}</div>,
         },
         {
             key: 'languages',
             label: 'Languages',
             icon: <TranslationOutlined className="w-4" />,
-            children: [...(i18n.languages || [])]
-                .sort()
-                .map((lang: string) => ({
-                    key: lang,
-                    label: (
-                        <p
-                            className="m-0 flex justify-between w-24"
-                            onClick={() => changeLanguage(lang)}
-                        >
-                            {lang === 'en' ? 'English' : 'German'}
-                            {lang === currentLocale && (
-                                <CheckOutlined
-                                    style={{ color: colorSuccess }}
-                                />
-                            )}
-                        </p>
-                    ),
-                    icon: (
-                        <Avatar size={16} src={`/images/flags/${lang}.svg`} />
-                    ),
-                })),
+            children: [...(i18n.languages || [])].sort().map((lang: string) => ({
+                key: lang,
+                label: (
+                    <p className="m-0 flex justify-between w-24" onClick={() => changeLanguage(lang)}>
+                        {lang === 'EN' ? 'English' : 'Korea'}
+                        {lang === currentLocale && <CheckOutlined style={{ color: colorSuccess }} />}
+                    </p>
+                ),
+                icon: <Avatar size={16} src={`/images/flags/${lang}.svg`} />,
+            })),
         },
         {
             type: 'divider',
@@ -125,11 +98,7 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
 
     return (
         <AntdLayout.Header style={headerStyles}>
-            <Dropdown
-                menu={{ items: userOptions }}
-                overlayClassName="w-60"
-                trigger={['click']}
-            >
+            <Dropdown menu={{ items: userOptions }} overlayClassName="w-60" trigger={['click']}>
                 <Avatar
                     className="cursor-pointer"
                     style={{
@@ -137,7 +106,7 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
                         color: '#f56a00',
                     }}
                 >
-                    {(user?.name || 'Unknown')?.charAt(0).toUpperCase()}
+                    {displayName?.charAt(0).toUpperCase()}
                 </Avatar>
             </Dropdown>
         </AntdLayout.Header>
