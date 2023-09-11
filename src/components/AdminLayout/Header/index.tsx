@@ -11,7 +11,6 @@ import { TUser } from '@/types';
 
 const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
     const { i18n } = useTranslation();
-    console.log('⭐  i18n', i18n.languages);
     const locale = useGetLocale();
     const changeLanguage = useSetLocale();
     const { data: user } = useGetIdentity<TUser>();
@@ -45,6 +44,8 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
 
     const displayName = user?.display_name || user?.username || 'Unknown';
 
+    const languages = (i18n?.languages || []).filter((lang) => lang === 'en' || lang === 'ko');
+
     const userOptions: MenuProps['items'] = [
         {
             key: 'userName',
@@ -71,11 +72,11 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
             key: 'languages',
             label: 'Languages',
             icon: <TranslationOutlined className="w-4" />,
-            children: [...(i18n.languages || [])].sort().map((lang: string) => ({
+            children: languages.sort().map((lang: string) => ({
                 key: lang,
                 label: (
                     <p className="m-0 flex justify-between w-24" onClick={() => changeLanguage(lang)}>
-                        {lang === 'EN' ? 'English' : 'Korea'}
+                        {lang === 'en' ? 'English' : 'Korea'}
                         {lang === currentLocale && <CheckOutlined style={{ color: colorSuccess }} />}
                     </p>
                 ),
