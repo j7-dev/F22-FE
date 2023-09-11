@@ -41,6 +41,7 @@ export const authProvider: AuthBindings = {
     },
     check: async () => {
         const token = localStorage.getItem(API_TOKEN);
+        // TODO 跟後端CHECK
         if (token) {
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             return {
