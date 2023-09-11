@@ -57,9 +57,10 @@
         "vite-tsconfig-paths": "^4.2.0"
     },
     "scripts": {
-        "dev": "env-cmd -f ./env/.env.test refine dev",
+        "dev": "env-cmd -f ./env/.env.local refine dev",
         "build": "env-cmd -f ./env/.env.prod tsc && refine build",
-        "push:prod": "env-cmd -f ./env/.env.prod tsc && refine build",
+        "build:prod": "env-cmd -f ./env/.env.prod tsc && refine build",
+        "build:dev": "env-cmd -f ./env/.env.dev tsc && refine build",
         "preview": "refine start",
         "refine": "refine",
         "lint": "eslint src/**/*.{ts,tsx,js,jsx}",
