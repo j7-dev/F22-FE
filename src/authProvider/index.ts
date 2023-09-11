@@ -6,7 +6,11 @@ import { axiosInstance } from '@/providers/strapi-v4/';
 const strapiAuthHelper = AuthHelper(`${API_URL}/api`);
 
 export const authProvider: AuthBindings = {
-    login: async ({ email, password, redirectPath }) => {
+    login: async (props) => {
+        const email = props?.email || '';
+        const password = props?.password || '';
+        const redirectPath = props?.redirectPath || '/';
+
         const { data, status } = await strapiAuthHelper.login(email, password);
         if (status === 200) {
             const token = data.jwt;

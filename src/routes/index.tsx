@@ -1,6 +1,6 @@
 import { Outlet, Routes, Route } from 'react-router-dom';
 import { Authenticated, useGetIdentity } from '@refinedev/core';
-import { AuthPage, ErrorComponent, ThemedLayoutV2 } from '@refinedev/antd';
+import { ErrorComponent, ThemedLayoutV2 } from '@refinedev/antd';
 import '@refinedev/antd/dist/reset.css';
 import { CatchAllNavigate, NavigateToResource } from '@refinedev/react-router-v6';
 import { Header, Sider } from '@/components/AdminLayout';
@@ -10,6 +10,7 @@ import contentRoutes from '@/routes/content';
 import adminRoutes from '@/routes/admin';
 import { allowedRoles } from '@/utils';
 import { TUser } from '@/types';
+import Login from '@/pages/Admin/login';
 
 const index = () => {
     const { data: identity } = useGetIdentity<TUser>();
@@ -40,22 +41,9 @@ const index = () => {
                     </Authenticated>
                 }
             >
-                <Route
-                    path="/refine/login"
-                    element={
-                        <AuthPage
-                            type="login"
-                            formProps={{
-                                initialValues: {
-                                    email: '',
-                                    password: '',
-                                },
-                            }}
-                        />
-                    }
-                />
-                <Route path="/refine/register" element={<AuthPage type="register" />} />
-                <Route path="/refine/forgot-password" element={<AuthPage type="forgotPassword" />} />
+                <Route path="/refine/login" element={<Login />} />
+                {/* <Route path="/refine/register" element={<AuthPage type="register" />} />
+                <Route path="/refine/forgot-password" element={<AuthPage type="forgotPassword" />} /> */}
             </Route>
             {/* Content */}
             <Route element={<ContentLayout />}>

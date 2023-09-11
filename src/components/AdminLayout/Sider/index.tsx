@@ -12,7 +12,6 @@ const CustomSider: typeof Sider = () => {
     const { token } = useToken();
     const [collapsed, setCollapsed] = useState<boolean>(false);
     const { menuItems, selectedKey, defaultOpenKeys } = useMenu();
-    console.log('⭐  menuItems', menuItems);
     const { SubMenu } = Menu;
 
     const breakpoint = Grid.useBreakpoint();
