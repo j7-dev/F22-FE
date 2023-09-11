@@ -60,6 +60,7 @@ const Evolution: React.FC = () => {
                             <h3 className="gamesCategory mb-2">Evolution {t('Live Casino')}</h3>
                             <span className="gamesCategoryDes">{isLoading === false && `${games.length} ${t('Games found')}`}</span>
                         </div>
+                        {/* TODO 需要把它拆成組件才不會每次切換狀態都要重新渲染重打一次API */}
                         <div className="gamesWrap w-full">
                             <ul className="m-0 p-0 flex justify-start items-center flex-wrap gap-y-2.5">
                                 {isLoading === false ? (
