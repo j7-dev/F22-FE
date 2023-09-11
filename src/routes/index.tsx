@@ -4,8 +4,7 @@ import { AuthPage, ErrorComponent, ThemedLayoutV2 } from '@refinedev/antd';
 import '@refinedev/antd/dist/reset.css';
 import { CatchAllNavigate, NavigateToResource } from '@refinedev/react-router-v6';
 import { Header, Sider } from '@/components/AdminLayout';
-import { BlogPostCreate, BlogPostEdit, BlogPostList, BlogPostShow } from '@/pages/Admin/blog-posts';
-import { CategoryCreate, CategoryEdit, CategoryList, CategoryShow } from '@/pages/Admin/categories';
+
 import ContentLayout from '@/components/ContentLayout';
 import contentRoutes from '@/routes/content';
 import adminRoutes from '@/routes/admin';
@@ -29,21 +28,7 @@ const index = () => {
                         </Authenticated>
                     }
                 >
-                    {adminRoutes.map((route) => (
-                        <Route key={route.path} path={route.path} element={route.element} children={route.children} />
-                    ))}
-                    <Route path="/refine/blog-posts">
-                        <Route index element={<BlogPostList />} />
-                        <Route path="create" element={<BlogPostCreate />} />
-                        <Route path="edit/:id" element={<BlogPostEdit />} />
-                        <Route path="show/:id" element={<BlogPostShow />} />
-                    </Route>
-                    <Route path="/refine/categories">
-                        <Route index element={<CategoryList />} />
-                        <Route path="create" element={<CategoryCreate />} />
-                        <Route path="edit/:id" element={<CategoryEdit />} />
-                        <Route path="show/:id" element={<CategoryShow />} />
-                    </Route>
+                    {adminRoutes()}
                 </Route>
             ) : null}
 

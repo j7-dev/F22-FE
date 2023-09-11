@@ -1,4 +1,4 @@
-export const allowedRoles = ['agent'];
+export const allowedRoles = ['agent', 'admin'];
 
 export const languages = [
     { language: 'en', name: 'English', shortName: 'EN' },
