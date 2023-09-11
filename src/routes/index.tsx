@@ -47,9 +47,7 @@ const index = () => {
             </Route>
             {/* Content */}
             <Route element={<ContentLayout />}>
-                {contentRoutes.map((route) => (
-                    <Route key={route.path} path={route.path} element={route.element} children={route.children} />
-                ))}
+                {contentRoutes()}
                 <Route path="*" element={<ErrorComponent />} />
             </Route>
         </Routes>
