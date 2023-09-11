@@ -2,9 +2,8 @@ import { LoginOutlined, UserOutlined, TranslationOutlined, CheckOutlined } from 
 import type { RefineThemedLayoutV2HeaderProps } from '@refinedev/antd';
 import { useGetIdentity, useGetLocale, useSetLocale, useLogout } from '@refinedev/core';
 import { Layout as AntdLayout, Avatar, Dropdown, MenuProps } from 'antd';
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ColorModeContext } from '@/contexts/color-mode';
 import useColor from '@/hooks/useColor';
 import { useQueryClient } from '@tanstack/react-query';
 import { TUser } from '@/types';
@@ -14,7 +13,6 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
     const locale = useGetLocale();
     const changeLanguage = useSetLocale();
     const { data: user } = useGetIdentity<TUser>();
-    const { mode, setMode } = useContext(ColorModeContext);
 
     const currentLocale = locale();
     const { colorSuccess, colorBgElevated } = useColor();
@@ -59,15 +57,15 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
         {
             type: 'divider',
         },
-        {
-            key: 'mode',
-            label: (
-                <p className="m-0" onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}>
-                    {mode === 'light' ? 'Dark Mode' : 'Light Mode'}
-                </p>
-            ),
-            icon: <div className="inline-block w-4">{mode === 'light' ? '🌛' : '🔆'}</div>,
-        },
+        // {
+        //     key: 'mode',
+        //     label: (
+        //         <p className="m-0" onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}>
+        //             {mode === 'light' ? 'Dark Mode' : 'Light Mode'}
+        //         </p>
+        //     ),
+        //     icon: <div className="inline-block w-4">{mode === 'light' ? '🌛' : '🔆'}</div>,
+        // },
         {
             key: 'languages',
             label: 'Languages',

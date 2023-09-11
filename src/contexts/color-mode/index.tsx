@@ -7,22 +7,14 @@ type ColorModeContextType = {
     setMode: (mode: string) => void;
 };
 
-export const ColorModeContext = createContext<ColorModeContextType>(
-    {} as ColorModeContextType,
-);
+export const ColorModeContext = createContext<ColorModeContextType>({} as ColorModeContextType);
 
-export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({
-    children,
-}) => {
+export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
     const colorModeFromLocalStorage = localStorage.getItem('colorMode');
-    const isSystemPreferenceDark = window?.matchMedia(
-        '(prefers-color-scheme: dark)',
-    ).matches;
+    const isSystemPreferenceDark = window?.matchMedia('(prefers-color-scheme: dark)').matches;
 
     const systemPreference = isSystemPreferenceDark ? 'dark' : 'light';
-    const [mode, setMode] = useState(
-        colorModeFromLocalStorage || systemPreference,
-    );
+    const [mode, setMode] = useState(colorModeFromLocalStorage || systemPreference);
 
     useEffect(() => {
         window.localStorage.setItem('colorMode', mode);
@@ -36,7 +28,7 @@ export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({
         }
     };
 
-    const { darkAlgorithm, defaultAlgorithm } = theme;
+    const { darkAlgorithm: _, defaultAlgorithm } = theme;
 
     return (
         <ColorModeContext.Provider
@@ -47,10 +39,10 @@ export const ColorModeContextProvider: React.FC<PropsWithChildren> = ({
         >
             <ConfigProvider
                 // you can change the theme colors here. example: ...RefineThemes.Magenta,
+                //  algorithm: mode === 'light' ? defaultAlgorithm : darkAlgorithm,
                 theme={{
                     ...RefineThemes.Blue,
-                    algorithm:
-                        mode === 'light' ? defaultAlgorithm : darkAlgorithm,
+                    algorithm: defaultAlgorithm,
                 }}
             >
                 {children}
