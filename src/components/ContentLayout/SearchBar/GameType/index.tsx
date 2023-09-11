@@ -10,6 +10,7 @@ import blackjackImg from '@/assets/images/blackjackImg.png';
 import rouletteImg from '@/assets/images/rouletteImg.png';
 import baccaratImg from '@/assets/images/baccaratImg.png';
 import dragontigerImg from '@/assets/images/dragontigerImg.png';
+import diceImg from '@/assets/images/bac_bo_circular_752x752_jp_2021_11.png';
 
 const GameType: React.FC = () => {
     const { t } = useTranslation();
@@ -22,22 +23,27 @@ const GameType: React.FC = () => {
         {
             img: baccaratImg,
             name: 'Baccarat',
-            gameType: 'baccarat',
+            gameType: 'Baccarat',
         },
         {
             img: blackjackImg,
             name: 'Blackjack',
-            gameType: 'blackjack',
+            gameType: 'Blackjack',
         },
         {
             img: rouletteImg,
             name: 'Roulette',
-            gameType: 'roulette',
+            gameType: 'Roulette',
+        },
+        {
+            img: diceImg,
+            name: 'Dice',
+            gameType: 'Dice',
         },
         {
             img: dragontigerImg,
-            name: 'Dragon Tiger',
-            gameType: 'dragontiger',
+            name: 'Other',
+            gameType: 'Other',
         },
     ];
 
