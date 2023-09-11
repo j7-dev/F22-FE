@@ -109,11 +109,10 @@ const NavBar: React.FC = () => {
                                 <span className="text-xs font-normal">Service</span>
                             </div>
                         </Link>
-                        <div onClick={handleProfile}>
-                            <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
-                                <UserOutlined className="text-[1.5rem]" />
-                                <span className="text-xs font-normal">Profile</span>
-                            </div>
+
+                        <div className="cursor-pointer flex flex-col justify-center items-center text-gray-600 hover:text-gray-400" onClick={handleProfile}>
+                            <UserOutlined className="text-[1.5rem]" />
+                            <span className="text-xs font-normal">Profile</span>
                         </div>
                     </div>
                 </nav>
