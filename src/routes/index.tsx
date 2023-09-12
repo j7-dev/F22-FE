@@ -22,11 +22,13 @@ const index = () => {
             {allowedRoles.includes(role) ? (
                 <Route
                     element={
-                        <Authenticated fallback={<CatchAllNavigate to="/refine/login" />}>
-                            <ThemedLayoutV2 Header={() => <Header sticky />} Sider={Sider}>
-                                <Outlet />
-                            </ThemedLayoutV2>
-                        </Authenticated>
+                        <div className="f22-admin">
+                            <Authenticated fallback={<CatchAllNavigate to="/refine/login" />}>
+                                <ThemedLayoutV2 Header={() => <Header sticky />} Sider={Sider}>
+                                    <Outlet />
+                                </ThemedLayoutV2>
+                            </Authenticated>
+                        </div>
                     }
                 >
                     {adminRoutes()}
@@ -46,7 +48,13 @@ const index = () => {
                 <Route path="/refine/forgot-password" element={<AuthPage type="forgotPassword" />} /> */}
             </Route>
             {/* Content */}
-            <Route element={<ContentLayout />}>
+            <Route
+                element={
+                    <div className="f22-content">
+                        <ContentLayout />
+                    </div>
+                }
+            >
                 {contentRoutes()}
                 <Route path="*" element={<ErrorComponent />} />
             </Route>
