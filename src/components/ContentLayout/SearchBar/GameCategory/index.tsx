@@ -40,7 +40,7 @@ const index: React.FC<GameCategoryProps> = ({ Provider }) => {
                         <div className="w-16 h-16 md:w-24 md:h-24 m-2.5 p-5 bg-white shadow-[0_0px_30px_0px_rgba(194,127,228,0.3)] border border-solid border-[#99BDE8] rounded-full">
                             <LazyLoadImage src={item.img as unknown as string} alt="" width="100%" height="100%" />
                         </div>
-                        <span className={`font-bold text-xs md:text-base ${GameCategoryState === item.toPath ? 'text-[#78d39d]' : ''}`}>{t(item.name)}</span>
+                        <span className={`font-bold text-xs md:text-base ${GameCategoryState === item.name ? 'text-[#78d39d]' : ''}`}>{t(item.name)}</span>
                     </div>
                 ))}
             </div>

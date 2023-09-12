@@ -1,30 +1,33 @@
-import { useCustom } from '@refinedev/core';
+import { useCustom, useGetIdentity } from '@refinedev/core';
 import { F22_API_URL, F22_TOKEN } from 'utils/env';
 
 interface PostUniqueCheckResponse {
-    data: [];
+    data: {
+        data: {
+            amount: string;
+            currency: string;
+        }[];
+    }[];
     isAvailable: boolean;
 }
 
-export const useRefineAPI = () => {
-    console.log('useRefineAPI');
-    // const corsURL = 'https://cors-anywhere.herokuapp.com/';
-    // const appName = '4w7ga5btl92qgt7e';
-    // const appPassword = '1a1e45c3f3a61930f545f2156548e17d';
-    const apiUrl = `${F22_API_URL}/evo/tablelist`;
-    // console.log('apiUrl', apiUrl);
-    // const authHeader = btoa(`${appName}:${appPassword}`);
+export const useBalanceAPI = () => {
+    console.log('useBalanceAPI');
+    const { data: identity } = useGetIdentity<{ id: number }>();
+
+    const apiUrl = `${F22_API_URL}/wallet-api/balance/get`;
     const apiToken = F22_TOKEN;
-    // console.log('apiToken', apiToken);
     const headers = {
         Authorization: `Bearer ${apiToken}`,
     };
-    // console.log('headers', headers);
     const { data, isLoading } = useCustom<PostUniqueCheckResponse>({
         url: apiUrl,
         method: 'get',
         config: {
             headers: headers,
+            query: {
+                user_id: identity?.id,
+            },
         },
     });
 
