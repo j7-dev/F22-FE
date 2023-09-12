@@ -4,7 +4,9 @@
     "private": true,
     "type": "module",
     "dependencies": {
+        "@ant-design/charts": "^1.4.2",
         "@ant-design/icons": "^5.0.1",
+        "@faker-js/faker": "^8.0.2",
         "@refinedev/antd": "^5.7.0",
         "@refinedev/cli": "^2.7.4",
         "@refinedev/core": "^4.28.2",
