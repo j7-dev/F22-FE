@@ -3,12 +3,11 @@ import { F22_API_URL, F22_TOKEN } from 'utils/env';
 
 interface PostUniqueCheckResponse {
     data: {
-        data: {
-            amount: string;
-            currency: string;
-        }[];
+        amount: string;
+        currency: string;
     }[];
-    isAvailable: boolean;
+    message: string;
+    status: number;
 }
 
 export const useBalanceAPI = () => {
@@ -30,6 +29,8 @@ export const useBalanceAPI = () => {
             },
         },
     });
+
+    console.log('data', data);
 
     // 將 data 和 isLoading 包裝在物件中並返回
     const apiData = {
