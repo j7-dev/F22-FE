@@ -48,7 +48,7 @@ const Login: React.FC = () => {
                                     remember: false,
                                 }}
                             >
-                                <Form.Item name="redirectPath" hidden initialValue="/refine/login">
+                                <Form.Item name="redirectPath" hidden initialValue="/refine/home">
                                     <Input />
                                 </Form.Item>
                                 <Form.Item name="email" label="E-mail" rules={[{ required: true }]}>

@@ -7,6 +7,7 @@ import { UnorderedListOutlined, RightOutlined, LeftOutlined, RadarChartOutlined 
 import { antLayoutSider, antLayoutSiderMobile } from './styles';
 
 const { useToken } = theme;
+const siderWidth = 320;
 
 const CustomSider: typeof Sider = () => {
     const { token } = useToken();
@@ -96,10 +97,11 @@ const CustomSider: typeof Sider = () => {
                     </Button>
                 )
             }
+            width={siderWidth}
         >
             <div
                 style={{
-                    width: collapsed ? '80px' : '200px',
+                    width: collapsed ? '80px' : `${siderWidth.toString()}px`,
                     padding: collapsed ? '0' : '0 16px',
                     display: 'flex',
                     justifyContent: collapsed ? 'center' : 'flex-start',
