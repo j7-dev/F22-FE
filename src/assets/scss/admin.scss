@@ -33,10 +33,23 @@
 		}
 	}
 
+	hr {
+		border-top: 1px solid #eee;
+		border-bottom: 0px;
+		border-right: 0px;
+		border-left: 0px;
+	}
 	table.table {
 		width: 100%;
 		border-collapse: collapse;
 		table-layout: auto; /* 让列宽自动分配 */
+		tr {
+			background-color: transparent;
+			transition: 0.3s ease-in-out;
+			&:hover {
+				background-color: #fffbe6;
+			}
+		}
 		td,
 		th {
 			width: 0;
