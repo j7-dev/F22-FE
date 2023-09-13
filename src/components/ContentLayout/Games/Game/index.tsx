@@ -42,7 +42,7 @@ export const configAtom = atom<configAtomType>({
     config: {
         game: {
             category: '',
-            interface: '',
+            interface: 'view1',
             table: {
                 id: '',
             },

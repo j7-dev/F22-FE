@@ -6,11 +6,14 @@ import { GrFormClose } from 'react-icons/gr';
 import { configAtom } from '@/components/ContentLayout/Games/Game';
 import { useGetIdentity } from '@refinedev/core';
 
+// import { useOpenGame } from '@/hooks/useOpenGame';
+
 export const gamepopupIsOpenAtom = atom(false);
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const [popupIsOpen, setPopupIsOpen] = useAtom(gamepopupIsOpenAtom);
+    // const [formattedData, setformattedData] = useState('');
     const gamePopupRef = useRef<HTMLDivElement>(null);
     const [form] = Form.useForm();
     //遊戲資料
@@ -18,10 +21,20 @@ const index: React.FC = () => {
     //strapi會員資料
     const { data: identity } = useGetIdentity<{ id: number }>(); //TODO 為什麼是用identity而不是data?
 
+    // const {mutate} = useCustomMutation();
+    //打API
+    // const { data, isLoading } = useOpenGame({ json: formattedData });
+    // console.log('data', data);
+
     const onFinish = (values: any) => {
         //合併遊戲資料與strapi會員資料
-        const formattedData = { ...values, ...gameconfig };
-        console.log('formattedData', formattedData);
+        const data = { ...values, ...gameconfig };
+        console.log('data', data);
+        // 指定外部网站的URL
+        const externalWebsiteUrl = 'https://v88wl.uat1.evo-test.com/frontend/evo/errors/incorrect-currency-for-geo-location.html?lang=en';
+
+        // 使用 window.open() 打开外部网站
+        window.open(externalWebsiteUrl, '_blank');
     };
 
     const handleClick = () => {
@@ -59,9 +72,9 @@ const index: React.FC = () => {
                             <Form.Item name="uuid" hidden={true} initialValue="unique request identifier" />
                             <Form.Item name={['player', 'id']} hidden={true} initialValue={identity?.id} />
                             <Form.Item name={['player', 'update']} hidden={true} initialValue={true} />
-                            <Form.Item name={['player', 'firstName']} hidden={true} initialValue="firstName" />
-                            <Form.Item name={['player', 'lastName']} hidden={true} initialValue="lastName" />
-                            <Form.Item name={['player', 'country']} hidden={true} initialValue="ko" />
+                            <Form.Item name={['player', 'firstName']} hidden={true} initialValue="evo" />
+                            <Form.Item name={['player', 'lastName']} hidden={true} initialValue="test" />
+                            <Form.Item name={['player', 'country']} hidden={true} initialValue="kr" />
                             <Form.Item name={['player', 'language']}>
                                 <Select
                                     showSearch
@@ -86,7 +99,7 @@ const index: React.FC = () => {
                                     ]}
                                 />
                             </Form.Item>
-                            <Form.Item name={['player', 'session', 'id']} hidden={true} initialValue="111ssss3333rrrrr45555" />
+                            <Form.Item name={['player', 'session', 'id']} hidden={true} initialValue="3ede6595ccf746bab923457b1bb48784" />
                             <Form.Item name={['player', 'session', 'ip']} hidden={true} initialValue="192.168.0.1" />
                             <Form.Item name={['player', 'group', 'action']} hidden={true} initialValue="assign" />
                             <Form.Item>
