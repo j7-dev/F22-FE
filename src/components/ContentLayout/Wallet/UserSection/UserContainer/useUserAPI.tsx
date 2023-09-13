@@ -2,19 +2,19 @@ import { useCustom, useGetIdentity } from '@refinedev/core';
 import { F22_API_URL, F22_TOKEN } from 'utils/env';
 
 interface PostUniqueCheckResponse {
-    data: {
+    balances: {
         amount: string;
         currency: string;
     }[];
-    message: string;
-    status: number;
+    username: string;
+    vip: string;
 }
 
-export const useBalanceAPI = () => {
-    console.log('useBalanceAPI');
+export const useUserAPI = () => {
+    // console.log('useUserAPI');
     const { data: identity } = useGetIdentity<{ id: number }>();
 
-    const apiUrl = `${F22_API_URL}/wallet-api/balance/get`;
+    const apiUrl = `${F22_API_URL}/users/${identity?.id}`;
     const apiToken = F22_TOKEN;
     const headers = {
         Authorization: `Bearer ${apiToken}`,
@@ -25,7 +25,8 @@ export const useBalanceAPI = () => {
         config: {
             headers: headers,
             query: {
-                user_id: identity?.id,
+                'populate[0]': 'balances',
+                'populate[1]': 'vip',
             },
         },
     });

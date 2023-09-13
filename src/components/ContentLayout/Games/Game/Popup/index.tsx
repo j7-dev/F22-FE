@@ -53,7 +53,7 @@ const index: React.FC = () => {
                 </div>
                 <div className="w-full h-full flex flex-col justify-center items-center gap-10 p-8 md:p-16">
                     <div className="loginFrom text-center flex flex-col gap-2.5 w-full">
-                        <span>請選擇下注幣值與金額</span>
+                        <span>請選擇語言與下注幣值</span>
                         {/* //TODO strapi 的 會員資料有缺  uuid/session id / session ip這三個資料來源待商榷 */}
                         <Form form={form} onFinish={onFinish}>
                             <Form.Item name="uuid" hidden={true} initialValue="unique request identifier" />
@@ -77,7 +77,7 @@ const index: React.FC = () => {
                             <Form.Item name={['player', 'currency']}>
                                 <Select
                                     showSearch
-                                    placeholder={t('Please Select a language')}
+                                    placeholder={t('Please Select a currency value')}
                                     optionFilterProp="children"
                                     filterOption={(input, option) => (option?.label ?? '').toLowerCase().includes(input.toLowerCase())}
                                     options={[
