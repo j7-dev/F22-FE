@@ -19,9 +19,17 @@ const TopBar: React.FC = () => {
 
     const handleChangeLanguage = (lng: string) => {
         i18n.changeLanguage(lng);
-        // console.log('language', i18n.language);
-        // console.log('i18n', i18n);
     };
+    // 在i18next.on('languageChanged')事件監聽器中處理其他操作
+    i18n.on('languageChanged', function (lng) {
+        // 在語言更改後執行其他操作
+        if (lng === 'KO') {
+            // 更改字體
+            document.body.style.fontFamily = 'gong-gothic';
+        } else {
+            document.body.style.fontFamily = '"Poppins", arial, sans-serif, Graphik';
+        }
+    });
     return (
         <>
             {/* <!-- Topbar --> */}

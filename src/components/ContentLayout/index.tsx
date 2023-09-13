@@ -4,7 +4,7 @@ import { Footer } from './Footer';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import Popup from './LoginPopUp';
-import GanePopup from './Games/Game/Popup';
+import GamePopup from './Games/Game/Popup';
 import { atom, useAtom, useAtomValue } from 'jotai';
 
 export const mbSidebarAtom = atom(false);
@@ -40,7 +40,7 @@ const Layout = () => {
                 <Outlet />
                 <Footer />
                 <Popup />
-                <GanePopup />
+                <GamePopup />
             </div>
         </>
     );
