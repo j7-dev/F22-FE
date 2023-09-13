@@ -12,7 +12,6 @@ export const sidebarIsOpenAtom = atom(false);
 export const Sidebar: React.FC = () => {
     const windowWidth = useAtomValue(windowWidthAtom);
     const setMbSidebar = useSetAtom(mbSidebarAtom);
-    const setsidebarIsOpen = useSetAtom(sidebarIsOpenAtom);
     const [sidebarIsOpen, setSidebarIsOpen] = useAtom(sidebarIsOpenAtom);
 
     const logoSrc = sidebarIsOpen
@@ -32,7 +31,7 @@ export const Sidebar: React.FC = () => {
 
     const handleMbSidebar = () => {
         if (windowWidth <= 1280) {
-            setsidebarIsOpen((prevValue) => !prevValue);
+            setSidebarIsOpen((prevValue) => !prevValue);
             setMbSidebar((prevValue) => !prevValue);
         }
     };
