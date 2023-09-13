@@ -5,8 +5,8 @@ import coinIcon from '@/assets/images/coin-icon.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 // import { getFakeImg } from '@/pages/Content/Taxonomy/Live/Evolution/fakeGameData';
 import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
-import { gamepopupIsOpenAtom } from '@/components/ContentLayout/Games/Game/Popup';
 import { cloneDeep } from 'lodash';
+import { requestAtomType } from '@/types';
 
 type GameProps = {
     data: {
@@ -23,22 +23,23 @@ type GameProps = {
         };
     };
 };
-export type configAtomType = {
-    config: {
-        game: {
-            category?: string;
-            interface?: string;
-            table: {
-                id: string;
-            };
-        };
-        channel: {
-            wrapped: boolean;
-            mobile?: boolean;
-        };
-    };
-};
-export const configAtom = atom<configAtomType>({
+
+export const configAtom = atom<requestAtomType>({
+    uuid: '123456789',
+    player: {
+        id: '1',
+        updata: true,
+        firstName: 'evo',
+        lastName: 'test',
+        country: 'KR',
+        nickname: 'evo',
+        language: 'ko',
+        currency: 'KRW',
+        session: {
+            id: '3ede6595ccf746bab923457b1bb48784',
+            ip: '192.168.0.1',
+        },
+    },
     config: {
         game: {
             category: '',
@@ -56,16 +57,25 @@ export const configAtom = atom<configAtomType>({
 const index: React.FC<GameProps> = ({ data = {} }) => {
     const isLogin = useAtomValue(IsLoginAtom);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
-    const setGamepopupIsOpen = useSetAtom(gamepopupIsOpenAtom);
     const [gameconfig, setGameconfig] = useAtom(configAtom);
 
     //TODO 這邊有一個功能待補=>如何在客戶登入後，再將客戶導回原本點擊的遊戲頁面並打開彈窗
     const handleClick = () => {
-        const newGameConfig = cloneDeep(gameconfig);
-        newGameConfig.config.game.category = data['Game Type'];
-        newGameConfig.config.game.table.id = data['Table ID'] as string;
-        setGameconfig(newGameConfig);
-        !isLogin ? setPopupIsOpen(true) : setGamepopupIsOpen(true);
+        if (!isLogin) {
+            setPopupIsOpen(true);
+            return;
+        } else {
+            const newGameConfig = cloneDeep(gameconfig);
+            newGameConfig.config.game.category = data['Game Type'];
+            newGameConfig.config.game.table.id = data['Table ID'] as string;
+            setGameconfig(newGameConfig);
+            console.log('newGameConfig', newGameConfig);
+            // 指定外部网站的URL
+            const externalWebsiteUrl = 'https://v88wl.uat1.evo-test.com/frontend/evo/r1/index.coop.html#provider=evolution&ua_launch_id=178473e948bbf87ca35d4a16&game=blackjack&table_id=k4r2hyhw4eqqb6us&app=';
+            // 使用 window.open() 打开外部网站
+            window.open(externalWebsiteUrl, '_blank');
+            //TODO 會話會過期
+        }
     };
     return (
         <div className="gameWrap w-full px-1" onClick={handleClick}>

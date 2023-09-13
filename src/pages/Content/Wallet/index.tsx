@@ -6,7 +6,7 @@ import AccountSection from '@/components/ContentLayout/Wallet/AccountSection';
 import RewardSection from '@/components/ContentLayout/Wallet/RewardSection';
 import { Authenticated } from './Authenticated';
 
-export const selectedSectionAtom = atom('MyBalance');
+export const selectedSectionAtom = atom('Deposit');
 
 const Wallet: React.FC = () => {
     const selectedSection = useAtomValue(selectedSectionAtom);

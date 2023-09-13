@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSetAtom } from 'jotai';
 import { GameTypeAtom, GameCategoryStateAtom } from '@/pages/Content/Taxonomy/AtomSetting';
-import GameType from '@/components/ContentLayout/SearchBar/GameType';
-import GameCategory from '@/components/ContentLayout/SearchBar/GameCategory';
+import GameType from '@/components/ContentLayout/GameType';
+import GameCategory from '@/components/ContentLayout/GameCategory';
 import { useRefineAPI } from './useRefineAPI';
 import Games from '@/components/ContentLayout/Games';
 

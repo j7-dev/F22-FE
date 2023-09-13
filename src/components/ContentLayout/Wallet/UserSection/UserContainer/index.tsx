@@ -1,20 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import refreshIcon from '@/assets/images/refresh-icon.svg';
-import { useUserAPI } from './useUserAPI';
+import { useUserAPI } from '../../../../../hooks/useUserAPI';
 
 const UserContainer: React.FC = () => {
     const { t } = useTranslation();
     const { data, isLoading } = useUserAPI();
     // console.log(data);
     if (isLoading) return <div>loading...</div>;
-    const balance = data?.data.balances[0].amount || '0'; //TODO why 類型沒有沒有屬性 'amount'?
+    const balance = data?.data.balances[0].amount || '0';
     const userName = data?.data.username || 'userName';
     const vip = data?.data.vip || '';
-    // console.log
-    // console.log(currency);
-    // console.log(balance);
-    // console.log('vip', vip);
     return (
         <div className="userContainer flex flex-col gap-2.5">
             <div className="flex justify-between items-center">

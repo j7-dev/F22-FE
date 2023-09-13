@@ -1,6 +1,6 @@
 import React from 'react';
 import { atom } from 'jotai';
-import GameCategory from './GameType';
+import GameCategory from '../GameType';
 // import SearchInput from './SearchInput';
 // import SearchDropdown from './SearchDropdown';
 // import FilterGames from './FilterGames';

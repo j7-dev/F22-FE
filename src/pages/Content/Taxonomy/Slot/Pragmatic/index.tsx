@@ -9,8 +9,8 @@ import {
     // GameTypeAtom,
     GameCategoryStateAtom,
 } from '@/pages/Content/Taxonomy/AtomSetting';
-import GameType from '@/components/ContentLayout/SearchBar/GameType';
-import GameCategory from '@/components/ContentLayout/SearchBar/GameCategory';
+import GameType from '@/components/ContentLayout/GameType';
+import GameCategory from '@/components/ContentLayout/GameCategory';
 // import Game from '@/components/ContentLayout/Games/Game';
 // import fakeGameData from './fakeGameData.json';
 import MaintainImg from '@/assets/images/Maintain.png';
@@ -48,20 +48,12 @@ const Evolution: React.FC = () => {
                 <div className="FilterGames dropdown-menu w-full flex justify-center items-center mt-10">
                     <div className="w-[1360px] flex flex-col justify-center flex-wrap gap-4  py-5 px-10 ">
                         <div className="gamesCategoryInfo w-auto text-center">
-                            <h3 className="gamesCategory mb-2">
-                                Pragmatic Play {t('Slot Game')}
-                            </h3>
-                            <span className="gamesCategoryDes">
-                                {/* {games.length} {t('Games found')} */}
-                            </span>
+                            <h3 className="gamesCategory mb-2">Pragmatic Play {t('Slot Game')}</h3>
+                            <span className="gamesCategoryDes">{/* {games.length} {t('Games found')} */}</span>
                         </div>
                         <div className="gamesWrap w-full">
                             <ul className="m-0 p-0 flex justify-start items-center flex-wrap gap-y-2.5">
-                                <img
-                                    src={MaintainImg}
-                                    alt=""
-                                    className="m-auto"
-                                />
+                                <img src={MaintainImg} alt="" className="m-auto" />
                                 {/* {games.map((item) => (
                                     <li
                                         key={nanoid()}

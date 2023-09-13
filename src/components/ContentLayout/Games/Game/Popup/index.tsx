@@ -31,7 +31,7 @@ const index: React.FC = () => {
         const data = { ...values, ...gameconfig };
         console.log('data', data);
         // 指定外部网站的URL
-        const externalWebsiteUrl = 'https://v88wl.uat1.evo-test.com/frontend/evo/errors/incorrect-currency-for-geo-location.html?lang=en';
+        const externalWebsiteUrl = 'https://v88wl.uat1.evo-test.com/frontend/evo/r1/index.coop.html#provider=evolution&ua_launch_id=178473e948bbf87ca35d4a16&game=blackjack&table_id=k4r2hyhw4eqqb6us&app=';
 
         // 使用 window.open() 打开外部网站
         window.open(externalWebsiteUrl, '_blank');

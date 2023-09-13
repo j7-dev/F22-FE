@@ -2,12 +2,9 @@ import React, { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { useTranslation } from 'react-i18next';
 import { useAtom, useSetAtom } from 'jotai';
-import {
-    GameTypeAtom,
-    GameCategoryStateAtom,
-} from '@/pages/Content/Taxonomy/AtomSetting';
-import GameType from '@/components/ContentLayout/SearchBar/GameType';
-import GameCategory from '@/components/ContentLayout/SearchBar/GameCategory';
+import { GameTypeAtom, GameCategoryStateAtom } from '@/pages/Content/Taxonomy/AtomSetting';
+import GameType from '@/components/ContentLayout/GameType';
+import GameCategory from '@/components/ContentLayout/GameCategory';
 import Game from '@/components/ContentLayout/Games/Game';
 import { fakeGameData } from './fakeGameData';
 
@@ -17,10 +14,7 @@ const Evolution: React.FC = () => {
     const [GameTypeValue, setGameType] = useAtom(GameTypeAtom);
     const setGameCategoryState = useSetAtom(GameCategoryStateAtom);
 
-    const games =
-        GameTypeValue !== 'all'
-            ? fakeGameData.filter((item) => item['Game Type'] === GameTypeValue)
-            : fakeGameData;
+    const games = GameTypeValue !== 'all' ? fakeGameData.filter((item) => item['Game Type'] === GameTypeValue) : fakeGameData;
 
     useEffect(() => {
         setGameType('all');
@@ -41,9 +35,7 @@ const Evolution: React.FC = () => {
                 <div className="FilterGames dropdown-menu w-full flex justify-center items-center mt-10">
                     <div className="w-[1360px] flex flex-col justify-center flex-wrap gap-4  py-5 px-10 ">
                         <div className="gamesCategoryInfo w-auto text-center">
-                            <h3 className="gamesCategory mb-2">
-                                Pragmatic Play {t('Live Casino')}
-                            </h3>
+                            <h3 className="gamesCategory mb-2">Pragmatic Play {t('Live Casino')}</h3>
                             <span className="gamesCategoryDes">
                                 {games.length} {t('Games found')}
                             </span>
@@ -54,10 +46,7 @@ const Evolution: React.FC = () => {
                                     // TODO 目前是放假圖片
 
                                     return (
-                                        <li
-                                            key={nanoid()}
-                                            className="w-[calc(100%/2)] flex flex-col justify-center items-center cursor-pointer md:w-[calc(100%/7)]"
-                                        >
+                                        <li key={nanoid()} className="w-[calc(100%/2)] flex flex-col justify-center items-center cursor-pointer md:w-[calc(100%/7)]">
                                             <Game data={item} />
                                         </li>
                                     );
