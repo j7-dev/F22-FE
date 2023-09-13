@@ -175,8 +175,11 @@ export const resources = [
         },
     },
     {
-        name: 'vip-setting',
-        list: '/refine/system-setting/vip-setting',
+        name: 'vips',
+        list: '/refine/system-setting/vips',
+        create: '/refine/system-setting/vips/create',
+        edit: '/refine/system-setting/vips/edit/:id',
+        delete: '/refine/system-setting/vips/delete/:id',
         meta: {
             parent: 'system-setting',
             label: 'VIP Upgrade Rule VIP等級管理',
