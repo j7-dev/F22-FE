@@ -6,7 +6,6 @@ import { ListAgent, CreateAgent, AffCommissionTransactions, AffTransactions, Com
 import { ListDeposits, ListWithdraws } from '@/pages/Admin/payments';
 import { ListBettingRecords } from '@/pages/Admin/bettingManagement';
 import { VipSetting } from '@/pages/Admin/systemSetting';
-import { AntdInferencer } from '@refinedev/inferencer/antd';
 
 const adminRoutes = () => {
     return (
@@ -48,9 +47,6 @@ const adminRoutes = () => {
             <Route path="/refine/system-setting">
                 <Route index element={<VipSetting />} />
                 <Route path="vips" element={<VipSetting />} />
-                <Route path="vips/create" element={<AntdInferencer />} />
-                <Route path="vips/edit/:id" element={<AntdInferencer />} />
-                <Route path="vips/delete/:id" element={<AntdInferencer />} />
             </Route>
         </>
     );

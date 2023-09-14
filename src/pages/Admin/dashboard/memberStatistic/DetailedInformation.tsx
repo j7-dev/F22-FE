@@ -22,44 +22,52 @@ const DetailedInformation = () => {
 
     const columns: ColumnsType<DataType> = [
         {
-            title: 'Major Shareholder',
+            title: 'NO.',
             dataIndex: 'agentId',
         },
         {
-            title: 'New Members',
-            dataIndex: 'newMembers',
+            title: 'Member Account ',
+            dataIndex: 'memberAccount ',
         },
         {
-            title: 'Number of Depositors',
-            dataIndex: 'numberOfDepositors',
+            title: 'Agent Account',
+            dataIndex: 'agentAccount',
         },
         {
-            title: 'Number of First Deposit',
-            dataIndex: 'numberOfFirstDeposit',
+            title: 'Total Bet Count',
+            dataIndex: 'totalBetCount',
         },
         {
-            title: 'Number of Disable',
-            dataIndex: 'numberOfDisable',
+            title: 'Total Profit Amount',
+            dataIndex: 'totalProfitAmount',
         },
         {
-            title: 'Total Deposits',
-            dataIndex: 'totalDeposits',
+            title: 'Total Bet Amount',
+            dataIndex: 'totalBetAmount',
         },
         {
-            title: 'Total Withdraw',
-            dataIndex: 'totalWithdraw',
+            title: 'Total Valid Bet Amount',
+            dataIndex: 'totalValidBetAmount',
         },
         {
-            title: 'Profit(DP-WD)',
-            dataIndex: 'profit',
+            title: 'Total Deposit Amount',
+            dataIndex: 'totalDepositAmount',
         },
         {
-            title: 'Commission Amount',
-            dataIndex: 'commissionAmount',
+            title: 'Total Withdraw Amount(Including Amount still Applying)',
+            dataIndex: 'totalWithdrawAmount',
         },
         {
-            title: '',
-            dataIndex: 'action',
+            title: 'Total Bonus Amount',
+            dataIndex: 'totalBonusAmount',
+        },
+        {
+            title: 'Total Discount Amount',
+            dataIndex: 'totalDiscountAmount',
+        },
+        {
+            title: 'Total AnyTime Discount Amount',
+            dataIndex: 'totalAnyTimeDiscountAmount',
         },
     ];
 
