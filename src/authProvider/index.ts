@@ -1,19 +1,23 @@
 import { AuthBindings } from '@refinedev/core';
 import { AuthHelper } from '@refinedev/strapi-v4';
 import { API_URL, API_TOKEN } from '@/utils';
-import { axiosInstance } from '@/authProvider/axiosInstance';
-export * from '@/authProvider/axiosInstance';
+import { axiosInstance } from '@/providers/strapi-v4/';
 
-const strapiAuthHelper = AuthHelper(API_URL + '/api');
+const strapiAuthHelper = AuthHelper(`${API_URL}/api`);
 
 export const authProvider: AuthBindings = {
-    login: async ({ email, password, redirectPath }) => {
+    login: async (props) => {
+        const email = props?.email || '';
+        const password = props?.password || '';
+        const redirectPath = props?.redirectPath || '/';
+
         const { data, status } = await strapiAuthHelper.login(email, password);
         if (status === 200) {
-            localStorage.setItem(API_TOKEN, data.jwt);
+            const token = data.jwt;
+            localStorage.setItem(API_TOKEN, token);
 
             // set header axios instance
-            axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${data.jwt}`;
+            axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
             return {
                 success: true,
@@ -28,7 +32,8 @@ export const authProvider: AuthBindings = {
             },
         };
     },
-    logout: async ({ redirectPath }) => {
+    logout: async (props) => {
+        const redirectPath = props?.redirectPath || '/';
         localStorage.removeItem(API_TOKEN);
         return {
             success: true,
@@ -66,14 +71,14 @@ export const authProvider: AuthBindings = {
             return null;
         }
 
-        const { data, status } = await strapiAuthHelper.me(token);
+        const { data, status } = await strapiAuthHelper.me(token, {
+            meta: {
+                populate: ['role'],
+            },
+        });
+
         if (status === 200) {
-            const { id, username, email } = data;
-            return {
-                id,
-                name: username,
-                email,
-            };
+            return data;
         }
 
         return null;

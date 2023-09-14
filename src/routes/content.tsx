@@ -1,4 +1,4 @@
-import { TRoute } from '@/types';
+import { Route } from 'react-router-dom';
 import About from '@/pages/Content/About';
 import Home from '@/pages/Content/Home';
 import PromotionPage from '@/pages/Content/Promotion';
@@ -16,87 +16,31 @@ import TermsOfService from '@/pages/Content/TermsOfService';
 import Customer from '@/pages/Content/Customer';
 import Wallet from '@/pages/Content/Wallet';
 
-const Routes: TRoute[] = [
-    {
-        path: '/',
-        element: <Home />,
-    },
-    {
-        path: '/about',
-        element: <About />,
-    },
-    {
-        path: '/promotion',
-        element: <PromotionPage />,
-    },
-    {
-        path: '/evolution',
-        element: <EvolutionLive />,
-    },
-    {
-        path: '/evolution/live',
-        element: <EvolutionLive />,
-    },
-    {
-        path: '/pragmatic',
-        element: <PragmaticLive />,
-    },
-    {
-        path: '/pragmatic/live',
-        element: <PragmaticLive />,
-    },
-    {
-        path: '/asiagaming',
-        element: <AsiaGamingLive />,
-    },
-    {
-        path: '/asiagaming/live',
-        element: <AsiaGamingLive />,
-    },
-    {
-        path: '/microgaming',
-        element: <MicroGamingLive />,
-    },
-    {
-        path: '/microgaming/live',
-        element: <MicroGamingLive />,
-    },
-    {
-        path: '/evolution/slot',
-        element: <EvolutionSlot />,
-    },
-    {
-        path: '/pragmatic/slot',
-        element: <PragmaticSlot />,
-    },
-    {
-        path: '/asiagaming/slot',
-        element: <AsiaGamingSlot />,
-    },
-    {
-        path: '/microgaming/slot',
-        element: <MicroGamingSlot />,
-    },
-    {
-        path: '/bti',
-        element: <Bti />,
-    },
-    {
-        path: '/gigx',
-        element: <Gigx />,
-    },
-    {
-        path: '/terms-of-service',
-        element: <TermsOfService />,
-    },
-    {
-        path: '/customer',
-        element: <Customer />,
-    },
-    {
-        path: '/wallet',
-        element: <Wallet />,
-    },
-];
+const contentRoutes = () => {
+    return (
+        <>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/promotion" element={<PromotionPage />} />
+            <Route path="/evolution" element={<EvolutionLive />} />
+            <Route path="/evolution/live" element={<EvolutionLive />} />
+            <Route path="/pragmatic" element={<PragmaticLive />} />
+            <Route path="/pragmatic/live" element={<PragmaticLive />} />
+            <Route path="/asiagaming" element={<AsiaGamingLive />} />
+            <Route path="/asiagaming/live" element={<AsiaGamingLive />} />
+            <Route path="/microgaming" element={<MicroGamingLive />} />
+            <Route path="/microgaming/live" element={<MicroGamingLive />} />
+            <Route path="/evolution/slot" element={<EvolutionSlot />} />
+            <Route path="/pragmatic/slot" element={<PragmaticSlot />} />
+            <Route path="/asiagaming/slot" element={<AsiaGamingSlot />} />
+            <Route path="/microgaming/slot" element={<MicroGamingSlot />} />
+            <Route path="/bti" element={<Bti />} />
+            <Route path="/gigx" element={<Gigx />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/customer" element={<Customer />} />
+            <Route path="/wallet" element={<Wallet />} />
+        </>
+    );
+};
 
-export default Routes;
+export default contentRoutes;

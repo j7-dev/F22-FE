@@ -3,26 +3,21 @@ import { ITreeMenu, CanAccess, useMenu } from '@refinedev/core';
 import { Link } from 'react-router-dom';
 import { Sider, ThemedTitleV2 } from '@refinedev/antd';
 import { Layout as AntdLayout, Menu, Grid, theme, Button } from 'antd';
-import {
-    UnorderedListOutlined,
-    RightOutlined,
-    LeftOutlined,
-} from '@ant-design/icons';
+import { UnorderedListOutlined, RightOutlined, LeftOutlined, RadarChartOutlined } from '@ant-design/icons';
 import { antLayoutSider, antLayoutSiderMobile } from './styles';
 
 const { useToken } = theme;
+const siderWidth = 320;
 
 const CustomSider: typeof Sider = () => {
     const { token } = useToken();
     const [collapsed, setCollapsed] = useState<boolean>(false);
     const { menuItems, selectedKey, defaultOpenKeys } = useMenu();
-    console.log('⭐  menuItems', menuItems);
     const { SubMenu } = Menu;
 
     const breakpoint = Grid.useBreakpoint();
 
-    const isMobile =
-        typeof breakpoint.lg === 'undefined' ? false : !breakpoint.lg;
+    const isMobile = typeof breakpoint.lg === 'undefined' ? false : !breakpoint.lg;
 
     const renderTreeView = (tree: ITreeMenu[], theSelectedKey: string) => {
         return tree.map((item: ITreeMenu) => {
@@ -31,20 +26,11 @@ const CustomSider: typeof Sider = () => {
             const icon = meta?.icon;
             const label = meta?.label ?? name;
             const parent = meta?.parent;
-            const route =
-                typeof list === 'string'
-                    ? list
-                    : typeof list !== 'function'
-                    ? list?.path
-                    : key;
+            const route = typeof list === 'string' ? list : typeof list !== 'function' ? list?.path : key;
 
             if (children.length > 0) {
                 return (
-                    <SubMenu
-                        key={route}
-                        icon={icon ?? <UnorderedListOutlined />}
-                        title={label}
-                    >
+                    <SubMenu key={route} icon={icon ?? <UnorderedListOutlined />} title={label}>
                         {renderTreeView(children, theSelectedKey)}
                     </SubMenu>
                 );
@@ -52,12 +38,7 @@ const CustomSider: typeof Sider = () => {
             const isSelected = route === theSelectedKey;
             const isRoute = !(parent !== undefined && children.length === 0);
             return (
-                <CanAccess
-                    key={route}
-                    resource={name.toLowerCase()}
-                    action="list"
-                    params={{ resource: item }}
-                >
+                <CanAccess key={route} resource={name.toLowerCase()} action="list" params={{ resource: item }}>
                     <Menu.Item
                         key={route}
                         style={{
@@ -66,9 +47,7 @@ const CustomSider: typeof Sider = () => {
                         icon={icon ?? (isRoute && <UnorderedListOutlined />)}
                     >
                         {route ? <Link to={route || '/'}>{label}</Link> : label}
-                        {!collapsed && isSelected && (
-                            <div className="ant-menu-tree-arrow" />
-                        )}
+                        {!collapsed && isSelected && <div className="ant-menu-tree-arrow" />}
                     </Menu.Item>
                 </CanAccess>
             );
@@ -85,9 +64,7 @@ const CustomSider: typeof Sider = () => {
             collapsedWidth={isMobile ? 0 : 80}
             collapsed={collapsed}
             breakpoint="lg"
-            onCollapse={(isCollapsed: boolean): void =>
-                setCollapsed(isCollapsed)
-            }
+            onCollapse={(isCollapsed: boolean): void => setCollapsed(isCollapsed)}
             style={{
                 ...siderStyle,
                 backgroundColor: token.colorBgContainer,
@@ -120,10 +97,11 @@ const CustomSider: typeof Sider = () => {
                     </Button>
                 )
             }
+            width={siderWidth}
         >
             <div
                 style={{
-                    width: collapsed ? '80px' : '200px',
+                    width: collapsed ? '80px' : `${siderWidth.toString()}px`,
                     padding: collapsed ? '0' : '0 16px',
                     display: 'flex',
                     justifyContent: collapsed ? 'center' : 'flex-start',
@@ -133,7 +111,7 @@ const CustomSider: typeof Sider = () => {
                     fontSize: '14px',
                 }}
             >
-                <ThemedTitleV2 collapsed={collapsed} />
+                <ThemedTitleV2 collapsed={collapsed} icon={<RadarChartOutlined className="text-[1.5rem]" />} text="SmartBet" />
             </div>
             <Menu
                 defaultOpenKeys={defaultOpenKeys}
