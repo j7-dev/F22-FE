@@ -1,3 +1,4 @@
+// TODO 資料結構找時間補=首字不要大寫
 export type Coupon = {
     CouponCode: string;
     CouponName: string;
@@ -8,14 +9,7 @@ export type Coupon = {
     [key: string]: any;
 };
 
-export const CouponHistoryTitle = [
-    'Coupon Code',
-    'Coupon Name',
-    'Coupon Amount',
-    'Expiration Date',
-    'Date of Use',
-    'Request',
-];
+export const CouponHistoryTitle = ['Coupon Code', 'Coupon Name', 'Coupon Amount', 'Expiration Date', 'Date of Use', 'Request'];
 export const fakeCouponHistory: Coupon[] = [
     {
         CouponCode: 'firstBonus',

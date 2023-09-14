@@ -18,7 +18,7 @@ import { BiCheckShield } from 'react-icons/bi';
 const NavBar: React.FC = () => {
     const { t } = useTranslation();
     const [mbSidebar, setMbSidebar] = useAtom(mbSidebarAtom);
-    const setsidebarIsOpen = useSetAtom(sidebarIsOpenAtom);
+    const setSidebarIsOpen = useSetAtom(sidebarIsOpenAtom);
     // const sidebarIsOpen = useAtomValue(sidebarIsOpenAtom);
     const isLogin = useAtomValue(IsLoginAtom);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
@@ -33,7 +33,7 @@ const NavBar: React.FC = () => {
 
     //手機版選單
     const handleMbSidebar = () => {
-        setsidebarIsOpen((prevValue) => !prevValue);
+        setSidebarIsOpen((prevValue) => !prevValue);
         setMbSidebar((prevValue) => !prevValue);
         // console.log('mbSidebar', mbSidebar);
         // console.log('sidebarIsOpen', sidebarIsOpen);

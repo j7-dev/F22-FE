@@ -4,14 +4,23 @@ import { Footer } from './Footer';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import Popup from './LoginPopUp';
-import { atom, useAtom, useAtomValue } from 'jotai';
+import GamePopup from './Games/Game/Popup';
+import { atom, useAtom, useSetAtom } from 'jotai';
+import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
 
 export const mbSidebarAtom = atom(false);
 export const windowWidthAtom = atom(window.innerWidth);
 const Layout = () => {
-    const mbSidebar = useAtomValue(mbSidebarAtom);
+    const [mbSidebar, setMbSidebar] = useAtom(mbSidebarAtom);
     const [windowWidth, setWindowWidth] = useAtom(windowWidthAtom);
+    const setsidebarIsOpen = useSetAtom(sidebarIsOpenAtom);
 
+    const handleCloseMbSidebar = () => {
+        if (windowWidth <= 1280 && mbSidebar) {
+            setsidebarIsOpen(false);
+            setMbSidebar(false);
+        }
+    };
     //路徑發生變化時，關閉手機版選單
     useEffect(() => {
         // 监听窗口大小变化
@@ -34,11 +43,12 @@ const Layout = () => {
             >
                 <Sidebar />
             </div>
-            <div className="rightContent relative xl:pl-20 ">
+            <div className="rightContent relative xl:pl-20" onClick={handleCloseMbSidebar}>
                 <Header />
                 <Outlet />
                 <Footer />
                 <Popup />
+                <GamePopup />
             </div>
         </>
     );

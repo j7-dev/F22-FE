@@ -1,4 +1,5 @@
 import { useCustom } from '@refinedev/core';
+import { F22_API_URL, F22_TOKEN } from 'utils/env';
 
 interface PostUniqueCheckResponse {
     data: [];
@@ -6,17 +7,21 @@ interface PostUniqueCheckResponse {
 }
 
 export const useRefineAPI = () => {
-    const corsURL = 'https://cors-anywhere.herokuapp.com/';
-    const appName = '4w7ga5btl92qgt7e';
-    const appPassword = '1a1e45c3f3a61930f545f2156548e17d';
-    const apiUrl = `https://stage-admin.asia-live.com/api/lobby/v1/${appName}/tablelist`;
-    const authHeader = btoa(`${appName}:${appPassword}`);
+    console.log('useRefineAPI');
+    // const corsURL = 'https://cors-anywhere.herokuapp.com/';
+    // const appName = '4w7ga5btl92qgt7e';
+    // const appPassword = '1a1e45c3f3a61930f545f2156548e17d';
+    const apiUrl = `${F22_API_URL}/evo/tablelist`;
+    // console.log('apiUrl', apiUrl);
+    // const authHeader = btoa(`${appName}:${appPassword}`);
+    const apiToken = F22_TOKEN;
+    // console.log('apiToken', apiToken);
     const headers = {
-        Authorization: `Basic ${authHeader}`,
+        Authorization: `Bearer ${apiToken}`,
     };
-
+    // console.log('headers', headers);
     const { data, isLoading } = useCustom<PostUniqueCheckResponse>({
-        url: corsURL + apiUrl,
+        url: apiUrl,
         method: 'get',
         config: {
             headers: headers,
