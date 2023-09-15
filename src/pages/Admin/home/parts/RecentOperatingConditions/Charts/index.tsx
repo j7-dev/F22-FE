@@ -1,4 +1,3 @@
-import React from 'react';
 import LineChart from './LineChart';
 import { winLossData, validBetData, bettingAmountData, onlineMembersData } from '../atom';
 import { FakeAlert } from '@/components/PureComponents';

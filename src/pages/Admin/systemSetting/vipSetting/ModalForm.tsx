@@ -1,4 +1,3 @@
-import React from 'react';
 import { Form, Input, InputNumber, Switch, Modal, ModalProps } from 'antd';
 import { modalShowAtom } from './atom';
 import { useAtom } from 'jotai';
