@@ -1,4 +1,3 @@
-import React from 'react';
 import { Typography, Tabs, TabsProps } from 'antd';
 import { LineChartOutlined, TableOutlined, InfoCircleFilled } from '@ant-design/icons';
 import Charts from './Charts';

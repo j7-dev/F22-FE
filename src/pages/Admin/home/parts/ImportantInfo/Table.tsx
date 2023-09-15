@@ -1,4 +1,3 @@
-import React from 'react';
 import { FakeAlert } from '@/components/PureComponents';
 
 const Table = () => {
