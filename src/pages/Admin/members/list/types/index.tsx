@@ -1,4 +1,6 @@
 export type DataType = {
+    id: number;
+    label: string;
     agentId: number;
     newMembers: string;
     numberOfDepositors: string;
