@@ -1,5 +1,5 @@
 import { AuthBindings } from '@refinedev/core';
-import { AuthHelper } from '@refinedev/strapi-v4';
+import { AuthHelper } from './AuthHelper';
 import { API_URL } from '@/utils';
 import { axiosInstance } from '@/providers/strapi-v4/';
 import axios from 'axios';
@@ -13,9 +13,10 @@ export const authProvider: AuthBindings = {
         const password = props?.password || '';
         const redirectPath = props?.redirectPath || '/';
 
-        const { data, status } = await strapiAuthHelper.login(email, password);
-        if (status === 200) {
-            const token = data.jwt;
+        const loginResult = await strapiAuthHelper.login(email, password);
+        console.log('⭐  login:  loginResult', loginResult);
+        if (loginResult.status === 200) {
+            const token = loginResult.data.jwt;
             localStorage.setItem('API_TOKEN', token);
 
             // set header axios instance

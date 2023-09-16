@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Input, Button, Form } from 'antd';
 import { LockOutlined } from '@ant-design/icons';
 import { useCustomMutation } from '@refinedev/core';
-import { API_URL, API_TOKEN } from '@/utils';
+import { API_URL } from '@/utils';
 import { useNavigate } from 'react-router-dom';
 import { popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
 import { useSetAtom } from 'jotai';
@@ -16,7 +16,6 @@ import { useSetAtom } from 'jotai';
 //     "password": "1234567",
 //     "passwordConfirmation": "1234567"
 // }
-console.log('localStorage', localStorage.getItem(API_TOKEN));
 const index: React.FC = () => {
     const { t } = useTranslation();
     const [form] = Form.useForm();
