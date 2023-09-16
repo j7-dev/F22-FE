@@ -19,6 +19,16 @@ export const authProvider: AuthBindings = {
             // set header axios instance
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
+            // axiosInstance.post('/login-details', {
+            // 	ip: email,
+            // 	device: email,
+            // 	login_url: password,
+            // },{
+            // 	headers: {
+            // 		Authorization: `Bearer ${API_TOKEN}`,
+            // 	}
+            // })
+
             return {
                 success: true,
                 redirectTo: redirectPath,

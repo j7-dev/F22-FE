@@ -1,6 +1,7 @@
 import { Outlet, Routes, Route } from 'react-router-dom';
 import { Authenticated, useGetIdentity } from '@refinedev/core';
-import { ErrorComponent, ThemedLayoutV2 } from '@refinedev/antd';
+import { ThemedLayoutV2 } from '@refinedev/antd';
+import { ErrorComponent } from '@/components/PureComponents';
 import '@refinedev/antd/dist/reset.css';
 import { CatchAllNavigate, NavigateToResource } from '@refinedev/react-router-v6';
 import { Header, Sider } from '@/components/AdminLayout';

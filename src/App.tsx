@@ -1,6 +1,6 @@
 import { Refine } from '@refinedev/core';
 import { RefineKbar, RefineKbarProvider } from '@refinedev/kbar';
-import { notificationProvider } from '@refinedev/antd';
+import { notificationProvider } from '@/notificationProvider';
 import '@refinedev/antd/dist/reset.css';
 import routerBindings, { UnsavedChangesNotifier } from '@refinedev/react-router-v6';
 import { DataProvider, axiosInstance } from '@/providers/strapi-v4';

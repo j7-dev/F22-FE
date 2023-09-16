@@ -1,5 +1,5 @@
 import { SearchOutlined } from '@ant-design/icons';
-import { Form, Input, Button, DatePicker, Select } from 'antd';
+import { Form, Input, Button, DatePicker } from 'antd';
 import { searchPropsAtom, TSearchProps } from './atom';
 import { useSetAtom } from 'jotai';
 import dayjs from 'dayjs';
@@ -7,17 +7,18 @@ import dayjs from 'dayjs';
 const { RangePicker } = DatePicker;
 const Filter: React.FC = () => {
     // TODO 優化  搜尋 agent
-
+    const [form] = Form.useForm<TSearchProps>();
     const setSearchProps = useSetAtom(searchPropsAtom);
 
-    const handleFinish = (values: TSearchProps) => {
+    const handleFinish = () => {
+        const values = form.getFieldsValue();
         setSearchProps(values);
     };
 
     return (
-        <Form layout="vertical" onFinish={handleFinish}>
+        <Form form={form} layout="vertical" onFinish={handleFinish}>
             <Form.Item
-                label="Date"
+                label="Register Date"
                 name={['dateRange']}
                 rules={[
                     {
@@ -29,34 +30,11 @@ const Filter: React.FC = () => {
             >
                 <RangePicker className="w-full" />
             </Form.Item>
-            <Form.Item label="Agent" name={['agent']}>
-                <Input placeholder="search agent ID or leave blank" prefix={<SearchOutlined />} />
-            </Form.Item>
-            <Form.Item label="Member Level" name={['vip']}>
-                <Select
-                    disabled
-                    allowClear
-                    options={[
-                        {
-                            label: 'Game Type1',
-                            value: 'gameType1',
-                        },
-                        {
-                            label: 'Game Type2',
-                            value: 'gameType2',
-                        },
-                        {
-                            label: 'Game Type3',
-                            value: 'gameType3',
-                        },
-                    ]}
-                />
-            </Form.Item>
             <Form.Item label="Member Account" name={['users']}>
                 <Input placeholder="search user ID or leave blank" prefix={<SearchOutlined />} />
             </Form.Item>
             <Form.Item>
-                <Button htmlType="submit" type="primary" className="w-full">
+                <Button type="primary" className="w-full" onClick={handleFinish}>
                     Filter
                 </Button>
             </Form.Item>
