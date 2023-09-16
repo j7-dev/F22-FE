@@ -62,7 +62,8 @@
         "vite-tsconfig-paths": "^4.2.0"
     },
     "scripts": {
-        "dev": "env-cmd -f ./env/.env.local refine dev",
+        "dev:local": "env-cmd -f ./env/.env.local refine dev",
+        "dev": "env-cmd -f ./env/.env.dev refine dev",
         "build": "env-cmd -f ./env/.env.prod tsc && refine build",
         "build:prod": "env-cmd -f ./env/.env.prod tsc && refine build",
         "build:dev": "env-cmd -f ./env/.env.dev tsc && refine build",
