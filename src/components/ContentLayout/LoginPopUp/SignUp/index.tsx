@@ -7,7 +7,7 @@ import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { AiOutlineMail } from 'react-icons/ai';
 import { useRegister } from '@refinedev/core';
-import { popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
+import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/LoginModule';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 type LoginVariables = {
@@ -16,12 +16,11 @@ type LoginVariables = {
     redirectPath: string;
     username: string;
 };
-type SignUpProps = {
-    formCarousel?: HTMLDivElement;
-};
-const index: React.FC<SignUpProps> = ({ formCarousel }) => {
+
+const index: React.FC = () => {
     const { mutate: register } = useRegister<LoginVariables>();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
+    const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
     const [form] = Form.useForm();
     const [verify, setVerify] = useState(false);
     const [verifyError, setVerifyError] = useState('');
@@ -51,8 +50,7 @@ const index: React.FC<SignUpProps> = ({ formCarousel }) => {
     };
 
     const handleToLogin = () => {
-        if (!formCarousel) return;
-        formCarousel.style.transform = 'translateX(0%)';
+        setLoginOrSignUp(true);
     };
 
     const handleVerificationSuccess = () => {

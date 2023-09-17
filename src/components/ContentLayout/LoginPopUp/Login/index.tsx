@@ -3,7 +3,7 @@ import { useSetAtom } from 'jotai';
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useLogin } from '@refinedev/core';
-import { popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
+import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/LoginModule';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 type LoginVariables = {
@@ -11,12 +11,11 @@ type LoginVariables = {
     password: string;
     redirectPath: string;
 };
-type LoginProps = {
-    formCarousel?: HTMLDivElement;
-};
-const index: React.FC<LoginProps> = ({ formCarousel }) => {
+
+const index: React.FC = () => {
     const { mutate: login } = useLogin<LoginVariables>();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
+    const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
     const [form] = Form.useForm();
     const [verify, setVerify] = useState(false);
     const [verifyError, setVerifyError] = useState('');
@@ -46,8 +45,7 @@ const index: React.FC<LoginProps> = ({ formCarousel }) => {
         );
     };
     const handleToSignUp = () => {
-        if (!formCarousel) return;
-        formCarousel.style.transform = 'translateX(-50%)';
+        setLoginOrSignUp(false);
     };
     const handleVerificationSuccess = () => {
         //TODO 正常會帶token跟ekey這兩個參數,但暫時用不到
