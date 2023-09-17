@@ -26,7 +26,7 @@ const index: React.FC = () => {
                 <div className={`h-10 gap-2.5  rounded-lg flex justify-between items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'CouponHistory' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('CouponHistory')}>
                     <div className="rewardInfo flex  justify-start items-center gap-2.5">
                         <img src={couponIcon as unknown as string} alt="" />
-                        <span className="text-sm font-bold text-[#2B3240]">{t('Coupon History')}</span>
+                        <span className="text-sm font-bold text-[#2B3240]">{t('Coupon')}</span>
                     </div>
                     <span className="rewardNumber flex justify-center items-center min-w-[36px] h-[27px] bg-[#DC3545] rounded-lg text-sm font-bold text-white">0</span>
                 </div>

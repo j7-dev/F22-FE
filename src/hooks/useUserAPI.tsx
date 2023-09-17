@@ -3,17 +3,15 @@ import { F22_API_URL, F22_TOKEN } from 'utils/env';
 
 interface PostUniqueCheckResponse {
     balances: {
-        amount: string;
+        amount: number;
         currency: string;
     }[];
     username: string;
-    vip: string;
+    vip?: { label: string };
 }
-
 export const useUserAPI = () => {
-    // console.log('useUserAPI');
     const { data: identity } = useGetIdentity<{ id: number }>();
-
+    // console.log('identity', identity);
     const apiUrl = `${F22_API_URL}/users/${identity?.id}`;
     const apiToken = F22_TOKEN;
     const headers = {
@@ -30,9 +28,6 @@ export const useUserAPI = () => {
             },
         },
     });
-
-    console.log('data', data);
-
     // 將 data 和 isLoading 包裝在物件中並返回
     const apiData = {
         data,

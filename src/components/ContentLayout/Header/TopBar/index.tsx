@@ -1,9 +1,6 @@
 import React from 'react';
 import { useGetLocale } from '@refinedev/core';
 import { nanoid } from 'nanoid';
-import twitterIcon from '@/assets/images/twitter-icon.png';
-import igIcon from '@/assets/images/ig-icon.png';
-import lineIcon from '@/assets/images/line-icon.png';
 import { languages } from '@/utils';
 import i18n from '@/i18n';
 
@@ -31,7 +28,8 @@ const TopBar: React.FC = () => {
             {/* <!-- Topbar --> */}
             <div className="bg-[#2B3240] w-full px-4 sm:px-6 lg:px-8">
                 <div className=" py-1 max-w-7xl mx-auto flex items-center justify-between xl:justify-end gap-x-5 w-full">
-                    <div className="pl-1 sm:pl-2 space-x-1">
+                    <div></div>
+                    {/* <div className="pl-1 sm:pl-2 space-x-1">
                         <span className=" inline-flex flex-shrink-0 justify-center items-center h-9 w-9 font-bold rounded-full">
                             <img src={twitterIcon} alt="" />
                         </span>
@@ -41,7 +39,7 @@ const TopBar: React.FC = () => {
                         <span className=" inline-flex flex-shrink-0 justify-center items-center h-9 w-9 font-bold rounded-full">
                             <img src={lineIcon} alt="" />
                         </span>
-                    </div>
+                    </div> */}
                     <div className="languageSwitchContain w-[150px] text-center">
                         <div className="nowLanguage cursor-pointer text-right xl:text-center">
                             <span className="h-10 px-2.5 inline-flex justify-center items-center gap-2 font-bold text-slate-400 hover:text-slate-300 text-sm">

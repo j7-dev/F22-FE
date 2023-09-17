@@ -13,7 +13,10 @@ const index: React.FC = () => {
             <div className="tableWrap md:overflow-hidden overflow-x-scroll">
                 <div className="tableHeader h-10 w-full items-center flex flex-row text-white bg-[#2B3240] md:pl-5 px-0 font-bold text-[13px] text-start">
                     {CouponTitle.map((item) => (
-                        <div className={`bg-[#2B3240] h-full flex items-center px-1.5 ${window.innerWidth < 810 ? 'whitespace-nowrap min-w-[115px] max-w-[115px]' : 'w-1/6 '}`}> {t(item)}</div>
+                        <div key={nanoid()} className={`bg-[#2B3240] h-full flex items-center px-1.5 ${window.innerWidth < 810 ? 'whitespace-nowrap min-w-[115px] max-w-[115px]' : 'w-1/5 '}`}>
+                            {' '}
+                            {t(item)}
+                        </div>
                     ))}
                 </div>
                 {/* TODO 資料結構找時間補=首字不要大寫 */}
@@ -21,7 +24,7 @@ const index: React.FC = () => {
                     CouponHistory.map((item) => (
                         <div key={nanoid()} className="tableContent h-10 w-full items-center flex flex-row  md:pl-5 px-0 font-bold text-[13px] text-start border-0 border-solid border-b border-[#F3F3F4]">
                             {CouponTitle.map((title) => (
-                                <div key={nanoid()} className={`h-full flex items-center px-1.5 ${window.innerWidth < 810 ? 'whitespace-nowrap min-w-[115px] max-w-[115px]' : 'w-1/6 '}`}>
+                                <div key={nanoid()} className={`h-full flex items-center px-1.5 ${window.innerWidth < 810 ? 'whitespace-nowrap min-w-[115px] max-w-[115px]' : 'w-1/5 '}`}>
                                     {item[title.replace(/\s/g, '')]}
                                 </div>
                             ))}
