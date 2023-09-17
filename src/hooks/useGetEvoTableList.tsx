@@ -6,8 +6,8 @@ interface PostUniqueCheckResponse {
     isAvailable: boolean;
 }
 
-export const useRefineAPI = () => {
-    console.log('useRefineAPI');
+export const useGetEvoTableList = () => {
+    // console.log('useRefineAPI');
     // const corsURL = 'https://cors-anywhere.herokuapp.com/';
     // const appName = '4w7ga5btl92qgt7e';
     // const appPassword = '1a1e45c3f3a61930f545f2156548e17d';

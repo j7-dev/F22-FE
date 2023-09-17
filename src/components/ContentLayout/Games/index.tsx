@@ -8,17 +8,16 @@ import { gameTypeFilter } from '@/components/ContentLayout/Games/Game/GameImg';
 
 type GamesDataProp = {
     ProviderName: string;
-    gamesData: { [key: string]: string }[];
+    gamesData?: { [key: string]: string }[];
     isLoading: boolean;
 };
-const Games: React.FC<GamesDataProp> = ({ ProviderName, gamesData, isLoading }) => {
+const Games: React.FC<GamesDataProp> = ({ ProviderName, gamesData = [], isLoading }) => {
     const GameTypeValue = useAtomValue(GameTypeAtom);
     const GameCategoryState = useAtomValue(GameCategoryStateAtom);
     const { t } = useTranslation();
 
     //排除rng-類別
     const gamesList = GameTypeValue !== 'all' ? gamesData.filter((item) => gameTypeFilter[GameTypeValue].some((gameType) => item['Game Type'] === gameType) && !item['Game Type'].startsWith('rng-')) : gamesData.filter((item) => !item['Game Type'].startsWith('rng-'));
-
     return (
         <>
             <div className="gamesCategoryInfo w-auto text-center">
@@ -32,7 +31,7 @@ const Games: React.FC<GamesDataProp> = ({ ProviderName, gamesData, isLoading }) 
                     {isLoading === false ? (
                         gamesList.map((item) => {
                             return (
-                                <li key={nanoid()} className="w-1/2 flex flex-col justify-center items-center cursor-pointer md:w-[calc(100%/7)]">
+                                <li key={nanoid()} className="w-1/2 flex flex-col justify-center items-center cursor-pointer md:w-[calc(100%/6)]">
                                     <Game data={item} />
                                 </li>
                             );

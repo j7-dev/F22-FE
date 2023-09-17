@@ -3,13 +3,13 @@ import { useSetAtom } from 'jotai';
 import { GameTypeAtom, GameCategoryStateAtom } from '@/pages/Content/Taxonomy/AtomSetting';
 import GameType from '@/components/ContentLayout/GameType';
 import GameCategory from '@/components/ContentLayout/GameCategory';
-import { useRefineAPI } from './useRefineAPI';
+import { useGetEvoTableList } from '../../../../../hooks/useGetEvoTableList';
 import Games from '@/components/ContentLayout/Games';
 
 const Evolution: React.FC = () => {
     const setGameType = useSetAtom(GameTypeAtom);
     const setGameCategoryState = useSetAtom(GameCategoryStateAtom);
-    const { data, isLoading } = useRefineAPI(); //TODO 為什麼在載入時會載呼叫多次API?
+    const { data, isLoading } = useGetEvoTableList(); //TODO 為什麼在載入時會載呼叫多次API?
     const extractedData = data?.data['data'] || []; //指定如果沒有data的話就給空陣列不要是undefined
 
     useEffect(() => {
