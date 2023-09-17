@@ -24,7 +24,7 @@ const index: React.FC = () => {
                 <span className="text-sm font-bold text-[#2b324080] p-2.5">{t('Cash')}</span>
                 {window.innerWidth < 810 && <AiOutlineDown />}
             </div>
-            <div className={`cashListContainer flex flex-col gap-4 overflow-hidden transition-all md:h-full ${window.innerWidth < 810 && down ? 'h-[100px]' : 'h-0'}`}>
+            <div className={`cashListContainer flex flex-col gap-4 overflow-hidden transition-all md:h-full ${window.innerWidth < 810 && down ? 'h-[150px]' : 'h-0'}`}>
                 <div className={`h-10 gap-2.5 rounded-lg flex justify-between items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'siteMail' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('siteMail')}>
                     <div className="siteMailInfo flex justify-start items-center gap-2.5">
                         <AiFillMail size={30} className="p-1" />
