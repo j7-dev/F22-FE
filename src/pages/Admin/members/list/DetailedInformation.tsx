@@ -1,24 +1,68 @@
-import { useEffect } from 'react';
-import { Table } from 'antd';
+import { Table, Row, Col, Card } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { searchPropsAtom } from './atom';
-import { useAtomValue } from 'jotai';
 import { DataType } from './types';
 import { useTable } from '@refinedev/antd';
 import { TVip } from '@/types';
 import { Link } from 'react-router-dom';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { BooleanIndicator } from '@/components/PureComponents';
+import { useCustom } from '@refinedev/core';
+import { API_URL } from '@/utils';
+import Filter from './Filter';
+import FilterTags from '@/components/FilterTags';
+
+type TSearchProps = {
+    email?: string;
+    dateRange?: [Dayjs, Dayjs] | undefined;
+    [key: string]: any;
+};
 
 const DetailedInformation = () => {
-    const searchProps = useAtomValue(searchPropsAtom);
-    const { tableProps } = useTable({
+    const { tableProps, searchFormProps } = useTable({
         resource: 'users',
         meta: {
-            populate: ['vip', 'balances'],
+            populate: ['vip'],
+        },
+        onSearch: (values: TSearchProps) => {
+            console.log('⭐  DetailedInformation  values', values);
+            return values?.dateRange
+                ? [
+                      {
+                          field: 'email',
+                          operator: 'contains',
+                          value: values?.email,
+                      },
+                      {
+                          field: 'createdAt',
+                          operator: 'gt',
+                          value: values?.dateRange[0]?.format('YYYY-MM-DD HH:mm:ss.SSSSSS'),
+                      },
+                      {
+                          field: 'createdAt',
+                          operator: 'lt',
+                          value: values?.dateRange[1]?.format('YYYY-MM-DD HH:mm:ss.SSSSSS'),
+                      },
+                  ]
+                : [
+                      {
+                          field: 'email',
+                          operator: 'contains',
+                          value: values?.email,
+                      },
+                  ];
         },
     });
-    const dateRange = searchProps.dateRange || undefined;
+
+    const user_ids = tableProps?.dataSource?.map((user) => user.id) || [];
+    const unique_user_ids = [...new Set(user_ids)];
+    const { data: _balance } = useCustom({
+        url: `${API_URL}/api/wallet-api/balance/get`,
+        method: 'get',
+        queryOptions: {
+            enabled: unique_user_ids.length > 0,
+        },
+    });
+
     const columns: ColumnsType<DataType> = [
         {
             title: '#',
@@ -47,7 +91,8 @@ const DetailedInformation = () => {
         },
         {
             title: 'Account Balance',
-            dataIndex: 'accountBalance',
+            dataIndex: 'balances',
+            render: (_balances) => <></>,
         },
         {
             title: 'phone',
@@ -106,16 +151,23 @@ const DetailedInformation = () => {
         rowKey: 'userId',
     };
 
-    useEffect(() => {
-        console.log('searchProps', searchProps);
-    }, [searchProps]);
-
     return (
-        <>
-            <p>Detailed Information {dateRange ? dateRange.map((date) => (date ? date.format('YYYY/MM/DD') : '')).join(' ~ ') : ''}</p>
-            <Table {...formattedTableProps} />
-            <hr className="my-8" />
-        </>
+        <Row gutter={[16, 16]}>
+            <Col lg={6} xs={24}>
+                <Card title="Filters">
+                    <Filter formProps={searchFormProps} />
+                </Card>
+            </Col>
+            <Col lg={18} xs={24}>
+                <Card title="Search Result">
+                    <div className="mb-4">
+                        <FilterTags searchFormProps={searchFormProps} />
+                    </div>
+                    <Table {...formattedTableProps} />
+                    <hr className="my-8" />
+                </Card>
+            </Col>
+        </Row>
     );
 };
 

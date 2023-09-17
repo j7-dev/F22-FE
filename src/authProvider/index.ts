@@ -14,23 +14,12 @@ export const authProvider: AuthBindings = {
         const redirectPath = props?.redirectPath || '/';
 
         const loginResult = await strapiAuthHelper.login(email, password);
-        console.log('⭐  login:  loginResult', loginResult);
         if (loginResult.status === 200) {
             const token = loginResult.data.jwt;
             localStorage.setItem('API_TOKEN', token);
 
             // set header axios instance
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-            // axiosInstance.post('/login-details', {
-            // 	ip: email,
-            // 	device: email,
-            // 	login_url: password,
-            // },{
-            // 	headers: {
-            // 		Authorization: `Bearer ${API_TOKEN}`,
-            // 	}
-            // })
 
             return {
                 success: true,

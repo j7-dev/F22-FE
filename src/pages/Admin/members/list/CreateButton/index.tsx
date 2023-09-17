@@ -1,53 +1,11 @@
 import { Button } from 'antd';
-import { useCreate } from '@refinedev/core';
-import { modalPropsAtom, modalShowAtom } from '../atom';
-import { useAtom, useSetAtom } from 'jotai';
-import useFormInstance from 'antd/es/form/hooks/useFormInstance';
+import { Link } from 'react-router-dom';
 
 const CreateButton = () => {
-    const { mutate: create, isLoading } = useCreate();
-    const [modalProps, setModalProps] = useAtom(modalPropsAtom);
-    const setModalShow = useSetAtom(modalShowAtom);
-    const form = useFormInstance();
-
-    const handleCreate = () => {
-        form.validateFields()
-            .then((values) => {
-                console.log(values);
-                create(
-                    {
-                        resource: 'vips',
-                        values,
-                    },
-                    {
-                        onSuccess: () => {
-                            setModalShow(false);
-                            form.resetFields();
-                        },
-                    },
-                );
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-
-    const handleClick = () => {
-        setModalShow(true);
-        setModalProps({
-            ...modalProps,
-            title: 'Create VIP',
-            onOk: handleCreate,
-            confirmLoading: isLoading,
-        });
-    };
-
     return (
-        <>
-            <Button type="primary" onClick={handleClick}>
-                Create
-            </Button>
-        </>
+        <Link to="/refine/members/create">
+            <Button type="primary">Create</Button>
+        </Link>
     );
 };
 
