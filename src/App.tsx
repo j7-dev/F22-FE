@@ -32,7 +32,7 @@ function App() {
                         i18nProvider={i18nProvider}
                         resources={resources}
                         options={{
-                            syncWithLocation: true,
+                            syncWithLocation: false,
                             warnWhenUnsavedChanges: true,
                             disableTelemetry: true,
                             projectId: 'DFwDAg-3y0BW1-GbOkSm',
