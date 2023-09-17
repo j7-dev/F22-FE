@@ -36,6 +36,15 @@ function App() {
                             warnWhenUnsavedChanges: true,
                             disableTelemetry: true,
                             projectId: 'DFwDAg-3y0BW1-GbOkSm',
+                            reactQuery: {
+                                clientConfig: {
+                                    defaultOptions: {
+                                        queries: {
+                                            retry: 0,
+                                        },
+                                    },
+                                },
+                            },
                         }}
                     >
                         <AppRouter />
