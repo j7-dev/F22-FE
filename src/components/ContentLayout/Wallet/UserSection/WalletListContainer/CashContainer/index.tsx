@@ -5,7 +5,7 @@ import { selectedSectionAtom } from '@/pages/Content/Wallet';
 // import creditIcon from '@/assets/images/credit-icon.svg';
 import depositIcon from '@/assets/images/deposit-icon.svg';
 import withdrawIcon from '@/assets/images/withdraw-icon.svg';
-import { AiOutlineDown } from 'react-icons/ai';
+import { AiOutlineDown, AiFillMail } from 'react-icons/ai';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
@@ -25,6 +25,13 @@ const index: React.FC = () => {
                 {window.innerWidth < 810 && <AiOutlineDown />}
             </div>
             <div className={`cashListContainer flex flex-col gap-4 overflow-hidden transition-all md:h-full ${window.innerWidth < 810 && down ? 'h-[100px]' : 'h-0'}`}>
+                <div className={`h-10 gap-2.5 rounded-lg flex justify-between items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'siteMail' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('siteMail')}>
+                    <div className="siteMailInfo flex justify-start items-center gap-2.5">
+                        <AiFillMail size={30} className="p-1" />
+                        <span className="text-sm font-bold text-[#2B3240]">{t('站内信쪽지')}</span>
+                    </div>
+                    <span className="siteMailNumber flex justify-center items-center min-w-[36px] h-[27px] bg-[#DC3545] rounded-lg text-sm font-bold text-white">0</span>
+                </div>
                 {/* <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'MyBalance' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('MyBalance')}>
                     <img src={creditIcon as unknown as string} alt="" />
                     <span className="text-sm font-bold text-[#2B3240]">{t('My Balance & Transfer')}</span>
