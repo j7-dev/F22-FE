@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
-import Mybalance from './Mybalance';
+// import Mybalance from './Mybalance';
 import Deposit from './Deposit';
 import Withdraw from './Withdraw';
 
@@ -32,7 +32,7 @@ const TransactionSection: React.FC<TransactionSectionProps> = ({ section }) => {
                     <span className="w-auto font-bold text-sm">{t('Withdraw')}</span>
                 </div>
             </div>
-            {section === 'MyBalance' ? <Mybalance /> : ''}
+            {/* {section === 'MyBalance' ? <Mybalance /> : ''} */}
             {section === 'Deposit' ? <Deposit /> : ''}
             {section === 'Withdraw' ? <Withdraw /> : ''}
         </div>

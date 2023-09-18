@@ -6,6 +6,7 @@ import { selectedSectionAtom } from '@/pages/Content/Wallet';
 import depositIcon from '@/assets/images/deposit-icon.svg';
 import withdrawIcon from '@/assets/images/withdraw-icon.svg';
 import { AiOutlineDown, AiFillMail } from 'react-icons/ai';
+import { BsFillCreditCard2FrontFill } from 'react-icons/bs';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
@@ -36,6 +37,10 @@ const index: React.FC = () => {
                     <img src={creditIcon as unknown as string} alt="" />
                     <span className="text-sm font-bold text-[#2B3240]">{t('My Balance & Transfer')}</span>
                 </div> */}
+                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'bankAccount' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('bankAccount')}>
+                    <BsFillCreditCard2FrontFill size={30} className="p-1" />
+                    <span className="text-sm font-bold text-[#2B3240]">{t('Bank Account')}</span>
+                </div>
                 <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'Deposit' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('Deposit')}>
                     <img src={depositIcon as unknown as string} alt="" />
                     <span className="text-sm font-bold text-[#2B3240]">{t('Deposit')}</span>
