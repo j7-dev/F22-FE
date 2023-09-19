@@ -7,7 +7,6 @@ import Popup from './LoginPopUp';
 import GamePopup from './Games/Game/Popup';
 import { atom, useAtom, useSetAtom } from 'jotai';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
-import CreatBankPop from '@/components/ContentLayout/Wallet/CashSection/BankAccount/CreatBankPop';
 
 export const mbSidebarAtom = atom(false);
 export const windowWidthAtom = atom(window.innerWidth);
@@ -50,7 +49,6 @@ const Layout = () => {
                 <Footer />
                 <Popup />
                 <GamePopup />
-                <CreatBankPop />
             </div>
         </>
     );
