@@ -98,7 +98,7 @@ const index: React.FC = () => {
     };
     return (
         <div className="w-full bg-white rounded-lg shadow-[0_0px_29px_0px_rgba(43, 50, 64, 0.09)] flex flex-col gap-2.5 p-4">
-            <div className="pageHeader font-bold text-[#2B3240] text-sm p-2.5">{t(serviceCenterValue)}</div>
+            <div className="pageHeader font-bold text-[#2B3240] text-sm p-2.5">{t('站内信쪽지')}</div>
             {isShowContent && <SinglePost />}
             <div className="pageContent w-full flex flex-col">
                 <div className="tableHeader h-10 w-full items-center flex flex-row bg-[#2B3240] text-white p-2 font-bold text-[13px]">

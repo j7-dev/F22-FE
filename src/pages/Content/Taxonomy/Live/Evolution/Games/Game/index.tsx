@@ -5,7 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
 import { cloneDeep } from 'lodash';
 import { requestAtomType } from '@/types';
-import { useCustomMutation } from '@refinedev/core';
+import { useCustomMutation, useGetIdentity } from '@refinedev/core';
 import { API_URL } from '@/utils';
 import { FaGamepad } from 'react-icons/fa';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
@@ -62,6 +62,7 @@ const index: React.FC<GameProps> = ({ data = {} }) => {
     const isLogin = useAtomValue(IsLoginAtom);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const [gameconfig, _setGameconfig] = useAtom(configAtom);
+    const { data: identity } = useGetIdentity<{ id: number }>();
     const { mutate: openGame, isLoading: openGameLoading } = useCustomMutation();
 
     //TODO 這邊有一個功能待補=>如何在客戶登入後，再將客戶導回原本點擊的遊戲頁面並打開彈窗
@@ -69,10 +70,11 @@ const index: React.FC<GameProps> = ({ data = {} }) => {
         if (!isLogin) {
             setPopupIsOpen(true);
             return;
-        } else {
+        } else if (identity !== undefined) {
             const newGameConfig = cloneDeep(gameconfig);
             newGameConfig.config.game.category = data['Game Type'];
             newGameConfig.config.game.table.id = data['Table ID'] as string;
+            newGameConfig.player.id = identity.id.toString();
             // setGameconfig(newGameConfig);
             // console.log('newGameConfig', newGameConfig);
 
