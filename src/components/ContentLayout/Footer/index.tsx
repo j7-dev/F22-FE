@@ -4,6 +4,9 @@ import { useTranslation, Trans } from 'react-i18next';
 // import { useSetAtom } from 'jotai';
 import { Link } from 'react-router-dom';
 import { MenuItem, fakeMenuData } from '@/components/ContentLayout/Header/MenuData';
+import twitterIcon from '@/assets/images/twitter-icon.png';
+import igIcon from '@/assets/images/ig-icon.png';
+import lineIcon from '@/assets/images/line-icon.png';
 // import { popupIsOpenAtom } from '@/components/ContentLayout/LoginPopUp';
 // import { fakeProviderData } from '@/pages/Content/Home/Provider/ProviderData';
 
@@ -55,6 +58,17 @@ export const Footer: React.FC = () => {
                 ))}
             </div> */}
             <div className="footerImgWarp max-w-5xl flex w-full justify-center mx-auto h-auto items-center gap-8 mt-12 pb-20 md:pb-4">
+                <div className="pl-1 sm:pl-2 space-x-1">
+                    <span className=" inline-flex flex-shrink-0 justify-center items-center h-9 w-9 font-bold rounded-full">
+                        <img src={twitterIcon} alt="" />
+                    </span>
+                    <span className=" inline-flex flex-shrink-0 justify-center items-center h-9 w-9 font-bold rounded-full">
+                        <img src={igIcon} alt="" />
+                    </span>
+                    <span className=" inline-flex flex-shrink-0 justify-center items-center h-9 w-9 font-bold rounded-full">
+                        <img src={lineIcon} alt="" />
+                    </span>
+                </div>
                 <span className="text-xs md:text-base text-center font-normal text-gray-500">
                     <Trans i18nKey="© Smart Bet Casino" />
                 </span>

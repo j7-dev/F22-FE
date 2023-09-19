@@ -28,7 +28,7 @@ export type requestAtomType = {
     uuid: string;
     player: {
         id: string;
-        updata: boolean;
+        update: boolean;
         firstName: string;
         lastName: string;
         country: string;

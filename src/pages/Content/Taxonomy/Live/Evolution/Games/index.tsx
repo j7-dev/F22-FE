@@ -6,7 +6,7 @@ import Game from './Game';
 import { GameTypeAtom, GameCategoryStateAtom } from '@/pages/Content/Taxonomy/AtomSetting';
 import { gameTypeFilter } from '@/components/ContentLayout/Games/Game/GameImg';
 
-type GamesDataProp = {
+export type GamesDataProp = {
     ProviderName: string;
     gamesData?: { [key: string]: string }[];
     isLoading: boolean;
@@ -27,11 +27,11 @@ const Games: React.FC<GamesDataProp> = ({ ProviderName, gamesData = [], isLoadin
                 <span className="gamesCategoryDes">{isLoading === false && `${gamesList.length} ${t('Games found')}`}</span>
             </div>
             <div className="gamesWrap w-full">
-                <ul className="m-0 p-0 flex justify-start items-center flex-wrap gap-y-2.5">
+                <ul className="m-0 p-0 grid md:grid-cols-6 gap-1.5 grid-cols-2">
                     {isLoading === false ? (
                         gamesList.map((item) => {
                             return (
-                                <li key={nanoid()} className="w-1/2 flex flex-col justify-center items-center cursor-pointer md:w-[calc(100%/6)]">
+                                <li key={nanoid()} className="flex flex-col justify-center items-center">
                                     <Game data={item} />
                                 </li>
                             );

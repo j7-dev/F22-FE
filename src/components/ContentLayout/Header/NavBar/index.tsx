@@ -1,13 +1,11 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+// import { nanoid } from 'nanoid';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSetAtom, useAtom, useAtomValue } from 'jotai';
-import { useTranslation } from 'react-i18next';
 import { AiOutlineMenu, AiOutlinePlus } from 'react-icons/ai';
-import SubMenuUI from './SubMenu';
+import UserInfo from './UserInfo';
 import LoginNodule, { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
 import logo from '@/assets/images/logo.png';
-import { fakeMenuData, MenuItem } from '@/components/ContentLayout/Header/MenuData';
 import { mbSidebarAtom } from '@/components/ContentLayout';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
 import { UserOutlined } from '@ant-design/icons';
@@ -16,20 +14,20 @@ import { RiCustomerService2Fill } from 'react-icons/ri';
 import { BiCheckShield } from 'react-icons/bi';
 
 const NavBar: React.FC = () => {
-    const { t } = useTranslation();
+    // const { t } = useTranslation();
     const [mbSidebar, setMbSidebar] = useAtom(mbSidebarAtom);
     const setSidebarIsOpen = useSetAtom(sidebarIsOpenAtom);
     // const sidebarIsOpen = useAtomValue(sidebarIsOpenAtom);
     const isLogin = useAtomValue(IsLoginAtom);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const Navigate = useNavigate();
-    const fakeData = fakeMenuData;
+    // const fakeData = fakeMenuData;
 
     // 自訂 Hook 來判斷是否為當前路徑
-    function isActive(path: string) {
-        const location = useLocation();
-        return location.pathname === path ? 'active' : '';
-    }
+    // function isActive(path: string) {
+    //     const location = useLocation();
+    //     return location.pathname === path ? 'active' : '';
+    // }
 
     //手機版選單
     const handleMbSidebar = () => {
@@ -64,8 +62,8 @@ const NavBar: React.FC = () => {
                     </div>
                     {/* 桌機選單 */}
                     <div className="hidden transition-all duration-300 basis-full grow xl:block">
-                        <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-between md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
-                            <div className="hidden xl:flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-start md:gap-y-0 md:gap-x-7 md:mt-0 ">
+                        <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
+                            {/* <div className="hidden xl:flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-start md:gap-y-0 md:gap-x-7 md:mt-0 ">
                                 {fakeData.map((item) => {
                                     const title = item?.title as string;
                                     const path = item?.path as string;
@@ -85,7 +83,8 @@ const NavBar: React.FC = () => {
                                         </div>
                                     );
                                 })}
-                            </div>
+                            </div> */}
+                            {isLogin && <UserInfo />}
                             <LoginNodule />
                         </div>
                     </div>

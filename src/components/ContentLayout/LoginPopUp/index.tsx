@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { GrFormClose } from 'react-icons/gr';
 import logoLogin from '@/assets/images/logo.png';
-import { popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
+import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/LoginModule';
 import Login from './Login';
 import SignUp from './SignUp';
 
@@ -11,14 +11,20 @@ const Popup: React.FC = () => {
     const popupContainerRef = useRef<HTMLDivElement>(null);
     const formCarouselRef = useRef<HTMLDivElement>(null);
     const [popupIsOpen, setPopupIsOpen] = useAtom(popupIsOpenAtom);
+    const loginOrSignUp = useAtomValue(loginOrSignUpAtom);
 
     useEffect(() => {
         if (popupIsOpen) {
             document.body.style.overflow = 'hidden';
+            if (loginOrSignUp && formCarouselRef.current) {
+                formCarouselRef.current.style.transform = 'translateX(0%)';
+            } else if (!loginOrSignUp && formCarouselRef.current) {
+                formCarouselRef.current.style.transform = 'translateX(-50%)';
+            }
         } else {
             document.body.style.overflow = 'unset';
         }
-    }, [popupIsOpen]);
+    }, [popupIsOpen, loginOrSignUp]);
 
     const handleClick = () => {
         setPopupIsOpen(!popupIsOpen);
@@ -39,8 +45,8 @@ const Popup: React.FC = () => {
                     <img src={logoLogin} alt="" className="w-full" />
                     <div className="formWrap flex flex-nowrap overflow-hidden w-full">
                         <div ref={formCarouselRef} className="min-w-[200%] flex duration-300" id="formCarousel">
-                            <Login formCarousel={formCarouselRef.current || undefined} />
-                            <SignUp formCarousel={formCarouselRef.current || undefined} />
+                            <Login />
+                            <SignUp />
                         </div>
                     </div>
                 </div>

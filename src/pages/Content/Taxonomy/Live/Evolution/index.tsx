@@ -1,17 +1,27 @@
 import React, { useEffect } from 'react';
 import { useSetAtom } from 'jotai';
+import { useList } from '@refinedev/core';
 import { GameTypeAtom, GameCategoryStateAtom } from '@/pages/Content/Taxonomy/AtomSetting';
 import GameType from '@/components/ContentLayout/GameType';
 import GameCategory from '@/components/ContentLayout/GameCategory';
-import { useRefineAPI } from './useRefineAPI';
-import Games from '@/components/ContentLayout/Games';
+import Games from './Games';
+import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg';
 
 const Evolution: React.FC = () => {
     const setGameType = useSetAtom(GameTypeAtom);
     const setGameCategoryState = useSetAtom(GameCategoryStateAtom);
-    const { data, isLoading } = useRefineAPI(); //TODO 為什麼在載入時會載呼叫多次API?
-    const extractedData = data?.data['data'] || []; //指定如果沒有data的話就給空陣列不要是undefined
 
+    const { data, isLoading } = useList({
+        resource: 'evo/tablelist',
+    });
+    // console.log('data', data?.data);
+    const newData = (data?.data.map((item) => {
+        return {
+            ...item,
+            gameImg: getGameTypeImg(item['Game Type']),
+        };
+    }) || []) as { [key: string]: string }[];
+    // console.log('newData', newData);
     useEffect(() => {
         setGameType('all');
         setGameCategoryState('Live Casino');
@@ -29,8 +39,8 @@ const Evolution: React.FC = () => {
             </div>
             <div>
                 <div className="FilterGames dropdown-menu w-full flex justify-center items-center mt-10">
-                    <div className="w-[1360px] flex flex-col justify-center flex-wrap gap-4  py-5 px-10 ">
-                        <Games ProviderName="Evolution" gamesData={extractedData} isLoading={isLoading} />
+                    <div className="w-[1360px] flex flex-col justify-center flex-wrap gap-4  py-5 md:px-10 px-4">
+                        <Games ProviderName="Evolution" gamesData={newData} isLoading={isLoading} />
                     </div>
                 </div>
             </div>

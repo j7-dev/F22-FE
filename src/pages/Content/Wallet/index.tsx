@@ -11,11 +11,13 @@ export const selectedSectionAtom = atom('Deposit');
 const Wallet: React.FC = () => {
     const selectedSection = useAtomValue(selectedSectionAtom);
     const switchSection: { [key: string]: JSX.Element } = {
-        MyBalance: <CashSection section="MyBalance" />,
+        // MyBalance: <CashSection section="MyBalance" />,
         Deposit: <CashSection section="Deposit" />,
         Withdraw: <CashSection section="Withdraw" />,
+        siteMail: <CashSection section="siteMail" />,
+        bankAccount: <CashSection section="bankAccount" />,
         CouponHistory: <RewardSection section="CouponHistory" />,
-        BonusPoint: <RewardSection section="BonusPoint" />,
+        // BonusPoint: <RewardSection section="BonusPoint" />,
         RolloverHistory: <AccountSection section="RolloverHistory" />,
         CashHistory: <AccountSection section="CashHistory" />,
         ChangePassword: <AccountSection section="ChangePassword" />,
