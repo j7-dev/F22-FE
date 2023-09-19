@@ -63,5 +63,24 @@
 			text-align: center;
 			font-weight: 600;
 		}
+
+		&.table-vertical {
+			table-layout: fixed;
+			tr {
+				display: flex;
+				border-bottom: 1px solid #ddd;
+			}
+			th {
+				background-color: #f8f8f8;
+				text-align: left;
+				border: none;
+				width: 10rem;
+			}
+			td {
+				text-align: right;
+				flex: 1;
+				border: none;
+			}
+		}
 	}
 }

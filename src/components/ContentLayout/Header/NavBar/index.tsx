@@ -90,7 +90,7 @@ const NavBar: React.FC = () => {
                         </div>
                     </div>
                     {/* 手機選單 */}
-                    <div className="flex xl:hidden bg-white fixed bottom-0 left-0 justify-between w-full px-8 pt-3 pb-2" style={{ borderTop: '1px solid #999' }}>
+                    <div className="flex xl:hidden bg-white fixed bottom-0 left-0 justify-between w-full px-8 pt-3 pb-2 z-50" style={{ borderTop: '1px solid #999' }}>
                         <Link to="/">
                             <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
                                 <GiPokerHand className="text-[1.5rem]" />

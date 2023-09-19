@@ -11,7 +11,7 @@ export const authProvider: AuthBindings = {
     login: async (props) => {
         const email = props?.email || '';
         const password = props?.password || '';
-        const redirectPath = props?.redirectPath || '/';
+        const redirectPath = props?.redirectPath || '/refine/home';
 
         const loginResult = await strapiAuthHelper.login(email, password);
         if (loginResult.status === 200) {
@@ -21,10 +21,12 @@ export const authProvider: AuthBindings = {
             // set header axios instance
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-            return {
-                success: true,
-                redirectTo: redirectPath,
-            };
+            setTimeout(() => {
+                return {
+                    success: true,
+                    redirectTo: redirectPath,
+                };
+            }, 0);
         }
         return {
             success: false,

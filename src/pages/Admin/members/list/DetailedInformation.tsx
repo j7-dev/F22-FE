@@ -10,6 +10,7 @@ import { useCustom } from '@refinedev/core';
 import { API_URL } from '@/utils';
 import Filter from './Filter';
 import FilterTags from '@/components/FilterTags';
+import RowActionButton from './RowActionButton';
 
 type TSearchProps = {
     email?: string;
@@ -24,7 +25,6 @@ const DetailedInformation = () => {
             populate: ['vip'],
         },
         onSearch: (values: TSearchProps) => {
-            console.log('⭐  DetailedInformation  values', values);
             return values?.dateRange
                 ? [
                       {
@@ -139,8 +139,14 @@ const DetailedInformation = () => {
             render: (createdAt) => dayjs(createdAt).format('YYYY-MM-DD'),
         },
         {
-            title: 'Last Bettime ',
+            title: 'Last Bettime',
             dataIndex: 'lastBettime ',
+        },
+        {
+            title: '',
+            dataIndex: 'action ',
+            fixed: 'right',
+            render: (_, record) => <RowActionButton id={record?.id} />,
         },
     ];
 
