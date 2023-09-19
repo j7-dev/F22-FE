@@ -12,9 +12,9 @@ type TgameType = {
 
 //篩選API來的遊戲類型轉換成五大分類
 export const gameTypeFilter: TgameType = {
-    baccarat: ['baccarat'],
-    blackjack: ['blackjack', 'lightningscalablebj', 'scalableblackjack', 'powerscalableblackjack'],
-    roulette: ['roulette', 'americanroulette'],
+    baccarat: ['baccarat', 'Baccarat', 'Baccarat New'],
+    blackjack: ['blackjack', 'lightningscalablebj', 'scalableblackjack', 'powerscalableblackjack', 'Blackjack'],
+    roulette: ['roulette', 'americanroulette', 'Roulette'],
     dice: ['sicbo', 'craps'],
     other: ['dhp', 'dragontiger', 'cashorcrash', 'videopoker', 'holdem', 'powerball', 'monopoly', 'funkytime', 'andarbahar', 'moneywheel', 'gonzotreasuremap', 'crazytime', 'teenpatti', 'monopolybigballer', 'bacbo', 'sidebetcity', 'trp', 'csp', 'instantroulette', 'dealnodeal', 'megaball', 'lightningdice', 'gonzotreasurehunt', 'thb', 'topdice', 'classicfreebet', 'eth', 'deadoralivesaloon', 'crazycoinflip', 'lightninglotto', 'topcard', 'extrachilliepicspins', 'fantan', 'freebet'],
 };
@@ -69,6 +69,6 @@ export const getGameTypeImg = (gameType: string) => {
             return imageArray[matchingKey][currentIndex % imageArray[matchingKey].length];
         }
         default:
-            return '';
+            return otherGameImg[0];
     }
 };
