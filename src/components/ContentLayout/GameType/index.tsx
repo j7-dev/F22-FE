@@ -23,27 +23,27 @@ const GameType: React.FC = () => {
         {
             img: baccaratImg,
             name: 'Baccarat',
-            gameType: 'Baccarat',
+            gameType: 'baccarat',
         },
         {
             img: blackjackImg,
             name: 'Blackjack',
-            gameType: 'Blackjack',
+            gameType: 'blackjack',
         },
         {
             img: rouletteImg,
             name: 'Roulette',
-            gameType: 'Roulette',
+            gameType: 'roulette',
         },
         {
             img: diceImg,
             name: 'Dice',
-            gameType: 'Dice',
+            gameType: 'dice',
         },
         {
             img: dragontigerImg,
             name: 'Other',
-            gameType: 'Other',
+            gameType: 'other',
         },
     ];
 

@@ -1,17 +1,18 @@
 import React from 'react';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg/';
 import coinIcon from '@/assets/images/coin-icon.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-// import { getFakeImg } from '@/pages/Content/Taxonomy/Live/Evolution/fakeGameData';
 import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
 import { cloneDeep } from 'lodash';
 import { requestAtomType } from '@/types';
 import { useCustomMutation } from '@refinedev/core';
 import { API_URL } from '@/utils';
+import { FaGamepad } from 'react-icons/fa';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 type GameProps = {
     data: {
+        gameImg?: string;
         'Table Name'?: string;
         'Table ID'?: string;
         'Direct Launch Table ID'?: string;
@@ -57,10 +58,11 @@ export const configAtom = atom<requestAtomType>({
     },
 });
 const index: React.FC<GameProps> = ({ data = {} }) => {
+    // console.log('game');
     const isLogin = useAtomValue(IsLoginAtom);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const [gameconfig, _setGameconfig] = useAtom(configAtom);
-    const { mutate: openGame } = useCustomMutation();
+    const { mutate: openGame, isLoading: openGameLoading } = useCustomMutation();
 
     //TODO 這邊有一個功能待補=>如何在客戶登入後，再將客戶導回原本點擊的遊戲頁面並打開彈窗
     const handleClick = () => {
@@ -93,11 +95,12 @@ const index: React.FC<GameProps> = ({ data = {} }) => {
         }
     };
     return (
-        <div className="gameWrap w-full px-1" onClick={handleClick}>
+        <div className="gameWrap w-full relative">
+            <div onClick={handleClick} className={`${openGameLoading ? 'opacity-100 bg-slate-600/50' : ''} z-10 cursor-pointer absolute inset-0 editOverlay w-full h-full duration-300 text-white opacity-0 hover:opacity-100 hover:bg-slate-600/50 flex justify-center items-center`}>
+                {openGameLoading ? <AiOutlineLoading3Quarters className={`${openGameLoading ? 'block' : 'hidden'} animate-spin`} /> : <FaGamepad size={30} />}
+            </div>
             <div className="gameImg w-full aspect-square relative align-top object-cover LazyLoadImage">
-                {/* <LazyLoadImage src={getFakeImg(imgiD + 1)} width="100%" height="100%" /> */}
-                <LazyLoadImage src={getGameTypeImg(data['Game Type'] as string)} width="100%" height="100%" />
-                {/* <img className="w-full aspect-square align-top object-cover" src={data.GameImg} alt="" /> */}
+                <LazyLoadImage src={data['gameImg'] as string} width="100%" height="100%" />
             </div>
             <div className="gameInfo bg-[#363F4E] px-2 py-2">
                 <span className="gameName text-white line-clamp-1 text-sm">{data['Table Name']}</span>
