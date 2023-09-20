@@ -1,5 +1,5 @@
 import { useCustom, useGetIdentity } from '@refinedev/core';
-import { F22_API_URL, F22_TOKEN } from 'utils/env';
+import { API_URL, API_TOKEN } from 'utils/env';
 
 interface PostUniqueCheckResponse {
     balances: {
@@ -11,9 +11,9 @@ interface PostUniqueCheckResponse {
 }
 export const useUserAPI = () => {
     const { data: identity } = useGetIdentity<{ id: number }>();
-    // console.log('identity', identity);
-    const apiUrl = `${F22_API_URL}/users/${identity?.id}`;
-    const apiToken = F22_TOKEN;
+
+    const apiUrl = `${API_URL}/users/${identity?.id}`;
+    const apiToken = API_TOKEN;
     const headers = {
         Authorization: `Bearer ${apiToken}`,
     };
