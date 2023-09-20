@@ -110,7 +110,7 @@ export const authProvider: AuthBindings = {
 
         const { data, status } = await strapiAuthHelper.me(token, {
             meta: {
-                populate: ['role'],
+                populate: '*',
             },
         });
 

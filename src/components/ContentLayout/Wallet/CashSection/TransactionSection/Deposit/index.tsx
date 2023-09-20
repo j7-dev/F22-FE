@@ -1,41 +1,55 @@
 import React from 'react';
-import { Form, Input, notification, Alert } from 'antd';
+import { Form, Input, notification, Alert, Modal } from 'antd';
 import { useTranslation } from 'react-i18next';
 import AmountInput from '../Mybalance/AmountInput';
 import SendButton from '../Mybalance/SendButton';
 import { LockOutlined } from '@ant-design/icons';
 import { useGetIdentity, useCustomMutation, useApiUrl } from '@refinedev/core';
 import { TUser } from '@/types';
+import { useModal } from '@refinedev/antd';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const [form] = Form.useForm();
     const { data: identity } = useGetIdentity<TUser>();
     const userId = identity?.id;
+    console.log('⭐  userId', userId);
     const { mutate: deposit, isLoading } = useCustomMutation();
     const apiUrl = useApiUrl();
+    const { modalProps, show, close } = useModal();
+    const watchSimpleAddressFrom = Form.useWatch(['simpleAddressFrom'], form);
+    const watchAmount = Form.useWatch(['amount'], form);
 
-    const handleDeposit = () => {
+    const handleClick = () => {
         form.validateFields()
-            .then((values) => {
-                deposit(
-                    {
-                        url: `${apiUrl}/codepay/deposit`,
-                        method: 'post',
-                        values,
-                    },
-                    {
-                        onSuccess: () => {
-                            notification.success({
-                                message: `Deposit $${values.amount} Success`,
-                            });
-                        },
-                    },
-                );
+            .then(() => {
+                show();
             })
             .catch((errorInfo) => {
                 console.log('errorInfo', errorInfo);
             });
+    };
+
+    const handleDeposit = () => {
+        const values = form.getFieldsValue();
+        deposit(
+            {
+                url: `${apiUrl}/codepay/deposit`,
+                method: 'post',
+                values: { ...values, user_id: userId },
+            },
+            {
+                onSuccess: () => {
+                    // TODO const txnId = data?.data?.data?.id;
+                    notification.success({
+                        key: 'deposit',
+                        message: `Deposit $${values.amount} Success `,
+                        duration: null,
+                    });
+                    close();
+                },
+            },
+        );
     };
 
     return (
@@ -72,7 +86,7 @@ const index: React.FC = () => {
                     <Form.Item name={['currency']} hidden initialValue="KRW">
                         <Input />
                     </Form.Item>
-                    <Form.Item name={['user_id']} hidden initialValue={userId}>
+                    <Form.Item name={['user_id']} hidden>
                         <Input />
                     </Form.Item>
                 </div>
@@ -97,7 +111,23 @@ const index: React.FC = () => {
                     showIcon
                 />
 
-                <SendButton loading={isLoading} label={t('Deposit')} className="mt-5 w-full" onClick={handleDeposit} />
+                <SendButton label={t('Deposit')} className="mt-5 w-full" onClick={handleClick} />
+                <Modal {...modalProps} centered title="Confirm Deposit" okText={t('confirm')} onOk={handleDeposit} confirmLoading={isLoading}>
+                    <table className="table table-vertical my-8">
+                        <tr>
+                            <th>
+                                <span>{t('Your CodePay Simple Address')}</span>
+                            </th>
+                            <td>{watchSimpleAddressFrom}</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <span>{t('Deposit Amount')}</span>
+                            </th>
+                            <td>{watchAmount}</td>
+                        </tr>
+                    </table>
+                </Modal>
             </Form>
         </div>
     );

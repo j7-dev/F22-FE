@@ -1,6 +1,5 @@
 import { Table, Row, Col, Card } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { DataType } from './types';
 import { useTable } from '@refinedev/antd';
 import { TVip } from '@/types';
 import { Link } from 'react-router-dom';
@@ -63,7 +62,7 @@ const DetailedInformation = () => {
         },
     });
 
-    const columns: ColumnsType<DataType> = [
+    const columns: ColumnsType<any> = [
         {
             title: '#',
             dataIndex: 'id',
@@ -79,7 +78,7 @@ const DetailedInformation = () => {
         {
             title: 'Display Name',
             dataIndex: 'display_name',
-            render: (text, record) => text || record.username,
+            render: (text, record) => text || record?.username,
         },
         {
             title: 'Agent',
