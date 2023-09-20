@@ -12,6 +12,7 @@ export type TUser = {
     gender: string | null;
     birthday: string | null;
     role: TRole;
+    uuid: string;
     vip?: TVip;
     balances?: TBalance[];
 };
