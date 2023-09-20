@@ -1,16 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import refreshIcon from '@/assets/images/refresh-icon.svg';
-import { useUserAPI } from '../../../../../hooks/useUserAPI';
+import { useGetIdentity } from '@refinedev/core';
+import { TUser } from '@/types';
 
 const UserContainer: React.FC = () => {
     const { t } = useTranslation();
-    const { data, isLoading } = useUserAPI(); //TODO 同時還會在UserInfo中用到，怎麼讓他不要一直重複發送請求
-    // console.log(data);
+    const { data, isLoading } = useGetIdentity<TUser>();
+    // console.log('data', data);
     if (isLoading) return <div>loading...</div>;
-    const balance = data?.data.balances[0]?.amount || 0;
-    const userName = data?.data?.username || 'userName';
-    const vip = data?.data.vip?.label || '';
+    const balance = data?.balances !== undefined ? data?.balances[0]?.amount : 0;
+    const userName = data?.username || 'userName';
+    const vip = data?.vip?.label || '';
     // console.log('data', data);
     return (
         <div className="userContainer flex flex-col gap-2.5">

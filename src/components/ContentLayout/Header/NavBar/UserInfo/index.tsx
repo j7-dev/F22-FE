@@ -1,18 +1,19 @@
 import React from 'react';
 import { useSetAtom } from 'jotai';
-import { useUserAPI } from '@/hooks/useUserAPI';
+// import { useUserAPI } from '@/hooks/useUserAPI';
 import { useTranslation } from 'react-i18next';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
+import { useGetIdentity } from '@refinedev/core';
+import { TUser } from '@/types';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
-    const { data, isLoading } = useUserAPI(); //TODO 同時還會在UserContainer中用到，怎麼讓他不要一直重複發送請求
-    // console.log(data);
+    const { data, isLoading } = useGetIdentity<TUser>();
+
     const setSelectedSection = useSetAtom(selectedSectionAtom);
     if (isLoading) return <div>loading...</div>;
-    // const balance = data?.data.balances[0]?.amount || 0;
-    const userName = data?.data?.username || 'userName';
-    const vip = data?.data.vip?.label || '';
+    const userName = data?.username || 'userName';
+    const vip = data?.vip?.label || '';
 
     return (
         <div className="w-full flex justify-end">
