@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import refreshIcon from '@/assets/images/refresh-icon.svg';
-import { useUserAPI } from '../../../../../hooks/useUserAPI';
+import { useUserAPI } from '@/hooks/useUserAPI';
 
 const UserContainer: React.FC = () => {
     const { t } = useTranslation();

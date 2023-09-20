@@ -27,3 +27,12 @@ input[class*="ant-select"] {
 		overflow: hidden;
 	}
 }
+
+.ant-input-number-affix-wrapper {
+	&.text-right {
+		input {
+			text-align: right;
+			padding-right: 0.5rem;
+		}
+	}
+}
