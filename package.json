@@ -39,6 +39,7 @@
         "slick-carousel": "^1.8.1"
     },
     "devDependencies": {
+        "@types/lodash-es": "^4.17.9",
         "@types/node": "^18.16.2",
         "@types/qs": "^6.9.8",
         "@types/react": "^18.2.21",
