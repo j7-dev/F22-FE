@@ -3,13 +3,12 @@ import { Button, Form } from 'antd';
 
 const index: React.FC = () => {
     const form = Form.useFormInstance();
+    // 取得 amount Field 的即時數值
+    const watchAmount = Form.useWatch(['amount'], form);
+
     const handleClick = (value: number) => {
-        // Form initialValues 預設值為字串0，所以要先轉成數字做計算
-        const currentAmount = parseFloat(form.getFieldValue('amount').replace(/,/g, ''));
-        const newAmount = (currentAmount + value).toLocaleString();
-        // 計算完成後，再用toLocaleString()轉換字串並加上千分位
+        const newAmount = Number(watchAmount) + Number(value);
         form.setFieldsValue({ amount: newAmount });
-        // console.log(parseFloat(form.getFieldValue('amount').replace(/,/g, '')));
     };
     return (
         <div className="walletAmountButton w-full flex flex-wrap gap-1">

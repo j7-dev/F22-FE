@@ -49,21 +49,18 @@ export const resources = [
         },
     },
     {
-        name: 'list-members',
+        name: 'users',
         list: '/refine/members/list',
+        create: '/refine/members/create',
+        show: '/refine/members/show/:id',
+        edit: '/refine/members/edit/:id',
+        delete: '/refine/members/delete/:id',
         meta: {
             parent: 'members',
             label: 'All Members 會員查詢',
         },
     },
-    {
-        name: 'create-members',
-        list: '/refine/members/create',
-        meta: {
-            parent: 'members',
-            label: 'Add Members 新增會員',
-        },
-    },
+
     {
         name: 'balance-adjustment',
         list: '/refine/members/balance-adjustment',

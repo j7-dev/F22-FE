@@ -1,14 +1,13 @@
-import { Button } from 'antd';
+import { Button, Form } from 'antd';
 import { useCreate } from '@refinedev/core';
 import { modalPropsAtom, modalShowAtom } from '../atom';
 import { useAtom, useSetAtom } from 'jotai';
-import useFormInstance from 'antd/es/form/hooks/useFormInstance';
 
 const CreateButton = () => {
     const { mutate: create, isLoading } = useCreate();
     const [modalProps, setModalProps] = useAtom(modalPropsAtom);
     const setModalShow = useSetAtom(modalShowAtom);
-    const form = useFormInstance();
+    const form = Form.useFormInstance();
 
     const handleCreate = () => {
         form.validateFields()

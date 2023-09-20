@@ -1,5 +1,5 @@
 import { AuthBindings } from '@refinedev/core';
-import { AuthHelper } from '@refinedev/strapi-v4';
+import { AuthHelper } from './AuthHelper';
 import { API_URL } from '@/utils';
 import { axiosInstance } from '@/providers/strapi-v4/';
 import axios from 'axios';
@@ -11,20 +11,22 @@ export const authProvider: AuthBindings = {
     login: async (props) => {
         const email = props?.email || '';
         const password = props?.password || '';
-        const redirectPath = props?.redirectPath || '/';
+        const redirectPath = props?.redirectPath || '/refine/home';
 
-        const { data, status } = await strapiAuthHelper.login(email, password);
-        if (status === 200) {
-            const token = data.jwt;
+        const loginResult = await strapiAuthHelper.login(email, password);
+        if (loginResult.status === 200) {
+            const token = loginResult.data.jwt;
             localStorage.setItem('API_TOKEN', token);
 
             // set header axios instance
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-            return {
-                success: true,
-                redirectTo: redirectPath,
-            };
+            setTimeout(() => {
+                return {
+                    success: true,
+                    redirectTo: redirectPath,
+                };
+            }, 0);
         }
         return {
             success: false,
@@ -108,7 +110,7 @@ export const authProvider: AuthBindings = {
 
         const { data, status } = await strapiAuthHelper.me(token, {
             meta: {
-                populate: ['role'],
+                populate: '*',
             },
         });
 
