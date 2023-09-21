@@ -100,7 +100,7 @@ const DetailedInformation = () => {
         {
             title: 'vip',
             dataIndex: 'vip',
-            render: (vip: TVip) => <Link to="/refine/system-setting/vips">{vip.label}</Link>,
+            render: (vip: TVip) => <Link to="/refine/system-setting/vips">{vip?.label}</Link>,
         },
         {
             title: 'blocked',
@@ -108,7 +108,7 @@ const DetailedInformation = () => {
             align: 'center',
             render: (blocked) => (
                 <BooleanIndicator
-                    value={!blocked}
+                    enabled={!blocked}
                     tooltipProps={{
                         title: blocked ? 'Blocked' : 'Unblocked',
                         enabled: true,

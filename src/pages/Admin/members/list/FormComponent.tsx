@@ -34,7 +34,7 @@ const FormComponent: React.FC<{
 
     const { selectProps: agentSelectProps } = useSelect<TUser>({
         resource: 'users',
-        optionLabel: 'username',
+        optionLabel: 'display_name',
         filters: [
             {
                 field: 'role.id',

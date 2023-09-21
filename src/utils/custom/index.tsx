@@ -1,3 +1,5 @@
+import { Tag } from 'antd';
+
 export const allowedRoles = ['agent', 'admin'];
 
 export const languages = [
@@ -6,3 +8,17 @@ export const languages = [
     { language: 'tw', name: '繁體中文', shortName: 'TW' },
     { language: 'cn', name: '简体中文', shortName: 'CN' },
 ];
+
+export const statusColorEnum: {
+    [key: string]: string;
+} = {
+    SUCCESS: 'green',
+    FAILED: 'volcano',
+    CANCEL: '#ccccc',
+    PENDING: 'orange',
+    REJECTED: 'red',
+};
+
+export const getStatusTag = (status: string) => {
+    return <Tag color={statusColorEnum?.[status] || 'default'}>{status}</Tag>;
+};

@@ -7,7 +7,7 @@ const FilterTags: React.FC<{ searchFormProps: FormProps<any> }> = ({ searchFormP
     const form = searchFormProps?.form;
     const searchValues = form ? form.getFieldsValue() : {};
     const handleClearSearchProps = (key: string) => () => {
-        form?.setFieldValue([key], '');
+        form?.resetFields([[key]]);
     };
     const searchKeys = Object.keys(searchValues || {});
 
