@@ -5,7 +5,7 @@ import { TUser } from '@/types';
 
 const status = ['SUCCESS', 'FAILED', 'CANCEL', 'PENDING', 'REJECTED'];
 
-const statusOptinos = status.map((s) => ({
+export const statusOptinos = status.map((s) => ({
     label: s,
     value: s,
 }));

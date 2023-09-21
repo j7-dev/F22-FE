@@ -1,6 +1,6 @@
 import { Table, Row, Col, Card } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { useTable } from '@refinedev/antd';
+import { useTable, List } from '@refinedev/antd';
 import { Dayjs } from 'dayjs';
 import Filter from './Filter';
 import FilterTags from '@/components/FilterTags';
@@ -125,22 +125,24 @@ const index = () => {
     const filterTagsKey = JSON.stringify(searchFormProps?.form?.getFieldsValue());
 
     return (
-        <Row gutter={[16, 16]}>
-            <Col lg={6} xs={24}>
-                <Card title="Filters">
-                    <Filter formProps={searchFormProps} />
-                </Card>
-            </Col>
-            <Col lg={18} xs={24}>
-                <Card title="Search Result">
-                    <div className="mb-4">
-                        <FilterTags key={filterTagsKey} searchFormProps={searchFormProps} />
-                    </div>
-                    <Table {...formattedTableProps} />
-                    <hr className="my-8" />
-                </Card>
-            </Col>
-        </Row>
+        <List>
+            <Row gutter={[16, 16]}>
+                <Col lg={6} xs={24}>
+                    <Card title="Filters">
+                        <Filter formProps={searchFormProps} />
+                    </Card>
+                </Col>
+                <Col lg={18} xs={24}>
+                    <Card title="Search Result">
+                        <div className="mb-4">
+                            <FilterTags key={filterTagsKey} searchFormProps={searchFormProps} />
+                        </div>
+                        <Table {...formattedTableProps} />
+                        <hr className="my-8" />
+                    </Card>
+                </Col>
+            </Row>
+        </List>
     );
 };
 
