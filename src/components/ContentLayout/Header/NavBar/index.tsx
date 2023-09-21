@@ -1,54 +1,47 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
-import { useSetAtom, useAtom } from 'jotai';
-import { useTranslation } from 'react-i18next';
+// import { nanoid } from 'nanoid';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSetAtom, useAtom, useAtomValue } from 'jotai';
 import { AiOutlineMenu, AiOutlinePlus } from 'react-icons/ai';
-import { popupIsOpenAtom, IsLoginAtom } from '@/components/ContentLayout/LoginPopUp';
-import SubMenuUI from './SubMenu';
+import UserInfo from './UserInfo';
+import LoginNodule, { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
 import logo from '@/assets/images/logo.png';
-import { fakeMenuData, MenuItem } from '@/components/ContentLayout/Header/MenuData';
 import { mbSidebarAtom } from '@/components/ContentLayout';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
 import { UserOutlined } from '@ant-design/icons';
 import { GiPokerHand } from 'react-icons/gi';
 import { RiCustomerService2Fill } from 'react-icons/ri';
-import { BiCheckShield, BiSolidUser } from 'react-icons/bi';
+import { BiCheckShield } from 'react-icons/bi';
 
 const NavBar: React.FC = () => {
-    const { t } = useTranslation();
-    const [isLogin, setIsLogin] = useAtom(IsLoginAtom);
+    // const { t } = useTranslation();
     const [mbSidebar, setMbSidebar] = useAtom(mbSidebarAtom);
-    const setsidebarIsOpen = useSetAtom(sidebarIsOpenAtom);
+    const setSidebarIsOpen = useSetAtom(sidebarIsOpenAtom);
     // const sidebarIsOpen = useAtomValue(sidebarIsOpenAtom);
-
-    const Navigate = useNavigate();
-    const fakeData = fakeMenuData;
-
-    // LoginButton
+    const isLogin = useAtomValue(IsLoginAtom);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
-    const handleClick = () => {
-        setPopupIsOpen((prevValue) => !prevValue);
-        // console.log('popupIsOpenAtom', popupIsOpen);
-    };
-    // LogOutButton
-    const handleLogout = () => {
-        setIsLogin(false);
-        Navigate('/');
-    };
+    const Navigate = useNavigate();
+    // const fakeData = fakeMenuData;
 
     // 自訂 Hook 來判斷是否為當前路徑
-    function isActive(path: string) {
-        const location = useLocation();
-        return location.pathname === path ? 'active' : '';
-    }
+    // function isActive(path: string) {
+    //     const location = useLocation();
+    //     return location.pathname === path ? 'active' : '';
+    // }
 
     //手機版選單
     const handleMbSidebar = () => {
-        setsidebarIsOpen((prevValue) => !prevValue);
+        setSidebarIsOpen((prevValue) => !prevValue);
         setMbSidebar((prevValue) => !prevValue);
         // console.log('mbSidebar', mbSidebar);
         // console.log('sidebarIsOpen', sidebarIsOpen);
+    };
+    const handleProfile = () => {
+        if (isLogin) {
+            Navigate('/wallet');
+        } else {
+            setPopupIsOpen(true);
+        }
     };
     return (
         <>
@@ -69,8 +62,8 @@ const NavBar: React.FC = () => {
                     </div>
                     {/* 桌機選單 */}
                     <div className="hidden transition-all duration-300 basis-full grow xl:block">
-                        <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-between md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
-                            <div className="hidden xl:flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-start md:gap-y-0 md:gap-x-7 md:mt-0 ">
+                        <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
+                            {/* <div className="hidden xl:flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-start md:gap-y-0 md:gap-x-7 md:mt-0 ">
                                 {fakeData.map((item) => {
                                     const title = item?.title as string;
                                     const path = item?.path as string;
@@ -90,23 +83,9 @@ const NavBar: React.FC = () => {
                                         </div>
                                     );
                                 })}
-                            </div>
-                            {/* TODO 把登入登出拆成組件 */}
-                            <span className={`loginBtn whitespace-nowrap flex items-center rounded-lg border-white gap-x-2 font-bold bg-[#F9A318] text-white hover:opacity-80  md:my-3 md:px-6 md:py-3 cursor-pointer ${isLogin === false ? 'block' : 'hidden'} `} onClick={handleClick}>
-                                <BiSolidUser size={20} />
-                                Log in
-                            </span>
-                            <div className={`walletBtn flex flex-row gap-2.5 ${isLogin === true ? 'block' : 'hidden'}`}>
-                                <Link to="/wallet">
-                                    <span className="flex whitespace-nowrap  items-center rounded-lg border-white gap-x-2 font-bold bg-[#F9A318] text-white hover:opacity-80  md:my-3 md:px-6 md:py-3 ">
-                                        <BiSolidUser size={20} />
-                                        My Wallet
-                                    </span>
-                                </Link>
-                                <span className="logoutBtn whitespace-nowrap  flex items-center rounded-lg border-white gap-x-2 font-bold bg-[#e5e5e5] text-black hover:opacity-80  md:my-3 md:px-6 md:py-3 cursor-pointer" onClick={handleLogout}>
-                                    Log out
-                                </span>
-                            </div>
+                            </div> */}
+                            {isLogin && <UserInfo />}
+                            <LoginNodule />
                         </div>
                     </div>
                     {/* 手機選單 */}
@@ -129,12 +108,11 @@ const NavBar: React.FC = () => {
                                 <span className="text-xs font-normal">Service</span>
                             </div>
                         </Link>
-                        <Link to="/wallet">
-                            <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
-                                <UserOutlined className="text-[1.5rem]" />
-                                <span className="text-xs font-normal">Profile</span>
-                            </div>
-                        </Link>
+
+                        <div className="cursor-pointer flex flex-col justify-center items-center text-gray-600 hover:text-gray-400" onClick={handleProfile}>
+                            <UserOutlined className="text-[1.5rem]" />
+                            <span className="text-xs font-normal">Profile</span>
+                        </div>
                     </div>
                 </nav>
             </div>

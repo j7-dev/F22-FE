@@ -1,29 +1,30 @@
 import React, { useEffect } from 'react';
-import { nanoid } from 'nanoid';
-import { useTranslation } from 'react-i18next';
-import { useAtom, useSetAtom } from 'jotai';
-import {
-    GameTypeAtom,
-    GameCategoryStateAtom,
-} from '@/pages/Content/Taxonomy/AtomSetting';
-import GameType from '@/components/ContentLayout/SearchBar/GameType';
-import GameCategory from '@/components/ContentLayout/SearchBar/GameCategory';
-import Game from '@/components/ContentLayout/Games/Game';
-import { fakeGameData } from './fakeGameData';
+import { useSetAtom } from 'jotai';
+import { useList } from '@refinedev/core';
+import { GameTypeAtom, GameCategoryStateAtom } from '@/pages/Content/Taxonomy/AtomSetting';
+import GameType from '@/components/ContentLayout/GameType';
+import GameCategory from '@/components/ContentLayout/GameCategory';
+import Games from './Games';
+import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg';
 
 const Evolution: React.FC = () => {
-    const { t } = useTranslation();
-
-    const [GameTypeValue, setGameType] = useAtom(GameTypeAtom);
+    const setGameType = useSetAtom(GameTypeAtom);
     const setGameCategoryState = useSetAtom(GameCategoryStateAtom);
-    const games =
-        GameTypeValue !== 'all'
-            ? fakeGameData.filter((item) => item['Game Type'] === GameTypeValue)
-            : fakeGameData;
 
+    const { data, isLoading } = useList({
+        resource: 'evo/tablelist',
+    });
+    // console.log('data', data?.data);
+    const newData = (data?.data.map((item) => {
+        return {
+            ...item,
+            gameImg: getGameTypeImg(item['Game Type']),
+        };
+    }) || []) as { [key: string]: string }[];
+    // console.log('newData', newData);
     useEffect(() => {
         setGameType('all');
-        setGameCategoryState('live');
+        setGameCategoryState('Live Casino');
         window.scrollTo(0, 0);
     }, []);
 
@@ -38,29 +39,8 @@ const Evolution: React.FC = () => {
             </div>
             <div>
                 <div className="FilterGames dropdown-menu w-full flex justify-center items-center mt-10">
-                    <div className="w-[1360px] flex flex-col justify-center flex-wrap gap-4  py-5 px-10 ">
-                        <div className="gamesCategoryInfo w-auto text-center">
-                            <h3 className="gamesCategory mb-2">
-                                Evolution {t('Live Casino')}
-                            </h3>
-                            <span className="gamesCategoryDes">
-                                {games.length} {t('Games found')}
-                            </span>
-                        </div>
-                        <div className="gamesWrap w-full">
-                            <ul className="m-0 p-0 flex justify-start items-center flex-wrap gap-y-2.5">
-                                {games.map((item) => {
-                                    return (
-                                        <li
-                                            key={nanoid()}
-                                            className="w-[calc(100%/2)] flex flex-col justify-center items-center cursor-pointer md:w-[calc(100%/7)]"
-                                        >
-                                            <Game data={item} />
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </div>
+                    <div className="w-[1360px] flex flex-col justify-center flex-wrap gap-4  py-5 md:px-10 px-4">
+                        <Games ProviderName="Evolution" gamesData={newData} isLoading={isLoading} />
                     </div>
                 </div>
             </div>

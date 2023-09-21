@@ -10,7 +10,7 @@ import {
     GameCategoryStateAtom,
 } from '@/pages/Content/Taxonomy/AtomSetting';
 // import GameType from '@/components/ContentLayout/SearchBar/GameType';
-import GameCategory from '@/components/ContentLayout/SearchBar/GameCategory';
+import GameCategory from '@/components/ContentLayout/GameCategory';
 // import Game from '@/components/ContentLayout/Games/Game';
 // import fakeGameData from './fakeGameData.json';
 import MaintainImg from '@/assets/images/Maintain.png';

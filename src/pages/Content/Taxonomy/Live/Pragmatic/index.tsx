@@ -1,30 +1,39 @@
 import React, { useEffect } from 'react';
-import { nanoid } from 'nanoid';
-import { useTranslation } from 'react-i18next';
-import { useAtom, useSetAtom } from 'jotai';
-import {
-    GameTypeAtom,
-    GameCategoryStateAtom,
-} from '@/pages/Content/Taxonomy/AtomSetting';
-import GameType from '@/components/ContentLayout/SearchBar/GameType';
-import GameCategory from '@/components/ContentLayout/SearchBar/GameCategory';
-import Game from '@/components/ContentLayout/Games/Game';
-import { fakeGameData } from './fakeGameData';
+import { useSetAtom } from 'jotai';
+import { GameTypeAtom, GameCategoryStateAtom } from '@/pages/Content/Taxonomy/AtomSetting';
+import GameType from '@/components/ContentLayout/GameType';
+import GameCategory from '@/components/ContentLayout/GameCategory';
+import Games from './Games';
+import { useApiUrl, useCustom } from '@refinedev/core';
+import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg';
 
-const Evolution: React.FC = () => {
-    const { t } = useTranslation();
-
-    const [GameTypeValue, setGameType] = useAtom(GameTypeAtom);
+const Pragmatic: React.FC = () => {
+    const setGameType = useSetAtom(GameTypeAtom);
     const setGameCategoryState = useSetAtom(GameCategoryStateAtom);
-
-    const games =
-        GameTypeValue !== 'all'
-            ? fakeGameData.filter((item) => item['Game Type'] === GameTypeValue)
-            : fakeGameData;
-
+    const apiUrl = useApiUrl();
+    const { data, isLoading } = useCustom({
+        url: `${apiUrl}/pp/getcasinogames`,
+        method: 'post',
+    });
+    //取分類
+    // const typeDescriptionArray = [];
+    const newData = (data?.data?.gameList.map((item: any) => {
+        // const description = item.typeDescription;
+        // if (!typeDescriptionArray.includes(description)) {
+        //     typeDescriptionArray.push(description); // 将不重复的值添加到数组
+        // }
+        // console.log('typeDescription ', item.typeDescription);
+        //TODO 未來找時間改
+        return {
+            ...item,
+            gameImg: getGameTypeImg(item['typeDescription']),
+        };
+    }) || []) as { [key: string]: string }[];
+    // console.log('typeDescriptionArray', typeDescriptionArray);
+    // console.log('extractedData', extractedData);
     useEffect(() => {
         setGameType('all');
-        setGameCategoryState('live');
+        setGameCategoryState('Live Casino');
         window.scrollTo(0, 0);
     }, []);
 
@@ -34,36 +43,13 @@ const Evolution: React.FC = () => {
             <div className="w-full h-auto flex mx-auto flex-col items-center mt-[-2.5rem] mb-6 z-10 ">
                 <GameCategory Provider="pragmatic" />
             </div>
-            <div className="w-full h-auto flex mx-auto flex-col items-center  z-10 ">
+            <div className="w-full h-auto flex mx-auto flex-col items-center z-10 ">
                 <GameType />
             </div>
             <div>
                 <div className="FilterGames dropdown-menu w-full flex justify-center items-center mt-10">
-                    <div className="w-[1360px] flex flex-col justify-center flex-wrap gap-4  py-5 px-10 ">
-                        <div className="gamesCategoryInfo w-auto text-center">
-                            <h3 className="gamesCategory mb-2">
-                                Pragmatic Play {t('Live Casino')}
-                            </h3>
-                            <span className="gamesCategoryDes">
-                                {games.length} {t('Games found')}
-                            </span>
-                        </div>
-                        <div className="gamesWrap w-full">
-                            <ul className="m-0 p-0 flex justify-start items-center flex-wrap gap-y-2.5">
-                                {games.map((item) => {
-                                    // TODO 目前是放假圖片
-
-                                    return (
-                                        <li
-                                            key={nanoid()}
-                                            className="w-[calc(100%/2)] flex flex-col justify-center items-center cursor-pointer md:w-[calc(100%/7)]"
-                                        >
-                                            <Game data={item} />
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        </div>
+                    <div className="w-[1360px] flex flex-col justify-center flex-wrap gap-4  py-5 md:px-10 px-4">
+                        <Games ProviderName="Pragmatic Play" gamesData={newData} isLoading={isLoading} />
                     </div>
                 </div>
             </div>
@@ -71,4 +57,4 @@ const Evolution: React.FC = () => {
     );
 };
 
-export default Evolution;
+export default Pragmatic;

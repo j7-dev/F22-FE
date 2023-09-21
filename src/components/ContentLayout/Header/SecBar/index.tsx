@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSetAtom } from 'jotai';
-import { popupIsOpenAtom } from '@/components/ContentLayout/LoginPopUp';
+import { popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
 
 const Secbar: React.FC = () => {
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
@@ -19,28 +19,16 @@ const Secbar: React.FC = () => {
                         <span>test newsname</span>
                     </div>
                     <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-start md:gap-y-0 md:gap-x-7 md:mt-0 ">
-                        <span
-                            className="font-bold text-white md:py-1 hover:text-[#78D39D] "
-                            onClick={handleClick}
-                        >
+                        <span className="font-bold text-white md:py-1 hover:text-[#78D39D] " onClick={handleClick}>
                             Deposit
                         </span>
-                        <span
-                            className="font-bold text-white hover:text-[#78D39D] active:text-[#78D39D] md:py-1 "
-                            onClick={handleClick}
-                        >
+                        <span className="font-bold text-white hover:text-[#78D39D] active:text-[#78D39D] md:py-1 " onClick={handleClick}>
                             Withdraw
                         </span>
-                        <span
-                            className="font-bold text-white hover:text-[#78D39D] active:text-[#78D39D] md:py-1 "
-                            onClick={handleClick}
-                        >
+                        <span className="font-bold text-white hover:text-[#78D39D] active:text-[#78D39D] md:py-1 " onClick={handleClick}>
                             Credit Transfer
                         </span>
-                        <span
-                            className="font-bold text-white hover:text-[#78D39D] active:text-[#78D39D] md:py-1 "
-                            onClick={handleClick}
-                        >
+                        <span className="font-bold text-white hover:text-[#78D39D] active:text-[#78D39D] md:py-1 " onClick={handleClick}>
                             Rollover
                         </span>
                     </div>

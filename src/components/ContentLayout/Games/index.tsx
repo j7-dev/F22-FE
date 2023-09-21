@@ -1,39 +1,47 @@
 import React from 'react';
+import { useAtomValue } from 'jotai';
 import { nanoid } from 'nanoid';
 import { useTranslation } from 'react-i18next';
 import Game from './Game';
-import gameImg from '@/assets/images/messageImage_1693412354632.jpg';
+import { GameTypeAtom, GameCategoryStateAtom } from '@/pages/Content/Taxonomy/AtomSetting';
+import { gameTypeFilter } from '@/components/ContentLayout/Games/Game/GameImg';
 
-const Games: React.FC = () => {
+type GamesDataProp = {
+    ProviderName: string;
+    gamesData?: { [key: string]: string }[];
+    isLoading: boolean;
+};
+const Games: React.FC<GamesDataProp> = ({ ProviderName, gamesData = [], isLoading }) => {
+    const GameTypeValue = useAtomValue(GameTypeAtom);
+    const GameCategoryState = useAtomValue(GameCategoryStateAtom);
     const { t } = useTranslation();
-    const fakeGames = [
-        { title: 'Game1', imgSrc: gameImg },
-        { title: 'Game2', imgSrc: gameImg },
-        { title: 'Game3', imgSrc: gameImg },
-        { title: 'Game4', imgSrc: gameImg },
-        { title: 'Game5', imgSrc: gameImg },
-        { title: 'Game6', imgSrc: gameImg },
-    ];
 
+    //排除rng-類別
+    const gamesList = GameTypeValue !== 'all' ? gamesData.filter((item) => gameTypeFilter[GameTypeValue].some((gameType) => item['Game Type'] === gameType) && !item['Game Type'].startsWith('rng-')) : gamesData.filter((item) => !item['Game Type'].startsWith('rng-'));
     return (
-        <div className="my-20 max-w-3xl mx-auto ">
-            <div className="gameHeader flex flex-row justify-between my-2">
-                <span className="gameTaxonomyTitle text-base tracking-wide font-bold ">{t('Top Games')}</span>
-                <span className="gameLink text-[#357ACB] text-sm tracking-wide">View All</span>
+        <>
+            <div className="gamesCategoryInfo w-auto text-center">
+                <h3 className="gamesCategory mb-2">
+                    {ProviderName} {t(GameCategoryState)}
+                </h3>
+                <span className="gamesCategoryDes">{isLoading === false && `${gamesList.length} ${t('Games found')}`}</span>
             </div>
-            <div className="flex gap-2.5 flex-wrap">
-                {fakeGames.map(() => (
-                    <div key={nanoid()} className="w-[calc(50%-5px)]">
-                        <Game key={nanoid()} />
-                    </div>
-                ))}
+            <div className="gamesWrap w-full">
+                <ul className="m-0 p-0 flex justify-start items-center flex-wrap gap-y-2.5">
+                    {isLoading === false ? (
+                        gamesList.map((item) => {
+                            return (
+                                <li key={nanoid()} className="w-1/2 flex flex-col justify-center items-center cursor-pointer md:w-[calc(100%/6)]">
+                                    <Game data={item} />
+                                </li>
+                            );
+                        })
+                    ) : (
+                        <div className="w-full text-center isloading">loading...</div>
+                    )}
+                </ul>
             </div>
-        </div>
-        // 	<div className="gamesWrap max-w-7xl relative flex flex-row  mx-auto gap-2">
-        //     {new Array(7).fill(0).map(() => (
-        //         <Game />
-        //     ))}
-        // </div>
+        </>
     );
 };
 
