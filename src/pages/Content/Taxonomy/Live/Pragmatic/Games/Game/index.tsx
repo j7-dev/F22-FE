@@ -32,7 +32,7 @@ const index: React.FC<GameProps> = ({ data = {} }) => {
         } else {
             openGame(
                 {
-                    url: `${API_URL}/api/pp/opengame?language=${currentLocale}&playMode=DEMO&symbol=${data.gameID}`,
+                    url: `${API_URL}/api/pp/opengame?language=${currentLocale}&symbol=${data.gameID}`,
                     method: 'post',
                     values: {},
                 },
