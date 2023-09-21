@@ -1,19 +1,21 @@
-import { HttpError } from '@refinedev/core';
+import { notification } from 'antd';
 import axios from 'axios';
 
-export const axiosInstance = axios.create();
+const axiosInstance = axios.create();
 
 axiosInstance.interceptors.response.use(
     (response) => {
         return response;
     },
     (error) => {
-        const customError: HttpError = {
-            ...error,
-            message: error.response?.data?.message,
-            statusCode: error.response?.status,
-        };
+        const response = error?.response?.data?.error;
+        notification.error({
+            message: response?.name || 'Error',
+            description: response?.message || 'Error',
+        });
 
-        return Promise.reject(customError);
+        return Promise.reject(error);
     },
 );
+
+export { axiosInstance };

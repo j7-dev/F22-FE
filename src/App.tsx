@@ -1,6 +1,5 @@
 import { Refine } from '@refinedev/core';
 import { RefineKbar, RefineKbarProvider } from '@refinedev/kbar';
-import { notificationProvider } from '@refinedev/antd';
 import '@refinedev/antd/dist/reset.css';
 import routerBindings, { UnsavedChangesNotifier } from '@refinedev/react-router-v6';
 import { DataProvider, axiosInstance } from '@/providers/strapi-v4';
@@ -29,15 +28,23 @@ function App() {
                     <Refine
                         authProvider={authProvider}
                         dataProvider={DataProvider(`${API_URL}/api`, axiosInstance)}
-                        notificationProvider={notificationProvider}
                         routerProvider={routerBindings}
                         i18nProvider={i18nProvider}
                         resources={resources}
                         options={{
-                            syncWithLocation: true,
+                            syncWithLocation: false,
                             warnWhenUnsavedChanges: true,
                             disableTelemetry: true,
                             projectId: 'DFwDAg-3y0BW1-GbOkSm',
+                            reactQuery: {
+                                clientConfig: {
+                                    defaultOptions: {
+                                        queries: {
+                                            retry: 0,
+                                        },
+                                    },
+                                },
+                            },
                         }}
                     >
                         <AppRouter />

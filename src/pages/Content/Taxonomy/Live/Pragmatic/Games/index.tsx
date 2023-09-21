@@ -13,6 +13,7 @@ export type GamesDataProp = {
 };
 const Games: React.FC<GamesDataProp> = ({ ProviderName, gamesData = [], isLoading }) => {
     const _GameTypeValue = useAtomValue(GameTypeAtom);
+    console.log('⭐  _GameTypeValue', _GameTypeValue);
     const GameCategoryState = useAtomValue(GameCategoryStateAtom);
     const { t } = useTranslation();
 

@@ -1,8 +1,7 @@
-import { Button } from 'antd';
+import { Button, Form } from 'antd';
 import { useUpdate } from '@refinedev/core';
 import { modalPropsAtom, modalShowAtom } from '../atom';
 import { useAtom, useSetAtom } from 'jotai';
-import useFormInstance from 'antd/es/form/hooks/useFormInstance';
 import { EditOutlined } from '@ant-design/icons';
 import { DataType } from '../types';
 
@@ -10,7 +9,7 @@ const EditButton: React.FC<{ record: DataType }> = ({ record }) => {
     const { mutate: update, isLoading } = useUpdate();
     const [modalProps, setModalProps] = useAtom(modalPropsAtom);
     const setModalShow = useSetAtom(modalShowAtom);
-    const form = useFormInstance();
+    const form = Form.useFormInstance();
 
     const handleEdit = () => {
         form.validateFields()

@@ -1,7 +1,7 @@
 import { Route } from 'react-router-dom';
 import Home from '@/pages/Admin/home';
 import { StatisticReport, AgentStatistic, MemberStatistic } from '@/pages/Admin/dashboard';
-import { ListMember, CreateMember, BalanceAdjustment } from '@/pages/Admin/members';
+import { ListMember, CreateMember, ShowMember, EditMember, BalanceAdjustment } from '@/pages/Admin/members';
 import { ListAgent, CreateAgent, AffCommissionTransactions, AffTransactions, CommissionSetting, CommissionSettlement } from '@/pages/Admin/agents';
 import { ListDeposits, ListWithdraws } from '@/pages/Admin/payments';
 import { ListBettingRecords } from '@/pages/Admin/bettingManagement';
@@ -22,6 +22,8 @@ const adminRoutes = () => {
                 <Route index element={<ListMember />} />
                 <Route path="list" element={<ListMember />} />
                 <Route path="create" element={<CreateMember />} />
+                <Route path="show/:id" element={<ShowMember />} />
+                <Route path="edit/:id" element={<EditMember />} />
                 <Route path="balance-adjustment" element={<BalanceAdjustment />} />
             </Route>
 
