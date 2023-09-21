@@ -1,4 +1,4 @@
-import { Table, Row, Col, Card, TablePaginationConfig } from 'antd';
+import { Table, Row, Col, Card, TablePaginationConfig, TableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useTable, List } from '@refinedev/antd';
 import Filter from './Filter';
@@ -147,7 +147,7 @@ const index = () => {
                       }),
                   }
                 : undefined,
-    };
+    } as TableProps<DataType>;
 
     const filterTagsKey = JSON.stringify(searchFormProps?.form?.getFieldsValue());
 
