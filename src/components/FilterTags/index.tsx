@@ -1,10 +1,9 @@
 import React from 'react';
-import { Tag, FormProps } from 'antd';
+import { Tag, FormInstance } from 'antd';
 import { Dayjs } from 'dayjs';
 import { CloseCircleOutlined } from '@ant-design/icons';
 
-const FilterTags: React.FC<{ searchFormProps: FormProps<any> }> = ({ searchFormProps }) => {
-    const form = searchFormProps?.form;
+const FilterTags: React.FC<{ form?: FormInstance }> = ({ form }) => {
     const searchValues = form ? form.getFieldsValue() : {};
     const handleClearSearchProps = (key: string) => () => {
         form?.setFieldValue([key], undefined);

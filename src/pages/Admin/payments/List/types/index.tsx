@@ -1,3 +1,5 @@
+import { Dayjs } from 'dayjs';
+
 export type DataType = {
     id: number;
     username: string;
@@ -11,4 +13,10 @@ export type DataType = {
     totalWithdraw: string;
     profit: string;
     commissionAmount: string;
+};
+
+export type TSearchProps = {
+    dateRange?: [Dayjs, Dayjs] | undefined;
+    status?: string | undefined;
+    user?: number | undefined;
 };

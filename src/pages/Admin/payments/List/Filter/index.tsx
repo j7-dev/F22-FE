@@ -1,7 +1,10 @@
+import { useEffect } from 'react';
 import { Form, Button, DatePicker, FormProps, Select } from 'antd';
 import dayjs from 'dayjs';
 import { useSelect } from '@refinedev/antd';
 import { TUser } from '@/types';
+import { listTypeAtom } from '../atom';
+import { useAtomValue } from 'jotai';
 
 const status = ['SUCCESS', 'FAILED', 'CANCEL', 'PENDING', 'REJECTED'];
 
@@ -12,6 +15,8 @@ export const statusOptinos = status.map((s) => ({
 
 const { RangePicker } = DatePicker;
 const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
+    const listType = useAtomValue(listTypeAtom);
+    const form = formProps.form;
     const { selectProps } = useSelect<TUser>({
         resource: 'users',
         optionLabel: 'display_name',
@@ -23,6 +28,12 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
             },
         ],
     });
+
+    useEffect(() => {
+        form?.setFieldValue(['status'], listType === 'WITHDRAW' ? 'PENDING' : undefined);
+        form?.submit();
+    }, [listType]);
+
     return (
         <Form {...formProps} layout="vertical">
             <Form.Item label="Date" name={['dateRange']} initialValue={[dayjs().subtract(7, 'day'), dayjs()]}>
