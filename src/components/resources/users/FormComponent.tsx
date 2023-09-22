@@ -1,14 +1,20 @@
+import { useEffect } from 'react';
 import { Form, Input, Switch, Radio, DatePicker, Select, FormProps } from 'antd';
-import { TRole, TUser } from '@/types';
+import { TRole, TUser, TRoleType } from '@/types';
 import { nanoid } from 'nanoid';
 import { useCustom } from '@refinedev/core';
-import { API_URL } from '@/utils';
+import { API_URL, getRoleId } from '@/utils';
 import { useSelect } from '@refinedev/antd';
+import dayjs from 'dayjs';
+import { isString } from 'lodash-es';
 
 const FormComponent: React.FC<{
+    formType: 'create' | 'edit';
     formProps: FormProps;
     handler: () => void;
-}> = ({ formProps, handler }) => {
+    roleType?: TRoleType;
+}> = ({ formType, formProps, handler, roleType = 'authenticated' }) => {
+    const form = formProps.form;
     const { data: roleData, isLoading: roleIsLoading } = useCustom({
         url: `${API_URL}/api/users-permissions/roles`,
         method: 'get',
@@ -44,6 +50,20 @@ const FormComponent: React.FC<{
         ],
     });
 
+    const watchBirthday = Form.useWatch('birthday', form);
+
+    useEffect(() => {
+        if (isString(watchBirthday)) {
+            form?.setFieldValue('birthday', dayjs(watchBirthday, 'YYYY-MM-DD'));
+        }
+    }, [watchBirthday]);
+
+    useEffect(() => {
+        if (formType === 'create') {
+            form?.setFieldValue('role', getRoleId(roleType));
+        }
+    }, []);
+
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
             <div className="grid grid-cols-2 gap-6">
@@ -58,6 +78,25 @@ const FormComponent: React.FC<{
                     ]}
                 >
                     <Input />
+                </Form.Item>
+                <Form.Item
+                    name="email"
+                    label="email"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input a value',
+                        },
+                        {
+                            type: 'email',
+                            message: 'Please input a valid email',
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item name="password" label="password">
+                    <Input.Password />
                 </Form.Item>
                 <Form.Item name="display_name" label="display name">
                     <Input />
@@ -84,38 +123,15 @@ const FormComponent: React.FC<{
                         buttonStyle="solid"
                     />
                 </Form.Item>
+
                 <Form.Item name="birthday" label="birthday">
-                    <DatePicker className="w-full" />
+                    {!isString(watchBirthday) && watchBirthday ? <DatePicker className="w-full" /> : <Input />}
                 </Form.Item>
-                <Form.Item
-                    name="email"
-                    label="email"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input a value',
-                        },
-                        {
-                            type: 'email',
-                            message: 'Please input a valid email',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item name="blocked" valuePropName="checked" label="blocked" initialValue={false}>
+
+                <Form.Item name="blocked" valuePropName="checked" label="blocked" initialValue={formType === 'create' ? false : undefined}>
                     <Switch />
                 </Form.Item>
-                <Form.Item
-                    name="role"
-                    label="role"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input a value',
-                        },
-                    ]}
-                >
+                <Form.Item hidden name="role" label="role" initialValue={formType === 'create' ? 1 : undefined}>
                     <Select {...roleSelectProps} />
                 </Form.Item>
                 <Form.Item
@@ -142,7 +158,7 @@ const FormComponent: React.FC<{
                 >
                     <Select {...agentSelectProps} />
                 </Form.Item>
-                <Form.Item name="uuid" label="uuid" hidden initialValue={nanoid()}>
+                <Form.Item name="uuid" label="uuid" hidden initialValue={formType === 'create' ? nanoid() : undefined}>
                     <Input />
                 </Form.Item>
             </div>

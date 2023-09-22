@@ -1,4 +1,4 @@
-export * from './custom';
+export * from './resources';
 
 export type TConstant<T> = {
     label: string;
