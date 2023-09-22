@@ -39,8 +39,8 @@ const adminRoutes = () => {
 
             <Route path="/refine/payments">
                 <Route index element={<ListDeposits />} />
-                <Route path="list-deposits" element={<ListDeposits />} />
-                <Route path="list-withdraws" element={<ListWithdraws />} />
+                <Route path="deposits/list" element={<ListDeposits />} />
+                <Route path="withdraws/list" element={<ListWithdraws />} />
             </Route>
             <Route path="/refine/betting-management">
                 <Route index element={<ListBettingRecords />} />

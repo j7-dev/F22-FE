@@ -4,6 +4,7 @@ import { PiUsersThree } from 'react-icons/pi';
 export const resources = [
     {
         name: 'home',
+        identifier: 'home',
         list: '/refine/home',
         meta: {
             label: 'Home',
@@ -19,6 +20,7 @@ export const resources = [
     },
     {
         name: 'statistic-report',
+        identifier: 'statistic-report',
         list: '/refine/dashboard/statistic-report',
         meta: {
             parent: 'dashboard',
@@ -27,6 +29,7 @@ export const resources = [
     },
     {
         name: 'agent-statistic',
+        identifier: 'agent-statistic',
         list: '/refine/dashboard/agent-statistic',
         meta: {
             parent: 'dashboard',
@@ -35,6 +38,7 @@ export const resources = [
     },
     {
         name: 'member-statistic',
+        identifier: 'member-statistic',
         list: '/refine/dashboard/member-statistic',
         meta: {
             parent: 'dashboard',
@@ -50,6 +54,7 @@ export const resources = [
     },
     {
         name: 'users',
+        identifier: 'members-list',
         list: '/refine/members/list',
         create: '/refine/members/create',
         show: '/refine/members/show/:id',
@@ -63,6 +68,7 @@ export const resources = [
 
     {
         name: 'balance-adjustment',
+        identifier: 'balance-adjustment',
         list: '/refine/members/balance-adjustment',
         meta: {
             parent: 'members',
@@ -78,7 +84,8 @@ export const resources = [
         },
     },
     {
-        name: 'list-agents',
+        name: 'balance-adjustment',
+        identifier: 'balance-adjustment',
         list: '/refine/agents/list',
         meta: {
             parent: 'agents',
@@ -86,15 +93,17 @@ export const resources = [
         },
     },
     {
-        name: 'create-agents',
+        name: 'users',
+        identifier: 'agents-create',
         list: '/refine/agents/create',
         meta: {
             parent: 'agents',
-            label: 'Balance Adjustment 新增代理商',
+            label: 'Create Agent 新增代理商',
         },
     },
     {
         name: 'commission-setting',
+        identifier: 'commission-setting',
         list: '/refine/agents/commission-setting',
         meta: {
             parent: 'agents',
@@ -103,6 +112,7 @@ export const resources = [
     },
     {
         name: 'commission-settlement',
+        identifier: 'commission-settlement',
         list: '/refine/agents/commission-settlement',
         meta: {
             parent: 'agents',
@@ -112,6 +122,7 @@ export const resources = [
 
     {
         name: 'aff-transactions',
+        identifier: 'aff-transactions',
         list: '/refine/agents/aff-transactions',
         meta: {
             parent: 'agents',
@@ -120,6 +131,7 @@ export const resources = [
     },
     {
         name: 'aff-commission-transactions',
+        identifier: 'aff-commission-transactions',
         list: '/refine/agents/aff-commission-transactions',
         meta: {
             parent: 'agents',
@@ -134,16 +146,18 @@ export const resources = [
         },
     },
     {
-        name: 'list-deposits',
-        list: '/refine/payments/list-deposits',
+        name: 'transaction-records',
+        identifier: 'deposits-list',
+        list: '/refine/payments/deposits/list',
         meta: {
             parent: 'payments',
             label: 'All Deposits 公司入款審核',
         },
     },
     {
-        name: 'list-withdraws',
-        list: '/refine/payments/list-withdraws',
+        name: 'transaction-records',
+        identifier: 'withdraws-list',
+        list: '/refine/payments/withdraws/list',
         meta: {
             parent: 'payments',
             label: 'All Withdraws 取款審核',
@@ -157,8 +171,9 @@ export const resources = [
         },
     },
     {
-        name: 'list-betting-records',
-        list: '/refine/betting-management/list-betting-records',
+        name: 'betting-records',
+        identifier: 'betting-records/list',
+        list: '/refine/betting-management/betting-records/list',
         meta: {
             parent: 'betting-management',
             label: 'All Betting Records 投注記錄查詢',
@@ -173,6 +188,7 @@ export const resources = [
     },
     {
         name: 'vips',
+        identifier: 'vips',
         list: '/refine/system-setting/vips',
         create: '/refine/system-setting/vips/create',
         edit: '/refine/system-setting/vips/edit/:id',

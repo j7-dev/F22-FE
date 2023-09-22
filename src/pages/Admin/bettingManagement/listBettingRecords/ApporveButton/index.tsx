@@ -1,13 +1,11 @@
 import { Button, Popconfirm, notification } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
-import { useUpdateMany, useGetIdentity } from '@refinedev/core';
+import { useUpdateMany } from '@refinedev/core';
 import { selectedRecordsAtom } from '../atom';
 import { useAtom } from 'jotai';
-import { TUser } from '@/types';
 
 const index = () => {
     const [selectedRecords, setSelectedRecords] = useAtom(selectedRecordsAtom);
-    const { data: identity } = useGetIdentity<TUser>();
     const { mutate, isLoading } = useUpdateMany();
     const handleUpdate = () => {
         const ids = selectedRecords.map((record) => record.id);
@@ -17,7 +15,6 @@ const index = () => {
                 ids,
                 values: {
                     status: 'SUCCESS',
-                    updated_by_user_id: identity?.id,
                 },
             },
             {

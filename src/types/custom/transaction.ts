@@ -12,4 +12,5 @@ export type TTransction = {
     updatedAt: string;
     currency: string;
     user?: TUser;
+    updated_by_user_id?: number;
 };
