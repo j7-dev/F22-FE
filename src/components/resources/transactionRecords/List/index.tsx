@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Table, Row, Col, Card, TablePaginationConfig, TableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useTable, List } from '@refinedev/antd';
@@ -14,10 +15,15 @@ import { nanoid } from 'nanoid';
 import ApproveButton from './ApporveButton';
 import { DataType, TSearchProps } from './types';
 import { listTypeAtom, selectedRecordsAtom } from './atom';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
-const index = () => {
-    const listType = useAtomValue(listTypeAtom);
+const index: React.FC<{
+    txnType: 'DEPOSIT' | 'WITHDRAW';
+}> = ({ txnType }) => {
+    const [listType, setListType] = useAtom(listTypeAtom);
+    useEffect(() => {
+        setListType(txnType);
+    }, [txnType]);
 
     const setSelectedRecords = useSetAtom(selectedRecordsAtom);
 

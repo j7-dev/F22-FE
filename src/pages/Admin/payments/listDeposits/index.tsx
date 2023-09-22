@@ -1,14 +1,5 @@
-import { useEffect } from 'react';
-import List from '../List';
-import { listTypeAtom } from '../List/atom';
-import { useSetAtom } from 'jotai';
+import List from '@/components/resources/transactionRecords/List';
 
-const index = () => {
-    const setListType = useSetAtom(listTypeAtom);
-    useEffect(() => {
-        setListType('DEPOSIT');
-    }, []);
-    return <List />;
-};
+const index = () => <List txnType="DEPOSIT" />;
 
 export default index;

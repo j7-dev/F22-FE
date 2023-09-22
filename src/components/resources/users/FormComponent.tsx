@@ -60,6 +60,7 @@ const FormComponent: React.FC<{
 
     useEffect(() => {
         if (formType === 'create') {
+            console.log('⭐  useEffect  getRoleId(roleType)', getRoleId(roleType));
             form?.setFieldValue('role', getRoleId(roleType));
         }
     }, []);
@@ -134,28 +135,10 @@ const FormComponent: React.FC<{
                 <Form.Item hidden name="role" label="role" initialValue={formType === 'create' ? 1 : undefined}>
                     <Select {...roleSelectProps} />
                 </Form.Item>
-                <Form.Item
-                    name="vip"
-                    label="vip"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input a value',
-                        },
-                    ]}
-                >
+                <Form.Item name="vip" label="vip">
                     <Select {...vipSelectProps} />
                 </Form.Item>
-                <Form.Item
-                    name="agent"
-                    label="Agent"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input a value',
-                        },
-                    ]}
-                >
+                <Form.Item name="agent" label="Agent">
                     <Select {...agentSelectProps} />
                 </Form.Item>
                 <Form.Item name="uuid" label="uuid" hidden initialValue={formType === 'create' ? nanoid() : undefined}>

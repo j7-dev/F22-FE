@@ -8,3 +8,5 @@ export type TSearchProps = {
     status?: string | undefined;
     user?: number | undefined;
 };
+
+export type TListType = 'DEPOSIT' | 'WITHDRAW';
