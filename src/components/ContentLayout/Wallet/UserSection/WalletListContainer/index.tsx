@@ -1,12 +1,12 @@
 import React from 'react';
 import CashContainer from './CashContainer';
-import RewardContainer from './RewardContainer';
+// import RewardContainer from './RewardContainer';
 import AccountContainer from './AccountContainer';
 
 const WalletListContainer: React.FC = () => (
     <div className="walletListContainer">
         <CashContainer />
-        <RewardContainer />
+        {/* <RewardContainer /> */}
         <AccountContainer />
     </div>
 );

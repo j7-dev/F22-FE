@@ -48,3 +48,13 @@ export type TRole = {
     createdAt: string;
     updatedAt: string;
 };
+export type TsiteNotify = {
+    siteNotifyData?: {
+        content: string;
+        createdAt: string;
+        id: number;
+        locale: string;
+        localizations: [];
+        post_type: string;
+    }[];
+};

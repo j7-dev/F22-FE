@@ -23,7 +23,7 @@ const index: React.FC = () => {
             </span>
             <div
                 onClick={() => {
-                    setSelectedSection('siteMail');
+                    setSelectedSection('siteNotify');
                 }}
                 className="h-10 gap-2.5  rounded-lg flex justify-between items-center px-2 hover:bg-[#F3F3F4] cursor-pointer"
             >

@@ -14,7 +14,7 @@ const Wallet: React.FC = () => {
         // MyBalance: <CashSection section="MyBalance" />,
         Deposit: <CashSection section="Deposit" />,
         Withdraw: <CashSection section="Withdraw" />,
-        siteMail: <CashSection section="siteMail" />,
+        siteNotify: <CashSection section="siteNotify" />,
         bankAccount: <CashSection section="bankAccount" />,
         CouponHistory: <RewardSection section="CouponHistory" />,
         // BonusPoint: <RewardSection section="BonusPoint" />,

@@ -26,12 +26,12 @@ const index: React.FC = () => {
                 {window.innerWidth < 810 && <AiOutlineDown />}
             </div>
             <div className={`cashListContainer flex flex-col gap-4 overflow-hidden transition-all md:h-full ${window.innerWidth < 810 && down ? 'h-[150px]' : 'h-0'}`}>
-                <div className={`h-10 gap-2.5 rounded-lg flex justify-between items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'siteMail' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('siteMail')}>
-                    <div className="siteMailInfo flex justify-start items-center gap-2.5">
+                <div className={`h-10 gap-2.5 rounded-lg flex justify-between items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'siteNotify' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('siteNotify')}>
+                    <div className="siteNotifyInfo flex justify-start items-center gap-2.5">
                         <AiFillMail size={30} className="p-1" />
                         <span className="text-sm font-bold text-[#2B3240]">{t('站内信쪽지')}</span>
                     </div>
-                    <span className="siteMailNumber flex justify-center items-center min-w-[36px] h-[27px] bg-[#DC3545] rounded-lg text-sm font-bold text-white">0</span>
+                    <span className="siteNotifyNumber flex justify-center items-center min-w-[36px] h-[27px] bg-[#DC3545] rounded-lg text-sm font-bold text-white">0</span>
                 </div>
                 {/* <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'MyBalance' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('MyBalance')}>
                     <img src={creditIcon as unknown as string} alt="" />
