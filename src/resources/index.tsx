@@ -102,9 +102,13 @@ export const resources = [
         },
     },
     {
-        name: 'commission-setting',
-        identifier: 'commission-setting',
-        list: '/refine/agents/commission-setting',
+        name: 'commissions',
+        identifier: 'commissions',
+        list: '/refine/agents/commissions',
+        show: '/refine/agents/commissions/show/:id',
+        create: '/refine/agents/commissions/create',
+        edit: '/refine/agents/commissions/edit/:id',
+        delete: '/refine/agents/commissions/delete/:id',
         meta: {
             parent: 'agents',
             label: 'Commission Setting 佣金設定',
