@@ -1,15 +1,7 @@
-import DetailedInformation from './DetailedInformation';
-import CreateButton from './CreateButton';
+import { List } from '@/components/resources/users';
 
 const index = () => {
-    return (
-        <>
-            <div className="mb-4">
-                <CreateButton />
-            </div>
-            <DetailedInformation />
-        </>
-    );
+    return <List />;
 };
 
 export default index;

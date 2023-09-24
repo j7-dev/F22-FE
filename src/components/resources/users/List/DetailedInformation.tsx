@@ -1,6 +1,6 @@
 import { Table, Row, Col, Card } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { useTable } from '@refinedev/antd';
+import { useTable, ShowButton, EditButton } from '@refinedev/antd';
 import { TVip } from '@/types';
 import { Link } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
@@ -9,7 +9,6 @@ import { useCustom } from '@refinedev/core';
 import { API_URL } from '@/utils';
 import Filter from './Filter';
 import FilterTags from '@/components/FilterTags';
-import RowActionButton from './RowActionButton';
 
 type TSearchProps = {
     email?: string;
@@ -143,9 +142,14 @@ const DetailedInformation = () => {
         },
         {
             title: '',
-            dataIndex: 'action ',
             fixed: 'right',
-            render: (_, record) => <RowActionButton id={record?.id} />,
+            dataIndex: 'action',
+            render: (_, record) => (
+                <p className="m-0 whitespace-nowrap">
+                    <ShowButton size="small" type="primary" shape="circle" recordItemId={record.id} hideText className="mr-2" />
+                    <EditButton size="small" type="primary" shape="circle" recordItemId={record.id} hideText />
+                </p>
+            ),
         },
     ];
 
