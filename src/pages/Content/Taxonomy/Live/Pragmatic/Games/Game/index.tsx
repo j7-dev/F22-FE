@@ -1,58 +1,28 @@
 import React from 'react';
-import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 // import coinIcon from '@/assets/images/coin-icon.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
-// import { cloneDeep } from 'lodash';
-import { requestAtomType } from '@/types';
-import { useCustomMutation } from '@refinedev/core';
-// import { API_URL } from '@/utils';
+import { useCustomMutation, useGetLocale } from '@refinedev/core';
+import { API_URL } from '@/utils';
 import { FaGamepad } from 'react-icons/fa';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
 type GameProps = {
     data: {
+        gameID?: string;
         gameImg?: string;
         gameName?: string;
     };
 };
 
-export const configAtom = atom<requestAtomType>({
-    uuid: '123456789',
-    player: {
-        id: '1',
-        update: true,
-        firstName: 'evo',
-        lastName: 'test',
-        country: 'KR',
-        nickname: 'evo',
-        language: 'ko',
-        currency: 'KRW',
-        session: {
-            id: '3ede6595ccf746bab923457b1bb48784',
-            ip: '192.168.0.1',
-        },
-    },
-    config: {
-        game: {
-            category: '',
-            interface: 'view1',
-            table: {
-                id: '',
-            },
-        },
-        channel: {
-            wrapped: false,
-            mobile: false,
-        },
-    },
-});
 const index: React.FC<GameProps> = ({ data = {} }) => {
+    const locale = useGetLocale();
+    const currentLocale = locale();
     // console.log('game');
     const isLogin = useAtomValue(IsLoginAtom);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
-    const [_gameconfig, _setGameconfig] = useAtom(configAtom);
-    const { mutate: _openGame, isLoading: openGameLoading } = useCustomMutation();
+    const { mutate: openGame, isLoading: openGameLoading } = useCustomMutation();
 
     //TODO 這邊有一個功能待補=>如何在客戶登入後，再將客戶導回原本點擊的遊戲頁面並打開彈窗
     const handleClick = () => {
@@ -60,27 +30,22 @@ const index: React.FC<GameProps> = ({ data = {} }) => {
             setPopupIsOpen(true);
             return;
         } else {
-            // const newGameConfig = cloneDeep(gameconfig);
-            // newGameConfig.config.game.category = data['Game Type'];
-            // newGameConfig.config.game.table.id = data['Table ID'] as string;
-            // setGameconfig(newGameConfig);
-            // console.log('newGameConfig', newGameConfig);
-            //     openGame(
-            //         {
-            //             url: `${API_URL}/api/evo/opengame`,
-            //             method: 'post',
-            //             values: newGameConfig,
-            //         },
-            //         {
-            //             onSuccess: (entryData) => {
-            //                 window.open(entryData.data.entry, '_blank');
-            //                 // console.log('URL', entryData);
-            //             },
-            //             // onError: (error) => {
-            //             //     console.log('error', error);
-            //             // },
-            //         },
-            //     );
+            openGame(
+                {
+                    url: `${API_URL}/api/pp/opengame?language=${currentLocale}&symbol=${data.gameID}`,
+                    method: 'post',
+                    values: {},
+                },
+                {
+                    onSuccess: (entryData) => {
+                        window.open(entryData.data.gameURL, '_blank');
+                        // console.log('URL', entryData);
+                    },
+                    // onError: (error) => {
+                    //     console.log('error', error);
+                    // },
+                },
+            );
         }
     };
     return (
