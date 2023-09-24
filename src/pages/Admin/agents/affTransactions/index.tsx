@@ -1,5 +1,5 @@
-const index = () => {
-    return <div>index</div>;
-};
+import List from '@/components/resources/transactionRecords/List';
+
+const index = () => <List />;
 
 export default index;

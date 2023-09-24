@@ -21,10 +21,12 @@
         "antd": "^5.0.5",
         "axios": "^1.5.0",
         "crypto-js": "^4.1.1",
+        "currency-symbol-map": "^5.1.0",
         "i18next": "^20.1.0",
         "i18next-browser-languagedetector": "^6.1.1",
         "i18next-xhr-backend": "^3.2.2",
         "jotai": "^2.4.0",
+        "jotai-tanstack-query": "^0.7.2",
         "nanoid": "^4.0.2",
         "qs": "^6.11.2",
         "react": "^18.2.0",
@@ -66,8 +68,8 @@
         "vite-tsconfig-paths": "^4.2.0"
     },
     "scripts": {
-        "dev:local": "env-cmd -f ./env/.env.local refine dev",
-        "dev": "env-cmd -f ./env/.env.dev refine dev",
+        "dev": "env-cmd -f ./env/.env.local refine dev",
+        "dev:dev": "env-cmd -f ./env/.env.dev refine dev",
         "build": "env-cmd -f ./env/.env.prod tsc && refine build",
         "build:prod": "env-cmd -f ./env/.env.prod tsc && refine build",
         "build:dev": "env-cmd -f ./env/.env.dev tsc && refine build",

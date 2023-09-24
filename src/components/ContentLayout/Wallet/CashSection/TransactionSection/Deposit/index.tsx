@@ -13,7 +13,6 @@ const index: React.FC = () => {
     const [form] = Form.useForm();
     const { data: identity } = useGetIdentity<TUser>();
     const userId = identity?.id;
-    console.log('⭐  userId', userId);
     const { mutate: deposit, isLoading } = useCustomMutation();
     const apiUrl = useApiUrl();
     const { modalProps, show, close } = useModal();

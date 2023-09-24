@@ -1,5 +1,4 @@
-const index = () => {
-    return <div>index</div>;
-};
-
-export default index;
+export { default as ListCommission } from './List';
+export { default as CreateCommission } from './Create';
+export { default as ShowCommission } from './Show';
+export { default as EditCommission } from './Edit';

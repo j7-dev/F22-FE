@@ -5,6 +5,7 @@ import { Sider, ThemedTitleV2 } from '@refinedev/antd';
 import { Layout as AntdLayout, Menu, Grid, theme, Button } from 'antd';
 import { UnorderedListOutlined, RightOutlined, LeftOutlined, RadarChartOutlined } from '@ant-design/icons';
 import { antLayoutSider, antLayoutSiderMobile } from './styles';
+import { nanoid } from 'nanoid';
 
 const { useToken } = theme;
 const siderWidth = 320;
@@ -30,7 +31,7 @@ const CustomSider: typeof Sider = () => {
 
             if (children.length > 0) {
                 return (
-                    <SubMenu key={route} icon={icon ?? <UnorderedListOutlined />} title={label}>
+                    <SubMenu key={nanoid()} icon={icon ?? <UnorderedListOutlined />} title={label}>
                         {renderTreeView(children, theSelectedKey)}
                     </SubMenu>
                 );
@@ -38,7 +39,7 @@ const CustomSider: typeof Sider = () => {
             const isSelected = route === theSelectedKey;
             const isRoute = !(parent !== undefined && children.length === 0);
             return (
-                <CanAccess key={route} resource={name.toLowerCase()} action="list" params={{ resource: item }}>
+                <CanAccess key={nanoid()} resource={name.toLowerCase()} action="list" params={{ resource: item }}>
                     <Menu.Item
                         key={route}
                         style={{
