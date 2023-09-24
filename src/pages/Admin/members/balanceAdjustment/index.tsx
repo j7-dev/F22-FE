@@ -1,5 +1,7 @@
+import { Create } from '@/components/resources/transactionRecords';
+
 const index = () => {
-    return <div>index</div>;
+    return <Create />;
 };
 
 export default index;

@@ -67,9 +67,9 @@ export const resources = [
     },
 
     {
-        name: 'balance-adjustment',
+        name: 'transaction-records',
         identifier: 'balance-adjustment',
-        list: '/refine/members/balance-adjustment',
+        create: '/refine/members/balance-adjustment',
         meta: {
             parent: 'members',
             label: 'Balance Adjustment 人工存提',
@@ -81,15 +81,6 @@ export const resources = [
         meta: {
             label: 'Member Management 代理商管理',
             icon: <UserAddOutlined />,
-        },
-    },
-    {
-        name: 'balance-adjustment',
-        identifier: 'balance-adjustment',
-        list: '/refine/agents/list',
-        meta: {
-            parent: 'agents',
-            label: 'Balance Adjustment 人工存提',
         },
     },
     {

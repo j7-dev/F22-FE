@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 import { Form, Button, DatePicker, FormProps, Select } from 'antd';
 import dayjs from 'dayjs';
-import { useSelect } from '@refinedev/antd';
-import { TUser } from '@/types';
 import { listTypeAtom } from '../atom';
 import { useAtomValue } from 'jotai';
+import { useUserSelect } from '@/hooks';
 
 const status = ['SUCCESS', 'FAILED', 'CANCEL', 'PENDING', 'REJECTED'];
 
@@ -17,16 +16,9 @@ const { RangePicker } = DatePicker;
 const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
     const listType = useAtomValue(listTypeAtom);
     const form = formProps.form;
-    const { selectProps } = useSelect<TUser>({
-        resource: 'users',
-        optionLabel: 'display_name',
-        filters: [
-            {
-                field: 'role.id',
-                operator: 'eq',
-                value: '1',
-            },
-        ],
+
+    const { selectProps } = useUserSelect({
+        roleType: 'authenticated',
     });
 
     useEffect(() => {

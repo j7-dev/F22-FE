@@ -10,3 +10,9 @@ export type BaseType = {
     createdAt: string;
     updatedAt: string;
 };
+
+export type AmountType = {
+    amount: number;
+    currency: string;
+    amount_type: string;
+};

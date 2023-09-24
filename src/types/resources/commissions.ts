@@ -1,4 +1,4 @@
-import { TUser, BaseType } from '@/types';
+import { TUser, BaseType, AmountType } from '@/types';
 
 export const commissionTypes = ['WINLOSE'] as const;
 
@@ -16,5 +16,14 @@ export type TCommission = BaseType & {
     formula: TCommissionFormula[];
     enabled: boolean;
     currency: string;
+    agents?: TUser[];
+};
+
+export type TCommissionFields = Omit<AmountType, 'amount'> & {
+    label: string;
+    description?: string;
+    type: TCommissionType;
+    formula?: TCommissionFormula[];
+    enabled: boolean;
     agents?: TUser[];
 };

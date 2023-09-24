@@ -29,7 +29,6 @@ const adminRoutes = () => {
 
             <Route path="/refine/agents">
                 <Route index element={<ListAgent />} />
-                <Route path="list" element={<ListAgent />} />
                 <Route path="create" element={<CreateAgent />} />
                 <Route path="commissions" element={<ListCommission />} />
                 <Route path="commissions/create" element={<CreateCommission />} />

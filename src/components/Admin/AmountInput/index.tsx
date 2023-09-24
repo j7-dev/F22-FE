@@ -2,7 +2,9 @@ import { useEffect } from 'react';
 import { Form, Space, Select, InputNumber } from 'antd';
 import { useGetSiteSetting } from '@/hooks';
 
-const index = () => {
+const index: React.FC<{
+    hideAmount?: boolean;
+}> = ({ hideAmount = false }) => {
     const form = Form.useFormInstance();
     const siteSetting = useGetSiteSetting();
 
@@ -29,9 +31,12 @@ const index = () => {
 
     return (
         <Space.Compact block className="w-full">
-            <Form.Item className="w-full" label="Amount" name={['amount']} rules={[{ required: true, message: 'amount is required' }]}>
-                <InputNumber min={0} precision={0} className="w-full relative -top-[1px]" />
-            </Form.Item>
+            {!hideAmount && (
+                <Form.Item className="w-full" label="Amount" name={['amount']} rules={[{ required: true, message: 'amount is required' }]}>
+                    <InputNumber min={0} precision={0} className="w-full relative -top-[1px]" />
+                </Form.Item>
+            )}
+
             <Form.Item className="min-w-[5rem]" label="&nbsp;" name={['currency']}>
                 <Select
                     options={supportCurrencies.map((currency: string) => ({

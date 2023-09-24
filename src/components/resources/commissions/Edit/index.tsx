@@ -1,7 +1,7 @@
 import FormComponent from '../FormComponent';
 import { useUpdate, HttpError } from '@refinedev/core';
 import { Edit, useForm } from '@refinedev/antd';
-import { TCommission } from '@/types';
+import { TCommission, TCommissionFields } from '@/types';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { useParams } from 'react-router-dom';
@@ -12,7 +12,7 @@ const index: React.FC<{
     const { id } = useParams();
     const { mutate: update } = useUpdate();
 
-    const { form, formProps, saveButtonProps } = useForm<TCommission, HttpError, TCommission>();
+    const { form, formProps, saveButtonProps } = useForm<TCommission, HttpError, TCommissionFields>();
     const handleCreate = () => {
         if (!id) return;
         form.validateFields()

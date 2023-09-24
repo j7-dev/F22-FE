@@ -1,6 +1,6 @@
-import { BaseType } from '@/types';
+import { BaseType, AmountType, TUser } from '@/types';
 
-export type TBalance = BaseType & {
-    amount: number;
-    currency: string;
-};
+export type TBalance = BaseType &
+    AmountType & {
+        user?: TUser;
+    };

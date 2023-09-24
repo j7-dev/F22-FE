@@ -1,7 +1,7 @@
 import { Dayjs } from 'dayjs';
-import { TTransction } from '@/types';
+import { TTransaction } from '@/types';
 
-export type DataType = TTransction;
+export type DataType = TTransaction;
 
 export type TSearchProps = {
     dateRange?: [Dayjs, Dayjs] | undefined;

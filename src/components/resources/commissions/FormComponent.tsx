@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
 import { Form, Input, Switch, Select, FormProps, InputNumber, Button } from 'antd';
-import { useSelect } from '@refinedev/antd';
-import { TUser, commissionTypes } from '@/types';
-import { useGetSiteSetting } from '@/hooks';
+import { commissionTypes } from '@/types';
+import { useGetSiteSetting, useUserSelect } from '@/hooks';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 
 const FormComponent: React.FC<{
@@ -19,16 +18,8 @@ const FormComponent: React.FC<{
     const defaultAmountType = siteSetting?.defaut_amount_type || 'CASH';
     const supportAmountTypes = siteSetting?.support_amount_types || ['CASH'];
 
-    const { selectProps: agentSelectProps } = useSelect<TUser>({
-        resource: 'users',
-        optionLabel: 'display_name',
-        filters: [
-            {
-                field: 'role.id',
-                operator: 'eq',
-                value: 3, // TODO,
-            },
-        ],
+    const { selectProps: agentSelectProps } = useUserSelect({
+        roleType: 'agent',
     });
 
     useEffect(() => {

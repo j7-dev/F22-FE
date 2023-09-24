@@ -1,7 +1,7 @@
 import FormComponent from '../FormComponent';
 import { useCreate, HttpError, useGo } from '@refinedev/core';
 import { Create, useForm } from '@refinedev/antd';
-import { TCommission } from '@/types';
+import { TCommission, TCommissionFields } from '@/types';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 
@@ -11,7 +11,7 @@ const index: React.FC<{
     const { mutate: create } = useCreate();
     const go = useGo();
 
-    const { form, formProps, saveButtonProps } = useForm<TCommission, HttpError, TCommission>();
+    const { form, formProps, saveButtonProps } = useForm<TCommission, HttpError, TCommissionFields>();
     const handleCreate = () => {
         form.validateFields()
             .then((values) => {
