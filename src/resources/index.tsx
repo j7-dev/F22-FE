@@ -86,10 +86,14 @@ export const resources = [
     {
         name: 'users',
         identifier: 'agents-create',
-        list: '/refine/agents/create',
+        list: '/refine/agents/list',
+        create: '/refine/agents/create',
+        show: '/refine/agents/show/:id',
+        edit: '/refine/agents/edit/:id',
+        delete: '/refine/agents/delete/:id',
         meta: {
             parent: 'agents',
-            label: 'Create Agent 新增代理商',
+            label: 'All Agents 代理商管理',
         },
     },
     {

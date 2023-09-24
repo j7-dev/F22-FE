@@ -1,19 +1,36 @@
 import FormComponent from '@/components/resources/users/FormComponent';
 import { useUpdate, HttpError } from '@refinedev/core';
 import { Edit, useForm } from '@refinedev/antd';
-import { TUser, TRoleType } from '@/types';
+import { TUser } from '@/types';
 import dayjs, { Dayjs } from 'dayjs';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
+import { useParams } from 'react-router-dom';
 
 const index: React.FC<{
-    roleType?: TRoleType;
     notificationConfig?: ArgsProps;
-}> = ({ notificationConfig = {}, roleType }) => {
+}> = ({ notificationConfig = {} }) => {
     const { mutate: update } = useUpdate();
+    const { id } = useParams();
 
-    const { form, formProps, saveButtonProps } = useForm<TUser, HttpError, TUser & { birthday: Dayjs }>();
+    const { form, formProps, saveButtonProps, formLoading } = useForm<TUser, HttpError, TUser & { birthday: Dayjs }>({
+        meta: {
+            populate: {
+                agent: {
+                    fields: ['id'],
+                },
+                top_agent: {
+                    fields: ['id'],
+                },
+                role: {
+                    fields: ['type'],
+                },
+            },
+        },
+    });
+
     const handleUpdate = () => {
+        if (!id) return;
         form.validateFields()
             .then((values) => {
                 const birthday = values?.birthday as Dayjs;
@@ -29,14 +46,14 @@ const index: React.FC<{
                     {
                         resource: 'users',
                         values: formattedValues,
-                        id: values.id,
+                        id,
                     },
                     {
                         onSuccess: () => {
                             form.resetFields();
                             notification.success({
-                                key: 'create-user',
-                                message: 'Create user successfully',
+                                key: 'edit-user',
+                                message: 'Edit user successfully',
                                 ...notificationConfig,
                             });
                         },
@@ -50,7 +67,7 @@ const index: React.FC<{
 
     return (
         <Edit saveButtonProps={saveButtonProps}>
-            <FormComponent formType="edit" formProps={formProps} handler={handleUpdate} roleType={roleType} />
+            <FormComponent formType="edit" formProps={formProps} formLoading={formLoading} handler={handleUpdate} />
         </Edit>
     );
 };

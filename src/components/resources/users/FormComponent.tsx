@@ -1,34 +1,35 @@
 import { useEffect } from 'react';
 import { Form, Input, Switch, Radio, DatePicker, Select, FormProps } from 'antd';
-import { TRole, TUser, TRoleType } from '@/types';
-import { nanoid } from 'nanoid';
-import { useCustom } from '@refinedev/core';
-import { API_URL, getRoleId } from '@/utils';
+import { TRole, TRoleType, TUser } from '@/types';
+import dayjs, { Dayjs } from 'dayjs';
+import { isString, isObject } from 'lodash-es';
+import { useUserSelect, useGetSiteSetting } from '@/hooks';
 import { useSelect } from '@refinedev/antd';
-import dayjs from 'dayjs';
-import { isString } from 'lodash-es';
+import { DefaultOptionType } from 'rc-select/lib/Select';
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
     formProps: FormProps;
     handler: () => void;
-    roleType?: TRoleType;
-}> = ({ formType, formProps, handler, roleType = 'authenticated' }) => {
+    defaultRoleType?: TRoleType;
+    formLoading?: boolean;
+}> = ({ formType, formProps, handler, defaultRoleType = 'authenticated', formLoading }) => {
     const form = formProps.form;
-    const { data: roleData, isLoading: roleIsLoading } = useCustom({
-        url: `${API_URL}/api/users-permissions/roles`,
-        method: 'get',
-    });
-    const roles = (roleData?.data?.roles || []) as TRole[];
+    const siteSetting = useGetSiteSetting();
+    const rolesMapping = siteSetting?.roles || {};
     const roleSelectProps = {
-        loading: roleIsLoading,
-        options: roles
-            .filter((role) => role.type !== 'public')
-            .map((role) => ({
-                label: role.name,
-                value: role.id,
-            })),
+        options: Object.keys(rolesMapping)
+            .filter((k) => k === 'agent' || k === 'top_agent')
+            .map((key) => {
+                return {
+                    label: key,
+                    value: rolesMapping?.[key],
+                };
+            }) as DefaultOptionType[],
     };
+
+    const watchRole = Form.useWatch('role', form);
+    const watchRoleType = Object.keys(rolesMapping).find((key) => rolesMapping?.[key] === watchRole);
 
     const { selectProps: vipSelectProps } = useSelect({
         resource: 'vips',
@@ -36,34 +37,27 @@ const FormComponent: React.FC<{
         optionValue: 'id',
     });
 
-    const angentRoleId = roles.find((role) => role.type === 'agent')?.id;
-
-    const { selectProps: agentSelectProps } = useSelect<TUser>({
-        resource: 'users',
-        optionLabel: 'display_name',
-        filters: [
-            {
-                field: 'role.id',
-                operator: 'eq',
-                value: angentRoleId,
-            },
-        ],
+    const { selectProps: topAgentSelectProps } = useUserSelect({
+        roleType: 'top_agent',
     });
 
-    const watchBirthday = Form.useWatch('birthday', form);
+    const { selectProps: agentSelectProps } = useUserSelect({
+        roleType: 'agent',
+    });
 
     useEffect(() => {
-        if (isString(watchBirthday)) {
-            form?.setFieldValue('birthday', dayjs(watchBirthday, 'YYYY-MM-DD'));
+        if (!formLoading && formProps.initialValues) {
+            if (isObject(formProps.initialValues.role as number | TRole)) {
+                formProps.initialValues.role = formProps.initialValues.role.id;
+            }
+            if (isObject(formProps.initialValues.top_agent as number | TUser)) {
+                formProps.initialValues.top_agent = formProps.initialValues.top_agent.id;
+            }
+            if (isString(formProps.initialValues?.birthday as string | Dayjs)) {
+                formProps.initialValues.birthday = dayjs(formProps.initialValues?.birthday, 'YYYY-MM-DD');
+            }
         }
-    }, [watchBirthday]);
-
-    useEffect(() => {
-        if (formType === 'create') {
-            console.log('⭐  useEffect  getRoleId(roleType)', getRoleId(roleType));
-            form?.setFieldValue('role', getRoleId(roleType));
-        }
-    }, []);
+    }, [formLoading]);
 
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
@@ -126,24 +120,33 @@ const FormComponent: React.FC<{
                 </Form.Item>
 
                 <Form.Item name="birthday" label="birthday">
-                    {!isString(watchBirthday) && watchBirthday ? <DatePicker className="w-full" /> : <Input />}
+                    {!isString(formProps.initialValues?.birthday) && formProps.initialValues?.birthday ? <DatePicker className="w-full" /> : <Input />}
                 </Form.Item>
 
                 <Form.Item name="blocked" valuePropName="checked" label="blocked" initialValue={formType === 'create' ? false : undefined}>
                     <Switch />
                 </Form.Item>
-                <Form.Item hidden name="role" label="role" initialValue={formType === 'create' ? 1 : undefined}>
-                    <Select {...roleSelectProps} />
+
+                <Form.Item hidden={watchRoleType !== 'agent' && watchRoleType !== 'top_agent'} name="role" label="role" initialValue={formType === 'create' ? rolesMapping?.[defaultRoleType] : undefined}>
+                    {watchRoleType !== 'agent' && watchRoleType !== 'top_agent' ? <Input /> : <Select {...roleSelectProps} />}
                 </Form.Item>
-                <Form.Item name="vip" label="vip">
-                    <Select {...vipSelectProps} />
-                </Form.Item>
-                <Form.Item name="agent" label="Agent">
-                    <Select {...agentSelectProps} />
-                </Form.Item>
-                <Form.Item name="uuid" label="uuid" hidden initialValue={formType === 'create' ? nanoid() : undefined}>
-                    <Input />
-                </Form.Item>
+                {watchRoleType === 'authenticated' && (
+                    <Form.Item name="vip" label="vip">
+                        <Select {...vipSelectProps} />
+                    </Form.Item>
+                )}
+
+                {watchRoleType === 'agent' && (
+                    <Form.Item name="top_agent" label="Top Agent">
+                        <Select {...topAgentSelectProps} />
+                    </Form.Item>
+                )}
+
+                {watchRoleType === 'authenticated' && (
+                    <Form.Item name="agent" label="Agent">
+                        <Select {...agentSelectProps} />
+                    </Form.Item>
+                )}
             </div>
         </Form>
     );

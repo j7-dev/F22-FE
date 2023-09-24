@@ -1,14 +1,15 @@
 import { Table, Row, Col, Card } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useTable, ShowButton, EditButton } from '@refinedev/antd';
-import { TVip } from '@/types';
+import { TRoleType, TVip } from '@/types';
 import { Link } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
 import { BooleanIndicator } from '@/components/PureComponents';
-import { useCustom } from '@refinedev/core';
+import { useCustom, CrudFilters } from '@refinedev/core';
 import { API_URL } from '@/utils';
 import Filter from './Filter';
 import FilterTags from '@/components/FilterTags';
+import { useGetSiteSetting } from '@/hooks';
 
 type TSearchProps = {
     email?: string;
@@ -16,11 +17,45 @@ type TSearchProps = {
     [key: string]: any;
 };
 
-const DetailedInformation = () => {
+const DetailedInformation: React.FC<{
+    roleType?: TRoleType | TRoleType[];
+}> = ({ roleType = 'authenticated' }) => {
+    const siteSetting = useGetSiteSetting();
+    const rolesMapping = siteSetting?.roles || {};
+
+    const filters: CrudFilters = Array.isArray(roleType)
+        ? [
+              {
+                  operator: 'or',
+                  value: roleType.map((r) => ({
+                      field: 'role.id',
+                      operator: 'eq',
+                      value: rolesMapping?.[r],
+                  })),
+              },
+          ]
+        : [
+              {
+                  field: 'role.id',
+                  operator: 'eq',
+                  value: rolesMapping?.[roleType],
+              },
+          ];
+
     const { tableProps, searchFormProps } = useTable({
         resource: 'users',
         meta: {
-            populate: ['vip'],
+            populate: {
+                vip: {
+                    fields: ['label'],
+                },
+                role: {
+                    fields: ['type'],
+                },
+            },
+        },
+        filters: {
+            permanent: filters,
         },
         onSearch: (values: TSearchProps) => {
             return values?.dateRange
@@ -170,7 +205,7 @@ const DetailedInformation = () => {
             <Col lg={18} xs={24}>
                 <Card title="Search Result">
                     <div className="mb-4">
-                        <FilterTags searchFormProps={searchFormProps} />
+                        <FilterTags form={searchFormProps?.form} />
                     </div>
                     <Table {...formattedTableProps} />
                     <hr className="my-8" />

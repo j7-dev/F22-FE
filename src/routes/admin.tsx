@@ -2,7 +2,7 @@ import { Route } from 'react-router-dom';
 import Home from '@/pages/Admin/home';
 import { StatisticReport, AgentStatistic, MemberStatistic } from '@/pages/Admin/dashboard';
 import { ListMember, CreateMember, ShowMember, EditMember, BalanceAdjustment } from '@/pages/Admin/members';
-import { ListAgent, CreateAgent, AffCommissionTransactions, AffTransactions, ListCommission, CreateCommission, ShowCommission, EditCommission, CommissionSettlement } from '@/pages/Admin/agents';
+import { ListAgent, CreateAgent, EditAgent, AffCommissionTransactions, AffTransactions, ListCommission, CreateCommission, ShowCommission, EditCommission, CommissionSettlement } from '@/pages/Admin/agents';
 import { ListDeposits, ListWithdraws } from '@/pages/Admin/payments';
 import { ListBettingRecords } from '@/pages/Admin/bettingManagement';
 import { VipSetting } from '@/pages/Admin/systemSetting';
@@ -29,7 +29,10 @@ const adminRoutes = () => {
 
             <Route path="/refine/agents">
                 <Route index element={<ListAgent />} />
+                <Route path="list" element={<ListAgent />} />
                 <Route path="create" element={<CreateAgent />} />
+                <Route path="show/:id" element={<ShowMember />} />
+                <Route path="edit/:id" element={<EditAgent />} />
                 <Route path="commissions" element={<ListCommission />} />
                 <Route path="commissions/create" element={<CreateCommission />} />
                 <Route path="commissions/show/:id" element={<ShowCommission />} />

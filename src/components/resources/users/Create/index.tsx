@@ -7,12 +7,11 @@ import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 
 const index: React.FC<{
-    roleType?: TRoleType;
+    defaultRoleType?: TRoleType;
     notificationConfig?: ArgsProps;
-}> = ({ notificationConfig = {}, roleType }) => {
+}> = ({ notificationConfig = {}, defaultRoleType }) => {
     const { mutate: create } = useCreate();
-
-    const { form, formProps, saveButtonProps } = useForm<TUser, HttpError, TUser & { birthday: Dayjs }>();
+    const { form, formProps, saveButtonProps, formLoading } = useForm<TUser, HttpError, TUser & { birthday: Dayjs }>();
     const handleCreate = () => {
         form.validateFields()
             .then((values) => {
@@ -49,7 +48,7 @@ const index: React.FC<{
 
     return (
         <Create saveButtonProps={saveButtonProps}>
-            <FormComponent formType="create" formProps={formProps} handler={handleCreate} roleType={roleType} />
+            <FormComponent formType="create" formProps={formProps} formLoading={formLoading} handler={handleCreate} defaultRoleType={defaultRoleType} />
         </Create>
     );
 };

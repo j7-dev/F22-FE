@@ -1,7 +1,7 @@
 import { Create } from '@/components/resources/users';
 
 const index = () => {
-    return <Create roleType="authenticated" />;
+    return <Create defaultRoleType="authenticated" />;
 };
 
 export default index;

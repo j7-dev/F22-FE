@@ -3,4 +3,5 @@ export { default as AffTransactions } from './affTransactions';
 export * from './commissionSetting';
 export { default as CommissionSettlement } from './commissionSettlement';
 export { default as CreateAgent } from './Create';
-export { default as ListAgent } from './list';
+export { default as ListAgent } from './List';
+export { default as EditAgent } from './Edit';
