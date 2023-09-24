@@ -1,21 +1,21 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useList, useGetIdentity } from '@refinedev/core';
+import { useList } from '@refinedev/core';
 // import { serviceCenterAtom, isShowContentAtom, postContentAtom, PostContent } from '@/components/ContentLayout/Customer/ServiceCenter';
 // import SinglePost from '@/components/ContentLayout/Customer/PostList/PostDetail';
 // import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 // import { nanoid } from 'nanoid';
-import { TsiteNotify, TUser } from '@/types/custom/user';
+import { TSiteNotify } from '@/types';
 import NotifyList from './NotifyList';
+
 //TODO 站內信先拿其他版型覆蓋，待改寫
 const index: React.FC = () => {
     const { t } = useTranslation();
     // const serviceCenterValue = useAtomValue(serviceCenterAtom);
     // const [isShowContent, setIsShowContent] = useAtom(isShowContentAtom);
     // const setPostContent = useSetAtom(postContentAtom);
-    const { data: identity } = useGetIdentity<TUser>();
-    console.log('identity', identity);
-    const { data: siteNotify, isLoading } = useList<TsiteNotify>({
+
+    const { data: siteNotify, isLoading } = useList<TSiteNotify>({
         resource: 'cms-posts',
         meta: {
             populate: '*',
@@ -28,7 +28,7 @@ const index: React.FC = () => {
             },
         ],
     });
-    console.log('siteNotify', siteNotify);
+
     const siteNotifyData = siteNotify?.data as [];
 
     // const handleClick = (data: PostContent) => {
