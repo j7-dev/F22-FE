@@ -1,5 +1,7 @@
+import { Create } from '@/components/resources/users';
+
 const index = () => {
-    return <div>index</div>;
+    return <Create defaultRoleType="agent" />;
 };
 
 export default index;

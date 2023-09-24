@@ -40,7 +40,7 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
         queryClient.clear();
     };
 
-    const displayName = user?.display_name || user?.username || 'Unknown';
+    const displayName = user?.display_name || 'Unknown';
 
     const languages = (i18n?.languages || []).filter((lang) => lang === 'en' || lang === 'ko');
 

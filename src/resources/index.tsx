@@ -4,6 +4,7 @@ import { PiUsersThree } from 'react-icons/pi';
 export const resources = [
     {
         name: 'home',
+        identifier: 'home',
         list: '/refine/home',
         meta: {
             label: 'Home',
@@ -19,6 +20,7 @@ export const resources = [
     },
     {
         name: 'statistic-report',
+        identifier: 'statistic-report',
         list: '/refine/dashboard/statistic-report',
         meta: {
             parent: 'dashboard',
@@ -27,6 +29,7 @@ export const resources = [
     },
     {
         name: 'agent-statistic',
+        identifier: 'agent-statistic',
         list: '/refine/dashboard/agent-statistic',
         meta: {
             parent: 'dashboard',
@@ -35,6 +38,7 @@ export const resources = [
     },
     {
         name: 'member-statistic',
+        identifier: 'member-statistic',
         list: '/refine/dashboard/member-statistic',
         meta: {
             parent: 'dashboard',
@@ -50,6 +54,7 @@ export const resources = [
     },
     {
         name: 'users',
+        identifier: 'members-list',
         list: '/refine/members/list',
         create: '/refine/members/create',
         show: '/refine/members/show/:id',
@@ -62,8 +67,9 @@ export const resources = [
     },
 
     {
-        name: 'balance-adjustment',
-        list: '/refine/members/balance-adjustment',
+        name: 'transaction-records',
+        identifier: 'balance-adjustment',
+        create: '/refine/members/balance-adjustment',
         meta: {
             parent: 'members',
             label: 'Balance Adjustment 人工存提',
@@ -71,58 +77,63 @@ export const resources = [
     },
 
     {
-        name: 'agents',
+        name: 'agent',
         meta: {
             label: 'Member Management 代理商管理',
             icon: <UserAddOutlined />,
         },
     },
     {
-        name: 'list-agents',
-        list: '/refine/agents/list',
+        name: 'users',
+        identifier: 'agents-create',
+        list: '/refine/agent/list',
+        create: '/refine/agent/create',
+        show: '/refine/agent/show/:id',
+        edit: '/refine/agent/edit/:id',
+        delete: '/refine/agent/delete/:id',
         meta: {
-            parent: 'agents',
-            label: 'Balance Adjustment 人工存提',
+            parent: 'agent',
+            label: 'All Agents 代理商管理',
         },
     },
     {
-        name: 'create-agents',
-        list: '/refine/agents/create',
+        name: 'commissions',
+        identifier: 'commissions',
+        list: '/refine/agent/commissions',
+        show: '/refine/agent/commissions/show/:id',
+        create: '/refine/agent/commissions/create',
+        edit: '/refine/agent/commissions/edit/:id',
+        delete: '/refine/agent/commissions/delete/:id',
         meta: {
-            parent: 'agents',
-            label: 'Balance Adjustment 新增代理商',
-        },
-    },
-    {
-        name: 'commission-setting',
-        list: '/refine/agents/commission-setting',
-        meta: {
-            parent: 'agents',
+            parent: 'agent',
             label: 'Commission Setting 佣金設定',
         },
     },
     {
         name: 'commission-settlement',
-        list: '/refine/agents/commission-settlement',
+        identifier: 'commission-settlement',
+        list: '/refine/agent/commission-settlement',
         meta: {
-            parent: 'agents',
+            parent: 'agent',
             label: 'Commission Settlement 佣金計算',
         },
     },
 
     {
-        name: 'aff-transactions',
-        list: '/refine/agents/aff-transactions',
+        name: 'transaction-records',
+        identifier: 'aff-transactions',
+        list: '/refine/agent/all/aff-transactions',
         meta: {
-            parent: 'agents',
+            parent: 'agent',
             label: 'AFF Transactions 代理交易紀錄查詢',
         },
     },
     {
         name: 'aff-commission-transactions',
-        list: '/refine/agents/aff-commission-transactions',
+        identifier: 'aff-commission-transactions',
+        list: '/refine/agent/all/aff-commission-transactions',
         meta: {
-            parent: 'agents',
+            parent: 'agent',
             label: 'AFF Commission Transactions 代理佣金交易紀錄',
         },
     },
@@ -134,16 +145,18 @@ export const resources = [
         },
     },
     {
-        name: 'list-deposits',
-        list: '/refine/payments/list-deposits',
+        name: 'transaction-records',
+        identifier: 'deposits-list',
+        list: '/refine/payments/deposit/list',
         meta: {
             parent: 'payments',
             label: 'All Deposits 公司入款審核',
         },
     },
     {
-        name: 'list-withdraws',
-        list: '/refine/payments/list-withdraws',
+        name: 'transaction-records',
+        identifier: 'withdraws-list',
+        list: '/refine/payments/withdraw/list',
         meta: {
             parent: 'payments',
             label: 'All Withdraws 取款審核',
@@ -157,8 +170,9 @@ export const resources = [
         },
     },
     {
-        name: 'list-betting-records',
-        list: '/refine/betting-management/list-betting-records',
+        name: 'betting-records',
+        identifier: 'betting-records/list',
+        list: '/refine/betting-management/betting-records/list',
         meta: {
             parent: 'betting-management',
             label: 'All Betting Records 投注記錄查詢',
@@ -173,6 +187,7 @@ export const resources = [
     },
     {
         name: 'vips',
+        identifier: 'vips',
         list: '/refine/system-setting/vips',
         create: '/refine/system-setting/vips/create',
         edit: '/refine/system-setting/vips/edit/:id',
