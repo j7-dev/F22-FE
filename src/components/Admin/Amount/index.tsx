@@ -2,10 +2,12 @@ import React from 'react';
 import getSymbolFromCurrency from 'currency-symbol-map';
 
 const index: React.FC<{
-    amount: number;
-    currency: string;
+    amount: number | null;
+    currency: string | null;
     symbol?: boolean;
-}> = ({ amount, currency, symbol = false }) => {
+}> = ({ amount: rawAmount, currency: rawCurrency, symbol = false }) => {
+    const amount = rawAmount || 0;
+    const currency = rawCurrency || '';
     return (
         <span className="text-nowrap">
             <span>{symbol ? getSymbolFromCurrency(currency.toUpperCase()) : currency.toUpperCase()}</span> {amount.toLocaleString()}

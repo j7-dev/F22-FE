@@ -4,9 +4,9 @@ export const transactionTypes = ['BET', 'DEPOSIT', 'WITHDRAW', 'MANUAL', 'COUPON
 export const transactionBy = ['SYSTEM', 'ADMIN', 'USER'] as const;
 export const transactionStatus = ['SUCCESS', 'FAILED', 'CANCEL', 'PENDING', 'REJECTED'] as const;
 
-type TTransactionType = (typeof transactionTypes)[number];
-type TTransactionBy = (typeof transactionBy)[number];
-type TTransactionStatus = (typeof transactionBy)[number];
+export type TTransactionType = (typeof transactionTypes)[number];
+export type TTransactionBy = (typeof transactionBy)[number];
+export type TTransactionStatus = (typeof transactionStatus)[number];
 
 export type TTransaction = BaseType &
     AmountType & {

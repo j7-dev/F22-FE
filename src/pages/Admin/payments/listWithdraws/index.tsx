@@ -1,5 +1,5 @@
 import List from '@/components/resources/transactionRecords/List';
 
-const index = () => <List txnType="WITHDRAW" />;
+const index = () => <List />;
 
 export default index;

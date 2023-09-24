@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
 import { Table, Row, Col, Card, TablePaginationConfig, TableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useTable, List } from '@refinedev/antd';
 import Filter from './Filter';
 import FilterTags from '@/components/FilterTags';
 import { getStatusTag } from '@/utils';
-import { TUser } from '@/types';
+import { TUser, TTransactionType } from '@/types';
 import UserLink from '@/components/Admin/UserLink';
 import VipLink from '@/components/Admin/VipLink';
 import Amount from '@/components/Admin/Amount';
@@ -13,19 +12,59 @@ import { CrudFilters } from '@refinedev/core';
 import { DateTime } from '@/components/PureComponents';
 import { nanoid } from 'nanoid';
 import ApproveButton from './ApporveButton';
-import { DataType, TSearchProps } from './types';
-import { listTypeAtom, selectedRecordsAtom } from './atom';
-import { useAtom, useSetAtom } from 'jotai';
+import { DataType, TSearchProps, TParams } from './types';
+import { selectedRecordsAtom } from './atom';
+import { useSetAtom } from 'jotai';
+import { useParams } from 'react-router-dom';
+import { useGetSiteSetting } from '@/hooks';
 
-const index: React.FC<{
-    txnType: 'DEPOSIT' | 'WITHDRAW';
-}> = ({ txnType }) => {
-    const [listType, setListType] = useAtom(listTypeAtom);
-    useEffect(() => {
-        setListType(txnType);
-    }, [txnType]);
+const index = () => {
+    const { type: listTypeLowerCase, roleType } = useParams<TParams>();
+    const siteSetting = useGetSiteSetting();
+    const rolesMapping = siteSetting?.roles || {};
+
+    const listType = (listTypeLowerCase || '')?.toUpperCase() as TTransactionType & 'ALL';
 
     const setSelectedRecords = useSetAtom(selectedRecordsAtom);
+
+    const getPermanentFilters = (): CrudFilters => {
+        const typeFilter =
+            listType === 'ALL'
+                ? []
+                : [
+                      {
+                          field: 'type',
+                          operator: 'eq',
+                          value: listType,
+                      },
+                  ];
+        const roleFilter = roleType
+            ? [
+                  {
+                      field: 'user.role.id',
+                      operator: 'eq',
+                      value: rolesMapping?.[roleType],
+                  },
+              ]
+            : [];
+
+        const combinedFilter = [...typeFilter, ...roleFilter];
+
+        const filters = (
+            combinedFilter.length > 1
+                ? [
+                      {
+                          operator: 'and',
+                          value: combinedFilter,
+                      },
+                  ]
+                : combinedFilter
+        ) as CrudFilters;
+
+        return filters;
+    };
+
+    const permanentFilters = getPermanentFilters();
 
     const { tableProps, searchFormProps } = useTable({
         resource: 'transaction-records',
@@ -37,18 +76,15 @@ const index: React.FC<{
                         vip: {
                             fields: ['label'],
                         },
+                        role: {
+                            fields: ['id'],
+                        },
                     },
                 },
             },
         },
         filters: {
-            permanent: [
-                {
-                    field: 'type',
-                    operator: 'eq',
-                    value: listType,
-                },
-            ],
+            permanent: permanentFilters,
             initial:
                 listType === 'WITHDRAW'
                     ? [
@@ -71,6 +107,11 @@ const index: React.FC<{
                     field: 'createdAt',
                     operator: 'lt',
                     value: values?.dateRange ? values?.dateRange[1]?.format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
+                },
+                {
+                    field: 'type',
+                    operator: 'eq',
+                    value: values?.type,
                 },
                 {
                     field: 'status',

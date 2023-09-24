@@ -50,6 +50,9 @@ const FormComponent: React.FC<{
             if (isObject(formProps.initialValues.role as number | TRole)) {
                 formProps.initialValues.role = formProps.initialValues.role.id;
             }
+            if (isObject(formProps.initialValues.agent as number | TUser)) {
+                formProps.initialValues.agent = formProps.initialValues.agent.id;
+            }
             if (isObject(formProps.initialValues.top_agent as number | TUser)) {
                 formProps.initialValues.top_agent = formProps.initialValues.top_agent.id;
             }

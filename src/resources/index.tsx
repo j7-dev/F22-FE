@@ -77,7 +77,7 @@ export const resources = [
     },
 
     {
-        name: 'agents',
+        name: 'agent',
         meta: {
             label: 'Member Management 代理商管理',
             icon: <UserAddOutlined />,
@@ -86,54 +86,54 @@ export const resources = [
     {
         name: 'users',
         identifier: 'agents-create',
-        list: '/refine/agents/list',
-        create: '/refine/agents/create',
-        show: '/refine/agents/show/:id',
-        edit: '/refine/agents/edit/:id',
-        delete: '/refine/agents/delete/:id',
+        list: '/refine/agent/list',
+        create: '/refine/agent/create',
+        show: '/refine/agent/show/:id',
+        edit: '/refine/agent/edit/:id',
+        delete: '/refine/agent/delete/:id',
         meta: {
-            parent: 'agents',
+            parent: 'agent',
             label: 'All Agents 代理商管理',
         },
     },
     {
         name: 'commissions',
         identifier: 'commissions',
-        list: '/refine/agents/commissions',
-        show: '/refine/agents/commissions/show/:id',
-        create: '/refine/agents/commissions/create',
-        edit: '/refine/agents/commissions/edit/:id',
-        delete: '/refine/agents/commissions/delete/:id',
+        list: '/refine/agent/commissions',
+        show: '/refine/agent/commissions/show/:id',
+        create: '/refine/agent/commissions/create',
+        edit: '/refine/agent/commissions/edit/:id',
+        delete: '/refine/agent/commissions/delete/:id',
         meta: {
-            parent: 'agents',
+            parent: 'agent',
             label: 'Commission Setting 佣金設定',
         },
     },
     {
         name: 'commission-settlement',
         identifier: 'commission-settlement',
-        list: '/refine/agents/commission-settlement',
+        list: '/refine/agent/commission-settlement',
         meta: {
-            parent: 'agents',
+            parent: 'agent',
             label: 'Commission Settlement 佣金計算',
         },
     },
 
     {
-        name: 'aff-transactions',
+        name: 'transaction-records',
         identifier: 'aff-transactions',
-        list: '/refine/agents/aff-transactions',
+        list: '/refine/agent/all/aff-transactions',
         meta: {
-            parent: 'agents',
+            parent: 'agent',
             label: 'AFF Transactions 代理交易紀錄查詢',
         },
     },
     {
         name: 'aff-commission-transactions',
         identifier: 'aff-commission-transactions',
-        list: '/refine/agents/aff-commission-transactions',
+        list: '/refine/agent/all/aff-commission-transactions',
         meta: {
-            parent: 'agents',
+            parent: 'agent',
             label: 'AFF Commission Transactions 代理佣金交易紀錄',
         },
     },
@@ -147,7 +147,7 @@ export const resources = [
     {
         name: 'transaction-records',
         identifier: 'deposits-list',
-        list: '/refine/payments/deposits/list',
+        list: '/refine/payments/deposit/list',
         meta: {
             parent: 'payments',
             label: 'All Deposits 公司入款審核',
@@ -156,7 +156,7 @@ export const resources = [
     {
         name: 'transaction-records',
         identifier: 'withdraws-list',
-        list: '/refine/payments/withdraws/list',
+        list: '/refine/payments/withdraw/list',
         meta: {
             parent: 'payments',
             label: 'All Withdraws 取款審核',

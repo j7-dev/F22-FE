@@ -1,12 +1,16 @@
 import { Dayjs } from 'dayjs';
-import { TTransaction } from '@/types';
+import { TTransaction, TTransactionType, TTransactionStatus, TRoleType } from '@/types';
 
 export type DataType = TTransaction;
 
 export type TSearchProps = {
     dateRange?: [Dayjs, Dayjs] | undefined;
-    status?: string | undefined;
+    type?: TTransactionType | 'ALL' | undefined;
+    status?: TTransactionStatus | undefined;
     user?: number | undefined;
 };
 
-export type TListType = 'DEPOSIT' | 'WITHDRAW';
+export type TParams = {
+    type: string;
+    roleType: TRoleType | undefined;
+};

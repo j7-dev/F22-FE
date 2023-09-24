@@ -1,20 +1,26 @@
 import { useEffect } from 'react';
 import { Form, Button, DatePicker, FormProps, Select } from 'antd';
 import dayjs from 'dayjs';
-import { listTypeAtom } from '../atom';
-import { useAtomValue } from 'jotai';
 import { useUserSelect } from '@/hooks';
+import { useParams } from 'react-router-dom';
+import { TTransactionType, transactionStatus, transactionTypes } from '@/types';
+import { TParams } from '../types';
 
-const status = ['SUCCESS', 'FAILED', 'CANCEL', 'PENDING', 'REJECTED'];
+export const statusOptions = transactionStatus.map((s) => ({
+    label: s,
+    value: s,
+}));
 
-export const statusOptinos = status.map((s) => ({
+export const typeOptions = transactionTypes.map((s) => ({
     label: s,
     value: s,
 }));
 
 const { RangePicker } = DatePicker;
 const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
-    const listType = useAtomValue(listTypeAtom);
+    const { type: listTypeLowerCase } = useParams<TParams>();
+    const listType = (listTypeLowerCase || '')?.toUpperCase() as TTransactionType & 'ALL';
+
     const form = formProps.form;
 
     const { selectProps } = useUserSelect({
@@ -31,8 +37,14 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
             <Form.Item label="Date" name={['dateRange']} initialValue={[dayjs().subtract(7, 'day'), dayjs()]}>
                 <RangePicker className="w-full" />
             </Form.Item>
+            {listType === 'ALL' && (
+                <Form.Item label="Type" name={['type']}>
+                    <Select options={typeOptions} allowClear />
+                </Form.Item>
+            )}
+
             <Form.Item label="Status" name={['status']}>
-                <Select options={statusOptinos} allowClear />
+                <Select options={statusOptions} allowClear />
             </Form.Item>
             <Form.Item label="User" name={['user']}>
                 <Select {...selectProps} allowClear />
