@@ -1,5 +1,7 @@
 import { Tag } from 'antd';
 
+export const iso8601Format = 'YYYY-MM-DDTHH:mm:ss.SSS[Z]';
+
 export const allowedRoles = ['agent', 'admin'];
 
 export const languages = [
