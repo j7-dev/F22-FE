@@ -47,7 +47,7 @@ const NavBar: React.FC = () => {
                         </div>
                     </div>
                     {/* 桌機選單 */}
-                    <div className="hidden transition-all duration-300 basis-full grow xl:flex flex-row justify-between items-center">
+                    <div className="hidden relative transition-all duration-300 basis-full grow xl:flex flex-row justify-between items-center">
                         <NewsMarquee />
                         <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
                             {isLogin && <UserInfo />}
