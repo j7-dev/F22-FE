@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSetAtom } from 'jotai';
-import { popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
+import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 
 const Secbar: React.FC = () => {
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);

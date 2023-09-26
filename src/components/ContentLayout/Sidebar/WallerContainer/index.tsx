@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
-import { popupIsOpenAtom, IsLoginAtom } from '@/components/ContentLayout/LoginModule';
+import { popupIsOpenAtom, IsLoginAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { useLogout, useIsAuthenticated } from '@refinedev/core';
 import depositImg from '@/assets/images/deposit-icon-hover.svg';
 import withdrawImg from '@/assets/images/withdraw-icon-hover.svg';

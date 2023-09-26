@@ -4,7 +4,7 @@ import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg/';
 import coinIcon from '@/assets/images/coin-icon.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 // import { getFakeImg } from '@/pages/Content/Taxonomy/Live/Evolution/fakeGameData';
-import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
+import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { cloneDeep } from 'lodash';
 import { requestAtomType } from '@/types';
 import { useCustomMutation } from '@refinedev/core';

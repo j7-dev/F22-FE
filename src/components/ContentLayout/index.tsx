@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
-import Popup from './LoginPopUp';
+import Popup from './Header/LoginPopUp';
 import GamePopup from './Games/Game/Popup';
 import { atom, useAtom, useSetAtom } from 'jotai';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';

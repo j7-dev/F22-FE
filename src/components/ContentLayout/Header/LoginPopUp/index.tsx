@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { GrFormClose } from 'react-icons/gr';
 import logoLogin from '@/assets/images/logo.png';
-import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/LoginModule';
+import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/Header/LoginModule';
 import Login from './Login';
 import SignUp from './SignUp';
 

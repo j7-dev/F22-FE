@@ -4,11 +4,11 @@
 import React, { useEffect, useState } from 'react';
 import { useSetAtom } from 'jotai';
 import { Form, Input, Button } from 'antd';
+import { useRegister } from '@refinedev/core';
+import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { AiOutlineMail } from 'react-icons/ai';
-import { useRegister } from '@refinedev/core';
-import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/LoginModule';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
 
 type LoginVariables = {
     email: string;

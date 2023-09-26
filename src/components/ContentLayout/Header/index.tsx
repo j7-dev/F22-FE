@@ -1,14 +1,10 @@
 import React from 'react';
 import NavBar from './NavBar';
-import TopBar from './TopBar';
-// import Secbar from './SecBar';
 
 export const Header: React.FC = () => (
     <>
-        <header className="flex z-40 flex-wrap md:justify-start md:flex-nowrap w-full text-sm sm:flex-col">
-            <TopBar />
+        <header className="mb-4 relative flex z-40 flex-wrap md:justify-start md:flex-nowrap w-full text-sm sm:flex-col shadow-[0_1px_6px_0px_rgba(0,0,0,0.2)]">
             <NavBar />
-            {/* <Secbar /> */}
         </header>
     </>
 );
