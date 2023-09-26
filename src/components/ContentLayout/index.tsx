@@ -43,7 +43,7 @@ const Layout = () => {
             >
                 <Sidebar />
             </div>
-            <div className="rightContent relative xl:pl-20" onClick={handleCloseMbSidebar}>
+            <div className="rightContent relative w-full xl:pl-20" onClick={handleCloseMbSidebar}>
                 <Header />
                 <Outlet />
                 <Footer />
