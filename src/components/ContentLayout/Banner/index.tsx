@@ -7,13 +7,11 @@ import { Pagination } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import newBanner1 from '@/assets/images/newBanner1.png';
-import newBanner2 from '@/assets/images/newBanner2.png';
-import newBanner3 from '@/assets/images/newBanner3.png';
+import newBanner1 from '@/assets/images/messageImage_1695738233708.jpg';
 
 const Banner: React.FC = () => {
     //Banner圖片陣列
-    const bannerArray = [newBanner1, newBanner2, newBanner3];
+    const bannerArray = [newBanner1, newBanner1];
     return (
         <div className="relative banner md:w-full mt-10 mb-4 ">
             <Swiper
