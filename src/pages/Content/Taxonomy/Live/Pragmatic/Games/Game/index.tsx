@@ -3,7 +3,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 // import coinIcon from '@/assets/images/coin-icon.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
-import { useCustomMutation, useGetLocale } from '@refinedev/core';
+import { useCustomMutation, useGetLocale, useGetIdentity } from '@refinedev/core';
 import { API_URL } from '@/utils';
 import { FaGamepad } from 'react-icons/fa';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
@@ -19,6 +19,7 @@ type GameProps = {
 const index: React.FC<GameProps> = ({ data = {} }) => {
     const locale = useGetLocale();
     const currentLocale = locale();
+    const { data: identity } = useGetIdentity<{ id: number }>();
     // console.log('game');
     const isLogin = useAtomValue(IsLoginAtom);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
@@ -32,7 +33,7 @@ const index: React.FC<GameProps> = ({ data = {} }) => {
         } else {
             openGame(
                 {
-                    url: `${API_URL}/api/pp/opengame?language=${currentLocale}&symbol=${data.gameID}`,
+                    url: `${API_URL}/api/pp/opengame?language=${currentLocale}&symbol=${data.gameID}&user_id=${identity?.id}`,
                     method: 'post',
                     values: {},
                 },
