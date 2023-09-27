@@ -1,3 +1,8 @@
+export type TLineData = {
+    date: string;
+    value: number | string;
+};
+
 export type DataType = {
     date: string;
     onlineMembers: string;

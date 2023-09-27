@@ -1,41 +1,40 @@
 import { Line, LineConfig } from '@ant-design/plots';
 import { Tag } from 'antd';
-
-type TLineData = {
-    date: string;
-    value: number;
-};
+import { TLineData } from '../types';
 
 const LineChart: React.FC<{
     data: TLineData[];
     title: string;
     titleColor: string;
     yAxis: string;
-}> = ({ data, title, titleColor, yAxis }) => {
+    isLoading: boolean;
+}> = ({ data, title, titleColor, yAxis, isLoading }) => {
     const config: LineConfig = {
-        data,
+        data: data,
         padding: 'auto',
         xField: 'date',
         yField: 'value',
         xAxis: {
             // type: 'timeCat',
-            tickCount: 5,
+            tickCount: 7,
         },
         yAxis: {
             title: {
                 text: yAxis,
             },
         },
-        smooth: true,
+        smooth: false,
     };
 
     return (
-        <>
+        <div>
             <Tag color={titleColor} className="mb-8">
                 {title}
             </Tag>
-            <Line {...config} />
-        </>
+            <div className="h-[200px] w-full relative">
+                <Line {...config} loading={isLoading} />
+            </div>
+        </div>
     );
 };
 

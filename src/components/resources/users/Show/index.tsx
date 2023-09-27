@@ -35,11 +35,11 @@ const index = () => {
                             <ObjectTable />
                         </Card>
                     </Col>
-                    <Col lg={12} xs={24}>
+                    {/* <Col lg={12} xs={24}>
                         <Card title="Search Result">
                             <hr className="my-8" />
                         </Card>
-                    </Col>
+                    </Col> */}
                 </Row>
             </Show>
         </>
