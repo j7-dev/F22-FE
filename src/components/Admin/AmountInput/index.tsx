@@ -11,7 +11,7 @@ const index: React.FC<{
     const defaultCurrency = siteSetting?.default_currency || 'KRW';
     const supportCurrencies = siteSetting?.support_currencies || ['KRW'];
 
-    const defaultAmountType = siteSetting?.defaut_amount_type || 'CASH';
+    const defaultAmountType = siteSetting?.default_amount_type || 'CASH';
     const supportAmountTypes = siteSetting?.support_amount_types || ['CASH'];
 
     useEffect(() => {

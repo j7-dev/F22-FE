@@ -17,7 +17,7 @@ type TSiteSetting = {
             updatedAt: string;
             default_currency: string;
             support_currencies: string[];
-            defaut_amount_type: string;
+            default_amount_type: string;
             support_amount_types: string[];
         };
     };

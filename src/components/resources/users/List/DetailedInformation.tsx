@@ -7,7 +7,7 @@ import { API_URL } from '@/utils';
 import Filter from './Filter';
 import FilterTags from '@/components/FilterTags';
 import { useGetSiteSetting } from '@/hooks';
-import columns from './columns';
+import useColumns from './hooks/useColumns';
 
 type TSearchProps = {
     email?: string;
@@ -19,7 +19,10 @@ const DetailedInformation: React.FC<{
     roleType?: TRoleType | TRoleType[];
 }> = ({ roleType = 'authenticated' }) => {
     const siteSetting = useGetSiteSetting();
+    const currency = siteSetting?.default_currency || 'KRW';
+    const amount_type = siteSetting?.default_amount_type || 'CASH';
     const rolesMapping = siteSetting?.roles || {};
+    const columns = useColumns();
 
     const filters: CrudFilters = Array.isArray(roleType)
         ? [
@@ -60,7 +63,34 @@ const DetailedInformation: React.FC<{
                     fields: ['amount', 'currency', 'amount_type'],
                 },
                 transaction_records: {
-                    fields: '*',
+                    fields: ['type', 'amount', 'currency', 'amount_type', 'status', 'createdAt'],
+                    filters: {
+                        $or: [
+                            {
+                                type: 'DEPOSIT',
+                                status: 'SUCCESS',
+                                currency,
+                                amount_type,
+                            },
+                            {
+                                type: 'WITHDRAW',
+                                status: 'SUCCESS',
+                                currency,
+                                amount_type,
+                            },
+                            {
+                                $and: [
+                                    {
+                                        type: 'BET',
+                                        status: 'SUCCESS',
+                                        currency,
+                                        amount_type,
+                                    },
+                                ],
+                            },
+                        ],
+                    },
+                    sort: 'createdAt:desc',
                 },
             },
         },
@@ -109,7 +139,7 @@ const DetailedInformation: React.FC<{
     const formattedTableProps = {
         ...tableProps,
 
-        scroll: { x: 1600 },
+        scroll: { x: 3200 },
         columns,
         rowKey: 'userId',
     };
