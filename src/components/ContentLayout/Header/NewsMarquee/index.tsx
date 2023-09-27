@@ -14,7 +14,7 @@ const WrapperContainer = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    top: 0
+    top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
