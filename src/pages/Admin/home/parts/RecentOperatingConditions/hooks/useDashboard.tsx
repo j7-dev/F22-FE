@@ -7,7 +7,7 @@ const useDashboard = () => {
     const start = dayjs().subtract(7, 'day').startOf('day').format(iso8601Format);
     const end = dayjs().endOf('day').format(iso8601Format);
     const result = useCustom({
-        url: `${apiUrl}/utility/dashboard/home`,
+        url: `${apiUrl}/utility/statistic/recent`,
         method: 'get',
         config: {
             query: {
