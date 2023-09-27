@@ -12,15 +12,15 @@ const Wallet: React.FC = () => {
     const selectedSection = useAtomValue(selectedSectionAtom);
     const switchSection: { [key: string]: JSX.Element } = {
         // MyBalance: <CashSection section="MyBalance" />,
-        Deposit: <CashSection section="Deposit" />,
-        Withdraw: <CashSection section="Withdraw" />,
+        deposit: <CashSection section="deposit" />,
+        withdraw: <CashSection section="withdraw" />,
         siteNotify: <CashSection section="siteNotify" />,
         bankAccount: <CashSection section="bankAccount" />,
-        CouponHistory: <RewardSection section="CouponHistory" />,
+        couponHistory: <RewardSection section="couponHistory" />,
         // BonusPoint: <RewardSection section="BonusPoint" />,
-        RolloverHistory: <AccountSection section="RolloverHistory" />,
-        CashHistory: <AccountSection section="CashHistory" />,
-        ChangePassword: <AccountSection section="ChangePassword" />,
+        rolloverHistory: <AccountSection section="rolloverHistory" />,
+        cashHistory: <AccountSection section="cashHistory" />,
+        changePassword: <AccountSection section="changePassword" />,
     };
     const selectSection = selectedSection;
 

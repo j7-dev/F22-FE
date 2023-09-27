@@ -120,7 +120,7 @@ const Marquee = ({ list, time, ...props }) => {
 const DATA_LIST = ['Marquee Text Test 1'];
 const index: React.FC = () => {
     return (
-        <div className="NewsMarquee relative flex items-center gap-2.5 overflow-hidden">
+        <div className="NewsMarquee relative flex items-center gap-2.5 overflow-hidden w-1/3">
             <img src={iconSpeaker} />
             {/* <span className="">Lorem ipsum dolor sit amet consectetur. Auctor rhoncus non pharetra sollicitudin.</span> */}
             <div className="w-[500px]">

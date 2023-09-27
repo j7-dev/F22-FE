@@ -37,7 +37,7 @@ const NavBar: React.FC = () => {
         <>
             {/* <!-- Navbar --> */}
             <div className="Navbar relative w-full bg-white md:flex md:items-center md:justify-between px-4 sm:px-6 lg:px-8">
-                <nav className="relative max-w-7xl w-full py-3 xl:flex md:items-center xl:justify-between md:py-0  xl:mx-auto " aria-label="Global">
+                <nav className="relative w-full py-3 xl:flex md:items-center xl:justify-between md:py-0  xl:mx-auto " aria-label="Global">
                     {/* 手機版選單按鈕 */}
                     <div className="phoneMenu flex items-center justify-end">
                         <div className="xl:hidden mobileBtn">
@@ -47,7 +47,7 @@ const NavBar: React.FC = () => {
                         </div>
                     </div>
                     {/* 桌機選單 */}
-                    <div className="hidden relative transition-all duration-300 basis-full grow xl:flex flex-row justify-between items-center">
+                    <div className="hidden w-full relative transition-all duration-300 basis-full grow xl:flex flex-row justify-between items-center">
                         <NewsMarquee />
                         <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
                             {isLogin && <UserInfo />}

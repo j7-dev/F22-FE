@@ -23,18 +23,18 @@ const TransactionSection: React.FC<TransactionSectionProps> = ({ section }) => {
                     <div className="transactionIcon md:w-[30px] md:h-[30px] w-5 h-5" />
                     <span className="w-[65px] md:w-auto font-bold text-xs">{t('My Balance & Transfer')}</span>
                 </div> */}
-                <div className={`${selectedSection === 'Deposit' ? 'active' : ''} Deposit transactionButton flex gap-1 justify-center items-center h-10  rounded-lg w-1/2`} onClick={() => handleClick('Deposit')}>
+                <div className={`${selectedSection === 'deposit' ? 'active' : ''} Deposit transactionButton flex gap-1 justify-center items-center h-10  rounded-lg w-1/2`} onClick={() => handleClick('deposit')}>
                     <div className="transactionIcon md:w-[30px] md:h-[30px] w-5 h-5" />
                     <span className="w-auto font-bold text-sm">{t('Deposit')}</span>
                 </div>
-                <div className={`${selectedSection === 'Withdraw' ? 'active' : ''} Withdraw transactionButton flex gap-1 justify-center items-center h-10  rounded-lg w-1/2`} onClick={() => handleClick('Withdraw')}>
+                <div className={`${selectedSection === 'withdraw' ? 'active' : ''} Withdraw transactionButton flex gap-1 justify-center items-center h-10  rounded-lg w-1/2`} onClick={() => handleClick('withdraw')}>
                     <div className="transactionIcon md:w-[30px] md:h-[30px] w-5 h-5" />
                     <span className="w-auto font-bold text-sm">{t('Withdraw')}</span>
                 </div>
             </div>
             {/* {section === 'MyBalance' ? <Mybalance /> : ''} */}
-            {section === 'Deposit' ? <Deposit /> : ''}
-            {section === 'Withdraw' ? <Withdraw /> : ''}
+            {section === 'deposit' ? <Deposit /> : ''}
+            {section === 'withdraw' ? <Withdraw /> : ''}
         </div>
     );
 };

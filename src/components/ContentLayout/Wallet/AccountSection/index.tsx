@@ -7,9 +7,9 @@ interface AccountSectionProps {
     section?: string;
 }
 const index: React.FC<AccountSectionProps> = (props) => {
-    if (props.section === 'RolloverHistory') return <RolloverHistory />;
-    if (props.section === 'CashHistory') return <CashHistory />;
-    if (props.section === 'ChangePassword') return <ChangePassword />;
+    if (props.section === 'rolloverHistory') return <RolloverHistory />;
+    if (props.section === 'cashHistory') return <CashHistory />;
+    if (props.section === 'changePassword') return <ChangePassword />;
     return <></>;
 };
 
