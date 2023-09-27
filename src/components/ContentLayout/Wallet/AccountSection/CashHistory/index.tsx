@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 // import { cashrHistoryTitle, cashrHistory } from '../../AccountSection/CashrHistory/fakeData';
 import { nanoid } from 'nanoid';
+import dayjs from 'dayjs';
 import { useGetTransactionRecords } from '@/hooks/useGetTransactionRecords';
 
 const index: React.FC = () => {
@@ -15,18 +16,9 @@ const index: React.FC = () => {
     const { data, isLoading } = useGetTransactionRecords({ type: ['DEPOSIT', 'WITHDRAW'] });
     const txnData =
         data?.data.map((item) => {
-            //TODO 時區轉換問題會+1天，待修正
-            // 將日期字符串轉換為Date物件
-            const dateString = item.createdAt;
-            const dateObj = new Date(dateString);
-            // 提取年、月和日
-            const year = dateObj.getFullYear();
-            const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // 月份是從0開始計數的，所以需要加1
-            const day = String(dateObj.getDate()).padStart(2, '0');
-            // 組合成年月日格式的字符串
-            const simplifiedDate = `${year}-${month}-${day}`;
+            const dateStringDayjs = dayjs(item.createdAt).format('YYYY-MM-DD');
             return {
-                cashDate: simplifiedDate,
+                cashDate: dateStringDayjs,
                 cashFor: item.type,
                 cashAmount: item.amount,
                 status: item.status,

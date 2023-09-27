@@ -6,7 +6,7 @@ import { useGetIdentity, useCreate, useUpdate, useDelete } from '@refinedev/core
 // import { useCreatBankAccount } from '@/hooks/useCreatBankAccount';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
-type updateBankPopProps = {
+export type updateBankPopProps = {
     id: number;
     label: string;
     bank_name: string;
