@@ -2,8 +2,7 @@ import { Table, Row, Col, Card } from 'antd';
 import { useTable } from '@refinedev/antd';
 import { TRoleType } from '@/types';
 import { Dayjs } from 'dayjs';
-import { useCustom, CrudFilters } from '@refinedev/core';
-import { API_URL } from '@/utils';
+import { CrudFilters } from '@refinedev/core';
 import Filter from './Filter';
 import FilterTags from '@/components/FilterTags';
 import { useGetSiteSetting } from '@/hooks';
@@ -123,16 +122,6 @@ const DetailedInformation: React.FC<{
                           value: values?.email,
                       },
                   ];
-        },
-    });
-
-    const user_ids = tableProps?.dataSource?.map((user) => user.id) || [];
-    const unique_user_ids = [...new Set(user_ids)];
-    const { data: _balance } = useCustom({
-        url: `${API_URL}/api/wallet-api/balance/get`,
-        method: 'get',
-        queryOptions: {
-            enabled: unique_user_ids.length > 0,
         },
     });
 
