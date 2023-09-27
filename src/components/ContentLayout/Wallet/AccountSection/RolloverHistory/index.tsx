@@ -53,7 +53,7 @@ const index: React.FC = () => {
                         <div key={nanoid()} className="tableContent h-10 w-full items-center flex flex-row  md:pl-5 px-0 font-bold text-[13px] text-start border-0 border-solid border-b border-[#F3F3F4]">
                             {rolloverTitle.map((title) => (
                                 <div key={nanoid()} className={`h-full flex items-center px-1.5 ${window.innerWidth < 810 ? 'whitespace-nowrap min-w-[115px] max-w-[115px]' : 'w-1/4 '}`}>
-                                    {item[title.value]}
+                                    {item?.[title.value as keyof typeof item]}
                                 </div>
                             ))}
                         </div>

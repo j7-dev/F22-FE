@@ -145,7 +145,7 @@ const DetailedInformation: React.FC<{
                     <div className="mb-4">
                         <FilterTags form={searchFormProps?.form} />
                     </div>
-                    <Table {...formattedTableProps} />
+                    <Table<any> {...formattedTableProps} />
                     <hr className="my-8" />
                 </Card>
             </Col>
