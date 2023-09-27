@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
     ];
     return (
         <div className="bg-white w-full text-black font-normal z-10">
-            <div className="footerImgWrap px-4 flex justify-start items-start gap-14 w-full h-auto border-solid border-b-2 border-0 border-[#E0E0E0] pb-20 md:py-9 ">
+            <div className="footerImgWrap px-4 flex flex-col justify-center items-start md:flex-row md:justify-start md:items-start gap-14 w-full h-auto border-solid border-b-2 border-0 border-[#E0E0E0] pb-20 md:py-9 ">
                 <div className="aboutWrap basis-1/4">
                     <div className="footerLogo">
                         <img src={logo} alt="" className="w-full" />
@@ -55,12 +55,12 @@ export const Footer: React.FC = () => {
                         {t('PAYMENT SUPPORTED BY')}
                     </div>
                 </div>
-                <div className="helpWrap basis-1/4">
+                <div className="helpWrap w-full basis-1/4">
                     <div className="text-2xl font-bold text-black mb-6 flex items-center gap-3">
                         <img src={Icon_Main_Title} alt="" />
                         <span className="">SMART BET HELP</span>
                     </div>
-                    <ul className="flex gap-4 p-0 m-0">
+                    <ul className="flex gap-4 p-0 m-0 justify-center">
                         <li className="w-[100px] aspect-[100/120] rounded-2xl cursor-pointer bg-[#BAA8FF33] duration-300 hover:shadow-[0_0px_15px_rgba(150,128,234,0.5)]">
                             <div className="w-full h-full flex justify-center items-center">
                                 <Link to="/">
@@ -93,7 +93,7 @@ export const Footer: React.FC = () => {
                         </li>
                     </ul>
                 </div>
-                <div className="rightZone grid grid-cols-1 md:grid-cols-3 gap-5 basis-1/3">
+                <div className="rightZone w-full grid grid-cols-2 md:grid-cols-3 gap-5 basis-1/3">
                     <div className="text-center">
                         <span className="text-lg text-black mb-4 block font-bold">{t('About Us')}</span>
                         <ul className="flex flex-col gap-1 p-0 m-0">
@@ -134,8 +134,8 @@ export const Footer: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full block py-4 text-xs md:text-base text-center font-normal text-gray-500">
-                <ul className="grid grid-cols-6 pl-0">
+            <div className="w-full block pt-4 pb-16 md:py-4 text-xs md:text-base text-center font-normal text-gray-500">
+                <ul className="grid grid-cols-2 md:grid-cols-6 pl-0">
                     {fakeProviderData.map((item) => {
                         return (
                             <li key={nanoid()} className="h-20">
