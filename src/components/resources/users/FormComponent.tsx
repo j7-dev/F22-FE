@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Form, Input, Switch, Radio, DatePicker, Select, FormProps } from 'antd';
-import { TRole, TRoleType, TUser } from '@/types';
+import { TRole, TRoleType, TUser, TVip } from '@/types';
 import dayjs, { Dayjs } from 'dayjs';
 import { isString, isObject } from 'lodash-es';
 import { useUserSelect, useGetSiteSetting } from '@/hooks';
@@ -49,6 +49,9 @@ const FormComponent: React.FC<{
         if (!formLoading && formProps.initialValues) {
             if (isObject(formProps.initialValues.role as number | TRole)) {
                 formProps.initialValues.role = formProps.initialValues.role.id;
+            }
+            if (isObject(formProps.initialValues.vip as number | TVip)) {
+                formProps.initialValues.vip = formProps.initialValues.vip.id;
             }
             if (isObject(formProps.initialValues.agent as number | TUser)) {
                 formProps.initialValues.agent = formProps.initialValues.agent.id;
