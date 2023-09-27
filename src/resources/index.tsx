@@ -128,15 +128,15 @@ export const resources = [
             label: 'AFF Transactions 代理交易紀錄查詢',
         },
     },
-    {
-        name: 'aff-commission-transactions',
-        identifier: 'aff-commission-transactions',
-        list: '/refine/agent/all/aff-commission-transactions',
-        meta: {
-            parent: 'agent',
-            label: 'AFF Commission Transactions 代理佣金交易紀錄',
-        },
-    },
+    // {
+    //     name: 'aff-commission-transactions',
+    //     identifier: 'aff-commission-transactions',
+    //     list: '/refine/agent/all/aff-commission-transactions',
+    //     meta: {
+    //         parent: 'agent',
+    //         label: 'AFF Commission Transactions 代理佣金交易紀錄',
+    //     },
+    // },
     {
         name: 'payments',
         meta: {
