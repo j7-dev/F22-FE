@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSetAtom, useAtom, useAtomValue } from 'jotai';
-// import NewsMarquee from '../NewsMarquee';
+import NewsMarquee from '../NewsMarquee';
 import UserInfo from './UserInfo';
 import LoginModule, { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { mbSidebarAtom } from '@/components/ContentLayout';
@@ -48,7 +48,7 @@ const NavBar: React.FC = () => {
                     </div>
                     {/* 桌機選單 */}
                     <div className="hidden w-full relative transition-all duration-300 basis-full grow xl:flex flex-row justify-between items-center">
-                        {/* <NewsMarquee /> */}
+                        <NewsMarquee />
                         <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
                             {isLogin && <UserInfo />}
                             <LoginModule />

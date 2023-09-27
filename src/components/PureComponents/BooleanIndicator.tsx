@@ -5,7 +5,7 @@ export const BooleanIndicator: React.FC<{
     enabled: boolean;
     className?: string;
     tooltipProps?: TooltipProps & { enabled: boolean };
-    node?: React.ReactNode;
+    node?: JSX.Element;
 }> = ({ enabled, className, tooltipProps, node }) => {
     if (tooltipProps?.enabled) {
         return (

@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 // import { rolloverHistoryTitle, rolloverHistory } from '../../AccountSection/RolloverHistory/fakeData';
 import { nanoid } from 'nanoid';
+import dayjs from 'dayjs';
 import { useGetTransactionRecords } from '@/hooks/useGetTransactionRecords';
 
 const index: React.FC = () => {
@@ -15,18 +16,10 @@ const index: React.FC = () => {
     const { data, isLoading } = useGetTransactionRecords({ type: ['BET'] });
     const txnData =
         data?.data.map((item) => {
-            //TODO 時區轉換問題會+1天，待修正
-            // 將日期字符串轉換為Date物件
-            const dateString = item.createdAt;
-            const dateObj = new Date(dateString);
-            // 提取年、月和日
-            const year = dateObj.getFullYear();
-            const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // 月份是從0開始計數的，所以需要加1
-            const day = String(dateObj.getDate()).padStart(2, '0');
-            // 組合成年月日格式的字符串
-            const simplifiedDate = `${year}-${month}-${day}`;
+            const dateStringDayjs = dayjs(item.createdAt).format('YYYY-MM-DD');
+
             return {
-                rolloveDate: simplifiedDate,
+                rolloveDate: dateStringDayjs,
                 rolloveGame: item.by,
                 rolloveAmount: item.amount,
                 status: item.status,
@@ -53,7 +46,7 @@ const index: React.FC = () => {
                         <div key={nanoid()} className="tableContent h-10 w-full items-center flex flex-row  md:pl-5 px-0 font-bold text-[13px] text-start border-0 border-solid border-b border-[#F3F3F4]">
                             {rolloverTitle.map((title) => (
                                 <div key={nanoid()} className={`h-full flex items-center px-1.5 ${window.innerWidth < 810 ? 'whitespace-nowrap min-w-[115px] max-w-[115px]' : 'w-1/4 '}`}>
-                                    {item[title.value]}
+                                    {item?.[title.value as keyof typeof item]}
                                 </div>
                             ))}
                         </div>

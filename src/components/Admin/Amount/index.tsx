@@ -5,11 +5,12 @@ const index: React.FC<{
     amount: number | null;
     currency: string | null;
     symbol?: boolean;
-}> = ({ amount: rawAmount, currency: rawCurrency, symbol = false }) => {
+    className?: string;
+}> = ({ amount: rawAmount, currency: rawCurrency, symbol = false, className = '' }) => {
     const amount = rawAmount || 0;
     const currency = rawCurrency || '';
     return (
-        <span className="text-nowrap">
+        <span className={`text-nowrap ${className}`}>
             <span>{symbol ? getSymbolFromCurrency(currency.toUpperCase()) : currency.toUpperCase()}</span> {amount.toLocaleString()}
         </span>
     );

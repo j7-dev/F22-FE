@@ -16,6 +16,9 @@ const index: React.FC<{
     const { form, formProps, saveButtonProps, formLoading } = useForm<TUser, HttpError, TUser & { birthday: Dayjs }>({
         meta: {
             populate: {
+                vip: {
+                    fields: ['id'],
+                },
                 agent: {
                     fields: ['id'],
                 },

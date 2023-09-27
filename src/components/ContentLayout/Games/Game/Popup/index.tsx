@@ -19,7 +19,7 @@ const index: React.FC = () => {
     //遊戲資料
     const gameconfig = useAtomValue(configAtom);
     //strapi會員資料
-    const { data: identity } = useGetIdentity<{ id: number }>(); //TODO 為什麼是用identity而不是data?
+    const { data: identity } = useGetIdentity<{ id: number }>();
 
     // const {mutate} = useCustomMutation();
     //打API

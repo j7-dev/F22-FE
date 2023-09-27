@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSetAtom } from 'jotai';
 import { nanoid } from 'nanoid';
-import { updateBankPopAtom, creatBankPopAtom } from '../CreatBankPop';
+import { updateBankPopAtom, creatBankPopAtom, updateBankPopProps } from '../CreatBankPop';
 import { AiOutlineEdit } from 'react-icons/ai';
 
 type BankCardProps = {
@@ -18,8 +18,7 @@ const index: React.FC<BankCardProps> = ({ bankAccount }) => {
     const setUpdateBankPop = useSetAtom(updateBankPopAtom);
     const setCreatBankPop = useSetAtom(creatBankPopAtom);
 
-    const handleEdit = (value: any) => {
-        //TODO 這邊該怎麼指定?
+    const handleEdit = (value: updateBankPopProps) => {
         setUpdateBankPop(value);
         setCreatBankPop(true);
         // console.log('value', value);
