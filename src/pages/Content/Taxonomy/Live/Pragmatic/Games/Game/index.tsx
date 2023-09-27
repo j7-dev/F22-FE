@@ -3,7 +3,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 // import coinIcon from '@/assets/images/coin-icon.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
-import { useCustomMutation, useGetLocale } from '@refinedev/core';
+import { useCustomMutation, useGetLocale, useGetIdentity } from '@refinedev/core';
 import { API_URL } from '@/utils';
 import { FaGamepad } from 'react-icons/fa';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
