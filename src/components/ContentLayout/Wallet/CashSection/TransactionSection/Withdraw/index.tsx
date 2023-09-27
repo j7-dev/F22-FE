@@ -48,6 +48,9 @@ const index: React.FC = () => {
                 <Form.Item name={['currency']} hidden initialValue="KRW">
                     <Input />
                 </Form.Item>
+								<Form.Item name={['amount_type']} hidden initialValue="CASH">
+                    <Input />
+                </Form.Item>
                 <Form.Item name={['user_id']} hidden>
                     <Input />
                 </Form.Item>
