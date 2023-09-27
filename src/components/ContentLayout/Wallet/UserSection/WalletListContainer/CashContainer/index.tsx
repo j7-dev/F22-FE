@@ -41,11 +41,11 @@ const index: React.FC = () => {
                     <BsFillCreditCard2FrontFill size={30} className="p-1" />
                     <span className="text-sm font-bold text-[#2B3240]">{t('Bank Account')}</span>
                 </div>
-                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'Deposit' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('Deposit')}>
+                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'deposit' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('deposit')}>
                     <img src={depositIcon as unknown as string} alt="" />
                     <span className="text-sm font-bold text-[#2B3240]">{t('Deposit')}</span>
                 </div>
-                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'Withdraw' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('Withdraw')}>
+                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'withdraw' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('withdraw')}>
                     <img src={withdrawIcon as unknown as string} alt="" />
                     <span className="text-sm font-bold text-[#2B3240]">{t('Withdraw')}</span>
                 </div>

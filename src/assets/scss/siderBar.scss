@@ -1,0 +1,151 @@
+.f22-content {
+	//sideBar css
+	$depositFavicon: url("@/assets/images/Icon_Deposit_Outlined_Grey.svg");
+	$depositFaviconWhite: url("@/assets/images/Icon_Deposit_Filled_White.svg");
+	$withdrawFavicon: url("@/assets/images/Icon_Withdraw_Outlined_Grey.svg");
+	$withdrawFaviconWhite: url("@/assets/images/Icon_Wihdraw_Filled_White.svg");
+	$rolloverHistoryFavicon: url("@/assets/images/Icon_Rollover_Outlined_Grey.svg");
+	$rolloverHistoryFaviconWhite: url("@/assets/images/Icon_Rollover_Filled_White.svg");
+	$popularFavicon: url("@/assets/images/Icon_Popular_Outlined_Grey.svg");
+	$popularFaviconWhite: url("@/assets/images/Icon_Popular_Filled_White.svg");
+	$sportFavicon: url("@/assets/images/Icon_Football_Outlined_Grey.svg");
+	$sportFaviconWhite: url("@/assets/images/Icon_Football_Filled_White.svg");
+	$liveCasinoFavicon: url("@/assets/images/Icon_LiveCasino_Outlined_Grey.svg");
+	$liveCasinoFaviconWhite: url("@/assets/images/Icon_LiveCasino_Filled_White.svg");
+	$slotFavicon: url("@/assets/images/Icon_SlotGame_Outlined_Grey.svg");
+	$slotFaviconWhite: url("@/assets/images/Icon_SlotGame_Filled_White.svg");
+	$iconArrowRight: url("@/assets/images/Icon_Arrow_Right_Grey.svg");
+	$iconArrowRightWhite: url("@/assets/images/Icon_Arrow_Right_White.svg");
+
+	.sideBar {
+		&.active {
+			ul {
+				li {
+					::after {
+						content: "";
+						position: absolute;
+						right: 20px;
+						top: 50%;
+						transform: translateY(-50%);
+						width: 10px;
+						height: 10px;
+						background-image: $iconArrowRight;
+						background-size: contain;
+						background-position: center;
+						background-repeat: no-repeat;
+					}
+					&:hover,
+					&.active {
+						::after {
+							background-image: $iconArrowRightWhite;
+						}
+					}
+				}
+			}
+		}
+		.WallerContainer {
+			li {
+				&.deposit {
+					.favicon {
+						background-image: $depositFavicon;
+					}
+				}
+				&.withdraw {
+					.favicon {
+						background-image: $withdrawFavicon;
+					}
+				}
+				&.rolloverHistory {
+					.favicon {
+						background-image: $rolloverHistoryFavicon;
+					}
+				}
+				&:hover,
+				&.active {
+					background-color: #5932ea;
+					span {
+						color: #ffffff;
+					}
+					box-shadow: 0px 6px 8px 0px rgba(89, 50, 234, 0.2);
+					&.deposit {
+						.favicon {
+							background-image: $depositFaviconWhite;
+						}
+					}
+					&.withdraw {
+						.favicon {
+							background-image: $withdrawFaviconWhite;
+						}
+					}
+					&.rolloverHistory {
+						.favicon {
+							background-image: $rolloverHistoryFaviconWhite;
+						}
+					}
+				}
+				.favicon {
+					background-size: 30px;
+					background-position: center;
+					background-repeat: no-repeat;
+				}
+			}
+		}
+		.GameNavContainer {
+			li {
+				&.popularGames {
+					.favicon {
+						background-image: $popularFavicon;
+					}
+				}
+				&.sport {
+					.favicon {
+						background-image: $sportFavicon;
+					}
+				}
+				&.liveCasino {
+					.favicon {
+						background-image: $liveCasinoFavicon;
+					}
+				}
+				&.slotGame {
+					.favicon {
+						background-image: $slotFavicon;
+					}
+				}
+				&:hover,
+				&.active {
+					background-color: #5932ea;
+					span {
+						color: #ffffff;
+					}
+					box-shadow: 0px 6px 8px 0px rgba(89, 50, 234, 0.2);
+					&.popularGames {
+						.favicon {
+							background-image: $popularFaviconWhite;
+						}
+					}
+					&.sport {
+						.favicon {
+							background-image: $sportFaviconWhite;
+						}
+					}
+					&.liveCasino {
+						.favicon {
+							background-image: $liveCasinoFaviconWhite;
+						}
+					}
+					&.slotGame {
+						.favicon {
+							background-image: $slotFaviconWhite;
+						}
+					}
+				}
+				.favicon {
+					background-size: 30px;
+					background-position: center;
+					background-repeat: no-repeat;
+				}
+			}
+		}
+	}
+}

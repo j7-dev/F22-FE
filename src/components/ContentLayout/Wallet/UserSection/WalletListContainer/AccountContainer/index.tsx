@@ -23,15 +23,15 @@ const index: React.FC = () => {
                 {window.innerWidth < 810 && <AiOutlineDown />}
             </div>
             <div className={`AccountContainer flex flex-col gap-4 overflow-hidden transition-all md:h-full ${window.innerWidth < 810 && down ? 'h-[150px]' : 'h-0'}`}>
-                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'RolloverHistory' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('RolloverHistory')}>
+                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'rolloverHistory' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('rolloverHistory')}>
                     <img src={historyIcon as unknown as string} alt="" />
                     <span className="text-sm font-bold text-[#2B3240]">{t('Rollover History')}</span>
                 </div>
-                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'CashHistory' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('CashHistory')}>
+                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'cashHistory' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('cashHistory')}>
                     <img src={historyIcon as unknown as string} alt="" />
                     <span className="text-sm font-bold text-[#2B3240]">{t('Cash History')}</span>
                 </div>
-                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'ChangePassword' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('ChangePassword')}>
+                <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'changePassword' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('changePassword')}>
                     <img src={passwordIcon as unknown as string} alt="" />
                     <span className="text-sm font-bold text-[#2B3240]">{t('Change Password')}</span>
                 </div>

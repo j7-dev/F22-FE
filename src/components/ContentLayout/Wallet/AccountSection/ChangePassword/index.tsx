@@ -5,7 +5,7 @@ import { LockOutlined } from '@ant-design/icons';
 import { useCustomMutation } from '@refinedev/core';
 import { API_URL } from '@/utils';
 import { useNavigate } from 'react-router-dom';
-import { popupIsOpenAtom } from '@/components/ContentLayout/LoginModule';
+import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { useSetAtom } from 'jotai';
 
 //1.API URL https://be-dev.smtbet7.com/api/auth/change-password

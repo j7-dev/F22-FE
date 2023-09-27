@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { Footer } from './Footer';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
-import Popup from './LoginPopUp';
+import Popup from './Header/LoginPopUp';
 import GamePopup from './Games/Game/Popup';
 import { atom, useAtom, useSetAtom } from 'jotai';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
@@ -38,12 +38,12 @@ const Layout = () => {
     return (
         <>
             <div
-                className={`z-50 leftContent overflow-hidden h-screen fixed left-0 top-0 xl:min-w-[80px] transition-all ${windowWidth <= 1280 ? (mbSidebar ? 'w-64' : 'w-0') : ''}
+                className={`z-50 leftContent overflow-hidden shadow-[2px_0px_20px_0px_rgba(163,112,237,0.25)] h-screen fixed left-0 top-0 xl:min-w-[80px] transition-all ${windowWidth <= 1280 ? (mbSidebar ? 'w-80' : 'w-0') : ''}
 								`}
             >
                 <Sidebar />
             </div>
-            <div className="rightContent relative xl:pl-20" onClick={handleCloseMbSidebar}>
+            <div className="rightContent relative w-full xl:pl-20" onClick={handleCloseMbSidebar}>
                 <Header />
                 <Outlet />
                 <Footer />
