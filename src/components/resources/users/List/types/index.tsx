@@ -1,4 +1,5 @@
 import { TUser, TBalance, TVip } from '@/types';
+import { Dayjs } from 'dayjs';
 
 export type DataType = {
     id: number;
@@ -18,4 +19,18 @@ export type DataType = {
     dpWd: number;
     createdAt: string;
     lastBetTime: string;
+};
+
+export type TSearchProps = {
+    dateRange?: [Dayjs, Dayjs] | undefined;
+    id?: string | undefined;
+    username?: string | undefined;
+    phone?: string | undefined;
+    display_name?: string | undefined;
+    vip?: string | undefined;
+    agent?: string | undefined;
+    top_agent?: string | undefined;
+    blocked?: boolean | undefined;
+    confirmed?: boolean | undefined;
+    [key: string]: any;
 };

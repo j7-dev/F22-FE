@@ -1,6 +1,6 @@
 import { Form, Input, Select, FormProps } from 'antd';
 import { useUserSelect } from '@/hooks';
-import AmountInput from '@/components/Admin/AmountInput';
+import AmountInput from '@/components/form/AmountInput';
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';

@@ -4,7 +4,7 @@ import { TRoleType } from '@/types';
 import { Dayjs } from 'dayjs';
 import { CrudFilters } from '@refinedev/core';
 import Filter from './Filter';
-import FilterTags from '@/components/FilterTags';
+import FilterTags from '@/components/Admin/FilterTags';
 import { useGetSiteSetting } from '@/hooks';
 import useColumns from './hooks/useColumns';
 

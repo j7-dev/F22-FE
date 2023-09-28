@@ -1,18 +1,13 @@
-import { Table, Row, Col, Card } from 'antd';
+import { useState } from 'react';
+import { Table, Row, Col, Card, Switch, TableProps, Tooltip } from 'antd';
 import { useTable } from '@refinedev/antd';
 import { TRoleType } from '@/types';
-import { Dayjs } from 'dayjs';
 import { CrudFilters } from '@refinedev/core';
 import Filter from './Filter';
-import FilterTags from '@/components/FilterTags';
+import FilterTags from '@/components/Admin/FilterTags';
 import { useGetSiteSetting } from '@/hooks';
 import useColumns from './hooks/useColumns';
-
-type TSearchProps = {
-    email?: string;
-    dateRange?: [Dayjs, Dayjs] | undefined;
-    [key: string]: any;
-};
+import { DataType, TSearchProps } from './types';
 
 const DetailedInformation: React.FC<{
     roleType?: TRoleType | TRoleType[];
@@ -97,51 +92,109 @@ const DetailedInformation: React.FC<{
             permanent: filters,
         },
         onSearch: (values: TSearchProps) => {
-            return values?.dateRange
-                ? [
-                      {
-                          field: 'email',
-                          operator: 'contains',
-                          value: values?.email,
-                      },
-                      {
-                          field: 'createdAt',
-                          operator: 'gt',
-                          value: values?.dateRange[0]?.format('YYYY-MM-DD HH:mm:ss.SSSSSS'),
-                      },
-                      {
-                          field: 'createdAt',
-                          operator: 'lt',
-                          value: values?.dateRange[1]?.format('YYYY-MM-DD HH:mm:ss.SSSSSS'),
-                      },
-                  ]
-                : [
-                      {
-                          field: 'email',
-                          operator: 'contains',
-                          value: values?.email,
-                      },
-                  ];
+            const start = values?.dateRange ? values?.dateRange[0]?.toISOString() : undefined;
+            const end = values?.dateRange ? values?.dateRange[1]?.toISOString() : undefined;
+
+            const defaultFilters = [
+                {
+                    field: 'createdAt',
+                    operator: 'gt',
+                    value: start,
+                },
+                {
+                    field: 'createdAt',
+                    operator: 'lt',
+                    value: end,
+                },
+                {
+                    field: 'id',
+                    operator: 'contains',
+                    value: values?.id,
+                },
+                {
+                    field: 'username',
+                    operator: 'contains',
+                    value: values?.username,
+                },
+                {
+                    field: 'phone',
+                    operator: 'contains',
+                    value: values?.phone,
+                },
+                {
+                    field: 'display_name',
+                    operator: 'contains',
+                    value: values?.display_name,
+                },
+                {
+                    field: 'vip.id',
+                    operator: 'eq',
+                    value: values?.vip,
+                },
+                {
+                    field: 'agent.id',
+                    operator: 'eq',
+                    value: values?.agent,
+                },
+                {
+                    field: 'top_agent.id',
+                    operator: 'eq',
+                    value: values?.top_agent,
+                },
+                {
+                    field: 'blocked',
+                    operator: 'eq',
+                    value: values?.blocked,
+                },
+                {
+                    field: 'confirmed',
+                    operator: 'eq',
+                    value: values?.confirmed,
+                },
+            ];
+            return defaultFilters as CrudFilters;
         },
     });
 
+    const [extendTableProps, setExtendTableProps] = useState<TableProps<DataType>>({});
+
     const formattedTableProps = {
         ...tableProps,
-
-        scroll: { x: 3200 },
+        ...extendTableProps,
+        tableLayout: 'fixed',
+        size: 'small',
         columns,
         rowKey: 'userId',
     };
 
+    const handleExpand = (checked: boolean) => {
+        if (checked) {
+            setExtendTableProps({
+                scroll: { x: 3200 },
+            });
+        } else {
+            setExtendTableProps({});
+        }
+    };
+
     return (
         <Row gutter={[16, 16]}>
-            <Col lg={6} xs={24}>
-                <Card title="Filters">
-                    <Filter formProps={searchFormProps} />
-                </Card>
+            <Col lg={24} xs={24}>
+                <Filter formProps={searchFormProps} />
             </Col>
-            <Col lg={18} xs={24}>
-                <Card title="Search Result">
+            <Col lg={24} xs={24}>
+                <Card
+                    title={
+                        <div className="flex justify-between items-end">
+                            <span>Search Result</span>
+                            <span className="text-xs">
+                                <Tooltip title="click to expand table">
+                                    <Switch size="small" onChange={handleExpand} />
+                                </Tooltip>
+                            </span>
+                        </div>
+                    }
+                >
                     <div className="mb-4">
                         <FilterTags form={searchFormProps?.form} />
                     </div>

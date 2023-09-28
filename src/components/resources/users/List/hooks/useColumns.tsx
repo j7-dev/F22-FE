@@ -70,6 +70,21 @@ const useColumns = () => {
             render: (vip: TVip) => <Link to="/refine/system-setting/vips">{vip?.label}</Link>,
         },
         {
+            title: 'confirmed',
+            dataIndex: 'confirmed',
+            key: 'confirmed',
+            align: 'center',
+            render: (confirmed: boolean) => (
+                <BooleanIndicator
+                    enabled={confirmed}
+                    tooltipProps={{
+                        title: confirmed ? 'Confirmed' : 'Note Confirmed',
+                        enabled: true,
+                    }}
+                />
+            ),
+        },
+        {
             title: 'blocked',
             dataIndex: 'blocked',
             key: 'blocked',

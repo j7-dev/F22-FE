@@ -2,7 +2,7 @@ import { Table, Row, Col, Card, TablePaginationConfig, TableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useTable, List } from '@refinedev/antd';
 import Filter from './Filter';
-import FilterTags from '@/components/FilterTags';
+import FilterTags from '@/components/Admin/FilterTags';
 import { getStatusTag } from '@/utils';
 import { TUser } from '@/types';
 import UserLink from '@/components/Admin/UserLink';
