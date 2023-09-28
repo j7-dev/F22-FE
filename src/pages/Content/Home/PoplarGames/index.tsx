@@ -1,6 +1,6 @@
 import React from 'react';
 import Tabs from './Tabs';
-import { useGetPoplarGames } from '@/hooks/useGetPoplarGames';
+import { useGetPoplarGames } from '@/hooks/gameProvider/useGetPoplarGames';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 
 const index: React.FC = () => {

@@ -7,6 +7,7 @@ import { useCustomMutation, useGetLocale, useGetIdentity } from '@refinedev/core
 import { API_URL } from '@/utils';
 import { FaGamepad } from 'react-icons/fa';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
+// import { useGetPPImg } from '@/hooks/gameProvider/pragmatic/useGetPPImg';
 
 type GameProps = {
     data: {
@@ -20,6 +21,7 @@ const index: React.FC<GameProps> = ({ data = {} }) => {
     const locale = useGetLocale();
     const currentLocale = locale();
     const { data: identity } = useGetIdentity<{ id: number }>();
+
     // console.log('game');
     const isLogin = useAtomValue(IsLoginAtom);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
@@ -55,7 +57,7 @@ const index: React.FC<GameProps> = ({ data = {} }) => {
                 {openGameLoading ? <AiOutlineLoading3Quarters className={`${openGameLoading ? 'block' : 'hidden'} animate-spin`} /> : <FaGamepad size={30} />}
             </div>
             <div className="gameImg w-full aspect-square relative align-top object-cover LazyLoadImage">
-                <LazyLoadImage src={data['gameImg'] as string} width="100%" height="100%" />
+                <LazyLoadImage src={data.gameImg} width="100%" height="100%" />
             </div>
             <div className="gameInfo bg-[#363F4E] px-2 py-2">
                 <span className="gameName text-white line-clamp-1 text-sm">{data['gameName']}</span>

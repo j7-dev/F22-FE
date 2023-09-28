@@ -3,17 +3,17 @@ import { useAtomValue } from 'jotai';
 import { nanoid } from 'nanoid';
 import { useTranslation } from 'react-i18next';
 import Game from './Game';
-import { GameTypeAtom, GameCategoryStateAtom } from '@/pages/Content/Taxonomy/AtomSetting';
+import { GameCategoryStateAtom } from '@/pages/Content/Taxonomy/AtomSetting';
 // import { gameTypeFilter } from '@/components/ContentLayout/Games/Game/GameImg';
 
 export type GamesDataProp = {
     ProviderName: string;
-    gamesData?: { [key: string]: string }[];
+    gamesData?: [];
     isLoading: boolean;
 };
 const Games: React.FC<GamesDataProp> = ({ ProviderName, gamesData = [], isLoading }) => {
-    const _GameTypeValue = useAtomValue(GameTypeAtom);
-    console.log('⭐  _GameTypeValue', _GameTypeValue);
+    // const _GameTypeValue = useAtomValue(GameTypeAtom);
+    // console.log('⭐  _GameTypeValue', _GameTypeValue);
     const GameCategoryState = useAtomValue(GameCategoryStateAtom);
     const { t } = useTranslation();
 
