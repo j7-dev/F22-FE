@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Form, Input, Switch, Radio, DatePicker, Select, FormProps } from 'antd';
 import { TRole, TRoleType, TUser, TVip } from '@/types';
 import dayjs, { Dayjs } from 'dayjs';
@@ -15,6 +15,7 @@ const FormComponent: React.FC<{
     formLoading?: boolean;
 }> = ({ formType, formProps, handler, defaultRoleType = 'authenticated', formLoading }) => {
     const form = formProps.form;
+    const [isEditing, setIsEditing] = useState(false);
     const siteSetting = useGetSiteSetting();
     const rolesMapping = siteSetting?.roles || {};
     const roleSelectProps = {
@@ -65,6 +66,10 @@ const FormComponent: React.FC<{
         }
     }, [formLoading]);
 
+    const handleChangePassword = (checked: boolean) => {
+        setIsEditing(checked);
+    };
+
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
             <div className="grid grid-cols-2 gap-6">
@@ -78,27 +83,9 @@ const FormComponent: React.FC<{
                         },
                     ]}
                 >
-                    <Input />
+                    <Input disabled />
                 </Form.Item>
-                <Form.Item
-                    name="email"
-                    label="email"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input a value',
-                        },
-                        {
-                            type: 'email',
-                            message: 'Please input a valid email',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item name="password" label="password">
-                    <Input.Password />
-                </Form.Item>
+
                 <Form.Item name="display_name" label="display name">
                     <Input />
                 </Form.Item>
@@ -153,6 +140,17 @@ const FormComponent: React.FC<{
                         <Select {...agentSelectProps} />
                     </Form.Item>
                 )}
+            </div>
+            <div className="grid grid-cols-2 gap-6 mt-16">
+                <div>
+                    <p className="mb-2">
+                        change password <Switch size="small" onChange={handleChangePassword} className="ml-4" />
+                    </p>
+
+                    <Form.Item name="password" className="mt-4">
+                        <Input.Password disabled={!isEditing} />
+                    </Form.Item>
+                </div>
             </div>
         </Form>
     );
