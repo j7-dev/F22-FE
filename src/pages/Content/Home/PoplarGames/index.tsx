@@ -1,60 +1,11 @@
 import React from 'react';
-import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import Tabs from './Tabs';
-import newBanner1 from '@/assets/images/messageImage_1695738233708.jpg';
+import { useGetPoplarGames } from '@/hooks/useGetPoplarGames';
+import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 
 const index: React.FC = () => {
-    const poplarGamesArray = [
-        {
-            label: 'All Games',
-            value: 'allGames',
-            gameData: [
-                {
-                    gameID: '1',
-                    gameImg: newBanner1,
-                },
-                {
-                    gameID: '2',
-                    gameImg: newBanner1,
-                },
-            ],
-        },
-        {
-            label: 'Sport',
-            value: 'sport',
-            gameData: [
-                {
-                    gameID: '1',
-                    gameImg: newBanner1,
-                },
-                {
-                    gameID: '2',
-                    gameImg: newBanner1,
-                },
-            ],
-        },
-        {
-            label: 'Live Casino',
-            value: 'liveCasino',
-            gameData: [
-                {
-                    gameID: '1',
-                    gameImg: newBanner1,
-                },
-            ],
-        },
-        {
-            label: 'Slot Games',
-            value: 'slotGames',
-            gameData: [
-                {
-                    gameID: '1',
-                    gameImg: newBanner1,
-                },
-            ],
-        },
-    ];
-    console.log('poplarGamesArray', poplarGamesArray);
+    const { poplarGamesData, loading } = useGetPoplarGames();
+
     return (
         <div className="relative PoplarGames md:w-full mb-4 ">
             <div className="mx-4 rounded-2xl shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
@@ -64,7 +15,7 @@ const index: React.FC = () => {
                         POPLAR<span className="text-black">GAMES</span>
                     </span>
                 </div>
-                <Tabs data={poplarGamesArray} />
+                {!loading ? 'isLoading' : <Tabs data={poplarGamesData} />}
             </div>
         </div>
     );

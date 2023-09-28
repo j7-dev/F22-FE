@@ -1,6 +1,6 @@
-import { GameCategory } from '@/types/resources/GameCategory';
+import { TGameCategory } from '@/types/resources/gameCategory';
 
-export const GameCategoryData: GameCategory[] = [
+export const GameCategoryData: TGameCategory[] = [
     {
         label: 'Popular Games',
         value: 'popularGames',

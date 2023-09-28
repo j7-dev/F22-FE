@@ -4,7 +4,8 @@ export * from './roles';
 export * from './commissions';
 export * from './vips';
 export * from './balances';
-export * from './SiteNotify';
+export * from './siteNotify';
+export * from './prodiver';
 
 export type BaseType = {
     id: number;
