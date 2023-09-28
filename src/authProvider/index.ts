@@ -3,7 +3,7 @@ import { AuthHelper } from './AuthHelper';
 import { API_URL } from '@/utils';
 import { axiosInstance } from '@/providers/strapi-v4/';
 import axios from 'axios';
-import { nanoid } from 'nanoid';
+import { notification } from 'antd';
 
 const strapiAuthHelper = AuthHelper(`${API_URL}/api`);
 
@@ -14,7 +14,24 @@ export const authProvider: AuthBindings = {
         const redirectPath = props?.redirectPath || '/refine/home';
 
         const loginResult = await strapiAuthHelper.login(email, password);
-        if (loginResult.status === 200) {
+        const confirmed = loginResult?.data?.user?.confirmed || false;
+
+        if (!confirmed) {
+            const message = 'Your account is not confirmed yet';
+            notification.error({
+                message,
+            });
+
+            return {
+                success: false,
+                error: {
+                    message: 'Login Failed',
+                    name: message,
+                },
+            };
+        }
+
+        if (loginResult.status === 200 && confirmed) {
             const token = loginResult.data.jwt;
             localStorage.setItem('API_TOKEN', token);
 
@@ -31,8 +48,8 @@ export const authProvider: AuthBindings = {
         return {
             success: false,
             error: {
-                message: 'Login failed',
-                name: 'Invalid email or password',
+                message: 'Login Failed',
+                name: 'Invalid username or password',
             },
         };
     },
@@ -51,16 +68,13 @@ export const authProvider: AuthBindings = {
         const redirectPath = props?.redirectPath || '/';
         const url = `${API_URL}/api/auth/local/register`;
         const registerPayload = {
-            uuid: nanoid(), //TODO 因為打API時UUID不能重複所以先用nanoid()產生一個UUID
             username: username,
             email: email,
             password: password,
-            confirmed: true,
-            blocked: false,
         };
         const { data, status } = await axios.post(url, registerPayload);
         if (status === 200) {
-            const token = data.jwt;
+            const token = data?.jwt || '';
             localStorage.setItem('API_TOKEN', token);
             // set header axios instance
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
