@@ -15,7 +15,7 @@ const index = () => {
                     </Card>
                 </Col>
                 <Col lg={18} xs={24}>
-                    <Card title="Search Result">
+                    <Card bordered={false} title="Search Result">
                         <DetailedInformation />
                         <StatisticData />
                         <GameType />

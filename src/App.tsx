@@ -11,6 +11,7 @@ import { ColorModeContextProvider } from '@/contexts/color-mode';
 import AppRouter from '@/routes';
 import { resources } from '@/resources';
 import '@/assets/scss/index.scss';
+import { ConfigProvider } from 'antd';
 
 function App() {
     const { t, i18n } = useTranslation();
@@ -25,33 +26,41 @@ function App() {
         <BrowserRouter>
             <RefineKbarProvider>
                 <ColorModeContextProvider>
-                    <Refine
-                        authProvider={authProvider}
-                        dataProvider={DataProvider(`${API_URL}/api`, axiosInstance)}
-                        routerProvider={routerBindings}
-                        i18nProvider={i18nProvider}
-                        resources={resources}
-                        options={{
-                            syncWithLocation: false,
-                            warnWhenUnsavedChanges: true,
-                            disableTelemetry: true,
-                            projectId: 'DFwDAg-3y0BW1-GbOkSm',
-                            reactQuery: {
-                                clientConfig: {
-                                    defaultOptions: {
-                                        queries: {
-                                            retry: 0,
-                                        },
-                                    },
-                                },
+                    <ConfigProvider
+                        theme={{
+                            token: {
+                                colorPrimary: '#7a5bee',
                             },
                         }}
                     >
-                        <AppRouter />
+                        <Refine
+                            authProvider={authProvider}
+                            dataProvider={DataProvider(`${API_URL}/api`, axiosInstance)}
+                            routerProvider={routerBindings}
+                            i18nProvider={i18nProvider}
+                            resources={resources}
+                            options={{
+                                syncWithLocation: false,
+                                warnWhenUnsavedChanges: true,
+                                disableTelemetry: true,
+                                projectId: 'DFwDAg-3y0BW1-GbOkSm',
+                                reactQuery: {
+                                    clientConfig: {
+                                        defaultOptions: {
+                                            queries: {
+                                                retry: 0,
+                                            },
+                                        },
+                                    },
+                                },
+                            }}
+                        >
+                            <AppRouter />
 
-                        <RefineKbar />
-                        <UnsavedChangesNotifier />
-                    </Refine>
+                            <RefineKbar />
+                            <UnsavedChangesNotifier />
+                        </Refine>
+                    </ConfigProvider>
                 </ColorModeContextProvider>
             </RefineKbarProvider>
         </BrowserRouter>

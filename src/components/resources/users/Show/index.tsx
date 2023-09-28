@@ -31,12 +31,12 @@ const index = () => {
             >
                 <Row gutter={[16, 16]} className="-ml-[24px] -mr-[24px]">
                     <Col lg={12} xs={24}>
-                        <Card title="Info">
+                        <Card bordered={false} title="Info">
                             <ObjectTable />
                         </Card>
                     </Col>
                     {/* <Col lg={12} xs={24}>
-                        <Card title="Search Result">
+                        <Card  bordered={false} title="Search Result">
                             <hr className="my-8" />
                         </Card>
                     </Col> */}

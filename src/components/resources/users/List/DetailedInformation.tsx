@@ -184,6 +184,7 @@ const DetailedInformation: React.FC<{
             </Col>
             <Col lg={24} xs={24}>
                 <Card
+                    bordered={false}
                     title={
                         <div className="flex justify-between items-end">
                             <span>Search Result</span>

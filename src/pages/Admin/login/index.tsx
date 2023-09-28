@@ -35,7 +35,7 @@ const Login: React.FC = () => {
                         <div className="text-center mb-4">
                             <img className="w-[15rem]" src={logo} alt="Logo" />
                         </div>
-                        <Card className="py-2 max-w-[30rem] mx-auto" title={CardTitle} headStyle={{ borderBottom: 0 }}>
+                        <Card bordered={false} className="py-2 max-w-[30rem] mx-auto" title={CardTitle} headStyle={{ borderBottom: 0 }}>
                             <Form<ILoginForm>
                                 layout="vertical"
                                 form={form}

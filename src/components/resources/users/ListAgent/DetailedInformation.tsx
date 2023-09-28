@@ -141,7 +141,7 @@ const DetailedInformation: React.FC<{
                 </Card>
             </Col>
             <Col lg={18} xs={24}>
-                <Card title="Search Result">
+                <Card bordered={false} title="Search Result">
                     <div className="mb-4">
                         <FilterTags form={searchFormProps?.form} />
                     </div>

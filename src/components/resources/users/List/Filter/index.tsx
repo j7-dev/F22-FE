@@ -72,7 +72,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
 
     return (
         <Collapse
-            // bordered={false}
+            bordered={false}
             className="bg-white"
             items={[
                 {

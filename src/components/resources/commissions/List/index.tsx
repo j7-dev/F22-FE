@@ -89,7 +89,7 @@ const index = () => {
         <List canCreate>
             <Row gutter={[16, 16]}>
                 <Col lg={24} xs={24}>
-                    <Card>
+                    <Card bordered={false}>
                         <Table {...formattedTableProps} />
                         <hr className="my-8" />
                     </Card>
