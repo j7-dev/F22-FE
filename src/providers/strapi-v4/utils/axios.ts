@@ -8,10 +8,11 @@ axiosInstance.interceptors.response.use(
         return response;
     },
     (error) => {
-        const response = error?.response?.data?.error;
+        const response = error?.response?.data?.error || 'Error';
+        const message = typeof response === 'string' ? response : response?.message || JSON.stringify(response);
+
         notification.error({
-            message: response?.name || 'Error',
-            description: response?.message || 'Error',
+            message,
         });
 
         return Promise.reject(error);
