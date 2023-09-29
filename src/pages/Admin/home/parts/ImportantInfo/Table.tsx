@@ -32,26 +32,24 @@ const Table = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* Affiliate's information */}
+                        {/* Agent's information */}
                         <tr>
-                            <th rowSpan={2}>Affiliate's information</th>
-                            <th>General Agent (Person)</th>
+                            <th rowSpan={4}>New Members</th>
+                            <th>New Top Agents</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.agentInfo_topAgent?.[column]}</td>
+                                <td key={column}>{dataSource?.agentInfo_newTopAgent?.[column]}</td>
                             ))}
                         </tr>
                         <tr>
-                            <th>Agent (Person)</th>
+                            <th>New Agents</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.agentInfo_agent?.[column]}</td>
+                                <td key={column}>{dataSource?.agentInfo_newAgent?.[column]}</td>
                             ))}
                         </tr>
-                        {/* New Members */}
                         <tr>
-                            <th rowSpan={2}>New Members</th>
-                            <th>Total members</th>
+                            <th>New members</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.newMembers_totalMembers?.[column]}</td>
+                                <td key={column}>{dataSource?.newMembers_newMembers?.[column]}</td>
                             ))}
                         </tr>
                         <tr>
