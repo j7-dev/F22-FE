@@ -1,0 +1,33 @@
+.f22-content {
+	.contentLayout {
+		.leftContent {
+			&:hover {
+				~ .rightContent {
+					padding-left: 320px !important;
+					@media (max-width: 1460px) {
+						.Navbar {
+							.userInfo {
+								.rewardInfo {
+									display: none !important;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		.rightContent {
+			transition: all 0.3s;
+			padding-left: 88px;
+			.Navbar {
+				.userInfo {
+					.rewardInfo {
+						span {
+							white-space: nowrap;
+						}
+					}
+				}
+			}
+		}
+	}
+}

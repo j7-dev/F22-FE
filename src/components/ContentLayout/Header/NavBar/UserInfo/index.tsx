@@ -16,7 +16,7 @@ const index: React.FC = () => {
     const vip = data?.vip?.label || '';
 
     return (
-        <div className="w-full flex justify-end">
+        <div className="userInfo w-full flex justify-end">
             <span className="userName flex text-sm font-bold text-[#2B3240] p-2.5">
                 {userName}
                 <span className={`${vip ? 'block' : 'hidden'} userVip text-sm font-bold text-[#f9a318] pl-2.5`}>{vip && vip}</span>
@@ -25,7 +25,7 @@ const index: React.FC = () => {
                 onClick={() => {
                     setSelectedSection('siteNotify');
                 }}
-                className="h-10 gap-2.5  rounded-lg flex justify-between items-center px-2 hover:bg-[#F3F3F4] cursor-pointer"
+                className="h-10 gap-2.5 rounded-lg flex justify-between items-center px-2 hover:bg-[#F3F3F4] cursor-pointer"
             >
                 <div className="rewardInfo flex  justify-start items-center gap-2.5">
                     <span className="text-sm font-bold text-[#2B3240]">{t('站内信쪽지')}</span>

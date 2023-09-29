@@ -60,7 +60,7 @@ export const authProvider: AuthBindings = {
             success: true,
             redirectTo: redirectPath,
         };
-    }, //TODO register 本來想寫在AuthHelper的register方法裡面，但是新增不進去，所以先寫在這裡
+    },
     register: async (props) => {
         const username = props?.username || '';
         const email = props?.email || '';
