@@ -9,11 +9,11 @@ const strapiAuthHelper = AuthHelper(`${API_URL}/api`);
 
 export const authProvider: AuthBindings = {
     login: async (props) => {
-        const email = props?.email || '';
+        const userName = props?.userName || '';
         const password = props?.password || '';
         const redirectPath = props?.redirectPath || '/refine/home';
 
-        const loginResult = await strapiAuthHelper.login(email, password);
+        const loginResult = await strapiAuthHelper.login(userName, password);
         const confirmed = loginResult?.data?.user?.confirmed || false;
 
         if (!confirmed) {
@@ -62,18 +62,39 @@ export const authProvider: AuthBindings = {
         };
     },
     register: async (props) => {
-        const username = props?.username || '';
-        const email = props?.email || '';
+        const userName = props?.userName || '';
+        const userEmail = props?.userEmail || '';
+        const userPhone = props?.userPhone || '';
         const password = props?.password || '';
         const redirectPath = props?.redirectPath || '/';
         const url = `${API_URL}/api/auth/local/register`;
         const registerPayload = {
-            username: username,
-            email: email,
+            username: userName,
+            email: userEmail,
             password: password,
+            phone: userPhone,
         };
         const { data, status } = await axios.post(url, registerPayload);
-        if (status === 200) {
+
+        const loginResult = await strapiAuthHelper.login(userName, password);
+        const confirmed = loginResult?.data?.user?.confirmed || false;
+
+        if (!confirmed) {
+            const message = 'You have registered successfully, please wait for the administrator to confirm it.';
+            notification.error({
+                message,
+            });
+
+            return {
+                success: false,
+                error: {
+                    message: 'Login Failed',
+                    name: message,
+                },
+            };
+        }
+
+        if (status === 200 && confirmed) {
             const token = data?.jwt || '';
             localStorage.setItem('API_TOKEN', token);
             // set header axios instance

@@ -7,7 +7,7 @@ import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/H
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 type LoginVariables = {
-    email: string;
+    userName: string;
     password: string;
     redirectPath: string;
 };
@@ -21,14 +21,14 @@ const index: React.FC = () => {
     const [verifyError, setVerifyError] = useState('');
     const [submittable, setSubmittable] = useState(false);
 
-    const handleLogin = (values: { email: string; userPas: string }) => {
+    const handleLogin = (values: { userName: string; userPas: string }) => {
         if (!verify) {
             setVerifyError('You must verify the captcha');
             return;
         }
-        const { email, userPas } = values;
+        const { userName, userPas } = values;
         login(
-            { email: email, password: userPas, redirectPath: '/wallet' },
+            { userName: userName, password: userPas, redirectPath: '/wallet' },
             {
                 onSuccess: (data) => {
                     if (!data.success) {
@@ -75,7 +75,7 @@ const index: React.FC = () => {
             {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
 
             <Form form={form} onFinish={handleLogin}>
-                <Form.Item name="email" hasFeedback rules={[{ required: true, message: 'Please input your Email' }]}>
+                <Form.Item name="userName" hasFeedback rules={[{ required: true, message: 'Please input your Email' }]}>
                     <Input addonBefore={<UserOutlined />} placeholder="User Email" />
                 </Form.Item>
                 <Form.Item name="userPas" hasFeedback rules={[{ required: true, message: 'Please input your Password' }]}>
