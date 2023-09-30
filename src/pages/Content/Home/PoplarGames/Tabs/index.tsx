@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Tabs, Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { TPoplarGames, TPoplarGame } from '@/types/resources/poplarGames';
@@ -40,6 +41,7 @@ const TabPaneList = (props: { taxonomy: TPoplarGames }) => {
 const CustomTabBar = (props: any) => {
     const { activeKey, panes, onTabClick } = props;
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const { t } = useTranslation();
     // console.log('panes', panes)
     // console.log('activeKey', activeKey)
     // 添加用于检测屏幕宽度变化的事件处理程序
@@ -61,7 +63,7 @@ const CustomTabBar = (props: any) => {
             key: pane.props.tabkey,
             label: (
                 <a className="text-center underline-offset-0 no-underline" onClick={() => onTabClick(pane.key)}>
-                    {pane.props.tab}
+                    {t(pane.props.tab)}
                 </a>
             ),
         }));
@@ -86,7 +88,7 @@ const CustomTabBar = (props: any) => {
             {panes.map((pane: any) => {
                 return (
                     <div key={pane.value} className={`customTab relative cursor-pointer py-2 mx-2.5 text-base ${activeKey === pane.key ? 'text-black font-bold' : 'font-normal'}`} onClick={() => onTabClick(pane.key)}>
-                        {pane.props.tab}
+                        {t(pane.props.tab)}
                         <div className={`activeBorder absolute top-[96%] w-full ${activeKey === pane.key ? 'h-1 rounded-full bg-[#9680EA]' : 'h-0'}`}></div>
                     </div>
                 );
