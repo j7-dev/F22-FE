@@ -1,34 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { useSetAtom } from 'jotai';
+import React, { useState, useEffect, useRef } from 'react';
+import { useSetAtom, useAtom } from 'jotai';
 import { Form, Input, Button } from 'antd';
-import { useLogin } from '@refinedev/core';
+import { useLogin, useIsAuthenticated } from '@refinedev/core';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { popupIsOpenAtom, loginOrSignUpAtom, verifyAtom, verifyErrorAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 type LoginVariables = {
-    email: string;
+    userName: string;
     password: string;
     redirectPath: string;
 };
 
 const index: React.FC = () => {
     const { mutate: login } = useLogin<LoginVariables>();
+    const { data: isAuthenticated } = useIsAuthenticated();
+    const captchaRef = useRef<HCaptcha>(null);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
     const [form] = Form.useForm();
-    const [verify, setVerify] = useState(false);
-    const [verifyError, setVerifyError] = useState('');
+    const [verify, setVerify] = useAtom(verifyAtom);
+    const [verifyError, setVerifyError] = useAtom(verifyErrorAtom);
     const [submittable, setSubmittable] = useState(false);
 
-    const handleLogin = (values: { email: string; userPas: string }) => {
+    const handleLogin = (values: { userName: string; userPas: string }) => {
         if (!verify) {
             setVerifyError('You must verify the captcha');
             return;
         }
-        const { email, userPas } = values;
+        const { userName, userPas } = values;
         login(
-            { email: email, password: userPas, redirectPath: '/wallet' },
+            { userName: userName, password: userPas, redirectPath: '/wallet' },
             {
                 onSuccess: (data) => {
                     if (!data.success) {
@@ -57,7 +59,6 @@ const index: React.FC = () => {
 
     // Watch all values
     const values = Form.useWatch([], form);
-
     useEffect(() => {
         form.validateFields({ validateOnly: true }).then(
             () => {
@@ -68,20 +69,26 @@ const index: React.FC = () => {
             },
         );
     }, [values]);
+
+    // //判斷是否登出，並且重置驗證表單
+    useEffect(() => {
+        if (captchaRef.current !== null && isAuthenticated?.authenticated === false) {
+            captchaRef.current.resetCaptcha();
+        }
+    }, [isAuthenticated?.authenticated]);
     return (
         <div className="loginFrom text-center flex flex-col gap-2.5 w-full">
             <span>Available After Login.</span>
             {/* 錯誤訊息 */}
             {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
-
             <Form form={form} onFinish={handleLogin}>
-                <Form.Item name="email" hasFeedback rules={[{ required: true, message: 'Please input your Email' }]}>
+                <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Email' }]}>
                     <Input addonBefore={<UserOutlined />} placeholder="User Email" />
                 </Form.Item>
-                <Form.Item name="userPas" hasFeedback rules={[{ required: true, message: 'Please input your Password' }]}>
+                <Form.Item name="userPas" rules={[{ required: true, message: 'Please input your Password' }]}>
                     <Input addonBefore={<LockOutlined />} placeholder="User Password" />
                 </Form.Item>
-                <HCaptcha sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" onVerify={() => handleVerificationSuccess()} />
+                <HCaptcha ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" onVerify={() => handleVerificationSuccess()} />
                 <Form.Item>
                     <Button disabled={!submittable} className="flex w-full h-10 items-center rounded-lg border-white gap-x-2 font-bold bg-[#F9A318] text-white hover:opacity-80  md:my-3 md:px-6 md:py-3 justify-center" htmlType="submit">
                         Sign in
