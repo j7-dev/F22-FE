@@ -4,6 +4,7 @@ import React, {
     useEffect, // { useState, useRef, useEffect }
 } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { nanoid } from 'nanoid';
 import iconSpeaker from '@/assets/images/Icon_Speaker.svg';
 
 //TODO 解決TS問題
@@ -105,7 +106,7 @@ const Marquee = ({ list, time, ...props }: { list: string[]; time: number }) => 
         <MarqueeContainer ref={marqueeContainer} {...props}>
             <MarqueeArea<any> ref={marqueeArea} move={marqueeMoveLeft} time={realTime}>
                 {showList.map((item) => {
-                    return <MarqueeItem>{item}</MarqueeItem>;
+                    return <MarqueeItem key={nanoid()}>{item}</MarqueeItem>;
                 })}
             </MarqueeArea>
         </MarqueeContainer>
