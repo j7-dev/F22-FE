@@ -1,12 +1,25 @@
 import React from 'react';
-import { TSiteNotify } from '@/types';
+import { useSetAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { nanoid } from 'nanoid';
 import dayjs from 'dayjs';
+import { TSiteNotify } from '@/types';
+import { isShowDetailAtom, notifyDetailAtom } from '@/components/ContentLayout/Wallet/CashSection/SiteNotify';
 
-const index: React.FC<TSiteNotify> = (props) => {
-    const { t } = useTranslation();
+type notifyListProps = {
+    siteNotifyData: TSiteNotify[];
+};
+const index: React.FC<notifyListProps> = (props) => {
     const { siteNotifyData } = props;
+    const { t } = useTranslation();
+    const setIsShowContent = useSetAtom(isShowDetailAtom);
+    const setNotifyDetail = useSetAtom(notifyDetailAtom);
+
+    const handleClick = (data: TSiteNotify) => {
+        setIsShowContent(true);
+        setNotifyDetail(data);
+    };
+
     return (
         <div className="pageContent w-full flex flex-col">
             <div className="tableHeader h-10 w-full items-center flex flex-row bg-[#2B3240] text-white p-2 font-bold text-[13px]">
@@ -21,7 +34,9 @@ const index: React.FC<TSiteNotify> = (props) => {
                         return (
                             <div className="contentList min-h-[40px] w-full items-center flex flex-row  p-2 font-bold text-[13px]" key={nanoid()}>
                                 <div className="tableNo w-20 text-center">{item.id}</div>
-                                <div className="tableTitle w-8/12 hover:text-[#78D39D] cursor-pointer">{t(item.content)}</div>
+                                <div className="tableTitle w-8/12 hover:text-[#78D39D] cursor-pointer" onClick={() => handleClick(item)}>
+                                    {t(item.title)}
+                                </div>
                                 <div className="tableDate w-48 text-center">{dateStringDayjs}</div>
                             </div>
                         );

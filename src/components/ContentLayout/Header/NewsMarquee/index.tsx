@@ -1,9 +1,7 @@
-import React, {
-    useState,
-    useRef,
-    useEffect, // { useState, useRef, useEffect }
-} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { nanoid } from 'nanoid';
+import { useList } from '@refinedev/core';
 import iconSpeaker from '@/assets/images/Icon_Speaker.svg';
 
 //TODO 解決TS問題
@@ -93,7 +91,7 @@ const Marquee = ({ list, time, ...props }: { list: string[]; time: number }) => 
             // 單圈移動距離
             const newMoveLeft = areaWidth * Math.floor(copyTimes / 2);
             // 一圈實際時間
-            const newRealTime = time * parseFloat((newMoveLeft / containerWidth).toFixed(2));
+            const newRealTime = time * parseFloat((newMoveLeft / containerWidth).toFixed(2)) * 2;
             setShowList(getFillList(list, copyTimes));
             setMarqueeMoveLeft(newMoveLeft);
             setRealTime(newRealTime);
@@ -105,7 +103,7 @@ const Marquee = ({ list, time, ...props }: { list: string[]; time: number }) => 
         <MarqueeContainer ref={marqueeContainer} {...props}>
             <MarqueeArea<any> ref={marqueeArea} move={marqueeMoveLeft} time={realTime}>
                 {showList.map((item) => {
-                    return <MarqueeItem>{item}</MarqueeItem>;
+                    return <MarqueeItem key={nanoid()}>{item}</MarqueeItem>;
                 })}
             </MarqueeArea>
         </MarqueeContainer>
@@ -124,16 +122,33 @@ const Marquee = ({ list, time, ...props }: { list: string[]; time: number }) => 
 // };
 
 // App
-const DATA_LIST = ['Marquee Text Test 1'];
 const index: React.FC = () => {
+    const { data: marquee, isLoading } = useList({
+        resource: 'cms-marketing-cotents',
+        filters: [
+            {
+                field: 'position',
+                operator: 'in',
+                value: 'header',
+            },
+        ],
+    });
+    const dateList = marquee?.data.map((item) => item.content);
     return (
         <div className="NewsMarquee relative flex items-center gap-2.5 overflow-hidden w-1/3">
             <img src={iconSpeaker} />
             {/* <span className="">Lorem ipsum dolor sit amet consectetur. Auctor rhoncus non pharetra sollicitudin.</span> */}
             <div className="w-[500px]">
-                <Wrapper>
+                {isLoading ? (
+                    ' Loading...'
+                ) : (
+                    <Wrapper>
+                        <Marquee list={dateList as string[]} time={5} />
+                    </Wrapper>
+                )}
+                {/* <Wrapper>
                     <Marquee list={DATA_LIST} time={5} />
-                </Wrapper>
+                </Wrapper> */}
             </div>
         </div>
     );

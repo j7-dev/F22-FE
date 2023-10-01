@@ -1,9 +1,8 @@
 import { useGetIdentity, useList } from '@refinedev/core';
 import { TUser, TTransaction } from '@/types';
 
-export const useGetTransactionRecords = (props: any) => {
-    //這個要怎麼設定型別?
-    //目的在於這支hook可以被重複使用，所以props要可以傳入不同的型別
+export const useGetTransactionRecords = (props: { type: string[] }) => {
+    //這支hook可以被重複使用，type傳入的參數是一個陣列如[DEPOSIT', 'WITHDRAW]
     const { type } = props;
     const { data: identity } = useGetIdentity<TUser>();
     // console.log('identity', identity);
