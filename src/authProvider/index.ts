@@ -38,12 +38,17 @@ export const authProvider: AuthBindings = {
             // set header axios instance
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-            setTimeout(() => {
-                return {
-                    success: true,
-                    redirectTo: redirectPath,
-                };
-            }, 0);
+            //TODO 這邊加了setTimeout會導致無法跳轉=>這麼加是因為要等待localStorage.setItem寫入完成(AI產生)=>為啥???
+            // setTimeout(() => {
+            //     return {
+            //         success: true,
+            //         redirectTo: redirectPath,
+            //     };
+            // }, 0);
+            return {
+                success: true,
+                redirectTo: redirectPath,
+            };
         }
         return {
             success: false,

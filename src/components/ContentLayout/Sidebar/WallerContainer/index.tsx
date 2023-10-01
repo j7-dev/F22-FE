@@ -7,11 +7,13 @@ import { useSetAtom, useAtom } from 'jotai';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
 import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { walletArray } from './walletArray';
+import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
-    const [selectedSection, setSelectedSection] = useAtom(selectedSectionAtom);
+    const [activeMenu, setActiveMenu] = useAtom(activeMenuAtom);
+    const [_selectedSection, setSelectedSection] = useAtom(selectedSectionAtom);
 
     const Navigate = useNavigate();
     const { data } = useIsAuthenticated();
@@ -25,6 +27,7 @@ const index: React.FC = () => {
                     setSelectedSection(walletAction);
                     if (isLogin) {
                         Navigate('/wallet');
+                        setActiveMenu(walletAction);
                     } else {
                         setPopupIsOpen(true);
                     }
@@ -36,7 +39,7 @@ const index: React.FC = () => {
                         onClick={() => {
                             handleClick(wallet.value);
                         }}
-                        className={`${selectedSection === wallet.value ? 'active' : ''} ${wallet.value} relative transition-all cursor-pointer rounded-2xl text-[#BDBDBD]`}
+                        className={`${activeMenu === wallet.value && isLogin ? 'active' : ''} ${wallet.value} relative transition-all cursor-pointer rounded-2xl text-[#BDBDBD]`}
                     >
                         <span className="flex items-center text-sm overflow-hidden">
                             <div className="favicon min-w-[60px] min-h-[60px] flex justify-center items-center" />
