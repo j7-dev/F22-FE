@@ -2,6 +2,7 @@ import { useList } from '@refinedev/core';
 import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg';
 import { TPoplarGame } from '@/types/resources/poplarGames';
 import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
+// import { GameCategoryData } from '@/utils/GameCategory';
 
 // 生成隨機的6個索引
 const getRandomIndexes = (arr: TPoplarGame[], count: number) => {
@@ -49,27 +50,42 @@ export const useGetPoplarGames = () => {
     const randomIndexes = getRandomIndexes(allGamesArray, 6);
     const sixPoplarAllGames = randomIndexes.map((index) => allGamesArray[index]);
 
+    //TODO 這邊的資料結構該怎麼與utils/GameCategory中的資料結合?
     const poplarGamesData = [
         {
             label: 'All Games',
             value: 'allGames',
             gameData: sixPoplarAllGames, //隨機取得所有遊戲中的6個
         },
-
         {
-            label: 'Sport',
-            value: 'sport',
+            label: 'In Play',
+            value: 'inPlay',
             gameData: [],
         },
         {
-            label: 'Live Casino',
-            value: 'liveCasino',
+            label: 'Sports',
+            value: 'sports',
+            gameData: [],
+        },
+        {
+            label: 'Golf',
+            value: 'golf',
+            gameData: [],
+        },
+        {
+            label: 'Casino',
+            value: 'casino',
             gameData: liveGamesData,
         },
         {
-            label: 'Slot Games',
-            value: 'slotGames',
+            label: 'Slot',
+            value: 'slot',
             gameData: slotGames,
+        },
+        {
+            label: 'Games',
+            value: 'games',
+            gameData: [],
         },
     ];
     const loading = !(evoLoading || ppLoading);

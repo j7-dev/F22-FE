@@ -5,6 +5,6 @@ export type TPoplarGames = {
 };
 
 export type TPoplarGame = {
-    gameID: string;
-    gameImg: string;
+    gameID?: string;
+    gameImg?: string;
 };
