@@ -11,11 +11,14 @@ import { BiSolidUserRectangle } from 'react-icons/bi';
 export const IsLoginAtom = atom(false);
 export const popupIsOpenAtom = atom(false);
 export const loginOrSignUpAtom = atom(true); //true:login false:signUp
+export const verifyAtom = atom(false);
+export const verifyErrorAtom = atom('');
 
 const Login: React.FC = () => {
-    // const [showLogin, setShowLogin] = useState(false);
     const Navigate = useNavigate();
     const [isLogin, setIsLogin] = useAtom(IsLoginAtom);
+    const [_verify, setVerify] = useAtom(verifyAtom);
+    const [_verifyError, setVerifyError] = useAtom(verifyErrorAtom);
     const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
     const { data } = useIsAuthenticated();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
@@ -26,10 +29,13 @@ const Login: React.FC = () => {
         setIsLogin(!!data?.authenticated);
     }, [data?.authenticated]);
 
-    //登入or登出事件=>如果登入就登出，如果登出就登入
+    //登入or登出事件=>如果登入就登出，如果登出就跳登入彈窗
     const handleClick = () => {
         if (isLogin) {
+            setVerify(false);
+            setVerifyError('');
             logout({ redirectPath: '/' });
+            console.log('Logout_verify', _verify);
         } else {
             setLoginOrSignUp(true);
             setPopupIsOpen(true);
