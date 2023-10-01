@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import WallerContainer from './WallerContainer';
 import GameNavContainer from './GameNavContainer';
-import favicon from '@/assets/images/0927logoNoText.png';
-import Logo from '@/assets/images/0927logo.png';
 import { windowWidthAtom, mbSidebarAtom } from '@/components/ContentLayout';
 
 export const sidebarIsOpenAtom = atom(false);
@@ -32,7 +30,7 @@ export const Sidebar: React.FC = () => {
             <div className="w-full logo h-1/6 flex justify-center items-center">
                 <Link to="/" className="w-full">
                     <div className="relative w-full block h-12 px-[14px]">
-                        <img src={sidebarIsOpen ? Logo : favicon} alt="" className="w-full h-full object-contain object-center" />
+                        <div className="logoFavicon w-full h-full bg-contain bg-center bg-no-repeat" />
                         <span className="sr-only">跳轉到首頁</span>
                     </div>
                 </Link>

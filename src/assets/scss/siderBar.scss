@@ -1,5 +1,7 @@
 .f22-content {
 	//sideBar css
+	$logoFavicon_s: url("@/assets/images/logo_s.png");
+	$logoFavicon_f: url("@/assets/images/logo_f.png");
 	$depositFavicon: url("@/assets/images/Icon_Deposit_Outlined_Grey.svg");
 	$depositFaviconWhite: url("@/assets/images/Icon_Deposit_Filled_White.svg");
 	$withdrawFavicon: url("@/assets/images/Icon_Withdraw_Outlined_Grey.svg");
@@ -18,7 +20,13 @@
 	$iconArrowRightWhite: url("@/assets/images/Icon_Arrow_Right_White.svg");
 
 	.sideBar {
+		.logoFavicon {
+			background-image: $logoFavicon_s;
+		}
 		&.active {
+			.logoFavicon {
+				background-image: $logoFavicon_f;
+			}
 			ul {
 				li {
 					::after {
