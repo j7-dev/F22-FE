@@ -23,12 +23,12 @@ export const useGetPoplarGames = () => {
         };
     }) as TPoplarGame[];
 
-    const allGamesArray = liveGamesData ? [...liveGamesData] : ([] as TPoplarGame[]);
+    const allGamesData = liveGamesData ? [...liveGamesData] : ([] as TPoplarGame[]);
     const poplarGamesData = [
         {
             label: 'All Games',
             value: 'allGames',
-            gameData: allGamesArray,
+            gameData: allGamesData,
         },
 
         {

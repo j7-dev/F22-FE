@@ -57,20 +57,24 @@ const Login: React.FC = () => {
     return (
         <>
             <div className={`walletBtn flex flex-row gap-2.5 `}>
-                <div onClick={handleWallet} className="WalletBtn min-w-[150px] whitespace-nowrap flex items-center rounded-[20px] border border-solid border-black gap-x-2 font-bold bg-black text-white hover:opacity-80  md:my-3 md:px-6 md:py-2 cursor-pointer">
-                    <BiSolidUserRectangle size={15} />
-                    <span>My Wallet</span>
-                </div>
-                <div onClick={handleRegister} className="WalletBtn min-w-[150px] whitespace-nowrap flex items-center rounded-[20px] border border-solid border-black gap-x-2 font-bold bg-black text-white hover:opacity-80  md:my-3 md:px-6 md:py-2 cursor-pointer">
-                    <BiSolidUserRectangle size={15} />
-                    <span>Register</span>
-                </div>
-                <div className="languageSwitchContain relative min-w-[150px] flex items-center justify-center border border-solid border-black rounded-[20px] font-bold bg-white text-black hover:opacity-80  md:my-3 md:px-6 md:py-2 cursor-pointer">
-                    <LanguageSwitch />
-                </div>
-                <div onClick={handleClick} className="loginBtn min-w-[100px] whitespace-nowrap flex items-center justify-center rounded-[20px] border border-solid border-[#5932EA] font-bold bg-[#5932EA] text-white hover:opacity-80  md:my-3 md:px-6 md:py-2 cursor-pointer">
+                <div onClick={handleClick} className="loginBtn min-w-[100px] whitespace-nowrap flex items-center justify-center rounded-2xl border border-solid border-[#5932EA] font-bold bg-[#5932EA] text-white hover:opacity-80  md:my-3 md:px-6 md:py-2 cursor-pointer">
                     <span>{isLogin ? 'Log out' : 'Log in'}</span>
                 </div>
+                {isLogin ? (
+                    <div onClick={handleWallet} className="WalletBtn min-w-[150px] whitespace-nowrap flex items-center rounded-2xl border border-solid border-black gap-x-2 font-bold bg-black text-white hover:opacity-80  md:my-3 md:px-6 md:py-2 cursor-pointer">
+                        <BiSolidUserRectangle size={15} />
+                        <span>My Wallet</span>
+                    </div>
+                ) : (
+                    <div onClick={handleRegister} className="RegisterBtn whitespace-nowrap flex justify-center items-center rounded-2xl border border-solid border-black gap-x-2 font-bold bg-black text-white hover:opacity-80  md:my-3 md:px-6 md:py-2 cursor-pointer">
+                        <span>Register</span>
+                    </div>
+                )}
+
+                <div className="languageSwitchContain relative min-w-[150px] flex items-center justify-center border-2 border-solid border-black rounded-2xl font-bold bg-white text-black hover:opacity-80  md:my-3 md:px-6 md:py-2 cursor-pointer">
+                    <LanguageSwitch />
+                </div>
+
                 {/* <span
                     onClick={() => {
                         handleClick(false);

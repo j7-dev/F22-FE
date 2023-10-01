@@ -2,23 +2,38 @@ import { TGameCategory } from '@/types/resources/gameCategory';
 
 export const GameCategoryData: TGameCategory[] = [
     {
-        label: 'Popular Games',
-        value: 'popularGames',
-        path: 'popular',
+        label: 'In Play',
+        value: 'inPlay',
+        path: '/',
     },
     {
-        label: 'Sport',
-        value: 'sport',
-        path: 'sport',
+        label: 'Sports',
+        value: 'sports',
+        path: 'sports',
     },
     {
-        label: 'Live Casino',
-        value: 'liveCasino',
-        path: 'live',
+        label: 'Golf',
+        value: 'golf',
+        path: 'golf',
     },
     {
-        label: 'Slot Game',
-        value: 'slotGame',
+        label: 'Casino',
+        value: 'casino',
+        path: 'casino',
+    },
+    {
+        label: 'Slot',
+        value: 'slot',
         path: 'slot',
+    },
+    {
+        label: 'Games',
+        value: 'games',
+        path: 'games',
+    },
+    {
+        label: 'Events',
+        value: 'events',
+        path: 'events',
     },
 ];

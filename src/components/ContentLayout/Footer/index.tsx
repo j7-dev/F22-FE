@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
     ];
     return (
         <div className="bg-white w-full text-black font-normal z-10">
-            <div className="footerImgWrap px-4 flex flex-col justify-center items-start md:flex-row md:justify-start md:items-start gap-14 w-full h-auto border-solid border-b-2 border-0 border-[#E0E0E0] pb-20 md:py-9 ">
+            <div className="footerImgWrap px-4 flex flex-col justify-center items-start md:flex-row md:justify-start md:items-start gap-14 w-full h-auto border-solid border-b-2 border-0 border-[#E0E0E0] pb-20 md:py-9 md:px-32">
                 <div className="aboutWrap basis-1/4">
                     <div className="footerLogo">
                         <img src={logo} alt="" className="w-full" />
@@ -134,7 +134,7 @@ export const Footer: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full block pt-4 pb-16 md:py-4 text-xs md:text-base text-center font-normal text-gray-500">
+            <div className="w-full block pt-4 pb-16 md:py-4 md:px-32 text-xs md:text-base text-center font-normal text-gray-500">
                 <ul className="grid grid-cols-2 md:grid-cols-6 pl-0">
                     {fakeProviderData.map((item) => {
                         return (
