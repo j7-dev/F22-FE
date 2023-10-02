@@ -35,7 +35,7 @@ const index: React.FC<GameProps> = ({ data = {} }) => {
         } else {
             openGame(
                 {
-                    url: `${API_URL}/api/pp/opengame?language=${currentLocale}&symbol=${data.gameID}&user_id=${identity?.id}`,
+                    url: `${API_URL}/api/pp/opengame?language=${currentLocale}&symbol=${data?.gameID || ''}&user_id=${identity?.id}`,
                     method: 'post',
                     values: {},
                 },
