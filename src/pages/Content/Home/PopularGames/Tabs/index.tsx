@@ -92,7 +92,7 @@ const CustomTabBar = (props: any) => {
             <div className="col-start-2 col-span-9 flex gap-2.5 -ml-2">
                 {panes.map((pane: any) => {
                     return (
-                        <div key={nanoid()} className={`customTab relative cursor-pointer p-2 text-base ${activeKey === pane.key ? 'text-black font-bold' : 'font-normal'}`} onClick={() => onTabClick(pane.key)}>
+                        <div key={pane.key} className={`customTab relative cursor-pointer p-2 text-base ${activeKey === pane.key ? 'text-black font-bold' : 'font-normal'}`} onClick={() => onTabClick(pane.key)}>
                             {t(pane.props.tab)}
                             <div className={`activeBorder absolute top-[96%] left-0 w-full ${activeKey === pane.key ? 'h-1 rounded-full bg-[#9680EA]' : 'h-0'}`}></div>
                         </div>
