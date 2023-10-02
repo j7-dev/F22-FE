@@ -1,6 +1,6 @@
 import { useList } from '@refinedev/core';
 import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg';
-import { TPoplarGame } from '@/types/resources/poplarGames';
+import { TPoplarGame } from '@/types/resources/PoplarGames';
 import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
 // import { GameCategoryData } from '@/utils/GameCategory';
 

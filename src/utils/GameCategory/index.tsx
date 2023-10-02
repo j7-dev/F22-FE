@@ -1,4 +1,4 @@
-import { TGameCategory } from '@/types/resources/gameCategory';
+import { TGameCategory } from '@/types/resources/GameCategory';
 
 export const GameCategoryData: TGameCategory[] = [
     {

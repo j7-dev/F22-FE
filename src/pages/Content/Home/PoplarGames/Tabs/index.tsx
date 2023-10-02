@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Tabs, Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { TPoplarGames, TPoplarGame } from '@/types/resources/poplarGames';
+import { TPoplarGames, TPoplarGame } from '@/types/resources/PoplarGames';
 
 //單個文章版型
 const TabPaneList = (props: { taxonomy: TPoplarGames }) => {

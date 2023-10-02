@@ -165,7 +165,7 @@ const DetailedInformation: React.FC<{
         size: 'small',
         columns,
         rowKey: 'userId',
-    };
+    } as TableProps<DataType>;
 
     const handleExpand = (checked: boolean) => {
         if (checked) {
@@ -199,7 +199,7 @@ const DetailedInformation: React.FC<{
                     <div className="mb-4">
                         <FilterTags form={searchFormProps?.form} />
                     </div>
-                    <Table<any> {...formattedTableProps} />
+                    <Table {...formattedTableProps} />
                     <hr className="my-8" />
                 </Card>
             </Col>
