@@ -123,7 +123,7 @@ const Marquee = ({ list, time, ...props }: { list: string[]; time: number }) => 
 
 // App
 const index: React.FC = () => {
-    const { data: marquee, isLoading } = useList({
+    const { data: marqueeData, isLoading } = useList({
         resource: 'cms-marketing-cotents',
         filters: [
             {
@@ -133,7 +133,8 @@ const index: React.FC = () => {
             },
         ],
     });
-    const dateList = marquee?.data.map((item) => item.content);
+    const marquee = marqueeData?.data || [];
+    const dateList = marquee.map((item) => item.content);
     return (
         <div className="NewsMarquee relative flex items-center gap-2.5 overflow-hidden w-1/3">
             <img src={iconSpeaker} />

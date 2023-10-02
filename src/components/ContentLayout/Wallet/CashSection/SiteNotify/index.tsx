@@ -19,7 +19,7 @@ const index: React.FC = () => {
     const { t } = useTranslation();
     const isShowContent = useAtomValue(isShowDetailAtom);
 
-    const { data: siteNotify, isLoading } = useList<TSiteNotify>({
+    const { data: siteNotifyData, isLoading } = useList<TSiteNotify>({
         resource: 'cms-posts',
         meta: {
             populate: '*',
@@ -33,13 +33,13 @@ const index: React.FC = () => {
         ],
     });
 
-    const siteNotifyData = siteNotify?.data as [];
+    const siteNotify = (siteNotifyData?.data || []) as TSiteNotify[]; // 我會取名叫siteNotification
 
     return (
         <div className="w-full bg-white rounded-lg shadow-[0_0px_29px_0px_rgba(43, 50, 64, 0.09)] flex flex-col gap-2.5 p-4">
             <div className="pageHeader font-bold text-[#2B3240] text-sm p-2.5">{t('站内信쪽지')}</div>
             {isShowContent && <PostDetail />}
-            {isLoading ? 'isLoading...' : <NotifyList siteNotifyData={siteNotifyData} />}
+            {isLoading ? 'isLoading...' : <NotifyList siteNotifyData={siteNotify} />}
         </div>
     );
 };

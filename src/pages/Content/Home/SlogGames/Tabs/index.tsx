@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Tabs, Dropdown, Space } from 'antd';
+import { Tabs, Dropdown, Space, TabsProps } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { atom, useAtom } from 'jotai';
 import { DownOutlined } from '@ant-design/icons';
 import { TProviders, TProvider } from '@/types';
 import { slogGamesArray } from '../index';
+import { throttle } from 'lodash-es';
 
-const tabActiveKeyAtom = atom<undefined | string>(undefined);
+const tabActiveKeyAtom = atom<string>('0');
 //單個文章版型
 const TabPaneList = (props: { taxonomy: TProviders }) => {
     const { taxonomy } = props;
@@ -60,10 +61,10 @@ const CustomTabBar = (props: any) => {
     };
     useEffect(() => {
         // 添加窗口大小变化事件监听器
-        window.addEventListener('resize', handleWindowResize);
+        window.addEventListener('resize', throttle(handleWindowResize, 500));
         return () => {
             // 在组件卸载时移除事件监听器
-            window.removeEventListener('resize', handleWindowResize);
+            window.removeEventListener('resize', throttle(handleWindowResize, 500));
         };
     }, []);
 
@@ -98,7 +99,7 @@ const CustomTabBar = (props: any) => {
             {panes.map((pane: any) => {
                 return (
                     <div
-                        key={pane.value}
+                        key={pane.key}
                         className={`customTab relative cursor-pointer py-2 mx-2.5 text-base ${activeKey === pane.key ? 'text-black font-bold' : 'font-normal'}`}
                         onClick={() => {
                             setTabActiveKey(pane.key);
@@ -113,11 +114,8 @@ const CustomTabBar = (props: any) => {
     );
 };
 
-//TODO這裡的props怎麼來的?
-const customTabBar = (props: any) => {
-    // console.log('onTabClick', props.onTabClick);
-    return <CustomTabBar {...props} />;
-};
+//TODO 這裡的props怎麼來的? TAB 內部封裝時幫你帶入的
+const customTabBar: TabsProps['renderTabBar'] = (props) => <CustomTabBar {...props} />;
 
 type ShowGamesProps = {
     data: TProviders[];
@@ -127,13 +125,13 @@ const ShowGames: React.FC<ShowGamesProps> = (props) => {
 
     //資料格式化
     //TODO 如何取得Tabs的props
-    const formattedData = data.map((item) => ({
-        key: item.value,
+    const formattedData = data.map((item, i) => ({
+        key: i.toString(),
         label: item.label,
         children: <TabPaneList taxonomy={item} />,
     }));
     const [tabActiveKey, setTabActiveKey] = useAtom(tabActiveKeyAtom);
-    tabActiveKey ?? setTabActiveKey(formattedData[0].key);
+
     return (
         <>
             {/* Tab */}
@@ -144,7 +142,7 @@ const ShowGames: React.FC<ShowGamesProps> = (props) => {
                     if (index === 0) {
                         return null;
                     }
-                    const handleSwichTab = (key: string) => {
+                    const handleSwitchTab = (key: string) => {
                         setTabActiveKey(key);
                     };
                     return (
@@ -152,7 +150,7 @@ const ShowGames: React.FC<ShowGamesProps> = (props) => {
                             key={item.value}
                             className="h-20 rounded-2xl overflow-hidden"
                             onMouseEnter={() => {
-                                handleSwichTab(item.value);
+                                handleSwitchTab(item.value);
                             }}
                         >
                             <img src={item.providerData.providerMainImg} className="w-full h-full duration-500 hover:scale-125 object-center object-cover" alt="" />
