@@ -7,7 +7,7 @@ import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 
 const index: React.FC = () => {
     const { PopularGamesData, loading } = useGetPopularGames();
-    console.log('PopularGamesData', PopularGamesData);
+    // console.log('PopularGamesData', PopularGamesData);
     // const allGames = PopularGamesData[0].gameData;
     // console.log('allGames', allGames);
 
