@@ -96,21 +96,23 @@ const CustomTabBar = (props: any) => {
         );
     }
     return (
-        <div className="custom-tab-bar flex justify-start px-32 gap-2.5 border-0 border-solid border-b border-[#d5d8dc]">
-            {panes.map((pane: any) => {
-                return (
-                    <div
-                        key={pane.key}
-                        className={`customTab relative cursor-pointer py-2 mx-2.5 text-base ${activeKey === pane.key ? 'text-black font-bold' : 'font-normal'}`}
-                        onClick={() => {
-                            setTabActiveKey(pane.key);
-                        }}
-                    >
-                        {pane.props.tab}
-                        <div className={`activeBorder absolute top-[96%] w-full ${activeKey === pane.key ? 'h-1 rounded-full bg-[#9680EA]' : 'h-0'}`}></div>
-                    </div>
-                );
-            })}
+        <div className="custom-tab-bar grid grid-cols-11 border-0 border-solid border-b border-[#d5d8dc]">
+            <div className="col-start-2 col-span-9 flex gap-2.5 -ml-2">
+                {panes.map((pane: any) => {
+                    return (
+                        <div
+                            key={pane.key}
+                            className={`customTab relative cursor-pointer p-2 text-base ${activeKey === pane.key ? 'text-black font-bold' : 'font-normal'}`}
+                            onClick={() => {
+                                setTabActiveKey(pane.key);
+                            }}
+                        >
+                            {pane.props.tab}
+                            <div className={`activeBorder absolute top-[96%] left-0 w-full ${activeKey === pane.key ? 'h-1 rounded-full bg-[#9680EA]' : 'h-0'}`}></div>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 };
@@ -138,20 +140,19 @@ const ShowGames: React.FC<ShowGamesProps> = (props) => {
             {/* Tab */}
             <Tabs activeKey={tabActiveKey} renderTabBar={customTabBar} items={formattedData} className="SlotGamesTabs" />
             {/* 切換小圖 */}
-            <div className="grid grid-cols-3 gap-5 pb-10 md:px-28">
+            <div className="grid grid-cols-11 gap-4 pb-10">
+                <div className="col-start-1"></div>
                 {slogGamesArray.map((item: TProviders, index: number) => {
-                    if (index === 0) {
-                        return null;
-                    }
+                    const activeKey = index.toString();
                     const handleSwitchTab = (key: string) => {
                         setTabActiveKey(key);
                     };
                     return (
                         <div
-                            key={item.value}
+                            key={activeKey}
                             className="h-20 rounded-2xl overflow-hidden col-span-3"
                             onMouseEnter={() => {
-                                handleSwitchTab(item.value);
+                                handleSwitchTab(activeKey);
                             }}
                         >
                             <img src={item.providerData.providerMainImg} className="w-full h-full duration-500 hover:scale-125 object-center object-cover" alt="" />
