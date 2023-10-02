@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSetAtom, useAtom, useAtomValue } from 'jotai';
 import NewsMarquee from '../NewsMarquee';
-import UserInfo from './UserInfo';
 import LoginModule, { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { mbSidebarAtom } from '@/components/ContentLayout';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
@@ -36,26 +35,23 @@ const NavBar: React.FC = () => {
     return (
         <>
             {/* <!-- Navbar --> */}
-            <div className="Navbar relative w-full bg-white md:flex md:items-center md:justify-between px-4 sm:px-6 lg:px-8">
+            <div className="Navbar relative w-full h-full bg-white md:flex md:items-center md:justify-between px-4 sm:px-6 lg:px-8">
                 <nav className="relative w-full py-3 xl:flex md:items-center xl:justify-between md:py-0  xl:mx-auto " aria-label="Global">
                     {/* 手機版選單按鈕 */}
                     <div className="phoneMenu flex items-center justify-end">
-                        <div className="xl:hidden mobileBtn">
+                        <div className="sm:hidden mobileBtn">
                             <button type="button" className="inline-flex justify-center items-center gap-2 rounded-full bg-transparent border-transparent  shadow-sm align-middle transition-all" onClick={handleMbSidebar}>
                                 <div className={`menuBtn transition-all ${mbSidebar ? 'rotate-45' : ''}`}>{mbSidebar ? <AiOutlinePlus size={30} /> : <AiOutlineMenu size={30} />}</div>
                             </button>
                         </div>
                     </div>
                     {/* 桌機選單 */}
-                    <div className="hidden w-full relative transition-all duration-300 basis-full grow xl:flex flex-row justify-between items-center">
+                    <div className="hidden w-full relative transition-all duration-300 basis-full grow sm:flex flex-row gap-16 justify-between items-center">
                         <NewsMarquee />
-                        <div className="flex flex-col gap-y-4 gap-x-0 mt-5 md:flex-row md:items-center md:justify-end md:gap-y-0 md:gap-x-7 md:mt-0 md:pl-7">
-                            {isLogin && <UserInfo />}
-                            <LoginModule />
-                        </div>
+                        <LoginModule />
                     </div>
                     {/* 手機選單 */}
-                    <div className="flex xl:hidden bg-white fixed bottom-0 left-0 justify-between w-full px-8 pt-3 pb-2 z-50" style={{ borderTop: '1px solid #999' }}>
+                    <div className="flex sm:hidden bg-white fixed bottom-0 left-0 justify-between w-full px-8 pt-3 pb-2 z-50" style={{ borderTop: '1px solid #999' }}>
                         <Link to="/">
                             <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
                                 <GiPokerHand className="text-[1.5rem]" />

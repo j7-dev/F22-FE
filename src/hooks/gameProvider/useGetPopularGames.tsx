@@ -1,11 +1,11 @@
 import { useList } from '@refinedev/core';
 import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg';
-import { TPoplarGame } from '@/types/resources/poplarGames';
+import { TPopularGame } from '@/types/resources/popularGames';
 import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
 // import { GameCategoryData } from '@/utils/GameCategory';
 
 // 生成隨機的6個索引
-const getRandomIndexes = (arr: TPoplarGame[], count: number) => {
+const getRandomIndexes = (arr: TPopularGame[], count: number) => {
     const indexes = [];
     const arrLength = arr.length;
 
@@ -19,7 +19,7 @@ const getRandomIndexes = (arr: TPoplarGame[], count: number) => {
     return indexes;
 };
 
-export const useGetPoplarGames = () => {
+export const useGetPopularGames = () => {
     //取得evo遊戲資料
     const { data: evoData, isLoading: evoLoading } = useList({
         resource: 'evo/tablelist',
@@ -28,12 +28,12 @@ export const useGetPoplarGames = () => {
     const { data: ppData, isLoading: ppLoading } = useGetPPTableList();
 
     //重組Slot Games遊戲資料
-    const slotGames = ppData?.slice(0, 6).map((item: any) => {
+    const slotGames = ppData?.slice(0, 6).map((item: TPopularGame) => {
         return {
             gameID: item.gameID,
             gameImg: item.gameImg,
         };
-    }) as TPoplarGame[];
+    });
 
     //重組Live Casino遊戲資料
     const liveGamesData = evoData?.data.slice(0, 6).map((item) => {
@@ -41,17 +41,16 @@ export const useGetPoplarGames = () => {
             gameID: item['Table ID'],
             gameImg: getGameTypeImg(item['Game Type']),
         };
-    }) as TPoplarGame[];
+    }) as TPopularGame[];
 
     //重組所有遊戲資料
-    const allGamesArray = liveGamesData && slotGames ? [...liveGamesData, ...slotGames] : ([] as TPoplarGame[]);
+    const allGamesArray = liveGamesData && slotGames ? [...liveGamesData, ...slotGames] : ([] as TPopularGame[]);
     // 獲取隨機的6個元素
     //TODO 有個BUG，切換語言時會多一個遊戲=>觸發重新渲染時會多一個?
     const randomIndexes = getRandomIndexes(allGamesArray, 6);
     const sixPoplarAllGames = randomIndexes.map((index) => allGamesArray[index]);
 
-    //TODO 這邊的資料結構該怎麼與utils/GameCategory中的資料結合?
-    const poplarGamesData = [
+    const PopularGamesData = [
         {
             label: 'All Games',
             value: 'allGames',
@@ -89,5 +88,5 @@ export const useGetPoplarGames = () => {
         },
     ];
     const loading = !(evoLoading || ppLoading);
-    return { poplarGamesData, loading };
+    return { PopularGamesData, loading };
 };

@@ -14,7 +14,7 @@ const Banner: React.FC = () => {
     //Banner圖片陣列
     const bannerArray = [banner_A, banner_B];
     return (
-        <div className="relative banner md:w-full mt-10 mb-4">
+        <div className="relative banner md:w-full">
             <Swiper
                 loop={true}
                 pagination={{

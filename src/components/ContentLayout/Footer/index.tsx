@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import twitterIcon from '@/assets/images/Icon_Twitter.svg';
 import igIcon from '@/assets/images/Icon_Instagram.svg';
 import lineIcon from '@/assets/images/Icon_Line.svg';
-import logo from '@/assets/images/0927logo.jpg';
+import logo from '@/assets/images/1002_logo_f.svg';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import { fakeProviderData } from '@/pages/Content/Home/Provider/ProviderData';
 
@@ -49,11 +49,7 @@ export const Footer: React.FC = () => {
                     <div className="footerLogo">
                         <img src={logo} alt="" className="w-full" />
                     </div>
-                    <div className="txt text-[#333333] text-xs font-normal pt-4 mt-4 border-solid border-t-2 border-0 border-[#E0E0E0]">
-                        {t('COPYRIGHT 2020, OLE BET. ALL RIGHTS RESERVED. GAMBLING CAN BE ADDICTIVE, PLEASE PLAY RESPONSIBLY. FOR MORE INFORMATION ON SUPPORT TOOLS, PLEASE VISIT OUR RESPONSIBLE GAMBLING PAGE')}
-                        <br />
-                        {t('PAYMENT SUPPORTED BY')}
-                    </div>
+                    <div className="txt text-[#333333] text-xs font-normal pt-4 mt-4 border-solid border-t-2 border-0 border-[#E0E0E0]">{t('COPYRIGHT 2023, SMART BET. ALL RIGHTS RESERVED. GAMBLING CAN BE ADDICTIVE, PLEASE PLAY RESPONSIBLY. FOR MORE INFORMATION ON SUPPORT TOOLS, PLEASE VISIT OUR RESPONSIBLE GAMBLING PAGE PAYMENT SUPPORTED BY CODE PAY')}</div>
                 </div>
                 <div className="helpWrap w-full basis-1/4">
                     <div className="text-2xl font-bold text-black mb-6 flex items-center gap-3">

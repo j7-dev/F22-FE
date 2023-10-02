@@ -42,7 +42,7 @@ const index: React.FC = () => {
                         className={`${activeMenu === wallet.value && isLogin ? 'active' : ''} ${wallet.value} relative transition-all cursor-pointer rounded-2xl text-[#BDBDBD]`}
                     >
                         <span className="flex items-center text-sm overflow-hidden">
-                            <div className="favicon min-w-[60px] min-h-[60px] flex justify-center items-center" />
+                            <div className="favicon sm:min-w-[60px] min-h-[60px] flex justify-center items-center" />
                             <span className={`whitespace-nowrap text-lg font-normal`}>{t(wallet.label)}</span>
                         </span>
                     </li>

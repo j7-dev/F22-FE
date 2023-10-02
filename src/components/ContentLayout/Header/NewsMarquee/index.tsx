@@ -135,10 +135,10 @@ const index: React.FC = () => {
     });
     const dateList = marquee?.data.map((item) => item.content);
     return (
-        <div className="NewsMarquee relative flex items-center gap-2.5 overflow-hidden w-1/3">
+        <div className="NewsMarquee relative flex items-center gap-2.5 overflow-hidden w-full">
             <img src={iconSpeaker} />
             {/* <span className="">Lorem ipsum dolor sit amet consectetur. Auctor rhoncus non pharetra sollicitudin.</span> */}
-            <div className="w-[500px]">
+            <div className="w-full">
                 {isLoading ? (
                     ' Loading...'
                 ) : (

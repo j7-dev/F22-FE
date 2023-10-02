@@ -18,7 +18,9 @@
 		}
 		.rightContent {
 			transition: all 0.3s;
-			padding-left: 88px;
+			@media (min-width: 414px) {
+				padding-left: 88px;
+			}
 			.Navbar {
 				.userInfo {
 					.rewardInfo {

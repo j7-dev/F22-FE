@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Tabs, Dropdown, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { TPoplarGames, TPoplarGame } from '@/types/resources/poplarGames';
+import { TPopularGames, TPopularGame } from '@/types/resources/popularGames';
 
 //單個文章版型
-const TabPaneList = (props: { taxonomy: TPoplarGames }) => {
+const TabPaneList = (props: { taxonomy: TPopularGames }) => {
     const { taxonomy } = props;
 
-    const SingleCase = (SingleCaseProps: { item: TPoplarGame }) => {
+    const SingleCase = (SingleCaseProps: { item: TPopularGame }) => {
         const { item } = SingleCaseProps;
 
         return (
@@ -102,7 +102,7 @@ const customTabBar = (props: any) => {
 };
 
 type ShowGamesProps = {
-    data: TPoplarGames[];
+    data: TPopularGames[];
 };
 const ShowGames: React.FC<ShowGamesProps> = (props) => {
     const { data } = props;
