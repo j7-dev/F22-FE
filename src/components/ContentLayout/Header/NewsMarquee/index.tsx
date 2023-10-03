@@ -13,7 +13,7 @@ const index: React.FC = () => {
         if (marqueeContent !== null) {
             root.style.setProperty('--marquee-elements', marqueeElementsDisplayed.toString());
             //影響速度
-            root.style.setProperty('--marquee-animation-duration', (marqueeElementsDisplayed * 10).toString() + 's');
+            root.style.setProperty('--marquee-animation-duration', (marqueeElementsDisplayed * 30).toString() + 's');
         }
         for (let i = 0; i < marqueeElementsDisplayed; i++) {
             // console.log('i', i);
@@ -31,7 +31,7 @@ const index: React.FC = () => {
                     {marqueeContentData.map((item) => {
                         return (
                             <li key={nanoid()}>
-                                <span>{item}</span>
+                                <span className="mr-1">{item}</span>
                             </li>
                         );
                     })}
