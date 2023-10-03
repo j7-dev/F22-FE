@@ -1,12 +1,12 @@
 import React from 'react';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
-import coinIcon from '@/assets/images/coin-icon.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { cloneDeep } from 'lodash';
-import { requestAtomType } from '@/types';
 import { useCustomMutation, useGetIdentity } from '@refinedev/core';
 import { API_URL } from '@/utils';
+import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { requestAtomType } from '@/types';
+import coinIcon from '@/assets/images/coin-icon.png';
 import { FaGamepad } from 'react-icons/fa';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 
@@ -75,8 +75,6 @@ const index: React.FC<GameProps> = ({ data = {} }) => {
             newGameConfig.config.game.category = data['Game Type'];
             newGameConfig.config.game.table.id = data['Table ID'] as string;
             newGameConfig.player.id = identity.id.toString();
-            // setGameconfig(newGameConfig);
-            // console.log('newGameConfig', newGameConfig);
 
             openGame(
                 {

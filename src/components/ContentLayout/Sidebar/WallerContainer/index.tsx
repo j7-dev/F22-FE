@@ -39,10 +39,10 @@ const index: React.FC = () => {
                         onClick={() => {
                             handleClick(wallet.value);
                         }}
-                        className={`${activeMenu === wallet.value && isLogin ? 'active' : ''} ${wallet.value} relative transition-all cursor-pointer rounded-2xl text-[#BDBDBD]`}
+                        className={`${activeMenu === wallet.value && isLogin ? 'active' : ''} ${wallet.value} relative transition-all cursor-pointer  px-6 sm:px-0 sm:rounded-2xl text-[#333333]`}
                     >
                         <span className="flex items-center text-sm overflow-hidden">
-                            <div className="favicon sm:min-w-[60px] min-h-[60px] flex justify-center items-center" />
+                            <div className="favicon min-w-[60px] min-h-[60px] flex justify-center items-center" />
                             <span className={`whitespace-nowrap text-lg font-normal`}>{t(wallet.label)}</span>
                         </span>
                     </li>

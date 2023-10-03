@@ -5,11 +5,10 @@ import NewsMarquee from '../NewsMarquee';
 import LoginModule, { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { mbSidebarAtom } from '@/components/ContentLayout';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
-import { UserOutlined } from '@ant-design/icons';
-import { GiPokerHand } from 'react-icons/gi';
-import { RiCustomerService2Fill } from 'react-icons/ri';
-import { BiCheckShield } from 'react-icons/bi';
-import { AiOutlineMenu, AiOutlinePlus } from 'react-icons/ai';
+import Icon_Wallet_White from '@/assets/images/Icon_Wallet_White.svg';
+import logo from '@/assets/images/logo_f.png';
+import menuBtn from '@/assets/images/menuBtn.svg';
+import menuOpen from '@/assets/images/menuOpen.svg';
 
 const NavBar: React.FC = () => {
     const [mbSidebar, setMbSidebar] = useAtom(mbSidebarAtom);
@@ -33,53 +32,58 @@ const NavBar: React.FC = () => {
         }
     };
     return (
-        <>
-            {/* <!-- Navbar --> */}
-            <div className="Navbar relative w-full h-full bg-white md:flex md:items-center md:justify-between px-4 sm:px-6 lg:px-8">
-                <nav className="relative w-full py-3 xl:flex md:items-center xl:justify-between md:py-0  xl:mx-auto " aria-label="Global">
+        <div className="z-[999] fixed h-20 Navbar sm:relative w-full sm:h-full bg-white md:flex md:items-center md:justify-between px-4 sm:px-6 lg:px-8 shadow-[0_1px_20px_0px_#A370ED33]">
+            <nav className="relative w-full h-full py-3 xl:flex md:items-center xl:justify-between md:py-0  xl:mx-auto " aria-label="Global">
+                {/* 桌機選單 */}
+                <div className="pcMenu hidden w-full relative transition-all duration-300 basis-full grow sm:flex flex-row gap-16 justify-between items-center">
+                    <NewsMarquee />
+                    <LoginModule />
+                </div>
+                {/* 手機選單 */}
+                <div className="mbMenu w-full h-full relative z-50 flex items-center justify-between sm:hidden">
                     {/* 手機版選單按鈕 */}
-                    <div className="phoneMenu flex items-center justify-end">
-                        <div className="sm:hidden mobileBtn">
-                            <button type="button" className="inline-flex justify-center items-center gap-2 rounded-full bg-transparent border-transparent  shadow-sm align-middle transition-all" onClick={handleMbSidebar}>
-                                <div className={`menuBtn transition-all ${mbSidebar ? 'rotate-45' : ''}`}>{mbSidebar ? <AiOutlinePlus size={30} /> : <AiOutlineMenu size={30} />}</div>
-                            </button>
+                    <div className="phoneMenu w-[30px] h-[30px]">
+                        <button type="button" className="inline-flex justify-center items-center gap-2 rounded-full bg-transparent border-transparent  shadow-sm align-middle transition-all" onClick={handleMbSidebar}>
+                            <div className={`menuBtn transition-all ${mbSidebar ? 'rotate-45' : ''}`}>{mbSidebar ? <img src={menuOpen} /> : <img src={menuBtn} />}</div>
+                        </button>
+                    </div>
+                    <div className="logo w-full h-full flex items-center">
+                        <Link to="/" className="w-full">
+                            <img src={logo} alt="" className="w-full h-[30px] object-contain" />
+                        </Link>
+                    </div>
+                    <div className="myWallet w-[30px] h-[30px] rounded-xl bg-[#5932EA] aspect-square p-1" onClick={handleProfile}>
+                        <img src={Icon_Wallet_White} alt="" className="w-full h-full object-contain " />
+                    </div>
+                </div>
+                {/* 手機選單 */}
+                {/* <div className="flex sm:hidden bg-white fixed bottom-0 left-0 justify-between w-full px-8 pt-3 pb-2 z-50" style={{ borderTop: '1px solid #999' }}>
+                    <Link to="/">
+                        <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
+                            <GiPokerHand className="text-[1.5rem]" />
+                            <span className="text-xs font-normal">Game</span>
                         </div>
-                    </div>
-                    {/* 桌機選單 */}
-                    <div className="hidden w-full relative transition-all duration-300 basis-full grow sm:flex flex-row gap-16 justify-between items-center">
-                        <NewsMarquee />
-                        <LoginModule />
-                    </div>
-                    {/* 手機選單 */}
-                    <div className="flex sm:hidden bg-white fixed bottom-0 left-0 justify-between w-full px-8 pt-3 pb-2 z-50" style={{ borderTop: '1px solid #999' }}>
-                        <Link to="/">
-                            <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
-                                <GiPokerHand className="text-[1.5rem]" />
-                                <span className="text-xs font-normal">Game</span>
-                            </div>
-                        </Link>
-                        <Link to="/about">
-                            <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
-                                <BiCheckShield className="text-[1.5rem]" />
-                                <span className="text-xs font-normal">About</span>
-                            </div>
-                        </Link>
-                        <Link to="/customer">
-                            <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
-                                <RiCustomerService2Fill className="text-[1.5rem]" />
-                                <span className="text-xs font-normal">Service</span>
-                            </div>
-                        </Link>
+                    </Link>
+                    <Link to="/about">
+                        <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
+                            <BiCheckShield className="text-[1.5rem]" />
+                            <span className="text-xs font-normal">About</span>
+                        </div>
+                    </Link>
+                    <Link to="/customer">
+                        <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
+                            <RiCustomerService2Fill className="text-[1.5rem]" />
+                            <span className="text-xs font-normal">Service</span>
+                        </div>
+                    </Link>
 
-                        <div className="cursor-pointer flex flex-col justify-center items-center text-gray-600 hover:text-gray-400" onClick={handleProfile}>
-                            <UserOutlined className="text-[1.5rem]" />
-                            <span className="text-xs font-normal">Profile</span>
-                        </div>
+                    <div className="cursor-pointer flex flex-col justify-center items-center text-gray-600 hover:text-gray-400" onClick={handleProfile}>
+                        <UserOutlined className="text-[1.5rem]" />
+                        <span className="text-xs font-normal">Profile</span>
                     </div>
-                </nav>
-            </div>
-            {/* <!-- End Navbar --> */}
-        </>
+                </div> */}
+            </nav>
+        </div>
     );
 };
 

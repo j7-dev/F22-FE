@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Tabs, Dropdown, Space, TabsProps } from 'antd';
 // import { useTranslation } from 'react-i18next';
 // import { useNavigate } from 'react-router-dom';
 import { atom, useAtom } from 'jotai';
-import { DownOutlined } from '@ant-design/icons';
+import { windowWidthAtom } from '@/components/ContentLayout';
 import { TProviders, TProvider } from '@/types';
 import { slogGamesArray } from '../index';
-import { throttle } from 'lodash-es';
-
+import { DownOutlined } from '@ant-design/icons';
 const tabActiveKeyAtom = atom<string>('0');
 //單個文章版型
 const TabPaneList = (props: { taxonomy: TProviders }) => {
@@ -54,20 +53,9 @@ const TabPaneList = (props: { taxonomy: TProviders }) => {
 // 自定义标签栏组件
 const CustomTabBar = (props: any) => {
     const { activeKey, panes } = props;
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [windowWidth, _setWindowWidth] = useAtom(windowWidthAtom);
     const [_tabActiveKey, setTabActiveKey] = useAtom(tabActiveKeyAtom);
     // 添加用于检测屏幕宽度变化的事件处理程序
-    const handleWindowResize = () => {
-        setWindowWidth(window.innerWidth);
-    };
-    useEffect(() => {
-        // 添加窗口大小变化事件监听器
-        window.addEventListener('resize', throttle(handleWindowResize, 500));
-        return () => {
-            // 在组件卸载时移除事件监听器
-            window.removeEventListener('resize', throttle(handleWindowResize, 500));
-        };
-    }, []);
 
     if (windowWidth < 810) {
         // 当屏幕宽度小于 810px 时，使用下拉菜单
