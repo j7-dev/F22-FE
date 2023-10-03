@@ -1,456 +1,54 @@
 import React from 'react';
-import { isNumber, isString, isNull, isUndefined } from 'lodash-es';
+import { isNumber, isString, isNull, isUndefined } from 'lodash';
+import { keyToWord } from '@/utils';
 
-const test = {
-    id: 1,
-    username: 'test1',
-    email: 'test1@gmail.com',
-    provider: 'local',
-    confirmed: true,
-    blocked: false,
-    createdAt: '2023-09-08T13:24:52.129Z',
-    updatedAt: '2023-09-16T13:24:43.754Z',
-    display_name: null,
-    phone: null,
-    gender: null,
-    birthday: '2023-08-29',
-    uuid: 'use',
-    role: {
-        id: 1,
-        name: 'Authenticated',
-        description: '登入用戶',
-        type: 'authenticated',
-        createdAt: '2023-09-06T05:33:29.649Z',
-        updatedAt: '2023-09-11T15:28:02.297Z',
-    },
-    bank_accounts: [
-        {
-            id: 3,
-            label: 'Money Market Account',
-            createdAt: '2023-09-09T08:07:09.255Z',
-            updatedAt: '2023-09-09T08:07:09.255Z',
-            bank_name: 'New Leatha Bank',
-            bank_code: '442',
-            bank_account_number: '729086940188',
-            owner_real_name: 'Personal Loan Account',
-        },
-        {
-            id: 10,
-            label: 'Home Loan Account',
-            createdAt: '2023-09-09T08:09:26.913Z',
-            updatedAt: '2023-09-09T08:09:26.913Z',
-            bank_name: 'Lake Kathryntown Bank',
-            bank_code: '444',
-            bank_account_number: '192361677387',
-            owner_real_name: 'Savings Account',
-        },
-    ],
-    vip_upgrate_records: [],
-    user_notes: [],
-    login_details: [],
-    user_relationship: null,
-    transaction_records: [
-        {
-            id: 6,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 30,
-            status: 'PENDING',
-            createdAt: '2023-09-08T18:20:37.655Z',
-            updatedAt: '2023-09-08T18:20:37.655Z',
-        },
-        {
-            id: 7,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 30,
-            status: 'PENDING',
-            createdAt: '2023-09-08T18:21:21.921Z',
-            updatedAt: '2023-09-08T18:21:21.921Z',
-        },
-        {
-            id: 8,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 30,
-            status: 'PENDING',
-            createdAt: '2023-09-08T18:22:02.175Z',
-            updatedAt: '2023-09-08T18:22:02.175Z',
-        },
-        {
-            id: 9,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 50,
-            status: 'PENDING',
-            createdAt: '2023-09-08T18:23:41.819Z',
-            updatedAt: '2023-09-08T18:23:41.819Z',
-        },
-        {
-            id: 10,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 50,
-            status: 'PENDING',
-            createdAt: '2023-09-09T02:07:31.819Z',
-            updatedAt: '2023-09-09T02:07:31.819Z',
-        },
-        {
-            id: 11,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 55,
-            status: 'PENDING',
-            createdAt: '2023-09-10T04:22:27.992Z',
-            updatedAt: '2023-09-10T04:22:27.992Z',
-        },
-        {
-            id: 12,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 55,
-            status: 'PENDING',
-            createdAt: '2023-09-10T04:22:33.505Z',
-            updatedAt: '2023-09-10T04:22:33.505Z',
-        },
-        {
-            id: 13,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 55,
-            status: 'PENDING',
-            createdAt: '2023-09-10T04:22:37.996Z',
-            updatedAt: '2023-09-10T04:22:37.996Z',
-        },
-        {
-            id: 14,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 55,
-            status: 'PENDING',
-            createdAt: '2023-09-10T04:23:35.529Z',
-            updatedAt: '2023-09-10T04:23:35.529Z',
-        },
-        {
-            id: 15,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 55,
-            status: 'PENDING',
-            createdAt: '2023-09-10T04:25:23.509Z',
-            updatedAt: '2023-09-10T04:25:23.509Z',
-        },
-        {
-            id: 16,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 55,
-            status: 'PENDING',
-            createdAt: '2023-09-10T04:26:48.577Z',
-            updatedAt: '2023-09-10T04:26:48.577Z',
-        },
-        {
-            id: 17,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 55,
-            status: 'PENDING',
-            createdAt: '2023-09-10T04:28:10.334Z',
-            updatedAt: '2023-09-10T06:37:22.794Z',
-        },
-        {
-            id: 18,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 55,
-            status: 'PENDING',
-            createdAt: '2023-09-10T04:37:36.855Z',
-            updatedAt: '2023-09-10T07:16:58.433Z',
-        },
-        {
-            id: 19,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 55,
-            status: 'PENDING',
-            createdAt: '2023-09-10T04:39:02.884Z',
-            updatedAt: '2023-09-10T04:39:02.884Z',
-        },
-        {
-            id: 20,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 55,
-            status: 'PENDING',
-            createdAt: '2023-09-10T09:18:06.299Z',
-            updatedAt: '2023-09-10T09:18:06.299Z',
-        },
-        {
-            id: 22,
-            type: 'BET',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 55,
-            status: 'PENDING',
-            createdAt: '2023-09-10T09:24:56.243Z',
-            updatedAt: '2023-09-10T09:24:56.243Z',
-        },
-        {
-            id: 23,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 5,
-            status: 'SUCCESS',
-            createdAt: '2023-09-10T09:33:42.240Z',
-            updatedAt: '2023-09-10T09:33:42.240Z',
-        },
-        {
-            id: 24,
-            type: 'BET',
-            by: 'SYSTEM',
-            title: 'TEST',
-            description: null,
-            amount: 10,
-            status: 'PENDING',
-            createdAt: '2023-09-10T09:41:59.123Z',
-            updatedAt: '2023-09-10T09:41:59.123Z',
-        },
-        {
-            id: 25,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 5,
-            status: 'SUCCESS',
-            createdAt: '2023-09-10T09:45:52.200Z',
-            updatedAt: '2023-09-10T09:45:52.200Z',
-        },
-        {
-            id: 26,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 80,
-            status: 'SUCCESS',
-            createdAt: '2023-09-10T09:46:04.622Z',
-            updatedAt: '2023-09-10T09:46:04.622Z',
-        },
-        {
-            id: 27,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 80,
-            status: 'SUCCESS',
-            createdAt: '2023-09-10T12:54:28.035Z',
-            updatedAt: '2023-09-10T12:54:28.035Z',
-        },
-        {
-            id: 28,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 80,
-            status: 'SUCCESS',
-            createdAt: '2023-09-10T17:53:48.386Z',
-            updatedAt: '2023-09-10T17:53:48.386Z',
-        },
-        {
-            id: 29,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 80,
-            status: 'SUCCESS',
-            createdAt: '2023-09-10T17:59:48.446Z',
-            updatedAt: '2023-09-10T17:59:48.446Z',
-        },
-        {
-            id: 30,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 90,
-            status: 'SUCCESS',
-            createdAt: '2023-09-10T18:08:17.875Z',
-            updatedAt: '2023-09-10T18:08:17.875Z',
-        },
-        {
-            id: 31,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 90,
-            status: 'SUCCESS',
-            createdAt: '2023-09-10T18:09:10.794Z',
-            updatedAt: '2023-09-10T18:09:10.794Z',
-        },
-        {
-            id: 32,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 90,
-            status: 'SUCCESS',
-            createdAt: '2023-09-11T08:05:00.611Z',
-            updatedAt: '2023-09-11T08:05:00.611Z',
-        },
-        {
-            id: 33,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 90,
-            status: 'SUCCESS',
-            createdAt: '2023-09-11T08:06:58.506Z',
-            updatedAt: '2023-09-11T08:06:58.506Z',
-        },
-        {
-            id: 34,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 90,
-            status: 'SUCCESS',
-            createdAt: '2023-09-11T08:07:47.386Z',
-            updatedAt: '2023-09-11T08:07:47.386Z',
-        },
-        {
-            id: 35,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 90,
-            status: 'SUCCESS',
-            createdAt: '2023-09-11T08:13:31.946Z',
-            updatedAt: '2023-09-11T08:13:31.946Z',
-        },
-        {
-            id: 36,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 20,
-            status: 'SUCCESS',
-            createdAt: '2023-09-11T08:13:53.414Z',
-            updatedAt: '2023-09-11T08:13:53.414Z',
-        },
-        {
-            id: 37,
-            type: 'MANUAL',
-            by: 'ADMIN',
-            title: '手動調整',
-            description: null,
-            amount: 10000,
-            status: 'SUCCESS',
-            createdAt: '2023-09-15T03:55:01.554Z',
-            updatedAt: '2023-09-15T03:55:01.554Z',
-        },
-    ],
-    vip: {
-        id: 2,
-        label: 'VIP1',
-        createdAt: '2023-09-13T00:50:03.885Z',
-        updatedAt: '2023-09-13T04:15:35.165Z',
-        order: 1,
-        upgrade_award: 10011,
-        activated: true,
-        deposit_upgrade_threshold: 10000,
-        valid_bet_amount_upgrade_threshold: 9000,
-        deposit_downgrade_threshold: 9000,
-        valid_bet_amount_downgrade_threshold: 8022,
-        upgrade_evaluation_interval: 8,
-        vip_duration: 31,
-    },
-    commission: null,
-    balances: [
-        {
-            id: 44,
-            amount: 11000,
-            createdAt: '2023-09-10T08:57:09.192Z',
-            updatedAt: '2023-09-15T03:55:01.542Z',
-        },
-        {
-            id: 45,
-            amount: 0,
-            createdAt: '2023-09-10T08:57:09.194Z',
-            updatedAt: '2023-09-10T08:57:09.194Z',
-        },
-        {
-            id: 86,
-            amount: 0,
-            createdAt: '2023-09-10T14:15:24.508Z',
-            updatedAt: '2023-09-10T14:15:24.508Z',
-        },
-        {
-            id: 87,
-            amount: 0,
-            createdAt: '2023-09-10T14:15:24.509Z',
-            updatedAt: '2023-09-10T14:15:24.509Z',
-        },
-    ],
+type TColumn = {
+    key: string;
+    title: string;
+    dataIndex: string;
+    render?: (value: any, record: any, index: number) => React.ReactNode;
 };
 
 const index: React.FC<{
-    data?: any;
-}> = ({ data = test }) => {
+    record: {
+        [key: string]: any;
+    };
+    columns?: TColumn[];
+}> = ({ record, columns }) => {
+    const defaultColumns = Object.keys(record)
+        .map((key) => {
+            if (isNumber(record?.[key]) || isString(record?.[key]) || isNull(record?.[key]) || isUndefined(record?.[key])) {
+                return {
+                    key,
+                    title: keyToWord(key),
+                    dataIndex: key,
+                };
+            }
+
+            if (Array.isArray(record?.[key]) && (record?.[key] || []).every((item: any) => isNumber(item) || isString(item) || isNull(item) || isUndefined(item))) {
+                return {
+                    key,
+                    title: keyToWord(key),
+                    dataIndex: key,
+                    render: (arr: (string | number)[]) => arr.join(', '),
+                };
+            }
+        })
+        .filter((c) => !!c) as TColumn[];
+
     return (
         <table className="table table-vertical mt-8 mb-16">
             <tbody>
-                {Object.keys(data).map((key) => {
-                    if (isNumber(data?.[key]) || isString(data?.[key]) || isNull(data?.[key]) || isUndefined(data?.[key])) {
-                        return (
-                            <tr key={key}>
-                                <th>{key}</th>
-                                <td>{data?.[key]}</td>
-                            </tr>
-                        );
-                    }
+                {(columns ? columns : defaultColumns).map((column, i) => {
+                    const render = column?.render;
+                    const dataIndex = column?.dataIndex;
+
+                    return (
+                        <tr key={column?.key}>
+                            <th>{column?.title as string}</th>
+                            <td>{render ? render(record?.[dataIndex as string], record, i) : record?.[dataIndex as string]}</td>
+                        </tr>
+                    );
                 })}
             </tbody>
         </table>

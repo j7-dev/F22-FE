@@ -4,7 +4,7 @@ import { CalendarOutlined, ClockCircleOutlined } from '@ant-design/icons';
 
 export const DateTime: React.FC<{ value: string }> = ({ value }) => {
     return (
-        <>
+        <div>
             <p className="m-0 whitespace-nowrap">
                 <CalendarOutlined className="mr-2" />
                 {dayjs(value).format('YYYY-MM-DD')}
@@ -13,6 +13,6 @@ export const DateTime: React.FC<{ value: string }> = ({ value }) => {
                 <ClockCircleOutlined className="mr-2" />
                 {dayjs(value).format('HH:mm:ss')}
             </p>
-        </>
+        </div>
     );
 };
