@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Form, Input, Switch, Radio, DatePicker, Select, FormProps } from 'antd';
+import { Form, Input, Switch, Radio, DatePicker, Select, FormProps, Checkbox } from 'antd';
 import { TRole, TRoleType, TUser, TVip } from '@/types';
 import dayjs, { Dayjs } from 'dayjs';
 import { isString, isObject } from 'lodash-es';
@@ -46,6 +46,10 @@ const FormComponent: React.FC<{
         roleType: 'agent',
     });
 
+    const support_payments = siteSetting?.support_payments || [];
+    const support_game_providers = siteSetting?.support_game_providers || [];
+    console.log('⭐  support_game_providers:', support_game_providers);
+
     useEffect(() => {
         if (!formLoading && formProps.initialValues) {
             if (isObject(formProps.initialValues.role as number | TRole)) {
@@ -65,6 +69,17 @@ const FormComponent: React.FC<{
             }
         }
     }, [formLoading]);
+
+    // useEffect(() => {
+    //     console.log('⭐  formProps.initialValues:', formProps.initialValues);
+    //     if (formType === 'create') {
+    //         // formProps?.initialValues?.support_payments = support_payments;
+    //         form?.setFieldValue('allow_payments', support_payments);
+    //         form?.setFieldValue('allow_game_providers', support_game_providers);
+    //     }
+    // }, [support_game_providers.length, support_payments.length]);
+
+    // const watch = Form.useWatch('allow_payments', form);
 
     const handleChangePassword = (checked: boolean) => {
         setIsEditing(checked);
@@ -122,6 +137,14 @@ const FormComponent: React.FC<{
 
                 <Form.Item name="blocked" valuePropName="checked" label="blocked" initialValue={formType === 'create' ? false : undefined}>
                     <Switch />
+                </Form.Item>
+
+                <Form.Item name="allow_payments" label="Allow Payments" initialValue={formType === 'create' ? support_payments : undefined}>
+                    <Checkbox.Group options={support_payments} />
+                </Form.Item>
+
+                <Form.Item name="allow_game_providers" label="Allow Game Providers" initialValue={formType === 'create' ? support_game_providers : undefined}>
+                    <Checkbox.Group options={support_game_providers} />
                 </Form.Item>
 
                 <Form.Item hidden={watchRoleType !== 'agent' && watchRoleType !== 'top_agent'} name="role" label="role" initialValue={formType === 'create' ? rolesMapping?.[defaultRoleType] : undefined}>

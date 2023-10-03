@@ -19,6 +19,8 @@ type TSiteSetting = {
             support_currencies: string[];
             default_amount_type: string;
             support_amount_types: string[];
+            support_payments: string[] | null;
+            support_game_providers: string[] | null;
         };
     };
 };
