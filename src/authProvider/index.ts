@@ -9,7 +9,7 @@ const strapiAuthHelper = AuthHelper(`${API_URL}/api`);
 
 export const authProvider: AuthBindings = {
     login: async (props) => {
-        const userName = props?.userName || '';
+        const userName = props?.userName || props?.email || '';
         const password = props?.password || '';
         const redirectPath = props?.redirectPath || '/refine/home';
 

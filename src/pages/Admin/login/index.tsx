@@ -40,6 +40,7 @@ const Login: React.FC = () => {
                                 layout="vertical"
                                 form={form}
                                 onFinish={(values) => {
+                                    console.log('⭐  values:', values);
                                     login(values);
                                 }}
                                 requiredMark={false}

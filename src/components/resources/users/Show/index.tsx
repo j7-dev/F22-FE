@@ -1,8 +1,12 @@
-import { Row, Col, Card } from 'antd';
+import { Card } from 'antd';
 import { Show } from '@refinedev/antd';
 import { useCan } from '@/hooks';
 import { useShow } from '@refinedev/core';
-import ObjectTable from '@/components/ObjectTable';
+import ObjectTable from '@/components/general/ObjectTable';
+import MoneyLog from '@/components/Admin/MoneyLog';
+import LoginDetail from '@/components/Admin/LoginDetail';
+
+import { useParams } from 'react-router-dom';
 
 const index = () => {
     const { canDelete, canEdit } = useCan();
@@ -11,6 +15,7 @@ const index = () => {
             populate: '*',
         },
     });
+    const { id } = useParams<{ id: string }>();
 
     console.log('⭐  index  dataBankAccounts', queryResult);
 
@@ -29,18 +34,26 @@ const index = () => {
                     },
                 }}
             >
-                <Row gutter={[16, 16]} className="-ml-[24px] -mr-[24px]">
-                    <Col lg={12} xs={24}>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 auto-rows-auto">
+                    <div>
                         <Card bordered={false} title="Info">
                             <ObjectTable />
                         </Card>
-                    </Col>
-                    {/* <Col lg={12} xs={24}>
-                        <Card  bordered={false} title="Search Result">
-                            <hr className="my-8" />
+                    </div>
+                    <div>
+                        <Card bordered={false} title="Money Log">
+                            <MoneyLog user_id={id} />
                         </Card>
-                    </Col> */}
-                </Row>
+                    </div>
+                    <div>
+                        <Card bordered={false} title="Login History">
+                            <LoginDetail user_id={id} />
+                        </Card>
+                    </div>
+                    <div>
+                        <Card bordered={false} title="Betting Records"></Card>
+                    </div>
+                </div>
             </Show>
         </>
     );
