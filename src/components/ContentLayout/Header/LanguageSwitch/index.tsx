@@ -27,7 +27,7 @@ const index: React.FC = () => {
         <>
             <div className="nowLanguage cursor-pointer text-right xl:text-center">
                 <span className="inline-flex justify-center items-center gap-2 hover:opacity-80">
-                    {currentLanguage?.shortName}
+                    Language
                     <BsFillCaretDownFill size={15} />
                 </span>
             </div>

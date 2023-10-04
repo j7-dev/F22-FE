@@ -1,0 +1,104 @@
+$inPlayFavicon: url("@/assets/images/Icon_Menu_Outlined_In_Play.svg");
+$inPlayFaviconWhite: url("@/assets/images/Icon_Menu_Filled_In_Play.svg");
+$sportsFavicon: url("@/assets/images/Icon_Menu_Outlined_Sports.svg");
+$sportsFaviconWhite: url("@/assets/images/Icon_Menu_Filled_Sports.svg");
+$golfFavicon: url("@/assets/images/Icon_Menu_Outlined_Golf.svg");
+$golfFaviconWhite: url("@/assets/images/Icon_Menu_Filled_Golf.svg");
+$casinoFavicon: url("@/assets/images/Icon_Menu_Outlined_Casino.svg");
+$casinoFaviconWhite: url("@/assets/images/Icon_Menu_Filled_Casino.svg");
+$slotFavicon: url("@/assets/images/Icon_Menu_Outlined_Slot.svg");
+$slotFaviconWhite: url("@/assets/images/Icon_Menu_Filled_Slot.svg");
+$gamesFavicon: url("@/assets/images/Icon_Menu_Outlined_Games.svg");
+$gamesFaviconWhite: url("@/assets/images/Icon_Menu_Filled_Games.svg");
+$eventsFavicon: url("@/assets/images/Icon_Menu_Outlined_Event.svg");
+$eventsFaviconWhite: url("@/assets/images/Icon_Menu_Filled_Event.svg");
+.f22-content {
+	.customTabBarMb {
+		.customTab {
+			font-weight: 500;
+			background-color: white;
+			color: #828282;
+
+			.favicon {
+				background-size: contain;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+			&.inPlay {
+				.favicon {
+					background-image: $inPlayFavicon;
+				}
+			}
+			&.sports {
+				.favicon {
+					background-image: $sportsFavicon;
+				}
+			}
+			&.golf {
+				.favicon {
+					background-image: $golfFavicon;
+				}
+			}
+			&.casino {
+				.favicon {
+					background-image: $casinoFavicon;
+				}
+			}
+			&.slot {
+				.favicon {
+					background-image: $slotFavicon;
+				}
+			}
+			&.games {
+				.favicon {
+					background-image: $gamesFavicon;
+				}
+			}
+			&.events {
+				.favicon {
+					background-image: $eventsFavicon;
+				}
+			}
+			&.active {
+				color: white;
+				font-weight: 900;
+				background-color: #5932ea;
+				&.inPlay {
+					.favicon {
+						background-image: $inPlayFaviconWhite;
+					}
+				}
+				&.sports {
+					.favicon {
+						background-image: $sportsFaviconWhite;
+					}
+				}
+				&.golf {
+					.favicon {
+						background-image: $golfFaviconWhite;
+					}
+				}
+				&.casino {
+					.favicon {
+						background-image: $casinoFaviconWhite;
+					}
+				}
+				&.slot {
+					.favicon {
+						background-image: $slotFaviconWhite;
+					}
+				}
+				&.games {
+					.favicon {
+						background-image: $gamesFaviconWhite;
+					}
+				}
+				&.events {
+					.favicon {
+						background-image: $eventsFaviconWhite;
+					}
+				}
+			}
+		}
+	}
+}

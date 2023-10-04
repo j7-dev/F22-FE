@@ -1,155 +1,41 @@
-import React, { useState, useRef, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { nanoid } from 'nanoid';
-import { useList } from '@refinedev/core';
+import React, { useEffect } from 'react'; // { useState, useRef, useEffect }
 import iconSpeaker from '@/assets/images/Icon_Speaker.svg';
-
-//TODO 解決TS問題
-// common js Nodejs require  module.exports
-
-// Wrapper
-const WrapperContainer = styled.div`
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-`;
-
-const Wrapper = ({ children }: { children: React.ReactNode }) => {
-    return <WrapperContainer>{children}</WrapperContainer>;
-};
-
-// Marquee
-const moveLeft = keyframes`
-  from {
-    transform: translateX(0);
-  }
-`;
-
-const MarqueeContainer = styled.div`
-    position: relative;
-    width: 100%;
-    padding: 10px 0;
-    overflow: hidden;
-    &:hover {
-        animation-play-state: paused;
-    }
-    &::after {
-        position: absolute;
-        content: '';
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-    }
-`;
-
-const MarqueeArea = styled.div`
-    display: inline-block;
-    white-space: nowrap;
-    transform: translateX(-${(props: any) => props.move}px);
-    animation: ${moveLeft} ${(props: any) => props.time}s linear infinite ${(props: any) => (props.toRight ? ' reverse' : '')};
-    animation-play-state: inherit;
-`;
-
-const MarqueeItem = styled.div`
-    position: relative;
-    display: inline-block;
-    margin-right: 2em;
-    color: #000;
-    font-weight: 700;
-    font-size: 14px;
-`;
-
-const getFillList = (list: any[], copyTimes = 1) => {
-    const newlist = [];
-    for (let i = 0; i < copyTimes; i++) {
-        newlist.push(...list);
-    }
-    // console.log('newlist', newlist);
-    return newlist;
-};
-
-const Marquee = ({ list, time, ...props }: { list: string[]; time: number }) => {
-    const marqueeContainer = useRef(null);
-    const marqueeArea = useRef(null);
-    const [marqueeMoveLeft, setMarqueeMoveLeft] = useState(0);
-    const [showList, setShowList] = useState(list);
-    const [realTime, setRealTime] = useState(time);
-
-    useEffect(() => {
-        if (marqueeContainer && marqueeContainer.current && marqueeArea && marqueeArea.current) {
-            const containerWidth = Math.floor((marqueeContainer.current as HTMLElement).offsetWidth);
-            const areaWidth = Math.floor((marqueeArea.current as HTMLElement).scrollWidth);
-            // 複製次數最小為2(跑馬燈寬度的兩倍以上)
-            const copyTimes = Math.max(2, Math.ceil((containerWidth * 2) / areaWidth));
-            // 單圈移動距離
-            const newMoveLeft = areaWidth * Math.floor(copyTimes / 2);
-            // 一圈實際時間
-            const newRealTime = time * parseFloat((newMoveLeft / containerWidth).toFixed(2)) * 2;
-            setShowList(getFillList(list, copyTimes));
-            setMarqueeMoveLeft(newMoveLeft);
-            setRealTime(newRealTime);
-        }
-        // console.log('containerWidth', containerWidth, 'areaWidth', areaWidth, 'copyTimes', copyTimes, 'newRealTime', newRealTime);
-    }, [list]);
-
-    return (
-        <MarqueeContainer ref={marqueeContainer} {...props}>
-            <MarqueeArea<any> ref={marqueeArea} move={marqueeMoveLeft} time={realTime}>
-                {showList.map((item) => {
-                    return <MarqueeItem key={nanoid()}>{item}</MarqueeItem>;
-                })}
-            </MarqueeArea>
-        </MarqueeContainer>
-    );
-};
-
-// Marquee.propTypes = {
-//     list: PropTypes.array,
-//     time: PropTypes.number,
-//     toRight: PropTypes.boolean,
-// };
-
-// Marquee.defaultProps = {
-//     list: [],
-//     time: 10,
-// };
+import { nanoid } from 'nanoid';
 
 // App
 const index: React.FC = () => {
-    const { data: marqueeData, isLoading } = useList({
-        resource: 'cms-marketing-cotents',
-        filters: [
-            {
-                field: 'position',
-                operator: 'in',
-                value: 'header',
-            },
-        ],
-    });
-    const marquee = marqueeData?.data || [];
-    const dateList = marquee.map((item) => item.content);
+    const marqueeContentData = ['Lorem ipsum dolor sit amet consectetur. Auctor rhoncus non pharetra sollicitudin.Lorem ipsum dolor sit amet consectetur. Auctor rhoncus non pharetra sollicitudin.'];
+    useEffect(() => {
+        const root = document.documentElement;
+        const marqueeElementsDisplayed = marqueeContentData.length * 2;
+        // console.log('marqueeElementsDisplayed', marqueeElementsDisplayed);
+        const marqueeContent = document.querySelector('.marquee-content');
+        if (marqueeContent !== null) {
+            root.style.setProperty('--marquee-elements', marqueeElementsDisplayed.toString());
+            //影響速度
+            root.style.setProperty('--marquee-animation-duration', (marqueeElementsDisplayed * 30).toString() + 's');
+        }
+        for (let i = 0; i < marqueeElementsDisplayed; i++) {
+            // console.log('i', i);
+            if (marqueeContent !== null) {
+                marqueeContent.appendChild(marqueeContent.children[i].cloneNode(true));
+            }
+        }
+    }, []);
+
     return (
-        <div className="NewsMarquee relative flex items-center gap-2.5 overflow-hidden w-1/3">
+        <div className="newsMarquee relative flex items-center gap-2.5 overflow-hidden w-full">
             <img src={iconSpeaker} />
-            {/* <span className="">Lorem ipsum dolor sit amet consectetur. Auctor rhoncus non pharetra sollicitudin.</span> */}
-            <div className="w-[500px]">
-                {isLoading ? (
-                    ' Loading...'
-                ) : (
-                    <Wrapper>
-                        <Marquee list={dateList as string[]} time={5} />
-                    </Wrapper>
-                )}
-                {/* <Wrapper>
-                    <Marquee list={DATA_LIST} time={5} />
-                </Wrapper> */}
+            <div className="marquee">
+                <ul className="marquee-content text-base font-bold">
+                    {marqueeContentData.map((item) => {
+                        return (
+                            <li key={nanoid()}>
+                                <span className="mr-1">{item}</span>
+                            </li>
+                        );
+                    })}
+                </ul>
             </div>
         </div>
     );

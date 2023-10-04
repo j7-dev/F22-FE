@@ -1,47 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Tabs, Dropdown, Space, TabsProps } from 'antd';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+// import { useTranslation } from 'react-i18next';
+// import { useNavigate } from 'react-router-dom';
 import { atom, useAtom } from 'jotai';
-import { DownOutlined } from '@ant-design/icons';
+import { windowWidthAtom } from '@/components/ContentLayout';
 import { TProviders, TProvider } from '@/types';
 import { slogGamesArray } from '../index';
-import { throttle } from 'lodash-es';
-
+import { DownOutlined } from '@ant-design/icons';
 const tabActiveKeyAtom = atom<string>('0');
 //單個文章版型
 const TabPaneList = (props: { taxonomy: TProviders }) => {
     const { taxonomy } = props;
-    const navigate = useNavigate();
-    const { t } = useTranslation();
-    const handleStartGame = (path: string) => {
-        navigate(path);
-    };
+    // const navigate = useNavigate();
+    // const { t } = useTranslation();
+    // const handleStartGame = (path: string) => {
+    //     navigate(path);
+    // };
     const SingleCase = (SingleCaseProps: { item: TProvider }) => {
         const { item } = SingleCaseProps;
         return (
-            <div className="providerInfo h-full w-full flex">
-                <div className="providerMainImg overflow-hidden rounded-2xl w-[55%]">
+            <div className="providerInfo h-full w-full grid grid-cols-11 gap-4">
+                <div className="col-start-1"></div>
+                <div className="providerMainImg overflow-hidden col-span-6 rounded-2xl ">
                     <img src={item.providerMainImg} alt="" className="w-full min-h-[369px] duration-500 hover:scale-125  object-cover" />
                 </div>
-                <div className="w-[45%] flex flex-col items-center justify-center px-20">
+                <div className="col-span-3 flex flex-col items-center justify-center">
                     <img className="providerFavIcon w-full" src={item.providerFavIcon} />
                     <p className="providerDescribe text-xs font-bold">{item.providerDescribe}</p>
-                    <span
+                    {/* <span
                         className="providerStartGameBtn w-[165px] text-center text-base font-bold text-white bg-[#5932EA] rounded-full py-1.5 cursor-pointer"
                         onClick={() => {
                             handleStartGame(item.providerPath as string);
                         }}
                     >
                         {t('START')}
-                    </span>
+                    </span> */}
                 </div>
             </div>
         );
     };
 
     return (
-        <div className="providerTabPane pt-10 pb-5 md:px-28 flex flex-col gap-6">
+        <div className="providerTabPane pt-10 pb-5">
             <div key={taxonomy.value} className="w-full">
                 <SingleCase item={taxonomy.providerData} />
             </div>
@@ -53,20 +53,9 @@ const TabPaneList = (props: { taxonomy: TProviders }) => {
 // 自定义标签栏组件
 const CustomTabBar = (props: any) => {
     const { activeKey, panes } = props;
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [windowWidth, _setWindowWidth] = useAtom(windowWidthAtom);
     const [_tabActiveKey, setTabActiveKey] = useAtom(tabActiveKeyAtom);
     // 添加用于检测屏幕宽度变化的事件处理程序
-    const handleWindowResize = () => {
-        setWindowWidth(window.innerWidth);
-    };
-    useEffect(() => {
-        // 添加窗口大小变化事件监听器
-        window.addEventListener('resize', throttle(handleWindowResize, 500));
-        return () => {
-            // 在组件卸载时移除事件监听器
-            window.removeEventListener('resize', throttle(handleWindowResize, 500));
-        };
-    }, []);
 
     if (windowWidth < 810) {
         // 当屏幕宽度小于 810px 时，使用下拉菜单
@@ -95,21 +84,23 @@ const CustomTabBar = (props: any) => {
         );
     }
     return (
-        <div className="custom-tab-bar flex justify-start px-32 gap-2.5 border-0 border-solid border-b border-[#d5d8dc]">
-            {panes.map((pane: any) => {
-                return (
-                    <div
-                        key={pane.key}
-                        className={`customTab relative cursor-pointer py-2 mx-2.5 text-base ${activeKey === pane.key ? 'text-black font-bold' : 'font-normal'}`}
-                        onClick={() => {
-                            setTabActiveKey(pane.key);
-                        }}
-                    >
-                        {pane.props.tab}
-                        <div className={`activeBorder absolute top-[96%] w-full ${activeKey === pane.key ? 'h-1 rounded-full bg-[#9680EA]' : 'h-0'}`}></div>
-                    </div>
-                );
-            })}
+        <div className="custom-tab-bar grid grid-cols-11 border-0 border-solid border-b border-[#d5d8dc]">
+            <div className="col-start-2 col-span-9 flex gap-2.5 -ml-2">
+                {panes.map((pane: any) => {
+                    return (
+                        <div
+                            key={pane.key}
+                            className={`customTab relative cursor-pointer p-2 text-base ${activeKey === pane.key ? 'text-black font-bold' : 'font-normal'}`}
+                            onClick={() => {
+                                setTabActiveKey(pane.key);
+                            }}
+                        >
+                            {pane.props.tab}
+                            <div className={`activeBorder absolute top-[96%] left-0 w-full ${activeKey === pane.key ? 'h-1 rounded-full bg-[#9680EA]' : 'h-0'}`}></div>
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     );
 };
@@ -137,20 +128,19 @@ const ShowGames: React.FC<ShowGamesProps> = (props) => {
             {/* Tab */}
             <Tabs activeKey={tabActiveKey} renderTabBar={customTabBar} items={formattedData} className="SlotGamesTabs" />
             {/* 切換小圖 */}
-            <div className="grid grid-cols-3 gap-5 pb-10 md:px-28">
+            <div className="grid grid-cols-11 gap-4 pb-10">
+                <div className="col-start-1"></div>
                 {slogGamesArray.map((item: TProviders, index: number) => {
-                    if (index === 0) {
-                        return null;
-                    }
+                    const activeKey = index.toString();
                     const handleSwitchTab = (key: string) => {
                         setTabActiveKey(key);
                     };
                     return (
                         <div
-                            key={item.value}
-                            className="h-20 rounded-2xl overflow-hidden"
+                            key={activeKey}
+                            className="h-20 rounded-2xl overflow-hidden col-span-3"
                             onMouseEnter={() => {
-                                handleSwitchTab(item.value);
+                                handleSwitchTab(activeKey);
                             }}
                         >
                             <img src={item.providerData.providerMainImg} className="w-full h-full duration-500 hover:scale-125 object-center object-cover" alt="" />

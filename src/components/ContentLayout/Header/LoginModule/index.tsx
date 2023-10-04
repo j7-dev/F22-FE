@@ -6,7 +6,7 @@ import { atom, useAtom, useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 import { useLogout, useIsAuthenticated } from '@refinedev/core';
 import LanguageSwitch from '../LanguageSwitch';
-import { BiSolidUserRectangle } from 'react-icons/bi';
+import Icon_Wallet_White from '@/assets/images/Icon_Wallet_White.svg';
 
 export const IsLoginAtom = atom(false);
 export const popupIsOpenAtom = atom(false);
@@ -35,7 +35,7 @@ const Login: React.FC = () => {
             setVerify(false);
             setVerifyError('');
             logout({ redirectPath: '/' });
-            console.log('Logout_verify', _verify);
+            // console.log('Logout_verify', _verify);
         } else {
             setLoginOrSignUp(true);
             setPopupIsOpen(true);
@@ -57,21 +57,21 @@ const Login: React.FC = () => {
     return (
         <>
             <div className={`walletBtn flex flex-row gap-2.5 `}>
-                <div onClick={handleClick} className="loginBtn min-w-[100px] whitespace-nowrap flex items-center justify-center rounded-2xl border border-solid border-[#5932EA] font-bold bg-[#5932EA] text-white hover:opacity-80  md:my-3 md:px-6 md:py-2 cursor-pointer">
+                <div onClick={handleClick} className="primayButton loginBtn  whitespace-nowrap flex items-center justify-center   md:my-3 md:px-6 md:py-2 cursor-pointer">
                     <span>{isLogin ? 'Log out' : 'Log in'}</span>
                 </div>
                 {isLogin ? (
-                    <div onClick={handleWallet} className="WalletBtn min-w-[150px] whitespace-nowrap flex items-center rounded-2xl border border-solid border-black gap-x-2 font-bold bg-black text-white hover:opacity-80  md:my-3 md:px-6 md:py-2 cursor-pointer">
-                        <BiSolidUserRectangle size={15} />
+                    <div onClick={handleWallet} className="secondaryButton WalletBtn whitespace-nowrap flex items-center  gap-x-2 bg md:my-3 md:px-6 md:py-2 cursor-pointer">
+                        <img src={Icon_Wallet_White} alt="" />
                         <span>My Wallet</span>
                     </div>
                 ) : (
-                    <div onClick={handleRegister} className="RegisterBtn whitespace-nowrap flex justify-center items-center rounded-2xl border border-solid border-black gap-x-2 font-bold bg-black text-white hover:opacity-80  md:my-3 md:px-6 md:py-2 cursor-pointer">
+                    <div onClick={handleRegister} className="secondaryButton RegisterBtn whitespace-nowrap flex justify-center items-center gap-x-2 md:my-3 md:px-6 md:py-2 cursor-pointer">
                         <span>Register</span>
                     </div>
                 )}
 
-                <div className="languageSwitchContain relative min-w-[150px] flex items-center justify-center border-2 border-solid border-black rounded-2xl font-bold bg-white text-black hover:opacity-80  md:my-3 md:px-6 md:py-2 cursor-pointer">
+                <div className="tertiaryButton languageSwitchContain relative flex items-center justify-center md:my-3 md:px-6 md:py-2 cursor-pointer">
                     <LanguageSwitch />
                 </div>
 

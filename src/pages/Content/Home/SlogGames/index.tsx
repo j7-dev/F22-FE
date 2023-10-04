@@ -10,17 +10,6 @@ import asiagamingProviderImg2 from '@/assets/images/game_provider/asiagaming2.pn
 
 export const slogGamesArray = [
     {
-        label: 'All Games Provider',
-        value: 'allGamesProvider',
-        providerData: {
-            providerMainImg: sloggameMgImg,
-            providerSmallImg: sloggameMgImg,
-            providerFavIcon: microgamingProviderImg2,
-            providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
-            providerPath: '/microgaming',
-        },
-    },
-    {
         label: 'Pragmatic Play',
         value: 'pragmaticPlay',
         providerData: {
@@ -64,14 +53,18 @@ const index: React.FC = () => {
     // 小游戏
     // 优惠
 
-    // console.log('poplarGamesArray', poplarGamesArray);
+    // console.log('PopularGamesArray', PopularGamesArray);
     return (
-        <div className="relative PoplarGames md:w-full mb-3">
+        <div className="relative PopularGames md:w-full">
             <div className="mx-4 rounded-2xl shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
-                <div className="px-12 py-9 flex gap-9 items-center md:justify-start justify-center">
-                    <img src={Icon_Main_Title} alt="" />
-                    <span className="font-bold text-3xl text-[#9680EA] flex gap-4">
-                        SLOT<span className="text-black">GAMES</span>
+                <div className="grid grid-cols-11 gap-4 py-9">
+                    <div className="col-span-1 flex justify-center">
+                        <img src={Icon_Main_Title} alt="" className="" />
+                    </div>
+
+                    <span className="col-span-1 font-bold text-3xl text-[#9680EA] -ml-3">
+                        SLOT
+                        {/* <span className="text-black">GAMES</span> */}
                     </span>
                 </div>
                 <Tabs data={slogGamesArray} />

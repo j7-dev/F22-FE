@@ -1,0 +1,80 @@
+//元素數量*2
+//scrolling 定義為 -100/元素數量
+:root {
+	/* --marquee-elements: 12; */
+	/* defined with JavaScript */
+	// --marquee-animation-duration: var(--marquee-elements) * 10s;
+	/* defined with JavaScript */
+}
+.f22-content {
+	.newsMarquee {
+		position: relative;
+		.marquee {
+			width: 100%;
+			height: 100%;
+			color: #000;
+			overflow: hidden;
+			position: relative;
+		}
+
+		.marquee:before,
+		.marquee:after {
+			position: absolute;
+			top: 0;
+			width: 1rem;
+			height: 100%;
+			content: "";
+			z-index: 1;
+		}
+		.marquee:before {
+			left: 0;
+			background: linear-gradient(to right, #fff 0%, transparent 100%);
+		}
+		.marquee:after {
+			right: 0;
+			background: linear-gradient(to left, #fff 0%, transparent 100%);
+		}
+		.marquee-content {
+			list-style: none;
+			width: fit-content;
+			height: 100%;
+			display: flex;
+			animation: scrolling var(--marquee-animation-duration) linear infinite;
+			padding: 0;
+			margin: 0;
+		}
+
+		.marquee-content:hover {
+			animation-play-state: paused;
+		}
+		@keyframes scrolling {
+			0% {
+				transform: translateX(0);
+			}
+
+			100% {
+				transform: translateX(calc(-100% / var(--marquee-elements)));
+			}
+		}
+
+		.marquee-content li {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			/* text-align: center; */
+			flex-shrink: 0;
+			width: fit-content;
+			max-height: 100%;
+			// font-size: calc(var(--marquee-height) * 3 / 4);
+			/* 5rem; */
+			white-space: nowrap;
+		}
+
+		.marquee-content li span {
+			width: fit-content;
+			/* height: 100%; */
+			/* border: 2px solid #eee; */
+			// aspect-ratio: 355/200;
+		}
+	}
+}

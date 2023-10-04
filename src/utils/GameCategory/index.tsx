@@ -1,6 +1,13 @@
-import { TGameCategory } from '@/types/resources/GameCategory';
+import { TGameCategory } from '@/types/resources/gameCategory';
 
-export const GameCategoryData: TGameCategory[] = [
+// 用來判斷此遊戲是歸類到七大分類哪個分類
+export const mappingGameCategory = ({ gameProviderName, _gameProviderCategory }: { gameProviderName: string; _gameProviderCategory?: string }) => {
+    if (gameProviderName === 'EVO') return 'casino';
+    if (gameProviderName === 'PP') return 'slot';
+    return 'events';
+};
+
+export const gameCategories: TGameCategory[] = [
     {
         label: 'In Play',
         value: 'inPlay',
