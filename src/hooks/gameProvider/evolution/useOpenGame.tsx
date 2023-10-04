@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { cloneDeep } from 'lodash';
 import { useCustomMutation, useGetIdentity } from '@refinedev/core';
 import { API_URL } from '@/utils';
-import { TEvolutionGames } from '@/types/resources/popularGames';
+import { TEvolutionGame } from '@/types/resources/popularGames';
 
 const defaultConfig = {
     uuid: '123456789',
@@ -39,7 +39,7 @@ export const useOpenGame = () => {
     const { data: identity } = useGetIdentity<{ id: number }>();
     const { mutate: openGame, isLoading } = useCustomMutation();
 
-    const handleClick = (item: TEvolutionGames) => () => {
+    const handleClick = (item: TEvolutionGame) => () => {
         if (identity) {
             const newGameConfig = cloneDeep(gameconfig);
             newGameConfig.config.game.category = item['Game Type'] as string;

@@ -26,11 +26,11 @@ const Banner: React.FC = () => {
                     dynamicBullets: true,
                 }}
                 modules={[Pagination]}
-                className="mySwiper w-full px-4"
+                className="mySwiper w-full px-4 h-fit"
             >
                 {bannerArray.map((item) => {
                     return (
-                        <SwiperSlide key={nanoid()} className="h-full w-full sm:w-full shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] sm:aspect-[1260/360] aspect-[342/180]">
+                        <SwiperSlide key={nanoid()} className=" w-full sm:w-full sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] sm:aspect-[1260/360] aspect-[342/180] shadow-[0_4px_4px_0px_#A370ED33]">
                             <LazyLoadImage src={item} alt="" className="rounded-2xl w-full h-full object-cover " />
                         </SwiperSlide>
                     );

@@ -1,17 +1,24 @@
+import { BaseRecord } from '@refinedev/core';
+
+export type TPopularGamesData = TPopularGames[];
+
 export type TPopularGames = {
     label: string;
     value: string;
     gameData: TPopularGame[];
-    openGame?: (item: TEvolutionGames) => () => void;
+    openGame?: (item: TEvolutionGame) => () => void;
     openGameLoading?: boolean;
 };
 
-export type TPopularGame = TEvolutionGames & {
-    gameID?: string;
-    gameImg?: string;
-};
+export type TPopularGame = TEvolutionGame &
+    TPragmaticGame &
+    BaseRecord & {
+        gameID?: string;
+        gameImg?: string;
+        category?: string;
+    };
 
-export type TEvolutionGames = {
+export type TEvolutionGame = {
     'Table Name'?: string;
     'Table ID'?: string;
     'Direct Launch Table ID'?: string;
@@ -23,4 +30,18 @@ export type TEvolutionGames = {
             max: number;
         };
     };
+};
+
+export type TPragmaticGame = {
+    gameID?: string;
+    gameName?: string;
+    gameTypeID?: string;
+    typeDescription?: string;
+    technology?: string;
+    platform?: string;
+    demoGameAvailable?: boolean;
+    aspectRatio?: string;
+    technologyID?: string;
+    gameIdNumeric?: number;
+    jurisdictions?: string[];
 };

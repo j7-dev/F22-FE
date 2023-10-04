@@ -32,7 +32,7 @@ const NavBar: React.FC = () => {
         }
     };
     return (
-        <div className="z-[999] fixed h-20 Navbar sm:relative w-full sm:h-full bg-white md:flex md:items-center md:justify-between px-4 sm:px-6 lg:px-8 shadow-[0_1px_20px_0px_#A370ED33]">
+        <div className="z-[999] fixed h-20 Navbar sm:relative w-full sm:h-full bg-white md:flex md:items-center md:justify-between px-4 sm:px-6 lg:px-8 shadow-[0_4px_4px_0px_#A370ED33]">
             <nav className="relative w-full h-full py-3 xl:flex md:items-center xl:justify-between md:py-0  xl:mx-auto " aria-label="Global">
                 {/* 桌機選單 */}
                 <div className="pcMenu hidden w-full relative transition-all duration-300 basis-full grow sm:flex flex-row gap-16 justify-between items-center">
