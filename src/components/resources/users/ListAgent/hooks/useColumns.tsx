@@ -149,7 +149,7 @@ const useColumns = () => {
             dataIndex: 'transaction_records',
             key: 'LastBetTime',
             render: (transaction_records: TTransaction[]) => {
-                const lastBet = transaction_records.find((tr) => tr.type === 'BET' && tr.status === 'SUCCESS');
+                const lastBet = transaction_records.find((tr) => tr.type === 'DEBIT' && tr.status === 'SUCCESS');
                 return lastBet ? dayjs(lastBet?.createdAt).format('YYYY-MM-DD') : null;
             },
         },
