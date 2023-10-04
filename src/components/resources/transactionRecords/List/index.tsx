@@ -17,6 +17,7 @@ import { selectedRecordsAtom } from './atom';
 import { useSetAtom } from 'jotai';
 import { useParams } from 'react-router-dom';
 import { useGetSiteSetting } from '@/hooks';
+import UserRecord from './UserRecord';
 
 const index = () => {
     const { type: listTypeLowerCase, roleType } = useParams<TParams>();
@@ -237,6 +238,10 @@ const index = () => {
                                         </Table.Summary.Row>
                                     </Table.Summary>
                                 );
+                            }}
+                            expandable={{
+                                expandedRowRender: (record) => <UserRecord user_id={record?.user?.id} />,
+                                rowExpandable: (record) => record.type === 'WITHDRAW',
                             }}
                         />
                         <hr className="my-8" />

@@ -17,7 +17,7 @@ type TRecord = {
     is_finish: boolean | null;
 };
 
-const index: React.FC<{ user_id: string | number | undefined }> = ({ user_id }) => {
+const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ user_id }) => {
     const apiUrl = useApiUrl();
     const { data, isLoading } = useCustom({
         url: `${apiUrl}/utility/betting-records`,
@@ -81,6 +81,6 @@ const index: React.FC<{ user_id: string | number | undefined }> = ({ user_id }) 
     ];
 
     return <Table dataSource={dataSource} columns={columns} rowKey="uuid" loading={isLoading} />;
-};
+});
 
 export default index;
