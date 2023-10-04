@@ -37,7 +37,7 @@ const index: React.FC<{
         .filter((c) => !!c) as TColumn[];
 
     return (
-        <table className="table table-vertical mt-8 mb-16">
+        <table className="table table-vertical mb-4">
             <tbody>
                 {(columns ? columns : defaultColumns).map((column, i) => {
                     const render = column?.render;
