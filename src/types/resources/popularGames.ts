@@ -16,6 +16,7 @@ export type TPopularGame = TEvolutionGame &
         gameID?: string;
         gameImg?: string;
         category?: string;
+        gameProviderName?: string;
     };
 
 export type TEvolutionGame = {

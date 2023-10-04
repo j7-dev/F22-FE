@@ -11,7 +11,6 @@ import { RenderTabBar } from 'rc-tabs/lib/interface';
 
 //單個文章版型
 const TabPaneList = ({ gameCategory }: { gameCategory: TPopularGames }) => {
-    // console.log('🚀 ~ file: index.tsx:16 ~ TabPaneList ~ gameCategory:', gameCategory);
     const gameData = gameCategory?.gameData || [];
     const openGameLoading = gameCategory?.openGameLoading || false;
     const handleClick =

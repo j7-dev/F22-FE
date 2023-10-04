@@ -1,5 +1,13 @@
 export const walletArray = [
-    { label: 'Deposit', value: 'deposit' },
-    { label: 'Withdraw', value: 'withdraw' },
-    { label: 'Rollover', value: 'rolloverHistory' },
+    { label: 'MY PAGE', value: 'myPage', showIn: 'afterLogin' },
+    { label: 'Note Box', value: 'noteBox', showIn: 'afterLogin' },
+    { label: 'Deposit', value: 'deposit', showIn: 'afterLogin' },
+    { label: 'Withdraw', value: 'withdraw', showIn: 'afterLogin' },
+    { label: 'Cash History', value: 'cashHistory', showIn: 'afterLogin' },
+    { label: 'Rolling Point', value: 'rollingPoint', showIn: 'afterLogin' },
+    { label: 'Rollover', value: 'rolloverHistory', showIn: 'afterLogin' },
+    { label: 'Point Details', value: 'pointDetails', showIn: 'afterLogin' },
+    { label: 'Notice', value: 'notice', showIn: 'beforeLogin' },
+    { label: 'Sports Regulations', value: 'sportsRegulations', showIn: 'beforeLogin' },
+    { label: 'Batting Regulation', value: 'battingRegulation', showIn: 'beforeLogin' },
 ];

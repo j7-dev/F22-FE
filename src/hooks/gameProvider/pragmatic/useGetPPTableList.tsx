@@ -13,6 +13,7 @@ export const useGetPPTableList = () => {
         fetchData?.data?.gameList.map((item: any) => {
             return {
                 ...item,
+                gameProviderName: 'Pragmatic',
                 gameImg: `${gameServerDomain}/game_pic/rec/325/${item.gameID}.png`,
             };
         }) || [];

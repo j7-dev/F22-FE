@@ -1,74 +1,39 @@
-import React, { useEffect } from 'react';
-// import { nanoid } from 'nanoid';
-import { useTranslation } from 'react-i18next';
-import {
-    // useAtom,
-    useSetAtom,
-} from 'jotai';
-import {
-    // GameTypeAtom,
-    GameCategoryStateAtom,
-} from '@/pages/Content/Taxonomy/AtomSetting';
-import GameType from '@/components/ContentLayout/GameType';
-import GameCategory from '@/components/ContentLayout/GameCategory';
-// import Game from '@/components/ContentLayout/Games/Game';
-// import fakeGameData from './fakeGameData.json';
-import MaintainImg from '@/assets/images/Maintain.png';
+import React from 'react';
+import { useAtomValue } from 'jotai';
+import { windowWidthAtom } from '@/components/ContentLayout';
+import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
+import Tabs from './Tabs';
+import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 
-const Evolution: React.FC = () => {
-    // TODO 未來須重新設計atom
-    // const [
-    //     GameTypeValue,
-    //     setGameType,
-    // ] = useAtom(GameTypeAtom);
-    const setGameCategoryState = useSetAtom(GameCategoryStateAtom);
-    useEffect(() => {
-        // setGameType('all');
-        setGameCategoryState('slot');
-        window.scrollTo(0, 0);
-    }, []);
+const index: React.FC = () => {
+    const { data, isLoading } = useGetPPTableList();
+    console.log('🚀  data:', data);
 
-    const { t } = useTranslation();
-    // const games =
-    //     GameTypeValue !== 'all'
-    //         ? fakeGameData.data.filter(
-    //               (item) => item['Game Type'] === GameTypeValue,
-    //           )
-    //         : fakeGameData.data;
+    const windowWidth = useAtomValue(windowWidthAtom);
     return (
-        <div className="w-full h-auto bg-[#F6F7F7] pb-20">
-            <div className="h-20 bg-white" />
-            <div className="w-full h-auto flex mx-auto flex-col items-center mt-[-2.5rem] mb-6 z-10 ">
-                <GameCategory Provider="pragmatic" />
-            </div>
-            <div className="w-full h-auto flex mx-auto flex-col items-center  z-10 ">
-                <GameType />
-            </div>
-            <div>
-                <div className="FilterGames dropdown-menu w-full flex justify-center items-center mt-10">
-                    <div className="w-[1360px] flex flex-col justify-center flex-wrap gap-4  py-5 px-10 ">
-                        <div className="gamesCategoryInfo w-auto text-center">
-                            <h3 className="gamesCategory mb-2">Pragmatic Play {t('Slot Game')}</h3>
-                            <span className="gamesCategoryDes">{/* {games.length} {t('Games found')} */}</span>
+        <div className="relative PopularGames sm:w-full">
+            <div className="sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl">
+                {windowWidth > 414 ? (
+                    <div className="grid grid-cols-11 gap-4 py-9">
+                        <div className="col-span-1 flex justify-center">
+                            <img src={Icon_Main_Title} alt="" className="" />
                         </div>
-                        <div className="gamesWrap w-full">
-                            <ul className="m-0 p-0 flex justify-start items-center flex-wrap gap-y-2.5">
-                                <img src={MaintainImg} alt="" className="m-auto" />
-                                {/* {games.map((item) => (
-                                    <li
-                                        key={nanoid()}
-                                        className="w-[calc(100%/7)] flex flex-col justify-center items-center cursor-pointer "
-                                    >
-                                        <Game data={item} />
-                                    </li>
-                                ))} */}
-                            </ul>
-                        </div>
+                        <span className="col-span-1 font-bold text-3xl text-[#9680EA] -ml-3">
+                            SLOT
+                            {/* <span className="text-black">GAMES</span> */}
+                        </span>
                     </div>
+                ) : (
+                    ''
+                )}
+
+                <div className="popularGamesContain sm:py-9">
+                    {/* <div className="col-start-1"></div> */}
+                    {isLoading ? 'isLoading' : <Tabs data={data} />}
                 </div>
             </div>
         </div>
     );
 };
 
-export default Evolution;
+export default index;
