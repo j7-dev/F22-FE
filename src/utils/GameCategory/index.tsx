@@ -1,4 +1,4 @@
-import { TGameCategory } from '@/types/resources/GameCategory';
+import { TGameCategory } from '@/types/games/gameCategory';
 
 // 用來判斷此遊戲是歸類到七大分類哪個分類
 export const mappingGameCategory = ({ gameProviderName, _gameProviderCategory }: { gameProviderName: string; _gameProviderCategory?: string }) => {
@@ -6,7 +6,9 @@ export const mappingGameCategory = ({ gameProviderName, _gameProviderCategory }:
     if (gameProviderName === 'PP') return 'slot';
     return 'events';
 };
-
+export const mappingIncludesProvider = ({ providerData, category }: { providerData: TGameProvider[]; category: TGameCategory }) => {
+    return providerData.filter((providerItem) => providerItem.gameCategories.includes(category.value));
+};
 export const gameCategories: TGameCategory[] = [
     {
         label: 'In Play',

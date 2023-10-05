@@ -1,21 +1,23 @@
-import { BaseRecord } from '@refinedev/core';
-
-export type TPopularGamesData = TPopularGames[];
-
-export type TPopularGames = {
+export type TGameProvider = {
     label: string;
     value: string;
-    gameData: TPopularGame[];
-    openGame?: (item: TEvolutionGame) => () => void;
-    openGameLoading?: boolean;
+    gameCategories: string[];
+    providerData?: TProviderData;
 };
 
-export type TPopularGame = TEvolutionGame &
-    TPragmaticGame &
-    BaseRecord & {
-        gameID?: string;
+export type TProviderData = {
+    providerMainImg: string;
+    providerSmallImg: string;
+    providerFavIcon: string;
+    providerDescribe: string;
+    providerPath?: string;
+};
+
+export type TGame = TEvolutionGame &
+    TPragmaticGame & {
+        formProviderCategory?: string; //casino 遊戲商定義的遊戲分類
+        gameProviderName?: string;
         gameImg?: string;
-        category?: string;
     };
 
 export type TEvolutionGame = {

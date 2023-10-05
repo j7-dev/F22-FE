@@ -5,7 +5,6 @@ export * from './commissions';
 export * from './vips';
 export * from './balances';
 export * from './SiteNotify';
-export * from './prodiver';
 export * from './loginDetails';
 
 export type BaseType = {

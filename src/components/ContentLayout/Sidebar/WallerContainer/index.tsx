@@ -19,10 +19,10 @@ const index: React.FC = () => {
     const { data } = useIsAuthenticated();
     const isLogin = data?.authenticated;
     const walletArrayData = walletArray;
-
+    const walletFilterData = isLogin ? walletArrayData : walletArrayData.filter((item) => item.showIn === 'beforeLogin');
     return (
         <ul className="WallerContainer w-full text-white transition-all duration-300 mb-0 pl-0 flex flex-col gap-4">
-            {walletArrayData.map((wallet) => {
+            {walletFilterData.map((wallet) => {
                 const handleClick = (walletAction: string) => {
                     setSelectedSection(walletAction);
                     if (isLogin) {

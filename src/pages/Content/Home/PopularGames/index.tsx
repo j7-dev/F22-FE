@@ -6,7 +6,8 @@ import Tabs from './Tabs';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 
 const index: React.FC = () => {
-    const { PopularGamesData, loading } = useGetPopularGames();
+    const { PopularGamesData, isLoading } = useGetPopularGames();
+
     const windowWidth = useAtomValue(windowWidthAtom);
     return (
         <div className="relative PopularGames sm:w-full">
@@ -27,7 +28,7 @@ const index: React.FC = () => {
 
                 <div className="popularGamesContain sm:py-9">
                     {/* <div className="col-start-1"></div> */}
-                    {!loading ? 'isLoading' : <Tabs data={PopularGamesData} />}
+                    {isLoading ? 'isLoading' : <Tabs data={PopularGamesData} />}
                 </div>
             </div>
         </div>

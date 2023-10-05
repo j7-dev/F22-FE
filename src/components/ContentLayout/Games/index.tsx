@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import { useTranslation } from 'react-i18next';
 import Game from './Game';
 import { GameTypeAtom, GameCategoryStateAtom } from '@/pages/Content/Taxonomy/AtomSetting';
-import { gameTypeFilter } from '@/components/ContentLayout/Games/Game/GameImg';
+import { casinoCategoryFilter } from '@/utils/GameCategory/casinoCategory';
 
 type GamesDataProp = {
     ProviderName: string;
@@ -17,7 +17,7 @@ const Games: React.FC<GamesDataProp> = ({ ProviderName, gamesData = [], isLoadin
     const { t } = useTranslation();
 
     //排除rng-類別
-    const gamesList = GameTypeValue !== 'all' ? gamesData.filter((item) => gameTypeFilter[GameTypeValue].some((gameType) => item['Game Type'] === gameType) && !item['Game Type'].startsWith('rng-')) : gamesData.filter((item) => !item['Game Type'].startsWith('rng-'));
+    const gamesList = GameTypeValue !== 'all' ? gamesData.filter((item) => casinoCategoryFilter[GameTypeValue].some((gameType) => item['Game Type'] === gameType) && !item['Game Type'].startsWith('rng-')) : gamesData.filter((item) => !item['Game Type'].startsWith('rng-'));
     return (
         <>
             <div className="gamesCategoryInfo w-auto text-center">
