@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAtomValue } from 'jotai';
 import { nanoid } from 'nanoid';
@@ -24,7 +24,9 @@ const index: React.FC = () => {
     const allLoading = evoLoadong;
     //分類遊戲
     const trnGameList = casinoGameCategory !== 'all' ? allGameList.filter((item) => casinoCategoryFilter[casinoGameCategory].some((casinoCategoryItem) => item.formProviderCategory === casinoCategoryItem)) : allGameList;
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className="casinoPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col  gap-4">
             <Banner />

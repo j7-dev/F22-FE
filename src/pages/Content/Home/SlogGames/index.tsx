@@ -11,7 +11,7 @@ import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import Tabs from './Tabs';
 import { providerData } from '@/utils/providerData';
 import { TGameProvider, TGameCategory } from '@/types/games';
-import { gameCategories } from '@/utils/GameCategory';
+import { gameCategories, mappingIncludesProvider } from '@/utils/GameCategory';
 
 export const slogGamesResource = providerData.filter((item) => item.gameCategories.includes('slot'));
 
@@ -23,13 +23,7 @@ const index: React.FC = () => {
         //目前統一傳回slot的資料
         return { ...item, providerData: slogGamesResource };
         //未來如果providerData有分類了，再用下面的方式
-        if (item.value === 'inPlay') return { ...item, providerData: providerData.filter((providerItem) => providerItem.gameCategories.includes(item.value)) };
-        if (item.value === 'sports') return { ...item, providerData: providerData.filter((providerItem) => providerItem.gameCategories.includes(item.value)) };
-        if (item.value === 'golf') return { ...item, providerData: providerData.filter((providerItem) => providerItem.gameCategories.includes(item.value)) };
-        if (item.value === 'casino') return { ...item, providerData: providerData.filter((providerItem) => providerItem.gameCategories.includes(item.value)) };
-        if (item.value === 'slot') return { ...item, providerData: providerData.filter((providerItem) => providerItem.gameCategories.includes(item.value)) };
-        if (item.value === 'games') return { ...item, providerData: providerData.filter((providerItem) => providerItem.gameCategories.includes(item.value)) };
-        if (item.value === 'events') return { ...item, providerData: providerData.filter((providerItem) => providerItem.gameCategories.includes(item.value)) };
+        return { ...item, providerData: mappingIncludesProvider({ providerData: providerData, category: item }) };
     }) as TGameCategory[];
 
     //渲染7大分類內頁面
@@ -45,7 +39,7 @@ const index: React.FC = () => {
                         {/* <span className="text-black">GAMES</span> */}
                     </span>
                 </div>
-                <Tabs data={provider} />
+                <Tabs provider={provider} />
             </>
         );
     };
@@ -54,7 +48,7 @@ const index: React.FC = () => {
             <div className="mx-4 rounded-2xl shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
                 <Swiper loop={true} modules={[Pagination]} className="gameProvidersSwiper w-full h-fit">
                     {gameCategoriesData.map((item) => (
-                        <SwiperSlide className="h-fit w-full sm:w-full sm:aspect-[1260/360] aspect-[342/180] shadow-[0_4px_4px_0px_#A370ED33]">
+                        <SwiperSlide key={nanoid()} className="h-fit w-full sm:w-full sm:aspect-[1260/360] aspect-[342/180] shadow-[0_4px_4px_0px_#A370ED33]">
                             <CategorySwiper key={nanoid()} provider={item.providerData} categoryName={item.label} />
                         </SwiperSlide>
                     ))}

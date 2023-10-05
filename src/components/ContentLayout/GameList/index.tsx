@@ -1,5 +1,6 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { TGame } from '@/types/games';
 import { useOpenGame } from '@/hooks/gameProvider/useOpenGame';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
@@ -21,7 +22,7 @@ const index: React.FC<PragmaticGameData> = ({ gameData = [] }) => {
                         <div key={nanoid()} onClick={handleClick(item)} className="w-full h-full relative overflow-hidden rounded-2xl sm:shadow-none shadow-[0_4px_4px_0_#A370ED33]">
                             <div className={`z-10 cursor-pointer absolute inset-0 editOverlay w-full h-full duration-300 text-white opacity-0 hover:opacity-100 hover:bg-slate-600/50 flex justify-center items-center`}>{openGameLoading ? <AiOutlineLoading3Quarters className={`${openGameLoading ? 'block' : 'hidden'} animate-spin`} /> : <FaGamepad size={30} />}</div>
                             <div className="w-full">
-                                <img src={item?.gameImg} alt="" className="sm:aspect-square w-full h-full duration-500 hover:scale-125 aspect-[342/120] object-cover" />
+                                <LazyLoadImage src={item?.gameImg} alt="" className="sm:aspect-square w-full h-full duration-500 hover:scale-125 aspect-[342/120] object-cover" />
                             </div>
                         </div>
                     );

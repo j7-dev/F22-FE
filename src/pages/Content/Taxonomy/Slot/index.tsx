@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAtomValue } from 'jotai';
 import { nanoid } from 'nanoid';
@@ -26,7 +26,9 @@ const index: React.FC = () => {
         if (tabActiveKey === 'asiaGaming') return <AsiaGaming />;
         if (tabActiveKey === 'microGaming') return <MicroGaming />;
     };
-
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <div className="slotPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col  gap-4">
             <Banner />

@@ -1,5 +1,6 @@
 import { useList } from '@refinedev/core';
 import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg';
+import { mappingGameCategory } from '@/utils/GameCategory';
 
 export const useGetEVOTableList = () => {
     const { data: fetchData, isLoading } = useList({
@@ -13,9 +14,11 @@ export const useGetEVOTableList = () => {
             .map((item: any) => {
                 return {
                     ...item,
-                    formProviderCategory: item['Game Type'],
-                    gameProviderName: 'Evolution',
+                    gameID: item['Table ID'],
                     gameImg: getGameTypeImg(item['Game Type'] as string),
+                    formProviderCategory: item['Game Type'],
+                    gameCategory: mappingGameCategory({ gameProviderName: 'EVO' }),
+                    gameProviderName: 'Evolution',
                 };
             }) || [];
 

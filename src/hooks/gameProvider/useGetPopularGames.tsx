@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
-import { TPopularGame, TPopularGamesData } from '@/types/games/popularGames';
+import { TPopularGamesData } from '@/types/games/popularGames';
 import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
 import { useOpenGame } from '@/hooks/gameProvider/useOpenGame';
 import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTableList';
 // import { getRandomIndexes } from '@/hooks/gameProvider/getRandomIndexes';
-import { gameCategories, mappingGameCategory } from '@/utils/GameCategory';
+import { gameCategories } from '@/utils/GameCategory';
 import igxImg from '@/assets/images/game_provider/igx_icon.png';
 import { sampleSize } from 'lodash-es';
 
@@ -23,30 +23,12 @@ export const useGetPopularGames = () => {
 
     // console.log('loading:為true');
     //重組Slot Games遊戲資料
-    const slotGames = isLoading
-        ? []
-        : (ppData || [])?.slice(0, 6).map((item: TPopularGame, i: number) => {
-              return {
-                  ...item,
-                  index: i,
-                  gameID: item.gameID,
-                  category: mappingGameCategory({ gameProviderName: 'PP' }),
-              };
-          });
+    const slotGames = isLoading ? [] : (ppData || [])?.slice(0, 18);
 
     // console.log('slotGames:', slotGames);
 
     //重組Live Casino遊戲資料
-    const liveGamesData = isLoading
-        ? []
-        : (evoData || []).slice(0, 6).map((item: TPopularGame, i) => {
-              return {
-                  ...item,
-                  index: i,
-                  gameID: item['Table ID'],
-                  category: mappingGameCategory({ gameProviderName: 'EVO' }),
-              };
-          });
+    const liveGamesData = isLoading ? [] : (evoData || []).slice(0, 18);
 
     //重組一個假的Golf遊戲資料
     const golfGamesData = [
@@ -54,7 +36,7 @@ export const useGetPopularGames = () => {
             gameID: 'Golf',
             gameImg: igxImg,
             gameProviderName: 'Golf',
-            category: 'golf',
+            gameCategory: 'golf',
         },
     ];
 
@@ -71,7 +53,7 @@ export const useGetPopularGames = () => {
     //TODO 有個BUG，切換語言時會多一個遊戲=>觸發重新渲染時會多一個?
 
     const sixPoplarAllGames = useMemo(() => {
-        return sampleSize(allGamesArray, 6);
+        return sampleSize(allGamesArray, 18);
     }, [isLoading]);
 
     //根據gameCategories map出PopularGamesData
@@ -86,7 +68,7 @@ export const useGetPopularGames = () => {
         ...gameCategories.map((CategoryItem) => ({
             label: CategoryItem.label,
             value: CategoryItem.value,
-            gameData: allGamesArray.filter((game) => game?.category === CategoryItem?.value),
+            gameData: allGamesArray.filter((game) => game?.gameCategory === CategoryItem?.value),
             openGameLoading: openGameLoading,
             openGame: handleClick,
         })),

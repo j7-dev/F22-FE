@@ -1,4 +1,5 @@
 import { useApiUrl, useCustom } from '@refinedev/core';
+import { mappingGameCategory } from '@/utils/GameCategory';
 // import { useGetPPImg } from '@/hooks/gameProvider/pragmatic/useGetPPImg';
 
 export const useGetPPTableList = () => {
@@ -13,6 +14,7 @@ export const useGetPPTableList = () => {
         fetchData?.data?.gameList.map((item: any) => {
             return {
                 ...item,
+                gameCategory: mappingGameCategory({ gameProviderName: 'PP' }),
                 gameProviderName: 'Pragmatic',
                 gameImg: `${gameServerDomain}/game_pic/rec/325/${item.gameID}.png`,
             };
