@@ -2,6 +2,7 @@ import { Route } from 'react-router-dom';
 import About from '@/pages/Content/About';
 import Home from '@/pages/Content/Home';
 import Slot from '@/pages/Content/Taxonomy/Slot';
+import Casino from '@/pages/Content/Taxonomy/Casino';
 import PromotionPage from '@/pages/Content/Promotion';
 import EvolutionLive from '@/pages/Content/Taxonomy/Live/Evolution';
 import PragmaticLive from '@/pages/Content/Taxonomy/Live/Pragmatic';
@@ -21,6 +22,7 @@ const contentRoutes = () => {
         <>
             <Route path="/" element={<Home />} />
             <Route path="/slot" element={<Slot />} />
+            <Route path="/casino" element={<Casino />} />
             <Route path="/about" element={<About />} />
             <Route path="/promotion" element={<PromotionPage />} />
             <Route path="/evolution" element={<EvolutionLive />} />

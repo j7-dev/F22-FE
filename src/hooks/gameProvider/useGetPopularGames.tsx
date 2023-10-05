@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { TPopularGame, TPopularGamesData } from '@/types/resources/popularGames';
+import { TPopularGame, TPopularGamesData } from '@/types/games/popularGames';
 import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
 import { useOpenGame } from '@/hooks/gameProvider/useOpenGame';
 import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTableList';

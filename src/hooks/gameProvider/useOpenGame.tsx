@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash';
 import { useCustomMutation, useGetIdentity, useGetLocale } from '@refinedev/core';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { API_URL } from '@/utils';
-import { TPopularGame } from '@/types/resources/popularGames';
+import { TPopularGame } from '@/types/games/popularGames';
 import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 
 const defaultConfig = {

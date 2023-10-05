@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Tabs } from 'antd';
 import { nanoid } from 'nanoid';
 import { useAtom } from 'jotai';
-import { TPopularGamesData, TPopularGames, TPopularGame } from '@/types/resources/popularGames';
+import { TPopularGamesData, TPopularGames, TPopularGame } from '@/types/games/popularGames';
 import { windowWidthAtom } from '@/components/ContentLayout';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { FaGamepad } from 'react-icons/fa';

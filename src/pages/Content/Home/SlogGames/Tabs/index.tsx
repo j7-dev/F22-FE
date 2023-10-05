@@ -4,19 +4,19 @@ import { Tabs, Dropdown, Space, TabsProps } from 'antd';
 // import { useNavigate } from 'react-router-dom';
 import { atom, useAtom } from 'jotai';
 import { windowWidthAtom } from '@/components/ContentLayout';
-import { TProviders, TProvider } from '@/types';
-import { slogGamesArray } from '../index';
+import { TGameProvider, TProviderData } from '@/types/games';
+import { slogGamesResource } from '../index';
 import { DownOutlined } from '@ant-design/icons';
 const tabActiveKeyAtom = atom<string>('0');
 //單個文章版型
-const TabPaneList = (props: { taxonomy: TProviders }) => {
+const TabPaneList = (props: { taxonomy: TGameProvider }) => {
     const { taxonomy } = props;
     // const navigate = useNavigate();
     // const { t } = useTranslation();
     // const handleStartGame = (path: string) => {
     //     navigate(path);
     // };
-    const SingleCase = (SingleCaseProps: { item: TProvider }) => {
+    const SingleCase = (SingleCaseProps: { item: TProviderData }) => {
         const { item } = SingleCaseProps;
         return (
             <div className="providerInfo h-full w-full grid grid-cols-11 gap-4">
@@ -109,7 +109,7 @@ const CustomTabBar = (props: any) => {
 const customTabBar: TabsProps['renderTabBar'] = (props) => <CustomTabBar {...props} />;
 
 type ShowGamesProps = {
-    data: TProviders[];
+    data: TGameProvider[];
 };
 const ShowGames: React.FC<ShowGamesProps> = (props) => {
     const { data } = props;
@@ -130,7 +130,7 @@ const ShowGames: React.FC<ShowGamesProps> = (props) => {
             {/* 切換小圖 */}
             <div className="grid grid-cols-11 gap-4 pb-10">
                 <div className="col-start-1"></div>
-                {slogGamesArray.map((item: TProviders, index: number) => {
+                {slogGamesResource.map((item: TGameProvider, index: number) => {
                     const activeKey = index.toString();
                     const handleSwitchTab = (key: string) => {
                         setTabActiveKey(key);

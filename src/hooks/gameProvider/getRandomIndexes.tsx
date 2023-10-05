@@ -1,4 +1,4 @@
-import { TPopularGame } from '@/types/resources/popularGames';
+import { TPopularGame } from '@/types/games/popularGames';
 
 export const getRandomIndexes = (arr: TPopularGame[], count: number) => {
     const indexes = [];
