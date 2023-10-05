@@ -1,4 +1,5 @@
 import { TGameCategory } from '@/types/games/gameCategory';
+import { TGameProvider } from '@/types/games';
 
 // 用來判斷此遊戲是歸類到七大分類哪個分類
 export const mappingGameCategory = ({ gameProviderName, _gameProviderCategory }: { gameProviderName: string; _gameProviderCategory?: string }) => {
