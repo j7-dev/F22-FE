@@ -25,6 +25,7 @@ const index: React.FC = () => {
         if (tabActiveKey === 'pragmaticPlay') return <Pragmatic />;
         if (tabActiveKey === 'asiaGaming') return <AsiaGaming />;
         if (tabActiveKey === 'microGaming') return <MicroGaming />;
+        return <div>Not Provider</div>;
     };
     useEffect(() => {
         window.scrollTo(0, 0);
