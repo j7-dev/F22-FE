@@ -46,5 +46,12 @@ export const providerData: TGameProvider[] = [
         label: 'Evolution',
         value: 'asiaGaming',
         gameCategories: ['casino'],
+        providerData: {
+            providerMainImg: sloggameAgImg,
+            providerSmallImg: sloggameAgImg,
+            providerFavIcon: asiagamingProviderImg2,
+            providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
+            providerPath: '/asiagaming',
+        },
     },
 ];

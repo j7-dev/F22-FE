@@ -24,7 +24,7 @@ const index: React.FC<marqueeTextProps> = ({ marqueeText = [''], speed = 30 }) =
             }
         }
     }, []);
-    console.log('speed', speed);
+    // console.log('speed', speed);
     return (
         <div className="newsMarquee relative flex items-center gap-2.5 overflow-hidden w-full sm:px-0 px-4">
             <img src={iconSpeaker} className="w-5 sm:w-auto" />
