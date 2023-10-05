@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSetAtom, useAtom, useAtomValue } from 'jotai';
-import NewsMarquee from '../NewsMarquee';
+import NewsMarquee from '../../NewsMarquee';
 import LoginModule, { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
-import { mbSidebarAtom } from '@/components/ContentLayout';
+import { mbSidebarAtom, windowWidthAtom } from '@/components/ContentLayout';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
 import Icon_Wallet_White from '@/assets/images/Icon_Wallet_White.svg';
 import logo from '@/assets/images/logo_f.png';
@@ -14,6 +14,7 @@ const NavBar: React.FC = () => {
     const [mbSidebar, setMbSidebar] = useAtom(mbSidebarAtom);
     const setSidebarIsOpen = useSetAtom(sidebarIsOpenAtom);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
+    const windowWidth = useAtomValue(windowWidthAtom);
     const isLogin = useAtomValue(IsLoginAtom);
     const Navigate = useNavigate();
 
@@ -36,7 +37,7 @@ const NavBar: React.FC = () => {
             <nav className="relative w-full h-full py-3 xl:flex md:items-center xl:justify-between md:py-0  xl:mx-auto " aria-label="Global">
                 {/* 桌機選單 */}
                 <div className="pcMenu hidden w-full relative transition-all duration-300 basis-full grow sm:flex flex-row gap-16 justify-between items-center">
-                    <NewsMarquee />
+                    {windowWidth > 414 ? <NewsMarquee speed={30} marqueeText={['Lorem ipsum dolor sit amet consectetur. Auctor rhoncus non pharetra sollicitudin.']} /> : ''}
                     <LoginModule />
                 </div>
                 {/* 手機選單 */}

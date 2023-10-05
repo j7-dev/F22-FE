@@ -42,4 +42,9 @@ export const providerData: TGameProvider[] = [
             providerPath: '/asiagaming',
         },
     },
+    {
+        label: 'Evolution',
+        value: 'asiaGaming',
+        gameCategories: ['casino'],
+    },
 ];

@@ -7,6 +7,7 @@ import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTabl
 import Banner from '@/components/ContentLayout/Banner';
 import { casinoCategoryFilter, casinoCategory } from '@/utils/GameCategory/casinoCategory';
 import GameList from '@/components/ContentLayout/GameList';
+import NewsMarquee from '@/components/ContentLayout/NewsMarquee';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 
 // import { nanoid } from 'nanoid';
@@ -27,6 +28,7 @@ const index: React.FC = () => {
     return (
         <div className="casinoPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col  gap-4">
             <Banner />
+            {windowWidth < 414 ? <NewsMarquee speed={15} marqueeText={['Lorem ipsum dolor sit amet consectetur. Auctor rhoncus non pharetra sollicitudin.']} /> : ''}
             <div className="slotSection relative sm:w-full">
                 <div className="sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl sm:py-4">
                     {windowWidth > 414 ? (

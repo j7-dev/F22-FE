@@ -2,7 +2,7 @@ export type TGameProvider = {
     label: string;
     value: string;
     gameCategories: string[];
-    providerData: TProviderData;
+    providerData?: TProviderData;
 };
 
 export type TProviderData = {
