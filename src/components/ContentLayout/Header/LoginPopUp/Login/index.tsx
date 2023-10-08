@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSetAtom, useAtom } from 'jotai';
 import { Form, Input, Button } from 'antd';
 import { useLogin, useIsAuthenticated } from '@refinedev/core';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { popupIsOpenAtom, loginOrSignUpAtom, verifyAtom, verifyErrorAtom } from '@/components/ContentLayout/Header/LoginModule';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 type LoginVariables = {
     userName: string;
@@ -13,6 +13,7 @@ type LoginVariables = {
 };
 
 const index: React.FC = () => {
+    const { t } = useTranslation();
     const { mutate: login } = useLogin<LoginVariables>();
     const { data: isAuthenticated } = useIsAuthenticated();
     const captchaRef = useRef<HCaptcha>(null);
@@ -78,29 +79,29 @@ const index: React.FC = () => {
     }, [isAuthenticated?.authenticated]);
     return (
         <div className="loginFrom text-center flex flex-col gap-2.5 w-full">
-            <span>Available After Login.</span>
+            <span className="text-4xl text-center font-semibold text-white mb-9">{t('USER LOGIN')}</span>
             {/* 錯誤訊息 */}
             {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
             <Form form={form} onFinish={handleLogin}>
-                <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Email' }]}>
-                    <Input addonBefore={<UserOutlined />} placeholder="User Email" />
+                <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }]}>
+                    <Input placeholder="User Name" bordered={false} className="text-center bg-[#ffffffcc] h-[50px] rounded-2xl text-base font-normal placeholder:text-[#9680EA]" />
                 </Form.Item>
                 <Form.Item name="userPas" rules={[{ required: true, message: 'Please input your Password' }]}>
-                    <Input addonBefore={<LockOutlined />} placeholder="User Password" />
+                    <Input placeholder="User Password" bordered={false} className="text-center bg-[#ffffffcc] h-[50px] rounded-2xl text-base font-normal placeholder:text-[#9680EA]" />
                 </Form.Item>
                 <HCaptcha ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" onVerify={() => handleVerificationSuccess()} />
-                <Form.Item>
-                    <Button disabled={!submittable} className="flex w-full h-10 items-center rounded-lg border-white gap-x-2 font-bold bg-[#F9A318] text-white hover:opacity-80  md:my-3 md:px-6 md:py-3 justify-center" htmlType="submit">
-                        Sign in
+                <Form.Item className="mb-0">
+                    <Button disabled={!submittable} className="mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
+                        {t('LOGIN')}
                     </Button>
                 </Form.Item>
             </Form>
-            <p className="font-bold text-sm text-[#999999] flex flex-col">
-                Don't have an account yet?
-                <span className="text-black cursor-pointer" onClick={handleToSignUp}>
+            <div className="text-white flex flex-col">
+                <span className="font-normal text-sm"> {t("Don't have an account yet?")}</span>
+                <span className="text-sm font-bold cursor-pointer" onClick={handleToSignUp}>
                     Sign Up
                 </span>
-            </p>
+            </div>
         </div>
     );
 };

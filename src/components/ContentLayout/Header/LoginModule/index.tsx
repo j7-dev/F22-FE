@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { atom, useAtom, useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useLogout, useIsAuthenticated } from '@refinedev/core';
 import Icon_Wallet_White from '@/assets/images/Icon_Wallet_White.svg';
 
@@ -11,6 +12,7 @@ export const verifyAtom = atom(false);
 export const verifyErrorAtom = atom('');
 
 const Login: React.FC = () => {
+    const { t } = useTranslation();
     const Navigate = useNavigate();
     const [isLogin, setIsLogin] = useAtom(IsLoginAtom);
     const [_verify, setVerify] = useAtom(verifyAtom);
@@ -51,37 +53,32 @@ const Login: React.FC = () => {
         setPopupIsOpen(true);
     };
     return (
-        <>
-            <div className={`walletBtn flex flex-row gap-2.5 `}>
-                <div onClick={handleClick} className="primayButton loginBtn  whitespace-nowrap flex items-center justify-center   md:my-3 md:px-6 md:py-2 cursor-pointer">
-                    <span>{isLogin ? 'Log out' : 'Log in'}</span>
-                </div>
-                {isLogin ? (
-                    <div onClick={handleWallet} className="secondaryButton WalletBtn whitespace-nowrap flex items-center  gap-x-2 bg md:my-3 md:px-6 md:py-2 cursor-pointer">
+        <div className={`walletBtn flex flex-row gap-2.5`}>
+            {isLogin ? (
+                <>
+                    <div onClick={handleWallet} className="primaryButton WalletBtn whitespace-nowrap flex items-center  gap-x-2 bg md:my-3 md:px-6 md:py-2 cursor-pointer">
                         <img src={Icon_Wallet_White} alt="" />
-                        <span>My Wallet</span>
+                        <span>{t('My Wallet')}</span>
                     </div>
-                ) : (
+                    <div onClick={handleClick} className={`secondaryButton loginBtn whitespace-nowrap flex items-center justify-center  md:my-3 md:px-6 md:py-2 cursor-pointer`}>
+                        <span>{t('Log out')}</span>
+                    </div>
+                </>
+            ) : (
+                <>
+                    <div onClick={handleClick} className={`primaryButton loginBtn  whitespace-nowrap flex items-center justify-center  md:my-3 md:px-6 md:py-2 cursor-pointer`}>
+                        <span>{t('Log in')}</span>
+                    </div>
                     <div onClick={handleRegister} className="secondaryButton RegisterBtn whitespace-nowrap flex justify-center items-center gap-x-2 md:my-3 md:px-6 md:py-2 cursor-pointer">
-                        <span>Register</span>
+                        <span>{t('Register')}</span>
                     </div>
-                )}
-                {/*
+                </>
+            )}
+            {/*
                 <div className="tertiaryButton languageSwitchContain relative flex items-center justify-center md:my-3 md:px-6 md:py-2 cursor-pointer">
                     <LanguageSwitch />
                 </div> */}
-
-                {/* <span
-                    onClick={() => {
-                        handleClick(false);
-                    }}
-                    className="logoutBtn whitespace-nowrap  flex items-center rounded-lg border-white gap-x-2 font-bold bg-[#e5e5e5] text-black hover:opacity-80  md:my-3 md:px-6 md:py-3 cursor-pointer"
-                >
-                    <AiOutlineUserAdd size={20} />
-                    Sign Up
-                </span> */}
-            </div>
-        </>
+        </div>
     );
 };
 

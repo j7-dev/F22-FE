@@ -2,13 +2,12 @@
 //2.payload json 格式 帶入uuid(唯一值) userEmail,username,password,confirmed": true,"blocked": false
 //3.不用帶入token
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSetAtom } from 'jotai';
 import { Form, Input, Button } from 'antd';
 import { useRegister } from '@refinedev/core';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/Header/LoginModule';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { AiFillPhone } from 'react-icons/ai';
 
 type LoginVariables = {
     userEmail: string;
@@ -19,6 +18,7 @@ type LoginVariables = {
 };
 
 const index: React.FC = () => {
+    const { t } = useTranslation();
     const { mutate: register } = useRegister<LoginVariables>();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
@@ -80,34 +80,33 @@ const index: React.FC = () => {
 
     return (
         <div className="loginFrom text-center flex flex-col gap-2.5 w-full">
-            <span>Available After SignUp.</span>
+            <span className="text-4xl text-center font-semibold text-white mb-9">{t('USER SIGN UP')}</span>
             {/* 錯誤訊息 */}
             {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
             <Form form={form} onFinish={handleSignUp}>
                 <Form.Item hidden name="userEmail" />
-
-                <Form.Item name="userName" hasFeedback rules={[{ required: true, message: 'Please input your Name' }]}>
-                    <Input addonBefore={<UserOutlined />} placeholder="User Name" />
+                <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }]}>
+                    <Input placeholder="User Name" bordered={false} className="text-center bg-[#ffffffcc] h-[50px] rounded-2xl text-base font-normal placeholder:text-[#9680EA]" />
                 </Form.Item>
-                <Form.Item name="userPas" hasFeedback rules={[{ required: true, message: 'Please input your Password' }]}>
-                    <Input addonBefore={<LockOutlined />} placeholder="User Password" />
+                <Form.Item name="userPas" rules={[{ required: true, message: 'Please input your Password' }]}>
+                    <Input placeholder="User Password" bordered={false} className="text-center bg-[#ffffffcc] h-[50px] rounded-2xl text-base font-normal placeholder:text-[#9680EA]" />
                 </Form.Item>
-                <Form.Item name="userPhone" hasFeedback rules={[{ required: true, message: 'Please input your Phone' }]}>
-                    <Input addonBefore={<AiFillPhone />} placeholder="User Phone" />
+                <Form.Item name="userPhone" rules={[{ required: true, message: 'Please input your Phone' }]}>
+                    <Input placeholder="User Phone" bordered={false} className="text-center bg-[#ffffffcc] h-[50px] rounded-2xl text-base font-normal placeholder:text-[#9680EA]" />
                 </Form.Item>
                 <HCaptcha sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" onVerify={() => handleVerificationSuccess()} />
-                <Form.Item>
-                    <Button disabled={!submitTable} className="flex w-full h-10 items-center rounded-lg border-white gap-x-2 font-bold bg-[#F9A318] text-white hover:opacity-80  md:my-3 md:px-6 md:py-3 justify-center" htmlType="submit">
+                <Form.Item className="mb-0">
+                    <Button disabled={!submitTable} className="mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
                         Sign Up
                     </Button>
                 </Form.Item>
             </Form>
-            <p className="font-bold text-sm text-[#999999] flex flex-col">
-                have an account?
-                <span className="text-black cursor-pointer" onClick={handleToLogin}>
+            <div className="text-white flex flex-col">
+                <span className="font-normal text-sm">{t('have an account?')}</span>
+                <span className="text-sm font-bold cursor-pointer" onClick={handleToLogin}>
                     Log In
                 </span>
-            </p>
+            </div>
         </div>
     );
 };

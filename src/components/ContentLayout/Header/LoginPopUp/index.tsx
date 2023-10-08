@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 import { GrFormClose } from 'react-icons/gr';
-import logoLogin from '@/assets/images/logo.png';
 import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/Header/LoginModule';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -36,15 +35,14 @@ const Popup: React.FC = () => {
     };
 
     return (
-        <div className={`${popupIsOpen ? 'fixed' : 'hidden'} popupOverlay w-full h-full bg-[#000000d9] z-50 left-0 top-0 flex justify-center items-center`} onClick={handleOverlayClick}>
-            <div ref={popupContainerRef} className="popupContainer m-auto w-full md:max-w-[530px] min-h-[500px] bg-white rounded-3xl ">
+        <div className={`${popupIsOpen ? 'fixed' : 'hidden'} popupOverlay px-2 md:px-0 w-full h-full backdrop-blur-sm bg-[#000000d9] z-50 left-0 top-0 flex justify-center items-center`} onClick={handleOverlayClick}>
+            <div ref={popupContainerRef} className="popupContainer  w-full py-10 md:m-auto md:pt-[150px] md:max-w-[600px] md:min-h-[700px] rounded-[20px] bg-gradient-to-r from-[#E9AAF1] to-[#8155EC]">
                 <div className="closeBtn absolute right-5 top-5 z-10 cursor-pointer w-10 h-10 flex justify-center items-center text-2xl rounded-md bg-[#F6F7F7] hover:bg-[#e5e5e5]" onClick={handleClick}>
                     <GrFormClose size={40} />
                 </div>
-                <div className="w-full h-full flex flex-col justify-center items-center gap-2 p-8 md:p-16">
-                    <img src={logoLogin} alt="" className="w-full" />
+                <div className="w-full h-full flex flex-col justify-center items-center max-w-[90%] md:max-w-[400px] m-auto">
                     <div className="formWrap flex flex-nowrap overflow-hidden w-full">
-                        <div ref={formCarouselRef} className="min-w-[200%] flex duration-300" id="formCarousel">
+                        <div ref={formCarouselRef} className="min-w-[200%] flex duration-300 p" id="formCarousel">
                             <Login />
                             <SignUp />
                         </div>
