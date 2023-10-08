@@ -16,6 +16,7 @@ import Gigx from '@/pages/Content/Taxonomy/Sports/GIGX';
 import TermsOfService from '@/pages/Content/TermsOfService';
 import Customer from '@/pages/Content/Customer';
 import Wallet from '@/pages/Content/Wallet';
+import Faq from '@/pages/Content/Faq';
 
 const contentRoutes = () => {
     return (
@@ -41,6 +42,7 @@ const contentRoutes = () => {
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/customer" element={<Customer />} />
             <Route path="/wallet" element={<Wallet />} />
+            <Route path="/faq" element={<Faq />} />
         </>
     );
 };

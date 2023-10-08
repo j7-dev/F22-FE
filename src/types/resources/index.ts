@@ -6,6 +6,7 @@ export * from './vips';
 export * from './balances';
 export * from './SiteNotify';
 export * from './loginDetails';
+export * from './faq';
 
 export type BaseType = {
     id: number;
