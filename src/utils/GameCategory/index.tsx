@@ -7,6 +7,7 @@ export const mappingGameCategory = ({ gameProviderName, _gameProviderCategory }:
     if (gameProviderName === 'PP') return 'slot';
     return 'events';
 };
+//用此來判斷此遊戲廠商是否有包含此分類
 export const mappingIncludesProvider = ({ providerData, category }: { providerData: TGameProvider[]; category: TGameCategory }) => {
     return providerData.filter((providerItem) => providerItem.gameCategories.includes(category.value));
 };

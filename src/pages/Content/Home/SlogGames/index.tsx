@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { nanoid } from 'nanoid';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Pagination, Autoplay } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -46,7 +46,15 @@ const index: React.FC = () => {
     return (
         <div className="relative PopularGames md:w-full">
             <div className="mx-4 rounded-2xl shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
-                <Swiper loop={true} modules={[Pagination]} className="gameProvidersSwiper w-full h-fit">
+                <Swiper
+                    loop={true}
+                    autoplay={{
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    }}
+                    modules={[Pagination, Autoplay]}
+                    className="gameProvidersSwiper w-full h-fit"
+                >
                     {gameCategoriesData.map((item) => (
                         <SwiperSlide key={nanoid()} className="h-fit w-full sm:w-full sm:aspect-[1260/360] aspect-[342/180] shadow-[0_4px_4px_0px_#A370ED33]">
                             <CategorySwiper key={nanoid()} provider={item.providerData} categoryName={item.label} />

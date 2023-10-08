@@ -2,7 +2,8 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSetAtom, useAtom, useAtomValue } from 'jotai';
 import NewsMarquee from '../../NewsMarquee';
-import LoginModule, { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
+import UserInfo from '../UserInfo';
+import LoginModule, { IsLoginAtom, popupIsOpenAtom } from '../LoginModule';
 import { mbSidebarAtom, windowWidthAtom } from '@/components/ContentLayout';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
 import Icon_Wallet_White from '@/assets/images/Icon_Wallet_White.svg';
@@ -38,7 +39,10 @@ const NavBar: React.FC = () => {
                 {/* 桌機選單 */}
                 <div className="pcMenu hidden w-full relative transition-all duration-300 basis-full grow sm:flex flex-row gap-16 justify-between items-center">
                     {windowWidth > 414 ? <NewsMarquee speed={30} marqueeText={['Lorem ipsum dolor sit amet consectetur. Auctor rhoncus non pharetra sollicitudin.']} /> : ''}
-                    <LoginModule />
+                    <div className="userSection flex items-center gap-2.5">
+                        {isLogin ? <UserInfo /> : ''}
+                        <LoginModule />
+                    </div>
                 </div>
                 {/* 手機選單 */}
                 <div className="mbMenu w-full h-full relative z-50 flex items-center justify-between sm:hidden">

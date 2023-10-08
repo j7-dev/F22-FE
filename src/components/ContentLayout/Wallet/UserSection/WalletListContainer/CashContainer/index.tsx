@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
+import { useList } from '@refinedev/core';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
 // import creditIcon from '@/assets/images/credit-icon.svg';
 import depositIcon from '@/assets/images/deposit-icon.svg';
@@ -12,6 +13,19 @@ const index: React.FC = () => {
     const { t } = useTranslation();
     const [selectedSection, setSelectedSection] = useAtom(selectedSectionAtom);
     const [down, setDown] = useState(false);
+    const { data: siteNotifyData } = useList({
+        resource: 'cms-posts',
+        meta: {
+            populate: '*',
+        },
+        filters: [
+            {
+                field: 'post_type',
+                operator: 'eq',
+                value: 'siteNotify',
+            },
+        ],
+    });
     // const setSelectedSection = useSetAtom(selectedSectionAtom);
     const handleClick = (data: string) => {
         setSelectedSection(data);
@@ -31,7 +45,7 @@ const index: React.FC = () => {
                         <AiFillMail size={30} className="p-1" />
                         <span className="text-sm font-bold text-[#2B3240]">{t('站内信쪽지')}</span>
                     </div>
-                    <span className="siteNotifyNumber flex justify-center items-center min-w-[36px] h-[27px] bg-[#DC3545] rounded-lg text-sm font-bold text-white">0</span>
+                    <span className="siteNotifyNumber flex justify-center items-center min-w-[36px] h-[27px] bg-[#DC3545] rounded-lg text-sm font-bold text-white">{siteNotifyData?.total}</span>
                 </div>
                 {/* <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'MyBalance' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('MyBalance')}>
                     <img src={creditIcon as unknown as string} alt="" />

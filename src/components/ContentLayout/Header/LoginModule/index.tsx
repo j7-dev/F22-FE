@@ -1,11 +1,7 @@
-// 1.狀態管理
-// 2.登入登出按紐
-// 3.登入彈窗呼叫
 import React, { useEffect } from 'react';
 import { atom, useAtom, useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 import { useLogout, useIsAuthenticated } from '@refinedev/core';
-import LanguageSwitch from '../LanguageSwitch';
 import Icon_Wallet_White from '@/assets/images/Icon_Wallet_White.svg';
 
 export const IsLoginAtom = atom(false);
@@ -70,10 +66,10 @@ const Login: React.FC = () => {
                         <span>Register</span>
                     </div>
                 )}
-
+                {/*
                 <div className="tertiaryButton languageSwitchContain relative flex items-center justify-center md:my-3 md:px-6 md:py-2 cursor-pointer">
                     <LanguageSwitch />
-                </div>
+                </div> */}
 
                 {/* <span
                     onClick={() => {

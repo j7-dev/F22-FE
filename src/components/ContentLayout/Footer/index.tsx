@@ -6,7 +6,6 @@ import { useAtomValue } from 'jotai';
 import { windowWidthAtom } from '@/components/ContentLayout';
 // import { useSetAtom } from 'jotai';
 // import { Link } from 'react-router-dom';
-// import { MenuItem, fakeMenuData } from '@/components/ContentLayout/Header/MenuData';
 import twitterIcon from '@/assets/images/Icon_Twitter.svg';
 import igIcon from '@/assets/images/Icon_Instagram.svg';
 import lineIcon from '@/assets/images/Icon_Line.svg';
