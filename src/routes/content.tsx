@@ -17,13 +17,23 @@ import TermsOfService from '@/pages/Content/TermsOfService';
 import Customer from '@/pages/Content/Customer';
 import Wallet from '@/pages/Content/Wallet';
 import Faq from '@/pages/Content/Faq';
+import InPlay from '@/pages/Content/Taxonomy/InPlay';
+import Sports from '@/pages/Content/Taxonomy/Sports';
+import Golf from '@/pages/Content/Taxonomy/Golf';
+import Games from '@/pages/Content/Taxonomy/Games';
+import Events from '@/pages/Content/Taxonomy/Events';
 
 const contentRoutes = () => {
     return (
         <>
             <Route path="/" element={<Home />} />
+            <Route path="/inPlay" element={<InPlay />} />
+            <Route path="/sports" element={<Sports />} />
+            <Route path="/golf" element={<Golf />} />
             <Route path="/slot" element={<Slot />} />
             <Route path="/casino" element={<Casino />} />
+            <Route path="/games" element={<Games />} />
+            <Route path="/events" element={<Events />} />
             <Route path="/about" element={<About />} />
             <Route path="/promotion" element={<PromotionPage />} />
             <Route path="/evolution" element={<EvolutionLive />} />

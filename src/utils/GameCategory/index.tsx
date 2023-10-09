@@ -15,7 +15,7 @@ export const gameCategories: TGameCategory[] = [
     {
         label: 'In Play',
         value: 'inPlay',
-        path: '/',
+        path: 'inPlay',
     },
     {
         label: 'Sports',
