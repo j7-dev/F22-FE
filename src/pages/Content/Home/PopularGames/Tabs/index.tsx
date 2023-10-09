@@ -59,7 +59,7 @@ const CustomTabBar: RenderTabBar = (props) => {
     const [windowWidth, _setWindowWidth] = useAtom(windowWidthAtom);
     const { t } = useTranslation();
     // console.log('panes', panes);
-    if (windowWidth < 810) {
+    if (windowWidth <= 414) {
         // 当屏幕宽度小于 810px 时，
         return (
             <div className="customTabBarMb  py-4 overflow-x-scroll">

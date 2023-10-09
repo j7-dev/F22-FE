@@ -19,7 +19,7 @@ const Banner: React.FC = () => {
         <div className="relative banner md:w-full">
             <Swiper
                 slidesPerView={'auto'}
-                spaceBetween={windowWidth > 414 ? 20 : 8}
+                spaceBetween={windowWidth >= 414 ? 20 : 8}
                 loop={true}
                 pagination={{
                     dynamicBullets: true,

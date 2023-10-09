@@ -57,7 +57,7 @@ const CustomTabBar = (props: any) => {
     // 添加用于检测屏幕宽度变化的事件处理程序
 
     //目前手機版用不到
-    if (windowWidth < 810) {
+    if (windowWidth <= 414) {
         // 当屏幕宽度小于 810px 时，使用下拉菜单
         const DropdownMenu = panes.map((pane: any) => ({
             key: pane.props.tabKey,
