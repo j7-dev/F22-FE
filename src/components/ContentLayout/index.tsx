@@ -39,10 +39,10 @@ const Layout = () => {
     }, [windowWidth]);
     return (
         <div className="contentLayout">
-            <div className={`leftContent z-50 overflow-hidden shadow-[2px_0px_20px_0px_rgba(163,112,237,0.25)] h-screen fixed left-0 top-0 xl:min-w-[88px] transition-all ${windowWidth <= 414 ? (mbSidebar ? 'w-60' : 'w-0') : ''}`}>
+            <div className={`leftContent z-50 overflow-hidden shadow-[2px_0px_20px_0px_rgba(163,112,237,0.25)] xl:min-w-[88px] h-screen fixed left-0 top-0  transition-all ${mbSidebar ? 'active' : ''}`}>
                 <Sidebar />
             </div>
-            <div className={`rightContent relative w-full bg-[#F8F9FF] ${windowWidth <= 414 ? (mbSidebar ? 'w-80' : 'w-0') : ''}`} onClick={handleCloseMbSidebar}>
+            <div className={`rightContent relative w-full bg-[#F8F9FF]`} onClick={handleCloseMbSidebar}>
                 <Header />
                 <Outlet />
                 <Footer />

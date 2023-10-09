@@ -12,7 +12,7 @@ module.exports = {
                 primary: '#1677ff',
             },
             screens: {
-                sm: '414px', // iphone SE
+                sm: '415px', // iphone SE
                 md: '810px', // ipad 直向
                 lg: '1080px', // ipad 橫向
                 xl: '1280px', // mac air
