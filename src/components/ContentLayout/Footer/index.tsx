@@ -6,11 +6,11 @@ import { useAtomValue } from 'jotai';
 import { windowWidthAtom } from '@/components/ContentLayout';
 // import { useSetAtom } from 'jotai';
 // import { Link } from 'react-router-dom';
-import twitterIcon from '@/assets/images/Icon_Twitter.svg';
-import igIcon from '@/assets/images/Icon_Instagram.svg';
-import lineIcon from '@/assets/images/Icon_Line.svg';
+import LanguageSwitch from '@/components/ContentLayout/Header/LanguageSwitch';
+import { socialMedia } from '@/utils/menuData/socialMedia';
+import { gameCategories } from '@/utils/GameCategory';
 import logo from '@/assets/images/1002_logo_f.svg';
-import logo2 from '@/assets/images/logo_t.svg';
+import logo2 from '@/assets/images/1002_logo_s.svg';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import { fakeProviderData } from '@/pages/Content/Home/Provider/ProviderData';
 
@@ -19,118 +19,89 @@ import { fakeProviderData } from '@/pages/Content/Home/Provider/ProviderData';
 export const Footer: React.FC = () => {
     const windowWidth = useAtomValue(windowWidthAtom);
     const { t } = useTranslation();
-    const fakeBetRule = [
-        {
-            label: 'Live Sports',
-            value: 'liveSports',
-        },
-        {
-            label: 'European Sports',
-            value: 'europeanSports',
-        },
-        {
-            label: 'Casino',
-            value: 'casino',
-        },
-        {
-            label: 'Slot',
-            value: 'slot',
-        },
-        {
-            label: 'MiniGame',
-            value: 'miniGame',
-        },
-        {
-            label: 'Virtual Sportse',
-            value: 'virtualSportse',
-        },
-    ];
+
     return (
         <div className="bg-white w-full text-black font-normal z-10 px-4">
             <div className="footerImgWrap grid sm:grid-cols-11 sm:pb-20 sm:py-9 grid-cols-4 gap-4 w-full h-auto border-solid border-b-2 border-0 border-[#E0E0E0] py-6">
-                <div className="aboutWrap sm:block sm:col-start-2 sm:col-span-3 col-span-4 gap-2.5 grid grid-cols-4">
-                    <div className="footerLogo sm:h-10 col-span-1 h-full">
-                        <img src={windowWidth > 414 ? logo : logo2} alt="" className="w-full h-full object-left object-contain" />
+                <div className="aboutWrap sm:flex sm:flex-col sm:col-start-2 sm:col-span-3 col-span-4 gap-4 grid grid-cols-4">
+                    <div className="footerLogo sm:h-10 col-span-1 h-full text-center">
+                        <img src={windowWidth > 414 ? logo : logo2} alt="" className="sm:w-full w-[30px] h-full object-left object-contain" />
                     </div>
-                    <div className="txt sm:pt-4 sm:mt-4 sm:border-t-2 sm:border-l-0 border-l-2 pl-2.5 col-span-3 text-[#333333] text-xs font-normal  border-solid  border-0 border-[#E0E0E0]">{t('COPYRIGHT 2023, SMART BET. ALL RIGHTS RESERVED. GAMBLING CAN BE ADDICTIVE, PLEASE PLAY RESPONSIBLY. FOR MORE INFORMATION ON SUPPORT TOOLS, PLEASE VISIT OUR RESPONSIBLE GAMBLING PAGE PAYMENT SUPPORTED BY CODE PAY')}</div>
+                    <div className="txt sm:py-4 sm:border-t-2 sm:border-l-0 border-l-2 pl-2.5 col-span-3 text-[#333333] text-xs font-normal  border-solid  border-0 border-[#E0E0E0]">{t('COPYRIGHT 2023, SMART BET. ALL RIGHTS RESERVED. GAMBLING CAN BE ADDICTIVE, PLEASE PLAY RESPONSIBLY. FOR MORE INFORMATION ON SUPPORT TOOLS, PLEASE VISIT OUR RESPONSIBLE GAMBLING PAGE PAYMENT SUPPORTED BY CODE PAY')}</div>
+                    {/* 電腦版翻譯選單 */}
+                    {windowWidth > 414 ? <LanguageSwitch /> : ''}
                 </div>
-                <div className="helpWrap w-full sm:block sm:col-span-3 col-span-4 gap-2.5 grid grid-cols-4">
-                    <div className="text-2xl sm:h-10 sm:mb-6 font-bold text-black  flex items-center gap-3 col-span-1">
+                <div className="helpWrap w-full sm:flex sm:flex-col sm:col-span-3 col-span-4 gap-4 grid grid-cols-4">
+                    <div className="sm:text-2xl sm:h-10 text-[10px] font-bold text-black flex items-center justify-center gap-3 col-span-1">
                         {windowWidth > 414 ? (
                             <>
                                 <img src={Icon_Main_Title} alt="" />
-                                <span className="">SMART BET HELP</span>
+                                <span className="">{t('SMART BET HELP')}</span>
                             </>
                         ) : (
-                            <span className="w-full h-full flex justify-center items-center">HELP</span>
+                            <span className="w-full h-full flex justify-center items-center">{t('HELPS')}</span>
                         )}
                     </div>
-                    <ul className=" gap-4 p-0 m-0 col-span-3 grid grid-cols-3">
-                        <li className="sm:aspect-[100/120] aspect-square rounded-2xl cursor-pointer bg-[#BAA8FF33] duration-300 hover:shadow-[0_0px_15px_rgba(150,128,234,0.5)]">
-                            <div className="w-full h-full flex justify-center items-center">
-                                <Link to="/">
-                                    <div className="flex flex-col justify-center items-center">
-                                        <img src={igIcon} alt="" className="w-6 mb-1" />
-                                        <span className="text-[#9680EA] sm:text-xs sm:mt-4 text-[8px] font-bold">Instagram</span>
+                    <ul className="socialMedia sm:grid-cols-4 gap-1.5 p-0 m-0 col-span-3 grid grid-cols-5">
+                        {socialMedia.map((item) => {
+                            return (
+                                <li key={nanoid()} className="sm:aspect-auto sm:h-[88px] aspect-square rounded-2xl cursor-pointer bg-[#BAA8FF33] duration-300 hover:shadow-[0_0px_15px_rgba(150,128,234,0.5)]">
+                                    <div className="w-full h-full flex justify-center items-center">
+                                        <Link to={item.link}>
+                                            <div className="flex flex-col justify-center items-center">
+                                                <img src={item.icon} alt="" className="sm:w-[30px] w-[15px] mb-2 aspect-square" />
+                                                <span className="text-[#9680EA] sm:text-xs text-[6px] leading-[8px] font-bold text-center">{item.value}</span>
+                                            </div>
+                                        </Link>
                                     </div>
-                                </Link>
-                            </div>
-                        </li>
-                        <li className="sm:aspect-[100/120] aspect-square rounded-2xl cursor-pointer bg-[#BAA8FF33] duration-300 hover:shadow-[0_0px_15px_rgba(150,128,234,0.5)]">
-                            <div className="w-full h-full flex justify-center items-center">
-                                <Link to="/">
-                                    <div className="flex flex-col justify-center items-center">
-                                        <img src={twitterIcon} alt="" className="w-6 mb-1" />
-                                        <span className="text-[#9680EA] sm:text-xs sm:mt-4 text-[8px] font-bold ">Twitter</span>
-                                    </div>
-                                </Link>
-                            </div>
-                        </li>
-                        <li className="sm:aspect-[100/120] aspect-square rounded-2xl cursor-pointer bg-[#BAA8FF33] duration-300 hover:shadow-[0_0px_15px_rgba(150,128,234,0.5)]">
-                            <div className="w-full h-full flex justify-center items-center">
-                                <Link to="/">
-                                    <div className="flex flex-col justify-center items-center">
-                                        <img src={lineIcon} alt="" className="w-6 mb-1" />
-                                        <span className="text-[#9680EA] sm:text-xs sm:mt-4 text-[8px] font-bold">Line</span>
-                                    </div>
-                                </Link>
-                            </div>
-                        </li>
+                                </li>
+                            );
+                        })}
                     </ul>
                 </div>
-                <div className="hidden rightZone w-full col-span-3 sm:grid grid-cols-2 md:grid-cols-3 gap-4 basis-1/3">
-                    <div className="text-center">
-                        <span className="h-10 flex items-center justify-center text-lg text-black mb-4 font-bold">{t('About Us')}</span>
-                        <ul className="flex flex-col gap-1 p-0 m-0">
+                {/* 手機版翻譯選單 */}
+                {windowWidth <= 414 ? (
+                    <div className="col-span-4 gap-4 grid grid-cols-4">
+                        <div className="col-start-2 col-span-3">
+                            <LanguageSwitch />
+                        </div>
+                    </div>
+                ) : (
+                    ''
+                )}
+                <div className="rightZone w-full sm:col-span-3 sm:grid-cols-3 sm:gap-4 col-span-4 grid grid-cols-4 gap-1">
+                    <div className="aboutWrap text-center sm:col-span-1 sm:flex sm:flex-col sm:gap-4 col-span-4 grid grid-cols-4">
+                        <span className="sm:text-lg sm:h-10 text-[10px] col-span-1  flex items-center justify-center text-black font-bold">{t('About Us')}</span>
+                        <ul className="sm:flex-col sm:justify-center sm:gap-0 col-span-3 flex flex-row justify-start items-center gap-1 p-0 m-0">
                             <li>
                                 <Link to="/about">
-                                    <span className="text-[#333333] hover:underline ">{t('About Us')}</span>
+                                    <span className="sm:text-xs text-[8px] text-[#333333] hover:underline ">{t('About Us')}</span>
                                 </Link>
                             </li>
                         </ul>
                     </div>
-                    <div className="text-center">
-                        <span className="h-10 flex items-center justify-center text-lg text-black mb-4 font-bold">{t('Bet Rule')}</span>
-                        <ul className="flex flex-col gap-1 p-0 m-0">
-                            {fakeBetRule.map((item) => {
+                    <div className="betRuleWrap text-center sm:col-span-1 sm:flex sm:flex-col sm:gap-4 col-span-4 grid grid-cols-4">
+                        <span className="sm:text-lg sm:h-10 text-[10px] col-span-1  flex items-center justify-center text-black font-bold">{t('Bet Rule')}</span>
+                        <ul className="sm:flex-col sm:justify-center sm:gap-0 col-span-3 flex flex-row justify-start items-center gap-1 p-0 m-0">
+                            {gameCategories.map((item) => {
                                 return (
                                     <li key={nanoid()}>
-                                        <Link to="/">
-                                            <span className="text-[#333333] hover:underline ">{t(item.label)}</span>
+                                        <Link to={item.path}>
+                                            <span className="sm:text-xs text-[8px] text-[#333333] hover:underline ">{t(item.value)}</span>
                                         </Link>
                                     </li>
                                 );
                             })}
                         </ul>
                     </div>
-                    <div className="text-center">
-                        <span className="h-10 flex items-center justify-center text-lg text-black mb-4 font-bold">{t('Site Map')}</span>
-                        <ul className="flex flex-col gap-1 p-0 m-0">
-                            {fakeBetRule.map((item) => {
+                    <div className="siteMapWrap text-center sm:col-span-1 sm:flex sm:flex-col sm:gap-4 col-span-4 grid grid-cols-4">
+                        <span className="sm:text-lg sm:h-10 text-[10px] col-span-1 flex items-center justify-center text-black font-bold">{t('Site Map')}</span>
+                        <ul className="sm:flex-col sm:justify-center sm:gap-0 col-span-3 flex flex-row justify-start items-center gap-1 p-0 m-0">
+                            {gameCategories.map((item) => {
                                 return (
                                     <li key={nanoid()}>
-                                        <Link to="/">
-                                            <span className="text-[#333333] hover:underline ">{t(item.label)}</span>
+                                        <Link to={item.path}>
+                                            <span className="sm:text-xs text-[8px] text-[#333333] hover:underline ">{t(item.value)}</span>
                                         </Link>
                                     </li>
                                 );

@@ -24,6 +24,13 @@ const index: React.FC = () => {
         <ul className="WallerContainer w-full text-white transition-all duration-300 mb-0 pl-0 flex flex-col gap-4">
             {walletFilterData.map((wallet) => {
                 const handleClick = (walletAction: string) => {
+                    //如果點擊的是faq，就跳轉到faq頁面
+                    if (walletAction === 'faq') {
+                        setActiveMenu(walletAction);
+                        Navigate('/faq');
+                        return;
+                    }
+                    //其餘為跳轉到錢包頁面
                     setSelectedSection(walletAction);
                     if (isLogin) {
                         Navigate('/wallet');
@@ -37,13 +44,13 @@ const index: React.FC = () => {
                     <li
                         key={nanoid()}
                         onClick={() => {
-                            handleClick(wallet.value);
+                            handleClick(wallet.label);
                         }}
-                        className={`${activeMenu === wallet.value && isLogin ? 'active' : ''} ${wallet.value} relative transition-all cursor-pointer  px-6 sm:px-0 sm:rounded-2xl text-[#333333]`}
+                        className={`${activeMenu === wallet.label && isLogin ? 'active' : ''} ${wallet.label} relative transition-all cursor-pointer  px-6 sm:px-0 sm:rounded-2xl text-[#333333]`}
                     >
                         <span className="flex items-center text-sm overflow-hidden">
                             <div className="favicon min-w-[60px] min-h-[60px] flex justify-center items-center" />
-                            <span className={`whitespace-nowrap text-lg font-normal`}>{t(wallet.label)}</span>
+                            <span className={`whitespace-nowrap text-lg font-normal`}>{t(wallet.value)}</span>
                         </span>
                     </li>
                 );

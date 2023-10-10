@@ -2,13 +2,30 @@
 	//sideBar css
 	$logoFavicon_s: url("@/assets/images/1002_logo_s.svg");
 	$logoFavicon_f: url("@/assets/images/1002_logo_f.svg");
+	//wallet icon
+	$MyPageFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_MyPage.svg");
+	$MyPageFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_MyPage.svg");
+	$siteNotifyFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_NoteBox.svg");
+	$siteNotifyFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_NoteBox.svg");
+	$cashHistoryFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_CashHistory.svg");
+	$cashHistoryFaviconWhite: url("@/assets/newMenuIcon/images/Icon_Menu_Filled_CashHistory.svg");
+	$rollingPointFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_RollingPoint.svg");
+	$rollingPointFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_RollingPoint.svg");
+	$pointDetailsFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_PointDetails.svg");
+	$pointDetailsFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_PointDetails.svg");
+	$faqFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_Notice.svg");
+	$faqFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_Notice.svg");
+	$sportsRegulationsFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_SportsRegulations.svg");
+	$sportsRegulationsFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_SportsRegulations.svg");
+	$battingRegulationsFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_BattingRegulations.svg");
+	$battingRegulationsFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_Batting_Regulations.svg");
 	$depositFavicon: url("@/assets/images/Icon_Menu_Outlined_Deposit.svg");
 	$depositFaviconWhite: url("@/assets/images/Icon_Menu_Filled_Deposit.svg");
 	$withdrawFavicon: url("@/assets/images/Icon_Menu_Outlined_Withdraw.svg");
 	$withdrawFaviconWhite: url("@/assets/images/Icon_Menu_Filled_Withdraw.svg");
 	$rolloverHistoryFavicon: url("@/assets/images/Icon_Menu_Outlined_Rollover.svg");
 	$rolloverHistoryFaviconWhite: url("@/assets/images/Icon_Menu_Filled_Rollover.svg");
-
+	//gameCategory icon
 	$inPlayFavicon: url("@/assets/images/Icon_Menu_Outlined_In_Play.svg");
 	$inPlayFaviconWhite: url("@/assets/images/Icon_Menu_Filled_In_Play.svg");
 	$sportsFavicon: url("@/assets/images/Icon_Menu_Outlined_Sports.svg");
@@ -64,6 +81,16 @@
 		}
 		.WallerContainer {
 			li {
+				&.MyPage {
+					.favicon {
+						background-image: $MyPageFavicon;
+					}
+				}
+				&.siteNotify {
+					.favicon {
+						background-image: $siteNotifyFavicon;
+					}
+				}
 				&.deposit {
 					.favicon {
 						background-image: $depositFavicon;
@@ -74,9 +101,39 @@
 						background-image: $withdrawFavicon;
 					}
 				}
+				&.cashHistory {
+					.favicon {
+						background-image: $cashHistoryFavicon;
+					}
+				}
+				&.rollingPoint {
+					.favicon {
+						background-image: $rollingPointFavicon;
+					}
+				}
 				&.rolloverHistory {
 					.favicon {
 						background-image: $rolloverHistoryFavicon;
+					}
+				}
+				&.pointDetails {
+					.favicon {
+						background-image: $pointDetailsFavicon;
+					}
+				}
+				&.faq {
+					.favicon {
+						background-image: $faqFavicon;
+					}
+				}
+				&.sportsRegulations {
+					.favicon {
+						background-image: $sportsRegulationsFavicon;
+					}
+				}
+				&.battingRegulations {
+					.favicon {
+						background-image: $battingRegulationsFavicon;
 					}
 				}
 				&:hover,
@@ -86,6 +143,16 @@
 						color: #ffffff;
 					}
 					box-shadow: 0px 6px 8px 0px rgba(89, 50, 234, 0.2);
+					&.MyPage {
+						.favicon {
+							background-image: $MyPageFaviconWhite;
+						}
+					}
+					&.siteNotify {
+						.favicon {
+							background-image: $siteNotifyFaviconWhite;
+						}
+					}
 					&.deposit {
 						.favicon {
 							background-image: $depositFaviconWhite;
@@ -96,9 +163,39 @@
 							background-image: $withdrawFaviconWhite;
 						}
 					}
+					&.cashHistory {
+						.favicon {
+							background-image: $cashHistoryFaviconWhite;
+						}
+					}
+					&.rollingPoint {
+						.favicon {
+							background-image: $rollingPointFaviconWhite;
+						}
+					}
 					&.rolloverHistory {
 						.favicon {
 							background-image: $rolloverHistoryFaviconWhite;
+						}
+					}
+					&.pointDetails {
+						.favicon {
+							background-image: $pointDetailsFaviconWhite;
+						}
+					}
+					&.faq {
+						.favicon {
+							background-image: $faqFaviconWhite;
+						}
+					}
+					&.sportsRegulations {
+						.favicon {
+							background-image: $sportsRegulationsFaviconWhite;
+						}
+					}
+					&.battingRegulations {
+						.favicon {
+							background-image: $battingRegulationsFaviconWhite;
 						}
 					}
 				}

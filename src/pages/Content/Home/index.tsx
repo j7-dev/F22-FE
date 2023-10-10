@@ -6,18 +6,24 @@ import PopularGames from './PopularGames';
 import SlogGames from './SlogGames';
 import NewsMarquee from '@/components/ContentLayout/NewsMarquee';
 import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
+import { useGetMarketingCotent } from '@/hooks/useGetMarketingCotent';
 
 const Home = () => {
     // const { t } = useTranslation();
     const setActiveMenu = useSetAtom(activeMenuAtom);
     const windowWidth = useAtomValue(windowWidthAtom);
+    const { data } = useGetMarketingCotent({ position: 'header' });
+
+    const marqueeText = data?.map((item) => {
+        return item?.content;
+    });
     React.useEffect(() => {
         setActiveMenu('');
     }, []);
     return (
         <div className="home sm:my-9 my-4 w-full  flex flex-col gap-8">
             <Banner />
-            {windowWidth <= 414 ? <NewsMarquee speed={15} marqueeText={['Lorem ipsum dolor sit amet consectetur. Auctor rhoncus non pharetra sollicitudin.']} /> : ''}
+            {windowWidth <= 414 ? <NewsMarquee speed={15} marqueeText={marqueeText} /> : ''}
             <PopularGames />
             {windowWidth > 414 ? <SlogGames /> : ''}
         </div>
