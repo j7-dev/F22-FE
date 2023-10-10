@@ -9,7 +9,7 @@ import menuOpen from '@/assets/images/menuOpen.svg';
 import Icon_Wallet_white from '@/assets/images/topBar/Icon_TopBar_Wallet_White.svg';
 import Icon_Account_White from '@/assets/images/topBar/Icon_Account_White.svg';
 import Icon_NoteBox_white from '@/assets/images/topBar/Icon_NoteBox_white.svg';
-import logo from '@/assets/images/logo_f.png';
+import logo from '@/assets/images/1002_logo_f.svg';
 
 const Mobile: React.FC<{
     handleMbSidebar: () => void;

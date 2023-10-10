@@ -9,6 +9,7 @@ import { windowWidthAtom } from '@/components/ContentLayout';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { FaGamepad } from 'react-icons/fa';
 import { RenderTabBar } from 'rc-tabs/lib/interface';
+import ComingSoonImg from '@/assets/images/ComingSoon.svg';
 
 //單個文章版型
 const TabPaneList = ({ gameCategory }: { gameCategory: TPopularGames }) => {
@@ -34,11 +35,15 @@ const TabPaneList = ({ gameCategory }: { gameCategory: TPopularGames }) => {
         );
     };
     //如果為空陣列
-    if (gameData.length === 0) return <div className="min-h-[300px] flex items-center justify-center text-center h-full w-full">Stay tuned</div>;
+    if (gameData.length === 0)
+        return (
+            <div className="grid sm:grid-cols-11 sm:px-0 p-10 ">
+                <img src={ComingSoonImg} className="col-start-2 col-span-9 w-full" />
+            </div>
+        );
     return (
         <div className="grid sm:grid-cols-11 sm:px-0 px-4 ">
-            <div className="col-start-1"></div>
-            <div className="col-span-9 grid grid-cols-1 gap-2 sm:py-10 sm:grid-cols-6 sm:gap-2">
+            <div className="col-start-2 col-span-9 grid grid-cols-1 gap-2 sm:py-10 sm:grid-cols-6 sm:gap-2">
                 {gameData.map((item) => {
                     return (
                         <div key={nanoid()}>
@@ -57,7 +62,7 @@ const CustomTabBar: RenderTabBar = (props) => {
     const { activeKey, panes, onTabClick } = props;
 
     const [windowWidth, _setWindowWidth] = useAtom(windowWidthAtom);
-    const { t } = useTranslation();
+
     // console.log('panes', panes);
     if (windowWidth <= 414) {
         // 当屏幕宽度小于 810px 时，
@@ -69,7 +74,7 @@ const CustomTabBar: RenderTabBar = (props) => {
                         return (
                             <div key={nanoid()} className={`${pane.props.tabKey} customTab relative rounded-2xl flex flex-col justify-center items-center aspect-square w-[50px] text-[8px] whitespace-nowrap shadow-[0px_4px_10px_0px_#A370ED33] ${activeKey === pane.props.tabKey ? 'active' : ''}`} onClick={(e) => onTabClick(pane.props.tabKey, e)}>
                                 <div className="favicon h-[24px] w-[20px]" />
-                                <span>{t(pane.props.tab)}</span>
+                                <span>{pane.props.tab}</span>
                             </div>
                         );
                     })}
@@ -83,7 +88,7 @@ const CustomTabBar: RenderTabBar = (props) => {
                 {((panes || []) as []).map((pane: any) => {
                     return (
                         <div key={nanoid()} className={`customTab relative cursor-pointer p-2 text-base ${activeKey === pane.props.tabKey ? 'text-black font-bold' : 'font-normal'}`} onClick={(e) => onTabClick(pane.props.tabKey, e)}>
-                            {t(pane.props.tab)}
+                            {pane.props.tab}
                             <div className={`activeBorder absolute top-[96%] left-0 w-full ${activeKey === pane.props.tabKey ? 'h-1 rounded-full bg-[#9680EA]' : 'h-0'}`}></div>
                         </div>
                     );
@@ -98,12 +103,13 @@ type indexProps = {
     data: TPopularGamesData;
 };
 const index: React.FC<indexProps> = (props) => {
+    const { t } = useTranslation();
     const data = props?.data || [];
     //資料格式化
     const formattedData = data.map((item, _i) => ({
         // key: i.toString(),
         key: item.value,
-        label: item.label,
+        label: t(item.label),
         children: <TabPaneList gameCategory={item} />,
     }));
 

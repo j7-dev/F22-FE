@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Tabs, Dropdown, Space, TabsProps } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useAtom } from 'jotai';
 import { nanoid } from 'nanoid';
 // import {LazyLoadImage} from 'react-lazy-load-image-component';
@@ -114,12 +115,12 @@ type indexProps = {
 };
 const index: React.FC<indexProps> = (props) => {
     const { provider } = props;
-
+    const { t } = useTranslation();
     //資料格式化
     //TODO 如何取得Tabs的props
     const formattedData = provider.map((item, i) => ({
         key: i.toString(),
-        label: item.label,
+        label: t(item.label),
         children: <TabPaneList taxonomy={item} />,
     }));
     const [tabActiveKey, setTabActiveKey] = useState('0');
