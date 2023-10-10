@@ -1,46 +1,33 @@
 import FormComponent from '../FormComponent';
-import { useUpdate, HttpError, useGo } from '@refinedev/core';
-import { Edit, useForm } from '@refinedev/antd';
+import { useCreate, HttpError, useGo } from '@refinedev/core';
+import { Create, useForm } from '@refinedev/antd';
 import { TCommission, TCommissionFields } from '@/types';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
-import { useParams } from 'react-router-dom';
 
 const index: React.FC<{
     notificationConfig?: ArgsProps;
 }> = ({ notificationConfig = {} }) => {
-    const { id } = useParams();
-    const { mutate: update } = useUpdate();
+    const { mutate: create } = useCreate();
     const go = useGo();
 
-    const { form, formProps, saveButtonProps, formLoading } = useForm<TCommission, HttpError, TCommissionFields>({
-        meta: {
-            populate: {
-                vips: {
-                    fields: ['id'],
-                },
-            },
-        },
-    });
+    const { form, formProps, saveButtonProps, formLoading } = useForm<TCommission, HttpError, TCommissionFields>();
     const handleCreate = () => {
-        if (!id) return;
         form.validateFields()
             .then((values) => {
-                update(
+                create(
                     {
                         resource: 'discounts',
                         values,
-                        id,
                     },
                     {
                         onSuccess: () => {
                             form.resetFields();
                             notification.success({
-                                key: 'create-discounts',
-                                message: 'Create Turnover bonus successfully',
+                                key: 'create-discount',
+                                message: 'Create turnover bonus successfully',
                                 ...notificationConfig,
                             });
-
                             go({
                                 to: '/refine/promotion/discounts',
                             });
@@ -54,9 +41,9 @@ const index: React.FC<{
     };
 
     return (
-        <Edit saveButtonProps={saveButtonProps}>
-            <FormComponent formType="edit" formProps={formProps} formLoading={formLoading} handler={handleCreate} />
-        </Edit>
+        <Create saveButtonProps={saveButtonProps}>
+            <FormComponent formType="create" formProps={formProps} formLoading={formLoading} handler={handleCreate} />
+        </Create>
     );
 };
 

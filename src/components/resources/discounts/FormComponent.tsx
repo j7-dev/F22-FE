@@ -1,29 +1,33 @@
-import { useEffect } from 'react';
-import { Form, Switch, Select, FormProps, InputNumber } from 'antd';
+import { useEffect, useState } from 'react';
+import { Form, Button, Select, FormProps, InputNumber, Input } from 'antd';
 import { useGetSiteSetting } from '@/hooks';
 import { CloseOutlined } from '@ant-design/icons';
-import { useSelect } from '@refinedev/antd';
 import { ratio } from './ratio';
+import ResourceSelect from '@/components/form/ResourceSelect';
+import { isObject } from 'lodash-es';
+import { TVip } from '@/types';
+
+type TDefaultValues = {
+    live: number | null;
+    slot: number | null;
+};
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
     formProps: FormProps;
     handler: () => void;
-}> = ({ formType, formProps, handler }) => {
-    console.log('⭐  formType:', formType);
+    formLoading?: boolean;
+}> = ({ formType, formProps, handler, formLoading }) => {
     const form = formProps.form;
     const siteSetting = useGetSiteSetting();
-
     const defaultCurrency = siteSetting?.default_currency || 'KRW';
     const supportCurrencies = siteSetting?.support_currencies || ['KRW'];
-
     const defaultAmountType = siteSetting?.default_amount_type || 'CASH';
     const supportAmountTypes = siteSetting?.support_amount_types || ['CASH'];
 
-    const { selectProps: vipSelectProps } = useSelect({
-        resource: 'vips',
-        optionLabel: 'label',
-        optionValue: 'id',
+    const [defaultValues, setDefaultValues] = useState<TDefaultValues>({
+        live: null,
+        slot: null,
     });
 
     useEffect(() => {
@@ -41,19 +45,48 @@ const FormComponent: React.FC<{
         };
     }, [defaultCurrency, defaultAmountType, form]);
 
+    useEffect(() => {
+        if (!formLoading && formProps.initialValues && formType === 'edit') {
+            if (Array.isArray(formProps?.initialValues?.vips as number[] | TVip[]) && formProps?.initialValues?.vips.every((v: number | TVip) => isObject(v))) {
+                formProps.initialValues.vips = (formProps?.initialValues?.vips || []).map((v: TVip) => v.id);
+            }
+        }
+    }, [formLoading]);
+
+    const handleChange = (key: keyof typeof defaultValues) => (value: number | null) => {
+        setDefaultValues({
+            ...defaultValues,
+            [key]: value,
+        });
+    };
+
+    const handleApplyAll = () => {
+        const values = form?.getFieldsValue();
+        const newRatio = ratio.map((item) => {
+            const newItem = {
+                ...item,
+                ...defaultValues,
+            };
+            return newItem;
+        });
+
+        form?.setFieldsValue({
+            ...values,
+            ratio: newRatio,
+        });
+    };
+
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
             <div className="grid grid-cols-3 gap-6">
-                <Form.Item className="w-full" label="valid_bet_amount_threshold" name={['valid_bet_amount_threshold']} rules={[{ required: true, message: 'value is required' }]}>
+                <Form.Item className="w-full" label="Valid Bet Amount Threshold" name={['valid_bet_amount_threshold']} rules={[{ required: true, message: 'value is required' }]}>
                     <InputNumber min={0} precision={0} className="w-full" />
                 </Form.Item>
-                <Form.Item className="w-full" label="discount_limit" name={['discount_limit']} rules={[{ required: true, message: 'value is required' }]}>
+                <Form.Item className="w-full" label="Discount Limit" name={['discount_limit']} rules={[{ required: true, message: 'value is required' }]}>
                     <InputNumber min={0} precision={0} className="w-full" />
                 </Form.Item>
 
-                <Form.Item label="VIPS" name={['vips']}>
-                    <Select {...vipSelectProps} allowClear mode="multiple" />
-                </Form.Item>
+                <ResourceSelect formItemProps={{ label: 'VIPS', name: ['vips'] }} fetchProps={{ resource: 'vips', optionLabel: 'label', optionValue: 'id' }} selectProps={{ allowClear: true, mode: 'multiple' }} />
             </div>
 
             <div className="bg-gray-100 p-4 rounded-xl mb-4">
@@ -81,22 +114,27 @@ const FormComponent: React.FC<{
             </div>
 
             <div className="grid grid-cols-3 gap-x-6 gap-y-2 bg-yellow-50 p-4 rounded-xl mb-4">
-                <div className="flex items-center">
-                    Apply All <Switch className="ml-4" />
+                <div className="flex items-end">
+                    <Button type="default" onClick={handleApplyAll}>
+                        Click to Apply ALL
+                    </Button>
                 </div>
                 <div>
                     <p className="mb-2">live</p>
-                    <InputNumber min={0} className="w-full" addonAfter="%" />
+                    <InputNumber value={defaultValues.live} onChange={handleChange('live')} min={0} className="w-full" addonAfter="%" />
                 </div>
                 <div>
                     <p className="mb-2">slot</p>
-                    <InputNumber min={0} className="w-full" addonAfter="%" />
+                    <InputNumber value={defaultValues.slot} onChange={handleChange('slot')} min={0} className="w-full" addonAfter="%" />
                 </div>
             </div>
 
             {ratio.map((item, index) => {
                 return (
                     <div key={item.gameProvider} className="grid grid-cols-3 gap-x-6 gap-y-2 bg-gray-100 p-4 rounded-xl mb-4">
+                        <Form.Item hidden name={['ratio', index, 'gameProvider']} initialValue={item.gameProvider}>
+                            <Input />
+                        </Form.Item>
                         {Object.keys(item).map((key) => {
                             if (key === 'gameProvider') return <div className="flex items-center">{item?.[key]}</div>;
                             return (

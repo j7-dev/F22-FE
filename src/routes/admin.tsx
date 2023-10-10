@@ -25,7 +25,7 @@ const ListDeposits = lazy(() => import('@/pages/Admin/payments/listDeposits'));
 const ListWithdraws = lazy(() => import('@/pages/Admin/payments/listWithdraws'));
 const SiteSetting = lazy(() => import('@/pages/Admin/systemSetting/siteSetting/List'));
 const ListDiscount = lazy(() => import('@/pages/Admin/discounts/List'));
-// const CreateDiscount = lazy(() => import('@/pages/Admin/discounts/Create'));
+const CreateDiscount = lazy(() => import('@/pages/Admin/discounts/Create'));
 const EditDiscount = lazy(() => import('@/pages/Admin/discounts/Edit'));
 
 const adminRoutes = () => {
@@ -80,7 +80,7 @@ const adminRoutes = () => {
             <Route path="/refine/promotion/">
                 <Route index element={<ListDiscount />} />
                 <Route path="discounts" element={<ListDiscount />} />
-                {/* <Route path="discounts/create" element={<CreateDiscount />} /> */}
+                <Route path="discounts/create" element={<CreateDiscount />} />
                 <Route path="discounts/edit/:id" element={<EditDiscount />} />
             </Route>
         </>

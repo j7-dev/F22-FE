@@ -6,6 +6,7 @@ import { DataType } from './types';
 import { selectedRecordsAtom } from './atom';
 import { useSetAtom } from 'jotai';
 import Amount from '@/components/Admin/Amount';
+import { TVip } from '@/types';
 
 const index = () => {
     const setSelectedRecords = useSetAtom(selectedRecordsAtom);
@@ -39,6 +40,11 @@ const index = () => {
         {
             title: 'amount_type',
             dataIndex: 'amount_type',
+        },
+        {
+            title: 'vips',
+            dataIndex: 'vips',
+            render: (v: TVip[]) => (v || [])?.map((vip: any) => vip?.label).join(', '),
         },
         {
             title: 'date',
