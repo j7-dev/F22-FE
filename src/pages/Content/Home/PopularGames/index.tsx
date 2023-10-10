@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAtomValue } from 'jotai';
 import { windowWidthAtom } from '@/components/ContentLayout';
 import { useGetPopularGames } from '@/hooks/gameProvider/useGetPopularGames';
@@ -6,6 +7,7 @@ import Tabs from './Tabs';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 
 const index: React.FC = () => {
+    const { t } = useTranslation();
     const { PopularGamesData, isLoading } = useGetPopularGames();
 
     const windowWidth = useAtomValue(windowWidthAtom);
@@ -18,7 +20,7 @@ const index: React.FC = () => {
                             <img src={Icon_Main_Title} alt="" className="" />
                         </div>
                         <span className="col-span-1 font-bold text-3xl text-[#9680EA] -ml-3">
-                            POPULAR
+                            {t('POPULAR')}
                             {/* <span className="text-black">GAMES</span> */}
                         </span>
                     </div>

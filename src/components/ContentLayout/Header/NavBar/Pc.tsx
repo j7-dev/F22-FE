@@ -1,0 +1,27 @@
+import React from 'react';
+import { useAtomValue } from 'jotai';
+import { windowWidthAtom } from '@/components/ContentLayout';
+import NewsMarquee from '@/components/ContentLayout/NewsMarquee';
+import UserInfo from '@/components/ContentLayout/Header/UserInfo';
+import LoginModule from '@/components/ContentLayout/Header/LoginModule';
+import { useGetMarketingCotent } from '@/hooks/useGetMarketingCotent';
+
+const Pc: React.FC<{ isLogin: boolean }> = ({ isLogin }) => {
+    const windowWidth = useAtomValue(windowWidthAtom);
+    const { data } = useGetMarketingCotent({ position: 'header' });
+
+    const marqueeText = data?.map((item) => {
+        return item?.content;
+    });
+    return (
+        <div className="pcMenu hidden w-full relative transition-all duration-300 basis-full grow sm:flex flex-row gap-16 justify-between items-center">
+            {windowWidth > 414 ? <NewsMarquee marqueeText={marqueeText} /> : ''}
+            <div className="userSection flex items-center gap-2.5">
+                {isLogin ? <UserInfo /> : ''}
+                <LoginModule />
+            </div>
+        </div>
+    );
+};
+
+export default Pc;

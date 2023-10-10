@@ -10,6 +10,7 @@ import Pragmatic from './Pragmatic';
 import AsiaGaming from './AsiaGaming';
 import MicroGaming from './MicroGaming';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
+import { useGetMarketingCotent } from '@/hooks/useGetMarketingCotent';
 
 const slotProviderResource = providerData.filter((item) => item.gameCategories.includes('slot'));
 
@@ -17,6 +18,11 @@ const index: React.FC = () => {
     const { t } = useTranslation();
     const windowWidth = useAtomValue(windowWidthAtom);
     const [tabActiveKey, setTabActiveKey] = useState('pragmaticPlay');
+    const { data } = useGetMarketingCotent({ position: 'header' });
+
+    const marqueeText = data?.map((item) => {
+        return item?.content;
+    });
     const handleSwitchTab = (key: string) => {
         setTabActiveKey(key);
     };
@@ -33,7 +39,7 @@ const index: React.FC = () => {
     return (
         <div className="slotPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col  gap-4">
             <Banner />
-            {windowWidth <= 414 ? <NewsMarquee speed={15} marqueeText={['Lorem ipsum dolor sit amet consectetur. Auctor rhoncus non pharetra sollicitudin.']} /> : ''}
+            {windowWidth <= 414 ? <NewsMarquee speed={15} marqueeText={marqueeText} /> : ''}
             <div className="slotSection relative sm:w-full">
                 <div className="sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl">
                     {windowWidth > 414 ? (

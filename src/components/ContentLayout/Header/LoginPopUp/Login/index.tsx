@@ -4,7 +4,7 @@ import { useSetAtom, useAtom } from 'jotai';
 import { Form, Input, Button } from 'antd';
 import { useLogin, useIsAuthenticated } from '@refinedev/core';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import { popupIsOpenAtom, loginOrSignUpAtom, verifyAtom, verifyErrorAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { popupIsOpenAtom, loginOrSignUpAtom, verifyErrorAtom } from '@/components/ContentLayout/Header/LoginModule';
 
 type LoginVariables = {
     userName: string;
@@ -20,42 +20,43 @@ const index: React.FC = () => {
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
     const [form] = Form.useForm();
-    const [verify, setVerify] = useAtom(verifyAtom);
     const [verifyError, setVerifyError] = useAtom(verifyErrorAtom);
     const [submittable, setSubmittable] = useState(false);
 
-    const handleLogin = (values: { userName: string; userPas: string }) => {
-        if (!verify) {
-            setVerifyError('You must verify the captcha');
+    const handleLogin = async (values: { userName: string; userPas: string }) => {
+        //先進行驗證後登入
+        if (captchaRef?.current) {
+            await captchaRef.current
+                ?.execute({ async: true })
+                .then((_token) => {
+                    const { userName, userPas } = values;
+                    login(
+                        { userName: userName, password: userPas, redirectPath: '/wallet' },
+                        {
+                            onSuccess: (data) => {
+                                if (!data.success) {
+                                    // handle error
+                                }
+                                setPopupIsOpen(false);
+                            },
+                            onError: (error) => {
+                                console.log('錯誤訊息', error);
+                            },
+                        },
+                    );
+                })
+                .catch((err) => {
+                    console.error(err);
+                    setVerifyError('Verification failed');
+                    return;
+                });
+        } else {
+            console.error('captchaRef.current is null');
             return;
         }
-        const { userName, userPas } = values;
-        login(
-            { userName: userName, password: userPas, redirectPath: '/wallet' },
-            {
-                onSuccess: (data) => {
-                    if (!data.success) {
-                        // handle error
-                    }
-                    // handle success
-                    setVerify(false);
-                    setPopupIsOpen(false);
-                },
-                onError: (error) => {
-                    console.log('錯誤訊息', error);
-                },
-            },
-        );
     };
     const handleToSignUp = () => {
         setLoginOrSignUp(false);
-    };
-    const handleVerificationSuccess = () => {
-        //TODO 正常會帶token跟ekey這兩個參數,但暫時用不到
-        // console.log('token', token);
-        // console.log('ekey', ekey);
-        setVerifyError('');
-        setVerify(true);
     };
 
     // Watch all values
@@ -89,7 +90,7 @@ const index: React.FC = () => {
                 <Form.Item name="userPas" rules={[{ required: true, message: 'Please input your Password' }]}>
                     <Input placeholder="User Password" bordered={false} className="text-center bg-[#ffffffcc] h-[50px] rounded-2xl text-base font-normal placeholder:text-[#9680EA]" />
                 </Form.Item>
-                <HCaptcha ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" onVerify={() => handleVerificationSuccess()} />
+                <HCaptcha size="invisible" ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
                 <Form.Item className="mb-0">
                     <Button disabled={!submittable} className="mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
                         {t('LOGIN')}
