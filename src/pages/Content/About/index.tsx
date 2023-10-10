@@ -131,7 +131,7 @@ const About: React.FC = () => {
                         <div className="contentList-1">
                             <div className="flex flex-col justify-center items-center gap-5 mb-12">
                                 <img className="" src={emailImg} />
-                                <button className="bg-[#4BA1FA] border-0 px-3 rounded-lg w-auto h-10 flex justify-center items-center text-white font-bold text-sm">EMAIL: support@widusroyal.com</button>
+                                <button className="bg-[#4BA1FA] border-0 px-3 rounded-lg w-auto h-10 flex justify-center items-center text-white font-bold text-sm">EMAIL: support@smtbet7.com</button>
                             </div>
                         </div>
                     </div>
