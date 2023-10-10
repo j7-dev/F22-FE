@@ -111,7 +111,7 @@ export const Footer: React.FC = () => {
                 </div>
             </div>
             <div className="w-full block py-2 sm:py-4 sm:px-20 sm:text-base text-xs text-center font-normal text-gray-500">
-                <ul className="grid grid-cols-6 pl-0">
+                <ul className="grid grid-cols-6 pl-0 sm:gap-4 gap-2">
                     {fakeProviderData.map((item) => {
                         return (
                             <li key={nanoid()} className="sm:h-20 h-[20px]">

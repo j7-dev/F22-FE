@@ -4,12 +4,12 @@ import microgamingProviderImg from '@/assets/images/game_provider/microgaming.pn
 import asiagamingProviderImg from '@/assets/images/game_provider/asiagaming.png';
 import btiProviderImg from '@/assets/images/game_provider/bti.png';
 import gigxProviderImg from '@/assets/images/game_provider/igx.png';
-import evolutionProviderImg2 from '@/assets/images/game_provider/evo2.png';
-import pragmaticplayProviderImg2 from '@/assets/images/game_provider/pragmaticplay2.png';
-import microgamingProviderImg2 from '@/assets/images/game_provider/microgaming2.png';
-import asiagamingProviderImg2 from '@/assets/images/game_provider/asiagaming2.png';
-import btiProviderImg2 from '@/assets/images/game_provider/bti2.png';
-import gigxProviderImg2 from '@/assets/images/game_provider/igx2.png';
+import evolutionProviderImg2 from '@/assets/images/game_provider/evoIcon.svg';
+import pragmaticplayProviderImg2 from '@/assets/images/game_provider/ppIcon.svg';
+import microgamingProviderImg2 from '@/assets/images/game_provider/mgIcon.svg';
+import asiagamingProviderImg2 from '@/assets/images/game_provider/agIcon.svg';
+import btiProviderImg2 from '@/assets/images/game_provider/btiIcon.svg';
+import gigxProviderImg2 from '@/assets/images/game_provider/igxIcon.svg';
 import pragmaticplayFavicon from '@/assets/images/game_provider/pragmaticplay_icon.png';
 import evolutionFavicon from '@/assets/images/game_provider/evo_icon.png';
 // import golfFavicon from '@/assets/images/golf_favicon.ico';
