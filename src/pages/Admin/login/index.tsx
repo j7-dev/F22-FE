@@ -51,7 +51,7 @@ const Login: React.FC = () => {
                                 <Form.Item name="redirectPath" hidden initialValue="/refine/home">
                                     <Input />
                                 </Form.Item>
-                                <Form.Item name="email" label="E-mail" rules={[{ required: true }]}>
+                                <Form.Item name="userName" label="User Name" rules={[{ required: true }]}>
                                     <Input size="large" />
                                 </Form.Item>
                                 <Form.Item name="password" label="Password" rules={[{ required: true }]} style={{ marginBottom: '12px' }}>
