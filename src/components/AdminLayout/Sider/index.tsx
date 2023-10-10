@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Sider, ThemedTitleV2 } from '@refinedev/antd';
 import { Layout as AntdLayout, Menu, Grid, theme, Button } from 'antd';
 import { UnorderedListOutlined, RightOutlined, LeftOutlined, RadarChartOutlined } from '@ant-design/icons';
-import { antLayoutSider, antLayoutSiderMobile } from './styles';
 import { nanoid } from 'nanoid';
 
 const { useToken } = theme;
@@ -57,80 +56,83 @@ const CustomSider: typeof Sider = () => {
 
     const items = renderTreeView(menuItems, selectedKey);
 
-    const siderStyle = isMobile ? antLayoutSiderMobile : antLayoutSider;
-
     return (
-        <AntdLayout.Sider
-            collapsible
-            collapsedWidth={isMobile ? 0 : 80}
-            collapsed={collapsed}
-            breakpoint="lg"
-            onCollapse={(isCollapsed: boolean): void => setCollapsed(isCollapsed)}
-            style={{
-                ...siderStyle,
-                backgroundColor: token.colorBgContainer,
-                borderRight: `1px solid ${token.colorBgElevated}`,
-            }}
-            trigger={
-                !isMobile && (
-                    <Button
-                        type="text"
-                        style={{
-                            borderRadius: 0,
-                            height: '100%',
-                            width: '100%',
-                            backgroundColor: token.colorBgElevated,
-                        }}
-                    >
-                        {collapsed ? (
-                            <RightOutlined
-                                style={{
-                                    color: token.colorPrimary,
-                                }}
-                            />
-                        ) : (
-                            <LeftOutlined
-                                style={{
-                                    color: token.colorPrimary,
-                                }}
-                            />
-                        )}
-                    </Button>
-                )
-            }
-            width={siderWidth}
-        >
-            <div
+        <>
+            <AntdLayout.Sider
+                collapsible
+                collapsedWidth={isMobile ? 0 : 80}
+                collapsed={collapsed}
+                breakpoint="lg"
+                onCollapse={(isCollapsed: boolean): void => setCollapsed(isCollapsed)}
                 style={{
-                    width: collapsed ? '80px' : `${siderWidth.toString()}px`,
-                    padding: collapsed ? '0' : '0 16px',
-                    display: 'flex',
-                    justifyContent: collapsed ? 'center' : 'flex-start',
-                    alignItems: 'center',
-                    height: '64px',
-                    backgroundColor: token.colorBgElevated,
-                    fontSize: '14px',
+                    position: 'fixed',
+                    height: '100vh',
+                    zIndex: 999,
+                    backgroundColor: token.colorBgContainer,
+                    borderRight: `1px solid ${token.colorBgElevated}`,
                 }}
+                trigger={
+                    !isMobile && (
+                        <Button
+                            type="text"
+                            style={{
+                                borderRadius: 0,
+                                height: '100%',
+                                width: '100%',
+                                backgroundColor: token.colorBgElevated,
+                            }}
+                        >
+                            {collapsed ? (
+                                <RightOutlined
+                                    style={{
+                                        color: token.colorPrimary,
+                                    }}
+                                />
+                            ) : (
+                                <LeftOutlined
+                                    style={{
+                                        color: token.colorPrimary,
+                                    }}
+                                />
+                            )}
+                        </Button>
+                    )
+                }
+                width={siderWidth}
             >
-                <ThemedTitleV2 collapsed={collapsed} icon={<RadarChartOutlined className="text-[1.5rem]" />} text="SmartBet" />
-            </div>
-            <Menu
-                defaultOpenKeys={defaultOpenKeys}
-                selectedKeys={[selectedKey]}
-                mode="inline"
-                style={{
-                    marginTop: '8px',
-                    border: 'none',
-                }}
-                onClick={() => {
-                    if (!breakpoint.lg) {
-                        setCollapsed(true);
-                    }
-                }}
-            >
-                {items}
-            </Menu>
-        </AntdLayout.Sider>
+                <div
+                    style={{
+                        width: collapsed ? '80px' : `${siderWidth.toString()}px`,
+                        padding: collapsed ? '0' : '0 16px',
+                        display: 'flex',
+                        justifyContent: collapsed ? 'center' : 'flex-start',
+                        alignItems: 'center',
+                        height: '64px',
+                        backgroundColor: token.colorBgElevated,
+                        fontSize: '14px',
+                    }}
+                >
+                    <ThemedTitleV2 collapsed={collapsed} icon={<RadarChartOutlined className="text-[1.5rem]" />} text="SmartBet" />
+                </div>
+                <Menu
+                    defaultOpenKeys={defaultOpenKeys}
+                    selectedKeys={[selectedKey]}
+                    mode="inline"
+                    style={{
+                        marginTop: '8px',
+                        border: 'none',
+                    }}
+                    onClick={() => {
+                        if (!breakpoint.lg) {
+                            setCollapsed(true);
+                        }
+                    }}
+                >
+                    {items}
+                </Menu>
+            </AntdLayout.Sider>
+            <div className={isMobile ? 'hidden' : 'block'} style={{ width: siderWidth }}></div>
+        </>
     );
 };
 
