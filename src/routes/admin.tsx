@@ -1,11 +1,29 @@
+import { lazy } from 'react';
 import { Route } from 'react-router-dom';
-import Home from '@/pages/Admin/home';
-import { StatisticReport, AgentStatistic, MemberStatistic } from '@/pages/Admin/dashboard';
-import { ListMember, CreateMember, ShowMember, EditMember, BalanceAdjustment } from '@/pages/Admin/members';
-import { ListAgent, CreateAgent, EditAgent, AffCommissionTransactions, AffTransactions, ListCommission, CreateCommission, ShowCommission, EditCommission, CommissionSettlement } from '@/pages/Admin/agents';
-import { ListDeposits, ListWithdraws } from '@/pages/Admin/payments';
-import { ListBettingRecords } from '@/pages/Admin/bettingManagement';
-import { VipSetting } from '@/pages/Admin/systemSetting';
+
+const Home = lazy(() => import('@/pages/Admin/home'));
+const StatisticReport = lazy(() => import('@/pages/Admin/dashboard/statisticReport'));
+const AgentStatistic = lazy(() => import('@/pages/Admin/dashboard/agentStatistic'));
+const MemberStatistic = lazy(() => import('@/pages/Admin/dashboard/memberStatistic'));
+const ListMember = lazy(() => import('@/pages/Admin/members/List'));
+const CreateMember = lazy(() => import('@/pages/Admin/members/Create'));
+const ShowMember = lazy(() => import('@/pages/Admin/members/Show'));
+const EditMember = lazy(() => import('@/pages/Admin/members/Edit'));
+const BalanceAdjustment = lazy(() => import('@/pages/Admin/members/BalanceAdjustment'));
+const ListAgent = lazy(() => import('@/pages/Admin/agents/List'));
+const CreateAgent = lazy(() => import('@/pages/Admin/agents/Create'));
+const EditAgent = lazy(() => import('@/pages/Admin/agents/Edit'));
+const ListCommission = lazy(() => import('@/pages/Admin/agents/commissionSetting/List'));
+const CreateCommission = lazy(() => import('@/pages/Admin/agents/commissionSetting/Create'));
+const ShowCommission = lazy(() => import('@/pages/Admin/agents/commissionSetting/Show'));
+const EditCommission = lazy(() => import('@/pages/Admin/agents/commissionSetting/Edit'));
+const CommissionSettlement = lazy(() => import('@/pages/Admin/agents/commissionSettlement/List'));
+const AffCommissionTransactions = lazy(() => import('@/pages/Admin/agents/affCommissionTransactions'));
+const AffTransactions = lazy(() => import('@/pages/Admin/agents/affTransactions'));
+const VipSetting = lazy(() => import('@/pages/Admin/systemSetting/vipSetting'));
+const ListBettingRecords = lazy(() => import('@/pages/Admin/bettingManagement/listBettingRecords'));
+const ListDeposits = lazy(() => import('@/pages/Admin/payments/listDeposits'));
+const ListWithdraws = lazy(() => import('@/pages/Admin/payments/listWithdraws'));
 
 const adminRoutes = () => {
     return (
