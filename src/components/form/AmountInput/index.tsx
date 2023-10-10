@@ -3,8 +3,15 @@ import { Form, Space, Select, InputNumber } from 'antd';
 import { useGetSiteSetting } from '@/hooks';
 
 const index: React.FC<{
-    hideAmount?: boolean;
-}> = ({ hideAmount = false }) => {
+    amountProps?: {
+        hide?: boolean;
+        name?: string | string[];
+        label?: string;
+    };
+}> = ({ amountProps }) => {
+    const hide = amountProps?.hide || false;
+    const name = amountProps?.name || ['amount'];
+    const label = amountProps?.label || 'Amount';
     const form = Form.useFormInstance();
     const siteSetting = useGetSiteSetting();
 
@@ -31,8 +38,8 @@ const index: React.FC<{
 
     return (
         <Space.Compact block className="w-full">
-            {!hideAmount && (
-                <Form.Item className="w-full" label="Amount" name={['amount']} rules={[{ required: true, message: 'amount is required' }]}>
+            {!hide && (
+                <Form.Item className="w-full" label={label} name={name} rules={[{ required: true, message: 'amount is required' }]}>
                     <InputNumber min={0} precision={0} className="w-full relative -top-[1px]" />
                 </Form.Item>
             )}
@@ -46,7 +53,7 @@ const index: React.FC<{
                     disabled={supportCurrencies.length < 2}
                 />
             </Form.Item>
-            <Form.Item className="min-w-[7rem]" label="&nbsp;" name={['amount_type']}>
+            <Form.Item className="min-w-[10rem]" label="&nbsp;" name={['amount_type']}>
                 <Select
                     options={supportAmountTypes.map((amountType: string) => ({
                         label: amountType,

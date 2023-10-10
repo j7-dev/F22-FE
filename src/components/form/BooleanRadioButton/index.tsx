@@ -1,9 +1,10 @@
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { Form, Radio, FormItemProps } from 'antd';
+import { Form, Radio, FormItemProps, RadioGroupProps } from 'antd';
 
 const index: React.FC<{
     formItemProps: FormItemProps;
-}> = ({ formItemProps }) => {
+    radioGroupProps?: RadioGroupProps;
+}> = ({ formItemProps, radioGroupProps }) => {
     return (
         <Form.Item {...formItemProps}>
             <Radio.Group
@@ -15,6 +16,7 @@ const index: React.FC<{
                 optionType="button"
                 buttonStyle="solid"
                 className="w-avg"
+                {...radioGroupProps}
             />
         </Form.Item>
     );

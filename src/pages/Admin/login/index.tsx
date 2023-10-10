@@ -1,6 +1,6 @@
 import { useLogin } from '@refinedev/core';
 import { Row, Col, Layout as AntdLayout, Card, Typography, Form, Input, Button } from 'antd';
-import logo from '@/assets/images/logo.png';
+import logo from '@/assets/images/1002_logo_f.png';
 
 const { Title } = Typography;
 

@@ -101,7 +101,7 @@ const FormComponent: React.FC<{
                             {fields.map(({ key, name, ...restField }) => (
                                 <div key={key} className="flex items-center">
                                     <Form.Item {...restField} label="Thresholds" className="mr-6 w-full" name={[name, 'gt']} rules={[{ required: true, message: 'thresholds is required' }]}>
-                                        <InputNumber min={0} precision={0} className="w-full" placeholder="First Name" />
+                                        <InputNumber min={0} precision={0} className="w-full" />
                                     </Form.Item>
                                     <Form.Item {...restField} label="Commission Ratio (max 100%)" className="mr-6 w-full" name={[name, 'ratio']} rules={[{ required: true, message: 'commission ratio is required' }]}>
                                         <InputNumber min={0} max={100} precision={2} className="w-full" addonAfter="%" />

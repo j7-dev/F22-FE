@@ -7,6 +7,7 @@ export * from './balances';
 export * from './SiteNotify';
 export * from './loginDetails';
 export * from './faq';
+export * from './discounts';
 
 export type BaseType = {
     id: number;

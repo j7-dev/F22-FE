@@ -91,6 +91,14 @@ const DetailedInformation: React.FC<{
         filters: {
             permanent: filters,
         },
+        sorters: {
+            initial: [
+                {
+                    field: 'createdAt',
+                    order: 'desc',
+                },
+            ],
+        },
         onSearch: (values: TSearchProps) => {
             const start = values?.dateRange ? values?.dateRange[0]?.toISOString() : undefined;
             const end = values?.dateRange ? values?.dateRange[1]?.toISOString() : undefined;

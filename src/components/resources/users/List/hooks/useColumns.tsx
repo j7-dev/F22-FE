@@ -52,11 +52,6 @@ const useColumns = () => {
             key: 'Agent',
             render: (agent: TUser) => (agent ? <Link to={`/refine/agent/show/${agent?.id}`}>{agent?.display_name}</Link> : null),
         },
-        {
-            title: 'birthday',
-            dataIndex: 'birthday',
-            key: 'birthday',
-        },
         ...amountTypesBalances,
         {
             title: 'phone',

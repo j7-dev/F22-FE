@@ -1,5 +1,6 @@
 import { HomeOutlined, LineChartOutlined, UserAddOutlined, TransactionOutlined, AuditOutlined, SettingOutlined } from '@ant-design/icons';
 import { PiUsersThree } from 'react-icons/pi';
+import { CiDiscount1 } from 'react-icons/ci';
 
 export const resources = [
     {
@@ -179,6 +180,25 @@ export const resources = [
         },
     },
     {
+        name: 'promotion',
+        meta: {
+            label: 'Promotion 優惠管理',
+            icon: <CiDiscount1 />,
+        },
+    },
+    {
+        name: 'discounts',
+        identifier: 'discounts',
+        list: '/refine/promotion/discounts',
+        create: '/refine/promotion/discounts/create',
+        edit: '/refine/promotion/discounts/edit/:id',
+        delete: '/refine/promotion/discounts/delete/:id',
+        meta: {
+            parent: 'promotion',
+            label: 'Turnover Bonus 返水設定',
+        },
+    },
+    {
         name: 'system-setting',
         meta: {
             label: 'System Setting 系統設定',
@@ -195,6 +215,16 @@ export const resources = [
         meta: {
             parent: 'system-setting',
             label: 'VIP Upgrade Rule VIP等級管理',
+        },
+    },
+    {
+        name: 'site-setting',
+        identifier: 'site-setting',
+        list: '/refine/system-setting/site-setting',
+        edit: '/refine/system-setting/site-setting/edit/',
+        meta: {
+            parent: 'system-setting',
+            label: 'Settings 設定',
         },
     },
 ];
