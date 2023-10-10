@@ -1,27 +1,29 @@
+import { lazy } from 'react';
 import { Route } from 'react-router-dom';
-import About from '@/pages/Content/About';
-import Home from '@/pages/Content/Home';
-import Slot from '@/pages/Content/Taxonomy/Slot';
-import Casino from '@/pages/Content/Taxonomy/Casino';
-import PromotionPage from '@/pages/Content/Promotion';
-import EvolutionLive from '@/pages/Content/Taxonomy/Live/Evolution';
-import PragmaticLive from '@/pages/Content/Taxonomy/Live/Pragmatic';
-import AsiaGamingLive from '@/pages/Content/Taxonomy/Live/AsiaGaming';
-import MicroGamingLive from '@/pages/Content/Taxonomy/Live/MicroGaming';
-import PragmaticSlot from '@/pages/Content/Taxonomy/Slot/Pragmatic';
-import AsiaGamingSlot from '@/pages/Content/Taxonomy/Slot/AsiaGaming';
-import MicroGamingSlot from '@/pages/Content/Taxonomy/Slot/MicroGaming';
-import Bti from '@/pages/Content/Taxonomy/Sports/BTI';
-import Gigx from '@/pages/Content/Taxonomy/Sports/GIGX';
-import TermsOfService from '@/pages/Content/TermsOfService';
-import Customer from '@/pages/Content/Customer';
-import Wallet from '@/pages/Content/Wallet';
-import Faq from '@/pages/Content/Faq';
-import InPlay from '@/pages/Content/Taxonomy/InPlay';
-import Sports from '@/pages/Content/Taxonomy/Sports';
-import Golf from '@/pages/Content/Taxonomy/Golf';
-import Games from '@/pages/Content/Taxonomy/Games';
-import Events from '@/pages/Content/Taxonomy/Events';
+
+const About = lazy(() => import('@/pages/Content/About'));
+const Home = lazy(() => import('@/pages/Content/Home'));
+const Slot = lazy(() => import('@/pages/Content/Taxonomy/Slot'));
+const Casino = lazy(() => import('@/pages/Content/Taxonomy/Casino'));
+const PromotionPage = lazy(() => import('@/pages/Content/Promotion'));
+const EvolutionLive = lazy(() => import('@/pages/Content/Taxonomy/Live/Evolution'));
+const PragmaticLive = lazy(() => import('@/pages/Content/Taxonomy/Live/Pragmatic'));
+const AsiaGamingLive = lazy(() => import('@/pages/Content/Taxonomy/Live/AsiaGaming'));
+const MicroGamingLive = lazy(() => import('@/pages/Content/Taxonomy/Live/MicroGaming'));
+const PragmaticSlot = lazy(() => import('@/pages/Content/Taxonomy/Slot/Pragmatic'));
+const AsiaGamingSlot = lazy(() => import('@/pages/Content/Taxonomy/Slot/AsiaGaming'));
+const MicroGamingSlot = lazy(() => import('@/pages/Content/Taxonomy/Slot/MicroGaming'));
+const Bti = lazy(() => import('@/pages/Content/Taxonomy/Sports/BTI'));
+const Gigx = lazy(() => import('@/pages/Content/Taxonomy/Sports/GIGX'));
+const TermsOfService = lazy(() => import('@/pages/Content/TermsOfService'));
+const Customer = lazy(() => import('@/pages/Content/Customer'));
+const Wallet = lazy(() => import('@/pages/Content/Wallet'));
+const Faq = lazy(() => import('@/pages/Content/Faq'));
+const InPlay = lazy(() => import('@/pages/Content/Taxonomy/InPlay'));
+const Sports = lazy(() => import('@/pages/Content/Taxonomy/Sports'));
+const Golf = lazy(() => import('@/pages/Content/Taxonomy/Golf'));
+const Games = lazy(() => import('@/pages/Content/Taxonomy/Games'));
+const Events = lazy(() => import('@/pages/Content/Taxonomy/Events'));
 
 const contentRoutes = () => {
     return (
