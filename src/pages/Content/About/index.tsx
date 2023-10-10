@@ -33,9 +33,9 @@ const About: React.FC = () => {
 
     return (
         <>
-            <div className="aboutSection w-full">
+            <div className="aboutSection w-full relative">
                 <div
-                    className="mainContainer h-full w-full overflow-hidden bg-no-repeat bg-cover pt-32 pb-44 px-8 flex justify-center"
+                    className="mainContainer relative h-full w-full overflow-hidden bg-no-repeat bg-cover pt-32 pb-44 px-8 flex justify-center"
                     style={{
                         backgroundImage: `url(${bgImg})`,
                     }}
@@ -55,7 +55,7 @@ const About: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="responsibleSection-2">
+            <div className="responsibleSection-2 relative">
                 <div className="mainContainer pt-16 pb-48 md:pb-16 px-8 md:px-16 h-full w-full flex flex-col gap-5 justify-center items-center bg-[#FAFAFA] overflow-hidden">
                     <img className="w-[150px] md:w-[299px] z-0 absolute bottom-0 left-0" src={girl1} />
                     <img className="scale-50 md:scale-100 z-0 absolute top-[22%] left-[92%] -ml-[91px] -mt-[70px]" src={card1} />
@@ -92,7 +92,7 @@ const About: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="responsibleSection-3">
+            <div className="responsibleSection-3 relative">
                 <div
                     className="mainContainer h-full w-full pt-24 pb-48 md:pb-32 px-8 bg-cover bg-no-repeat overflow-hidden"
                     style={{
@@ -116,7 +116,7 @@ const About: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="responsibleSection-4">
+            <div className="responsibleSection-4 relative">
                 <div className="mainContainer h-full w-full bg-[#FAFAFA] pt-24 pb-16 px-8">
                     <img className="scale-50 md:scale-100 z-0 absolute top-[41%] left-[10%] -ml-[93px] -mt-[70px]" src={chip} />
                     <img className="scale-50 md:scale-100 z-0 absolute top-[89%] left-[14%] -ml-[33px] -mt-[34px]" src={bubble} />
