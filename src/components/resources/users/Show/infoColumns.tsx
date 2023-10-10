@@ -1,7 +1,9 @@
 import { DateTime } from '@/components/PureComponents';
 import ReferralLink from '@/components/general/ReferralLink';
+import { TVip } from '@/types';
+import VipLink from '@/components/Admin/VipLink';
 
-export const infoColumns = [
+export const infoLeftColumns = [
     {
         key: 'id',
         title: 'ID',
@@ -11,6 +13,12 @@ export const infoColumns = [
         key: 'username',
         title: 'Username',
         dataIndex: 'username',
+    },
+    {
+        key: 'vip',
+        title: 'vip',
+        dataIndex: 'vip',
+        render: (vip: TVip) => <VipLink vip={vip} />,
     },
     {
         key: 'email',
@@ -28,20 +36,13 @@ export const infoColumns = [
         dataIndex: 'phone',
     },
     {
-        key: 'gender',
-        title: 'Gender',
-        dataIndex: 'gender',
-    },
-    {
-        key: 'birthday',
-        title: 'Birthday',
-        dataIndex: 'birthday',
-    },
-    {
         key: 'uuid',
         title: 'UUID',
         dataIndex: 'uuid',
     },
+];
+
+export const infoRightColumns = [
     {
         key: 'referralLink',
         title: 'Referral Link',

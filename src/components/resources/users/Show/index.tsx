@@ -1,4 +1,4 @@
-import { Card } from 'antd';
+import { Card, Tabs, TabsProps } from 'antd';
 import { Show } from '@refinedev/antd';
 import { useCan } from '@/hooks';
 import { useShow } from '@refinedev/core';
@@ -6,10 +6,9 @@ import ObjectTable from '@/components/general/ObjectTable';
 import MoneyLog from '@/components/Admin/MoneyLog';
 import LoginDetail from '@/components/Admin/LoginDetail';
 import BetRecordTable from '@/components/Admin/BetRecordTable';
-import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry';
 import { useParams } from 'react-router-dom';
 import { TUser } from '@/types';
-import { infoColumns } from './infoColumns';
+import { infoLeftColumns, infoRightColumns } from './infoColumns';
 
 const index = () => {
     const { canDelete, canEdit } = useCan();
@@ -18,12 +17,51 @@ const index = () => {
         resource: 'users',
         id,
         meta: {
-            // populate: '*',
+            populate: {
+                vip: {
+                    fields: ['label'],
+                },
+            },
         },
     });
     const { data, isLoading } = queryResult;
 
     const theUser = (data?.data || {}) as TUser;
+
+    const items: TabsProps['items'] = [
+        {
+            key: 'moneyLog',
+            label: 'Money Log',
+            children: (
+                <Card bordered={false} title="Money Log">
+                    <MoneyLog user_id={id} />
+                </Card>
+            ),
+        },
+        {
+            key: 'loginDetail',
+            label: 'Login History',
+            children: (
+                <Card bordered={false} title="Login History">
+                    <LoginDetail user_id={id} />
+                </Card>
+            ),
+        },
+        {
+            key: 'betRecordTable',
+            label: 'Betting Records',
+            children: (
+                <Card bordered={false} title="Betting Records">
+                    <BetRecordTable user_id={id} />
+                </Card>
+            ),
+        },
+        {
+            key: 'userNotes',
+            label: 'User Notes',
+            children: <Card bordered={false} title="User Notes"></Card>,
+        },
+    ];
 
     return (
         <>
@@ -41,33 +79,17 @@ const index = () => {
                     },
                 }}
             >
-                <ResponsiveMasonry columnsCountBreakPoints={{ 576: 1, 1080: 2 }}>
-                    <Masonry gutter="1.5rem">
-                        <div>
-                            <Card bordered={false} title="Info">
-                                <ObjectTable record={theUser} columns={infoColumns} />
-                            </Card>
+                <div>
+                    <Card bordered={false} title="Info">
+                        <div className="grid grid-cols-2 lg:grid-cols-2 gap-6">
+                            <ObjectTable record={theUser} columns={infoLeftColumns} />
+                            <ObjectTable record={theUser} columns={infoRightColumns} />
                         </div>
-                        <div>
-                            <Card bordered={false} title="Money Log">
-                                <MoneyLog user_id={id} />
-                            </Card>
-                        </div>
-                        <div>
-                            <Card bordered={false} title="Login History">
-                                <LoginDetail user_id={id} />
-                            </Card>
-                        </div>
-                        <div>
-                            <Card bordered={false} title="Betting Records">
-                                <BetRecordTable user_id={id} />
-                            </Card>
-                        </div>
-                        <div>
-                            <Card bordered={false} title="User Notes"></Card>
-                        </div>
-                    </Masonry>
-                </ResponsiveMasonry>
+                    </Card>
+                </div>
+                <div>
+                    <Tabs className="mt-12" defaultActiveKey="moneyLog1" type="card" centered items={items} tabBarStyle={{ marginBottom: '0px' }} />
+                </div>
             </Show>
         </>
     );
