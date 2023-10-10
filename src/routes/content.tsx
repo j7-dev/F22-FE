@@ -4,10 +4,6 @@ import Home from '@/pages/Content/Home';
 import Slot from '@/pages/Content/Taxonomy/Slot';
 import Casino from '@/pages/Content/Taxonomy/Casino';
 import PromotionPage from '@/pages/Content/Promotion';
-import EvolutionLive from '@/pages/Content/Taxonomy/Live/Evolution';
-import PragmaticLive from '@/pages/Content/Taxonomy/Live/Pragmatic';
-import AsiaGamingLive from '@/pages/Content/Taxonomy/Live/AsiaGaming';
-import MicroGamingLive from '@/pages/Content/Taxonomy/Live/MicroGaming';
 import PragmaticSlot from '@/pages/Content/Taxonomy/Slot/Pragmatic';
 import AsiaGamingSlot from '@/pages/Content/Taxonomy/Slot/AsiaGaming';
 import MicroGamingSlot from '@/pages/Content/Taxonomy/Slot/MicroGaming';
@@ -36,14 +32,6 @@ const contentRoutes = () => {
             <Route path="/events" element={<Events />} />
             <Route path="/about" element={<About />} />
             <Route path="/promotion" element={<PromotionPage />} />
-            <Route path="/evolution" element={<EvolutionLive />} />
-            <Route path="/evolution/live" element={<EvolutionLive />} />
-            <Route path="/pragmatic" element={<PragmaticLive />} />
-            <Route path="/pragmatic/live" element={<PragmaticLive />} />
-            <Route path="/asiagaming" element={<AsiaGamingLive />} />
-            <Route path="/asiagaming/live" element={<AsiaGamingLive />} />
-            <Route path="/microgaming" element={<MicroGamingLive />} />
-            <Route path="/microgaming/live" element={<MicroGamingLive />} />
             <Route path="/pragmatic/slot" element={<PragmaticSlot />} />
             <Route path="/asiagaming/slot" element={<AsiaGamingSlot />} />
             <Route path="/microgaming/slot" element={<MicroGamingSlot />} />
