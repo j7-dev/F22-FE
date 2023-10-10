@@ -1,7 +1,7 @@
 import { useList } from '@refinedev/core';
-export const useGetMarketingCotent = ({ position }: { position: string }) => {
+export const useGetMarketingContent = ({ position }: { position: string }) => {
     const { data: fetchData, isLoading } = useList({
-        resource: 'cms-marketing-contents', //TODO 這邊後端要改正確拼法
+        resource: 'cms-marketing-contents',
         meta: {
             populate: '*',
         },
