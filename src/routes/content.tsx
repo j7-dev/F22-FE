@@ -6,10 +6,6 @@ const Home = lazy(() => import('@/pages/Content/Home'));
 const Slot = lazy(() => import('@/pages/Content/Taxonomy/Slot'));
 const Casino = lazy(() => import('@/pages/Content/Taxonomy/Casino'));
 const PromotionPage = lazy(() => import('@/pages/Content/Promotion'));
-const EvolutionLive = lazy(() => import('@/pages/Content/Taxonomy/Live/Evolution'));
-const PragmaticLive = lazy(() => import('@/pages/Content/Taxonomy/Live/Pragmatic'));
-const AsiaGamingLive = lazy(() => import('@/pages/Content/Taxonomy/Live/AsiaGaming'));
-const MicroGamingLive = lazy(() => import('@/pages/Content/Taxonomy/Live/MicroGaming'));
 const PragmaticSlot = lazy(() => import('@/pages/Content/Taxonomy/Slot/Pragmatic'));
 const AsiaGamingSlot = lazy(() => import('@/pages/Content/Taxonomy/Slot/AsiaGaming'));
 const MicroGamingSlot = lazy(() => import('@/pages/Content/Taxonomy/Slot/MicroGaming'));
@@ -38,14 +34,6 @@ const contentRoutes = () => {
             <Route path="/events" element={<Events />} />
             <Route path="/about" element={<About />} />
             <Route path="/promotion" element={<PromotionPage />} />
-            <Route path="/evolution" element={<EvolutionLive />} />
-            <Route path="/evolution/live" element={<EvolutionLive />} />
-            <Route path="/pragmatic" element={<PragmaticLive />} />
-            <Route path="/pragmatic/live" element={<PragmaticLive />} />
-            <Route path="/asiagaming" element={<AsiaGamingLive />} />
-            <Route path="/asiagaming/live" element={<AsiaGamingLive />} />
-            <Route path="/microgaming" element={<MicroGamingLive />} />
-            <Route path="/microgaming/live" element={<MicroGamingLive />} />
             <Route path="/pragmatic/slot" element={<PragmaticSlot />} />
             <Route path="/asiagaming/slot" element={<AsiaGamingSlot />} />
             <Route path="/microgaming/slot" element={<MicroGamingSlot />} />
