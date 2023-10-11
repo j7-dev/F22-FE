@@ -33,13 +33,14 @@ const index: React.FC = () => {
     const handleDown = () => {
         setDown(!down);
     };
+    //TODO 應該有更好的解法實現collapse效果
     return (
         <div className="cashContainer flex flex-col">
             <div className="flex justify-between items-center" onClick={handleDown}>
                 <span className="text-sm font-bold text-[#2b324080] p-2.5">{t('Cash')}</span>
-                {window.innerWidth < 810 && <AiOutlineDown />}
+                {window.innerWidth <= 414 && <AiOutlineDown />}
             </div>
-            <div className={`cashListContainer flex flex-col gap-4 overflow-hidden transition-all md:h-full ${window.innerWidth < 810 && down ? 'h-[150px]' : 'h-0'}`}>
+            <div className={`cashListContainer flex flex-col gap-4 overflow-hidden transition-all duration-300  ${window.innerWidth <= 414 ? (down ? 'max-h-screen' : 'max-h-0') : 'h-full'}`}>
                 <div className={`h-10 gap-2.5 rounded-lg flex justify-between items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'siteNotify' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('siteNotify')}>
                     <div className="siteNotifyInfo flex justify-start items-center gap-2.5">
                         <AiFillMail size={30} className="p-1" />
