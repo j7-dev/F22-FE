@@ -30,6 +30,16 @@ const index: React.FC = () => {
                         Navigate('/faq');
                         return;
                     }
+                    if (walletAction === 'sportsRegulations') {
+                        setActiveMenu(walletAction);
+                        Navigate('/sports-regulations');
+                        return;
+                    }
+                    if (walletAction === 'battingRegulations') {
+                        setActiveMenu(walletAction);
+                        Navigate('/batting-regulations');
+                        return;
+                    }
                     //其餘為跳轉到錢包頁面
                     setSelectedSection(walletAction);
                     if (isLogin) {

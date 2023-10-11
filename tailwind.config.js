@@ -25,4 +25,5 @@ module.exports = {
         },
     },
     safelist: [],
+    plugins: [import('daisyui')],
 };

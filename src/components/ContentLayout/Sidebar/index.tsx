@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
 import WallerContainer from './WallerContainer';
 import GameNavContainer from './GameNavContainer';
-import LanguageSwitch from '@/components/ContentLayout/Header/LanguageSwitch';
+// import LanguageSwitch from '@/components/ContentLayout/Header/LanguageSwitch';
 import { windowWidthAtom, mbSidebarAtom } from '@/components/ContentLayout';
 import { loginOrSignUpAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 
@@ -37,7 +37,7 @@ export const Sidebar: React.FC = () => {
         setPopupIsOpen(true);
     };
     return (
-        <div className={`sideBar ${sidebarIsOpen ? 'active' : ''} text-[#BDBDBD] h-full bg-white sm:w-[88px] sm:hover:w-80 transition-all duration-300`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleMbSidebar}>
+        <div className={`sideBar ${sidebarIsOpen ? 'active' : ''} text-[#BDBDBD] h-full bg-white pb-10 sm:w-[88px] sm:hover:w-80 transition-all duration-300`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={handleMbSidebar}>
             <div className="opacity-0 w-full logo h-20 flex justify-center items-center mb-6 sm:mb-9 sm:opacity-100 ">
                 <Link to="/" className="w-full">
                     <div className="relative w-full block h-12 px-[14px]">
@@ -62,9 +62,9 @@ export const Sidebar: React.FC = () => {
                     </div>
                 </div>
                 {/* 手機選單 */}
-                <div className="sm:hidden tertiaryButton languageSwitchContain relative w-fit mt-20 mx-6 flex items-center justify-center">
+                {/* <div className="sm:hidden tertiaryButton languageSwitchContain relative w-fit mt-20 mx-6 flex items-center justify-center">
                     <LanguageSwitch />
-                </div>
+                </div> */}
             </div>
         </div>
     );

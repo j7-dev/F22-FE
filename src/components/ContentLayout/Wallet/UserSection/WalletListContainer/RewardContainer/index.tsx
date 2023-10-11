@@ -22,7 +22,7 @@ const index: React.FC = () => {
                 <span className="text-sm font-bold text-[#2b324080] p-2.5">{t('Reward')}</span>
                 {window.innerWidth < 810 && <AiOutlineDown />}
             </div>
-            <div className={`rewardContainer flex flex-col gap-4 overflow-hidden transition-all md:h-full ${window.innerWidth < 810 && down ? 'h-[50px]' : 'h-0'}`}>
+            <div className={`rewardContainer flex flex-col gap-4 overflow-hidden transition-all duration-300 ${window.innerWidth <= 414 && down ? 'max-h-screen' : 'max-h-0'}`}>
                 <div className={`h-10 gap-2.5  rounded-lg flex justify-between items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'CouponHistory' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('CouponHistory')}>
                     <div className="rewardInfo flex  justify-start items-center gap-2.5">
                         <img src={couponIcon as unknown as string} alt="" />

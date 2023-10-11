@@ -32,8 +32,8 @@ const Wallet: React.FC = () => {
                         <UserSection />
                     </div>
                     <div className="userContent  md:max-w-[900px] w-full flex justify-start items-start gap-5">
-                        {/* {switchSection[selectSection]} */}
-                        {switchSection?.[selectSection]}
+                        {/* default section */}
+                        {switchSection?.[selectSection] || <CashSection section="siteNotify" />}
                     </div>
                 </div>
             </div>
