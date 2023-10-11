@@ -65,7 +65,7 @@ const Mobile: React.FC<{
                     </div>
                 </button>
             </div>
-            <div className="logo w-full h-full flex items-center -mr-[30px]">
+            <div className="logo w-full h-full flex items-center">
                 <Link to="/" className="w-full">
                     <img src={logo} alt="" className="w-full h-[30px] object-contain" />
                 </Link>
