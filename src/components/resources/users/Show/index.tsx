@@ -7,8 +7,9 @@ import MoneyLog from '@/components/Admin/MoneyLog';
 import LoginDetail from '@/components/Admin/LoginDetail';
 import BetRecordTable from '@/components/Admin/BetRecordTable';
 import { useParams } from 'react-router-dom';
-import { TUser } from '@/types';
+import { TUser, TDiscount } from '@/types';
 import { infoLeftColumns, infoRightColumns } from './infoColumns';
+import TurnoverBonusTable from '@/components/Admin/TurnoverBonusTable';
 
 const index = () => {
     const { canDelete, canEdit } = useCan();
@@ -20,6 +21,11 @@ const index = () => {
             populate: {
                 vip: {
                     fields: ['label'],
+                    populate: {
+                        discount: {
+                            fields: '*',
+                        },
+                    },
                 },
             },
         },
@@ -27,6 +33,7 @@ const index = () => {
     const { data, isLoading } = queryResult;
 
     const theUser = (data?.data || {}) as TUser;
+    const discount = (theUser?.vip?.discount || { ratio: [] }) as TDiscount;
 
     const items: TabsProps['items'] = [
         {
@@ -53,6 +60,15 @@ const index = () => {
             children: (
                 <Card bordered={false} title="Betting Records">
                     <BetRecordTable user_id={id} />
+                </Card>
+            ),
+        },
+        {
+            key: 'turnoverBonus',
+            label: 'Turnover Bonus',
+            children: (
+                <Card bordered={false} title="Turnover Bonus">
+                    <TurnoverBonusTable discount={discount} />
                 </Card>
             ),
         },

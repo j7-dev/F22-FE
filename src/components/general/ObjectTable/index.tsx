@@ -3,7 +3,7 @@ import { isNumber, isString, isNull, isUndefined } from 'lodash';
 import { keyToWord } from '@/utils';
 import { Empty, Form, Input } from 'antd';
 
-type TColumn = {
+export type TColumn = {
     key: string;
     title: string;
     dataIndex: string;

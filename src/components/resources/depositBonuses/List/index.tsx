@@ -9,7 +9,7 @@ import { TVip } from '@/types';
 
 const index = () => {
     const { tableProps } = useTable({
-        resource: 'discounts',
+        resource: 'deposit-bonuses',
         meta: {
             populate: {
                 vips: {
@@ -25,13 +25,25 @@ const index = () => {
             dataIndex: 'id',
         },
         {
-            title: 'valid_bet_amount_threshold',
-            dataIndex: 'valid_bet_amount_threshold',
+            title: 'Label',
+            dataIndex: 'label',
+        },
+        {
+            title: 'deposit_type',
+            dataIndex: 'deposit_type',
+        },
+        {
+            title: 'bonus_rate',
+            dataIndex: 'bonus_rate',
+        },
+        {
+            title: 'min_deposit_amount',
+            dataIndex: 'min_deposit_amount',
             render: (v: number, record) => <Amount amount={v} currency={record?.currency} />,
         },
         {
-            title: 'discount_limit',
-            dataIndex: 'discount_limit',
+            title: 'max_bonus_amount',
+            dataIndex: 'max_bonus_amount',
             render: (v: number, record) => <Amount amount={v} currency={record?.currency} />,
         },
         {
@@ -69,7 +81,7 @@ const index = () => {
     } as TableProps<DataType>;
 
     return (
-        <List resource="discounts" canCreate>
+        <List resource="deposit-bonuses" canCreate>
             <Row gutter={[16, 16]}>
                 <Col lg={24} xs={24}>
                     <Card bordered={false}>

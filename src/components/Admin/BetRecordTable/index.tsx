@@ -67,10 +67,9 @@ const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ 
             render: (actual_stake: number, record: TRecord) => <Amount amount={actual_stake} currency={record.currency} symbol />,
         },
         {
-            title: 'winloss',
-            dataIndex: 'winloss',
-            key: 'winloss',
-            render: (winloss: number, record: TRecord) => <Amount amount={winloss} currency={record.currency} symbol />,
+            title: 'Transaction Id',
+            dataIndex: 'game_provider_transaction_id',
+            key: 'game_provider_transaction_id',
         },
         {
             title: 'createdAt',

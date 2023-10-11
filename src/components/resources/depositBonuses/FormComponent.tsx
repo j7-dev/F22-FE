@@ -74,17 +74,23 @@ const FormComponent: React.FC<{
 
         form?.setFieldsValue({
             ...values,
-            ratio: newRatio,
+            extra_ratio: newRatio,
         });
     };
 
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
             <div className="grid grid-cols-3 gap-6">
-                <Form.Item className="w-full" label="Valid Bet Amount Threshold" name={['valid_bet_amount_threshold']} rules={[{ required: true, message: 'value is required' }]}>
+                <Form.Item className="w-full" label="Label" name={['label']} rules={[{ required: true, message: 'value is required' }]}>
                     <InputNumber min={0} precision={0} className="w-full" />
                 </Form.Item>
-                <Form.Item className="w-full" label="Discount Limit" name={['discount_limit']} rules={[{ required: true, message: 'value is required' }]}>
+                <Form.Item className="w-full" label="Bonus Rate" name={['bonus_rate']} rules={[{ required: true, message: 'value is required' }]}>
+                    <InputNumber min={0} addonAfter="%" className="w-full" />
+                </Form.Item>
+                <Form.Item className="w-full" label="Min Deposit Amount" name={['min_deposit_amount']} rules={[{ required: true, message: 'value is required' }]}>
+                    <InputNumber min={0} precision={0} className="w-full" />
+                </Form.Item>
+                <Form.Item className="w-full" label="Max Bonus Amount" name={['max_bonus_amount']} rules={[{ required: true, message: 'value is required' }]}>
                     <InputNumber min={0} precision={0} className="w-full" />
                 </Form.Item>
 
@@ -135,14 +141,14 @@ const FormComponent: React.FC<{
                 return (
                     <div key={gameProvider} className="grid grid-cols-3 gap-x-6 gap-y-2 bg-gray-100 p-4 rounded-xl mb-4">
                         <div>
-                            <Form.Item hidden name={['ratio', index, 'gameProvider']} initialValue={gameProvider}>
+                            <Form.Item hidden name={['extra_ratio', index, 'gameProvider']} initialValue={gameProvider}>
                                 <Input />
                             </Form.Item>
                             <div className="flex items-center">{gameProvider}</div>
                         </div>
                         {RATIO_TYPES.map((key) => {
                             return (
-                                <Form.Item className="w-full m-0" label={key} name={['ratio', index, key]} rules={[{ required: true, message: 'value is required' }]}>
+                                <Form.Item className="w-full m-0" label={key} name={['extra_ratio', index, key]} rules={[{ required: true, message: 'value is required' }]}>
                                     <InputNumber min={0} className="w-full" addonAfter="%" />
                                 </Form.Item>
                             );
