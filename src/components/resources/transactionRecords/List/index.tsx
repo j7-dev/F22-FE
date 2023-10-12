@@ -202,12 +202,10 @@ const index = () => {
     return (
         <List>
             <Row gutter={[16, 16]}>
-                <Col lg={6} xs={24}>
-                    <Card title="Filters">
-                        <Filter formProps={searchFormProps} />
-                    </Card>
+                <Col lg={24} xs={24}>
+                    <Filter formProps={searchFormProps} />
                 </Col>
-                <Col lg={18} xs={24}>
+                <Col lg={24} xs={24}>
                     <Card bordered={false} title="Search Result">
                         <div className="mb-4">
                             <FilterTags key={filterTagsKey} form={searchFormProps.form} />
