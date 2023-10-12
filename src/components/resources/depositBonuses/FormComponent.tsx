@@ -35,9 +35,10 @@ const FormComponent: React.FC<{
     useEffect(() => {
         const timeout = setTimeout(() => {
             if (defaultCurrency && defaultAmountType && form) {
+                // 設定表單預設值
                 form?.setFieldsValue({
                     currency: defaultCurrency,
-                    amount_type: defaultAmountType,
+                    amount_type: 'DEPOSIT_BONUS',
                 });
             }
         }, 0);
@@ -48,6 +49,7 @@ const FormComponent: React.FC<{
     }, [defaultCurrency, defaultAmountType, form]);
 
     useEffect(() => {
+        // 編輯時重組資料
         if (!formLoading && formProps.initialValues && formType === 'edit') {
             if (Array.isArray(formProps?.initialValues?.vips as number[] | TVip[]) && formProps?.initialValues?.vips.every((v: number | TVip) => isObject(v))) {
                 formProps.initialValues.vips = (formProps?.initialValues?.vips || []).map((v: TVip) => v.id);
@@ -97,7 +99,7 @@ const FormComponent: React.FC<{
                 <ResourceSelect formItemProps={{ label: 'VIPS', name: ['vips'] }} fetchProps={{ resource: 'vips', optionLabel: 'label', optionValue: 'id' }} selectProps={{ allowClear: true, mode: 'multiple' }} />
             </div>
 
-            <div className="bg-gray-100 p-4 rounded-xl mb-4">
+            <div className="bg-gray-100 p-4 rounded-xl mb-4 hidden">
                 <div className="flex items-center">
                     <Form.Item className="mr-6 w-full" label="Currency" name={['currency']}>
                         <Select
