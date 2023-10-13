@@ -1,5 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { LoadingWrap } from './components/PureComponents';
 
 import App from './App';
 import './i18n';
@@ -9,7 +10,7 @@ const root = createRoot(container);
 
 root.render(
     <React.StrictMode>
-        <React.Suspense fallback="loading">
+        <React.Suspense fallback={<LoadingWrap />}>
             <App />
         </React.Suspense>
     </React.StrictMode>,

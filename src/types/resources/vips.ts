@@ -1,4 +1,4 @@
-import { BaseType, AmountType } from '@/types';
+import { BaseType, AmountType, TDiscount } from '@/types';
 
 export type TVip = BaseType &
     Omit<AmountType, 'amount'> & {
@@ -12,4 +12,5 @@ export type TVip = BaseType &
         valid_bet_amount_downgrade_threshold: number;
         valid_bet_amount_upgrade_threshold: number;
         vip_duration: number;
+        discount?: TDiscount;
     };

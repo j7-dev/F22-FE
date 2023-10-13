@@ -1,37 +1,39 @@
-import { useEffect } from 'react';
-import { Form, Switch, Select, FormProps, InputNumber } from 'antd';
+import { useEffect, useState } from 'react';
+import { Form, Button, Select, FormProps, InputNumber, Input } from 'antd';
 import { useGetSiteSetting } from '@/hooks';
 import { CloseOutlined } from '@ant-design/icons';
-import { useSelect } from '@refinedev/antd';
-import { ratio } from './ratio';
+import ResourceSelect from '@/components/form/ResourceSelect';
+import { isObject } from 'lodash-es';
+import { TVip } from '@/types';
+
+type TDefaultValues = {
+    live: number | null;
+    slot: number | null;
+};
+
+const RATIO_TYPES = ['live', 'slot'] as const;
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
     formProps: FormProps;
     handler: () => void;
-}> = ({ formType, formProps, handler }) => {
-    console.log('⭐  formType:', formType);
+    formLoading?: boolean;
+}> = ({ formType, formProps, handler, formLoading }) => {
     const form = formProps.form;
-    const siteSetting = useGetSiteSetting();
+    const { default_currency, default_amount_type, support_currencies, support_amount_types, support_game_providers } = useGetSiteSetting();
 
-    const defaultCurrency = siteSetting?.default_currency || 'KRW';
-    const supportCurrencies = siteSetting?.support_currencies || ['KRW'];
-
-    const defaultAmountType = siteSetting?.default_amount_type || 'CASH';
-    const supportAmountTypes = siteSetting?.support_amount_types || ['CASH'];
-
-    const { selectProps: vipSelectProps } = useSelect({
-        resource: 'vips',
-        optionLabel: 'label',
-        optionValue: 'id',
+    const [defaultValues, setDefaultValues] = useState<TDefaultValues>({
+        live: null,
+        slot: null,
     });
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-            if (defaultCurrency && defaultAmountType && form) {
+            // 創建的預設值
+            if (default_currency && default_amount_type && form) {
                 form?.setFieldsValue({
-                    currency: defaultCurrency,
-                    amount_type: defaultAmountType,
+                    currency: default_currency,
+                    amount_type: 'TURNOVER_BONUS',
                 });
             }
         }, 0);
@@ -39,41 +41,71 @@ const FormComponent: React.FC<{
         return () => {
             clearTimeout(timeout);
         };
-    }, [defaultCurrency, defaultAmountType, form]);
+    }, [default_currency, default_amount_type, form]);
+
+    useEffect(() => {
+        // 編輯時重組資料
+        if (!formLoading && formProps.initialValues && formType === 'edit') {
+            if (Array.isArray(formProps?.initialValues?.vips as number[] | TVip[]) && formProps?.initialValues?.vips.every((v: number | TVip) => isObject(v))) {
+                formProps.initialValues.vips = (formProps?.initialValues?.vips || []).map((v: TVip) => v.id);
+            }
+        }
+    }, [formLoading]);
+
+    const handleChange = (key: keyof typeof defaultValues) => (value: number | null) => {
+        setDefaultValues({
+            ...defaultValues,
+            [key]: value,
+        });
+    };
+
+    const handleApplyAll = () => {
+        const values = form?.getFieldsValue();
+        const newRatio = support_game_providers.map((gameProvider) => {
+            const newItem = {
+                gameProvider,
+                ...defaultValues,
+            };
+            return newItem;
+        });
+
+        form?.setFieldsValue({
+            ...values,
+            ratio: newRatio,
+        });
+    };
 
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
             <div className="grid grid-cols-3 gap-6">
-                <Form.Item className="w-full" label="valid_bet_amount_threshold" name={['valid_bet_amount_threshold']} rules={[{ required: true, message: 'value is required' }]}>
+                <Form.Item className="w-full" label="Valid Bet Amount Threshold" name={['valid_bet_amount_threshold']} rules={[{ required: true, message: 'value is required' }]}>
                     <InputNumber min={0} precision={0} className="w-full" />
                 </Form.Item>
-                <Form.Item className="w-full" label="discount_limit" name={['discount_limit']} rules={[{ required: true, message: 'value is required' }]}>
+                <Form.Item className="w-full" label="Discount Limit" name={['discount_limit']} rules={[{ required: true, message: 'value is required' }]}>
                     <InputNumber min={0} precision={0} className="w-full" />
                 </Form.Item>
 
-                <Form.Item label="VIPS" name={['vips']}>
-                    <Select {...vipSelectProps} allowClear mode="multiple" />
-                </Form.Item>
+                <ResourceSelect formItemProps={{ label: 'VIPS', name: ['vips'] }} fetchProps={{ resource: 'vips', optionLabel: 'label', optionValue: 'id' }} selectProps={{ allowClear: true, mode: 'multiple' }} />
             </div>
 
-            <div className="bg-gray-100 p-4 rounded-xl mb-4">
+            <div className="bg-gray-100 p-4 rounded-xl mb-4 hidden">
                 <div className="flex items-center">
                     <Form.Item className="mr-6 w-full" label="Currency" name={['currency']}>
                         <Select
-                            options={supportCurrencies.map((currency: string) => ({
+                            options={support_currencies.map((currency: string) => ({
                                 label: currency,
                                 value: currency,
                             }))}
-                            disabled={supportCurrencies.length < 2}
+                            disabled={support_currencies.length < 2}
                         />
                     </Form.Item>
                     <Form.Item className="mr-6 w-full" label="Amount Type" name={['amount_type']}>
                         <Select
-                            options={supportAmountTypes.map((amountType: string) => ({
+                            options={support_amount_types.map((amountType: string) => ({
                                 label: amountType,
                                 value: amountType,
                             }))}
-                            disabled={supportAmountTypes.length < 2}
+                            disabled={support_amount_types.length < 2}
                         />
                     </Form.Item>
                     <CloseOutlined className="opacity-0" />
@@ -81,24 +113,31 @@ const FormComponent: React.FC<{
             </div>
 
             <div className="grid grid-cols-3 gap-x-6 gap-y-2 bg-yellow-50 p-4 rounded-xl mb-4">
-                <div className="flex items-center">
-                    Apply All <Switch className="ml-4" />
+                <div className="flex items-end">
+                    <Button type="default" onClick={handleApplyAll}>
+                        Click to Apply ALL
+                    </Button>
                 </div>
                 <div>
                     <p className="mb-2">live</p>
-                    <InputNumber min={0} className="w-full" addonAfter="%" />
+                    <InputNumber value={defaultValues.live} onChange={handleChange('live')} min={0} className="w-full" addonAfter="%" />
                 </div>
                 <div>
                     <p className="mb-2">slot</p>
-                    <InputNumber min={0} className="w-full" addonAfter="%" />
+                    <InputNumber value={defaultValues.slot} onChange={handleChange('slot')} min={0} className="w-full" addonAfter="%" />
                 </div>
             </div>
 
-            {ratio.map((item, index) => {
+            {support_game_providers.map((gameProvider, index) => {
                 return (
-                    <div key={item.gameProvider} className="grid grid-cols-3 gap-x-6 gap-y-2 bg-gray-100 p-4 rounded-xl mb-4">
-                        {Object.keys(item).map((key) => {
-                            if (key === 'gameProvider') return <div className="flex items-center">{item?.[key]}</div>;
+                    <div key={gameProvider} className="grid grid-cols-3 gap-x-6 gap-y-2 bg-gray-100 p-4 rounded-xl mb-4">
+                        <div>
+                            <Form.Item hidden name={['ratio', index, 'gameProvider']} initialValue={gameProvider}>
+                                <Input />
+                            </Form.Item>
+                            <div className="flex items-center">{gameProvider}</div>
+                        </div>
+                        {RATIO_TYPES.map((key) => {
                             return (
                                 <Form.Item className="w-full m-0" label={key} name={['ratio', index, key]} rules={[{ required: true, message: 'value is required' }]}>
                                     <InputNumber min={0} className="w-full" addonAfter="%" />

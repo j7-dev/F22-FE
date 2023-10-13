@@ -48,7 +48,6 @@ const FormComponent: React.FC<{
 
     const support_payments = siteSetting?.support_payments || [];
     const support_game_providers = siteSetting?.support_game_providers || [];
-    console.log('⭐  support_game_providers:', support_game_providers);
 
     useEffect(() => {
         if (!formLoading && formProps.initialValues) {

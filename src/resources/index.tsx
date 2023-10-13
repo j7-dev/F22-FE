@@ -70,7 +70,7 @@ export const resources = [
     {
         name: 'transaction-records',
         identifier: 'balance-adjustment',
-        create: '/refine/members/balance-adjustment',
+        list: '/refine/members/balance-adjustment',
         meta: {
             parent: 'members',
             label: 'Balance Adjustment 人工存提',
@@ -172,8 +172,8 @@ export const resources = [
     },
     {
         name: 'betting-records',
-        identifier: 'betting-records/list',
-        list: '/refine/betting-management/betting-records/list',
+        identifier: 'betting-records',
+        list: '/refine/betting-management/betting-records',
         meta: {
             parent: 'betting-management',
             label: 'All Betting Records 投注記錄查詢',
@@ -184,6 +184,18 @@ export const resources = [
         meta: {
             label: 'Promotion 優惠管理',
             icon: <CiDiscount1 />,
+        },
+    },
+    {
+        name: 'deposit-bonuses',
+        identifier: 'deposit-bonuses',
+        list: '/refine/promotion/deposit-bonuses',
+        create: '/refine/promotion/deposit-bonuses/create',
+        edit: '/refine/promotion/deposit-bonuses/edit/:id',
+        delete: '/refine/promotion/deposit-bonuses/delete/:id',
+        meta: {
+            parent: 'promotion',
+            label: 'Deposit Bonus 存款紅利',
         },
     },
     {

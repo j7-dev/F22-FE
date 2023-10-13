@@ -9,7 +9,7 @@ import { casinoCategoryFilter, casinoCategory } from '@/utils/GameCategory/casin
 import GameList from '@/components/ContentLayout/GameList';
 import NewsMarquee from '@/components/ContentLayout/NewsMarquee';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
-import { useGetMarketingCotent } from '@/hooks/useGetMarketingCotent';
+import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
 
 // import { nanoid } from 'nanoid';
 
@@ -18,7 +18,7 @@ const index: React.FC = () => {
     const { t } = useTranslation();
     const windowWidth = useAtomValue(windowWidthAtom);
     const [casinoGameCategory, setCasinoGameCategory] = useState('all');
-    const { data } = useGetMarketingCotent({ position: 'header' });
+    const { data } = useGetMarketingContent({ position: 'header' });
 
     const marqueeText = data?.map((item) => {
         return item?.content;

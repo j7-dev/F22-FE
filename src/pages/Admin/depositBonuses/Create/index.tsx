@@ -1,4 +1,4 @@
-import { Create } from '@/components/resources/transactionRecords';
+import { Create } from '@/components/resources/depositBonuses';
 
 const index = () => {
     return <Create />;

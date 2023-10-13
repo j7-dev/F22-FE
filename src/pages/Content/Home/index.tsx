@@ -6,13 +6,13 @@ import PopularGames from './PopularGames';
 import SlogGames from './SlogGames';
 import NewsMarquee from '@/components/ContentLayout/NewsMarquee';
 import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
-import { useGetMarketingCotent } from '@/hooks/useGetMarketingCotent';
+import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
 
 const Home = () => {
     // const { t } = useTranslation();
     const setActiveMenu = useSetAtom(activeMenuAtom);
     const windowWidth = useAtomValue(windowWidthAtom);
-    const { data } = useGetMarketingCotent({ position: 'header' });
+    const { data } = useGetMarketingContent({ position: 'header' });
 
     const marqueeText = data?.map((item) => {
         return item?.content;

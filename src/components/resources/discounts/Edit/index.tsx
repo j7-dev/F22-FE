@@ -1,5 +1,5 @@
 import FormComponent from '../FormComponent';
-import { useUpdate, HttpError } from '@refinedev/core';
+import { useUpdate, HttpError, useGo } from '@refinedev/core';
 import { Edit, useForm } from '@refinedev/antd';
 import { TCommission, TCommissionFields } from '@/types';
 import { notification } from 'antd';
@@ -11,15 +11,24 @@ const index: React.FC<{
 }> = ({ notificationConfig = {} }) => {
     const { id } = useParams();
     const { mutate: update } = useUpdate();
+    const go = useGo();
 
-    const { form, formProps, saveButtonProps } = useForm<TCommission, HttpError, TCommissionFields>();
+    const { form, formProps, saveButtonProps, formLoading } = useForm<TCommission, HttpError, TCommissionFields>({
+        meta: {
+            populate: {
+                vips: {
+                    fields: ['id'],
+                },
+            },
+        },
+    });
     const handleCreate = () => {
         if (!id) return;
         form.validateFields()
             .then((values) => {
                 update(
                     {
-                        resource: 'commissions',
+                        resource: 'discounts',
                         values,
                         id,
                     },
@@ -27,9 +36,13 @@ const index: React.FC<{
                         onSuccess: () => {
                             form.resetFields();
                             notification.success({
-                                key: 'create-commission',
-                                message: 'Create commission successfully',
+                                key: 'create-discounts',
+                                message: 'Create Turnover bonus successfully',
                                 ...notificationConfig,
+                            });
+
+                            go({
+                                to: '/refine/promotion/discounts',
                             });
                         },
                     },
@@ -42,7 +55,7 @@ const index: React.FC<{
 
     return (
         <Edit saveButtonProps={saveButtonProps}>
-            <FormComponent formType="edit" formProps={formProps} handler={handleCreate} />
+            <FormComponent formType="edit" formProps={formProps} formLoading={formLoading} handler={handleCreate} />
         </Edit>
     );
 };

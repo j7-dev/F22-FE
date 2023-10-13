@@ -10,7 +10,7 @@ import Pragmatic from './Pragmatic';
 import AsiaGaming from './AsiaGaming';
 import MicroGaming from './MicroGaming';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
-import { useGetMarketingCotent } from '@/hooks/useGetMarketingCotent';
+import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
 
 const slotProviderResource = providerData.filter((item) => item.gameCategories.includes('slot'));
 
@@ -18,7 +18,7 @@ const index: React.FC = () => {
     const { t } = useTranslation();
     const windowWidth = useAtomValue(windowWidthAtom);
     const [tabActiveKey, setTabActiveKey] = useState('pragmaticPlay');
-    const { data } = useGetMarketingCotent({ position: 'header' });
+    const { data } = useGetMarketingContent({ position: 'header' });
 
     const marqueeText = data?.map((item) => {
         return item?.content;

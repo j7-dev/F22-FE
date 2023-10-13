@@ -17,7 +17,7 @@ import { selectedRecordsAtom } from './atom';
 import { useSetAtom } from 'jotai';
 import { useParams } from 'react-router-dom';
 import { useGetSiteSetting } from '@/hooks';
-import UserRecord from './UserRecord';
+import UserSummary from '@/components/Admin/UserSummary';
 
 const index = () => {
     const { type: listTypeLowerCase, roleType } = useParams<TParams>();
@@ -202,12 +202,10 @@ const index = () => {
     return (
         <List>
             <Row gutter={[16, 16]}>
-                <Col lg={6} xs={24}>
-                    <Card title="Filters">
-                        <Filter formProps={searchFormProps} />
-                    </Card>
+                <Col lg={24} xs={24}>
+                    <Filter formProps={searchFormProps} />
                 </Col>
-                <Col lg={18} xs={24}>
+                <Col lg={24} xs={24}>
                     <Card bordered={false} title="Search Result">
                         <div className="mb-4">
                             <FilterTags key={filterTagsKey} form={searchFormProps.form} />
@@ -240,7 +238,7 @@ const index = () => {
                                 );
                             }}
                             expandable={{
-                                expandedRowRender: (record) => <UserRecord user_id={record?.user?.id} />,
+                                expandedRowRender: (record) => <UserSummary user_id={record?.user?.id} />,
                                 rowExpandable: (record) => record.type === 'WITHDRAW',
                             }}
                         />

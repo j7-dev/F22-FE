@@ -1,15 +1,13 @@
-import { Table, Row, Col, Card, TablePaginationConfig, TableProps } from 'antd';
+import { Table, Row, Col, Card, TableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useTable, List, EditButton, DeleteButton } from '@refinedev/antd';
 import { DateTime } from '@/components/PureComponents';
 import { DataType } from './types';
-import { selectedRecordsAtom } from './atom';
-import { useSetAtom } from 'jotai';
+
 import Amount from '@/components/Admin/Amount';
+import { TVip } from '@/types';
 
 const index = () => {
-    const setSelectedRecords = useSetAtom(selectedRecordsAtom);
-
     const { tableProps } = useTable({
         resource: 'discounts',
         meta: {
@@ -41,6 +39,11 @@ const index = () => {
             dataIndex: 'amount_type',
         },
         {
+            title: 'vips',
+            dataIndex: 'vips',
+            render: (v: TVip[]) => (v || [])?.map((vip: any) => vip?.label).join(', '),
+        },
+        {
             title: 'date',
             dataIndex: 'createdAt',
             render: (createdAt: string) => <DateTime value={createdAt} />,
@@ -63,16 +66,6 @@ const index = () => {
         scroll: { x: 1000 },
         columns,
         rowKey: 'id',
-        pagination: {
-            showSizeChanger: true,
-            total: (tableProps?.pagination as TablePaginationConfig)?.total,
-        },
-        rowSelection: {
-            type: 'checkbox',
-            onChange: (_: number[], records: DataType[]) => {
-                setSelectedRecords(records);
-            },
-        },
     } as TableProps<DataType>;
 
     return (

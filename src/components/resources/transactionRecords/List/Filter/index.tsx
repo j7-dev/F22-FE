@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Form, Button, DatePicker, FormProps, Select } from 'antd';
+import { Form, Button, DatePicker, FormProps, Select, Collapse } from 'antd';
 import dayjs from 'dayjs';
 import { useUserSelect } from '@/hooks';
 import { useParams } from 'react-router-dom';
@@ -32,29 +32,45 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
         form?.submit();
     }, [listType]);
 
-    return (
+    const children = (
         <Form {...formProps} layout="vertical">
-            <Form.Item label="Date" name={['dateRange']} initialValue={[dayjs().subtract(7, 'day'), dayjs()]}>
-                <RangePicker className="w-full" />
-            </Form.Item>
-            {listType === 'ALL' && (
-                <Form.Item label="Type" name={['type']}>
-                    <Select options={typeOptions} allowClear />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-4 gap-y-0">
+                <Form.Item label="Date" name={['dateRange']} initialValue={[dayjs().subtract(7, 'day'), dayjs()]}>
+                    <RangePicker size="small" className="w-full" />
                 </Form.Item>
-            )}
+                {listType === 'ALL' && (
+                    <Form.Item label="Type" name={['type']}>
+                        <Select size="small" options={typeOptions} allowClear />
+                    </Form.Item>
+                )}
 
-            <Form.Item label="Status" name={['status']}>
-                <Select options={statusOptions} allowClear />
-            </Form.Item>
-            <Form.Item label="User" name={['user']}>
-                <Select {...selectProps} allowClear />
-            </Form.Item>
+                <Form.Item label="Status" name={['status']}>
+                    <Select size="small" options={statusOptions} allowClear />
+                </Form.Item>
+                <Form.Item label="User" name={['user']}>
+                    <Select size="small" {...selectProps} allowClear />
+                </Form.Item>
+            </div>
             <Form.Item>
-                <Button type="primary" htmlType="submit" className="w-full">
+                <Button size="small" type="primary" htmlType="submit" className="w-full">
                     Filter
                 </Button>
             </Form.Item>
         </Form>
+    );
+
+    return (
+        <Collapse
+            bordered={false}
+            className="bg-white"
+            items={[
+                {
+                    key: 'filters',
+                    label: <span className="font-semibold text-base relative -top-0.5">Filters</span>,
+                    children,
+                },
+            ]}
+        />
     );
 };
 

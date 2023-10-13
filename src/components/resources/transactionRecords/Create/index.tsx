@@ -1,13 +1,15 @@
 import FormComponent from '../FormComponent';
 import { useCustomMutation, HttpError, useGetIdentity, useApiUrl } from '@refinedev/core';
-import { Create, useForm } from '@refinedev/antd';
+import { Create, useForm, CreateProps } from '@refinedev/antd';
 import { TTransaction, TTransactionFields, TUser } from '@/types';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 
-const index: React.FC<{
-    notificationConfig?: ArgsProps;
-}> = ({ notificationConfig = {} }) => {
+const index: React.FC<
+    CreateProps & {
+        notificationConfig?: ArgsProps;
+    }
+> = ({ notificationConfig = {}, ...createProps }) => {
     const { mutate: add } = useCustomMutation<TTransactionFields>();
     const { data: identity } = useGetIdentity<TUser>();
     const updated_by_user_id = identity?.id;
@@ -48,7 +50,7 @@ const index: React.FC<{
     // TODO 可以加上顯示API結果方便除錯
 
     return (
-        <Create saveButtonProps={saveButtonProps}>
+        <Create {...createProps} saveButtonProps={saveButtonProps}>
             <FormComponent formType="create" formProps={formProps} handler={handleCreate} />
         </Create>
     );

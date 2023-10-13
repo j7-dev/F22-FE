@@ -4,11 +4,11 @@ import { windowWidthAtom } from '@/components/ContentLayout';
 import NewsMarquee from '@/components/ContentLayout/NewsMarquee';
 import UserInfo from '@/components/ContentLayout/Header/UserInfo';
 import LoginModule from '@/components/ContentLayout/Header/LoginModule';
-import { useGetMarketingCotent } from '@/hooks/useGetMarketingCotent';
+import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
 
 const Pc: React.FC<{ isLogin: boolean }> = ({ isLogin }) => {
     const windowWidth = useAtomValue(windowWidthAtom);
-    const { data } = useGetMarketingCotent({ position: 'header' });
+    const { data } = useGetMarketingContent({ position: 'header' });
 
     const marqueeText = data?.map((item) => {
         return item?.content;

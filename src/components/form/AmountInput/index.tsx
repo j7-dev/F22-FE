@@ -13,20 +13,15 @@ const index: React.FC<{
     const name = amountProps?.name || ['amount'];
     const label = amountProps?.label || 'Amount';
     const form = Form.useFormInstance();
-    const siteSetting = useGetSiteSetting();
 
-    const defaultCurrency = siteSetting?.default_currency || 'KRW';
-    const supportCurrencies = siteSetting?.support_currencies || ['KRW'];
-
-    const defaultAmountType = siteSetting?.default_amount_type || 'CASH';
-    const supportAmountTypes = siteSetting?.support_amount_types || ['CASH'];
+    const { default_currency, default_amount_type, support_currencies, support_amount_types } = useGetSiteSetting();
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-            if (defaultCurrency && defaultAmountType && form) {
+            if (default_currency && default_amount_type && form) {
                 form?.setFieldsValue({
-                    currency: defaultCurrency,
-                    amount_type: defaultAmountType,
+                    currency: default_currency,
+                    amount_type: default_amount_type,
                 });
             }
         }, 0);
@@ -34,7 +29,7 @@ const index: React.FC<{
         return () => {
             clearTimeout(timeout);
         };
-    }, [defaultCurrency, defaultAmountType, form]);
+    }, [default_currency, default_amount_type, form]);
 
     return (
         <Space.Compact block className="w-full">
@@ -44,22 +39,22 @@ const index: React.FC<{
                 </Form.Item>
             )}
 
-            <Form.Item className="min-w-[5rem]" label="&nbsp;" name={['currency']}>
+            <Form.Item className="min-w-[5rem]" label="&nbsp;" name={['currency']} initialValue={default_currency}>
                 <Select
-                    options={supportCurrencies.map((currency: string) => ({
+                    options={support_currencies.map((currency: string) => ({
                         label: currency,
                         value: currency,
                     }))}
-                    disabled={supportCurrencies.length < 2}
+                    disabled={support_currencies.length < 2}
                 />
             </Form.Item>
-            <Form.Item className="min-w-[10rem]" label="&nbsp;" name={['amount_type']}>
+            <Form.Item className="min-w-[10rem]" label="&nbsp;" name={['amount_type']} initialValue={default_amount_type}>
                 <Select
-                    options={supportAmountTypes.map((amountType: string) => ({
+                    options={support_amount_types.map((amountType: string) => ({
                         label: amountType,
                         value: amountType,
                     }))}
-                    disabled={supportAmountTypes.length < 2}
+                    disabled={support_amount_types.length < 2}
                 />
             </Form.Item>
         </Space.Compact>
