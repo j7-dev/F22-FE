@@ -1,17 +1,18 @@
 import { Card, Tabs, TabsProps, Collapse } from 'antd';
 import { Show } from '@refinedev/antd';
 import { useCan } from '@/hooks';
-import { useShow } from '@refinedev/core';
+import { BaseRecord, useShow } from '@refinedev/core';
 import ObjectTable from '@/components/general/ObjectTable';
 import MoneyLog from '@/components/Admin/MoneyLog';
 import LoginDetail from '@/components/Admin/LoginDetail';
 import BetRecordTable from '@/components/Admin/BetRecordTable';
 import { useParams } from 'react-router-dom';
 import { TUser, TDiscount } from '@/types';
-import { infoLeftColumns, infoRightColumns } from './infoColumns';
 import TurnoverBonusTable from '@/components/Admin/TurnoverBonusTable';
 import { Create } from '@/components/resources/transactionRecords';
 import { DollarOutlined } from '@ant-design/icons';
+import useDpWdUserInfo from './useDpWdUserInfo';
+import useColumns from './useColumns';
 
 const index = () => {
     const { canDelete, canEdit } = useCan();
@@ -36,6 +37,13 @@ const index = () => {
 
     const theUser = (data?.data || {}) as TUser;
     const discount = (theUser?.vip?.discount || { ratio: [] }) as TDiscount;
+
+    const { data: dpWdUserInfoData } = useDpWdUserInfo({ user_id: Number(id) });
+    const dpWdUserInfo = (dpWdUserInfoData?.data?.data || {}) as BaseRecord;
+    const userData = {
+        ...theUser,
+        ...dpWdUserInfo,
+    };
 
     const items: TabsProps['items'] = [
         {
@@ -81,6 +89,8 @@ const index = () => {
         },
     ];
 
+    const { infoLeftColumns, infoRightColumns } = useColumns();
+
     return (
         <>
             <Show
@@ -100,8 +110,8 @@ const index = () => {
                 <div>
                     <Card bordered={false} title="Info">
                         <div className="grid grid-cols-2 lg:grid-cols-2 gap-6">
-                            <ObjectTable record={theUser} columns={infoLeftColumns} />
-                            <ObjectTable record={theUser} columns={infoRightColumns} />
+                            <ObjectTable record={userData} columns={infoLeftColumns} />
+                            <ObjectTable record={userData} columns={infoRightColumns} />
                         </div>
                     </Card>
                 </div>
