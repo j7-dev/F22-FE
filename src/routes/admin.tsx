@@ -9,7 +9,6 @@ const ListMember = lazy(() => import('@/pages/Admin/members/List'));
 const CreateMember = lazy(() => import('@/pages/Admin/members/Create'));
 const ShowMember = lazy(() => import('@/pages/Admin/members/Show'));
 const EditMember = lazy(() => import('@/pages/Admin/members/Edit'));
-const BalanceAdjustment = lazy(() => import('@/pages/Admin/members/BalanceAdjustment'));
 const ListAgent = lazy(() => import('@/pages/Admin/agents/List'));
 const CreateAgent = lazy(() => import('@/pages/Admin/agents/Create'));
 const EditAgent = lazy(() => import('@/pages/Admin/agents/Edit'));
@@ -48,7 +47,6 @@ const adminRoutes = () => {
                 <Route path="create" element={<CreateMember />} />
                 <Route path="show/:id" element={<ShowMember />} />
                 <Route path="edit/:id" element={<EditMember />} />
-                <Route path="balance-adjustment" element={<BalanceAdjustment />} />
             </Route>
 
             <Route path="/refine/:roleType/">

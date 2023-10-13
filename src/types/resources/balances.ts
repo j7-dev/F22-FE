@@ -1,6 +1,7 @@
 import { BaseType, AmountType, TUser } from '@/types';
 
 export type TBalance = BaseType &
-    AmountType & {
+    Omit<AmountType, 'amount'> & {
         user?: TUser;
+        amount: string;
     };

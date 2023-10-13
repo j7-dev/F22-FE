@@ -170,8 +170,8 @@ const useColumns = () => {
             key: 'action',
             render: (_: any, record: DataType) => (
                 <p className="m-0 whitespace-nowrap">
-                    <ShowButton size="small" type="primary" shape="circle" recordItemId={record.id} hideText className="mr-2" />
-                    <EditButton size="small" type="primary" shape="circle" recordItemId={record.id} hideText />
+                    <ShowButton size="small" type="primary" shape="circle" resource="users" recordItemId={record.id} hideText className="mr-2" />
+                    <EditButton size="small" type="primary" shape="circle" resource="users" recordItemId={record.id} hideText />
                 </p>
             ),
         },

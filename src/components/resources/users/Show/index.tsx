@@ -1,4 +1,4 @@
-import { Card, Tabs, TabsProps } from 'antd';
+import { Card, Tabs, TabsProps, Collapse } from 'antd';
 import { Show } from '@refinedev/antd';
 import { useCan } from '@/hooks';
 import { useShow } from '@refinedev/core';
@@ -10,6 +10,8 @@ import { useParams } from 'react-router-dom';
 import { TUser, TDiscount } from '@/types';
 import { infoLeftColumns, infoRightColumns } from './infoColumns';
 import TurnoverBonusTable from '@/components/Admin/TurnoverBonusTable';
+import { Create } from '@/components/resources/transactionRecords';
+import { DollarOutlined } from '@ant-design/icons';
 
 const index = () => {
     const { canDelete, canEdit } = useCan();
@@ -103,8 +105,37 @@ const index = () => {
                         </div>
                     </Card>
                 </div>
+
+                <Collapse
+                    bordered={false}
+                    className="bg-white my-12"
+                    items={[
+                        {
+                            key: 'balanceAdjustment',
+                            label: (
+                                <span className="font-semibold text-base relative -top-0.5">
+                                    <DollarOutlined className="mr-2" />
+                                    Balance Adjustment
+                                </span>
+                            ),
+                            children: (
+                                <Create
+                                    title={<></>}
+                                    goBack={<></>}
+                                    breadcrumb={null}
+                                    contentProps={{
+                                        style: {
+                                            boxShadow: 'none',
+                                            padding: '0rem',
+                                        },
+                                    }}
+                                />
+                            ),
+                        },
+                    ]}
+                />
                 <div>
-                    <Tabs className="mt-12" defaultActiveKey="moneyLog1" type="card" centered items={items} tabBarStyle={{ marginBottom: '0px' }} />
+                    <Tabs defaultActiveKey="moneyLog1" type="card" centered items={items} tabBarStyle={{ marginBottom: '0px' }} />
                 </div>
             </Show>
         </>

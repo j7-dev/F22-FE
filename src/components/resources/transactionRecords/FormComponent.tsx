@@ -2,8 +2,10 @@ import { Form, Input, Select, FormProps } from 'antd';
 import { useUserSelect } from '@/hooks';
 import AmountInput from '@/components/form/AmountInput';
 import Amount from '@/components/Admin/Amount';
-import { useCustom, useApiUrl } from '@refinedev/core';
+import { useCustom, useApiUrl, useResource } from '@refinedev/core';
 import { TBalance } from '@/types';
+import { useEffect } from 'react';
+import { LoadingOutlined } from '@ant-design/icons';
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
@@ -15,6 +17,19 @@ const FormComponent: React.FC<{
     const watchUser = Form.useWatch(['user_id'], form);
     const watchCurrency = Form.useWatch(['currency'], form);
     const watchAmountType = Form.useWatch(['amount_type'], form);
+    const { action, id, identifier } = useResource();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (action === 'show' && identifier === 'members-list' && form) {
+                form.setFieldValue(['user_id'], Number(id));
+            }
+        }, 0);
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [action, id, identifier, form]);
 
     const { data, isFetching } = useCustom({
         url: `${apiUrl}/wallet-api/balance/get`,
@@ -30,9 +45,9 @@ const FormComponent: React.FC<{
             enabled: !!watchUser && !!watchCurrency && !!watchAmountType,
         },
     });
-    const balances = data?.data?.data || [];
+    const balances = (data?.data?.data || []) as TBalance[];
     const findBalance = balances.find((balance: TBalance) => balance.currency === watchCurrency && balance.amount_type === watchAmountType);
-    const currencyBalanceAmount = findBalance?.amount || 0;
+    const currencyBalanceAmount = findBalance?.amount || '0';
 
     const { selectProps: userSelectProps } = useUserSelect({
         roleType: 'authenticated',
@@ -60,8 +75,8 @@ const FormComponent: React.FC<{
                 <AmountInput />
                 <div>
                     <p className="mb-2">User's balance</p>
-                    {watchUser && !isFetching && <Amount amount={currencyBalanceAmount} currency={watchCurrency} symbol />}
-                    {isFetching && 'loading...'}
+                    {watchUser && !isFetching && <Amount amount={Number(currencyBalanceAmount)} currency={watchCurrency} symbol />}
+                    {isFetching && <LoadingOutlined />}
                 </div>
             </div>
 
