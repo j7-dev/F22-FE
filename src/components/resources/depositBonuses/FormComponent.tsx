@@ -20,12 +20,7 @@ const FormComponent: React.FC<{
     formLoading?: boolean;
 }> = ({ formType, formProps, handler, formLoading }) => {
     const form = formProps.form;
-    const siteSetting = useGetSiteSetting();
-    const defaultCurrency = siteSetting?.default_currency || 'KRW';
-    const supportCurrencies = siteSetting?.support_currencies || ['KRW'];
-    const defaultAmountType = siteSetting?.default_amount_type || 'CASH';
-    const supportAmountTypes = siteSetting?.support_amount_types || ['CASH'];
-    const support_game_providers = siteSetting?.support_game_providers || [];
+    const { default_currency, default_amount_type, support_currencies, support_amount_types, support_game_providers } = useGetSiteSetting();
 
     const [defaultValues, setDefaultValues] = useState<TDefaultValues>({
         live: null,
@@ -34,10 +29,10 @@ const FormComponent: React.FC<{
 
     useEffect(() => {
         const timeout = setTimeout(() => {
-            if (defaultCurrency && defaultAmountType && form) {
+            if (default_currency && default_amount_type && form) {
                 // 設定表單預設值
                 form?.setFieldsValue({
-                    currency: defaultCurrency,
+                    currency: default_currency,
                     amount_type: 'DEPOSIT_BONUS',
                 });
             }
@@ -46,7 +41,7 @@ const FormComponent: React.FC<{
         return () => {
             clearTimeout(timeout);
         };
-    }, [defaultCurrency, defaultAmountType, form]);
+    }, [default_currency, default_amount_type, form]);
 
     useEffect(() => {
         // 編輯時重組資料
@@ -103,20 +98,20 @@ const FormComponent: React.FC<{
                 <div className="flex items-center">
                     <Form.Item className="mr-6 w-full" label="Currency" name={['currency']}>
                         <Select
-                            options={supportCurrencies.map((currency: string) => ({
+                            options={support_currencies.map((currency: string) => ({
                                 label: currency,
                                 value: currency,
                             }))}
-                            disabled={supportCurrencies.length < 2}
+                            disabled={support_currencies.length < 2}
                         />
                     </Form.Item>
                     <Form.Item className="mr-6 w-full" label="Amount Type" name={['amount_type']}>
                         <Select
-                            options={supportAmountTypes.map((amountType: string) => ({
+                            options={support_amount_types.map((amountType: string) => ({
                                 label: amountType,
                                 value: amountType,
                             }))}
-                            disabled={supportAmountTypes.length < 2}
+                            disabled={support_amount_types.length < 2}
                         />
                     </Form.Item>
                     <CloseOutlined className="opacity-0" />

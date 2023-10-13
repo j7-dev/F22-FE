@@ -46,11 +46,16 @@ const [rolesAtom] = atomsWithQuery(() => ({
     staleTime: 1000 * 60 * 60 * 24 * 7,
 }));
 
-const useGetSiteSetting = () => {
+export const useGetSiteSetting = () => {
     const siteSettingData = useAtomValue(siteSettingAtom);
     const rolesData = useAtomValue(rolesAtom);
 
     const siteSetting = siteSettingData?.data?.data?.attributes;
+    const default_currency = siteSetting?.default_currency || 'KRW';
+    const support_currencies = siteSetting?.support_currencies || ['KRW'];
+    const default_amount_type = siteSetting?.default_amount_type || 'CASH';
+    const support_amount_types = siteSetting?.support_amount_types || ['CASH'];
+    const support_game_providers = siteSetting?.support_game_providers || [];
     const rolesArr = rolesData?.data?.roles;
     const roleObj = rolesArr?.reduce(
         (acc, role) => {
@@ -64,8 +69,11 @@ const useGetSiteSetting = () => {
 
     return {
         ...siteSetting,
+        default_currency,
+        support_currencies,
+        default_amount_type,
+        support_amount_types,
+        support_game_providers,
         roles: roleObj,
     };
 };
-
-export default useGetSiteSetting;
