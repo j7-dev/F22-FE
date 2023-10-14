@@ -6,6 +6,11 @@ export type TUserNote = {
     [key: (typeof USER_NOTES_FIELDS)[number]]: string;
 };
 
+export type TMe = TUser & {
+    deposit: number;
+    validBetAmount: number;
+};
+
 export type TUser = BaseType & {
     username: string;
     email: string;

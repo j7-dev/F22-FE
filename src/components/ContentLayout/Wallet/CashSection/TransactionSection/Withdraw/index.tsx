@@ -4,12 +4,12 @@ import { useTranslation } from 'react-i18next';
 import AmountInput from '../Mybalance/AmountInput';
 import SendButton from '../Mybalance/SendButton';
 import { useCustomMutation, useGetIdentity, useApiUrl } from '@refinedev/core';
-import { TUser } from '@/types';
+import { TMe } from '@/types';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const [form] = Form.useForm();
-    const { data: identity } = useGetIdentity<TUser>();
+    const { data: identity } = useGetIdentity<TMe>();
     const userId = identity?.id;
     const { mutate: withdraw, isLoading } = useCustomMutation();
     const apiUrl = useApiUrl();
@@ -48,7 +48,7 @@ const index: React.FC = () => {
                 <Form.Item name={['currency']} hidden initialValue="KRW">
                     <Input />
                 </Form.Item>
-								<Form.Item name={['amount_type']} hidden initialValue="CASH">
+                <Form.Item name={['amount_type']} hidden initialValue="CASH">
                     <Input />
                 </Form.Item>
                 <Form.Item name={['user_id']} hidden>

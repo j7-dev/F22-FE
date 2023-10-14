@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 // import { useUserAPI } from '@/hooks/useUserAPI';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
 import { useGetIdentity } from '@refinedev/core';
-import { TUser } from '@/types';
+import { TMe } from '@/types';
 import { useGetNoteBox } from '@/hooks/resources/useGetNoteBox';
 import noteBoxIcon from '@/assets/images/topBar/Icon_TopBar_NoteBox.svg';
 
 const index: React.FC = () => {
     const navigate = useNavigate();
-    const { data, isLoading } = useGetIdentity<TUser>();
+    const { data, isLoading } = useGetIdentity<TMe>();
     const setSelectedSection = useSetAtom(selectedSectionAtom);
     const userName = data?.username || 'userName';
     const vip = data?.vip?.label || '';

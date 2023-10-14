@@ -2,11 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import refreshIcon from '@/assets/images/refresh-icon.svg';
 import { useGetIdentity } from '@refinedev/core';
-import { TUser } from '@/types';
+import { TMe } from '@/types';
 
 const UserContainer: React.FC = () => {
     const { t } = useTranslation();
-    const { data, isLoading } = useGetIdentity<TUser>();
+    const { data, isLoading } = useGetIdentity<TMe>();
 
     if (isLoading) return <div>loading...</div>;
     const balance = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'CASH')[0].amount : 0;

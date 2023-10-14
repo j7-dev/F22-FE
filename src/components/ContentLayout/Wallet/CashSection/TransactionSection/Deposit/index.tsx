@@ -5,13 +5,13 @@ import AmountInput from '../Mybalance/AmountInput';
 import SendButton from '../Mybalance/SendButton';
 import { LockOutlined } from '@ant-design/icons';
 import { useGetIdentity, useCustomMutation, useApiUrl } from '@refinedev/core';
-import { TUser } from '@/types';
+import { TMe } from '@/types';
 import { useModal } from '@refinedev/antd';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const [form] = Form.useForm();
-    const { data: identity } = useGetIdentity<TUser>();
+    const { data: identity } = useGetIdentity<TMe>();
     const userId = identity?.id;
     const { mutate: deposit, isLoading } = useCustomMutation();
     const apiUrl = useApiUrl();

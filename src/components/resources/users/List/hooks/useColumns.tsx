@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom';
 import { TTransaction, TUser, TVip } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
-import { useGetSiteSetting, useBalanceColumns } from '@/hooks';
+import { useBalanceColumns } from '@/hooks';
 import Amount from '@/components/Admin/Amount';
 
 const useColumns = () => {
-    const { default_currency } = useGetSiteSetting();
     const allBalances = useBalanceColumns();
 
     const columns: ColumnsType<DataType> = [
@@ -73,51 +72,23 @@ const useColumns = () => {
         },
         {
             title: 'Total Deposits',
-            dataIndex: 'transaction_records',
-            key: 'TotalDeposits',
-            render: (transaction_records: TTransaction[]) => {
-                const sum = transaction_records.reduce((acc, cur) => {
-                    if (cur.type === 'DEPOSIT' && cur.status === 'SUCCESS') {
-                        return acc + Number(cur.amount);
-                    }
-                    return acc;
-                }, 0);
-                return <Amount amount={sum} />;
-            },
+            dataIndex: 'totalDp',
+            key: 'totalDp',
+            render: (v: number) => <Amount amount={v} />,
         },
         {
             title: 'Total Withdrawal',
-            dataIndex: 'transaction_records',
-            key: 'TotalWithdrawal',
-            render: (transaction_records: TTransaction[]) => {
-                const sum = transaction_records.reduce((acc, cur) => {
-                    if (cur.type === 'WITHDRAW' && cur.status === 'SUCCESS') {
-                        return acc + Number(cur.amount);
-                    }
-                    return acc;
-                }, 0);
-                return <Amount amount={sum} />;
-            },
+            dataIndex: 'totalWd',
+            key: 'totalWd',
+            render: (v: number) => <Amount amount={v} />,
         },
         {
             title: 'DP-WD',
-            dataIndex: 'transaction_records',
+            dataIndex: 'DP-WD',
             key: 'DP-WD',
-            render: (transaction_records: TTransaction[]) => {
-                const sumDeposit = transaction_records.reduce((acc, cur) => {
-                    if (cur.type === 'DEPOSIT' && cur.status === 'SUCCESS') {
-                        return acc + Number(cur.amount);
-                    }
-                    return acc;
-                }, 0);
-                const sumWithdraw = transaction_records.reduce((acc, cur) => {
-                    if (cur.type === 'WITHDRAW' && cur.status === 'SUCCESS') {
-                        return acc + Number(cur.amount);
-                    }
-                    return acc;
-                }, 0);
-                const dpWd = sumDeposit - sumWithdraw;
-                return <Amount amount={dpWd} currency={default_currency} symbol className={dpWd === 0 ? '' : dpWd > 0 ? 'text-teal-500' : 'text-rose-500'} />;
+            render: (_: undefined, record: any) => {
+                const v = Number(record.totalDp || 0) - Number(record.totalWd || 0);
+                return <Amount amount={v} />;
             },
         },
         {

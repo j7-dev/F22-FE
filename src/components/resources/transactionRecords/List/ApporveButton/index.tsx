@@ -3,11 +3,11 @@ import { CheckOutlined } from '@ant-design/icons';
 import { useUpdateMany, useGetIdentity } from '@refinedev/core';
 import { selectedRecordsAtom } from '../atom';
 import { useAtom } from 'jotai';
-import { TUser } from '@/types';
+import { TMe } from '@/types';
 
 const index = () => {
     const [selectedRecords, setSelectedRecords] = useAtom(selectedRecordsAtom);
-    const { data: identity } = useGetIdentity<TUser>();
+    const { data: identity } = useGetIdentity<TMe>();
     const { mutate, isLoading } = useUpdateMany();
     const handleUpdate = () => {
         const ids = selectedRecords.map((record) => record.id);
