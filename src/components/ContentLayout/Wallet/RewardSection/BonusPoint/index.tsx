@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Form } from 'antd';
+import { Form, InputNumber } from 'antd';
 import { useTranslation } from 'react-i18next';
 import SelectGame from '@/components/ContentLayout/Wallet/CashSection/TransactionSection/Mybalance/SelectGame';
-import QuickAmountInput from '@/components/ContentLayout/Wallet/CashSection/TransactionSection/Mybalance/QuickAmountInput';
 import SendButton from '@/components/ContentLayout/Wallet/CashSection/TransactionSection/Mybalance/SendButton';
 import CompBonus from './CompBonus';
 import RollingBonus from './RollingBonus';
@@ -40,7 +39,9 @@ const index: React.FC = () => {
             <div className="usePointForm">
                 <Form form={form} initialValues={{ amount: '0' }} className="w-full flex gap-2 flex-col md:flex-row justify-between items-center py-3 px-5 bg-[#F3F3F4]">
                     <SelectGame className="w-full md:w-2/5 my-0" />
-                    <QuickAmountInput itemName="amount" ifShowButton={false} className="w-full md:w-2/5 mb-0" />
+                    <Form.Item name={['amount']} className="w-full md:w-2/5 mb-0">
+                        <InputNumber />
+                    </Form.Item>
                     <SendButton label={t('Use Point')} className="w-auto md:w-1/5 mb-0" />
                     {/* TODO: 這個組件是否可以沿用? */}
                 </Form>
