@@ -7,7 +7,7 @@ export type TGameProvider = {
 
 export type TProviderData = {
     providerMainImg: string;
-    providerSmallImg: string;
+    providerSmallIcon: string;
     providerFavIcon: string;
     providerDescribe: string;
     providerPath?: string;
@@ -15,9 +15,12 @@ export type TProviderData = {
 
 export type TGame = TEvolutionGame &
     TPragmaticGame & {
-        formProviderCategory?: string; //casino 遊戲商定義的遊戲分類
+        casinoCategory?: string; //casino 遊戲分類
+        casinoCategoryIcon?: string; //casino 遊戲分類 icon
+        gameCategory?: string; //七大遊戲分類
         gameProviderName?: string;
         gameImg?: string;
+        gameListFavIcon?: string;
     };
 
 export type TEvolutionGame = {
@@ -46,4 +49,5 @@ export type TPragmaticGame = {
     technologyID?: string;
     gameIdNumeric?: number;
     jurisdictions?: string[];
+    RTP?: number;
 };

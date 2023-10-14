@@ -6,7 +6,23 @@ import baccaratImg from '@/assets/images/casino/Icon_CasinoFilter_Baccarat.svg';
 import otherImg from '@/assets/images/casino/Icon_CasinoFilter_Other.svg';
 import diceImg from '@/assets/images/casino/Icon_CasinoFilter_Dice.svg';
 
-//篩選Casino Provider API來的遊戲類型轉換成五大分類
+//把遊戲商的遊戲類型轉換成五大分類方法
+export const mappingCasinoCategory = ({ category }: { category: string }) => {
+    if (casinoCategoryFilter.baccarat.includes(category)) return 'baccarat';
+    if (casinoCategoryFilter.blackjack.includes(category)) return 'blackjack';
+    if (casinoCategoryFilter.roulette.includes(category)) return 'roulette';
+    if (casinoCategoryFilter.dice.includes(category)) return 'dice';
+    if (casinoCategoryFilter.other.includes(category)) return 'other';
+};
+export const mappingCasinoCategoryIcon = ({ category }: { category: string }) => {
+    if (casinoCategoryFilter.baccarat.includes(category)) return baccaratImg;
+    if (casinoCategoryFilter.blackjack.includes(category)) return blackjackImg;
+    if (casinoCategoryFilter.roulette.includes(category)) return rouletteImg;
+    if (casinoCategoryFilter.dice.includes(category)) return diceImg;
+    if (casinoCategoryFilter.other.includes(category)) return otherImg;
+};
+
+//記錄遊戲商的遊戲類型並且分類在五大類中
 export const casinoCategoryFilter: TCasinoCategory = {
     baccarat: ['baccarat', 'Baccarat', 'Baccarat New'],
     blackjack: ['blackjack', 'lightningscalablebj', 'scalableblackjack', 'powerscalableblackjack', 'Blackjack'],

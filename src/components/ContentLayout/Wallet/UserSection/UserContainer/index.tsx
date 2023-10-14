@@ -9,8 +9,8 @@ const UserContainer: React.FC = () => {
     const { data, isLoading } = useGetIdentity<TUser>();
 
     if (isLoading) return <div>loading...</div>;
-    const balance = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'CASH')[0].amount : 0;
-    const rollingPoint = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'TURNOVER_BONUS"')?.[0]?.amount || 0 : 0;
+    const balance = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'CASH')[0].amount || 0 : 0;
+    const turnoverBonus = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'TURNOVER_BONUS')[0].amount || 0 : 0;
 
     const userName = data?.username || 'userName';
     const vip = data?.vip?.label || '';
@@ -31,8 +31,8 @@ const UserContainer: React.FC = () => {
                 <span className="text-sm font-bold text-[#2B3240]">{`₩ ${balance && balance}`}</span>
             </div>
             <div className="balanceContainer h-10 bg-[#F3F3F4] rounded-lg flex justify-between items-center px-4 hover:bg-[#e5e5e5] cursor-pointer">
-                <span className="text-sm font-bold text-[#2b324080]">{t('Rolling Point')}</span>
-                <span className="text-sm font-bold text-[#2B3240]">{`${rollingPoint && rollingPoint}`}</span>
+                <span className="text-sm font-bold text-[#2b324080]">{t('Turnover Bonus')}</span>
+                <span className="text-sm font-bold text-[#2B3240]">{`${turnoverBonus && turnoverBonus}`}</span>
             </div>
             {/* <div className="balanceContainer h-10 bg-[#F3F3F4] rounded-lg flex justify-between items-center px-4 hover:bg-[#e5e5e5] cursor-pointer">
                 <span className="text-sm font-bold text-[#2b324080]">{t('Bonus Point')}</span>

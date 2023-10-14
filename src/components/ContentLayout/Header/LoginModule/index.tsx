@@ -47,20 +47,20 @@ const Login: React.FC = () => {
         <div className={`walletBtn flex flex-row gap-2.5`}>
             {isLogin ? (
                 <>
-                    <div onClick={handleWallet} className="primaryButton WalletBtn whitespace-nowrap flex items-center  gap-x-2 bg md:my-3 md:px-6 md:py-2 cursor-pointer">
+                    <div onClick={handleWallet} className="primaryButton WalletBtn whitespace-nowrap flex items-center gap-x-2 cursor-pointer">
                         <img src={Icon_Wallet_white} alt="" />
                         <span>{t('My Wallet')}</span>
                     </div>
-                    <div onClick={handleClick} className={`secondaryButton loginBtn whitespace-nowrap flex items-center justify-center  md:my-3 md:px-6 md:py-2 cursor-pointer`}>
+                    <div onClick={handleClick} className={`secondaryButton loginBtn whitespace-nowrap flex items-center justify-center cursor-pointer`}>
                         <span>{t('Log out')}</span>
                     </div>
                 </>
             ) : (
                 <>
-                    <div onClick={handleClick} className={`primaryButton loginBtn  whitespace-nowrap flex items-center justify-center  md:my-3 md:px-6 md:py-2 cursor-pointer`}>
+                    <div onClick={handleClick} className={`primaryButton loginBtn  whitespace-nowrap flex items-center justify-center cursor-pointer`}>
                         <span>{t('Log in')}</span>
                     </div>
-                    <div onClick={handleRegister} className="secondaryButton RegisterBtn whitespace-nowrap flex justify-center items-center gap-x-2 md:my-3 md:px-6 md:py-2 cursor-pointer">
+                    <div onClick={handleRegister} className="secondaryButton RegisterBtn whitespace-nowrap flex justify-center items-center gap-x-2 md:px-6 md:py-2 cursor-pointer">
                         <span>{t('Register')}</span>
                     </div>
                 </>

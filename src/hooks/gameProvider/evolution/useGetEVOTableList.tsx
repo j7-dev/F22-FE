@@ -1,6 +1,8 @@
 import { useList } from '@refinedev/core';
 import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg';
 import { mappingGameCategory } from '@/utils/GameCategory';
+import { mappingCasinoCategory, mappingCasinoCategoryIcon } from '@/utils/GameCategory/casinoCategory';
+import { TGame } from '@/types/games';
 
 export const useGetEVOTableList = () => {
     const { data: fetchData, isLoading } = useList({
@@ -9,16 +11,18 @@ export const useGetEVOTableList = () => {
     //Casino 的遊戲商加上統一的formProviderCategory來分類
     //近來的資料先排除rng-類別並加上gameProviderName和gameImg
     const data =
-        fetchData?.data
-            .filter((item) => !item['Game Type'].startsWith('rng-'))
-            .map((item: any) => {
+        ((fetchData?.data as TGame[]) || undefined)
+            ?.filter((item) => !(item['Game Type'] as string).startsWith('rng-'))
+            .map((item: TGame) => {
                 return {
                     ...item,
+                    gameName: item['Table Name'],
                     gameID: item['Table ID'],
                     gameImg: getGameTypeImg(item['Game Type'] as string),
-                    formProviderCategory: item['Game Type'],
                     gameCategory: mappingGameCategory({ gameProviderName: 'EVO' }),
                     gameProviderName: 'Evolution',
+                    casinoCategory: mappingCasinoCategory({ category: item['Game Type'] as string }),
+                    casinoCategoryIcon: mappingCasinoCategoryIcon({ category: item['Game Type'] as string }),
                 };
             }) || [];
 
