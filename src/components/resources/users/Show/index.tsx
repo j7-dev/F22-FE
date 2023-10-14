@@ -11,18 +11,9 @@ import { TUser, TDiscount } from '@/types';
 import TurnoverBonusTable from '@/components/Admin/TurnoverBonusTable';
 import { Create } from '@/components/resources/transactionRecords';
 import { DollarOutlined } from '@ant-design/icons';
-import useDpWdUserInfo from './useDpWdUserInfo';
+import useDpWdUserInfo from '../List/hooks/useDpWdUserInfo';
 import useColumns from './useColumns';
 import NotesForm from './NotesForm';
-
-type TInfo = {
-    dayDp: number;
-    monthDp: number;
-    totalDp: number;
-    dayWd: number;
-    monthWd: number;
-    totalWd: number;
-};
 
 const index = () => {
     const { identifier } = useResource();
@@ -52,8 +43,8 @@ const index = () => {
     const theUser = (data?.data || {}) as TUser;
     const discount = (theUser?.vip?.discount || { ratio: [] }) as TDiscount;
 
-    const { data: dpWdUserInfoData } = useDpWdUserInfo({ user_id: Number(id) });
-    const dpWdUserInfo = (dpWdUserInfoData?.data?.data || {}) as TInfo;
+    const { data: dpWdUserInfoData } = useDpWdUserInfo({ user_ids: [Number(id)] });
+    const { user_id: _user_id, ...dpWdUserInfo } = dpWdUserInfoData?.data?.data?.[0] || {};
     const userData = {
         ...theUser,
         ...dpWdUserInfo,

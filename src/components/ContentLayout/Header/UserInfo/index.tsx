@@ -3,7 +3,7 @@ import { useSetAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { useGetIdentity } from '@refinedev/core';
 import { useNavigate } from 'react-router-dom';
-import { TUser } from '@/types';
+import { TMe } from '@/types';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
 import userBalanceIcon from '@/assets/images/topBar/userBalance.svg';
 import userBonusIcon from '@/assets/images/topBar/userBonus.svg';
@@ -11,7 +11,7 @@ import userDepositIcon from '@/assets/images/topBar/userDeposit.svg';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
-    const { data, isLoading } = useGetIdentity<TUser>();
+    const { data, isLoading } = useGetIdentity<TMe>();
     const userName = data?.username || 'userName';
     const vip = data?.vip?.label || '';
     const balance = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'CASH')[0].amount || 0 : 0;

@@ -1,8 +1,8 @@
 import { useGetIdentity, useList } from '@refinedev/core';
-import { TUser } from '@/types';
+import { TMe } from '@/types';
 
 export const useGetBankAccount = () => {
-    const { data: identity } = useGetIdentity<TUser>();
+    const { data: identity } = useGetIdentity<TMe>();
     // console.log('identity', identity);
     const { data, isLoading } = useList({
         resource: 'bank-accounts',

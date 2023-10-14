@@ -3,7 +3,7 @@ import { useAtomValue } from 'jotai';
 import { atomsWithQuery } from 'jotai-tanstack-query';
 import { axiosInstance } from '@/providers/strapi-v4';
 import { AxiosResponse } from 'axios';
-import { TRole } from '@/types';
+import { TRole, TVip } from '@/types';
 
 type TSiteSetting = {
     data: {
@@ -21,6 +21,8 @@ type TSiteSetting = {
             support_amount_types: string[];
             support_payments: string[] | null;
             support_game_providers: string[] | null;
+            default_vip: TVip | null;
+            vip_upgrade_evaluation_interval: number;
         };
     };
 };

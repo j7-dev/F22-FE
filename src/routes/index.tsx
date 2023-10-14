@@ -10,7 +10,7 @@ import ContentLayout from '@/components/ContentLayout';
 import contentRoutes from '@/routes/content';
 import adminRoutes from '@/routes/admin';
 import { allowedRoles } from '@/utils';
-import { TUser } from '@/types';
+import { TMe } from '@/types';
 import Login from '@/pages/Admin/login';
 
 const index = () => {
@@ -21,7 +21,7 @@ const index = () => {
         localStorage.setItem('ref', referralCode);
     }
 
-    const { data: identity } = useGetIdentity<TUser>();
+    const { data: identity } = useGetIdentity<TMe>();
     const role = identity?.role?.type || '';
 
     return (

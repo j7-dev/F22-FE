@@ -1,7 +1,7 @@
 import FormComponent from '../FormComponent';
 import { useCustomMutation, HttpError, useGetIdentity, useApiUrl, useInvalidate } from '@refinedev/core';
 import { Create, useForm, CreateProps } from '@refinedev/antd';
-import { TTransaction, TTransactionFields, TUser } from '@/types';
+import { TTransaction, TTransactionFields, TMe } from '@/types';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { useQueryClient } from '@tanstack/react-query';
@@ -14,7 +14,7 @@ const index: React.FC<
     const invalidate = useInvalidate();
     const queryClient = useQueryClient();
     const { mutate: add } = useCustomMutation<TTransactionFields>();
-    const { data: identity } = useGetIdentity<TUser>();
+    const { data: identity } = useGetIdentity<TMe>();
     const updated_by_user_id = identity?.id;
     const apiUrl = useApiUrl();
 

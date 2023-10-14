@@ -97,18 +97,7 @@ const ModalForm: React.FC<{ modalProps: ModalProps }> = ({ modalProps }) => {
                     >
                         <InputNumber min={0} className="w-full" />
                     </Form.Item>
-                    <Form.Item
-                        name="upgrade_evaluation_interval"
-                        label="Upgrade Evaluation Interval"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input a value',
-                            },
-                        ]}
-                    >
-                        <InputNumber min={0} className="w-full" />
-                    </Form.Item>
+
                     <Form.Item
                         name="vip_duration"
                         label="VIP Duration"

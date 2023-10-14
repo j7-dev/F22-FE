@@ -6,13 +6,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import useColor from '@/hooks/useColor';
 import { useQueryClient } from '@tanstack/react-query';
-import { TUser } from '@/types';
+import { TMe } from '@/types';
 
 const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
     const { i18n } = useTranslation();
     const locale = useGetLocale();
     const changeLanguage = useSetLocale();
-    const { data: user } = useGetIdentity<TUser>();
+    const { data: user } = useGetIdentity<TMe>();
 
     const currentLocale = locale();
     const { colorSuccess, colorBgElevated } = useColor();

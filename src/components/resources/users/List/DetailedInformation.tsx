@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { Table, Row, Col, Card, Switch, TableProps, Tooltip } from 'antd';
 import { useTable } from '@refinedev/antd';
-import { TRoleType } from '@/types';
+import { TRoleType, TUser } from '@/types';
 import { CrudFilters } from '@refinedev/core';
 import Filter from './Filter';
 import FilterTags from '@/components/Admin/FilterTags';
 import { useGetSiteSetting } from '@/hooks';
 import useColumns from './hooks/useColumns';
 import { DataType, TSearchProps } from './types';
+import useDpWdUserInfo from './hooks/useDpWdUserInfo';
 
 const DetailedInformation: React.FC<{
     roleType?: TRoleType | TRoleType[];
@@ -166,9 +167,20 @@ const DetailedInformation: React.FC<{
 
     const [extendTableProps, setExtendTableProps] = useState<TableProps<DataType>>({});
 
+    const user_ids = ((tableProps?.dataSource || []) as TUser[])?.map((user) => user?.id) || [];
+    const { data: dpWdUserInfoData } = useDpWdUserInfo({ user_ids });
+    const dpWdUserInfos = dpWdUserInfoData?.data?.data || [];
+
     const formattedTableProps = {
         ...tableProps,
         ...extendTableProps,
+        dataSource: tableProps?.dataSource?.map((user) => {
+            const { user_id: _user_id, ...dpWdUserInfo } = dpWdUserInfos.find((item) => item?.user_id === user?.id) || {};
+            return {
+                ...user,
+                ...dpWdUserInfo,
+            };
+        }),
         tableLayout: 'fixed',
         size: 'small',
         columns,
