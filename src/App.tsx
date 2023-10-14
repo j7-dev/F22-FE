@@ -12,6 +12,7 @@ import AppRouter from '@/routes';
 import { resources } from '@/resources';
 import '@/assets/scss/index.scss';
 import { ConfigProvider } from 'antd';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 function App() {
     const { t, i18n } = useTranslation();
@@ -59,6 +60,7 @@ function App() {
 
                             <RefineKbar />
                             <UnsavedChangesNotifier />
+                            <ReactQueryDevtools />
                         </Refine>
                     </ConfigProvider>
                 </ColorModeContextProvider>

@@ -44,6 +44,7 @@ const FormComponent: React.FC<{
             },
         },
         queryOptions: {
+            queryKey: ['wallet-api', 'balance', 'get'],
             enabled: !!watchUser && !!watchCurrency && !!watchAmountType,
         },
     });
@@ -71,7 +72,7 @@ const FormComponent: React.FC<{
                     <Input />
                 </Form.Item>
 
-                <Form.Item name={['user_id']} label="User">
+                <Form.Item name={['user_id']} label="User" initialValue={Number(id)}>
                     <Select {...userSelectProps} allowClear disabled={userFieldIsDisabled} />
                 </Form.Item>
                 <AmountInput />

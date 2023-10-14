@@ -44,6 +44,7 @@
         "styled-components": "^6.0.8"
     },
     "devDependencies": {
+        "@tanstack/react-query-devtools": "^4.36.1",
         "@types/lodash-es": "^4.17.9",
         "@types/node": "^18.16.2",
         "@types/qs": "^6.9.8",

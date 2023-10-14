@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Form, Input, Switch, Radio, DatePicker, Select, FormProps, Checkbox } from 'antd';
-import { TRole, TRoleType, TUser, TVip } from '@/types';
+import { Form, Input, Switch, Radio, DatePicker, Select, FormProps, Checkbox, Typography } from 'antd';
+import { TRole, TRoleType, TUser, TVip, BANK_ACCOUNT_FIELDS } from '@/types';
 import dayjs, { Dayjs } from 'dayjs';
 import { isString, isObject } from 'lodash-es';
 import { useUserSelect, useGetSiteSetting } from '@/hooks';
 import { useSelect } from '@refinedev/antd';
 import { DefaultOptionType } from 'rc-select/lib/Select';
+import { keyToWord } from '@/utils';
+import { BankOutlined } from '@ant-design/icons';
+
+const { Title } = Typography;
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
@@ -115,7 +119,7 @@ const FormComponent: React.FC<{
                 >
                     <Input />
                 </Form.Item>
-                <Form.Item name="gender" label="gender">
+                <Form.Item name="gender" label="gender" initialValue="MALE" hidden>
                     <Radio.Group
                         options={[
                             { label: 'Male', value: 'MALE' },
@@ -162,6 +166,21 @@ const FormComponent: React.FC<{
                         <Select {...agentSelectProps} />
                     </Form.Item>
                 )}
+            </div>
+            <div className="bg-yellow-50 rounded-xl p-6 mt-16">
+                <Title level={5}>
+                    <BankOutlined className="mr-2" /> Bank Account
+                </Title>
+                <div className="grid grid-cols-2 gap-6">
+                    {BANK_ACCOUNT_FIELDS.map((field) => (
+                        <Form.Item key={field} label={keyToWord(field)} name={['bank_account', field]}>
+                            <Input />
+                        </Form.Item>
+                    ))}
+                    <Form.Item hidden name={['bank_account', 'id']}>
+                        <Input />
+                    </Form.Item>
+                </div>
             </div>
             <div className="grid grid-cols-2 gap-6 mt-16">
                 <div>

@@ -50,7 +50,6 @@ const index = () => {
     const { data, isLoading } = queryResult;
 
     const theUser = (data?.data || {}) as TUser;
-    console.log('⭐  theUser:', theUser);
     const discount = (theUser?.vip?.discount || { ratio: [] }) as TDiscount;
 
     const { data: dpWdUserInfoData } = useDpWdUserInfo({ user_id: Number(id) });
@@ -129,7 +128,7 @@ const index = () => {
             >
                 <div>
                     <Card bordered={false} title="Info">
-                        <div className="grid grid-cols-2 lg:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-2 xl:grid-cols-2 gap-6">
                             <ObjectTable record={userData} columns={infoLeftColumns} />
                             <ObjectTable record={userData} columns={infoRightColumns} />
                         </div>

@@ -13,4 +13,5 @@ export type TVip = BaseType &
         valid_bet_amount_upgrade_threshold: number;
         vip_duration: number;
         discount?: TDiscount;
+        level_order?: number;
     };
