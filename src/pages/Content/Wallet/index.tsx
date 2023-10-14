@@ -8,6 +8,7 @@ import BankCard from './BankCard';
 import ChangPas from './ChangPas';
 import NoteBox from './NoteBox';
 import CashHistory from './CashHistory';
+import Withdraw from './Withdraw';
 // import { useTranslation } from 'react-i18next';
 
 export const selectedSectionAtom = atom('siteNotify');
@@ -20,7 +21,7 @@ const Wallet: React.FC = () => {
     if (isLoading) return <div>loading...</div>;
     return (
         <Authenticated>
-            <div className="myPage relative sm:w-full flex flex-col gap-6 mt-9 px-4">
+            <div className="myPage relative sm:w-full flex flex-col gap-6 my-9 px-4">
                 <UserInfo userInfo={data} />
                 <div className="userSection2 grid grid-cols-4 gap-6">
                     <div className="col-span-1">
@@ -34,6 +35,15 @@ const Wallet: React.FC = () => {
                     </div>
                 </div>
                 <CashHistory userID={data?.id as number} />
+
+                <div className="grid grid-cols-2 gap-6">
+                    <div>
+                        <Withdraw />
+                    </div>
+                    <div>
+                        <Withdraw />
+                    </div>
+                </div>
             </div>
         </Authenticated>
     );

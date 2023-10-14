@@ -30,7 +30,13 @@ function App() {
                     <ConfigProvider
                         theme={{
                             token: {
-                                colorPrimary: '#7a5bee',
+                                colorPrimary: '#5932EA',
+                                borderRadius: 12,
+                            },
+                            components: {
+                                Button: {
+                                    borderRadius: 12,
+                                },
                             },
                         }}
                     >

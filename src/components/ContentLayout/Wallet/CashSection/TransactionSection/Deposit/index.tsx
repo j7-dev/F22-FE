@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, notification, Alert, Modal } from 'antd';
 import { useTranslation } from 'react-i18next';
-import AmountInput from '../Mybalance/AmountInput';
+import QuickAmountInput from '../Mybalance/QuickAmountInput';
 import SendButton from '../Mybalance/SendButton';
 import { LockOutlined } from '@ant-design/icons';
 import { useGetIdentity, useCustomMutation, useApiUrl } from '@refinedev/core';
@@ -54,7 +54,7 @@ const index: React.FC = () => {
     return (
         <div className="w-full bg-white rounded-lg shadow-[0_0px_29px_0px_rgba(43, 50, 64, 0.09)] flex flex-col gap-2.5 p-4">
             <Form form={form} initialValues={{ amount: '0' }} layout="vertical">
-                <AmountInput label={t('Amount to transfer')} itemName={['amount']} />
+                <QuickAmountInput label={t('Amount to transfer')} itemName={['amount']} />
 
                 <div className="mt-8">
                     <Form.Item

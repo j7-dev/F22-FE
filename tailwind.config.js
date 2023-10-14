@@ -9,7 +9,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                primary: '#1677ff',
+                primary: '#5932EA',
             },
             screens: {
                 sm: '415px', // iphone SE

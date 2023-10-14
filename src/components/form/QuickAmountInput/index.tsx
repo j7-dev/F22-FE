@@ -1,6 +1,6 @@
 import React from 'react';
 import { InputNumber, Form } from 'antd';
-import InputButton from './InputButton';
+import QuickButton from './QuickButton';
 
 type TAmountInputProps = {
     label?: string;
@@ -26,9 +26,9 @@ const index: React.FC<TAmountInputProps> = ({ label, itemName, ifShowButton = tr
                     },
                 ]}
             >
-                <InputNumber min={0} className="w-full text-right" prefix="¥" controls={false} formatter={(value: number | undefined) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={(value) => Number(value!.replace(/\$\s?|(,*)/g, ''))} />
+                <InputNumber size="large" min={0} className="w-full text-right" prefix="¥" controls={false} formatter={(value: number | undefined) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={(value) => Number(value!.replace(/\$\s?|(,*)/g, ''))} />
             </Form.Item>
-            {ifShowButton && <InputButton />}
+            {ifShowButton && <QuickButton />}
         </>
     );
 };
