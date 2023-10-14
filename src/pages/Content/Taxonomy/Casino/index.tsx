@@ -1,69 +1,93 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAtomValue } from 'jotai';
 import { nanoid } from 'nanoid';
-import { windowWidthAtom } from '@/components/ContentLayout';
 import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTableList';
 import Banner from '@/components/ContentLayout/Banner';
-import { casinoCategoryFilter, casinoCategory } from '@/utils/GameCategory/casinoCategory';
+import { casinoCategory } from '@/utils/GameCategory/casinoCategory';
 import GameList from '@/components/ContentLayout/GameList';
 import NewsMarquee from '@/components/ContentLayout/NewsMarquee';
+import SearchBar from '@/components/ContentLayout/SearchBar';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
+import slot_favorite_icon from '@/assets/images/game_provider/slot_favorite_icon.svg';
 
-// import { nanoid } from 'nanoid';
+//由五大分類而來的分類表
+const fxnCasinoCategory = [
+    {
+        img: slot_favorite_icon,
+        name: 'Favorite',
+        Category: 'favorite',
+    },
+    ...casinoCategory,
+];
 
 const index: React.FC = () => {
-    const { data: evoData, isLoading: evoLoadong } = useGetEVOTableList();
     const { t } = useTranslation();
-    const windowWidth = useAtomValue(windowWidthAtom);
     const [casinoGameCategory, setCasinoGameCategory] = useState('all');
-    const { data } = useGetMarketingContent({ position: 'header' });
+    //切換分類
+    const handleSwitchTab = (key: string) => () => {
+        setCasinoGameCategory(key);
+    };
 
+    //跑馬燈
+    const { data } = useGetMarketingContent({ position: 'header' });
     const marqueeText = data?.map((item) => {
         return item?.content;
     });
-    // const handleGameCategory = (key: string) => {
-    //     setCasinoGameCategory(key);
-    // };
+
+    //取得遊戲列表
+    const { data: evoData, isLoading: evoLoading } = useGetEVOTableList();
     const allGameList = [...evoData];
-    const allLoading = evoLoadong;
+    const allLoading = evoLoading;
+
     //分類遊戲
-    const trnGameList = casinoGameCategory !== 'all' ? allGameList.filter((item) => casinoCategoryFilter[casinoGameCategory].some((casinoCategoryItem) => item.formProviderCategory === casinoCategoryItem)) : allGameList;
+    const ShowGames = () => {
+        if (allLoading) return <div>loading...</div>;
+        if (casinoGameCategory === 'all') return <GameList gameData={allGameList} />;
+        if (casinoGameCategory === 'baccarat') return <GameList gameData={allGameList.filter((item) => item.casinoCategory === 'baccarat')} />;
+        if (casinoGameCategory === 'blackjack') return <GameList gameData={allGameList.filter((item) => item.casinoCategory === 'blackjack')} />;
+        if (casinoGameCategory === 'roulette') return <GameList gameData={allGameList.filter((item) => item.casinoCategory === 'roulette')} />;
+        if (casinoGameCategory === 'dice') return <GameList gameData={allGameList.filter((item) => item.casinoCategory === 'dice')} />;
+        if (casinoGameCategory === 'other') return <GameList gameData={allGameList.filter((item) => item.casinoCategory === 'other')} />;
+        return <div className="text-center">Not Provider</div>;
+    };
+
+    //搜尋遊戲
+    const filterGame = (value: any) => {
+        console.log(value);
+    };
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
     return (
         <div className="casinoPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col  gap-4">
             <Banner />
-            {windowWidth <= 414 ? <NewsMarquee speed={15} marqueeText={marqueeText} /> : ''}
+            <NewsMarquee className="sm:hidden" speed={15} marqueeText={marqueeText} />
             <div className="slotSection relative sm:w-full">
                 <div className="sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl sm:py-4">
-                    {windowWidth > 414 ? (
-                        <div className="slotTitle grid grid-cols-11 gap-4 py-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
-                            <div className="col-span-1 flex justify-center">
-                                <img src={Icon_Main_Title} alt="" className="" />
-                            </div>
-                            <span className="col-span-1 font-bold text-3xl text-[#9680EA] -ml-3">{t('CASINO')}</span>
+                    <div className="hidden slotTitle sm:grid grid-cols-11 gap-4 py-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
+                        <div className="col-span-1 flex justify-center">
+                            <img src={Icon_Main_Title} alt="" className="" />
                         </div>
-                    ) : (
-                        ''
-                    )}
-                    <div className="casinoCategorySection grid sm:grid-cols-11 sm:px-0 sm:py-2 sm:pt-4 grid-cols-3 pb-3 px-4">
-                        <div className="sm:col-start-2 sm:col-span-9 col-span-3 grid grid-cols-3 gap-2">
-                            {casinoCategory.map((item) => {
+                        <span className="col-span-1 font-bold text-3xl text-[#9680EA] -ml-3 flex items-center">{t('CASINO')}</span>
+                        <div className="col-start-7 col-span-4 relative flex">
+                            <SearchBar onFilter={filterGame} />
+                        </div>
+                    </div>
+
+                    <div className="casinoCategorySection grid-cols-3 pb-3 px-4  overflow-x-scroll sm:grid sm:grid-cols-11 sm:px-0 sm:py-2 sm:pt-4 sm:overflow-hidden">
+                        <div className="w-fit flex flex-nowrap col-span-3 grid-cols-7 gap-2 sm:w-full sm:grid sm:col-start-2 sm:col-span-9 ">
+                            {fxnCasinoCategory.map((item) => {
                                 return (
-                                    <div key={nanoid()} onClick={() => setCasinoGameCategory(item.Category)} className={`${casinoGameCategory == item.Category ? 'font-bold bg-[#5932EA]' : 'font-medium bg-[#C6BBEE]'} col-span-1 sm:h-20 sm:aspect-auto  aspect-[108/50] cursor-pointer rounded-2xl overflow-hidden`}>
-                                        <div className="sm:px-9 sm:py-5 sm:gap-8 gap-1 p-3 flex w-full h-full relative justify-start items-center ">
-                                            <img src={item.img} className="sm:h-10 h-6 object-center object-contain" alt="" />
-                                            <span className="sm:text-3xl text-xs text-white">{t(item.name)}</span>
-                                        </div>
+                                    <div key={nanoid()} onClick={handleSwitchTab(item.Category)} className={`${casinoGameCategory == item.Category ? 'font-bold bg-[#5932EA]' : 'font-medium bg-[#C6BBEE]'} px-4 py-2 col-span-1 cursor-pointer rounded-2xl overflow-hidden flex items-center gap-2`}>
+                                        <img src={item.img} className="w-9 h-full object-center object-contain" alt="" />
+                                        <span className="sm:text-base text-xs text-white">{t(item.name)}</span>
                                     </div>
                                 );
                             })}
                         </div>
                     </div>
-                    {!allLoading ? <GameList gameData={trnGameList} /> : <div className="w-full text-center">loading...</div>}
+                    <ShowGames />
                 </div>
             </div>
         </div>

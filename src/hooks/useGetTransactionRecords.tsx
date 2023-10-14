@@ -1,10 +1,9 @@
-import { useGetIdentity, useList } from '@refinedev/core';
-import { TMe, TTransaction } from '@/types';
+import { useList } from '@refinedev/core';
+import { TTransaction } from '@/types';
 
-export const useGetTransactionRecords = (props: { type: string[] }) => {
+export const useGetTransactionRecords = ({ type, userID }: { type: string[]; userID: number }) => {
     //這支hook可以被重複使用，type傳入的參數是一個陣列如[DEPOSIT', 'WITHDRAW]
-    const { type } = props;
-    const { data: identity } = useGetIdentity<TMe>();
+    // const { type, userID } = props;
     // console.log('identity', identity);
     //取得交易紀錄
     const { data, isLoading } = useList<TTransaction>({
@@ -20,7 +19,7 @@ export const useGetTransactionRecords = (props: { type: string[] }) => {
             {
                 field: 'user.id',
                 operator: 'eq',
-                value: identity?.id,
+                value: userID,
             },
             {
                 field: 'type',

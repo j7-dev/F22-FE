@@ -6,10 +6,11 @@ import Marquee from 'react-fast-marquee';
 type marqueeTextProps = {
     marqueeText?: string[];
     speed?: number;
+    className?: string;
 };
-const index: React.FC<marqueeTextProps> = ({ marqueeText = [''], speed = 40 }) => {
+const index: React.FC<marqueeTextProps> = ({ marqueeText = [''], speed = 40, className }) => {
     return (
-        <div className="newsMarquee relative flex items-center gap-2.5 overflow-hidden w-full sm:px-0 px-4">
+        <div className={`${className} newsMarquee relative flex items-center gap-2.5 overflow-hidden w-full sm:px-0 px-4`}>
             <img src={iconSpeaker} className="w-5 sm:w-auto" />
             <Marquee autoFill={true} speed={speed} pauseOnHover={true} className="font-bold text-xs sm:text-base text-black">
                 {marqueeText?.map((item) => {

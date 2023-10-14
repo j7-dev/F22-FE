@@ -3,15 +3,8 @@
 		.leftContent {
 			&:hover {
 				~ .rightContent {
-					padding-left: 320px !important;
-					@media (max-width: 1460px) {
-						.Navbar {
-							.userInfo {
-								.rewardInfo {
-									display: none !important;
-								}
-							}
-						}
+					@media (min-width: 415px) {
+						padding-left: 320px !important;
 					}
 				}
 			}

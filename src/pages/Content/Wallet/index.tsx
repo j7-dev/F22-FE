@@ -1,41 +1,39 @@
 import React from 'react';
-import { atom, useAtomValue } from 'jotai';
-import UserSection from '@/components/ContentLayout/Wallet/UserSection';
-import CashSection from '@/components/ContentLayout/Wallet/CashSection';
-import AccountSection from '@/components/ContentLayout/Wallet/AccountSection';
-import RewardSection from '@/components/ContentLayout/Wallet/RewardSection';
+import { atom } from 'jotai';
 import { Authenticated } from './Authenticated';
+import { useGetIdentity } from '@refinedev/core';
+import { TUser } from '@/types';
+import UserInfo from './UserInfo';
+import BankCard from './BankCard';
+import ChangPas from './ChangPas';
+import NoteBox from './NoteBox';
+import CashHistory from './CashHistory';
+// import { useTranslation } from 'react-i18next';
 
 export const selectedSectionAtom = atom('siteNotify');
 
 const Wallet: React.FC = () => {
-    const selectedSection = useAtomValue(selectedSectionAtom);
-    const switchSection: { [key: string]: JSX.Element } = {
-        // MyBalance: <CashSection section="MyBalance" />,
-        deposit: <CashSection section="deposit" />,
-        withdraw: <CashSection section="withdraw" />,
-        siteNotify: <CashSection section="siteNotify" />,
-        bankAccount: <CashSection section="bankAccount" />,
-        couponHistory: <RewardSection section="couponHistory" />,
-        // BonusPoint: <RewardSection section="BonusPoint" />,
-        rolloverHistory: <AccountSection section="rolloverHistory" />,
-        cashHistory: <AccountSection section="cashHistory" />,
-        changePassword: <AccountSection section="changePassword" />,
-    };
-    const selectSection = selectedSection;
+    // const { t } = useTranslation();
+    const { data, isLoading } = useGetIdentity<TUser>();
+    // console.log('🚀 ~ data:', data);
 
+    if (isLoading) return <div>loading...</div>;
     return (
         <Authenticated>
-            <div className="walletPage w-full bg-[#F6F7F7]">
-                <div className="wallerSection max-w-7xl mx-auto flex justify-start items-start p-5 gap-5 md:flex-row flex-col">
-                    <div className="userMenu md:max-w-[300px] w-full">
-                        <UserSection />
+            <div className="myPage relative sm:w-full flex flex-col gap-6 mt-9 px-4">
+                <UserInfo userInfo={data} />
+                <div className="userSection2 grid grid-cols-4 gap-6">
+                    <div className="col-span-1">
+                        <BankCard bankInfo={data?.bank_account} />
                     </div>
-                    <div className="userContent  md:max-w-[900px] w-full flex justify-start items-start gap-5">
-                        {/* default section */}
-                        {switchSection?.[selectSection] || <CashSection section="siteNotify" />}
+                    <div className="col-span-1">
+                        <ChangPas />
+                    </div>
+                    <div className="col-span-2">
+                        <NoteBox />
                     </div>
                 </div>
+                <CashHistory userID={data?.id as number} />
             </div>
         </Authenticated>
     );

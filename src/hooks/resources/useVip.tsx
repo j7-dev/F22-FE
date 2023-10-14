@@ -2,6 +2,19 @@ import { useList, useGetIdentity } from '@refinedev/core';
 import { sortBy } from 'lodash-es';
 import { TMe, TVip } from '@/types';
 
+/**
+ * 如果用戶有登入   且身上有VIP等級
+ *
+ * @returns
+ * nextVip - 下個VIP等級  如果沒有  就回null
+ * prevVip - 上個VIP等級  如果沒有  就回null
+ * diff - 是距離下個等級還要多少存款 & 有效投注
+ *
+ * ⚠️需要注意的是  這邊有可能是負數@@  如果後台亂設定的化
+ * 因為VIP等級排序是用一個 order的數字排
+ * 如果故意把  VIP2 比VIP1  門檻還低  就會有這種狀況
+ */
+
 export const useVip = () => {
     const { data: user } = useGetIdentity<TMe>();
     const vip_id = user?.vip?.id;
