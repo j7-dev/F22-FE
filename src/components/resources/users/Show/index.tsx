@@ -13,6 +13,7 @@ import { Create } from '@/components/resources/transactionRecords';
 import { DollarOutlined } from '@ant-design/icons';
 import useDpWdUserInfo from './useDpWdUserInfo';
 import useColumns from './useColumns';
+import NotesForm from './NotesForm';
 
 type TInfo = {
     dayDp: number;
@@ -99,7 +100,11 @@ const index = () => {
         {
             key: 'userNotes',
             label: 'User Notes',
-            children: <Card bordered={false} title="User Notes"></Card>,
+            children: (
+                <Card bordered={false} title="User Notes">
+                    <NotesForm user_notes={theUser?.user_notes} />
+                </Card>
+            ),
         },
     ];
 
