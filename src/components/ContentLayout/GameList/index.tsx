@@ -41,6 +41,7 @@ const index: React.FC<PragmaticGameData> = ({ gameData = [] }) => {
                 </div>
             );
         }
+        return '';
     };
     return (
         <div className="gameList grid sm:grid-cols-11 sm:px-0 px-4 ">

@@ -20,7 +20,7 @@ const Wallet: React.FC = () => {
     if (isLoading) return <div>loading...</div>;
     return (
         <Authenticated>
-            <div className="myPage relative sm:w-full flex flex-col gap-6 mt-9 px-4">
+            <div className="myPage relative sm:w-full flex flex-col gap-6 my-9 px-4">
                 <UserInfo userInfo={data} />
                 <div className="userSection2 grid grid-cols-4 gap-6">
                     <div className="col-span-1">

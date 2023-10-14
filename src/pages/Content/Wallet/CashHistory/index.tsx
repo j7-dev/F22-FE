@@ -8,7 +8,7 @@ const { Column } = Table;
 const index: React.FC<{ userID: number }> = ({ userID }) => {
     const { t } = useTranslation();
     const { data, isLoading } = useGetTransactionRecords({ type: ['DEPOSIT', 'WITHDRAW'], userID });
-    console.log('🚀 ~ data:', data);
+    // console.log('🚀 ~ data:', data);
 
     const fxnData =
         data?.data.slice(0, 3).map((item) => {
