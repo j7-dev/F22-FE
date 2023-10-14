@@ -1,15 +1,18 @@
 import FormComponent from '../FormComponent';
-import { useCustomMutation, HttpError, useGetIdentity, useApiUrl } from '@refinedev/core';
+import { useCustomMutation, HttpError, useGetIdentity, useApiUrl, useInvalidate } from '@refinedev/core';
 import { Create, useForm, CreateProps } from '@refinedev/antd';
 import { TTransaction, TTransactionFields, TUser } from '@/types';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
+import { useQueryClient } from '@tanstack/react-query';
 
 const index: React.FC<
     CreateProps & {
         notificationConfig?: ArgsProps;
     }
 > = ({ notificationConfig = {}, ...createProps }) => {
+    const invalidate = useInvalidate();
+    const queryClient = useQueryClient();
     const { mutate: add } = useCustomMutation<TTransactionFields>();
     const { data: identity } = useGetIdentity<TUser>();
     const updated_by_user_id = identity?.id;
@@ -33,9 +36,14 @@ const index: React.FC<
                     {
                         onSuccess: () => {
                             form.resetFields();
+                            invalidate({
+                                resource: 'users',
+                                invalidates: ['all'],
+                            });
+                            queryClient.invalidateQueries(['wallet-api', 'balance', 'get']);
                             notification.success({
                                 key: 'add balance',
-                                message: 'add balance records successfully',
+                                message: 'Balance Adjustment successfully',
                                 ...notificationConfig,
                             });
                         },

@@ -10,7 +10,6 @@ import useColumns from './useColumns';
 const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }) => {
     const siteSetting = useGetSiteSetting();
     const support_game_providers = siteSetting?.support_game_providers || [];
-    const default_currency = siteSetting?.default_currency || 'KRW';
     const { data } = useList({
         resource: 'transaction-records',
         filters: [
@@ -65,12 +64,13 @@ const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }
 
         // ENHANCE: 須注意並非所有 transaction 都是 credit
 
-        const win = txns.reduce((acc: number, cur: TBetRecord) => {
-            if (cur.game_provider === gameProvider && cur.status === 'CREDIT') {
-                return acc + cur.amount;
-            }
-            return acc;
-        }, 0);
+        const payOut =
+            txns.reduce((acc: number, cur: TBetRecord) => {
+                if (cur.game_provider === gameProvider && cur.status === 'CREDIT') {
+                    return acc + cur.amount;
+                }
+                return acc;
+            }, 0) * -1; // 付出去為負數
 
         const txnAmountRefIds = [...new Set(txns.filter((t) => t.game_provider === gameProvider).map((t) => t.transaction_ref_id))];
 
@@ -78,8 +78,8 @@ const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }
             gameProvider,
             txnAmount: txnAmountRefIds.length,
             validBetAmount,
-            winLoss: win - validBetAmount,
-            win,
+            winLoss: validBetAmount + payOut,
+            payOut,
         };
     });
 
@@ -90,7 +90,7 @@ const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }
             {latestDeposit ? (
                 <div>
                     <p>
-                        Latest Deposit: <Amount amount={latestDeposit?.amount} currency={default_currency} symbol className="bg-yellow-200 px-3" /> at <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}</u>
+                        Latest Deposit: <Amount amount={latestDeposit?.amount} className="bg-yellow-200 px-3" /> at <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}</u>
                     </p>
                     <p>
                         Date: from <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD')}</u> to <u>{dayjs().format('YYYY-MM-DD')}</u>
@@ -99,7 +99,36 @@ const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }
             ) : (
                 'This user has no deposit record'
             )}
-            <Table loading={txnsIsLoading} size="small" dataSource={dataSource} columns={columns} />
+            <Table
+                loading={txnsIsLoading}
+                size="small"
+                dataSource={dataSource}
+                columns={columns}
+                summary={(pageData) => {
+                    const totalTxnAmount = pageData.reduce((acc: number, cur) => acc + cur.txnAmount, 0);
+                    const totalValidBetAmount = pageData.reduce((acc: number, cur) => acc + cur.validBetAmount, 0);
+                    const totalWinLoss = pageData.reduce((acc: number, cur) => acc + cur.winLoss, 0);
+                    const totalPayOut = pageData.reduce((acc: number, cur) => acc + cur.payOut, 0);
+
+                    return (
+                        <Table.Summary fixed>
+                            <Table.Summary.Row>
+                                <Table.Summary.Cell index={0}>Total</Table.Summary.Cell>
+                                <Table.Summary.Cell index={1}>{totalTxnAmount}</Table.Summary.Cell>
+                                <Table.Summary.Cell index={2}>
+                                    <Amount amount={totalValidBetAmount} />
+                                </Table.Summary.Cell>
+                                <Table.Summary.Cell index={3}>
+                                    <Amount amount={totalPayOut} />
+                                </Table.Summary.Cell>
+                                <Table.Summary.Cell index={4}>
+                                    <Amount amount={totalWinLoss} />
+                                </Table.Summary.Cell>
+                            </Table.Summary.Row>
+                        </Table.Summary>
+                    );
+                }}
+            />
         </div>
     );
 });

@@ -12,6 +12,8 @@ type TDefaultValues = {
 };
 
 const RATIO_TYPES = ['live', 'slot'] as const;
+const GENERAL_GP = ['BTI', 'IGX'] as const;
+const GENERAL_GAME_TYPES = ['turnoverRate'] as const;
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
@@ -128,7 +130,28 @@ const FormComponent: React.FC<{
                 </div>
             </div>
 
+            {/* TODO 可以抽離視覺部分優化 */}
             {support_game_providers.map((gameProvider, index) => {
+                if (GENERAL_GP.includes(gameProvider as any)) {
+                    return (
+                        <div key={gameProvider} className="grid grid-cols-3 gap-x-6 gap-y-2 bg-gray-100 p-4 rounded-xl mb-4">
+                            <div>
+                                <Form.Item hidden name={['ratio', index, 'gameProvider']} initialValue={gameProvider}>
+                                    <Input />
+                                </Form.Item>
+                                <div className="flex items-center">{gameProvider}</div>
+                            </div>
+                            {GENERAL_GAME_TYPES.map((key) => {
+                                return (
+                                    <Form.Item className="w-full m-0" label={key} name={['ratio', index, key]} rules={[{ required: true, message: 'value is required' }]}>
+                                        <InputNumber min={0} className="w-full" addonAfter="%" />
+                                    </Form.Item>
+                                );
+                            })}
+                        </div>
+                    );
+                }
+
                 return (
                     <div key={gameProvider} className="grid grid-cols-3 gap-x-6 gap-y-2 bg-gray-100 p-4 rounded-xl mb-4">
                         <div>

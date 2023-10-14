@@ -1,7 +1,7 @@
 import { Card, Tabs, TabsProps, Collapse } from 'antd';
 import { Show } from '@refinedev/antd';
 import { useCan } from '@/hooks';
-import { BaseRecord, useShow } from '@refinedev/core';
+import { useShow, useResource } from '@refinedev/core';
 import ObjectTable from '@/components/general/ObjectTable';
 import MoneyLog from '@/components/Admin/MoneyLog';
 import LoginDetail from '@/components/Admin/LoginDetail';
@@ -13,8 +13,19 @@ import { Create } from '@/components/resources/transactionRecords';
 import { DollarOutlined } from '@ant-design/icons';
 import useDpWdUserInfo from './useDpWdUserInfo';
 import useColumns from './useColumns';
+import NotesForm from './NotesForm';
+
+type TInfo = {
+    dayDp: number;
+    monthDp: number;
+    totalDp: number;
+    dayWd: number;
+    monthWd: number;
+    totalWd: number;
+};
 
 const index = () => {
+    const { identifier } = useResource();
     const { canDelete, canEdit } = useCan();
     const { id } = useParams<{ id: string }>();
     const { queryResult } = useShow({
@@ -30,6 +41,9 @@ const index = () => {
                         },
                     },
                 },
+                balances: {
+                    fields: '*',
+                },
             },
         },
     });
@@ -39,7 +53,7 @@ const index = () => {
     const discount = (theUser?.vip?.discount || { ratio: [] }) as TDiscount;
 
     const { data: dpWdUserInfoData } = useDpWdUserInfo({ user_id: Number(id) });
-    const dpWdUserInfo = (dpWdUserInfoData?.data?.data || {}) as BaseRecord;
+    const dpWdUserInfo = (dpWdUserInfoData?.data?.data || {}) as TInfo;
     const userData = {
         ...theUser,
         ...dpWdUserInfo,
@@ -85,7 +99,11 @@ const index = () => {
         {
             key: 'userNotes',
             label: 'User Notes',
-            children: <Card bordered={false} title="User Notes"></Card>,
+            children: (
+                <Card bordered={false} title="User Notes">
+                    <NotesForm user_notes={theUser?.user_notes} />
+                </Card>
+            ),
         },
     ];
 
@@ -96,7 +114,8 @@ const index = () => {
             <Show
                 isLoading={isLoading}
                 title={`【${theUser?.display_name}】Member Detail`}
-                resource="users"
+                resource={identifier}
+                recordItemId={id}
                 canDelete={canDelete}
                 canEdit={canEdit}
                 contentProps={{
@@ -109,7 +128,7 @@ const index = () => {
             >
                 <div>
                     <Card bordered={false} title="Info">
-                        <div className="grid grid-cols-2 lg:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-2 xl:grid-cols-2 gap-6">
                             <ObjectTable record={userData} columns={infoLeftColumns} />
                             <ObjectTable record={userData} columns={infoRightColumns} />
                         </div>

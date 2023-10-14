@@ -1,12 +1,14 @@
 import { DateTime } from '@/components/PureComponents';
 import ReferralLink from '@/components/general/ReferralLink';
-import { TVip } from '@/types';
+import { TBankAccount, TVip } from '@/types';
 import VipLink from '@/components/Admin/VipLink';
 import Amount from '@/components/Admin/Amount';
-import { useGetSiteSetting } from '@/hooks';
+import { useGetSiteSetting, useBalanceColumns } from '@/hooks';
+import BankAccount from '@/components/Admin/BankAccount';
 
 const useColumns = () => {
     const { default_currency } = useGetSiteSetting();
+    const allBalances = useBalanceColumns();
 
     const infoLeftColumns = [
         {
@@ -88,6 +90,7 @@ const useColumns = () => {
     ];
 
     const infoRightColumns = [
+        ...allBalances,
         {
             key: 'email',
             title: 'Email',
@@ -120,6 +123,12 @@ const useColumns = () => {
             title: 'Allow Game Providers',
             dataIndex: 'allow_game_providers',
             render: (allow_game_providers: string[] | null) => (allow_game_providers || []).join(', '),
+        },
+        {
+            key: 'bank_account',
+            title: 'Bank Account',
+            dataIndex: 'bank_account',
+            render: (bank_account: TBankAccount | null) => <BankAccount bank_account={bank_account} />,
         },
         {
             key: 'createdAt',

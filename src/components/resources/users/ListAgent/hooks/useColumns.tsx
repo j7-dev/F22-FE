@@ -19,7 +19,7 @@ const useColumns = () => {
             dataIndex: `balances`,
             key: `balances-${currency}-${amount_type}`,
             render: (balances: TBalance[]) => {
-                const balance = balances.find((b) => b.currency === currency && b.amount_type === amount_type);
+                const balance = (balances || []).find((b) => b.currency === currency && b.amount_type === amount_type);
                 return <Amount amount={balance?.amount || 0} currency={currency} symbol />;
             },
         };
@@ -149,7 +149,7 @@ const useColumns = () => {
             dataIndex: 'transaction_records',
             key: 'LastBetTime',
             render: (transaction_records: TTransaction[]) => {
-                const lastBet = transaction_records.find((tr) => tr.type === 'DEBIT' && tr.status === 'SUCCESS');
+                const lastBet = (transaction_records || []).find((tr) => tr.type === 'DEBIT' && tr.status === 'SUCCESS');
                 return lastBet ? dayjs(lastBet?.createdAt).format('YYYY-MM-DD') : null;
             },
         },

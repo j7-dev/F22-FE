@@ -18,8 +18,10 @@ const FormComponent: React.FC<{
     const watchCurrency = Form.useWatch(['currency'], form);
     const watchAmountType = Form.useWatch(['amount_type'], form);
     const { action, id, identifier } = useResource();
+    const userFieldIsDisabled = action === 'show' && identifier === 'members-list';
 
     useEffect(() => {
+        // User Show 畫面自動帶入當前 user
         const timer = setTimeout(() => {
             if (action === 'show' && identifier === 'members-list' && form) {
                 form.setFieldValue(['user_id'], Number(id));
@@ -42,6 +44,7 @@ const FormComponent: React.FC<{
             },
         },
         queryOptions: {
+            queryKey: ['wallet-api', 'balance', 'get'],
             enabled: !!watchUser && !!watchCurrency && !!watchAmountType,
         },
     });
@@ -69,8 +72,8 @@ const FormComponent: React.FC<{
                     <Input />
                 </Form.Item>
 
-                <Form.Item name={['user_id']} label="User">
-                    <Select {...userSelectProps} allowClear />
+                <Form.Item name={['user_id']} label="User" initialValue={Number(id)}>
+                    <Select {...userSelectProps} allowClear disabled={userFieldIsDisabled} />
                 </Form.Item>
                 <AmountInput />
                 <div>

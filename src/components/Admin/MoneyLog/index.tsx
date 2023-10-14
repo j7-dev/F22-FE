@@ -4,7 +4,6 @@ import { TTransaction } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
 import { DateTime } from '@/components/PureComponents';
 import Amount from '@/components/Admin/Amount';
-import { useGetSiteSetting } from '@/hooks';
 
 type DataType = {
     id: number;
@@ -18,10 +17,7 @@ type DataType = {
 const index: React.FC<{
     user_id: string | number | undefined;
 }> = ({ user_id }) => {
-    const siteSetting = useGetSiteSetting();
     if (!user_id) return <p>can't get user_id</p>;
-
-    const default_currency = siteSetting?.default_currency || 'KRW';
 
     const columns: ColumnsType<DataType> = [
         {
@@ -34,19 +30,19 @@ const index: React.FC<{
             title: 'credit',
             dataIndex: 'credit',
             key: 'credit',
-            render: (credit: number) => <Amount amount={credit} currency={default_currency} symbol />,
+            render: (credit: number) => <Amount amount={credit} />,
         },
         {
             title: 'debit',
             dataIndex: 'debit',
             key: 'debit',
-            render: (debit: number) => <Amount amount={debit} currency={default_currency} symbol />,
+            render: (debit: number) => <Amount amount={debit} />,
         },
         {
             title: 'balance',
             dataIndex: 'balance_after_mutate',
             key: 'balance_after_mutate',
-            render: (balance_after_mutate: number) => <Amount amount={balance_after_mutate} currency={default_currency} symbol />,
+            render: (balance_after_mutate: number) => <Amount amount={balance_after_mutate} />,
         },
         {
             title: 'description',
