@@ -2,28 +2,15 @@ import { DataType } from '../types';
 import { ShowButton, EditButton } from '@refinedev/antd';
 import { BooleanIndicator } from '@/components/PureComponents';
 import { Link } from 'react-router-dom';
-import { TBalance, TTransaction, TUser, TVip } from '@/types';
+import { TTransaction, TUser, TVip } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
-import { useGetSiteSetting } from '@/hooks';
+import { useGetSiteSetting, useBalanceColumns } from '@/hooks';
 import Amount from '@/components/Admin/Amount';
 
 const useColumns = () => {
-    const siteSetting = useGetSiteSetting();
-    const currency = siteSetting?.default_currency || 'KRW';
-    const support_amount_types = siteSetting?.support_amount_types || [];
-    const amountTypesBalances = support_amount_types.map((amount_type) => {
-        return {
-            with: 300,
-            title: `balances-${currency}-${amount_type}`,
-            dataIndex: `balances`,
-            key: `balances-${currency}-${amount_type}`,
-            render: (balances: TBalance[]) => {
-                const balance = balances.find((b) => b.currency === currency && b.amount_type === amount_type);
-                return <Amount amount={balance?.amount || 0} currency={currency} symbol />;
-            },
-        };
-    });
+    const { default_currency } = useGetSiteSetting();
+    const allBalances = useBalanceColumns();
 
     const columns: ColumnsType<DataType> = [
         {
@@ -52,7 +39,7 @@ const useColumns = () => {
             key: 'Agent',
             render: (agent: TUser) => (agent ? <Link to={`/refine/agent/show/${agent?.id}`}>{agent?.display_name}</Link> : null),
         },
-        ...amountTypesBalances,
+        ...allBalances,
         {
             title: 'phone',
             dataIndex: 'phone',
@@ -65,30 +52,15 @@ const useColumns = () => {
             render: (vip: TVip) => <Link to="/refine/system-setting/vips">{vip?.label}</Link>,
         },
         {
-            title: 'confirmed',
+            title: 'status',
             dataIndex: 'confirmed',
-            key: 'confirmed',
+            key: 'status',
             align: 'center',
             render: (confirmed: boolean) => (
                 <BooleanIndicator
                     enabled={confirmed}
                     tooltipProps={{
                         title: confirmed ? 'Confirmed' : 'Note Confirmed',
-                        enabled: true,
-                    }}
-                />
-            ),
-        },
-        {
-            title: 'blocked',
-            dataIndex: 'blocked',
-            key: 'blocked',
-            align: 'center',
-            render: (blocked: boolean) => (
-                <BooleanIndicator
-                    enabled={!blocked}
-                    tooltipProps={{
-                        title: blocked ? 'Blocked' : 'Unblocked',
                         enabled: true,
                     }}
                 />
@@ -110,7 +82,7 @@ const useColumns = () => {
                     }
                     return acc;
                 }, 0);
-                return <Amount amount={sum} currency={currency} symbol />;
+                return <Amount amount={sum} />;
             },
         },
         {
@@ -124,7 +96,7 @@ const useColumns = () => {
                     }
                     return acc;
                 }, 0);
-                return <Amount amount={sum} currency={currency} symbol />;
+                return <Amount amount={sum} />;
             },
         },
         {
@@ -145,7 +117,7 @@ const useColumns = () => {
                     return acc;
                 }, 0);
                 const dpWd = sumDeposit - sumWithdraw;
-                return <Amount amount={dpWd} currency={currency} symbol className={dpWd === 0 ? '' : dpWd > 0 ? 'text-teal-500' : 'text-rose-500'} />;
+                return <Amount amount={dpWd} currency={default_currency} symbol className={dpWd === 0 ? '' : dpWd > 0 ? 'text-teal-500' : 'text-rose-500'} />;
             },
         },
         {

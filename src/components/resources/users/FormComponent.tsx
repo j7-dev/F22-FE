@@ -130,11 +130,7 @@ const FormComponent: React.FC<{
                     {!isString(formProps.initialValues?.birthday) && formProps.initialValues?.birthday ? <DatePicker className="w-full" /> : <Input />}
                 </Form.Item>
 
-                <Form.Item name="confirmed" valuePropName="checked" label="confirmed" initialValue={formType === 'create' ? true : undefined}>
-                    <Switch />
-                </Form.Item>
-
-                <Form.Item name="blocked" valuePropName="checked" label="blocked" initialValue={formType === 'create' ? false : undefined}>
+                <Form.Item name="confirmed" valuePropName="checked" label="status" initialValue={formType === 'create' ? true : undefined}>
                     <Switch />
                 </Form.Item>
 

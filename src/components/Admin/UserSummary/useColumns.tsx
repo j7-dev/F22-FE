@@ -1,12 +1,9 @@
 import type { ColumnsType } from 'antd/es/table';
-import { useGetSiteSetting } from '@/hooks';
 import Amount from '@/components/Admin/Amount';
 
 type DataType = any;
 
 const useColumns = () => {
-    const siteSetting = useGetSiteSetting();
-    const currency = siteSetting?.default_currency || 'KRW';
     const columns: ColumnsType<DataType> = [
         {
             title: 'Game Provider',
@@ -22,19 +19,19 @@ const useColumns = () => {
             title: 'Valid Bet Amount',
             dataIndex: 'validBetAmount',
             key: 'validBetAmount',
-            render: (v: number) => <Amount amount={v || 0} currency={currency} symbol />,
+            render: (v: number) => <Amount amount={v || 0} />,
         },
         {
-            title: 'WINLOSS',
+            title: 'Pay out',
+            dataIndex: 'payOut',
+            key: 'payOut',
+            render: (v: number) => <Amount amount={v || 0} />,
+        },
+        {
+            title: 'win/loss',
             dataIndex: 'winLoss',
             key: 'winLoss',
-            render: (v: number) => <Amount amount={v || 0} currency={currency} symbol />,
-        },
-        {
-            title: 'WIN',
-            dataIndex: 'win',
-            key: 'win',
-            render: (v: number) => <Amount amount={v || 0} currency={currency} symbol />,
+            render: (v: number) => <Amount amount={v || 0} />,
         },
     ];
 

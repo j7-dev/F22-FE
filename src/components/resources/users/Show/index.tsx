@@ -1,7 +1,7 @@
 import { Card, Tabs, TabsProps, Collapse } from 'antd';
 import { Show } from '@refinedev/antd';
 import { useCan } from '@/hooks';
-import { BaseRecord, useShow } from '@refinedev/core';
+import { useShow, useResource } from '@refinedev/core';
 import ObjectTable from '@/components/general/ObjectTable';
 import MoneyLog from '@/components/Admin/MoneyLog';
 import LoginDetail from '@/components/Admin/LoginDetail';
@@ -14,7 +14,17 @@ import { DollarOutlined } from '@ant-design/icons';
 import useDpWdUserInfo from './useDpWdUserInfo';
 import useColumns from './useColumns';
 
+type TInfo = {
+    dayDp: number;
+    monthDp: number;
+    totalDp: number;
+    dayWd: number;
+    monthWd: number;
+    totalWd: number;
+};
+
 const index = () => {
+    const { identifier } = useResource();
     const { canDelete, canEdit } = useCan();
     const { id } = useParams<{ id: string }>();
     const { queryResult } = useShow({
@@ -30,16 +40,20 @@ const index = () => {
                         },
                     },
                 },
+                balances: {
+                    fields: '*',
+                },
             },
         },
     });
     const { data, isLoading } = queryResult;
 
     const theUser = (data?.data || {}) as TUser;
+    console.log('⭐  theUser:', theUser);
     const discount = (theUser?.vip?.discount || { ratio: [] }) as TDiscount;
 
     const { data: dpWdUserInfoData } = useDpWdUserInfo({ user_id: Number(id) });
-    const dpWdUserInfo = (dpWdUserInfoData?.data?.data || {}) as BaseRecord;
+    const dpWdUserInfo = (dpWdUserInfoData?.data?.data || {}) as TInfo;
     const userData = {
         ...theUser,
         ...dpWdUserInfo,
@@ -96,7 +110,8 @@ const index = () => {
             <Show
                 isLoading={isLoading}
                 title={`【${theUser?.display_name}】Member Detail`}
-                resource="users"
+                resource={identifier}
+                recordItemId={id}
                 canDelete={canDelete}
                 canEdit={canEdit}
                 contentProps={{

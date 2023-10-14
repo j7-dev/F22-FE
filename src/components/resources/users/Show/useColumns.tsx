@@ -3,10 +3,11 @@ import ReferralLink from '@/components/general/ReferralLink';
 import { TVip } from '@/types';
 import VipLink from '@/components/Admin/VipLink';
 import Amount from '@/components/Admin/Amount';
-import { useGetSiteSetting } from '@/hooks';
+import { useGetSiteSetting, useBalanceColumns } from '@/hooks';
 
 const useColumns = () => {
     const { default_currency } = useGetSiteSetting();
+    const allBalances = useBalanceColumns();
 
     const infoLeftColumns = [
         {
@@ -88,6 +89,7 @@ const useColumns = () => {
     ];
 
     const infoRightColumns = [
+        ...allBalances,
         {
             key: 'email',
             title: 'Email',

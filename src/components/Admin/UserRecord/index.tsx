@@ -1,14 +1,11 @@
 import React from 'react';
 import BetRecordTable from '@/components/Admin/BetRecordTable';
 import Amount from '@/components/Admin/Amount';
-import { useGetSiteSetting } from '@/hooks';
 import dayjs from 'dayjs';
 import { useList } from '@refinedev/core';
 import { TTransaction } from '@/types';
 
 const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }) => {
-    const siteSetting = useGetSiteSetting();
-    const default_currency = siteSetting?.default_currency || 'KRW';
     const { data } = useList({
         resource: 'transaction-records',
         filters: [
@@ -42,7 +39,7 @@ const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }
         <div>
             {latestDeposit ? (
                 <div>
-                    Latest Deposit: <Amount amount={0} currency={default_currency} symbol /> at {dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}
+                    Latest Deposit: <Amount amount={0} /> at {dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}
                 </div>
             ) : (
                 'This user has no deposit record'

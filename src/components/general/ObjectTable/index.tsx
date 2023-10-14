@@ -69,7 +69,9 @@ const index: React.FC<{
                 {(columns ? columns : defaultColumns).map((column, i) => {
                     return (
                         <tr key={column?.key}>
-                            <th>{column?.title as string}</th>
+                            <th>
+                                <div>{column?.title as string}</div>
+                            </th>
                             <td>{getView(column, i)}</td>
                         </tr>
                     );
