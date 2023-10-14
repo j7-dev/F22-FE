@@ -15,7 +15,7 @@ export const selectedSectionAtom = atom('siteNotify');
 const Wallet: React.FC = () => {
     // const { t } = useTranslation();
     const { data, isLoading } = useGetIdentity<TUser>();
-    // console.log('🚀 ~ data:', data);
+    console.log('🚀 ~ data:', data);
 
     if (isLoading) return <div>loading...</div>;
     return (

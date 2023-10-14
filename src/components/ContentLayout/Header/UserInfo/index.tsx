@@ -13,7 +13,8 @@ const index: React.FC = () => {
     const { t } = useTranslation();
     const { data, isLoading } = useGetIdentity<TMe>();
     const userName = data?.username || 'userName';
-    const vip = data?.vip?.label || '';
+    const vip = (data?.vip?.order as number) + 1 || 0;
+    // console.log('🚀 ~ data:', data);
     const balance = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'CASH')[0].amount || 0 : 0;
     const turnoverBonus = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'TURNOVER_BONUS')[0].amount || 0 : 0;
     const navigate = useNavigate();
@@ -28,7 +29,7 @@ const index: React.FC = () => {
     return (
         <div className="userInfo w-full flex justify-end text-base leading-4 font-bold gap-2.5">
             <div className="userName flex flex-col justify-center items-end">
-                <span className="userVip text-[#828282] ">{vip && vip}</span>
+                <span className="userVip text-[#828282] ">{vip ? `LV.${vip}` : ''}</span>
                 <span className=" text-[#5932EA] whitespace-nowrap ">{userName}</span>
             </div>
             <div className="userBalancesWrap flex justify-center items-center gap-2 px-2 py-1.5 rounded-2xl bg-[#ECE8FA]">
