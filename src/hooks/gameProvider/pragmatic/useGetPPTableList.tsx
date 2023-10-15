@@ -7,7 +7,11 @@ export const useGetPPTableList = () => {
     const apiUrl = useApiUrl();
     const gameServerDomain = 'https://smart-bet.prerelease-env.biz';
 
-    const { data: fetchData, isLoading } = useCustom({
+    const {
+        data: fetchData,
+        isLoading,
+        isFetching,
+    } = useCustom({
         url: `${apiUrl}/pp/getcasinogames`,
         method: 'post',
     });
@@ -25,5 +29,6 @@ export const useGetPPTableList = () => {
     return {
         data,
         isLoading,
+        isFetching,
     };
 };
