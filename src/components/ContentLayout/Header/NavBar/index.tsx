@@ -1,20 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useIsAuthenticated } from '@refinedev/core';
-import { useSetAtom, useAtom, useAtomValue } from 'jotai';
-import { IsLoginAtom, popupIsOpenAtom } from '../LoginModule';
+import { useSetAtom, useAtomValue } from 'jotai';
+import { popupIsOpenAtom } from '../LoginModule';
 import { mbSidebarAtom, windowWidthAtom } from '@/components/ContentLayout';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
 import Mobile from './Mobile';
 import Pc from './Pc';
+import { useIsLogin } from '@/hooks/resources/useIsLogin';
 
 const NavBar: React.FC = () => {
     const setMbSidebar = useSetAtom(mbSidebarAtom);
     const setSidebarIsOpen = useSetAtom(sidebarIsOpenAtom);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const windowWidth = useAtomValue(windowWidthAtom);
-    const [isLogin, setIsLogin] = useAtom(IsLoginAtom);
-    const { data } = useIsAuthenticated();
+    const isLogin = useIsLogin();
     const Navigate = useNavigate();
 
     //手機版選單暴露函式
@@ -34,10 +33,7 @@ const NavBar: React.FC = () => {
         if (windowWidth > 414) return <Pc isLogin={isLogin} />;
         else return <Mobile handleMbSidebar={handleMbSidebar} handleProfile={handleProfile} isLogin={isLogin} />;
     };
-    //判斷是否登入並且覆值
-    useEffect(() => {
-        setIsLogin(!!data?.authenticated);
-    }, [data?.authenticated]);
+
     return (
         <div className="Navbar z-[999] fixed p-4 w-full h-fit bg-white sm:flex sm:items-center sm:justify-between sm:px-6 sm:py-4 sm:h-full sm:relative shadow-[0_4px_4px_0px_#A370ED33]">
             <nav className="relative w-full h-full py-3 xl:flex sm:items-center xl:justify-between sm:py-0  xl:mx-auto " aria-label="Global">

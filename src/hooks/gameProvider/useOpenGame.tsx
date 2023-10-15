@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { cloneDeep } from 'lodash';
 import { useCustomMutation, useGetIdentity, useGetLocale } from '@refinedev/core';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { API_URL } from '@/utils';
 import { TPopularGame } from '@/types/games/popularGames';
-import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { useIsLogin } from '@/hooks/resources/useIsLogin';
 
 const defaultConfig = {
     uuid: '123456789',
@@ -40,7 +41,7 @@ export const useOpenGame = () => {
     const [gameconfig, setGameconfig] = useState(defaultConfig);
     const { data: identity } = useGetIdentity<{ id: number; username: string }>();
     const { mutate: openGame, isLoading } = useCustomMutation();
-    const isLogin = useAtomValue(IsLoginAtom);
+    const isLogin = useIsLogin();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const locale = useGetLocale();
     const currentLocale = locale();

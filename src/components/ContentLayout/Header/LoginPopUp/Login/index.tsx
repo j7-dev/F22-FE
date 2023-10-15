@@ -16,7 +16,7 @@ type LoginVariables = {
 
 const index: React.FC = () => {
     const { t } = useTranslation();
-    const { mutate: login } = useLogin<LoginVariables>();
+    const { mutate: login, isLoading } = useLogin<LoginVariables>();
     const { data: isAuthenticated } = useIsAuthenticated();
     const captchaRef = useRef<HCaptcha>(null);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
@@ -94,7 +94,7 @@ const index: React.FC = () => {
                 </Form.Item>
                 <HCaptcha size="invisible" ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
                 <Form.Item className="mb-0">
-                    <Button disabled={!submittable} className="mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
+                    <Button loading={isLoading} disabled={!submittable} className="mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
                         {t('LOGIN')}
                     </Button>
                 </Form.Item>
@@ -102,7 +102,7 @@ const index: React.FC = () => {
             <div className="text-white flex flex-col">
                 <span className="font-normal text-sm"> {t("Don't have an account yet?")}</span>
                 <span className="text-sm font-bold cursor-pointer" onClick={handleToSignUp}>
-                    Sign Up
+                    {t('Sign Up')}
                 </span>
             </div>
         </div>

@@ -39,7 +39,7 @@ const index: React.FC = () => {
                             </Form.Item>
                             <Form.Item>
                                 <Button loading={isLoading} className="flex justify-center items-center h-10 rounded-lg gap-x-2 font-bold bg-[#5932EA] text-white hover:opacity-80 md:px-6 mx-auto" htmlType="submit">
-                                    Change Password
+                                    {t('Change Password')}
                                 </Button>
                             </Form.Item>
                         </Form>
