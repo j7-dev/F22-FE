@@ -1,6 +1,6 @@
 import { BaseType, TRole, TVip, TBalance } from '@/types';
 
-export const USER_NOTES_FIELDS = ['NOTE1', 'NOTE2', 'NOTE3', 'NOTE4', 'NOTE5', 'NOTE6'];
+export const USER_NOTES_FIELDS = new Array(6).fill(0).map((_, i) => i);
 
 export type TUserNote = {
     [key: (typeof USER_NOTES_FIELDS)[number]]: string;
