@@ -32,7 +32,8 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                         <div onClick={setFavorite(item)} className={`favorite cursor-pointer w-[30px] aspect-square bg-[#00000080] rounded-full p-1`}>
                             <div className={`${item.isFavorite ? 'active' : ''} favoriteIcon w-full h-full`} />
                         </div>
-                        <div className="RTP text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`RTP 96%`}</div>
+                        {/* 有RTP率才顯示否則為空 */}
+                        {item.gameRTP ? <div className="RTP text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2"> RTP ${item.gameRTP}</div> : ''}
                     </div>
                     <img className="provider" src={item.gameListFavIcon} alt="" />
                 </div>

@@ -1,0 +1,28 @@
+/*
+登入註冊表單欄位樣式
+*/
+
+.f22-content {
+	.formWrap {
+		.ant-form {
+			span.ant-input-affix-wrapper {
+				background-color: #ffffffcc;
+				height: 50px;
+				border-radius: 16px;
+				font-size: 1rem /* 16px */ !important;
+				line-height: 1.5rem /* 24px */ !important;
+				font-weight: 400 !important;
+				padding: 15px 30px !important;
+				gap: 16px;
+				input::placeholder {
+					color: #5932ea !important;
+				}
+				.ant-input-suffix {
+					svg {
+						fill: #5932ea !important;
+					}
+				}
+			}
+		}
+	}
+}

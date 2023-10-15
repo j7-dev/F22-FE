@@ -39,7 +39,7 @@ const NavBar: React.FC = () => {
         setIsLogin(!!data?.authenticated);
     }, [data?.authenticated]);
     return (
-        <div className="Navbar z-[999] fixed p-4 w-full bg-white sm:flex sm:items-center sm:justify-between sm:px-6 sm:py-4 sm:h-full sm:relative shadow-[0_4px_4px_0px_#A370ED33]">
+        <div className="Navbar z-[999] fixed p-4 w-full h-fit bg-white sm:flex sm:items-center sm:justify-between sm:px-6 sm:py-4 sm:h-full sm:relative shadow-[0_4px_4px_0px_#A370ED33]">
             <nav className="relative w-full h-full py-3 xl:flex sm:items-center xl:justify-between sm:py-0  xl:mx-auto " aria-label="Global">
                 <ShowNav />
                 {/* 舊手機選單 */}

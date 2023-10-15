@@ -50,5 +50,5 @@ export type TPragmaticGame = {
     technologyID?: string;
     gameIdNumeric?: number;
     jurisdictions?: string[];
-    RTP?: number;
+    gameRTP?: number;
 };

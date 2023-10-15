@@ -68,7 +68,7 @@ const index: React.FC = () => {
     }, []);
 
     return (
-        <div className="casinoPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col  gap-4">
+        <div className="casinoPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col gap-4">
             <Banner />
             <NewsMarquee className="sm:hidden" speed={15} marqueeText={marqueeText} />
             <div className="slotSection relative sm:w-full">

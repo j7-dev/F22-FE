@@ -46,6 +46,7 @@ const index: React.FC = () => {
 
     //取得遊戲列表
     const { data: ppData, isFetching } = useGetPPTableList();
+    // console.log('🚀 ~ ppData:', ppData);
     const allGameList = [...ppData];
     const allLoading = isFetching;
 

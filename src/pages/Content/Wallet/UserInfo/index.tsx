@@ -34,13 +34,13 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
     const validPercent = (currentValid / nextValidUpgrade) * 100;
 
     return (
-        <div className="userInfo sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl grid grid-cols-4 gap-6 p-[30px]">
-            <div className="userName col-span-2 flex flex-col gap-4">
+        <div className="userInfo rounded-2xl grid grid-cols-1 gap-6 sm:p-[30px] sm:grid-cols-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
+            <div className="userName flex flex-col gap-4 col-span-1  sm:col-span-2">
                 <div className="text-3xl font-bold text-[#5932EA]">
                     {userName}
                     <span className="text-sm text-[#ACACAC] font-normal ml-2">{userPhone}</span>
                 </div>
-                <div className="relative p-0.5 w-5/6 h-12 bg-gradient-to-r from-[#9680EA33] to-[#BAA8FF33] rounded-full">
+                <div className="relative p-0.5 w-full h-12 bg-gradient-to-r from-[#9680EA33] to-[#BAA8FF33] rounded-full sm:w-5/6">
                     <div className="relative w-full h-full">
                         <div className="currentVip absolute z-10 left-0 h-full flex justify-center items-center aspect-square bg-[#9680EA] text-white text-base font-semibold rounded-full">
                             <div>{nextVip?.order}</div>
@@ -68,7 +68,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                     </div>
                 </div>
             </div>
-            <div className="userBalance h-full col-span-1 border-0 border-l-2 border-solid border-[#F0F0F0] px-6 flex gap-5 items-center">
+            <div className="userBalance h-full col-span-1 border-0 border-solid border-[#F0F0F0] flex gap-5 items-center sm:border-l-2 sm:px-6">
                 <div className="aspect-square p-6 bg-gradient-to-r from-[#E7C9FF00] to-[#D4C9FFA3] rounded-full">
                     <img src={userBalanceIcon} alt="" className="w-full h-full" />
                 </div>
@@ -77,7 +77,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                     <div className="text-[#333333] text-3xl font-semibold">${balance}</div>
                 </div>
             </div>
-            <div className="userRolling h-full col-span-1 border-0 border-l-2 border-solid border-[#F0F0F0] px-6 flex gap-5 items-center">
+            <div className="userRolling h-full col-span-1 border-0 border-solid border-[#F0F0F0] flex gap-5 items-center sm:border-l-2 sm:px-6">
                 <div className="aspect-square p-6 bg-gradient-to-r from-[#E7C9FF00] to-[#D4C9FFA3] rounded-full">
                     <img src={userBonusIcon} alt="" className="w-full h-full" />
                 </div>

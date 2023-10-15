@@ -1,15 +1,8 @@
 import React from 'react';
-import { atom } from 'jotai';
 import { Form, Input } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-// import SearchInput from './SearchInput';
-// import SearchDropdown from './SearchDropdown';
-// import FilterGames from './FilterGames';
 
-export const dropdownIsOpenAtom = atom(false);
-export const FilterGamesIsOpenAtom = atom(false);
-
-const SearchBar: React.FC<{ onFilter: (value: any) => void }> = ({ onFilter }) => {
+const SearchBar: React.FC<{ onFilter: (value: string) => void }> = ({ onFilter }) => {
     const [form] = Form.useForm();
     const onFinishFilter = ({ searchGame }: { searchGame: string }) => {
         onFilter(searchGame);

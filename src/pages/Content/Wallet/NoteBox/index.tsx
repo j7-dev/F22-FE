@@ -37,7 +37,7 @@ const index: React.FC = () => {
     if (isLoading) return <div>loading...</div>;
 
     return (
-        <div className="h-full w-full px-[32px] py-[42px] flex flex-col gap-4 rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
+        <div className="h-full w-full py-[42px] flex flex-col gap-4 rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] sm:px-[32px]">
             <div className="text-black font-bold text-2xl flex gap-2">
                 <span>{t('Note Box')}</span>
                 <div className="flex justify-center items-center rounded-full bg-[#EB5757] aspect-square w-[30px] text-xl text-white font-bold">{data?.total}</div>
