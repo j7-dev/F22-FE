@@ -47,7 +47,7 @@ TABLE bet-records `amount_type=CASH` && `currency=KRW`
 <br><br>
 
 #### 🔹 代理資料
-TODO
+TODO.
 <br><br>
 
 ## 投注情境
