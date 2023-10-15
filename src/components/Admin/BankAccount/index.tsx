@@ -2,7 +2,7 @@ import { TBankAccount } from '@/types';
 import { keyToWord } from '@/utils';
 
 const index = ({ bank_account }: { bank_account: TBankAccount | null }) => {
-    if (!bank_account) return '';
+    if (!bank_account) return <></>;
 
     return (
         <div>

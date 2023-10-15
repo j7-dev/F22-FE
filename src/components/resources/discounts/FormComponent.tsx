@@ -130,7 +130,6 @@ const FormComponent: React.FC<{
                 </div>
             </div>
 
-            {/* TODO 可以抽離視覺部分優化 */}
             {support_game_providers.map((gameProvider, index) => {
                 if (GENERAL_GP.includes(gameProvider as any)) {
                     return (

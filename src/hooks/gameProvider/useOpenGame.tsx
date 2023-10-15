@@ -103,7 +103,7 @@ export const useOpenGame = () => {
                             //TODO 沒意外應該是這樣=>等後端開API出來再測試
                             console.log('data', data);
                             const otp_id = data.data.otp_id;
-                            //创建一个 FormData 对象
+                            // 创建一个 FormData 对象
                             const formData = new FormData();
                             formData.append('otp_id', otp_id);
                             formData.append('login_id', identity?.id as unknown as string);

@@ -29,7 +29,6 @@ const index: React.FC<
                         values: {
                             ...values,
                             by: 'ADMIN',
-                            status: 'SUCCESS',
                             updated_by_user_id,
                         },
                     },

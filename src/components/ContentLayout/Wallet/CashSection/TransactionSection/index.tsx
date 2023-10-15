@@ -3,13 +3,11 @@ import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
 // import Mybalance from './Mybalance';
-import Deposit from '../../../../../pages/Content/Wallet/Deposit';
-import Withdraw from './Withdraw';
 
 interface TransactionSectionProps {
     section?: string;
 }
-const TransactionSection: React.FC<TransactionSectionProps> = ({ section }) => {
+const TransactionSection: React.FC<TransactionSectionProps> = () => {
     const { t } = useTranslation();
     const [selectedSection, setSelectedSection] = useAtom(selectedSectionAtom);
     const handleClick = (data: string) => {
@@ -32,9 +30,6 @@ const TransactionSection: React.FC<TransactionSectionProps> = ({ section }) => {
                     <span className="w-auto font-bold text-sm">{t('Withdraw')}</span>
                 </div>
             </div>
-            {/* {section === 'MyBalance' ? <Mybalance /> : ''} */}
-            {section === 'deposit' ? <Deposit /> : ''}
-            {section === 'withdraw' ? <Withdraw /> : ''}
         </div>
     );
 };

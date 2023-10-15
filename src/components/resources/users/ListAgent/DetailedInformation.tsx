@@ -152,11 +152,5 @@ const DetailedInformation: React.FC<{
         </Row>
     );
 };
-// TODO
-// function dataSourceFormatter(dataSource: any) {
-//     console.log('⭐  dataSourceFormatter  dataSource', dataSource);
-
-//     return dataSource;
-// }
 
 export default DetailedInformation;
