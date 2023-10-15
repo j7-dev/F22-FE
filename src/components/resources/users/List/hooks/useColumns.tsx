@@ -2,9 +2,8 @@ import { DataType } from '../types';
 import { ShowButton, EditButton } from '@refinedev/antd';
 import { BooleanIndicator, DateTime } from '@/components/PureComponents';
 import { Link } from 'react-router-dom';
-import { TTransaction, TUser, TVip } from '@/types';
+import { TUser, TVip } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
-import dayjs from 'dayjs';
 import { useBalanceColumns } from '@/hooks';
 import Amount from '@/components/Admin/Amount';
 
