@@ -1,6 +1,6 @@
 import { DataType } from '../types';
 import { ShowButton, EditButton } from '@refinedev/antd';
-import { BooleanIndicator } from '@/components/PureComponents';
+import { BooleanIndicator, DateTime } from '@/components/PureComponents';
 import { Link } from 'react-router-dom';
 import { TTransaction, TUser, TVip } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
@@ -66,11 +66,6 @@ const useColumns = () => {
             ),
         },
         {
-            title: 'AnyTimeDiscount',
-            dataIndex: 'anyTimeDiscount',
-            key: 'AnyTimeDiscount',
-        },
-        {
             title: 'Total Deposits',
             dataIndex: 'totalDp',
             key: 'totalDp',
@@ -95,16 +90,13 @@ const useColumns = () => {
             title: 'Join Date',
             dataIndex: 'createdAt',
             key: 'JoinDate',
-            render: (createdAt) => dayjs(createdAt).format('YYYY-MM-DD'),
+            render: (createdAt: string) => <DateTime value={createdAt} />,
         },
         {
             title: 'Last BetTime',
-            dataIndex: 'transaction_records',
+            dataIndex: 'lastBetTime',
             key: 'LastBetTime',
-            render: (transaction_records: TTransaction[]) => {
-                const lastBet = (transaction_records || []).find((tr) => tr.type === 'DEBIT' && tr.status === 'SUCCESS');
-                return lastBet ? dayjs(lastBet?.createdAt).format('YYYY-MM-DD') : null;
-            },
+            render: (lastBetTime: string) => <DateTime value={lastBetTime} />,
         },
         {
             title: '',
