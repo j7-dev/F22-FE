@@ -28,8 +28,8 @@ const index: React.FC<
                         method: 'post',
                         values: {
                             ...values,
-                            type: 'MANUAL',
-                            by: 'USER',
+                            by: 'ADMIN',
+                            status: 'SUCCESS',
                             updated_by_user_id,
                         },
                     },

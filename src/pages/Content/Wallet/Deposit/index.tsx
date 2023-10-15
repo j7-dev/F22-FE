@@ -1,26 +1,23 @@
 import React from 'react';
-import { Form, Input, notification, Alert, Modal, Button } from 'antd';
+import { Form, Alert, Modal, Button, Divider, notification, Popconfirm } from 'antd';
 import { useTranslation } from 'react-i18next';
 import QuickAmountInput from '@/components/form/QuickAmountInput';
-import { LockOutlined } from '@ant-design/icons';
-import { useGetIdentity, useCustomMutation, useApiUrl } from '@refinedev/core';
+import { useGetIdentity, useCreate } from '@refinedev/core';
 import { TMe } from '@/types';
 import { useModal } from '@refinedev/antd';
 import { CODEPAY_APP_URL, CODEPAY_SIMPLE_ADDRESS_TO } from '@/utils';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { useGetSiteSetting } from '@/hooks';
-
-const CODEPAY_IDENTIFIER = 'smtbet7deposittest';
+import Amount from '@/components/Admin/Amount';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const [form] = Form.useForm();
     const { data: identity } = useGetIdentity<TMe>();
-    const userId = identity?.id;
-    const { mutate: deposit, isLoading } = useCustomMutation();
-    const apiUrl = useApiUrl();
+    const user_id = identity?.id;
+    const CODEPAY_IDENTIFIER = `user_id:${user_id}`;
+
     const { modalProps, show, close } = useModal();
-    const watchSimpleAddressFrom = Form.useWatch(['simpleAddressFrom'], form);
     const watchAmount = Form.useWatch(['amount'], form);
 
     const handleClick = () => {
@@ -33,31 +30,51 @@ const index: React.FC = () => {
             });
     };
 
-    const handleDeposit = () => {
+    const { default_currency, default_amount_type } = useGetSiteSetting();
+    const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
+
+    const codePayUrl = `${CODEPAY_APP_URL}/payment?type=payment&simpeAddress=${CODEPAY_SIMPLE_ADDRESS_TO}&tag=smtbet7&identifier=${CODEPAY_IDENTIFIER}&amount=${watchAmount}`;
+
+    const handleOpenUrl = () => {
+        window.open(codePayUrl, '_blank');
+    };
+
+    const { mutate: create, isLoading } = useCreate();
+
+    const handleNotify = () => {
         const values = form.getFieldsValue();
-        deposit(
+        create(
             {
-                url: `${apiUrl}/codepay/deposit`,
-                method: 'post',
-                values: { ...values, user_id: userId },
+                resource: 'transaction-records',
+                values: {
+                    ...values,
+                    type: 'DEPOSIT',
+                    title: `Deposit by user ${user_id}`,
+                    status: 'PENDING',
+                    user: user_id,
+                    by: 'USER',
+                    currency: default_currency,
+                    amount_type: default_amount_type,
+                },
             },
             {
                 onSuccess: () => {
-                    // TODO const txnId = data?.data?.data?.id;
+                    form.resetFields();
+                    close();
                     notification.success({
                         key: 'deposit',
-                        message: `Deposit $${values.amount} Success `,
+                        message: `Submit $${values.amount} deposit notification Success`,
+                        description: 'Please wait for the administrator to review, we will reply in 3 working days.',
                         duration: null,
                     });
-                    close();
                 },
             },
         );
     };
-    const { default_currency } = useGetSiteSetting();
-    const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
 
-    const codePayUrl = `${CODEPAY_APP_URL}/payment?type=payment&simpeAddress=${CODEPAY_SIMPLE_ADDRESS_TO}&tag=smtbet7&identifier=${CODEPAY_IDENTIFIER}&amount=${watchAmount}`;
+    const handleCancel = () => {
+        close();
+    };
 
     return (
         <div className="px-8 py-[42px] rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
@@ -81,40 +98,6 @@ const index: React.FC = () => {
                         }}
                     />
 
-                    <div className="mt-8">
-                        <Form.Item
-                            name={['simpleAddressFrom']}
-                            label={t('Your CodePay Simple Address')}
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input your simple address!',
-                                },
-                            ]}
-                        >
-                            <Input prefix="¥" style={{ textAlign: 'right' }} />
-                        </Form.Item>
-
-                        <Form.Item
-                            name={['sendPassword']}
-                            label={t('Your CodePay Send Password')}
-                            rules={[
-                                {
-                                    required: true,
-                                    message: 'Please input your password!',
-                                },
-                            ]}
-                        >
-                            <Input.Password prefix={<LockOutlined />} style={{ textAlign: 'right' }} />
-                        </Form.Item>
-                        <Form.Item name={['currency']} hidden initialValue="KRW">
-                            <Input />
-                        </Form.Item>
-                        <Form.Item name={['user_id']} hidden>
-                            <Input />
-                        </Form.Item>
-                    </div>
-
                     <Alert
                         message={<span className="font-semibold">{t("Don't have Code Pay account?")}</span>}
                         description={
@@ -131,33 +114,47 @@ const index: React.FC = () => {
                                 </p>
                             </div>
                         }
+                        className="my-6"
                         type="info"
                         showIcon
                     />
-                    <Button type="primary" loading={isLoading} className="mt-5 w-full font-bold" onClick={handleClick}>
+                    <Button type="primary" className="w-full font-bold" onClick={handleClick}>
                         {t('Deposit')}
                     </Button>
-                    <a href={codePayUrl} target="_blank">
-                        <Button type="primary" className="mt-5 w-full font-bold">
-                            {t('Deposit')}
-                        </Button>
-                    </a>
 
-                    <Modal {...modalProps} centered title="Confirm Deposit" okText={t('confirm')} onOk={handleDeposit} confirmLoading={isLoading}>
+                    <Modal
+                        {...modalProps}
+                        centered
+                        title="Scan QR code to finish payment"
+                        footer={
+                            <div className="flex justify-between">
+                                <Popconfirm title={t('')} description={t('Are you sure to leave without notification?')} onConfirm={handleCancel} okText="Yes" cancelText="No">
+                                    <Button type="default">{t('Cancel')}</Button>
+                                </Popconfirm>
+                                <Button onClick={handleNotify} type="primary">
+                                    {t("Notify admin I've paid")}
+                                </Button>
+                            </div>
+                        }
+                        maskClosable={false}
+                        closeIcon={false}
+                        confirmLoading={isLoading}
+                    >
                         <table className="table table-vertical my-8">
-                            <tr>
-                                <th>
-                                    <span>{t('Your CodePay Simple Address')}</span>
-                                </th>
-                                <td>{watchSimpleAddressFrom}</td>
-                            </tr>
                             <tr>
                                 <th>
                                     <span>{t('Deposit Amount')}</span>
                                 </th>
-                                <td>{watchAmount}</td>
+                                <td>
+                                    <Amount amount={watchAmount} />
+                                </td>
                             </tr>
                         </table>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" className="w-full" />
+                        <Divider plain>or</Divider>
+                        <Button className="w-full mb-8" type="primary" ghost onClick={handleOpenUrl}>
+                            Pay by URL
+                        </Button>
                     </Modal>
                 </Form>
             </div>
