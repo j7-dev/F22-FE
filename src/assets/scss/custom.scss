@@ -186,6 +186,8 @@
 	}
 
 	//footer social icon
+	$logoFavicon_s: url("@/assets/images/1002_logo_s.svg");
+	$logoFavicon_f: url("@/assets/images/1002_logo_f.svg");
 	.helpWrap {
 		.socialMedia {
 			li {
@@ -246,6 +248,28 @@
 					text-align: left;
 					font-size: 14px;
 					font-weight: 400;
+				}
+			}
+		}
+	}
+
+	//Favorite 收藏遊戲ICON
+	$Favorite: url("@/assets/images/game_provider/slot_favorite_icon.svg");
+	$FavoriteRed: url("@/assets/images/game_provider/slot_favorite_red_icon.svg");
+	.onTheTop {
+		.favorite {
+			.favoriteIcon {
+				background: $Favorite;
+				background-position: center;
+				background-size: contain;
+				background-repeat: no-repeat;
+				transition: all 0.3s;
+				&.active,
+				&:hover {
+					background: $FavoriteRed;
+					background-position: center;
+					background-size: contain;
+					background-repeat: no-repeat;
 				}
 			}
 		}

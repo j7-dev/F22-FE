@@ -16,7 +16,7 @@ export const useGetPPTableList = () => {
             return {
                 ...item,
                 gameCategory: mappingGameCategory({ gameProviderName: 'PP' }),
-                gameProviderName: 'Pragmatic',
+                gameProviderName: 'pragmatic',
                 gameImg: `${gameServerDomain}/game_pic/rec/325/${item.gameID}.png`,
                 gameListFavIcon: ProviderS_PragmaticPlay,
             };

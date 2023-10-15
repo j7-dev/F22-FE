@@ -21,6 +21,7 @@ export type TGame = TEvolutionGame &
         gameProviderName?: string;
         gameImg?: string;
         gameListFavIcon?: string;
+        isFavorite?: boolean;
     };
 
 export type TEvolutionGame = {

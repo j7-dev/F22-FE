@@ -44,8 +44,9 @@ export const providerData: TGameProvider[] = [
         },
     },
     {
+        // 這個是測試用的
         label: 'Evolution',
-        value: 'asiaGaming',
+        value: 'evolution',
         gameCategories: ['casino'],
         providerData: {
             providerMainImg: sloggameAgImg,
