@@ -9,7 +9,7 @@ import ChangPas from './ChangPas';
 import NoteBox from './NoteBox';
 import CashHistory from './CashHistory';
 // import { useTranslation } from 'react-i18next';
-
+//FIXME 未來想法是改成useState在組件內部切換，取得activeMenuAtom來做判斷就好，減少ATOM的使用
 export const selectedSectionAtom = atom('siteNotify');
 
 const Wallet: React.FC = () => {

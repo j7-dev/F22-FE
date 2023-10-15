@@ -7,6 +7,8 @@ import GameNavContainer from './GameNavContainer';
 import { windowWidthAtom, mbSidebarAtom } from '@/components/ContentLayout';
 import { loginOrSignUpAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 
+//FIXME sidebarIsOpenAtom 有沒有更好的做法?它的作用是判斷側選單要不要打開
+// activeMenuAtom應該不用,就是用做判斷active的
 export const sidebarIsOpenAtom = atom(false);
 export const activeMenuAtom = atom('');
 

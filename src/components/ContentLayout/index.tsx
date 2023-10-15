@@ -8,7 +8,10 @@ import { Sidebar } from './Sidebar';
 import Popup from './Header/LoginPopUp';
 import GamePopup from './Games/Game/Popup';
 import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
-
+//FIXME windowWidthAtom / mbSidebarAtom Atom 有沒有更好的做法
+// windowWidthAtom 用來判斷要不要呈現手機版布局
+// mbSidebarAtom 用來判斷手機版選單要不要打開
+//mbSidebarAtom 跟 sidebarIsOpenAtom最大不同是未打開前寬度是0或是w-20
 export const mbSidebarAtom = atom(false);
 export const windowWidthAtom = atom(window.innerWidth);
 const Layout = () => {
