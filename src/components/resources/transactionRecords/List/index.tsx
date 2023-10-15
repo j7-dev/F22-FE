@@ -183,18 +183,15 @@ const index = () => {
             showSizeChanger: true,
             total: (tableProps?.pagination as TablePaginationConfig)?.total,
         },
-        rowSelection:
-            listType === 'WITHDRAW'
-                ? {
-                      type: 'checkbox',
-                      onChange: (_: number[], records: DataType[]) => {
-                          setSelectedRecords(records);
-                      },
-                      getCheckboxProps: (record: DataType) => ({
-                          disabled: record.status !== 'PENDING', // Column configuration not to be checked
-                      }),
-                  }
-                : undefined,
+        rowSelection: {
+            type: 'checkbox',
+            onChange: (_: number[], records: DataType[]) => {
+                setSelectedRecords(records);
+            },
+            getCheckboxProps: (record: DataType) => ({
+                disabled: record.status !== 'PENDING', // Column configuration not to be checked
+            }),
+        },
     } as TableProps<DataType>;
 
     const filterTagsKey = JSON.stringify(searchFormProps?.form?.getFieldsValue());
@@ -210,11 +207,9 @@ const index = () => {
                         <div className="mb-4">
                             <FilterTags key={filterTagsKey} form={searchFormProps.form} />
                         </div>
-                        {listType === 'WITHDRAW' && (
-                            <div className="mb-4">
-                                <ApproveButton />
-                            </div>
-                        )}
+                        <div className="mb-4">
+                            <ApproveButton />
+                        </div>
 
                         <Table
                             {...formattedTableProps}

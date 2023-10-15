@@ -11,7 +11,7 @@ export type TTransactionStatus = (typeof transactionStatus)[number];
 export type TTransaction = BaseType &
     AmountType & {
         type: TTransactionType;
-        by: TTransactionBy;
+        by: TTransactionBy | string;
         title: string | null;
         description: string | null;
         status: TTransactionStatus;

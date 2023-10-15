@@ -9,6 +9,7 @@ import { CODEPAY_APP_URL, CODEPAY_SIMPLE_ADDRESS_TO } from '@/utils';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { useGetSiteSetting } from '@/hooks';
 import Amount from '@/components/Admin/Amount';
+import BonusCards from './BonusCards';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
@@ -139,22 +140,31 @@ const index: React.FC = () => {
                         maskClosable={false}
                         closeIcon={false}
                         confirmLoading={isLoading}
+                        width={1200}
                     >
-                        <table className="table table-vertical my-8">
-                            <tr>
-                                <th>
-                                    <span>{t('Deposit Amount')}</span>
-                                </th>
-                                <td>
-                                    <Amount amount={watchAmount} />
-                                </td>
-                            </tr>
-                        </table>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" className="w-full" />
-                        <Divider plain>or</Divider>
-                        <Button className="w-full mb-8" type="primary" ghost onClick={handleOpenUrl}>
-                            Pay by URL
-                        </Button>
+                        <div className="grid grid-cols-4 gap-x-6">
+                            <div className="col-span-3">
+                                <BonusCards />
+                            </div>
+
+                            <div className="col-span-1">
+                                <table className="table table-vertical my-8 table-fixed">
+                                    <tr>
+                                        <th className="w-1/2">
+                                            <span>{t('Deposit Amount')}</span>
+                                        </th>
+                                        <td className="w-1/2">
+                                            <Amount amount={watchAmount} />
+                                        </td>
+                                    </tr>
+                                </table>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" className="w-full" />
+                                <Divider plain>or</Divider>
+                                <Button className="w-full mb-8" type="primary" ghost onClick={handleOpenUrl}>
+                                    Pay by URL
+                                </Button>
+                            </div>
+                        </div>
                     </Modal>
                 </Form>
             </div>
