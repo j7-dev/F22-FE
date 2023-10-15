@@ -107,7 +107,6 @@ const CustomTabBar = (props: any) => {
     );
 };
 
-//TODO 這裡的props怎麼來的? TAB 內部封裝時幫你帶入的
 const customTabBar: TabsProps['renderTabBar'] = (props) => <CustomTabBar {...props} />;
 
 type indexProps = {

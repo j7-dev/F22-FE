@@ -8,6 +8,8 @@ import BankCard from './BankCard';
 import ChangPas from './ChangPas';
 import NoteBox from './NoteBox';
 import CashHistory from './CashHistory';
+import Withdraw from './Withdraw';
+import Deposit from './Deposit';
 // import { useTranslation } from 'react-i18next';
 //FIXME 未來想法是改成useState在組件內部切換，取得activeMenuAtom來做判斷就好，減少ATOM的使用
 export const selectedSectionAtom = atom('siteNotify');
@@ -34,6 +36,15 @@ const Wallet: React.FC = () => {
                     </div>
                 </div>
                 <CashHistory userID={data?.id as number} />
+
+                <div className="grid grid-cols-2 gap-6">
+                    <div>
+                        <Deposit />
+                    </div>
+                    <div>
+                        <Withdraw />
+                    </div>
+                </div>
             </div>
         </Authenticated>
     );

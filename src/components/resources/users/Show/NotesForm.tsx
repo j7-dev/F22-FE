@@ -34,6 +34,7 @@ const NotesForm = ({ user_notes }: { user_notes?: TUserNote }) => {
 
     useEffect(() => {
         if (user_notes) {
+            console.log('⭐  user_notes:', user_notes);
             form.setFieldsValue(user_notes);
         }
     }, [user_notes]);
@@ -43,9 +44,14 @@ const NotesForm = ({ user_notes }: { user_notes?: TUserNote }) => {
             <Form form={form} layout="vertical" onFinish={handleFinish}>
                 <div className="grid grid-cols-3 gap-6">
                     {USER_NOTES_FIELDS.map((field) => (
-                        <Form.Item key={field} label={field} name={[field]}>
-                            <TextArea showCount maxLength={100} style={{ height: '8rem' }} />
-                        </Form.Item>
+                        <div key={field}>
+                            <Form.Item name={[field.toString(), 'title']} initialValue={`Note${field + 1}`}>
+                                <Input />
+                            </Form.Item>
+                            <Form.Item name={[field.toString(), 'content']}>
+                                <TextArea showCount maxLength={100} style={{ height: '8rem' }} />
+                            </Form.Item>
+                        </div>
                     ))}
                 </div>
                 <Form.Item className="text-right mt-8">

@@ -55,7 +55,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                 </div>
             );
         }
-        return '';
+        return <></>;
     };
 
     return (

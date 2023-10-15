@@ -1,3 +1,9 @@
+const index = () => {
+    return <></>;
+};
+
+export default index;
+
 // import React from 'react';
 // import { useTranslation } from 'react-i18next';
 // // import { cashrHistoryTitle, cashrHistory } from '../../AccountSection/CashrHistory/fakeData';

@@ -58,7 +58,7 @@ const FormComponent: React.FC<{
 
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-4 gap-6">
                 <Form.Item
                     name={['title']}
                     label="title"
@@ -68,24 +68,30 @@ const FormComponent: React.FC<{
                             message: 'Please input a value',
                         },
                     ]}
+                    className="col-span-2 lg:col-span-1"
                 >
                     <Input />
                 </Form.Item>
 
-                <Form.Item name={['user_id']} label="User" initialValue={Number(id)}>
+                <Form.Item name={['user_id']} label="User" initialValue={Number(id)} className="col-span-2 lg:col-span-1">
                     <Select {...userSelectProps} allowClear disabled={userFieldIsDisabled} />
                 </Form.Item>
-                <AmountInput />
-                <div>
+
+                <div className="col-span-2 lg:col-span-1">
                     <p className="mb-2">User's balance</p>
                     {watchUser && !isFetching && <Amount amount={Number(currencyBalanceAmount)} currency={watchCurrency} symbol />}
                     {isFetching && <LoadingOutlined />}
                 </div>
+                <Form.Item name={['type']} label="Type" className="col-span-2 lg:col-span-1" initialValue="DEPOSIT">
+                    <Select options={['DEPOSIT', 'MANUAL'].map((type) => ({ label: type, value: type }))} />
+                </Form.Item>
+                <div className="col-span-4 md:col-span-2">
+                    <AmountInput />
+                </div>
+                <Form.Item name={['description']} label="description" className="col-span-4 md:col-span-2">
+                    <Input.TextArea />
+                </Form.Item>
             </div>
-
-            <Form.Item name={['description']} label="description">
-                <Input.TextArea />
-            </Form.Item>
         </Form>
     );
 };
