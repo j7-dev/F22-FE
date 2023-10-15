@@ -44,3 +44,11 @@ export type TBankAccount = {
 export type TFavoriteGames = {
     [key: string]: string[];
 };
+
+export type TRegisterPayload = {
+    username: string;
+    email: string;
+    password: string;
+    phone: string;
+    bank_account: TBankAccount;
+};

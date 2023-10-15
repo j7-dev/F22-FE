@@ -79,11 +79,11 @@ const index: React.FC = () => {
         }
     }, [isAuthenticated?.authenticated]);
     return (
-        <div className="loginFrom text-center flex flex-col gap-2.5 w-full">
+        <div className="loginFromSection text-center flex flex-col gap-2.5 w-full">
             <span className="text-4xl text-center font-semibold text-white mb-9">{t('USER LOGIN')}</span>
             {/* 錯誤訊息 */}
             {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
-            <Form form={form} onFinish={handleLogin}>
+            <Form form={form} onFinish={handleLogin} className="login">
                 <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }]}>
                     <Input placeholder="User Name" bordered={false} className="text-center bg-[#ffffffcc] h-[50px] rounded-2xl text-base font-normal placeholder:text-[#9680EA]" />
                 </Form.Item>

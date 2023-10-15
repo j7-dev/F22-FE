@@ -47,8 +47,9 @@
 			}
 		}
 	}
-
-	.sideNav.overflow-y-scroll::-webkit-scrollbar {
+	//scrollbar寬度調整
+	.sideNav::-webkit-scrollbar,
+	.signUpFromSection::-webkit-scrollbar {
 		width: 0;
 	}
 	.slick-prev,
