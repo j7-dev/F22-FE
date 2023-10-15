@@ -9,6 +9,7 @@ import ChangPas from './ChangPas';
 import NoteBox from './NoteBox';
 import CashHistory from './CashHistory';
 import Withdraw from './Withdraw';
+import Deposit from './Deposit';
 // import { useTranslation } from 'react-i18next';
 
 export const selectedSectionAtom = atom('siteNotify');
@@ -38,7 +39,7 @@ const Wallet: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-6">
                     <div>
-                        <Withdraw />
+                        <Deposit />
                     </div>
                     <div>
                         <Withdraw />

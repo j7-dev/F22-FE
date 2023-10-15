@@ -45,9 +45,9 @@ const index: React.FC = () => {
     const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
 
     return (
-        <div className="h-full w-full px-[32px] py-[42px] flex flex-col gap-4 rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
+        <div className="px-8 py-[42px] rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
             <span className="text-black font-bold text-2xl">{t('Withdraw')}</span>
-            <div className="min-h-[180px] flex flex-col items-center justify-between">
+            <div className="min-h-[180px]">
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical" className="w-full">
                     <QuickAmountInput
                         formItemProps={{

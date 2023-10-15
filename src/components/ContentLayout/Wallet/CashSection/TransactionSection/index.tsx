@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
 // import Mybalance from './Mybalance';
-import Deposit from './Deposit';
+import Deposit from '../../../../../pages/Content/Wallet/Deposit';
 import Withdraw from './Withdraw';
 
 interface TransactionSectionProps {
