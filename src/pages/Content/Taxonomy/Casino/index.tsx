@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { nanoid } from 'nanoid';
+import { Spin } from 'antd';
 import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTableList';
 import Banner from '@/components/ContentLayout/Banner';
 import { casinoCategory } from '@/utils/GameCategory/casinoCategory';
@@ -24,43 +25,50 @@ const fxnCasinoCategory = [
 const index: React.FC = () => {
     const { t } = useTranslation();
     const [casinoGameCategory, setCasinoGameCategory] = useState('all');
-    //切換分類
-    const handleSwitchTab = (key: string) => () => {
-        setCasinoGameCategory(key);
-    };
+    //遊戲列表
+    const [gameDataList, setGameDataList] = useState([]);
 
     //跑馬燈
     const { data } = useGetMarketingContent({ position: 'header' });
     const marqueeText = data?.map((item) => {
         return item?.content;
     });
-
     //取得遊戲列表
-    const { data: evoData, isLoading: evoLoading } = useGetEVOTableList();
+    const { data: evoData, isFetching } = useGetEVOTableList();
     const allGameList = [...evoData];
-    const allLoading = evoLoading;
-
-    //分類遊戲
-    const ShowGames = () => {
-        if (allLoading) return <div>loading...</div>;
-        if (casinoGameCategory === 'all') return <GameList gameData={allGameList} />;
-        if (casinoGameCategory === 'baccarat') return <GameList gameData={allGameList.filter((item) => item.casinoCategory === 'baccarat')} />;
-        if (casinoGameCategory === 'blackjack') return <GameList gameData={allGameList.filter((item) => item.casinoCategory === 'blackjack')} />;
-        if (casinoGameCategory === 'roulette') return <GameList gameData={allGameList.filter((item) => item.casinoCategory === 'roulette')} />;
-        if (casinoGameCategory === 'dice') return <GameList gameData={allGameList.filter((item) => item.casinoCategory === 'dice')} />;
-        if (casinoGameCategory === 'other') return <GameList gameData={allGameList.filter((item) => item.casinoCategory === 'other')} />;
-        return <div className="text-center">Not Provider</div>;
+    const allLoading = isFetching;
+    //切換分類
+    const handleSwitchTab = (key: string) => () => {
+        setCasinoGameCategory(key);
+        if (key === 'all') return setGameDataList(allGameList as []);
+        setGameDataList(allGameList.filter((item) => item.casinoCategory === key) as []);
     };
-
     //搜尋遊戲
-    const filterGame = (value: any) => {
-        console.log(value);
+    const filterGame = (searchGame: string) => {
+        if (searchGame === '') return setGameDataList(allGameList as []);
+        setCasinoGameCategory(searchGame);
+        setGameDataList((allGameList.filter((item) => item?.gameName?.includes(searchGame)) as []) || []);
     };
+    //分類遊戲條件渲染
+    const ShowGames = () => {
+        if (allLoading)
+            return (
+                <div className="text-center">
+                    <Spin />
+                </div>
+            );
+        return <GameList gameData={gameDataList} />;
+    };
+    //當載入完成後，將遊戲列表資料放入gameDataList
+    useEffect(() => {
+        setGameDataList(allGameList as []);
+    }, [isFetching]);
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
     return (
-        <div className="casinoPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col  gap-4">
+        <div className="casinoPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col gap-4">
             <Banner />
             <NewsMarquee className="sm:hidden" speed={15} marqueeText={marqueeText} />
             <div className="slotSection relative sm:w-full">
@@ -87,6 +95,7 @@ const index: React.FC = () => {
                             })}
                         </div>
                     </div>
+
                     <ShowGames />
                 </div>
             </div>

@@ -21,6 +21,7 @@ export type TGame = TEvolutionGame &
         gameProviderName?: string;
         gameImg?: string;
         gameListFavIcon?: string;
+        isFavorite?: boolean;
     };
 
 export type TEvolutionGame = {
@@ -49,5 +50,5 @@ export type TPragmaticGame = {
     technologyID?: string;
     gameIdNumeric?: number;
     jurisdictions?: string[];
-    RTP?: number;
+    gameRTP?: number;
 };

@@ -5,6 +5,8 @@ import { Form, Input, Button } from 'antd';
 import { useLogin, useIsAuthenticated } from '@refinedev/core';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { popupIsOpenAtom, loginOrSignUpAtom, verifyErrorAtom } from '@/components/ContentLayout/Header/LoginModule';
+import passwordIcon from '@/assets/images/loginFrom/password.svg';
+import userNameIcon from '@/assets/images/loginFrom/userName.svg';
 
 type LoginVariables = {
     userName: string;
@@ -79,16 +81,16 @@ const index: React.FC = () => {
         }
     }, [isAuthenticated?.authenticated]);
     return (
-        <div className="loginFrom text-center flex flex-col gap-2.5 w-full">
+        <div className="loginFromSection text-center flex flex-col gap-2.5 w-full">
             <span className="text-4xl text-center font-semibold text-white mb-9">{t('USER LOGIN')}</span>
             {/* 錯誤訊息 */}
             {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
-            <Form form={form} onFinish={handleLogin}>
+            <Form form={form} onFinish={handleLogin} className="login">
                 <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }]}>
-                    <Input placeholder="User Name" bordered={false} className="text-center bg-[#ffffffcc] h-[50px] rounded-2xl text-base font-normal placeholder:text-[#9680EA]" />
+                    <Input placeholder="User Name" prefix={<img src={userNameIcon} />} bordered={false} />
                 </Form.Item>
                 <Form.Item name="userPas" rules={[{ required: true, message: 'Please input your Password' }]}>
-                    <Input placeholder="User Password" bordered={false} className="text-center bg-[#ffffffcc] h-[50px] rounded-2xl text-base font-normal placeholder:text-[#9680EA]" />
+                    <Input.Password placeholder="User Password" prefix={<img src={passwordIcon} />} bordered={false} />
                 </Form.Item>
                 <HCaptcha size="invisible" ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
                 <Form.Item className="mb-0">

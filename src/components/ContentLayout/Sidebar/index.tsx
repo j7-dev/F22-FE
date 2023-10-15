@@ -46,7 +46,7 @@ export const Sidebar: React.FC = () => {
                     </div>
                 </Link>
             </div>
-            <div className="overflow-y-scroll h-[calc(100%-80px)] pb-10 sideNav sm:px-[14px] w-full flex flex-col relative">
+            <div className="sideNav overflow-y-scroll h-[calc(100%-80px)] pb-10  sm:px-[14px] w-full flex flex-col relative">
                 <GameNavContainer />
                 <div className="border-0 border-solid border-t-2 mx-[14px] my-[46px]" />
                 <WallerContainer />

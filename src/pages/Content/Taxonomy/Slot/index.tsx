@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { nanoid } from 'nanoid';
+import { Spin } from 'antd';
 import { providerData } from '@/utils/providerData';
 import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
+import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
 import NewsMarquee from '@/components/ContentLayout/NewsMarquee';
 import Banner from '@/components/ContentLayout/Banner';
-import AllGame from './AllGame';
-import Pragmatic from './Pragmatic';
-import AsiaGaming from './AsiaGaming';
-import MicroGaming from './MicroGaming';
+import GameList from '@/components/ContentLayout/GameList';
 import SearchBar from '@/components/ContentLayout/SearchBar';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import slot_all_icon from '@/assets/images/game_provider/slot_all_icon.svg';
@@ -35,31 +34,49 @@ const fxnSlotProvider = [
 ];
 const index: React.FC = () => {
     const { t } = useTranslation();
-    const [soltGameProvider, setSoltGameProvider] = useState('all');
-    //切換分類
-    const handleSwitchTab = (key: string) => () => {
-        setSoltGameProvider(key);
-    };
+    const [slotGameProvider, setSlotGameProvider] = useState('all');
+    //遊戲列表
+    const [gameDataList, setGameDataList] = useState([]);
+
     //跑馬燈
     const { data } = useGetMarketingContent({ position: 'header' });
     const marqueeText = data?.map((item) => {
         return item?.content;
     });
 
-    //分類遊戲
-    const ShowGames = () => {
-        if (soltGameProvider === 'all') return <AllGame />;
-        if (soltGameProvider === 'pragmaticPlay') return <Pragmatic />;
-        if (soltGameProvider === 'asiaGaming') return <AsiaGaming />;
-        if (soltGameProvider === 'microGaming') return <MicroGaming />;
-        //TODO Favorite
-        return <div className="text-center">Not Provider</div>;
+    //取得遊戲列表
+    const { data: ppData, isFetching } = useGetPPTableList();
+    // console.log('🚀 ~ ppData:', ppData);
+    const allGameList = [...ppData];
+    const allLoading = isFetching;
+
+    //切換分類
+    const handleSwitchTab = (key: string) => () => {
+        setSlotGameProvider(key);
+        if (key === 'all') return setGameDataList(allGameList as []);
+        setGameDataList(allGameList.filter((item) => item.casinoCategory === key) as []);
     };
     //搜尋遊戲
-    const filterGame = (value: any) => {
-        console.log(value);
+    const filterGame = (searchGame: string) => {
+        if (searchGame === '') return setGameDataList(allGameList as []);
+        setSlotGameProvider(searchGame);
+        setGameDataList((allGameList.filter((item) => item?.gameName?.includes(searchGame)) as []) || []);
     };
-
+    //分類遊戲
+    //分類遊戲條件渲染
+    const ShowGames = () => {
+        if (allLoading)
+            return (
+                <div className="text-center">
+                    <Spin />
+                </div>
+            );
+        return <GameList gameData={gameDataList} />;
+    };
+    //當載入完成後，將遊戲列表資料放入gameDataList
+    useEffect(() => {
+        setGameDataList(allGameList as []);
+    }, [isFetching]);
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -83,7 +100,7 @@ const index: React.FC = () => {
                         <div className="w-fit flex flex-nowrap col-span-3 grid-cols-5 gap-2 sm:w-full sm:grid sm:col-start-2 sm:col-span-9 ">
                             {fxnSlotProvider.map((item) => {
                                 return (
-                                    <div key={nanoid()} onClick={handleSwitchTab(item.value)} className={`${soltGameProvider === item.value ? 'bg-[#5932EA]' : 'bg-[#9680EA]'} px-4 py-2 col-span-1 cursor-pointer rounded-2xl overflow-hidden flex items-center gap-2`}>
+                                    <div key={nanoid()} onClick={handleSwitchTab(item.value)} className={`${slotGameProvider === item.value ? 'bg-[#5932EA]' : 'bg-[#9680EA]'} px-4 py-2 col-span-1 cursor-pointer rounded-2xl overflow-hidden flex items-center gap-2`}>
                                         <img src={item?.providerData?.providerSmallIcon} className="w-9 h-full object-center object-contain" alt="" />
                                         <span className="whitespace-nowrap font-medium text-xs text-white sm:text-base sm:whitespace-normal ">{item.label}</span>
                                     </div>

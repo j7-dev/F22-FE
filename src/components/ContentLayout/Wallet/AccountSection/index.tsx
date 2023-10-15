@@ -1,6 +1,6 @@
 import React from 'react';
 import RolloverHistory from './RolloverHistory';
-import CashHistory from './CashHistory';
+// import CashHistory from './CashHistory';
 import ChangePassword from './ChangePassword';
 
 interface AccountSectionProps {
@@ -8,7 +8,7 @@ interface AccountSectionProps {
 }
 const index: React.FC<AccountSectionProps> = (props) => {
     if (props.section === 'rolloverHistory') return <RolloverHistory />;
-    if (props.section === 'cashHistory') return <CashHistory />;
+    // if (props.section === 'cashHistory') return <CashHistory />;
     if (props.section === 'changePassword') return <ChangePassword />;
     return <></>;
 };

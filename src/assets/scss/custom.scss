@@ -14,11 +14,6 @@
 		font-weight: 600;
 		letter-spacing: 0.05em;
 	}
-	// div {
-	// 	box-sizing: border-box;
-	// 	position: relative;
-	// 	display: block;
-	// }
 	a {
 		text-decoration: none;
 	}
@@ -26,29 +21,9 @@
 		list-style: none;
 	}
 
-	//Header Menu A
-	.navMenuItem.active {
-		color: #78d39d !important;
-	}
-	.navMenuItem {
-		a:hover ~ ul.submenu {
-			display: block !important;
-		}
-		& ul.submenu:hover {
-			display: block !important;
-		}
-		a.hasSubmenu {
-			&:after {
-				content: url("../images/dropdown-icon.svg");
-				margin-left: 5px;
-			}
-			&:hover:after {
-				content: url("../images/dropdown-hover-icon.svg");
-			}
-		}
-	}
-
-	.sideNav.overflow-y-scroll::-webkit-scrollbar {
+	//scrollbar寬度調整
+	.sideNav::-webkit-scrollbar,
+	.signUpFromSection::-webkit-scrollbar {
 		width: 0;
 	}
 	.slick-prev,
@@ -64,35 +39,6 @@
 	.slick-next:before {
 		content: url("../images/next-white-icon.svg") !important;
 	}
-	//Promotions自定義頁碼
-
-	.ExclusivePromotions {
-		.navSlider {
-			.slick-slider {
-				display: flex;
-				align-items: center;
-				.slick-arrow {
-					display: block;
-					position: relative;
-					top: auto;
-					left: auto;
-					right: auto;
-					transform: translate(0, 0);
-				}
-				.slick-list {
-					.slick-current {
-						span {
-							span {
-								background: #4ba1fa;
-								border-color: #4ba1fa;
-								color: #fff !important;
-							}
-						}
-					}
-				}
-			}
-		}
-	}
 
 	// terms-of-service css
 	.terms-content__container {
@@ -104,16 +50,7 @@
 		}
 	}
 
-	//customer css
-	.tableContent {
-		.contentList {
-			&:nth-child(even) {
-				background: #f3f3f4;
-			}
-		}
-	}
-
-	//wallet css
+	//wallet css old
 	.balanceListContainer:not(:last-child) {
 		padding-bottom: 10px;
 		margin-bottom: 10px;
@@ -181,11 +118,9 @@
 		}
 	}
 
-	.ant-input {
-		text-align: right;
-	}
-
 	//footer social icon
+	$logoFavicon_s: url("@/assets/images/1002_logo_s.svg");
+	$logoFavicon_f: url("@/assets/images/1002_logo_f.svg");
 	.helpWrap {
 		.socialMedia {
 			li {
@@ -201,15 +136,6 @@
 			}
 		}
 	}
-
-	//languageSwitch
-	// .languageSwitchContain {
-	// 	&:hover {
-	// 		.languageSwitch {
-	// 			display: flex !important;
-	// 		}
-	// 	}
-	// }
 
 	//gameImg
 	.LazyLoadImage {
@@ -246,6 +172,28 @@
 					text-align: left;
 					font-size: 14px;
 					font-weight: 400;
+				}
+			}
+		}
+	}
+
+	//Favorite 收藏遊戲ICON
+	$Favorite: url("@/assets/images/game_provider/slot_favorite_icon.svg");
+	$FavoriteRed: url("@/assets/images/game_provider/slot_favorite_red_icon.svg");
+	.onTheTop {
+		.favorite {
+			.favoriteIcon {
+				background: $Favorite;
+				background-position: center;
+				background-size: contain;
+				background-repeat: no-repeat;
+				transition: all 0.3s;
+				&.active,
+				&:hover {
+					background: $FavoriteRed;
+					background-position: center;
+					background-size: contain;
+					background-repeat: no-repeat;
 				}
 			}
 		}

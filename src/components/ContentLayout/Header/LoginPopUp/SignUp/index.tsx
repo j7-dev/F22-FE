@@ -8,46 +8,46 @@ import { Form, Input, Button } from 'antd';
 import { useRegister } from '@refinedev/core';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/Header/LoginModule';
-
-type LoginVariables = {
-    userEmail: string;
-    password: string;
-    redirectPath: string;
-    userName: string;
-    userPhone: number;
-};
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { TRegisterPayload } from '@/types';
+import password from '@/assets/images/loginFrom/password.svg';
+import userName from '@/assets/images/loginFrom/userName.svg';
+import phoneNumber from '@/assets/images/loginFrom/phoneNumber.svg';
+import bankNumber from '@/assets/images/loginFrom/bankNumber.svg';
+import bankName from '@/assets/images/loginFrom/bankName.svg';
+import bankCode from '@/assets/images/loginFrom/bankCode.svg';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const captchaRef = useRef<HCaptcha>(null);
-    const { mutate: register } = useRegister<LoginVariables>();
+    const { mutate: register } = useRegister<TRegisterPayload>();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
     const [form] = Form.useForm();
     const [verifyError, setVerifyError] = useState('');
     const [submitTable, setSubmitTable] = useState(false);
-    const handleSignUp = async (values: { userEmail: string; userName: string; userPas: string; userPhone: number }) => {
+    const handleSignUp = async (values: TRegisterPayload) => {
         if (captchaRef?.current) {
             await captchaRef.current
                 ?.execute({ async: true })
                 .then((_token) => {
-                    const { userEmail, userPas, userName, userPhone } = values;
                     // console.log('SignUpValues', values);
-                    register(
-                        { userEmail: userEmail, userName: userName, password: userPas, userPhone: userPhone, redirectPath: '/wallet' },
-                        {
-                            onSuccess: (data) => {
-                                if (!data.success) {
-                                    // handle error
-                                }
-                                // handle success
-                                setPopupIsOpen(false);
-                            },
-                            onError: (error) => {
-                                console.log('錯誤訊息', error);
-                            },
+                    const sendValues = {
+                        ...values,
+                        redirectPath: '/wallet',
+                    };
+                    register(sendValues, {
+                        onSuccess: (data) => {
+                            if (!data.success) {
+                                // handle error
+                            }
+                            // handle success
+                            setPopupIsOpen(false);
                         },
-                    );
+                        onError: (error) => {
+                            console.log('錯誤訊息', error);
+                        },
+                    });
                 })
                 .catch((err) => {
                     console.error(err);
@@ -62,6 +62,14 @@ const index: React.FC = () => {
 
     const handleToLogin = () => {
         setLoginOrSignUp(true);
+    };
+
+    //自定義驗證規則=>確認密碼
+    const validateFunction = (_: object, value: string) => {
+        if (value !== form.getFieldValue('password')) {
+            return Promise.reject('The two passwords that you entered do not match!');
+        }
+        return Promise.resolve();
     };
     // Watch all values
     const values = Form.useWatch([], form);
@@ -80,20 +88,32 @@ const index: React.FC = () => {
     }, [values]);
 
     return (
-        <div className="loginFrom text-center flex flex-col gap-2.5 w-full">
+        <div className="signUpFromSection overflow-y-scroll text-center flex flex-col gap-2.5 w-full">
             <span className="text-4xl text-center font-semibold text-white mb-9">{t('USER SIGN UP')}</span>
             {/* 錯誤訊息 */}
             {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
-            <Form form={form} onFinish={handleSignUp}>
+            <Form form={form} onFinish={handleSignUp} className="signUp">
                 <Form.Item hidden name="userEmail" />
                 <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }]}>
-                    <Input placeholder="User Name" bordered={false} className="text-center bg-[#ffffffcc] h-[50px] rounded-2xl text-base font-normal placeholder:text-[#9680EA]" />
+                    <Input placeholder="User Name" prefix={<img src={userName} />} bordered={false} />
                 </Form.Item>
-                <Form.Item name="userPas" rules={[{ required: true, message: 'Please input your Password' }]}>
-                    <Input placeholder="User Password" bordered={false} className="text-center bg-[#ffffffcc] h-[50px] rounded-2xl text-base font-normal placeholder:text-[#9680EA]" />
+                <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password' }]}>
+                    <Input.Password placeholder="User Password" prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
+                </Form.Item>
+                <Form.Item name="confirmPassword" rules={[{ required: true, message: 'Please input your Password' }, { validator: validateFunction }]}>
+                    <Input.Password placeholder="Confirm Password" prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
                 </Form.Item>
                 <Form.Item name="userPhone" rules={[{ required: true, message: 'Please input your Phone' }]}>
-                    <Input placeholder="User Phone" bordered={false} className="text-center bg-[#ffffffcc] h-[50px] rounded-2xl text-base font-normal placeholder:text-[#9680EA]" />
+                    <Input placeholder="User Phone" prefix={<img src={phoneNumber} />} bordered={false} />
+                </Form.Item>
+                <Form.Item name={['bank_account', 'bank_name']} rules={[{ required: true, message: 'Please input your Phone' }]}>
+                    <Input placeholder="Bank Name" prefix={<img src={bankName} />} bordered={false} />
+                </Form.Item>
+                <Form.Item name={['bank_account', 'bank_code']} rules={[{ required: true, message: 'Please input your Phone' }]}>
+                    <Input placeholder="Bank Code" prefix={<img src={bankCode} />} bordered={false} />
+                </Form.Item>
+                <Form.Item name={['bank_account', 'bank_account_number']} rules={[{ required: true, message: 'Please input your Phone' }]}>
+                    <Input.Password placeholder="Bank Account Number" prefix={<img src={bankNumber} />} bordered={false} />
                 </Form.Item>
                 <HCaptcha size="invisible" ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
                 <Form.Item className="mb-0">

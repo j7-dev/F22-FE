@@ -13,7 +13,7 @@ const index: React.FC = () => {
         { label: 'Rollove Amount', value: 'rolloveAmount' },
         { label: 'Status', value: 'status' },
     ];
-    const { data, isLoading } = useGetTransactionRecords({ type: ['BET'] });
+    const { data, isLoading } = useGetTransactionRecords({ type: ['BET'], userID: 1 });
     const txnData =
         data?.data.map((item) => {
             const dateStringDayjs = dayjs(item.createdAt).format('YYYY-MM-DD');

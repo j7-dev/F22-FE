@@ -8,7 +8,7 @@ const { Column } = Table;
 const index: React.FC<{ userID: number }> = ({ userID }) => {
     const { t } = useTranslation();
     const { data, isLoading } = useGetTransactionRecords({ type: ['DEPOSIT', 'WITHDRAW'], userID });
-    console.log('🚀 ~ data:', data);
+    // console.log('🚀 ~ data:', data);
 
     const fxnData =
         data?.data.slice(0, 3).map((item) => {
@@ -20,7 +20,7 @@ const index: React.FC<{ userID: number }> = ({ userID }) => {
         }) || [];
     if (isLoading) return <div>loading...</div>;
     return (
-        <div className="h-full w-full px-[32px] py-[42px] flex flex-col gap-4 rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
+        <div className="h-full w-full py-[42px] flex flex-col gap-4 rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] sm:px-[32px]">
             <div className="text-black font-bold text-2xl flex gap-2">
                 <span>{t('Cash History')}</span>
                 <button className="font-bold border-0 px-3 py-1.5 rounded-xl text-xs bg-[#5932EA] text-white">{t('Read More')}</button>

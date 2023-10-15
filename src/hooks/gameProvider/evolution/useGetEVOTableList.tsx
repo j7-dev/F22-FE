@@ -5,7 +5,11 @@ import { mappingCasinoCategory, mappingCasinoCategoryIcon } from '@/utils/GameCa
 import { TGame } from '@/types/games';
 
 export const useGetEVOTableList = () => {
-    const { data: fetchData, isLoading } = useList({
+    const {
+        data: fetchData,
+        isLoading,
+        isFetching,
+    } = useList({
         resource: 'evo/tablelist',
     });
     //Casino 的遊戲商加上統一的formProviderCategory來分類
@@ -20,11 +24,11 @@ export const useGetEVOTableList = () => {
                     gameID: item['Table ID'],
                     gameImg: getGameTypeImg(item['Game Type'] as string),
                     gameCategory: mappingGameCategory({ gameProviderName: 'EVO' }),
-                    gameProviderName: 'Evolution',
+                    gameProviderName: 'evolution',
                     casinoCategory: mappingCasinoCategory({ category: item['Game Type'] as string }),
                     casinoCategoryIcon: mappingCasinoCategoryIcon({ category: item['Game Type'] as string }),
                 };
             }) || [];
 
-    return { data, isLoading };
+    return { data, isLoading, isFetching };
 };

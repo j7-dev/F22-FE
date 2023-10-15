@@ -28,7 +28,7 @@ export type TUser = BaseType & {
     top_agent?: TUser;
     allow_payments?: string[] | null;
     allow_game_providers?: string[] | null;
-    favorite_games?: any | null;
+    favorite_games?: TFavoriteGames | null;
     user_notes?: TUserNote;
     bank_account?: TBankAccount;
 };
@@ -39,4 +39,16 @@ type BankAccountField = (typeof BANK_ACCOUNT_FIELDS)[number];
 
 export type TBankAccount = {
     [key in BankAccountField]: string;
+};
+
+export type TFavoriteGames = {
+    [key: string]: string[];
+};
+
+export type TRegisterPayload = {
+    username: string;
+    email: string;
+    password: string;
+    phone: string;
+    bank_account: TBankAccount;
 };
