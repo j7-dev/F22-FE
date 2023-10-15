@@ -17,14 +17,14 @@ export const selectedSectionAtom = atom('siteNotify');
 const Wallet: React.FC = () => {
     // const { t } = useTranslation();
     const { data, isLoading } = useGetIdentity<TUser>();
-    console.log('🚀 ~ data:', data);
+    // console.log('🚀 ~ data:', data);
 
     if (isLoading) return <div>loading...</div>;
     return (
         <Authenticated>
             <div className="myPage relative px-4 my-4 flex flex-col gap-6 sm:my-9 sm:w-full">
                 <UserInfo userInfo={data} />
-                <div className="userSection2 grid grid-cols-1 gap-6 sm:grid-cols-4">
+                <div className="userSection2 grid grid-cols-1 gap-6 sm:grid-cols-4 ">
                     <div className="col-span-1">
                         <BankCard bankInfo={data?.bank_account} />
                     </div>
