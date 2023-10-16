@@ -5,6 +5,11 @@ import { selectedRecordsAtom } from '../atom';
 import { useAtom } from 'jotai';
 import { TMe } from '@/types';
 
+/**
+ * BUG 同時變更多筆資料會產生死鎖
+ * Insert ignore into transaction_records_updated_by_user_id_links (`transaction_record_id`, `user_id`) values (116, 26) - ER_LOCK_DEADLOCK: Deadlock found when trying to get lock; try restarting transaction
+ */
+
 const index = () => {
     const [selectedRecords, setSelectedRecords] = useAtom(selectedRecordsAtom);
     const { data: identity } = useGetIdentity<TMe>();

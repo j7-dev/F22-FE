@@ -59,13 +59,13 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
     };
 
     return (
-        <div onClick={handleClick(gameItem)} className="singleGame w-full h-full relative overflow-hidden rounded-2xl sm:shadow-none shadow-[0_4px_4px_0_#A370ED33]">
+        <div onClick={handleClick(gameItem)} className="singleGame w-full h-full relative overflow-hidden rounded-2xl sm:shadow-none shadow-[0_4px_4px_0_#A370ED33] group">
             <div className={`editOverlay z-10 cursor-pointer absolute inset-0 w-full h-full duration-300 text-white opacity-0 hover:opacity-100 hover:bg-slate-600/50 flex justify-center items-center`}>{openGameLoading ? <AiOutlineLoading3Quarters className={`${openGameLoading ? 'block' : 'hidden'} animate-spin`} /> : <FaGamepad size={30} />}</div>
             <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit px-5">
                 <OnTheTop {...fxnGameItem} />
             </div>
             <div className="gameWrap w-full relative">
-                <LazyLoadImage src={gameItem?.gameImg} alt="" className="sm:aspect-square w-full h-full duration-500 hover:scale-125 aspect-[342/120] object-cover" />
+                <LazyLoadImage src={gameItem?.gameImg} alt="" className="sm:aspect-square w-full h-full duration-500 group-hover:scale-125 aspect-[342/120] object-cover" />
                 <div className="gameInfo absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent via-50% to-[#1A1A1A80] flex items-end  px-5 py-2.5">
                     <span className="gameName font-bold text-xl text-white">{gameItem?.gameName}</span>
                 </div>
