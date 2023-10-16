@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
-import { selectedSectionAtom } from '@/pages/Content/Wallet';
+import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 // import Mybalance from './Mybalance';
 
 interface TransactionSectionProps {
@@ -9,7 +9,8 @@ interface TransactionSectionProps {
 }
 const TransactionSection: React.FC<TransactionSectionProps> = () => {
     const { t } = useTranslation();
-    const [selectedSection, setSelectedSection] = useAtom(selectedSectionAtom);
+    const [selectedSection, setSelectedSection] = useAtom(activeMenuAtom);
+
     const handleClick = (data: string) => {
         setSelectedSection(data);
     };

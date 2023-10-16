@@ -3,18 +3,15 @@ import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSetAtom, useAtom } from 'jotai';
-import { selectedSectionAtom } from '@/pages/Content/Wallet';
+import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { walletArray } from './walletArray';
-import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 import { useIsLogin } from '@/hooks/resources/useIsLogin';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const [activeMenu, setActiveMenu] = useAtom(activeMenuAtom);
-    const [_selectedSection, setSelectedSection] = useAtom(selectedSectionAtom);
-
     const Navigate = useNavigate();
     const isLogin = useIsLogin();
     const walletArrayData = walletArray;
@@ -40,7 +37,6 @@ const index: React.FC = () => {
                         return;
                     }
                     //其餘為跳轉到錢包頁面
-                    setSelectedSection(walletAction);
                     if (isLogin) {
                         Navigate('/wallet');
                         setActiveMenu(walletAction);

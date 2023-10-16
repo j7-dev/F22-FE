@@ -1,42 +1,27 @@
 import React from 'react';
-import { atom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { Authenticated } from './Authenticated';
 import { useGetIdentity } from '@refinedev/core';
-import { TUser } from '@/types';
-import UserInfo from './UserInfo';
-import BankCard from './BankCard';
-import ChangPas from './ChangPas';
+import { Spin } from 'antd';
+import { TMe } from '@/types';
+import MyPage from './MyPage';
 import NoteBox from './NoteBox';
 import CashHistory from './CashHistory';
 import Withdraw from './Withdraw';
 import Deposit from './Deposit';
+import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 // import { useTranslation } from 'react-i18next';
-//FIXME 未來想法是改成useState在組件內部切換，取得activeMenuAtom來做判斷就好，減少ATOM的使用
-export const selectedSectionAtom = atom('siteNotify');
 
 const Wallet: React.FC = () => {
-    // const { t } = useTranslation();
-    const { data, isLoading } = useGetIdentity<TUser>();
-    // console.log('🚀 ~ data:', data);
+    const activeMenu = useAtomValue(activeMenuAtom);
+    const { data, isLoading } = useGetIdentity<TMe>();
 
-    if (isLoading) return <div>loading...</div>;
-    return (
-        <Authenticated>
-            <div className="myPage relative px-4 my-4 flex flex-col gap-6 sm:my-9 sm:w-full">
-                <UserInfo userInfo={data} />
-                <div className="userSection2 grid grid-cols-1 gap-6 sm:grid-cols-4 ">
-                    <div className="col-span-1">
-                        <BankCard bankInfo={data?.bank_account} />
-                    </div>
-                    <div className="col-span-1">
-                        <ChangPas />
-                    </div>
-                    <div className="col-span-1 sm:col-span-2">
-                        <NoteBox />
-                    </div>
-                </div>
-                <CashHistory userID={data?.id as number} />
-
+    const ShowSection = () => {
+        if (activeMenu === 'myPage') return <MyPage data={data as TMe} />;
+        if (activeMenu === 'siteNotify') return <NoteBox />;
+        if (activeMenu === 'cashHistory') return <CashHistory userID={data?.id as number} />;
+        if (activeMenu === 'withdraw' || activeMenu === 'deposit')
+            return (
                 <div className="grid grid-cols-2 gap-6">
                     <div>
                         <Deposit />
@@ -45,6 +30,15 @@ const Wallet: React.FC = () => {
                         <Withdraw />
                     </div>
                 </div>
+            );
+        return <MyPage data={data as TMe} />;
+    };
+    return (
+        <Authenticated>
+            <div className="wallet px-4 my-4 sm:my-9 sm:w-full">
+                <Spin spinning={isLoading}>
+                    <ShowSection />
+                </Spin>
             </div>
         </Authenticated>
     );

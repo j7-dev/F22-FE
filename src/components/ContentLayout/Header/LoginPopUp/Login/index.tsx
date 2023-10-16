@@ -81,7 +81,7 @@ const index: React.FC = () => {
             captchaRef.current.resetCaptcha();
             form.resetFields();
         }
-    }, [isAuthenticated?.authenticated, captchaRef.current]);
+    }, [isAuthenticated?.authenticated]);
     return (
         <div className="loginFromSection text-center flex flex-col gap-2.5 w-full">
             <span className="text-4xl text-center font-semibold text-white mb-9">{t('USER LOGIN')}</span>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSetAtom } from 'jotai';
 import { Link, useNavigate } from 'react-router-dom';
-import { selectedSectionAtom } from '@/pages/Content/Wallet';
+import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 import { useGetNoteBox } from '@/hooks/resources/useGetNoteBox';
 import Icon_Wallet_white from '@/assets/images/topBar/Icon_TopBar_Wallet_White.svg';
 import Icon_Account_White from '@/assets/images/topBar/Icon_Account_White.svg';
@@ -14,11 +14,11 @@ const Mobile: React.FC<{
     isLogin: boolean;
 }> = ({ handleProfile, isLogin }) => {
     const navigate = useNavigate();
-    const setSelectedSection = useSetAtom(selectedSectionAtom);
+    const setSection = useSetAtom(activeMenuAtom);
     const { dataCount } = useGetNoteBox();
 
     const handleClckToSiteNotify = () => {
-        setSelectedSection('siteNotify');
+        setSection('siteNotify');
         navigate('/wallet');
     };
     //錢包及通知組件

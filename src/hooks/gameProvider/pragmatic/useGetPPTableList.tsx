@@ -4,6 +4,7 @@ import { mappingRTP } from '@/utils/providerData/PPGameRTP';
 // import { useGetPPImg } from '@/hooks/gameProvider/pragmatic/useGetPPImg';
 import ProviderS_PragmaticPlay from '@/assets/images/game_provider/ProviderS_PragmaticPlay.svg';
 import { TGame } from '@/types/games';
+
 export const useGetPPTableList = () => {
     const apiUrl = useApiUrl();
     const gameServerDomain = 'https://smart-bet.prerelease-env.biz';

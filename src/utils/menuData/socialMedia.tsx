@@ -1,5 +1,8 @@
 import twitterIcon from '@/assets/images/Icon_Twitter.svg';
 import igIcon from '@/assets/images/Icon_Instagram.svg';
+import TelegramIcon from '@/assets/images/Telegram.svg';
+import GroupIcon from '@/assets/images/Group.svg';
+import CustomServiceIcon from '@/assets/images/CustomService.svg';
 
 export const socialMedia = [
     {
@@ -17,19 +20,19 @@ export const socialMedia = [
     {
         label: 'telegramChannel',
         value: 'Telegram Channel',
-        icon: igIcon,
+        icon: TelegramIcon,
         link: '',
     },
     {
         label: 'telegramGroup',
         value: 'Telegram Group',
-        icon: igIcon,
+        icon: GroupIcon,
         link: '',
     },
     {
         label: 'customService',
         value: 'Custom Service',
-        icon: igIcon,
+        icon: CustomServiceIcon,
         link: '',
     },
 ];
