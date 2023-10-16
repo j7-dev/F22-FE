@@ -16,12 +16,16 @@ export const useGetPPTableList = () => {
     } = useCustom({
         url: `${apiUrl}/pp/getcasinogames`,
         method: 'post',
+        queryOptions: {
+            staleTime: 1000 * 60 * 60 * 24,
+            cacheTime: 1000 * 60 * 60 * 24,
+        },
     });
     const data =
         fetchData?.data?.gameList.map((item: TGame) => {
             return {
                 ...item,
-                gameCategory: mappingGameCategory({ gameProviderName: 'PP' }),
+                gameCategory: mappingGameCategory({ gameProviderName: 'pragmaticPlay' }),
                 gameProviderName: 'pragmatic',
                 gameImg: `${gameServerDomain}/game_pic/rec/325/${item.gameID}.png`,
                 gameListFavIcon: ProviderS_PragmaticPlay,
