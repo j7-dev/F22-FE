@@ -2,14 +2,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Tabs } from 'antd';
 import { nanoid } from 'nanoid';
-import { useAtom } from 'jotai';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { TPopularGamesData, TPopularGames, TPopularGame } from '@/types/games/popularGames';
-import { windowWidthAtom } from '@/components/ContentLayout';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { FaGamepad } from 'react-icons/fa';
 import { RenderTabBar } from 'rc-tabs/lib/interface';
 import ComingSoonImg from '@/assets/images/ComingSoon.svg';
+import { useShowPc } from '@/hooks/useShowPc';
 
 //單個文章版型
 const TabPaneList = ({ gameCategory }: { gameCategory: TPopularGames }) => {
@@ -60,11 +59,10 @@ const TabPaneList = ({ gameCategory }: { gameCategory: TPopularGames }) => {
 // 自定义标签栏组件
 const CustomTabBar: RenderTabBar = (props) => {
     const { activeKey, panes, onTabClick } = props;
-
-    const [windowWidth, _setWindowWidth] = useAtom(windowWidthAtom);
+    const showPc = useShowPc();
 
     // console.log('panes', panes);
-    if (windowWidth <= 414) {
+    if (!showPc) {
         // 当屏幕宽度小于 810px 时，
         return (
             <div className="customTabBarMb py-4 overflow-x-scroll">

@@ -1,26 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSetAtom, useAtomValue } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { popupIsOpenAtom } from '../LoginModule';
-import { mbSidebarAtom, windowWidthAtom } from '@/components/ContentLayout';
-import { sidebarIsOpenAtom } from '@/components/ContentLayout/Sidebar';
 import Mobile from './Mobile';
 import Pc from './Pc';
 import { useIsLogin } from '@/hooks/resources/useIsLogin';
+import { useShowPc } from '@/hooks/useShowPc';
 
 const NavBar: React.FC = () => {
-    const setMbSidebar = useSetAtom(mbSidebarAtom);
-    const setSidebarIsOpen = useSetAtom(sidebarIsOpenAtom);
+    const showPc = useShowPc();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
-    const windowWidth = useAtomValue(windowWidthAtom);
     const isLogin = useIsLogin();
     const Navigate = useNavigate();
 
-    //手機版選單暴露函式
-    const handleMbSidebar = () => {
-        setSidebarIsOpen((prevValue) => !prevValue);
-        setMbSidebar((prevValue) => !prevValue);
-    };
     const handleProfile = () => {
         if (isLogin) {
             Navigate('/wallet');
@@ -30,8 +22,8 @@ const NavBar: React.FC = () => {
     };
     //選擇顯示的選單
     const ShowNav = () => {
-        if (windowWidth > 414) return <Pc isLogin={isLogin} />;
-        else return <Mobile handleMbSidebar={handleMbSidebar} handleProfile={handleProfile} isLogin={isLogin} />;
+        if (showPc) return <Pc isLogin={isLogin} />;
+        else return <Mobile handleProfile={handleProfile} isLogin={isLogin} />;
     };
 
     return (

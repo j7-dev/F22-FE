@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Tabs, Dropdown, Space, TabsProps } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { useAtom } from 'jotai';
 import { nanoid } from 'nanoid';
 // import {LazyLoadImage} from 'react-lazy-load-image-component';
-import { windowWidthAtom } from '@/components/ContentLayout';
 import { TGameProvider, TProviderData } from '@/types/games';
 import { DownOutlined } from '@ant-design/icons';
+import { useShowPc } from '@/hooks/useShowPc';
 
-//TODO 這邊只要套用LazyLoadImage 組件就會閃跳
+//FIXME 這邊只要套用LazyLoadImage 組件就會閃跳
 //單個文章版型
 const TabPaneList = (props: { taxonomy: TGameProvider }) => {
     const { taxonomy } = props;
@@ -54,11 +53,11 @@ const TabPaneList = (props: { taxonomy: TGameProvider }) => {
 // 自定义标签栏组件
 const CustomTabBar = (props: any) => {
     const { activeKey, panes, onTabClick } = props;
-    const [windowWidth, _setWindowWidth] = useAtom(windowWidthAtom);
+    const showPc = useShowPc();
     // 添加用于检测屏幕宽度变化的事件处理程序
 
     //目前手機版用不到
-    if (windowWidth <= 414) {
+    if (!showPc) {
         // 当屏幕宽度小于 810px 时，使用下拉菜单
         const DropdownMenu = panes.map((pane: any) => ({
             key: pane.props.tabKey,
