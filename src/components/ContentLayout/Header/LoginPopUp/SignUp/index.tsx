@@ -115,7 +115,7 @@ const index: React.FC = () => {
                 <Form.Item name={['bank_account', 'bank_account_number']} rules={[{ required: true, message: 'Please input your Phone' }]}>
                     <Input.Password placeholder="Bank Account Number" prefix={<img src={bankNumber} />} bordered={false} />
                 </Form.Item>
-                <HCaptcha size="invisible" ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
+                <HCaptcha id='id="signUpHCaptcha"' size="invisible" ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
                 <Form.Item className="mb-0">
                     <Button loading={isLoading} disabled={!submitTable} className="mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
                         {t('Sign Up')}

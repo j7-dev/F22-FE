@@ -30,8 +30,8 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
     const currentValid = nextValidUpgrade - validUpgrade;
 
     //百分比
-    const depositPercent = (currentDeposit / nextDepositUpgrade) * 100;
-    const validPercent = (currentValid / nextValidUpgrade) * 100;
+    const depositPercent = (currentDeposit / nextDepositUpgrade) * 100 || 0;
+    const validPercent = (currentValid / nextValidUpgrade) * 100 || 0;
 
     return (
         <div className="userInfo rounded-2xl grid grid-cols-1 gap-6 sm:p-[30px] sm:grid-cols-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">

@@ -18,6 +18,7 @@ const index: React.FC = () => {
     const { t } = useTranslation();
     const { mutate: login, isLoading } = useLogin<LoginVariables>();
     const { data: isAuthenticated } = useIsAuthenticated();
+    // console.log('🚀 ~ isAuthenticated:', isAuthenticated);
     const captchaRef = useRef<HCaptcha>(null);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
@@ -76,11 +77,11 @@ const index: React.FC = () => {
 
     // //判斷是否登出，並且重置表單及驗證表單
     useEffect(() => {
-        if (captchaRef.current !== null && isAuthenticated?.authenticated === false) {
+        if (captchaRef.current && isAuthenticated?.authenticated === false) {
             captchaRef.current.resetCaptcha();
             form.resetFields();
         }
-    }, [isAuthenticated?.authenticated]);
+    }, [isAuthenticated?.authenticated, captchaRef.current]);
     return (
         <div className="loginFromSection text-center flex flex-col gap-2.5 w-full">
             <span className="text-4xl text-center font-semibold text-white mb-9">{t('USER LOGIN')}</span>
@@ -93,7 +94,7 @@ const index: React.FC = () => {
                 <Form.Item name="userPas" rules={[{ required: true, message: 'Please input your Password' }]}>
                     <Input.Password placeholder="User Password" prefix={<img src={passwordIcon} />} bordered={false} />
                 </Form.Item>
-                <HCaptcha size="invisible" ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
+                <HCaptcha id="loginHCaptcha" size="invisible" ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
                 <Form.Item className="mb-0">
                     <Button loading={isLoading} disabled={!submittable} className="mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
                         {t('LOGIN')}

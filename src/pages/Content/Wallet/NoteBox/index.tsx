@@ -13,7 +13,7 @@ const rowSelection = {
 };
 const index: React.FC = () => {
     const { t } = useTranslation();
-    const { data, isLoading } = useList<TSiteNotify>({
+    const { data, isFetching } = useList<TSiteNotify>({
         resource: 'cms-posts',
         meta: {
             populate: '*',
@@ -34,7 +34,6 @@ const index: React.FC = () => {
                 ...item,
             };
         }) || [];
-    if (isLoading) return <div>loading...</div>;
 
     return (
         <div className="h-full w-full py-[42px] flex flex-col gap-4 rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] sm:px-[32px]">
@@ -50,6 +49,7 @@ const index: React.FC = () => {
                     ...rowSelection,
                 }}
                 pagination={false}
+                loading={isFetching}
             >
                 <Column title="Title" dataIndex="content" key="content" className="text-sm text-[#0F172A] font-medium" />
                 <Column title="Date" dataIndex="fxnCreatedAt" key="fxnCreatedAt" className="text-sm text-[#0F172A] font-medium" />

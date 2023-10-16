@@ -1,10 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TBankAccount } from '@/types';
+import { Empty } from 'antd';
 
 const index: React.FC<{ bankInfo?: TBankAccount }> = ({ bankInfo }) => {
     const { t } = useTranslation();
-    if (!bankInfo) return <div>not BankAccount...</div>;
+    if (!bankInfo)
+        return (
+            <div className="h-full w-full py-[42px] userBank flex flex-col gap-4 rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] sm:px-[32px]">
+                <Empty description={<span>Not Data</span>} />
+            </div>
+        );
 
     return (
         <div className="h-full w-full py-[42px] userBank flex flex-col gap-4 rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] sm:px-[32px]">
