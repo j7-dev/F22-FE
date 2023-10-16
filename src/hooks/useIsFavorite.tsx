@@ -12,8 +12,8 @@ import { TGame } from '@/types/games';
 export const useIsFavorite = (game: TGame) => {
     const { data: user } = useGetIdentity<TMe>();
     if (!user) return false;
-    const gameProviderName = game.gameProviderName;
-    const gameID = game.gameID;
+    const gameProviderName = game?.gameProviderName;
+    const gameID = game?.gameID;
     const favoriteGame = user?.favorite_games || {};
     if (favoriteGame[gameProviderName as string]?.includes(gameID as string)) return true;
     return false;

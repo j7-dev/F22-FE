@@ -56,7 +56,7 @@ const index: React.FC = () => {
             setGameDataList(rawGameList as []);
             return;
         }
-        setGameDataList(rawGameList.filter((item) => item.casinoCategory === key) as []);
+        setGameDataList(rawGameList.filter((item) => item.gameProviderName === key) as []);
     };
     //搜尋遊戲
     const filterGame = (searchGame: string) => {
