@@ -74,10 +74,11 @@ const index: React.FC = () => {
         );
     }, [values]);
 
-    // //判斷是否登出，並且重置驗證表單
+    // //判斷是否登出，並且重置表單及驗證表單
     useEffect(() => {
         if (captchaRef.current !== null && isAuthenticated?.authenticated === false) {
             captchaRef.current.resetCaptcha();
+            form.resetFields();
         }
     }, [isAuthenticated?.authenticated]);
     return (
