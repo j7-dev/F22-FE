@@ -1,20 +1,18 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAtomValue } from 'jotai';
-import { windowWidthAtom } from '@/components/ContentLayout';
 import { useGetPopularGames } from '@/hooks/gameProvider/useGetPopularGames';
 import Tabs from './Tabs';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
+import { useShowPc } from '@/hooks/useShowPc';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const { PopularGamesData, isLoading } = useGetPopularGames();
-
-    const windowWidth = useAtomValue(windowWidthAtom);
+    const showPc = useShowPc();
     return (
         <div className="relative PopularGames sm:w-full">
             <div className="sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl">
-                {windowWidth > 414 ? (
+                {showPc ? (
                     <div className="grid grid-cols-11 gap-4 py-9">
                         <div className="col-span-1 flex justify-center">
                             <img src={Icon_Main_Title} alt="" className="" />

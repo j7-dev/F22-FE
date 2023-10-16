@@ -3,17 +3,19 @@ import { useSetAtom } from 'jotai';
 import { API_URL } from '@/utils';
 import { TPopularGame } from '@/types/games/popularGames';
 import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { useIsLogin } from '@/hooks/resources/useIsLogin';
 import { TMe } from '@/types';
 
 export const useOpenGame = () => {
     const { data: identity } = useGetIdentity<TMe>();
     const { mutate: openGame, isLoading } = useCustomMutation();
+    const isLogin = useIsLogin();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const locale = useGetLocale();
     const currentLocale = locale();
 
     const handleClick = (item: TPopularGame) => () => {
-        if (!identity) {
+        if (!isLogin) {
             setPopupIsOpen(true);
             return;
         }

@@ -2,8 +2,6 @@ import React from 'react';
 import { nanoid } from 'nanoid';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAtomValue } from 'jotai';
-import { windowWidthAtom } from '@/components/ContentLayout';
 // import { useSetAtom } from 'jotai';
 // import { Link } from 'react-router-dom';
 import LanguageSwitch from '@/components/ContentLayout/Header/LanguageSwitch';
@@ -13,11 +11,12 @@ import logo from '@/assets/images/1002_logo_f.svg';
 import logo2 from '@/assets/images/1002_logo_s.svg';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import { fakeProviderData } from '@/pages/Content/Home/Provider/ProviderData';
+import { useShowPc } from '@/hooks/useShowPc';
 
 // import { popupIsOpenAtom } from '@/components/ContentLayout/LoginPopUp';
 
 export const Footer: React.FC = () => {
-    const windowWidth = useAtomValue(windowWidthAtom);
+    const showPc = useShowPc();
     const { t } = useTranslation();
 
     return (
@@ -25,15 +24,15 @@ export const Footer: React.FC = () => {
             <div className="footerImgWrap grid sm:grid-cols-11 sm:pb-20 sm:py-9 grid-cols-4 gap-4 w-full h-auto border-solid border-b-2 border-0 border-[#E0E0E0] py-6">
                 <div className="aboutWrap sm:flex sm:flex-col sm:col-start-2 sm:col-span-3 col-span-4 gap-4 grid grid-cols-4">
                     <div className="footerLogo sm:h-10 col-span-1 h-full text-center">
-                        <img src={windowWidth > 414 ? logo : logo2} alt="" className="sm:w-full w-[30px] h-full object-left object-contain" />
+                        <img src={showPc ? logo : logo2} alt="" className="sm:w-full w-[30px] h-full object-left object-contain" />
                     </div>
                     <div className="txt sm:py-4 sm:border-t-2 sm:border-l-0 border-l-2 pl-2.5 col-span-3 text-[#333333] text-xs font-normal  border-solid  border-0 border-[#E0E0E0]">{t('COPYRIGHT 2023, SMART BET. ALL RIGHTS RESERVED. GAMBLING CAN BE ADDICTIVE, PLEASE PLAY RESPONSIBLY. FOR MORE INFORMATION ON SUPPORT TOOLS, PLEASE VISIT OUR RESPONSIBLE GAMBLING PAGE PAYMENT SUPPORTED BY CODE PAY')}</div>
                     {/* 電腦版翻譯選單 */}
-                    {windowWidth > 414 ? <LanguageSwitch /> : ''}
+                    {showPc ? <LanguageSwitch /> : ''}
                 </div>
                 <div className="helpWrap w-full sm:flex sm:flex-col sm:col-span-3 col-span-4 gap-4 grid grid-cols-4">
                     <div className="sm:text-2xl sm:h-10 text-[10px] font-bold text-black flex items-center justify-center gap-3 col-span-1">
-                        {windowWidth > 414 ? (
+                        {showPc ? (
                             <>
                                 <img src={Icon_Main_Title} alt="" />
                                 <span className="">{t('SMART BET HELP')}</span>
@@ -60,7 +59,7 @@ export const Footer: React.FC = () => {
                     </ul>
                 </div>
                 {/* 手機版翻譯選單 */}
-                {windowWidth <= 414 ? (
+                {!showPc ? (
                     <div className="col-span-4 gap-4 grid grid-cols-4">
                         <div className="col-start-2 col-span-3">
                             <LanguageSwitch />

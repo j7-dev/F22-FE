@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLogout } from '@refinedev/core';
 import Icon_Wallet_white from '@/assets/images/topBar/Icon_TopBar_Wallet_White.svg';
+import { useIsLogin } from '@/hooks/resources/useIsLogin';
 
-export const IsLoginAtom = atom(false);
 export const popupIsOpenAtom = atom(false);
 export const loginOrSignUpAtom = atom(true); //true:login false:signUp
 export const verifyErrorAtom = atom('');
@@ -13,7 +13,7 @@ export const verifyErrorAtom = atom('');
 const Login: React.FC = () => {
     const { t } = useTranslation();
     const Navigate = useNavigate();
-    const [isLogin, _setIsLogin] = useAtom(IsLoginAtom);
+    const isLogin = useIsLogin();
     const [_verifyError, setVerifyError] = useAtom(verifyErrorAtom);
     const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
@@ -33,11 +33,7 @@ const Login: React.FC = () => {
 
     //My Wallet
     const handleWallet = () => {
-        if (isLogin) {
-            Navigate('/wallet');
-        } else {
-            setPopupIsOpen(true);
-        }
+        Navigate('/wallet');
     };
     const handleRegister = () => {
         setLoginOrSignUp(false);

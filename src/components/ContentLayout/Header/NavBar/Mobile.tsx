@@ -1,37 +1,25 @@
 import React from 'react';
-import { useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { Link, useNavigate } from 'react-router-dom';
 import { selectedSectionAtom } from '@/pages/Content/Wallet';
 import { useGetNoteBox } from '@/hooks/resources/useGetNoteBox';
-import { mbSidebarAtom } from '@/components/ContentLayout';
-import menuBtn from '@/assets/images/menuBtn.svg';
-import menuOpen from '@/assets/images/menuOpen.svg';
 import Icon_Wallet_white from '@/assets/images/topBar/Icon_TopBar_Wallet_White.svg';
 import Icon_Account_White from '@/assets/images/topBar/Icon_Account_White.svg';
 import Icon_NoteBox_white from '@/assets/images/topBar/Icon_NoteBox_white.svg';
 import logo from '@/assets/images/1002_logo_f.svg';
+import MenuBtn from './MenuBtn';
 
 const Mobile: React.FC<{
-    handleMbSidebar: () => void;
     handleProfile: () => void;
     isLogin: boolean;
-}> = ({ handleMbSidebar, handleProfile, isLogin }) => {
+}> = ({ handleProfile, isLogin }) => {
     const navigate = useNavigate();
-    const [mbSidebar, _setMbSidebar] = useAtom(mbSidebarAtom);
     const setSelectedSection = useSetAtom(selectedSectionAtom);
     const { dataCount } = useGetNoteBox();
 
     const handleClckToSiteNotify = () => {
         setSelectedSection('siteNotify');
         navigate('/wallet');
-    };
-    //選單按鈕組件
-    const MenuBtn = () => {
-        if (mbSidebar) {
-            return <img src={menuOpen} />;
-        } else {
-            return <img src={menuBtn} />;
-        }
     };
     //錢包及通知組件
     const WalletMenu = () => {
@@ -59,11 +47,7 @@ const Mobile: React.FC<{
     return (
         <div className="mbMenu w-full h-full relative z-50 flex items-center justify-between sm:hidden">
             <div className="phoneMenu w-[30px] h-[30px]">
-                <button onClick={handleMbSidebar} type="button" className="inline-flex justify-center items-center gap-2 rounded-full bg-transparent border-transparent border-0 align-middle transition-all">
-                    <div className={`menuBtn transition-all ${mbSidebar ? 'rotate-45' : ''}`}>
-                        <MenuBtn />
-                    </div>
-                </button>
+                <MenuBtn />
             </div>
             <div className="logo w-full h-full flex items-center">
                 <Link to="/" className="w-full">

@@ -20,7 +20,7 @@ import bankCode from '@/assets/images/loginFrom/bankCode.svg';
 const index: React.FC = () => {
     const { t } = useTranslation();
     const captchaRef = useRef<HCaptcha>(null);
-    const { mutate: register } = useRegister<TRegisterPayload>();
+    const { mutate: register, isLoading } = useRegister<TRegisterPayload>();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
     const [form] = Form.useForm();
@@ -117,15 +117,15 @@ const index: React.FC = () => {
                 </Form.Item>
                 <HCaptcha size="invisible" ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
                 <Form.Item className="mb-0">
-                    <Button disabled={!submitTable} className="mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
-                        Sign Up
+                    <Button loading={isLoading} disabled={!submitTable} className="mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
+                        {t('Sign Up')}
                     </Button>
                 </Form.Item>
             </Form>
             <div className="text-white flex flex-col">
                 <span className="font-normal text-sm">{t('have an account?')}</span>
                 <span className="text-sm font-bold cursor-pointer" onClick={handleToLogin}>
-                    Log In
+                    {t('Log In')}
                 </span>
             </div>
         </div>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
-import { useIsAuthenticated } from '@refinedev/core';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSetAtom, useAtom } from 'jotai';
@@ -8,6 +7,7 @@ import { selectedSectionAtom } from '@/pages/Content/Wallet';
 import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { walletArray } from './walletArray';
 import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
+import { useIsLogin } from '@/hooks/resources/useIsLogin';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
@@ -16,12 +16,11 @@ const index: React.FC = () => {
     const [_selectedSection, setSelectedSection] = useAtom(selectedSectionAtom);
 
     const Navigate = useNavigate();
-    const { data } = useIsAuthenticated();
-    const isLogin = data?.authenticated;
+    const isLogin = useIsLogin();
     const walletArrayData = walletArray;
     const walletFilterData = isLogin ? walletArrayData : walletArrayData.filter((item) => item.showIn === 'beforeLogin');
     return (
-        <ul className="WallerContainer w-full text-white transition-all duration-300 mb-0 pl-0 flex flex-col gap-4">
+        <ul className="WallerContainer w-full transition-all duration-300 mb-0 pl-0 flex flex-col gap-4">
             {walletFilterData.map((wallet) => {
                 const handleClick = (walletAction: string) => {
                     //如果點擊的是faq，就跳轉到faq頁面
@@ -56,9 +55,9 @@ const index: React.FC = () => {
                         onClick={() => {
                             handleClick(wallet.label);
                         }}
-                        className={`${activeMenu === wallet.label && isLogin ? 'active' : ''} ${wallet.label} relative transition-all cursor-pointer  px-6 sm:px-0 sm:rounded-2xl text-[#333333]`}
+                        className={`${activeMenu === wallet.label && isLogin ? 'active' : ''} ${wallet.label} relative transition-all cursor-pointer  px-6 sm:px-0 sm:rounded-2xl `}
                     >
-                        <span className="flex items-center text-sm overflow-hidden">
+                        <span className="flex items-center text-sm overflow-hidden pr-2.5">
                             <div className="favicon min-w-[60px] min-h-[60px] flex justify-center items-center" />
                             <span className={`whitespace-nowrap text-lg font-normal`}>{t(wallet.value)}</span>
                         </span>

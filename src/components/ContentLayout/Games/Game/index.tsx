@@ -1,14 +1,15 @@
 import React from 'react';
-import { atom, useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { atom, useAtom, useSetAtom } from 'jotai';
 import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg/';
 import coinIcon from '@/assets/images/coin-icon.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 // import { getFakeImg } from '@/pages/Content/Taxonomy/Live/Evolution/fakeGameData';
-import { IsLoginAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { cloneDeep } from 'lodash';
 import { requestAtomType } from '@/types';
 import { useCustomMutation } from '@refinedev/core';
 import { API_URL } from '@/utils';
+import { useIsLogin } from '@/hooks/resources/useIsLogin';
 
 type GameProps = {
     data: {
@@ -57,7 +58,7 @@ export const configAtom = atom<requestAtomType>({
     },
 });
 const index: React.FC<GameProps> = ({ data = {} }) => {
-    const isLogin = useAtomValue(IsLoginAtom);
+    const isLogin = useIsLogin();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const [gameconfig, _setGameconfig] = useAtom(configAtom);
     const { mutate: openGame } = useCustomMutation();
