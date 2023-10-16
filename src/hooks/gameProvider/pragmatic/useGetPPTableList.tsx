@@ -2,7 +2,7 @@ import { useApiUrl, useCustom } from '@refinedev/core';
 import { mappingGameCategory } from '@/utils/GameCategory';
 import { mappingRTP } from '@/utils/providerData/PPGameRTP';
 // import { useGetPPImg } from '@/hooks/gameProvider/pragmatic/useGetPPImg';
-import ProviderS_PragmaticPlay from '@/assets/images/game_provider/providerS_PragmaticPlay.svg';
+import ProviderS_PragmaticPlay from '@/assets/images/game_provider/ProviderS_PragmaticPlay.svg';
 import { TGame } from '@/types/games';
 export const useGetPPTableList = () => {
     const apiUrl = useApiUrl();
