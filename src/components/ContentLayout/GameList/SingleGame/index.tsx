@@ -1,5 +1,4 @@
 import React from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { TGame } from '@/types/games';
 import { useOpenGame } from '@/hooks/gameProvider/useOpenGame';
 import { useIsFavorite } from '@/hooks/useIsFavorite';
@@ -57,7 +56,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                 <OnTheTop {...fxnGameItem} />
             </div>
             <div className="gameWrap w-full relative">
-                <LazyLoadImage src={gameItem?.gameImg} alt="" className="sm:aspect-square w-full h-full duration-500 group-hover:scale-125 aspect-[342/120] object-cover" />
+                <img src={gameItem?.gameImg} alt="" className="sm:aspect-square w-full h-full duration-500 group-hover:scale-125 aspect-[342/120] object-cover" />
                 <div className="gameInfo absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent via-50% to-[#1A1A1A80] flex items-end  px-5 py-2.5">
                     <span className="gameName font-bold text-xl text-white">{gameItem?.gameName}</span>
                 </div>

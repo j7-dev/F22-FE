@@ -47,35 +47,28 @@ const index: React.FC = () => {
     //取得遊戲列表
     const { data: ppData, isFetching } = useGetPPTableList();
     // console.log('🚀 ~ ppData:', ppData);
-    const allGameList = [...ppData];
-    const allLoading = isFetching;
+    const rawGameList = [...ppData];
 
     //切換分類
     const handleSwitchTab = (key: string) => () => {
         setSlotGameProvider(key);
-        if (key === 'all') return setGameDataList(allGameList as []);
-        setGameDataList(allGameList.filter((item) => item.casinoCategory === key) as []);
+        if (key === 'all') {
+            setGameDataList(rawGameList as []);
+            return;
+        }
+        setGameDataList(rawGameList.filter((item) => item.casinoCategory === key) as []);
     };
     //搜尋遊戲
     const filterGame = (searchGame: string) => {
-        if (searchGame === '') return setGameDataList(allGameList as []);
+        if (searchGame === '') return setGameDataList(rawGameList as []);
         setSlotGameProvider(searchGame);
-        setGameDataList((allGameList.filter((item) => item?.gameName?.includes(searchGame)) as []) || []);
+        setGameDataList((rawGameList.filter((item) => item?.gameName?.includes(searchGame)) as []) || []);
     };
     //分類遊戲
-    //分類遊戲條件渲染
-    const ShowGames = () => {
-        if (allLoading)
-            return (
-                <div className="text-center">
-                    <Spin />
-                </div>
-            );
-        return <GameList gameData={gameDataList} />;
-    };
+
     //當載入完成後，將遊戲列表資料放入gameDataList
     useEffect(() => {
-        setGameDataList(allGameList as []);
+        setGameDataList(rawGameList as []);
     }, [isFetching]);
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -108,7 +101,9 @@ const index: React.FC = () => {
                             })}
                         </div>
                     </div>
-                    <ShowGames />
+                    <Spin spinning={isFetching}>
+                        <GameList gameData={gameDataList} />
+                    </Spin>
                 </div>
             </div>
         </div>

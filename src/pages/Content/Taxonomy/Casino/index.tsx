@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { nanoid } from 'nanoid';
 import { Spin } from 'antd';
@@ -24,8 +24,7 @@ const fxnCasinoCategory = [
 
 const index: React.FC = () => {
     const { t } = useTranslation();
-    const [casinoGameCategory, setCasinoGameCategory] = useState('all');
-    //遊戲列表
+    const [chosenCategory, setChosenCategory] = useState('all');
     const [gameDataList, setGameDataList] = useState([]);
 
     //跑馬燈
@@ -35,34 +34,27 @@ const index: React.FC = () => {
     });
     //取得遊戲列表
     const { data: evoData, isFetching } = useGetEVOTableList();
-    const allGameList = [...evoData];
-    const allLoading = isFetching;
+    const rawGameList = useMemo(() => evoData || [], [isFetching]);
+    console.log('⭐  rawGameList:', rawGameList);
     //切換分類
     const handleSwitchTab = (key: string) => () => {
-        setCasinoGameCategory(key);
-        if (key === 'all') return setGameDataList(allGameList as []);
-        setGameDataList(allGameList.filter((item) => item.casinoCategory === key) as []);
+        setChosenCategory(key);
+        if (key === 'all') return setGameDataList(rawGameList as []);
+        setGameDataList(rawGameList.filter((item) => item.casinoCategory === key) as []);
     };
     //搜尋遊戲
     const filterGame = (searchGame: string) => {
-        if (searchGame === '') return setGameDataList(allGameList as []);
-        setCasinoGameCategory(searchGame);
-        setGameDataList((allGameList.filter((item) => item?.gameName?.includes(searchGame)) as []) || []);
+        if (searchGame === '') return setGameDataList(rawGameList as []);
+        setChosenCategory(searchGame);
+        setGameDataList((rawGameList.filter((item) => item?.gameName?.includes(searchGame)) as []) || []);
     };
-    //分類遊戲條件渲染
-    const ShowGames = () => {
-        if (allLoading)
-            return (
-                <div className="text-center">
-                    <Spin />
-                </div>
-            );
-        return <GameList gameData={gameDataList} />;
-    };
-    //當載入完成後，將遊戲列表資料放入gameDataList
+
     useEffect(() => {
-        setGameDataList(allGameList as []);
+        if (!isFetching) {
+            setGameDataList(rawGameList as []);
+        }
     }, [isFetching]);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -87,7 +79,7 @@ const index: React.FC = () => {
                         <div className="w-fit flex flex-nowrap col-span-3 grid-cols-7 gap-2 sm:w-full sm:grid sm:col-start-2 sm:col-span-9 ">
                             {fxnCasinoCategory.map((item) => {
                                 return (
-                                    <div key={nanoid()} onClick={handleSwitchTab(item.Category)} className={`${casinoGameCategory == item.Category ? 'font-bold bg-[#5932EA]' : 'font-medium bg-[#C6BBEE]'} px-4 py-2 col-span-1 cursor-pointer rounded-2xl overflow-hidden flex items-center gap-2`}>
+                                    <div key={nanoid()} onClick={handleSwitchTab(item.Category)} className={`${chosenCategory == item.Category ? 'font-bold bg-[#5932EA]' : 'font-medium bg-[#C6BBEE]'} px-4 py-2 col-span-1 cursor-pointer rounded-2xl overflow-hidden flex items-center gap-2`}>
                                         <img src={item.img} className="w-9 h-full object-center object-contain" alt="" />
                                         <span className="sm:text-base text-xs text-white">{t(item.name)}</span>
                                     </div>
@@ -95,8 +87,9 @@ const index: React.FC = () => {
                             })}
                         </div>
                     </div>
-
-                    <ShowGames />
+                    <Spin spinning={isFetching}>
+                        <GameList gameData={gameDataList} />
+                    </Spin>
                 </div>
             </div>
         </div>
