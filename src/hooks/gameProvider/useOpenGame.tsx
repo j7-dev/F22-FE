@@ -53,7 +53,7 @@ export const useOpenGame = () => {
             };
             evoGameConfig.config.game.category = item['Game Type'] as string;
             evoGameConfig.config.game.table.id = item['Table ID'] as string;
-            evoGameConfig.player.id = identity.id.toString();
+            evoGameConfig.player.id = (identity as TMe).id.toString();
             openGame(
                 {
                     url: `${API_URL}/api/evo/opengame`,

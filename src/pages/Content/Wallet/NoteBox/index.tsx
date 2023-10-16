@@ -29,7 +29,7 @@ const index: React.FC<{ pageSize?: number; pagination?: false | undefined }> = (
                     {t('Read More')}
                 </button>
             );
-        } else <></>;
+        } else return <></>;
     };
 
     //取得資料

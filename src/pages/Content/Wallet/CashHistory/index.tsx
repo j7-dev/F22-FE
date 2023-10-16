@@ -23,7 +23,7 @@ const index: React.FC<{ userID: number; pageSize?: number; pagination?: false | 
                     {t('Read More')}
                 </button>
             );
-        } else <></>;
+        } else return <></>;
     };
     //取得資料
     const { data, isLoading } = useGetTransactionRecords({ type: ['DEPOSIT', 'WITHDRAW'], userID, pageSize });
