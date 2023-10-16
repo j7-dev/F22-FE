@@ -19,7 +19,7 @@ import bankCode from '@/assets/images/loginFrom/bankCode.svg';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
-    const captchaRef = useRef<HCaptcha>(null);
+    const captchaSignUpRef = useRef<HCaptcha>(null);
     const { mutate: register, isLoading } = useRegister<TRegisterPayload>();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
@@ -27,8 +27,8 @@ const index: React.FC = () => {
     const [verifyError, setVerifyError] = useState('');
     const [submitTable, setSubmitTable] = useState(false);
     const handleSignUp = async (values: TRegisterPayload) => {
-        if (captchaRef?.current) {
-            await captchaRef.current
+        if (captchaSignUpRef?.current) {
+            await captchaSignUpRef.current
                 ?.execute({ async: true })
                 .then((_token) => {
                     // console.log('SignUpValues', values);
@@ -55,7 +55,7 @@ const index: React.FC = () => {
                     return;
                 });
         } else {
-            console.error('captchaRef.current is null');
+            console.error('captchaSignUpRef.current is null');
             return;
         }
     };
@@ -115,7 +115,7 @@ const index: React.FC = () => {
                 <Form.Item name={['bank_account', 'bank_account_number']} rules={[{ required: true, message: 'Please input your Phone' }]}>
                     <Input.Password placeholder="Bank Account Number" prefix={<img src={bankNumber} />} bordered={false} />
                 </Form.Item>
-                <HCaptcha id='id="signUpHCaptcha"' size="invisible" ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
+                <HCaptcha id='id="signUpHCaptcha"' size="invisible" ref={captchaSignUpRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
                 <Form.Item className="mb-0">
                     <Button loading={isLoading} disabled={!submitTable} className="mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
                         {t('Sign Up')}
