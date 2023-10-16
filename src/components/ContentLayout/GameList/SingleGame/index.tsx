@@ -2,10 +2,10 @@ import React from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { TGame } from '@/types/games';
 import { useOpenGame } from '@/hooks/gameProvider/useOpenGame';
-import { useSetFavorite } from '@/hooks/useSetFavorite';
 import { useIsFavorite } from '@/hooks/useIsFavorite';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { FaGamepad } from 'react-icons/fa';
+import FavoriteIcon from '@/components/general/FavoriteIcon';
 
 type SingleGameProp = {
     gameItem: TGame;
@@ -18,8 +18,6 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
         ...gameItem,
         isFavorite: useIsFavorite(gameItem),
     };
-    //取得收藏遊戲方法
-    const { isLoading: favoriteLoading, handleClick: setFavorite } = useSetFavorite();
     //取得開啟遊戲方法
     const { isLoading: openGameLoading, handleClick } = useOpenGame();
 
@@ -29,9 +27,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
             return (
                 <div className="onTheTop flex justify-between items-center w-full">
                     <div className="wrap flex gap-1 items-center">
-                        <div onClick={setFavorite(item)} className={`favorite cursor-pointer w-[30px] aspect-square bg-[#00000080] rounded-full p-1`}>
-                            <div className={`${item.isFavorite ? 'active' : ''} favoriteIcon w-full h-full`} />
-                        </div>
+                        <FavoriteIcon item={item} />
                         {/* 有RTP率才顯示否則為空 */}
                         {item.gameRTP ? <div className="RTP text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2"> RTP ${item.gameRTP}</div> : ''}
                     </div>
@@ -44,11 +40,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
             return (
                 <div className="onTheTop flex justify-between items-center w-full">
                     <div className="wrap flex gap-1 items-center">
-                        <div onClick={setFavorite(item)} className={`favorite cursor-pointer w-[30px] aspect-square bg-[#00000080] rounded-full p-1`}>
-                            <div className={`${item.isFavorite ? 'active' : ''} favoriteIcon w-full h-full`}>
-                                <AiOutlineLoading3Quarters className={`${favoriteLoading ? 'block' : 'hidden'} animate-spin`} />
-                            </div>
-                        </div>
+                        <FavoriteIcon item={item} />
                         <div className="RTP text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${item['Bet Limit']?.KRW.max?.toLocaleString()}`}</div>
                     </div>
                     <img className="provider" src={item.casinoCategoryIcon} alt="" />
