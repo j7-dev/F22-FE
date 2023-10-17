@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { TPopularGamesData } from '@/types/games/popularGames';
+import { TPopularGamesData, TPopularGame, TPopularGames } from '@/types/games/popularGames';
 import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
 import { useOpenGame } from '@/hooks/gameProvider/useOpenGame';
 import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTableList';
@@ -7,6 +7,7 @@ import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTabl
 import { gameCategories } from '@/utils/GameCategory';
 import igxImg from '@/assets/images/game_provider/igx_icon.png';
 import { sampleSize } from 'lodash-es';
+import { TGameCategory } from '@/types/games/gameCategory';
 
 //TODO BUG =>allGamesArray順序會亂跳
 
@@ -61,17 +62,17 @@ export const useGetPopularGames = () => {
         {
             label: 'All Games',
             value: 'allGames',
-            gameData: sixPoplarAllGames, //隨機取得所有遊戲中的6個
+            gameData: sixPoplarAllGames as TPopularGame[], //隨機取得所有遊戲中的6個
             openGameLoading: openGameLoading,
             openGame: handleClick,
         },
-        ...gameCategories.map((CategoryItem) => ({
+        ...(gameCategories.map((CategoryItem: TGameCategory) => ({
             label: CategoryItem.label,
             value: CategoryItem.value,
             gameData: allGamesArray.filter((game) => game?.gameCategory === CategoryItem?.value),
             openGameLoading: openGameLoading,
             openGame: handleClick,
-        })),
+        })) as TPopularGames[]),
     ];
     // console.log('allGamesArray:', allGamesArray);
     return { PopularGamesData, isLoading };
