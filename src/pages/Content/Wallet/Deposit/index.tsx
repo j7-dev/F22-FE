@@ -10,6 +10,7 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 import { useGetSiteSetting } from '@/hooks';
 import Amount from '@/components/Admin/Amount';
 import BonusCards from './BonusCards';
+import QRCode from 'qrcode';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
@@ -21,10 +22,24 @@ const index: React.FC = () => {
     const { modalProps, show, close } = useModal();
     const watchAmount = Form.useWatch(['amount'], form);
 
+    const [qrcode, setQrcode] = React.useState('');
+
+    const generateQR = async (text: string) => {
+        try {
+            const url = await QRCode.toDataURL(text);
+            setQrcode(url);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
     const handleClick = () => {
         form.validateFields()
             .then(() => {
                 show();
+
+                const qrString = `codp:${CODEPAY_SIMPLE_ADDRESS_TO}?type=payment&identifier=userid${user_id}&amount=${watchAmount}`;
+                generateQR(qrString);
             })
             .catch((errorInfo) => {
                 console.log('errorInfo', errorInfo);
@@ -34,7 +49,7 @@ const index: React.FC = () => {
     const { default_currency, default_amount_type } = useGetSiteSetting();
     const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
 
-    const codePayUrl = `${CODEPAY_APP_URL}/payment?type=payment&simpeAddress=${CODEPAY_SIMPLE_ADDRESS_TO}&tag=smtbet7&identifier=${CODEPAY_IDENTIFIER}&amount=${watchAmount}`;
+    const codePayUrl = `${CODEPAY_APP_URL}/payment?type=payment&simpleAddress=${CODEPAY_SIMPLE_ADDRESS_TO}&tag=smtbet7&identifier=${CODEPAY_IDENTIFIER}&amount=${watchAmount}`;
 
     const handleOpenUrl = () => {
         window.open(codePayUrl, '_blank');
@@ -158,7 +173,7 @@ const index: React.FC = () => {
                                         </td>
                                     </tr>
                                 </table>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" className="w-full" />
+                                {qrcode ? <img className="w-full" src={qrcode} /> : <>Loading</>}
                                 <Divider plain>or</Divider>
                                 <Button className="w-full mb-8" type="primary" ghost onClick={handleOpenUrl}>
                                     Pay by URL
