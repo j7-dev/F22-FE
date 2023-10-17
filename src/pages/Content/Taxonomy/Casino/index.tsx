@@ -11,7 +11,7 @@ import SearchBar from '@/components/ContentLayout/SearchBar';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
 import slot_favorite_icon from '@/assets/images/game_provider/slot_favorite_icon.svg';
-// import { TGame } from '@/types/games';
+import { useIsFavorite } from '@/hooks/useIsFavorite';
 
 //由五大分類而來的分類表
 const fxnCasinoCategory = [
@@ -27,7 +27,8 @@ const index: React.FC = () => {
     const { t } = useTranslation();
     const [chosenCategory, setChosenCategory] = useState('all');
     const [gameDataList, setGameDataList] = useState([]);
-
+    //取得判斷收藏遊戲方法
+    const { isFavorite } = useIsFavorite();
     //跑馬燈
     const { data } = useGetMarketingContent({ position: 'header' });
     const marqueeText = data?.map((item) => {
@@ -41,6 +42,8 @@ const index: React.FC = () => {
     const handleSwitchTab = (key: string) => () => {
         setChosenCategory(key);
         if (key === 'all') return setGameDataList(rawGameList as []);
+        //如果為Favorite遊戲渲染Favorite組件
+        if (key === 'favorite') return setGameDataList(rawGameList.filter((item) => isFavorite(item)) as []);
         setGameDataList(rawGameList.filter((item) => item.casinoCategory === key) as []);
     };
     // const favoriteFilter=(item:TGame)=>{

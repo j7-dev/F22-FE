@@ -67,7 +67,7 @@ export const useOpenGame = () => {
                     },
                 },
             );
-        } else if (item.gameProviderName === 'Pragmatic') {
+        } else if (item.gameProviderName === 'pragmaticPlay') {
             openGame(
                 {
                     url: `${API_URL}/api/pp/opengame?language=${currentLocale}&symbol=${item?.gameID || ''}&user_id=${identity?.id}`,
