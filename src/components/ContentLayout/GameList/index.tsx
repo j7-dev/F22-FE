@@ -42,7 +42,7 @@ const index: React.FC<TGameListProp> = React.memo(({ gameData = [] }) => {
     return (
         <div className="h-[800px] px-2">
             <AutoSizer>
-                {({ height, width }) => {
+                {({ height, width }: { height: number; width: number }) => {
                     const columnWidth = width / columnCount;
                     const rowCount = Math.ceil(gameData.length / columnCount);
 
