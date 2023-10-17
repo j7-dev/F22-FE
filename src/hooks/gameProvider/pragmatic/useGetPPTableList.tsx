@@ -22,7 +22,7 @@ export const useGetPPTableList = () => {
         },
     });
     const data =
-        fetchData?.data?.gameList.map((item: TGame) => {
+        (fetchData?.data?.gameList as TGame[])?.map((item: TGame) => {
             return {
                 ...item,
                 gameCategory: mappingGameCategory({ gameProviderName: 'pragmaticPlay' }),

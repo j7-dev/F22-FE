@@ -11,6 +11,7 @@ import SearchBar from '@/components/ContentLayout/SearchBar';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
 import slot_favorite_icon from '@/assets/images/game_provider/slot_favorite_icon.svg';
+// import { TGame } from '@/types/games';
 
 //由五大分類而來的分類表
 const fxnCasinoCategory = [
@@ -35,13 +36,16 @@ const index: React.FC = () => {
     //取得遊戲列表
     const { data: evoData, isFetching } = useGetEVOTableList();
     const rawGameList = useMemo(() => evoData || [], [isFetching]);
-    console.log('⭐  rawGameList:', rawGameList);
+    // console.log('⭐  rawGameList:', rawGameList);
     //切換分類
     const handleSwitchTab = (key: string) => () => {
         setChosenCategory(key);
         if (key === 'all') return setGameDataList(rawGameList as []);
         setGameDataList(rawGameList.filter((item) => item.casinoCategory === key) as []);
     };
+    // const favoriteFilter=(item:TGame)=>{
+    // 	const {}
+    // }
     //搜尋遊戲
     const filterGame = (searchGame: string) => {
         if (searchGame === '') return setGameDataList(rawGameList as []);

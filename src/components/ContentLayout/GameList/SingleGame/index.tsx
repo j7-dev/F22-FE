@@ -52,7 +52,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
     return (
         <div onClick={handleClick(gameItem)} className="singleGame w-full h-full relative overflow-hidden rounded-2xl sm:shadow-none shadow-[0_4px_4px_0_#A370ED33] group">
             <div className={`editOverlay z-10 cursor-pointer absolute inset-0 w-full h-full duration-300 text-white opacity-0 hover:opacity-100 hover:bg-slate-600/50 flex justify-center items-center`}>{openGameLoading ? <AiOutlineLoading3Quarters className={`${openGameLoading ? 'block' : 'hidden'} animate-spin`} /> : <FaGamepad size={30} />}</div>
-            <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit px-5">
+            <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit pt-1 px-5">
                 <OnTheTop {...fxnGameItem} />
             </div>
             <div className="gameWrap w-full relative">
