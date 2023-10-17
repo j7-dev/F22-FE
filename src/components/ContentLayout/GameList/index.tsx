@@ -40,17 +40,10 @@ const index: React.FC<TGameListProp> = React.memo(({ gameData = [] }) => {
     };
 
     return (
-        // <div className="gameList grid sm:grid-cols-11 sm:px-0 px-4 ">
-        //     <div className="col-span-9 col-start-2 grid grid-cols-1 gap-2 sm:grid-cols-4">
-        //         {gameData.map((item) => {
-        //             return <SingleGame key={item.gameID} gameItem={item} />;
-        //         })}
-        //     </div>
-        // </div>
         <div className="gameList grid sm:grid-cols-11 sm:px-0 px-4">
             <div className="col-span-9 col-start-2 grid h-screen sm:-mx-2">
                 <AutoSizer className="autoSizerWrap">
-                    {({ height, width }) => {
+                    {({ height, width }: { height: number; width: number }) => {
                         const columnWidth = width / columnCount;
                         const rowCount = Math.ceil(gameData.length / columnCount);
 
@@ -61,9 +54,6 @@ const index: React.FC<TGameListProp> = React.memo(({ gameData = [] }) => {
                         );
                     }}
                 </AutoSizer>
-                {/* <Grid columnCount={columnCount} rowCount={6} columnWidth={200} rowHeight={200} height={800} width={800}>
-                    {Cell as any}
-                </Grid> */}
             </div>
         </div>
     );

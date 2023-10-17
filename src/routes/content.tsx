@@ -6,9 +6,6 @@ const Home = lazy(() => import('@/pages/Content/Home'));
 const Slot = lazy(() => import('@/pages/Content/Taxonomy/Slot'));
 const Casino = lazy(() => import('@/pages/Content/Taxonomy/Casino'));
 const PromotionPage = lazy(() => import('@/pages/Content/Promotion'));
-const PragmaticSlot = lazy(() => import('@/pages/Content/Taxonomy/Slot/Pragmatic'));
-const AsiaGamingSlot = lazy(() => import('@/pages/Content/Taxonomy/Slot/AsiaGaming'));
-const MicroGamingSlot = lazy(() => import('@/pages/Content/Taxonomy/Slot/MicroGaming'));
 const Bti = lazy(() => import('@/pages/Content/Taxonomy/Sports/BTI'));
 const Gigx = lazy(() => import('@/pages/Content/Taxonomy/Sports/GIGX'));
 const TermsOfService = lazy(() => import('@/pages/Content/TermsOfService'));
@@ -36,9 +33,6 @@ const contentRoutes = () => {
             <Route path="/events" element={<Events />} />
             <Route path="/about" element={<About />} />
             <Route path="/promotion" element={<PromotionPage />} />
-            <Route path="/pragmatic/slot" element={<PragmaticSlot />} />
-            <Route path="/asiagaming/slot" element={<AsiaGamingSlot />} />
-            <Route path="/microgaming/slot" element={<MicroGamingSlot />} />
             <Route path="/bti" element={<Bti />} />
             <Route path="/gigx" element={<Gigx />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
