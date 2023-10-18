@@ -18,7 +18,8 @@ const index: React.FC = () => {
     const { t } = useTranslation();
     const { mutate: login, isLoading } = useLogin<LoginVariables>();
     const { data: isAuthenticated } = useIsAuthenticated();
-    const captchaRef = useRef<HCaptcha>(null);
+    // console.log('🚀 ~ isAuthenticated:', isAuthenticated);
+    const captchaLoginRef = useRef<HCaptcha>(null);
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
     const [form] = Form.useForm();
@@ -27,8 +28,8 @@ const index: React.FC = () => {
 
     const handleLogin = async (values: { userName: string; userPas: string }) => {
         //先進行驗證後登入
-        if (captchaRef?.current) {
-            await captchaRef.current
+        if (captchaLoginRef?.current) {
+            await captchaLoginRef.current
                 ?.execute({ async: true })
                 .then((_token) => {
                     const { userName, userPas } = values;
@@ -53,7 +54,7 @@ const index: React.FC = () => {
                     return;
                 });
         } else {
-            console.error('captchaRef.current is null');
+            console.error('captchaLoginRef.current is null');
             return;
         }
     };
@@ -76,8 +77,8 @@ const index: React.FC = () => {
 
     // //判斷是否登出，並且重置表單及驗證表單
     useEffect(() => {
-        if (captchaRef.current !== null && isAuthenticated?.authenticated === false) {
-            captchaRef.current.resetCaptcha();
+        if (captchaLoginRef.current && isAuthenticated?.authenticated === false) {
+            // captchaLoginRef.current.resetCaptcha();
             form.resetFields();
         }
     }, [isAuthenticated?.authenticated]);
@@ -93,7 +94,7 @@ const index: React.FC = () => {
                 <Form.Item name="userPas" rules={[{ required: true, message: 'Please input your Password' }]}>
                     <Input.Password placeholder="User Password" prefix={<img src={passwordIcon} />} bordered={false} />
                 </Form.Item>
-                <HCaptcha size="invisible" ref={captchaRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
+                <HCaptcha size="invisible" ref={captchaLoginRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
                 <Form.Item className="mb-0">
                     <Button loading={isLoading} disabled={!submittable} className="mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
                         {t('LOGIN')}

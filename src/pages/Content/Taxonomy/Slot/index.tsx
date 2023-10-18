@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { nanoid } from 'nanoid';
 import { Spin } from 'antd';
@@ -46,8 +46,9 @@ const index: React.FC = () => {
 
     //取得遊戲列表
     const { data: ppData, isFetching } = useGetPPTableList();
+    const rawGameList = useMemo(() => ppData || [], [isFetching]);
     // console.log('🚀 ~ ppData:', ppData);
-    const rawGameList = [...ppData];
+    // const rawGameList = [...ppData];
 
     //切換分類
     const handleSwitchTab = (key: string) => () => {
@@ -56,7 +57,7 @@ const index: React.FC = () => {
             setGameDataList(rawGameList as []);
             return;
         }
-        setGameDataList(rawGameList.filter((item) => item.casinoCategory === key) as []);
+        setGameDataList(rawGameList.filter((item) => item.gameProviderName === key) as []);
     };
     //搜尋遊戲
     const filterGame = (searchGame: string) => {
@@ -64,11 +65,12 @@ const index: React.FC = () => {
         setSlotGameProvider(searchGame);
         setGameDataList((rawGameList.filter((item) => item?.gameName?.includes(searchGame)) as []) || []);
     };
-    //分類遊戲
 
     //當載入完成後，將遊戲列表資料放入gameDataList
     useEffect(() => {
-        setGameDataList(rawGameList as []);
+        if (!isFetching) {
+            setGameDataList(rawGameList as []);
+        }
     }, [isFetching]);
     useEffect(() => {
         window.scrollTo(0, 0);

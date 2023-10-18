@@ -1,7 +1,7 @@
 import { BaseRecord } from '@refinedev/core';
 import { TEvolutionGame, TPragmaticGame } from './';
 
-export type TPopularGamesData = TPopularGames[];
+export type TPopularGamesData = TPopularGames[]
 
 export type TPopularGames = {
     label: string;

@@ -8,6 +8,7 @@ import { useRwd } from '@/hooks/useRwd';
 
 type TGameListProp = {
     gameData?: TGame[];
+    gridColumnCount?: number;
 };
 type TCell = {
     columnIndex: number;
@@ -17,12 +18,12 @@ type TCell = {
     };
 };
 
-const index: React.FC<TGameListProp> = React.memo(({ gameData = [] }) => {
+const index: React.FC<TGameListProp> = React.memo(({ gameData = [], gridColumnCount = 4 }) => {
     if (gameData.length === 0) return <Empty description={<span>Data Not Found</span>}></Empty>;
 
     const { isLg, isMd } = useRwd();
 
-    const columnCount = isLg ? 4 : isMd ? 3 : 2;
+    const columnCount = isLg ? gridColumnCount : isMd ? 3 : 2;
 
     const Cell = ({ columnIndex, rowIndex, style }: TCell) => {
         const gameItem = gameData?.[rowIndex * columnCount + columnIndex];
@@ -40,19 +41,21 @@ const index: React.FC<TGameListProp> = React.memo(({ gameData = [] }) => {
     };
 
     return (
-        <div className="h-[800px] px-2">
-            <AutoSizer>
-                {({ height, width }: { height: number; width: number }) => {
-                    const columnWidth = width / columnCount;
-                    const rowCount = Math.ceil(gameData.length / columnCount);
+        <div className="gameList grid sm:grid-cols-11 sm:px-0 px-4">
+            <div className="col-span-9 col-start-2 grid h-screen sm:-mx-2">
+                <AutoSizer className="autoSizerWrap">
+                    {({ height, width }: { height: number; width: number }) => {
+                        const columnWidth = width / columnCount;
+                        const rowCount = Math.ceil(gameData.length / columnCount);
 
-                    return (
-                        <Grid columnCount={columnCount} columnWidth={columnWidth} height={height} rowCount={rowCount} rowHeight={columnWidth} width={width}>
-                            {Cell as any}
-                        </Grid>
-                    );
-                }}
-            </AutoSizer>
+                        return (
+                            <Grid columnCount={columnCount} columnWidth={columnWidth} height={height} rowCount={rowCount} rowHeight={columnWidth} width={width}>
+                                {Cell as any}
+                            </Grid>
+                        );
+                    }}
+                </AutoSizer>
+            </div>
         </div>
     );
 });

@@ -1,35 +1,82 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { nanoid } from 'nanoid';
+import { Spin } from 'antd';
+import GameList from './GameList';
 import { useGetPopularGames } from '@/hooks/gameProvider/useGetPopularGames';
-import Tabs from './Tabs';
-import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import { useShowPc } from '@/hooks/useShowPc';
+import { TPopularGames } from '@/types/games/popularGames';
+import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
-    const { PopularGamesData, isLoading } = useGetPopularGames();
     const showPc = useShowPc();
-    return (
-        <div className="relative PopularGames sm:w-full">
-            <div className="sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl">
-                {showPc ? (
-                    <div className="grid grid-cols-11 gap-4 py-9">
+    const [activeTab, setActiveTab] = useState('allGames');
+    const [gameDataList, setGameDataList] = useState([]);
+    //取得遊戲列表
+    const { PopularGamesData, isLoading } = useGetPopularGames();
+    //切換遊戲列表
+    const handleSwitchTab = (key: string) => () => {
+        setActiveTab(key);
+        setGameDataList(PopularGamesData.filter((item) => item.value === key)[0].gameData as []);
+    };
+    //篩選條
+    const FilterBar = () => {
+        if (showPc)
+            //PC版
+            return (
+                <>
+                    <div className="hidden popularTitle sm:grid grid-cols-11 gap-4 pb-0.5 pt-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
                         <div className="col-span-1 flex justify-center">
                             <img src={Icon_Main_Title} alt="" className="" />
                         </div>
-                        <span className="col-span-1 font-bold text-3xl text-[#9680EA] -ml-3">
-                            {t('POPULAR')}
-                            {/* <span className="text-black">GAMES</span> */}
-                        </span>
+                        <span className="col-span-1 font-bold text-3xl text-[#9680EA] -ml-3 flex items-center">{t('POPULAR')}</span>
+                        <div className="filterBar col-start-2 col-span-9 flex gap-2.5 -ml-2">
+                            {PopularGamesData.map((item: TPopularGames) => {
+                                return (
+                                    <div key={nanoid()} onClick={handleSwitchTab(item.value)} className={`filterTab relative cursor-pointer p-2`}>
+                                        <span className={`${activeTab === item.value ? 'text-black font-bold' : 'font-normal'} text-base`}>{item.label}</span>
+                                        <div className={`activeBorder ${activeTab === item.value ? 'h-1 rounded-full bg-[#9680EA]' : 'h-0'} absolute top-[96%] left-0 w-full h-0`}></div>
+                                    </div>
+                                );
+                            })}
+                        </div>
                     </div>
-                ) : (
-                    ''
-                )}
-
-                <div className="popularGamesContain sm:py-9">
-                    {/* <div className="col-start-1"></div> */}
-                    {isLoading ? 'isLoading' : <Tabs data={PopularGamesData} />}
+                </>
+            );
+        return (
+            //手機版
+            <>
+                <div className="filterBarMb py-4 overflow-x-scroll">
+                    <div className="flex gap-2.5 w-fit px-4">
+                        {PopularGamesData.map((item: TPopularGames, dataIndex: number) => {
+                            //第一個全部遊戲不顯示
+                            if (dataIndex === 0) return;
+                            return (
+                                <div key={nanoid()} onClick={handleSwitchTab(item.value)} className={`${activeTab === item.value ? 'active' : ''} ${item.value} filterTab relative rounded-2xl flex flex-col justify-center items-center aspect-square w-[50px] shadow-[0px_4px_10px_0px_#A370ED33] `}>
+                                    <div className="favicon h-[24px] w-[20px]" />
+                                    <span className="text-[8px] whitespace-nowrap">{item.value}</span>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
+            </>
+        );
+    };
+    //首次載入時，將全部遊戲放入gameDataList
+    useEffect(() => {
+        setGameDataList(PopularGamesData.filter((item) => item.value === activeTab)[0].gameData as []);
+    }, [isLoading]);
+    return (
+        <div className="relative PopularGames sm:w-full">
+            <div className="sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl">
+                <FilterBar />
+                <Spin spinning={isLoading}>
+                    <div className="sm:py-9">
+                        <GameList gameData={gameDataList} />
+                    </div>
+                </Spin>
             </div>
         </div>
     );

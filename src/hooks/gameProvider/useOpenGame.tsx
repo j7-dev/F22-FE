@@ -51,7 +51,7 @@ export const useOpenGame = () => {
             };
             evoGameConfig.config.game.category = item['Game Type'] as string;
             evoGameConfig.config.game.table.id = item['Table ID'] as string;
-            evoGameConfig.player.id = identity.id.toString();
+            evoGameConfig.player.id = (identity as TMe).id.toString();
             openGame(
                 {
                     url: `${API_URL}/api/evo/opengame`,
@@ -67,7 +67,7 @@ export const useOpenGame = () => {
                     },
                 },
             );
-        } else if (item.gameProviderName === 'Pragmatic') {
+        } else if (item.gameProviderName === 'pragmaticPlay') {
             openGame(
                 {
                     url: `${API_URL}/api/pp/opengame?language=${currentLocale}&symbol=${item?.gameID || ''}&user_id=${identity?.id}`,

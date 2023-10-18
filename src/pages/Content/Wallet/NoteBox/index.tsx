@@ -1,9 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useList } from '@refinedev/core';
+import { useSetAtom } from 'jotai';
 import { Table } from 'antd';
 import dayjs from 'dayjs';
 import { TSiteNotify } from '@/types';
+import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 
 const { Column } = Table;
 const rowSelection = {
@@ -11,9 +13,27 @@ const rowSelection = {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
     },
 };
-const index: React.FC = () => {
+const index: React.FC<{ pageSize?: number; pagination?: false | undefined }> = ({ pageSize = 10, pagination = undefined }) => {
     const { t } = useTranslation();
-    const { data, isLoading } = useList<TSiteNotify>({
+
+    //設定activeMenuAtom的值
+    const setSection = useSetAtom(activeMenuAtom);
+    const handleClick = () => {
+        setSection('siteNotify');
+    };
+    //點擊Read More按鈕=>如果傳入pagination代表在myPage頁面則顯示按鈕
+    const ShowBtn = () => {
+        if (pagination === false) {
+            return (
+                <button onClick={handleClick} className="cursor-pointer font-bold border-0 px-3 py-1.5 rounded-xl text-xs bg-[#5932EA] text-white">
+                    {t('Read More')}
+                </button>
+            );
+        } else return <></>;
+    };
+
+    //取得資料
+    const { data, isFetching } = useList<TSiteNotify>({
         resource: 'cms-posts',
         meta: {
             populate: '*',
@@ -25,7 +45,11 @@ const index: React.FC = () => {
                 value: 'siteNotify',
             },
         ],
+        pagination: {
+            pageSize: pageSize,
+        },
     });
+    //轉換資料加上日期格式
     const fxnData =
         data?.data.map((item) => {
             return {
@@ -34,14 +58,13 @@ const index: React.FC = () => {
                 ...item,
             };
         }) || [];
-    if (isLoading) return <div>loading...</div>;
 
     return (
         <div className="h-full w-full py-[42px] flex flex-col gap-4 rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] sm:px-[32px]">
             <div className="text-black font-bold text-2xl flex gap-2">
                 <span>{t('Note Box')}</span>
                 <div className="flex justify-center items-center rounded-full bg-[#EB5757] aspect-square w-[30px] text-xl text-white font-bold">{data?.total}</div>
-                <button className="font-bold border-0 px-3 py-1.5 rounded-xl text-xs bg-[#5932EA] text-white">{t('Read More')}</button>
+                <ShowBtn />
             </div>
             <Table
                 dataSource={fxnData}
@@ -49,7 +72,8 @@ const index: React.FC = () => {
                     type: 'checkbox',
                     ...rowSelection,
                 }}
-                pagination={false}
+                loading={isFetching}
+                pagination={pagination}
             >
                 <Column title="Title" dataIndex="content" key="content" className="text-sm text-[#0F172A] font-medium" />
                 <Column title="Date" dataIndex="fxnCreatedAt" key="fxnCreatedAt" className="text-sm text-[#0F172A] font-medium" />

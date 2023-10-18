@@ -13,7 +13,7 @@ const index = ({ item }: { item: TGame }) => {
         setFavorite(!isFavorite);
     };
 
-    return <Button size="small" onClick={handleClick} ghost shape="circle" type="primary" icon={isFavorite ? <HeartFilled className="text-white" /> : <HeartOutlined className="text-white" />} className="bg-[#00000080] border-none" loading={isLoading} />;
+    return <Button size="small" onClick={handleClick} ghost shape="circle" type="primary" icon={isFavorite ? <HeartFilled className="text-red-500" /> : <HeartOutlined className="text-white" />} className="bg-[#00000080] border-none" loading={isLoading} />;
 };
 
 export default index;

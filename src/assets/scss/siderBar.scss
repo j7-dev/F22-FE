@@ -90,7 +90,7 @@
 		}
 		.WallerContainer {
 			li {
-				&.MyPage {
+				&.myPage {
 					.favicon {
 						background-image: $MyPageFavicon;
 					}
@@ -152,7 +152,7 @@
 						color: #ffffff;
 					}
 					box-shadow: 0px 6px 8px 0px rgba(89, 50, 234, 0.2);
-					&.MyPage {
+					&.myPage {
 						.favicon {
 							background-image: $MyPageFaviconWhite;
 						}

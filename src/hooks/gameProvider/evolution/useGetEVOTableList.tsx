@@ -27,7 +27,7 @@ export const useGetEVOTableList = () => {
                     gameName: item['Table Name'],
                     gameID: item['Table ID'],
                     gameImg: getGameTypeImg(item['Game Type'] as string),
-                    gameCategory: mappingGameCategory({ gameProviderName: 'EVO' }),
+                    gameCategory: mappingGameCategory({ gameProviderName: 'evolution' }),
                     gameProviderName: 'evolution',
                     casinoCategory: mappingCasinoCategory({ category: item['Game Type'] as string }),
                     casinoCategoryIcon: mappingCasinoCategoryIcon({ category: item['Game Type'] as string }),

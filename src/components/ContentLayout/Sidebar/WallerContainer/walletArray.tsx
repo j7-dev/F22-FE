@@ -1,5 +1,5 @@
 export const walletArray = [
-    { value: 'MY PAGE', label: 'MyPage', showIn: 'afterLogin' },
+    { value: 'MY PAGE', label: 'myPage', showIn: 'afterLogin' },
     { value: 'Note Box', label: 'siteNotify', showIn: 'afterLogin' },
     { value: 'Deposit', label: 'deposit', showIn: 'afterLogin' },
     { value: 'Withdraw', label: 'withdraw', showIn: 'afterLogin' },

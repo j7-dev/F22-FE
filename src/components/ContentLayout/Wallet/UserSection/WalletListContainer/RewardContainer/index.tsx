@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
-import { selectedSectionAtom } from '@/pages/Content/Wallet';
+import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 import couponIcon from '@/assets/images/coupon-icon.svg';
 // import pointsIcon from '@/assets/images/points-icon.svg';
 import { AiOutlineDown } from 'react-icons/ai';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
-    const [selectedSection, setSelectedSection] = useAtom(selectedSectionAtom);
+    const [selectedSection, setSelectedSection] = useAtom(activeMenuAtom);
     const [down, setDown] = useState(false);
     const handleClick = (data: string) => {
         setSelectedSection(data);

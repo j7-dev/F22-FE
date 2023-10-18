@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { TPopularGamesData } from '@/types/games/popularGames';
+import { TPopularGamesData, TPopularGame, TPopularGames } from '@/types/games/popularGames';
 import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
 import { useOpenGame } from '@/hooks/gameProvider/useOpenGame';
 import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTableList';
@@ -7,8 +7,7 @@ import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTabl
 import { gameCategories } from '@/utils/GameCategory';
 import igxImg from '@/assets/images/game_provider/igx_icon.png';
 import { sampleSize } from 'lodash-es';
-
-//TODO BUG =>allGamesArray順序會亂跳
+import { TGameCategory } from '@/types/games/gameCategory';
 
 export const useGetPopularGames = () => {
     //取得openGame函式
@@ -21,13 +20,12 @@ export const useGetPopularGames = () => {
     //取得所有資料後再重組
     const isLoading = evoLoading || ppLoading;
 
-    // console.log('loading:為true');
-    //重組Slot Games遊戲資料
+    //只取得Slot Games 18款遊戲資料
     const slotGames = isLoading ? [] : (ppData || [])?.slice(0, 18);
 
     // console.log('slotGames:', slotGames);
 
-    //重組Live Casino遊戲資料
+    //只取得Live Casino 18款遊戲資料
     const liveGamesData = isLoading ? [] : (evoData || []).slice(0, 18);
 
     //重組一個假的Golf遊戲資料
@@ -40,9 +38,6 @@ export const useGetPopularGames = () => {
         },
     ];
 
-    // console.log('liveGamesData:', liveGamesData);
-    // const allGames = [...(ppData || []), ...(evoData || [])];
-    // console.log('allGames', allGames);
     //重組所有遊戲資料
     const allGamesArray = useMemo(() => {
         return isLoading ? [] : [...liveGamesData, ...slotGames, ...golfGamesData];
@@ -50,8 +45,6 @@ export const useGetPopularGames = () => {
     // console.log('🚀  allGamesArray:', allGamesArray);
 
     // 獲取隨機的6個元素
-    //TODO 有個BUG，切換語言時會多一個遊戲=>觸發重新渲染時會多一個?
-
     const sixPoplarAllGames = useMemo(() => {
         return sampleSize(allGamesArray, 18);
     }, [isLoading]);
@@ -61,18 +54,17 @@ export const useGetPopularGames = () => {
         {
             label: 'All Games',
             value: 'allGames',
-            gameData: sixPoplarAllGames, //隨機取得所有遊戲中的6個
+            gameData: sixPoplarAllGames as TPopularGame[],
             openGameLoading: openGameLoading,
             openGame: handleClick,
         },
-        ...gameCategories.map((CategoryItem) => ({
+        ...(gameCategories.map((CategoryItem: TGameCategory) => ({
             label: CategoryItem.label,
             value: CategoryItem.value,
             gameData: allGamesArray.filter((game) => game?.gameCategory === CategoryItem?.value),
             openGameLoading: openGameLoading,
             openGame: handleClick,
-        })),
+        })) as TPopularGames[]),
     ];
-    // console.log('allGamesArray:', allGamesArray);
     return { PopularGamesData, isLoading };
 };

@@ -1,10 +1,13 @@
 import { useList } from '@refinedev/core';
 import { TTransaction } from '@/types';
 
-export const useGetTransactionRecords = ({ type, userID }: { type: string[]; userID: number }) => {
-    //這支hook可以被重複使用，type傳入的參數是一個陣列如[DEPOSIT', 'WITHDRAW]
-    // const { type, userID } = props;
-    // console.log('identity', identity);
+/**
+ * 傳入type, userID, pageSize預設10筆
+ * type傳入的參數是一個陣列如['DEPOSIT', 'WITHDRAW']
+ * @returns
+ */
+
+export const useGetTransactionRecords = ({ type, userID, pageSize = 10 }: { type: string[]; userID: number; pageSize?: number }) => {
     //取得交易紀錄
     const { data, isLoading } = useList<TTransaction>({
         resource: 'transaction-records',
@@ -27,6 +30,10 @@ export const useGetTransactionRecords = ({ type, userID }: { type: string[]; use
                 value: type,
             },
         ],
+        pagination: {
+            mode: 'client', //要怎麼設定成service端分頁同時又出現分頁
+            pageSize: pageSize,
+        },
     });
     // 將 data 和 isLoading 包裝在物件中並 返回
     return {

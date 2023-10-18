@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { useList } from '@refinedev/core';
-import { selectedSectionAtom } from '@/pages/Content/Wallet';
+import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 // import creditIcon from '@/assets/images/credit-icon.svg';
 import depositIcon from '@/assets/images/deposit-icon.svg';
 import withdrawIcon from '@/assets/images/withdraw-icon.svg';
@@ -11,7 +11,7 @@ import { BsFillCreditCard2FrontFill } from 'react-icons/bs';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
-    const [selectedSection, setSelectedSection] = useAtom(selectedSectionAtom);
+    const [selectedSection, setSelectedSection] = useAtom(activeMenuAtom);
     const [down, setDown] = useState(false);
     const { data: siteNotifyData } = useList({
         resource: 'cms-posts',
@@ -26,7 +26,6 @@ const index: React.FC = () => {
             },
         ],
     });
-    // const setSelectedSection = useSetAtom(selectedSectionAtom);
     const handleClick = (data: string) => {
         setSelectedSection(data);
     };
