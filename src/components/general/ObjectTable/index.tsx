@@ -1,5 +1,5 @@
 import React from 'react';
-import { isNumber, isString, isNull, isUndefined } from 'lodash';
+import { isNumber, isString, isNull, isUndefined } from 'lodash-es';
 import { keyToWord } from '@/utils';
 import { Empty, Form, Input } from 'antd';
 

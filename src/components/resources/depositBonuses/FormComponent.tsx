@@ -33,7 +33,7 @@ const FormComponent: React.FC<{
                 // 設定表單預設值
                 form?.setFieldsValue({
                     currency: default_currency,
-                    amount_type: 'DEPOSIT_BONUS',
+                    amount_type: default_amount_type,
                 });
             }
         }, 0);
