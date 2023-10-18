@@ -10,7 +10,7 @@ type SingleGameProp = {
 
 const index: React.FC<SingleGameProp> = ({ gameItem }) => {
     //如果沒有遊戲資料則不渲染
-    if (!gameItem) return;
+    if (!gameItem) return <></>;
 
     //TODO 未來開啟遊戲方法搬出去取得遊戲的Hook
     //取得開啟遊戲方法
