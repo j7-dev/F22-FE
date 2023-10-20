@@ -25,6 +25,7 @@ const Home = () => {
             {!showPc ? <NewsMarquee speed={15} marqueeText={marqueeText} /> : ''}
             <PopularGames />
             {showPc ? <SlogGames /> : ''}
+            <a href="/src/assets/ipa/smt7.ipa">123</a>
         </div>
     );
 };

@@ -3,6 +3,7 @@ import { atom, useAtom, useSetAtom } from 'jotai';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useLogout } from '@refinedev/core';
+import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 import Icon_Wallet_white from '@/assets/images/topBar/Icon_TopBar_Wallet_White.svg';
 import { useIsLogin } from '@/hooks/resources/useIsLogin';
 
@@ -15,6 +16,7 @@ const Login: React.FC = () => {
     const Navigate = useNavigate();
     const isLogin = useIsLogin();
     const [_verifyError, setVerifyError] = useAtom(verifyErrorAtom);
+    const setSection = useSetAtom(activeMenuAtom);
     const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const { mutate: logout } = useLogout();
@@ -33,6 +35,7 @@ const Login: React.FC = () => {
 
     //My Wallet
     const handleWallet = () => {
+        setSection('myPage');
         Navigate('/wallet');
     };
     const handleRegister = () => {

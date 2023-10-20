@@ -10,8 +10,8 @@
 	$siteNotifyFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_NoteBox.svg");
 	$cashHistoryFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_CashHistory.svg");
 	$cashHistoryFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_Cash_History.svg");
-	$rollingPointFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_RollingPoint.svg");
-	$rollingPointFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_RollingPoint.svg");
+	$couponHistoryFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_RollingPoint.svg");
+	$couponHistoryFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_RollingPoint.svg");
 	$pointDetailsFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_PointDetails.svg");
 	$pointDetailsFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_PointDetails.svg");
 	$faqFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_Notice.svg");
@@ -115,9 +115,9 @@
 						background-image: $cashHistoryFavicon;
 					}
 				}
-				&.rollingPoint {
+				&.couponHistory {
 					.favicon {
-						background-image: $rollingPointFavicon;
+						background-image: $couponHistoryFavicon;
 					}
 				}
 				&.rolloverHistory {
@@ -177,9 +177,9 @@
 							background-image: $cashHistoryFaviconWhite;
 						}
 					}
-					&.rollingPoint {
+					&.couponHistory {
 						.favicon {
-							background-image: $rollingPointFaviconWhite;
+							background-image: $couponHistoryFaviconWhite;
 						}
 					}
 					&.rolloverHistory {

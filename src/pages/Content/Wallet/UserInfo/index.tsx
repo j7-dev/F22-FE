@@ -5,6 +5,7 @@ import userBalanceIcon from '@/assets/images/topBar/userBalance.svg';
 import userBonusIcon from '@/assets/images/topBar/userBonus.svg';
 import { useVip } from '@/hooks/resources/useVip';
 import vipNextIcon from '@/assets/images/newMyPage/vipNextIcon.svg';
+import ConvertBtn from './ConvertBtn';
 
 const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
     const { t } = useTranslation();
@@ -40,25 +41,30 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                     {userName}
                     <span className="text-sm text-[#ACACAC] font-normal ml-2">{userPhone}</span>
                 </div>
+                {/* VIP進度條 */}
                 <div className="relative p-0.5 w-full h-12 bg-gradient-to-r from-[#9680EA33] to-[#BAA8FF33] rounded-full sm:w-5/6">
                     <div className="relative w-full h-full">
+                        {/* 當前等級 */}
                         <div className="currentVip absolute z-10 left-0 h-full flex justify-center items-center aspect-square bg-[#9680EA] text-white text-base font-semibold rounded-full">
                             <div>{nextVip?.order}</div>
                         </div>
-                        <div className="progressBar w-full h-full rounded-full overflow-hidden">
+                        <div className="progressBar w-full h-full rounded-full overflow-hidden flex flex-col gap-0.5">
+                            {/* 有效投注進度條 */}
                             <div className="validBetProgress h-1/2 relative">
-                                <div style={{ width: `${validPercent}%` }} className="h-full bg-gradient-to-r from-[#D4C9FF] to-[#9680EA] rounded-full" />
+                                <div style={{ width: `${validPercent}%` }} className="h-full bg-gradient-to-r from-[#D4C9FF] to-[#9680EA] rounded-tr-full" />
                                 <div className="absolute top-0 left-1/2 -translate-x-2/4 whitespace-nowrap h-full text-[10px] font-semibold text-white">
                                     <span>{`${validUpgrade} points to next level ${currentValid}/${nextValidUpgrade}`}</span>
                                 </div>
                             </div>
+                            {/* 存款進度條 */}
                             <div className="depositProgress h-1/2 relative">
-                                <div style={{ width: `${depositPercent}%` }} className="h-full bg-gradient-to-r from-[#D4C9FF] to-[#9680EA] rounded-full" />
+                                <div style={{ width: `${depositPercent}%` }} className="h-full bg-gradient-to-r from-[#D4C9FF] to-[#9680EA] rounded-br-full" />
                                 <div className="absolute top-0 left-1/2 -translate-x-2/4 whitespace-nowrap h-full text-[10px] font-semibold text-white">
                                     <span>{`${depositUpgrade} points to next level ${currentDeposit}/${nextDepositUpgrade}`}</span>
                                 </div>
                             </div>
                         </div>
+                        {/* 下一等級 */}
                         <div className="nextVip absolute z-10 right-0 bottom-0 h-full flex justify-center items-center aspect-square bg-[#FDD92A] text-white text-base font-semibold rounded-full">
                             <div className="relative">
                                 <img src={vipNextIcon} alt="" className="absolute -top-6 left-1/2 -translate-x-2/4 w-6" />
@@ -84,6 +90,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                 <div className="">
                     <div className="text-[#ACACAC] text-sm font-normal">{t('Rolling Point')}</div>
                     <div className="text-[#333333] text-3xl font-semibold">${turnoverBonus}</div>
+                    <ConvertBtn rollingPoint={turnoverBonus as number} />
                 </div>
             </div>
         </div>

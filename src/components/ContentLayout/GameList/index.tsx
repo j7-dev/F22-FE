@@ -41,8 +41,8 @@ const index: React.FC<TGameListProp> = React.memo(({ gameData = [], gridColumnCo
     };
 
     return (
-        <div className="gameList grid sm:grid-cols-11 sm:px-0 px-4">
-            <div className="col-span-9 col-start-2 grid h-screen sm:-mx-2">
+        <div className="gameList grid sm:grid-cols-11 px-4 sm:mx-0 -mx-2">
+            <div className="col-span-9 sm:col-start-2 grid h-screen sm:-mx-2">
                 <AutoSizer className="autoSizerWrap">
                     {({ height, width }: { height: number; width: number }) => {
                         const columnWidth = width / columnCount;

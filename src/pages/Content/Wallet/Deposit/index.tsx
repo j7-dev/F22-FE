@@ -1,5 +1,13 @@
 import React from 'react';
-import { Form, Alert, Modal, Button, Divider, notification, Popconfirm } from 'antd';
+import {
+    Form,
+    // Alert,
+    Modal,
+    Button,
+    Divider,
+    notification,
+    Popconfirm,
+} from 'antd';
 import { useTranslation } from 'react-i18next';
 import QuickAmountInput from '@/components/form/QuickAmountInput';
 import { useGetIdentity, useCreate } from '@refinedev/core';
@@ -9,7 +17,8 @@ import { CODEPAY_APP_URL, CODEPAY_SIMPLE_ADDRESS_TO } from '@/utils';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { useGetSiteSetting } from '@/hooks';
 import Amount from '@/components/Admin/Amount';
-import BonusCards from './BonusCards';
+// import BonusCards from './BonusCards';
+import BonusDetails from './BonusDetails';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
@@ -20,7 +29,6 @@ const index: React.FC = () => {
 
     const { modalProps, show, close } = useModal();
     const watchAmount = Form.useWatch(['amount'], form);
-
     const handleClick = () => {
         form.validateFields()
             .then(() => {
@@ -78,13 +86,13 @@ const index: React.FC = () => {
     };
 
     return (
-        <div className="px-8 py-[42px] rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
+        <div className="bg-white px-8 py-[42px] rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
             <span className="text-black font-bold text-2xl">{t('Deposit')}</span>
             <div className="min-h-[180px]">
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical">
                     <QuickAmountInput
                         formItemProps={{
-                            label: t('Amount to transfer'),
+                            label: <span className="mt-1 text-sm text-[#828282] font-medium">{t('Amount to transfer')}</span>,
                             name: ['amount'],
                             rules: [
                                 {
@@ -98,8 +106,8 @@ const index: React.FC = () => {
                             prefix: symbol,
                         }}
                     />
-
-                    <Alert
+                    <BonusDetails />
+                    {/* <Alert
                         message={<span className="font-semibold">{t("Don't have Code Pay account?")}</span>}
                         description={
                             <div>
@@ -118,8 +126,8 @@ const index: React.FC = () => {
                         className="my-6"
                         type="info"
                         showIcon
-                    />
-                    <Button type="primary" className="w-full font-bold" onClick={handleClick}>
+                    /> */}
+                    <Button type="primary" className="w-full h-[65px] font-bold text-xl" onClick={handleClick}>
                         {t('Deposit')}
                     </Button>
 
@@ -140,13 +148,9 @@ const index: React.FC = () => {
                         maskClosable={false}
                         closeIcon={false}
                         confirmLoading={isLoading}
-                        width={1200}
+                        width={400}
                     >
-                        <div className="grid grid-cols-4 gap-x-6">
-                            <div className="col-span-3">
-                                <BonusCards />
-                            </div>
-
+                        <div className="grid grid-cols-1 gap-x-6">
                             <div className="col-span-1">
                                 <table className="table table-vertical my-8 table-fixed">
                                     <tr>

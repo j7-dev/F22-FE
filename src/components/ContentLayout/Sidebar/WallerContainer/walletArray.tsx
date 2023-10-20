@@ -4,7 +4,7 @@ export const walletArray = [
     { value: 'Deposit', label: 'deposit', showIn: 'afterLogin' },
     { value: 'Withdraw', label: 'withdraw', showIn: 'afterLogin' },
     { value: 'Cash History', label: 'cashHistory', showIn: 'afterLogin' },
-    { value: 'Rolling Point', label: 'rollingPoint', showIn: 'afterLogin' },
+    { value: 'Coupon History', label: 'couponHistory', showIn: 'afterLogin' },
     { value: 'Rollover', label: 'rolloverHistory', showIn: 'afterLogin' },
     { value: 'Point Details', label: 'pointDetails', showIn: 'afterLogin' },
     { value: 'Notice', label: 'faq', showIn: 'beforeLogin' },

@@ -27,21 +27,25 @@ const index: React.FC = () => {
                         </button>
                     </div>
                     <div className="col-span-1 pasFrom">
-                        <Form form={form} onFinish={(values) => changePassword(values)}>
-                            <Form.Item name="currentPassword">
-                                <Input addonBefore={<img src={passwordIcon} />} placeholder="Current Password" />
-                            </Form.Item>
-                            <Form.Item name="newPas">
-                                <Input addonBefore={<img src={passwordIcon} />} placeholder="New Password" />
-                            </Form.Item>
-                            <Form.Item name="checkPas">
-                                <Input addonBefore={<img src={passwordIcon} />} placeholder="Check Password" />
-                            </Form.Item>
-                            <Form.Item>
-                                <Button loading={isLoading} className="flex justify-center items-center h-10 rounded-lg gap-x-2 font-bold bg-[#5932EA] text-white hover:opacity-80 md:px-6 mx-auto" htmlType="submit">
-                                    {t('Change Password')}
-                                </Button>
-                            </Form.Item>
+                        <Form form={form} onFinish={(values) => changePassword(values)} className="h-full">
+                            <div className="flex flex-col justify-between">
+                                <div className="formInput">
+                                    <Form.Item name="currentPassword">
+                                        <Input addonBefore={<img src={passwordIcon} />} placeholder="Current Password" />
+                                    </Form.Item>
+                                    <Form.Item name="newPas">
+                                        <Input addonBefore={<img src={passwordIcon} />} placeholder="New Password" />
+                                    </Form.Item>
+                                    <Form.Item name="checkPas">
+                                        <Input addonBefore={<img src={passwordIcon} />} placeholder="Check Password" />
+                                    </Form.Item>
+                                </div>
+                                <Form.Item noStyle>
+                                    <Button loading={isLoading} className="flex justify-center items-center h-10 rounded-lg gap-x-2 font-bold bg-[#5932EA] text-white hover:opacity-80 md:px-6 mx-auto" htmlType="submit">
+                                        {t('Change Password')}
+                                    </Button>
+                                </Form.Item>
+                            </div>
                         </Form>
                     </div>
                 </div>

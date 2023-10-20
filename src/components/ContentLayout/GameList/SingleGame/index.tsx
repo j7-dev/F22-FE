@@ -5,12 +5,12 @@ import { AiOutlineLoading3Quarters, AiFillPlayCircle } from 'react-icons/ai';
 import FavoriteIcon from '@/components/general/FavoriteIcon';
 
 type SingleGameProp = {
-    gameItem: TGame;
+    gameItem?: TGame;
 };
 
 const index: React.FC<SingleGameProp> = ({ gameItem }) => {
     //如果沒有遊戲資料則不渲染
-    if (!gameItem) return;
+    if (!gameItem) return <></>;
 
     //TODO 未來開啟遊戲方法搬出去取得遊戲的Hook
     //取得開啟遊戲方法
@@ -60,7 +60,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
             <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit pt-1 px-5">
                 <OnTheTop {...gameItem} />
             </div>
-            <div className="gameWrap w-full relative">
+            <div className="gameWrap w-full h-full relative">
                 <img src={gameItem?.gameImg} alt="" className="sm:aspect-square w-full h-full duration-500 group-hover:scale-125 aspect-[342/120] object-cover" />
                 <div className="gameInfo absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent via-50% to-[#1A1A1A80] flex items-end  px-5 py-2.5">
                     <span className="gameName font-bold text-xl text-white">{gameItem?.gameName}</span>

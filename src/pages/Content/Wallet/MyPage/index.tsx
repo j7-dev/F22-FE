@@ -5,9 +5,7 @@ import BankCard from '../BankCard';
 import ChangPas from '../ChangPas';
 import NoteBox from '../NoteBox';
 import CashHistory from '../CashHistory';
-import Withdraw from '../Withdraw';
-import Deposit from '../Deposit';
-
+import CouponHistory from '../CouponHistory';
 const index: React.FC<{ data: TMe }> = ({ data }) => {
     return (
         <div className="myPage relative flex flex-col gap-6 ">
@@ -23,15 +21,8 @@ const index: React.FC<{ data: TMe }> = ({ data }) => {
                     <NoteBox pageSize={3} pagination={false} />
                 </div>
             </div>
-            <CashHistory userID={data?.id as number} pageSize={3} pagination={false} />
-            <div className="grid grid-cols-2 gap-6">
-                <div>
-                    <Deposit />
-                </div>
-                <div>
-                    <Withdraw />
-                </div>
-            </div>
+            <CashHistory userID={data?.id as number} pageSize={3} />
+            <CouponHistory userID={data?.id as number} pageSize={3} />
         </div>
     );
 };

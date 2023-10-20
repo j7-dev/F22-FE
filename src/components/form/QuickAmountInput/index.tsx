@@ -17,10 +17,10 @@ const index: React.FC<{
     formItemProps,
     inputNumberProps,
     quickButtonProps = {
-        className: 'grid grid-cols-2 lg:grid-cols-3 gap-4',
+        className: 'grid grid-cols-2 lg:grid-cols-5 gap-4',
         buttonProps: {
             type: 'default',
-            className: 'w-full font-bold text-sm bg-[#F2F2F2] border-transparent hover:border-primary',
+            className: 'py-5 h-full w-full font-medium text-xl text-[#9680EA] bg-[#F8F9FF] border-transparent hover:bg-primary hover:text-white',
         },
         closeButtonIcon: <CloseOutlined />,
     },
@@ -36,8 +36,8 @@ const index: React.FC<{
 
     return (
         <div>
-            <Form.Item {...formItemProps}>
-                <InputNumber size="large" min={0} className="w-full text-right" controls={false} formatter={(value: string | number | undefined) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={(value) => Number(value!.replace(/\$\s?|(,*)/g, ''))} {...inputNumberProps} />
+            <Form.Item {...formItemProps} className="depositAmount">
+                <InputNumber min={0} className="" bordered={false} controls={false} formatter={(value: string | number | undefined) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={(value) => Number(value!.replace(/\$\s?|(,*)/g, ''))} {...inputNumberProps} />
             </Form.Item>
             <div className={quickButtonProps.className}>
                 {QUICK_BUTTON_VALUES.map((value) => (
@@ -51,13 +51,13 @@ const index: React.FC<{
                         {`${inputNumberProps?.prefix || ''} ${value.toLocaleString()}`}
                     </Button>
                 ))}
-                <Button
+                {/* <Button
                     {...quickButtonProps.buttonProps}
                     onClick={() => {
                         form.resetFields(['amount']);
                     }}
                     icon={quickButtonProps.closeButtonIcon}
-                />
+                /> */}
             </div>
         </div>
     );

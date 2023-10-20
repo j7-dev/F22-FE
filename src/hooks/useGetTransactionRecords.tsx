@@ -1,5 +1,5 @@
-import { useList } from '@refinedev/core';
-import { TTransaction } from '@/types';
+import { HttpError } from '@refinedev/core';
+import { useTable } from '@refinedev/antd';
 
 /**
  * 傳入type, userID, pageSize預設10筆
@@ -9,7 +9,7 @@ import { TTransaction } from '@/types';
 
 export const useGetTransactionRecords = ({ type, userID, pageSize = 10 }: { type: string[]; userID: number; pageSize?: number }) => {
     //取得交易紀錄
-    const { data, isLoading } = useList<TTransaction>({
+    const { tableProps } = useTable<HttpError>({
         resource: 'transaction-records',
         meta: {
             populate: {
@@ -18,26 +18,28 @@ export const useGetTransactionRecords = ({ type, userID, pageSize = 10 }: { type
                 },
             },
         },
-        filters: [
-            {
-                field: 'user.id',
-                operator: 'eq',
-                value: userID,
-            },
-            {
-                field: 'type',
-                operator: 'in',
-                value: type,
-            },
-        ],
+        filters: {
+            initial: [
+                {
+                    field: 'user.id',
+                    operator: 'eq',
+                    value: userID,
+                },
+                {
+                    field: 'type',
+                    operator: 'in',
+                    value: type,
+                },
+            ],
+        },
         pagination: {
-            mode: 'client', //要怎麼設定成service端分頁同時又出現分頁
+            mode: 'server', //要怎麼設定成server端分頁同時又出現分頁
             pageSize: pageSize,
         },
     });
-    // 將 data 和 isLoading 包裝在物件中並 返回
+
+    // 將 tableProps 包裝在物件中並 返回
     return {
-        data,
-        isLoading,
+        tableProps,
     };
 };

@@ -45,13 +45,13 @@ const index: React.FC = () => {
     const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
 
     return (
-        <div className="px-8 py-[42px] rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
+        <div className="bg-white px-8 py-[42px] rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
             <span className="text-black font-bold text-2xl">{t('Withdraw')}</span>
             <div className="min-h-[180px]">
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical" className="w-full">
                     <QuickAmountInput
                         formItemProps={{
-                            label: t('Amount to transfer'),
+                            label: <span className="mt-1 text-sm text-[#828282] font-medium">{t('Amount to transfer')}</span>,
                             name: ['amount'],
                             rules: [
                                 {
@@ -75,7 +75,7 @@ const index: React.FC = () => {
                     <Form.Item name={['user_id']} hidden>
                         <Input />
                     </Form.Item>
-                    <Button type="primary" loading={isLoading} className="mt-5 w-full font-bold" onClick={handleWithdraw}>
+                    <Button type="primary" loading={isLoading} className="mt-10 w-full h-[65px] font-bold text-xl" onClick={handleWithdraw}>
                         {t('Withdraw')}
                     </Button>
                 </Form>
