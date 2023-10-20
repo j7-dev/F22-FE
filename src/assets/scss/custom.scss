@@ -206,4 +206,11 @@
 	.formWrap::-webkit-scrollbar {
 		width: 0;
 	}
+	//銀行帳戶背景圖片
+	$bankAccount: url("@/assets/images/newMyPage/BankAccountBG.svg");
+	.BankCard {
+		.BankCardBg {
+			background: $bankAccount;
+		}
+	}
 }
