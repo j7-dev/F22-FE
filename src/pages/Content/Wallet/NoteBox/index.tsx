@@ -60,9 +60,9 @@ const index: React.FC<{ pageSize?: number; pagination?: false | undefined }> = (
         }) || [];
 
     return (
-        <div className="h-full w-full py-[42px] flex flex-col gap-4 rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] sm:px-[32px]">
-            <div className="text-black font-bold text-2xl flex gap-2">
-                <span>{t('Note Box')}</span>
+        <div className="bg-white h-full w-full py-6 px-4 gap-3 userBank flex flex-col rounded-2xl sm:py-[42px] sm:px-[32px] sm:gap-4 shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
+            <div className="flex gap-2">
+                <span className="text-black font-bold sm:text-2xl text-sm">{t('Note Box')}</span>
                 <div className="flex justify-center items-center rounded-full bg-[#EB5757] aspect-square w-[30px] text-xl text-white font-bold">{data?.total}</div>
                 <ShowBtn />
             </div>

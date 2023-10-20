@@ -2,20 +2,23 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetAtom } from 'jotai';
 import { popupIsOpenAtom } from '../LoginModule';
+import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 import Mobile from './Mobile';
 import Pc from './Pc';
 import { useIsLogin } from '@/hooks/resources/useIsLogin';
 import { useShowPc } from '@/hooks/useShowPc';
-
+//TODO 需要找時間整理一下NavBar 與Mobile的組件,統一下Atom
 const NavBar: React.FC = () => {
     const showPc = useShowPc();
     const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
+    const setSection = useSetAtom(activeMenuAtom);
     const isLogin = useIsLogin();
     const Navigate = useNavigate();
 
     const handleProfile = () => {
         if (isLogin) {
             Navigate('/wallet');
+            setSection('myPage');
         } else {
             setPopupIsOpen(true);
         }

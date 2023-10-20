@@ -203,4 +203,7 @@
 			width: 0;
 		}
 	}
+	.formWrap::-webkit-scrollbar {
+		width: 0;
+	}
 }

@@ -21,12 +21,12 @@ export const useGetPopularGames = () => {
     const isLoading = evoLoading || ppLoading;
 
     //只取得Slot Games 18款遊戲資料
-    const slotGames = isLoading ? [] : (ppData || [])?.slice(0, 18);
+    const slotGames = isLoading ? [] : (ppData || [])?.slice(0, 16);
 
     // console.log('slotGames:', slotGames);
 
     //只取得Live Casino 18款遊戲資料
-    const liveGamesData = isLoading ? [] : (evoData || []).slice(0, 18);
+    const liveGamesData = isLoading ? [] : (evoData || []).slice(0, 16);
 
     //重組一個假的Golf遊戲資料
     const golfGamesData = [
@@ -46,7 +46,7 @@ export const useGetPopularGames = () => {
 
     // 獲取隨機的6個元素
     const sixPoplarAllGames = useMemo(() => {
-        return sampleSize(allGamesArray, 18);
+        return sampleSize(allGamesArray, 16);
     }, [isLoading]);
 
     //根據gameCategories map出PopularGamesData
