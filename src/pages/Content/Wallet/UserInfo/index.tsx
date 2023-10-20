@@ -65,7 +65,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                             </div>
                         </div>
                         {/* 下一等級 */}
-                        <div className="nextVip absolute z-10 right-0 bottom-0 h-full flex justify-center items-center aspect-square bg-[#FDD92A] text-white text-base font-semibold rounded-full">
+                        <div className="nextVip absolute z-10 right-0 bottom-0 h-full flex justify-center items-center aspect-square bg-[#FFB930] text-white text-base font-semibold rounded-full">
                             <div className="relative">
                                 <img src={vipNextIcon} alt="" className="absolute -top-6 left-1/2 -translate-x-2/4 w-6" />
                                 {(nextVip?.order as number) + 1}
