@@ -58,7 +58,7 @@ const index: React.FC = () => {
     const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
 
     const codePayUrl = `${CODEPAY_APP_URL}/payment?type=payment&simpleAddress=${CODEPAY_SIMPLE_ADDRESS_TO}&tag=smtbet7&identifier=${CODEPAY_IDENTIFIER}&amount=${watchAmount}`;
-
+    //FIXME 這邊是不是要改成qrcode?
     const handleOpenUrl = () => {
         window.open(codePayUrl, '_blank');
     };
