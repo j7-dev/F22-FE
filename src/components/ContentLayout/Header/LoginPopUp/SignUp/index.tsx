@@ -89,7 +89,7 @@ const index: React.FC = () => {
 
     return (
         <div className="signUpFromSection overflow-y-scroll text-center flex flex-col gap-2.5 w-full h-full">
-            <span className="text-4xl text-center font-semibold text-white mb-9">{t('USER SIGN UP')}</span>
+            <span className="text-[30px] text-center font-semibold text-white mb-9">{t('User Sign Up')}</span>
             {/* 錯誤訊息 */}
             {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
             <Form form={form} onFinish={handleSignUp} className="signUp">
