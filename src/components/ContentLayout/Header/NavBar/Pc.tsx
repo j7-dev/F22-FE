@@ -6,7 +6,6 @@ import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
 
 const Pc: React.FC<{ isLogin: boolean }> = ({ isLogin }) => {
     const { data } = useGetMarketingContent({ position: 'header' });
-
     const marqueeText = data?.map((item) => {
         return item?.content;
     });

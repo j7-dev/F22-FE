@@ -20,9 +20,6 @@ const index: React.FC = () => {
 
     //取得七大遊戲分類，並根據gameCategories判斷遊戲廠商屬於哪一個分類
     const gameCategoriesData = [...gameCategories].map((item) => {
-        //目前統一傳回slot的資料
-        return { ...item, providerData: slogGamesResource };
-        //未來如果providerData有分類了，再用下面的方式
         return { ...item, providerData: mappingIncludesProvider({ providerData: providerData, category: item }) };
     }) as TGameCategory[];
 
@@ -55,11 +52,14 @@ const index: React.FC = () => {
                     modules={[Pagination, Autoplay]}
                     className="gameProvidersSwiper w-full h-fit"
                 >
-                    {gameCategoriesData.map((item) => (
-                        <SwiperSlide key={nanoid()} className="h-fit w-full sm:w-full sm:aspect-[1260/360] aspect-[342/180] shadow-[0_4px_4px_0px_#A370ED33]">
-                            <CategorySwiper key={nanoid()} provider={item.providerData} categoryName={item.label} />
-                        </SwiperSlide>
-                    ))}
+                    {/* 只取得有 providerData 的資料*/}
+                    {gameCategoriesData
+                        .filter((item) => item?.providerData?.length !== 0)
+                        .map((item) => (
+                            <SwiperSlide key={nanoid()} className="h-fit w-full sm:w-full sm:aspect-[1260/360] aspect-[342/180] shadow-[0_4px_4px_0px_#A370ED33]">
+                                <CategorySwiper key={nanoid()} provider={item.providerData} categoryName={item.label} />
+                            </SwiperSlide>
+                        ))}
                 </Swiper>
             </div>
         </div>

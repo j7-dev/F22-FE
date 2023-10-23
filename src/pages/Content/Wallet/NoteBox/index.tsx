@@ -6,6 +6,7 @@ import { Table } from 'antd';
 import dayjs from 'dayjs';
 import { TSiteNotify } from '@/types';
 import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
+import { BiSolidTimeFive } from 'react-icons/bi';
 
 const { Column } = Table;
 const rowSelection = {
@@ -67,6 +68,7 @@ const index: React.FC<{ pageSize?: number; pagination?: false | undefined }> = (
                 <ShowBtn />
             </div>
             <Table
+                className="customTable"
                 dataSource={fxnData}
                 rowSelection={{
                     type: 'checkbox',
@@ -75,8 +77,18 @@ const index: React.FC<{ pageSize?: number; pagination?: false | undefined }> = (
                 loading={isFetching}
                 pagination={pagination}
             >
-                <Column title="Title" dataIndex="content" key="content" className="text-sm text-[#0F172A] font-medium" />
-                <Column title="Date" dataIndex="fxnCreatedAt" key="fxnCreatedAt" className="text-sm text-[#0F172A] font-medium" />
+                <Column title="Title" dataIndex="content" key="content" className="" />
+                <Column
+                    title={
+                        <div className="flex items-center gap-1">
+                            <BiSolidTimeFive color="#828282" size={20} />
+                            Date
+                        </div>
+                    }
+                    dataIndex="fxnCreatedAt"
+                    key="fxnCreatedAt"
+                    className=""
+                />
             </Table>
         </div>
     );

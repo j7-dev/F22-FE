@@ -1,16 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetAtom } from 'jotai';
-import { popupIsOpenAtom } from '../LoginModule';
+import { signInAtom } from '../LoginModule';
 import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 import Mobile from './Mobile';
 import Pc from './Pc';
 import { useIsLogin } from '@/hooks/resources/useIsLogin';
 import { useShowPc } from '@/hooks/useShowPc';
+import SingIn from '../LoginPopUp/Login';
+import SingUp from '../LoginPopUp/SignUp';
+
 //TODO 需要找時間整理一下NavBar 與Mobile的組件,統一下Atom
 const NavBar: React.FC = () => {
     const showPc = useShowPc();
-    const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
+    const setSignIn = useSetAtom(signInAtom);
     const setSection = useSetAtom(activeMenuAtom);
     const isLogin = useIsLogin();
     const Navigate = useNavigate();
@@ -20,7 +23,7 @@ const NavBar: React.FC = () => {
             Navigate('/wallet');
             setSection('myPage');
         } else {
-            setPopupIsOpen(true);
+            setSignIn(true);
         }
     };
     //選擇顯示的選單
@@ -30,11 +33,13 @@ const NavBar: React.FC = () => {
     };
 
     return (
-        <div className="Navbar z-[999] fixed p-4 w-full h-fit bg-white sm:flex sm:items-center sm:justify-between sm:px-6 sm:py-4 sm:h-full sm:relative shadow-[0_4px_4px_0px_#A370ED33]">
-            <nav className="relative w-full h-full py-3 xl:flex sm:items-center xl:justify-between sm:py-0  xl:mx-auto " aria-label="Global">
+        <div className="Navbar z-[999] fixed p-4 w-full h-fit bg-white md:flex md:items-center md:justify-between md:px-6 md:py-4 md:h-full md:relative shadow-[0_4px_4px_0px_#A370ED33]">
+            <nav className="relative w-full h-full py-3 xl:flex md:items-center xl:justify-between md:py-0  xl:mx-auto " aria-label="Global">
                 <ShowNav />
+                <SingIn />
+                <SingUp />
                 {/* 舊手機選單 */}
-                {/* <div className="flex sm:hidden bg-white fixed bottom-0 left-0 justify-between w-full px-8 pt-3 pb-2 z-50" style={{ borderTop: '1px solid #999' }}>
+                {/* <div className="flex md:hidden bg-white fixed bottom-0 left-0 justify-between w-full px-8 pt-3 pb-2 z-50" style={{ borderTop: '1px solid #999' }}>
                     <Link to="/">
                         <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
                             <GiPokerHand className="text-[1.5rem]" />

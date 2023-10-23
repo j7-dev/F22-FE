@@ -13,7 +13,7 @@ export const useGetPPTableList = () => {
         data: fetchData,
         isLoading,
         isFetching,
-    } = useCustom({
+    } = useCustom<{ gameList: TGame[] }>({
         url: `${apiUrl}/pp/getcasinogames`,
         method: 'post',
         queryOptions: {
@@ -22,7 +22,7 @@ export const useGetPPTableList = () => {
         },
     });
     const data =
-        (fetchData?.data?.gameList as TGame[])?.map((item: TGame) => {
+        fetchData?.data?.gameList?.map((item: TGame) => {
             return {
                 ...item,
                 gameCategory: mappingGameCategory({ gameProviderName: 'pragmaticPlay' }),

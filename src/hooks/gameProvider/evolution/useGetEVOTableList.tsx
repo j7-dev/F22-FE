@@ -9,7 +9,7 @@ export const useGetEVOTableList = () => {
         data: fetchData,
         isLoading,
         isFetching,
-    } = useList({
+    } = useList<TGame>({
         resource: 'evo/tablelist',
         queryOptions: {
             staleTime: 1000 * 60 * 60 * 24,
@@ -19,7 +19,7 @@ export const useGetEVOTableList = () => {
     //Casino 的遊戲商加上統一的formProviderCategory來分類
     //近來的資料先排除rng-類別並加上gameProviderName和gameImg
     const data =
-        ((fetchData?.data as TGame[]) || undefined)
+        (fetchData?.data || undefined)
             ?.filter((item) => !(item['Game Type'] as string).startsWith('rng-'))
             .map((item: TGame) => {
                 return {

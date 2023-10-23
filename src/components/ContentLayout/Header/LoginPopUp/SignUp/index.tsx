@@ -1,13 +1,10 @@
-//1.API URL https://be-dev.smtbet7.com/api/auth/local/register
-//2.payload json 格式 帶入uuid(唯一值) userEmail,username,password,confirmed": true,"blocked": false
-//3.不用帶入token
 import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSetAtom } from 'jotai';
-import { Form, Input, Button } from 'antd';
+import { useSetAtom, useAtom } from 'jotai';
+import { Form, Input, Button, Modal, Radio } from 'antd';
 import { useRegister } from '@refinedev/core';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import { popupIsOpenAtom, loginOrSignUpAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { signInAtom, signUpAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { TRegisterPayload } from '@/types';
 import password from '@/assets/images/loginFrom/password.svg';
@@ -16,16 +13,21 @@ import phoneNumber from '@/assets/images/loginFrom/phoneNumber.svg';
 import bankNumber from '@/assets/images/loginFrom/bankNumber.svg';
 import bankName from '@/assets/images/loginFrom/bankName.svg';
 import bankCode from '@/assets/images/loginFrom/bankCode.svg';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
+    //判斷Modal是否打開
+    const [signUp, setSignUp] = useAtom(signUpAtom);
+    const setSignIn = useSetAtom(signInAtom);
+
     const captchaSignUpRef = useRef<HCaptcha>(null);
     const { mutate: register, isLoading } = useRegister<TRegisterPayload>();
-    const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
-    const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom); //true:login false:signUp
     const [form] = Form.useForm();
     const [verifyError, setVerifyError] = useState('');
     const [submitTable, setSubmitTable] = useState(false);
+
+    //點擊註冊會員
     const handleSignUp = async (values: TRegisterPayload) => {
         if (captchaSignUpRef?.current) {
             await captchaSignUpRef.current
@@ -42,7 +44,7 @@ const index: React.FC = () => {
                                 // handle error
                             }
                             // handle success
-                            setPopupIsOpen(false);
+                            setSignUp(false);
                         },
                         onError: (error) => {
                             console.log('錯誤訊息', error);
@@ -61,7 +63,8 @@ const index: React.FC = () => {
     };
 
     const handleToLogin = () => {
-        setLoginOrSignUp(true);
+        setSignUp(false);
+        setSignIn(true);
     };
 
     //自定義驗證規則=>確認密碼
@@ -88,47 +91,67 @@ const index: React.FC = () => {
     }, [values]);
 
     return (
-        <div className="signUpFromSection overflow-y-scroll text-center flex flex-col gap-2.5 w-full h-full">
-            <span className="text-[30px] text-center font-semibold text-white mb-9">{t('User Sign Up')}</span>
-            {/* 錯誤訊息 */}
-            {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
-            <Form form={form} onFinish={handleSignUp} className="signUp">
-                <Form.Item hidden name="userEmail" />
-                <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }]}>
-                    <Input placeholder="User Name" prefix={<img src={userName} />} bordered={false} />
-                </Form.Item>
-                <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password' }]}>
-                    <Input.Password placeholder="User Password" prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
-                </Form.Item>
-                <Form.Item name="confirmPassword" rules={[{ required: true, message: 'Please input your Password' }, { validator: validateFunction }]}>
-                    <Input.Password placeholder="Confirm Password" prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
-                </Form.Item>
-                <Form.Item name="userPhone" rules={[{ required: true, message: 'Please input your Phone' }]}>
-                    <Input placeholder="User Phone" prefix={<img src={phoneNumber} />} bordered={false} />
-                </Form.Item>
-                <Form.Item name={['bank_account', 'bank_name']} rules={[{ required: true, message: 'Please input your Phone' }]}>
-                    <Input placeholder="Bank Name" prefix={<img src={bankName} />} bordered={false} />
-                </Form.Item>
-                <Form.Item name={['bank_account', 'bank_code']} rules={[{ required: true, message: 'Please input your Phone' }]}>
-                    <Input placeholder="Bank Code" prefix={<img src={bankCode} />} bordered={false} />
-                </Form.Item>
-                <Form.Item name={['bank_account', 'bank_account_number']} rules={[{ required: true, message: 'Please input your Phone' }]}>
-                    <Input.Password placeholder="Bank Account Number" prefix={<img src={bankNumber} />} bordered={false} />
-                </Form.Item>
-                <HCaptcha id='id="signUpHCaptcha"' size="invisible" ref={captchaSignUpRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
-                <Form.Item className="mb-0">
-                    <Button loading={isLoading} disabled={!submitTable} className="mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
-                        {t('Sign Up')}
-                    </Button>
-                </Form.Item>
-            </Form>
-            <div className="text-white flex flex-col">
-                <span className="font-normal text-sm">{t('have an account?')}</span>
-                <span className="text-sm font-bold cursor-pointer" onClick={handleToLogin}>
-                    {t('Log In')}
-                </span>
+        <Modal
+            open={signUp}
+            onCancel={() => setSignUp(false)}
+            centered
+            closeIcon={<AiFillCloseCircle color="#FFFFFF" size={30} />}
+            footer={null}
+            className="formWrap sm:w-[600px] sm:h-auto w-screen max-w-none"
+            classNames={{
+                mask: 'bg-[#000000d9] blur-sm',
+                content: 'bg-gradient-to-b from-[#BAA8FF] to-[#5932EA] shadow-[0px_0px_10px_4px_#D4C9FF33] py-[50px] sm:px-[100px] px-[45px]',
+            }}
+        >
+            <div className="signUpFromSection text-center flex flex-col sm:gap-2.5 w-full h-full">
+                <span className="text-[30px] text-center font-semibold text-white sm:mb-9 mb-8">{t('User Sign Up')}</span>
+                {/* 錯誤訊息 */}
+                {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
+                <Form form={form} onFinish={handleSignUp} className="signUp">
+                    <Form.Item hidden name="userEmail" />
+                    <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }]}>
+                        <Input placeholder="User Name" prefix={<img src={userName} />} bordered={false} />
+                    </Form.Item>
+                    <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password' }]}>
+                        <Input.Password placeholder="User Password" prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
+                    </Form.Item>
+                    <Form.Item name="confirmPassword" rules={[{ required: true, message: 'Please input your Password' }, { validator: validateFunction }]}>
+                        <Input.Password placeholder="Confirm Password" prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
+                    </Form.Item>
+                    <Form.Item name="userPhone" rules={[{ required: true, message: 'Please input your Phone' }]}>
+                        <Input placeholder="Phone Number" prefix={<img src={phoneNumber} />} bordered={false} />
+                    </Form.Item>
+                    <Form.Item name={['bank_account', 'owner_real_name']} rules={[{ required: true, message: 'Please input your Phone' }]}>
+                        <Input placeholder="Full Name" prefix={<img src={bankName} />} bordered={false} />
+                    </Form.Item>
+                    <Form.Item name={['bank_account', 'bank_code']} rules={[{ required: true, message: 'Please input your Phone' }]}>
+                        <Input placeholder="Bank Code" prefix={<img src={bankCode} />} bordered={false} />
+                    </Form.Item>
+                    <Form.Item name={['bank_account', 'bank_account_number']} rules={[{ required: true, message: 'Please input your Phone' }]}>
+                        <Input.Password placeholder="Bank Account Number" prefix={<img src={bankNumber} />} bordered={false} />
+                    </Form.Item>
+                    <Form.Item name="privacy" rules={[{ required: true, message: 'Please agree the Terms' }]}>
+                        <Radio.Group>
+                            <Radio value="yes" className="">
+                                {t('I agree with all the Terms and Conditions & Privacy Policy and I am over 18 years old.')}
+                            </Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                    <HCaptcha id='id="signUpHCaptcha"' size="invisible" ref={captchaSignUpRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
+                    <Form.Item className="mb-0">
+                        <Button loading={isLoading} disabled={!submitTable} className="border-0 mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
+                            {t('Sign Up')}
+                        </Button>
+                    </Form.Item>
+                </Form>
+                <div className="text-white flex justify-center gap-1">
+                    <span className="font-normal text-sm">{t('have an account?')}</span>
+                    <span className="underline text-sm font-bold cursor-pointer" onClick={handleToLogin}>
+                        {t('Log In')}
+                    </span>
+                </div>
             </div>
-        </div>
+        </Modal>
     );
 };
 

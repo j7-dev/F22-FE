@@ -1,10 +1,10 @@
 import React from 'react';
-import { atom, useAtom, useSetAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg/';
 import coinIcon from '@/assets/images/coin-icon.png';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 // import { getFakeImg } from '@/pages/Content/Taxonomy/Live/Evolution/fakeGameData';
-import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
+// import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { cloneDeep } from 'lodash';
 import { requestAtomType } from '@/types';
 import { useCustomMutation } from '@refinedev/core';
@@ -59,14 +59,14 @@ export const configAtom = atom<requestAtomType>({
 });
 const index: React.FC<GameProps> = ({ data = {} }) => {
     const isLogin = useIsLogin();
-    const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
+    // const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
     const [gameconfig, _setGameconfig] = useAtom(configAtom);
     const { mutate: openGame } = useCustomMutation();
 
     //TODO 這邊有一個功能待補=>如何在客戶登入後，再將客戶導回原本點擊的遊戲頁面並打開彈窗
     const handleClick = () => {
         if (!isLogin) {
-            setPopupIsOpen(true);
+            // setPopupIsOpen(true);
             return;
         } else {
             const newGameConfig = cloneDeep(gameconfig);

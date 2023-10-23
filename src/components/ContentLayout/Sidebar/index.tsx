@@ -2,10 +2,13 @@ import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import { atom, useAtom, useSetAtom } from 'jotai';
+import { useQueryClient } from '@tanstack/react-query';
+import { useIsLogin } from '@/hooks/resources/useIsLogin';
+import { useLogout } from '@refinedev/core';
 import WallerContainer from './WallerContainer';
 import GameNavContainer from './GameNavContainer';
 // import LanguageSwitch from '@/components/ContentLayout/Header/LanguageSwitch';
-import { loginOrSignUpAtom, popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { signInAtom } from '@/components/ContentLayout/Header/LoginModule';
 
 export const activeMenuAtom = atom('');
 export const mbSidebarAtom = atom(false); //手機版選單是否打開
@@ -14,13 +17,18 @@ export const Sidebar: React.FC = () => {
     const sidebarRef = useRef<HTMLDivElement>(null);
     const { t } = useTranslation();
     const [mbSidebar, setMbSidebar] = useAtom(mbSidebarAtom);
-    const setLoginOrSignUp = useSetAtom(loginOrSignUpAtom);
-    const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
-
+    const setSignIn = useSetAtom(signInAtom);
+    const isLogin = useIsLogin();
+    //登出
+    const queryClient = useQueryClient();
+    const { mutate: logout } = useLogout();
+    const handleLogOut = () => {
+        logout();
+        queryClient.clear();
+    };
     //點擊START NOW登入彈窗
     const handleClick = () => {
-        setLoginOrSignUp(true);
-        setPopupIsOpen(true);
+        setSignIn(true);
     };
 
     //點擊選單本身關閉手機選單
@@ -45,7 +53,7 @@ export const Sidebar: React.FC = () => {
     }, []);
 
     return (
-        <div onClick={handleCloseMbSidebar} ref={sidebarRef} className={`${mbSidebar ? 'active' : 'w-0'} sideBar text-[#828282] h-full bg-white pb-10 sm:w-full sm:shadow-none shadow-[2px_0px_20px_0px_rgba(163,112,237,0.25)] duration-300`}>
+        <div onClick={handleCloseMbSidebar} ref={sidebarRef} className={`${mbSidebar ? 'active' : 'w-0'} sideBar text-[#828282] h-full bg-white pb-10 md:w-full sm:shadow-none shadow-[2px_0px_20px_0px_rgba(163,112,237,0.25)] duration-300`}>
             <div className="opacity-0 w-full logo h-20 flex justify-center items-center mb-6 sm:mb-9 sm:opacity-100 ">
                 <Link to="/" className="w-full">
                     <div className="relative w-full block h-12 px-[14px]">
@@ -56,7 +64,7 @@ export const Sidebar: React.FC = () => {
             </div>
             <div className="sideNav overflow-y-scroll h-[calc(100%-80px)] pb-10  sm:px-[14px] w-full flex flex-col relative">
                 <GameNavContainer />
-                <div className="border-0 border-solid border-t-2 mx-[14px] my-[46px]" />
+                <div className="divider border-0 border-solid border-t mx-[14px] my-[46px] border-[#828282]" />
                 <WallerContainer />
                 {/* 電腦登入 */}
                 <div className="hidden sm:flex flex-col startNow opacity-0 w-full transition-all mt-52">
@@ -69,6 +77,17 @@ export const Sidebar: React.FC = () => {
                         </span>
                     </div>
                 </div>
+                {/* 手機版登出 */}
+                {isLogin ? (
+                    <div onClick={handleLogOut} className="sm:hidden w-full flex justify-center logout mt-[50px]">
+                        <div className=" px-3 py-1.5 bg-black rounded-xl">
+                            <span className=" text-xs text-white font-bold">{t('Log Out')}</span>
+                        </div>
+                    </div>
+                ) : (
+                    ''
+                )}
+
                 {/* 手機選單 */}
                 {/* <div className="sm:hidden tertiaryButton languageSwitchContain relative w-fit mt-20 mx-6 flex items-center justify-center">
                     <LanguageSwitch />

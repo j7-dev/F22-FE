@@ -1,27 +1,26 @@
 import React, { useState } from 'react';
-import { Tabs, Dropdown, Space, TabsProps } from 'antd';
+import { Tabs, TabsProps } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { nanoid } from 'nanoid';
 // import {LazyLoadImage} from 'react-lazy-load-image-component';
 import { TGameProvider, TProviderData } from '@/types/games';
-import { DownOutlined } from '@ant-design/icons';
-import { useShowPc } from '@/hooks/useShowPc';
+import { useNavigate } from 'react-router-dom';
 
 //FIXME 這邊只要套用LazyLoadImage 組件就會閃跳
 //單個文章版型
 const TabPaneList = (props: { taxonomy: TGameProvider }) => {
     const { taxonomy } = props;
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     // const { t } = useTranslation();
-    // const handleStartGame = (path: string) => {
-    //     navigate(path);
-    // };
+    const handleStartGame = (path: string) => {
+        navigate(`${taxonomy.gameCategories[0]}/${path}`);
+    };
     const SingleCase = (SingleCaseProps: { item?: TProviderData }) => {
         const { item } = SingleCaseProps;
         return (
             <div className="providerInfo h-full w-full grid grid-cols-11 gap-4">
                 <div className="col-start-1"></div>
-                <div className="providerMainImg overflow-hidden col-span-6 rounded-2xl ">
+                <div onClick={() => handleStartGame(item?.providerPath as string)} className="cursor-pointer providerMainImg overflow-hidden col-span-6 rounded-2xl ">
                     <img src={item?.providerMainImg} alt="" className="w-full min-h-[369px] duration-500 hover:scale-125  object-cover" />
                 </div>
                 <div className="col-span-3 flex flex-col items-center justify-center">
@@ -53,36 +52,7 @@ const TabPaneList = (props: { taxonomy: TGameProvider }) => {
 // 自定义标签栏组件
 const CustomTabBar = (props: any) => {
     const { activeKey, panes, onTabClick } = props;
-    const showPc = useShowPc();
-    // 添加用于检测屏幕宽度变化的事件处理程序
 
-    //目前手機版用不到
-    if (!showPc) {
-        // 当屏幕宽度小于 810px 时，使用下拉菜单
-        const DropdownMenu = panes.map((pane: any) => ({
-            key: pane.props.tabKey,
-            label: (
-                <a key={nanoid()} className="text-center underline-offset-0 no-underline">
-                    {pane.props.tab}
-                </a>
-            ),
-        }));
-        return (
-            <Dropdown menu={{ items: DropdownMenu, selectable: true }} trigger={['click']}>
-                <a
-                    onClick={(e) => {
-                        e.preventDefault();
-                    }}
-                    className="text-center"
-                >
-                    <Space>
-                        {panes.find((pane: any) => pane.props.tabKey === activeKey)?.props.tab}
-                        <DownOutlined />
-                    </Space>
-                </a>
-            </Dropdown>
-        );
-    }
     return (
         <div className="custom-tab-bar grid grid-cols-11 border-0 border-solid border-b border-[#d5d8dc]">
             <div className="col-start-2 col-span-9 flex gap-2.5 -ml-2">
@@ -145,7 +115,12 @@ const index: React.FC<indexProps> = (props) => {
                                 handleSwitchTab(activeKey);
                             }}
                         >
-                            <img src={item?.providerData?.providerMainImg} className="w-full h-full duration-500 hover:scale-125 object-center object-cover" alt="" />
+                            <div className="w-full h-full duration-500 hover:scale-125 bg-cover bg-center" style={{ background: `url(${item?.providerData?.providerMainImg})` }}>
+                                <div className="w-full h-full px-4 py-6 flex text-end bg-gradient-to-r from-transparent from-40% to-[#5932EA]">
+                                    <img className="w-full h-full object-right object-contain" src={item?.providerData?.providerWhiteIcon} alt="" />
+                                </div>
+                            </div>
+                            {/* <img src={item?.providerData?.providerMainImg}  alt="" /> */}
                         </div>
                     );
                 })}

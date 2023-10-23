@@ -6,15 +6,17 @@ export type TGameProvider = {
 };
 
 export type TProviderData = {
-    providerMainImg: string;
-    providerSmallIcon: string;
-    providerFavIcon: string;
-    providerDescribe: string;
+    providerMainImg?: string;
+    providerSmallIcon?: string;
+    providerFavIcon?: string;
+    providerWhiteIcon?: string;
+    providerDescribe?: string;
     providerPath?: string;
 };
 
 export type TGame = TEvolutionGame &
     TPragmaticGame & {
+        gameID?: string;
         casinoCategory?: string; //casino 遊戲分類
         casinoCategoryIcon?: string; //casino 遊戲分類 icon
         gameCategory?: string; //七大遊戲分類

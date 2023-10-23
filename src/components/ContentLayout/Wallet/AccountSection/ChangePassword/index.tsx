@@ -5,7 +5,7 @@ import { LockOutlined } from '@ant-design/icons';
 import { useCustomMutation } from '@refinedev/core';
 import { API_URL } from '@/utils';
 import { useNavigate } from 'react-router-dom';
-import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { signInAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { useSetAtom } from 'jotai';
 
 //1.API URL https://be-dev.smtbet7.com/api/auth/change-password
@@ -21,7 +21,7 @@ const index: React.FC = () => {
     const [form] = Form.useForm();
     const { mutate } = useCustomMutation();
     const Navigate = useNavigate();
-    const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
+    const setSignIn = useSetAtom(signInAtom);
 
     const changePassword = (values: { newPas: string; currentPassword: string; checkPas: string }) => {
         const { newPas, currentPassword, checkPas } = values;
@@ -46,7 +46,7 @@ const index: React.FC = () => {
                     // 成功後登出帳號清除localStorage並且開啟登入視窗
                     localStorage.removeItem('API_TOKEN');
                     Navigate('/');
-                    setPopupIsOpen(true);
+                    setSignIn(true);
                 },
             },
         );

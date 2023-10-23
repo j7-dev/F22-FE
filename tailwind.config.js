@@ -13,7 +13,7 @@ module.exports = {
             },
             screens: {
                 sm: '415px', // iphone SE
-                md: '810px', // ipad 直向
+                md: '835px', // ipad 直向
                 lg: '1080px', // ipad 橫向
                 xl: '1280px', // mac air
                 xxl: '1440px',

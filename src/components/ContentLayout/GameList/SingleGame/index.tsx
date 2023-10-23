@@ -24,9 +24,9 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                     <div className="wrap flex gap-1 items-center">
                         <FavoriteIcon item={item} />
                         {/* 有RTP率才顯示否則為空 */}
-                        {item.gameRTP ? <div className="RTP text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2"> RTP ${item.gameRTP}</div> : ''}
+                        {item.gameRTP ? <div className="RTP hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2"> RTP ${item.gameRTP}</div> : ''}
                     </div>
-                    <img className="provider" src={item.gameListFavIcon} alt="" />
+                    <img className="provider w-5 sm:w-10" src={item.gameListFavIcon} alt="" />
                 </div>
             );
         }
@@ -36,14 +36,35 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                 <div className="onTheTop flex justify-between items-center w-full">
                     <div className="wrap flex gap-1 items-center">
                         <FavoriteIcon item={item} />
-                        <div className="RTP text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${item['Bet Limit']?.KRW.max?.toLocaleString()}`}</div>
+                        <div className="BetLimit hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${item['Bet Limit']?.KRW.max?.toLocaleString()}`}</div>
                     </div>
-                    <img className="provider" src={item.casinoCategoryIcon} alt="" />
+                    <img className="provider w-5 sm:w-10" src={item.casinoCategoryIcon} alt="" />
                 </div>
             );
         }
         return <></>;
     };
+    //手機版RTP與大小注
+    const MobileRTPAndBetLimit = (item: TGame) => {
+        if (item.gameCategory === 'slot') {
+            return (
+                <>
+                    {/* 有RTP率才顯示否則為空 */}
+                    {item.gameRTP ? <div className="RTP text-[10px] font-bold text-white bg-[#00000080] rounded-full py-1 px-2"> RTP ${item.gameRTP}</div> : ''}
+                </>
+            );
+        }
+        if (item.gameCategory === 'casino') {
+            //判斷是否為收藏遊戲
+            return (
+                <>
+                    <div className="BetLimit text-[10px] font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${item['Bet Limit']?.KRW.max?.toLocaleString()}`}</div>
+                </>
+            );
+        }
+        return <></>;
+    };
+
     const PlayGameBtn = () => {
         return (
             <div className="flex gap-2 items-center bg-white w-28 h-10 rounded-2xl border-2 border-[#5932EA] px-6 py-2 ">
@@ -57,13 +78,16 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
             <div onClick={openGame(gameItem)} className={`editOverlay opacity-0 hover:opacity-100 hover:bg-slate-600/50 z-10 cursor-pointer absolute inset-0 w-full h-full duration-300 text-white  flex justify-center items-center`}>
                 <PlayGameBtn />
             </div>
-            <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit pt-1 px-5">
+            <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit pt-1 sm:px-5 px-2.5">
                 <OnTheTop {...gameItem} />
             </div>
             <div className="gameWrap w-full h-full relative">
                 <img src={gameItem?.gameImg} alt="" className="aspect-square w-full h-full duration-500 group-hover:scale-125 object-cover" />
-                <div className="gameInfo absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent via-50% to-[#1A1A1A80] flex items-end  px-5 py-2.5">
-                    <span className="gameName font-bold text-xl text-white">{gameItem?.gameName}</span>
+                <div className="gameInfo absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent via-50% to-[#1A1A1A80] flex flex-col items-start justify-end sm:px-5 py-2.5 px-2.5">
+                    <div className="sm:hidden">
+                        <MobileRTPAndBetLimit {...gameItem} />
+                    </div>
+                    <span className="gameName font-bold sm:text-xl text-base text-white">{gameItem?.gameName}</span>
                 </div>
             </div>
         </div>

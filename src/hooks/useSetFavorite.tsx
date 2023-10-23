@@ -1,12 +1,12 @@
 import { useGetIdentity, useUpdate } from '@refinedev/core';
 import { useSetAtom } from 'jotai';
-import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { signInAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { TGame } from '@/types/games';
 import { TMe } from '@/types';
 import { useQueryClient } from '@tanstack/react-query';
 
 export const useSetFavorite = (item: TGame) => {
-    const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
+    const setSignIn = useSetAtom(signInAtom);
     const queryClient = useQueryClient();
     const { data: user } = useGetIdentity<TMe>();
     const { mutate, isLoading } = useUpdate();
@@ -17,7 +17,7 @@ export const useSetFavorite = (item: TGame) => {
         console.log('⭐  item:', item);
 
         if (!user) {
-            setPopupIsOpen(true);
+            setSignIn(true);
             return;
         }
         const gameProviderName = item.gameProviderName;

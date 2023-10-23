@@ -4,13 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSetAtom, useAtom } from 'jotai';
 import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
-import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { signInAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { walletArray } from './walletArray';
 import { useIsLogin } from '@/hooks/resources/useIsLogin';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
-    const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
+    const setSignIn = useSetAtom(signInAtom);
     const [activeMenu, setActiveMenu] = useAtom(activeMenuAtom);
     const Navigate = useNavigate();
     const isLogin = useIsLogin();
@@ -41,7 +41,7 @@ const index: React.FC = () => {
                         Navigate('/wallet');
                         setActiveMenu(walletAction);
                     } else {
-                        setPopupIsOpen(true);
+                        setSignIn(true);
                     }
                 };
 
@@ -53,9 +53,9 @@ const index: React.FC = () => {
                         }}
                         className={`${activeMenu === wallet.label && isLogin ? 'active' : ''} ${wallet.label} relative transition-all cursor-pointer  px-6 sm:px-0 sm:rounded-2xl `}
                     >
-                        <span className="flex items-center text-sm overflow-hidden pr-2.5">
-                            <div className="favicon min-w-[60px] min-h-[60px] flex justify-center items-center" />
-                            <span className={`whitespace-nowrap text-lg font-normal`}>{t(wallet.value)}</span>
+                        <span className="flex items-center text-sm overflow-hidden sm:pr-2.5 pr-5 gap-2">
+                            <div className="favicon min-w-[44px] min-h-[44px] sm:min-w-[60px] sm:min-h-[60px] flex justify-center items-center" />
+                            <span className={`whitespace-nowrap sm:text-lg text-[10px] font-normal`}>{t(wallet.value)}</span>
                         </span>
                     </li>
                 );

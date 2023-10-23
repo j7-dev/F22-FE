@@ -1,11 +1,17 @@
 import { TGameProvider } from '@/types/games';
-import sloggameAgImg from '@/assets/images/sloggame_ag.jpg';
-import sloggameMgImg from '@/assets/images/sloggame_mg.jpg';
-import sloggamePpImg from '@/assets/images/sloggame_pp.jpg';
+import sloggameAgImg from '@/assets/images/game_provider/new_slog_ag.png';
+import sloggameMgImg from '@/assets/images/game_provider/new_slog_mg.png';
+import sloggamePpImg from '@/assets/images/game_provider/new_slog_pp.png';
+import casinoGameEvoImg from '@/assets/images/game_provider/new_casino_evo.png';
 import pragmaticplayProviderImg2 from '@/assets/images/game_provider/pragmaticplay2.png';
 import microgamingProviderImg2 from '@/assets/images/game_provider/microgaming2.png';
 import asiagamingProviderImg2 from '@/assets/images/game_provider/asiagaming2.png';
+import evolutionProviderImg2 from '@/assets/images/game_provider/evoIcon.svg';
 import slot_all_icon from '@/assets/images/game_provider/slot_all_icon.svg';
+import mgWhiteIcon from '@/assets/images/game_provider/mgWhite.svg';
+import agWhiteIcon from '@/assets/images/game_provider/agWhite.svg';
+import evoWhiteIcon from '@/assets/images/game_provider/evoWhite.svg';
+import ppWhiteIcon from '@/assets/images/game_provider/ppWhite.svg';
 
 export const providerData: TGameProvider[] = [
     {
@@ -16,8 +22,9 @@ export const providerData: TGameProvider[] = [
             providerMainImg: sloggamePpImg,
             providerSmallIcon: slot_all_icon,
             providerFavIcon: pragmaticplayProviderImg2,
+            providerWhiteIcon: ppWhiteIcon,
             providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
-            providerPath: '/pragmatic',
+            providerPath: 'pragmaticPlay',
         },
     },
     {
@@ -28,7 +35,9 @@ export const providerData: TGameProvider[] = [
             providerMainImg: sloggameMgImg,
             providerSmallIcon: slot_all_icon,
             providerFavIcon: microgamingProviderImg2,
+            providerWhiteIcon: mgWhiteIcon,
             providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
+            providerPath: 'microGaming',
         },
     },
     {
@@ -39,21 +48,22 @@ export const providerData: TGameProvider[] = [
             providerMainImg: sloggameAgImg,
             providerSmallIcon: slot_all_icon,
             providerFavIcon: asiagamingProviderImg2,
+            providerWhiteIcon: agWhiteIcon,
             providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
-            providerPath: '/asiagaming',
+            providerPath: 'asiaGaming',
         },
     },
     {
-        // 這個是測試用的
         label: 'Evolution',
         value: 'evolution',
         gameCategories: ['casino'],
         providerData: {
-            providerMainImg: sloggameAgImg,
+            providerMainImg: casinoGameEvoImg,
             providerSmallIcon: slot_all_icon,
-            providerFavIcon: asiagamingProviderImg2,
+            providerFavIcon: evolutionProviderImg2,
+            providerWhiteIcon: evoWhiteIcon,
             providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
-            providerPath: '/asiagaming',
+            providerPath: 'evolution',
         },
     },
 ];

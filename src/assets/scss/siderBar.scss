@@ -52,6 +52,16 @@
 	}
 
 	.sideBar {
+		ul {
+			li {
+				&.active {
+					background-color: #5932ea;
+				}
+				&:hover:not(.active) {
+					background-color: #c6bbee;
+				}
+			}
+		}
 		.logoFavicon {
 			background-image: $logoFavicon_s;
 		}
@@ -147,7 +157,6 @@
 				}
 				&:hover,
 				&.active {
-					background-color: #5932ea;
 					span {
 						color: #ffffff;
 					}
@@ -254,7 +263,6 @@
 				}
 				&:hover,
 				&.active {
-					background-color: #5932ea;
 					span {
 						color: #ffffff;
 					}

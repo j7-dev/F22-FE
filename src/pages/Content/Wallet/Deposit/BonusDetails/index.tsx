@@ -1,7 +1,9 @@
 import React from 'react';
 import { Form, Select } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const index: React.FC = () => {
+    const { t } = useTranslation();
     const form = Form.useFormInstance();
 
     const watchAmount = Form.useWatch(['amount'], form);
@@ -34,15 +36,15 @@ const index: React.FC = () => {
                 />
             </Form.Item>
             <div className="w-full my-4 text-center">
-                <span className=" text-2xl font-bold text-black">Bonus Details</span>
+                <span className=" text-2xl font-bold text-black">{t('Bonus Details')}</span>
             </div>
-            <div className="w-full grid sm:grid-cols-3 py-12 place-items-center bg-[#F8F9FF] grid-cols-1">
+            <div className="w-full grid sm:grid-cols-3 py-12 place-items-center rounded-2xl bg-[#F8F9FF] grid-cols-1">
                 <div className="flex flex-col w-full items-center gap-3 ">
-                    <span className="text-lg font-medium">Bonus Type</span>
+                    <span className="text-lg font-medium">{t('Bonus Type')}</span>
                     <span className="text-[#9680EA] text-4xl font-bold">{watchChosenBonus || '-'}</span>
                 </div>
                 <div className="flex flex-col w-full items-center gap-3 border-0 sm:border sm:border-y-0 border-[#C6BBEE] border-solid">
-                    <span className="text-lg font-medium">Deposit Bouns</span>
+                    <span className="text-lg font-medium">{t('Deposit Bonus')}</span>
                     {/* TODO 這邊要接正確資料 */}
                     <span className="text-[#9680EA] text-4xl font-bold">{watchChosenBonus ? '5%' : '-'}</span>
                 </div>

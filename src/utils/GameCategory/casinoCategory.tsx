@@ -1,5 +1,4 @@
 import { TCasinoCategory } from '@/types/games';
-import allImg from '@/assets/images/casino/Icon_CasinoFilter_All.svg';
 import blackjackImg from '@/assets/images/casino/Icon_CasinoFilter_Blackjack.svg';
 import rouletteImg from '@/assets/images/casino/Icon_CasinoFilter_Roulette.svg';
 import baccaratImg from '@/assets/images/casino/Icon_CasinoFilter_Baccarat.svg';
@@ -33,11 +32,6 @@ export const casinoCategoryFilter: TCasinoCategory = {
 
 //Casino 五大分類
 export const casinoCategory = [
-    {
-        img: allImg,
-        name: 'All',
-        Category: 'all',
-    },
     {
         img: baccaratImg,
         name: 'Baccarat',

@@ -6,6 +6,7 @@ import userBonusIcon from '@/assets/images/topBar/userBonus.svg';
 import { useVip } from '@/hooks/resources/useVip';
 import vipNextIcon from '@/assets/images/newMyPage/vipNextIcon.svg';
 import ConvertBtn from './ConvertBtn';
+import { AiFillStar } from 'react-icons/ai';
 
 const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
     const { t } = useTranslation();
@@ -52,15 +53,17 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                             {/* 有效投注進度條 */}
                             <div className="validBetProgress h-1/2 relative">
                                 <div style={{ width: `${validPercent}%` }} className="h-full bg-gradient-to-r from-[#D4C9FF] to-[#9680EA] rounded-tr-full" />
-                                <div className="absolute top-0 left-1/2 -translate-x-2/4 whitespace-nowrap h-full text-[10px] font-semibold text-white">
-                                    <span>{`${validUpgrade} points to next level ${currentValid}/${nextValidUpgrade}`}</span>
+                                <div className="absolute top-0 left-12 z-10 whitespace-nowrap h-full flex items-center justify-start gap-1">
+                                    <AiFillStar color="#FDD92A" size={12} />
+                                    <span className="drop-shadow-[1px_1px_1px_#00000033] text-[10px] font-semibold text-white">{`${currentValid}/${nextValidUpgrade}`}</span>
                                 </div>
                             </div>
                             {/* 存款進度條 */}
                             <div className="depositProgress h-1/2 relative">
                                 <div style={{ width: `${depositPercent}%` }} className="h-full bg-gradient-to-r from-[#D4C9FF] to-[#9680EA] rounded-br-full" />
-                                <div className="absolute top-0 left-1/2 -translate-x-2/4 whitespace-nowrap h-full text-[10px] font-semibold text-white">
-                                    <span>{`${depositUpgrade} points to next level ${currentDeposit}/${nextDepositUpgrade}`}</span>
+                                <div className="absolute top-0 left-12 z-10 whitespace-nowrap h-full flex items-center justify-start gap-1">
+                                    <AiFillStar color="#FDD92A" size={12} />
+                                    <span className="drop-shadow-[1px_1px_1px_#00000033] text-[10px] font-semibold text-white">{`${currentDeposit}/${nextDepositUpgrade}`}</span>
                                 </div>
                             </div>
                         </div>

@@ -28,6 +28,9 @@ const contentRoutes = () => {
             <Route path="/sports" element={<Sports />} />
             <Route path="/golf" element={<Golf />} />
             <Route path="/slot" element={<Slot />} />
+            {/* 使Slot可以網址帶入參數查詢相對應的provider */}
+            <Route path="/slot/:provider" element={<Slot />} />
+            <Route path="/casino/:category" element={<Casino />} />
             <Route path="/casino" element={<Casino />} />
             <Route path="/games" element={<Games />} />
             <Route path="/events" element={<Events />} />

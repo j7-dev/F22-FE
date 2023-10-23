@@ -2,19 +2,19 @@ import { useCustomMutation, useGetIdentity, useGetLocale } from '@refinedev/core
 import { useSetAtom } from 'jotai';
 import { API_URL } from '@/utils';
 import { TPopularGame } from '@/types/games/popularGames';
-import { popupIsOpenAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { signInAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { TMe } from '@/types';
 
 export const useOpenGame = () => {
     const { data: identity } = useGetIdentity<TMe>();
     const { mutate: openGame, isLoading } = useCustomMutation();
-    const setPopupIsOpen = useSetAtom(popupIsOpenAtom);
+    const setSignIn = useSetAtom(signInAtom);
     const locale = useGetLocale();
     const currentLocale = locale();
 
     const handleClick = (item: TPopularGame) => () => {
         if (!identity) {
-            setPopupIsOpen(true);
+            setSignIn(true);
             return;
         }
 

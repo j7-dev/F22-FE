@@ -88,7 +88,7 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
         }
         return (
             <List>
-                <Table {...tableProps} pagination={paginationSetting}>
+                <Table className="customTable" {...tableProps} pagination={paginationSetting}>
                     <Column
                         title={
                             <div className="flex items-center gap-1">
@@ -98,16 +98,16 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
                         }
                         dataIndex="fxnCreatedAt"
                         key="fxnCreatedAt"
-                        className="w-1/4 text-sm text-[#0F172A] font-medium"
+                        className="w-2/6 "
                     />
-                    <Column title="From" dataIndex="type" key="type" className="w-1/4 text-sm text-[#0F172A] font-medium" />
-                    <Column title="Type" dataIndex="type" key="type" className="w-1/6 text-sm text-[#0F172A] font-medium" />
-                    <Column title="Point Amount" dataIndex="amount" key="amount" className="w-1/6 text-sm text-[#0F172A] font-medium" />
+                    <Column title="From" dataIndex="type" key="type" className="w-1/6 " />
+                    <Column title="Type" dataIndex="type" key="type" className="w-1/6 " />
+                    <Column title="Point Amount" dataIndex="amount" key="amount" className="w-1/6 " />
                     <Column
                         title="Status"
                         dataIndex="status"
                         key="status"
-                        className="w-1/6 text-sm text-[#0F172A] font-medium"
+                        className="w-1/6 "
                         render={(value) => {
                             let color = '#EB5757';
                             if (value === 'PENDING') color = '#BDBDBD';

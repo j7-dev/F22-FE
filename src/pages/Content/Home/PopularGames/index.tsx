@@ -53,7 +53,7 @@ const index: React.FC = () => {
                             //第一個全部遊戲不顯示
                             if (dataIndex === 0) return;
                             return (
-                                <div key={nanoid()} onClick={handleSwitchTab(item.value)} className={`${activeTab === item.value ? 'active' : ''} ${item.value} filterTab relative rounded-2xl flex flex-col justify-center items-center aspect-square w-[50px] shadow-[0px_4px_10px_0px_#A370ED33] `}>
+                                <div key={nanoid()} onClick={handleSwitchTab(item.value)} className={`${activeTab === item.value ? 'active' : ''} ${item.value} filterTab relative rounded-2xl flex flex-col justify-center items-center aspect-square w-[60px] gap-1 shadow-[0px_4px_10px_0px_#A370ED33] `}>
                                     <div className="favicon h-[24px] w-[20px]" />
                                     <span className="text-[8px] whitespace-nowrap">{item.value}</span>
                                 </div>

@@ -203,14 +203,36 @@
 			width: 0;
 		}
 	}
-	.formWrap::-webkit-scrollbar {
-		width: 0;
-	}
 	//銀行帳戶背景圖片
 	$bankAccount: url("@/assets/images/newMyPage/BankAccountBG.svg");
 	.BankCard {
 		.BankCardBg {
 			background: $bankAccount;
+		}
+	}
+	//自訂ANTD Table 表頭行顏色
+	.customTable {
+		table {
+			font-size: 0.875rem; /* 14px */
+			line-height: 1.25rem; /* 20px */
+			font-weight: 500;
+			thead {
+				tr {
+					th {
+						color: #64748b;
+						background: #f8f9ff;
+						border-color: #e6ebf2;
+					}
+				}
+			}
+			tbody {
+				tr {
+					th {
+						color: #0f172a;
+						border-color: #e2e8f0;
+					}
+				}
+			}
 		}
 	}
 }

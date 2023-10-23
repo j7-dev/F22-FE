@@ -14,9 +14,9 @@ const index: React.FC = () => {
                 return (
                     <li key={nanoid()} onClick={() => setActiveMenu(game.value)} className={`${activeMenu === game.value ? 'active' : ''} ${game.value} relative transition-all px-6 sm:px-0 sm:rounded-2xl`}>
                         <Link to={game.path} className="text-inherit">
-                            <span className="flex items-center text-sm overflow-hidden pr-2.5">
-                                <div className="favicon min-w-[60px] min-h-[60px] flex justify-center items-center" />
-                                <span className={`whitespace-nowrap text-lg font-normal`}>{game.label}</span>
+                            <span className="flex items-center text-sm overflow-hidden sm:pr-2.5 pr-5 gap-2">
+                                <div className="favicon min-w-[44px] min-h-[44px] sm:min-w-[60px] sm:min-h-[60px] flex justify-center items-center" />
+                                <span className={`whitespace-nowrap sm:text-lg text-[10px] font-normal`}>{game.label}</span>
                             </span>
                         </Link>
                     </li>
