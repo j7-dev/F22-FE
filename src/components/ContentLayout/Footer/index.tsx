@@ -42,7 +42,7 @@ export const Footer: React.FC = () => {
                     <ul className="socialMedia md:grid-cols-4 gap-1.5 p-0 m-0 col-span-3 grid grid-cols-5">
                         {socialMedia.map((item) => {
                             return (
-                                <li key={nanoid()} className="md:aspect-auto md:h-[88px] col-span-1 aspect-square rounded-2xl cursor-pointer bg-[#BAA8FF33] duration-300 hover:shadow-[0_0px_15px_rgba(150,128,234,0.5)]">
+                                <li key={nanoid()} className="md:aspect-auto md:h-[88px] aspect-square rounded-2xl cursor-pointer bg-[#BAA8FF33] duration-300 hover:shadow-[0_0px_15px_rgba(150,128,234,0.5)]">
                                     <div className="w-full h-full flex justify-center items-center">
                                         <Link to={item.link}>
                                             <div className="flex flex-col justify-center items-center">
