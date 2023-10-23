@@ -135,7 +135,7 @@
 						background-image: $rolloverHistoryFavicon;
 					}
 				}
-				&.pointDetails {
+				&.rollingPoint {
 					.favicon {
 						background-image: $pointDetailsFavicon;
 					}
@@ -196,7 +196,7 @@
 							background-image: $rolloverHistoryFaviconWhite;
 						}
 					}
-					&.pointDetails {
+					&.rollingPoint {
 						.favicon {
 							background-image: $pointDetailsFaviconWhite;
 						}
