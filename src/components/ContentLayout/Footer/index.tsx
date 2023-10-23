@@ -75,6 +75,11 @@ export const Footer: React.FC = () => {
                                     <span className="md:text-xs text-[10px] text-[#333333] hover:underline ">{t('About Us')}</span>
                                 </Link>
                             </li>
+                            <li>
+                                <a className="md:text-xs text-[10px] text-[#333333] hover:underline " href="/assets/ipa/smt7.ipa">
+                                    IPA下載
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div className="betRuleWrap text-center md:col-span-1 md:flex md:flex-col md:gap-4 col-span-4 grid grid-cols-4">
