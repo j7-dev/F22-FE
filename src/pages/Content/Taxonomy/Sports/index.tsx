@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spin, Empty, Button } from 'antd';
 // import { useGetBtiOperatorToken } from '@/hooks/gameProvider/bti/useGetBtiOperatorToken';
-import { API_URL } from '@/utils';
+// import { API_URL } from '@/utils';
 import { useGetIdentity } from '@refinedev/core';
 import { TMe } from '@/types';
 
@@ -20,7 +20,12 @@ const index: React.FC = () => {
                     <Button>Login</Button>
                 </Empty>
             );
-        return <iframe src={`${API_URL}/api/bti/opengame/?user_id=${identity?.id} `} className="w-full h-full" />;
+        return (
+            <>
+                <iframe src={`https://prod20290-125166753.442hattrick.com/ko/korean-view?operatorToken=btitest1`} className="w-full h-full" />
+                {/* <iframe src={`${API_URL}/api/bti/opengame/?user_id=${identity?.id} `} className="w-full h-full" /> */}
+            </>
+        );
     };
 
     return (
