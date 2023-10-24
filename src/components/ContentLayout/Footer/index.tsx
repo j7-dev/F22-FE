@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
                                         <Link to={item.link}>
                                             <div className="flex flex-col justify-center items-center">
                                                 <img src={item.icon} alt="" className="md:w-[30px] w-[15px] sm:mb-2 aspect-square" />
-                                                <span className="hidden sm:block text-[#9680EA] md:text-xs text-[6px] leading-[8px] font-bold text-center">{item.value}</span>
+                                                <span className="hidden sm:block text-[#9680EA] md:text-xs text-[6px] leading-[8px] font-bold text-center">{t(item.value)}</span>
                                             </div>
                                         </Link>
                                     </div>

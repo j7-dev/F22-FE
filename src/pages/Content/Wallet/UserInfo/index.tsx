@@ -83,7 +83,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                 </div>
                 <div className="">
                     <div className="text-[#ACACAC] text-[8px] sm:text-sm font-normal">{t('Total Balance')}</div>
-                    <div className="text-[#333333] text-base sm:text-3xl font-semibold">${balance}</div>
+                    <div className="text-[#333333] text-base sm:text-3xl font-semibold">${balance.toLocaleString()}</div>
                 </div>
             </div>
             <div className="userRolling h-full col-span-1 border-0 border-solid border-[#F0F0F0] flex gap-5 items-center pr-2 sm:border-l-2 sm:px-6">
@@ -92,7 +92,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                 </div>
                 <div className="">
                     <div className="text-[#ACACAC] text-[8px] sm:text-sm font-normal">{t('Rolling Point')}</div>
-                    <div className="text-[#333333] text-base sm:text-3xl font-semibold">${turnoverBonus}</div>
+                    <div className="text-[#333333] text-base sm:text-3xl font-semibold">${turnoverBonus.toLocaleString()}</div>
                     <ConvertBtn rollingPoint={turnoverBonus as number} />
                 </div>
             </div>

@@ -35,20 +35,20 @@ const index: React.FC = () => {
                 <div className="userBalancesWrap flex justify-center items-center gap-2 px-2 py-1.5 rounded-2xl bg-[#ECE8FA]">
                     <div className="userBalance flex gap-2 items-center ">
                         <img src={userBalanceIcon} alt="" />
-                        <span>{balance}</span>
+                        <span>{balance.toLocaleString()}</span>
                     </div>
                     <div className="userBonus flex gap-2 items-center ">
                         <img src={userBonusIcon} alt="" />
-                        <span>{turnoverBonus}</span>
+                        <span>{turnoverBonus.toLocaleString()}</span>
                     </div>
                     <div className="divider h-[17px] border-r border-0 border-solid border-[#9680EA] bg-[#9680EA] " />
                     <div onClick={handleNavigate('deposit')} className="userDeposit cursor-pointer flex gap-2 items-center px-3 py-1 bg-white rounded-2xl hover:text-[#828282]">
                         <img src={userDepositIcon} alt="" />
-                        <span>{t('Deposit')}</span>
+                        <span className="whitespace-nowrap">{t('Deposit')}</span>
                     </div>
                     <div onClick={handleNavigate('withdraw')} className="userWithdraw cursor-pointer flex gap-2 items-center px-3 py-1 bg-white rounded-2xl hover:text-[#828282]">
                         <img src={userDepositIcon} alt="" />
-                        <span>{t('Withdraw')}</span>
+                        <span className="whitespace-nowrap">{t('Withdraw')}</span>
                     </div>
                 </div>
                 {/* <div onClick={handleClickToSiteNotify} className="h-10 gap-2.5 relative rounded-lg flex justify-between items-center px-2 hover:bg-[#F3F3F4] cursor-pointer">
