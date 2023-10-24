@@ -76,7 +76,7 @@ export const Footer: React.FC = () => {
                                 </Link>
                             </li>
                             <li>
-                                <a className="md:text-xs text-[10px] text-[#333333] hover:underline " href="/assets/ipa/smt7.ipa">
+                                <a className="md:text-xs text-[10px] text-[#333333] hover:underline " href="/ipa/smt7.ipa">
                                     IPA下載
                                 </a>
                             </li>
