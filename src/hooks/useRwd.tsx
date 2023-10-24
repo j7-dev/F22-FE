@@ -22,10 +22,10 @@ export const useRwd = () => {
 
     return {
         windowWidth,
-        isXl: windowWidth > 1200,
-        isLg: windowWidth > 992,
-        isMd: windowWidth > 768,
-        isSm: windowWidth > 414,
-        isXs: windowWidth > 0 && windowWidth < 414,
+        isXl: windowWidth > 1280,
+        isLg: windowWidth > 1080,
+        isMd: windowWidth > 835,
+        isSm: windowWidth > 415,
+        isXs: windowWidth > 0 && windowWidth < 415,
     };
 };

@@ -18,7 +18,7 @@ const index: React.FC<{ data: TMe }> = ({ data }) => {
                     <ChangPas />
                 </div>
                 <div className="col-span-2 sm:col-span-2">
-                    <NoteBox pageSize={3} pagination={false} />
+                    <NoteBox pageSize={3} />
                 </div>
             </div>
             <div className="grid grid-cols-2 gap-2 sm:gap-6 sm:grid-cols-1">

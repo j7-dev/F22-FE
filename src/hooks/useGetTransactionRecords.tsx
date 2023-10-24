@@ -33,7 +33,7 @@ export const useGetTransactionRecords = ({ type, userID, pageSize = 10 }: { type
             ],
         },
         pagination: {
-            mode: 'server', //要怎麼設定成server端分頁同時又出現分頁
+            mode: 'server',
             pageSize: pageSize,
         },
     });
