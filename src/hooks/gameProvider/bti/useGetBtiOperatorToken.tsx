@@ -2,16 +2,24 @@ import { useCustom, useGetIdentity } from '@refinedev/core';
 import { TMe } from '@/types';
 import { API_URL } from '@/utils';
 
+/**
+ * 取得BTI遊戲商的token
+ * 返回identity, data, isFetching
+ */
 export const useGetBtiOperatorToken = () => {
-    const { data: user } = useGetIdentity<TMe>();
+    const { data: identity } = useGetIdentity<TMe>();
     const { data, isFetching } = useCustom({
-        url: `${API_URL}/api/bti-token-infos/${user?.id}`,
+        url: `${API_URL}/api/bti/token-info`,
         method: 'get',
+        config: {
+            query: {
+                user_id: identity?.id,
+            },
+        },
         queryOptions: {
-            enabled: !!user?.id,
+            enabled: !!identity?.id,
         },
     });
-    console.log('🚀 ~ data:', data);
 
-    return { data, isFetching };
+    return { identity, data, isFetching };
 };
