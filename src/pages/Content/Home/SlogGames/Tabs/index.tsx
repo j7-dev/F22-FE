@@ -6,7 +6,9 @@ import { nanoid } from 'nanoid';
 import { TGameProvider, TProviderData } from '@/types/games';
 import { useNavigate } from 'react-router-dom';
 
-//FIXME 這邊只要套用LazyLoadImage 組件就會閃跳
+/**
+ * 已棄用
+ */
 //單個文章版型
 const TabPaneList = (props: { taxonomy: TGameProvider }) => {
     const { taxonomy } = props;
