@@ -40,7 +40,7 @@ const NavBar = forwardRef<HTMLDivElement>((props, ref: ForwardedRef<HTMLDivEleme
 
     return (
         <div {...otherProps} ref={ref} className="Navbar z-[999] fixed p-4 w-full h-fit bg-white md:flex md:items-center md:justify-between md:px-6 md:py-4 md:h-full md:relative shadow-[0_4px_4px_0px_#A370ED33]">
-            <nav className="relative w-full h-full xl:flex md:items-center xl:justify-between py-0 xl:mx-auto " aria-label="Global">
+            <nav className="relative w-full h-fit xl:flex md:items-center xl:justify-between py-0 xl:mx-auto " aria-label="Global">
                 <ShowNav />
                 <SingIn />
                 <SingUp />
