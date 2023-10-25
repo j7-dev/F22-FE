@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSetAtom } from 'jotai';
 import { signInAtom } from '../LoginModule';
@@ -9,9 +9,14 @@ import { useIsLogin } from '@/hooks/resources/useIsLogin';
 import { useShowPc } from '@/hooks/useShowPc';
 import SingIn from '../LoginPopUp/Login';
 import SingUp from '../LoginPopUp/SignUp';
-
+import ForwardedRef = React.ForwardedRef;
+/**
+ * Header的NavBar子組件
+ * 使用forwardRef將高度傳給父組件Header
+ */
 //TODO 需要找時間整理一下NavBar 與Mobile的組件,統一下Atom
-const NavBar: React.FC = () => {
+const NavBar = forwardRef<HTMLDivElement>((props, ref: ForwardedRef<HTMLDivElement>) => {
+    const { ...otherProps } = props;
     const showPc = useShowPc();
     const setSignIn = useSetAtom(signInAtom);
     const setSection = useSetAtom(activeMenuAtom);
@@ -33,8 +38,8 @@ const NavBar: React.FC = () => {
     };
 
     return (
-        <div className="Navbar z-[999] fixed p-4 w-full h-fit bg-white md:flex md:items-center md:justify-between md:px-6 md:py-4 md:h-full md:relative shadow-[0_4px_4px_0px_#A370ED33]">
-            <nav className="relative w-full h-full py-3 xl:flex md:items-center xl:justify-between md:py-0  xl:mx-auto " aria-label="Global">
+        <div {...otherProps} ref={ref} className="Navbar z-[999] fixed p-4 w-full h-fit bg-white md:flex md:items-center md:justify-between md:px-6 md:py-4 md:h-full md:relative shadow-[0_4px_4px_0px_#A370ED33]">
+            <nav className="relative w-full h-full xl:flex md:items-center xl:justify-between py-0 xl:mx-auto " aria-label="Global">
                 <ShowNav />
                 <SingIn />
                 <SingUp />
@@ -67,6 +72,6 @@ const NavBar: React.FC = () => {
             </nav>
         </div>
     );
-};
+});
 
 export default NavBar;
