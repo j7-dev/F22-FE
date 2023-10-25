@@ -45,7 +45,7 @@ const Mobile: React.FC<{
     };
 
     return (
-        <div className="mbMenu w-full h-full relative z-50 flex items-center justify-between md:hidden">
+        <div className="mbMenu w-full h-fit relative z-50 flex items-center justify-between md:hidden">
             <div className="phoneMenu w-[30px] h-[30px]">
                 <MenuBtn />
             </div>

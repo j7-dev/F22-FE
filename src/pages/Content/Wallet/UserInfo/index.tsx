@@ -43,7 +43,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                     <span className="text-sm text-[#ACACAC] font-normal sm:ml-2">{userPhone}</span>
                 </div>
                 {/* VIP進度條 */}
-                <div className="relative p-0.5 w-full h-12 bg-gradient-to-r from-[#9680EA33] to-[#BAA8FF33] rounded-full sm:w-5/6">
+                <div className="relative p-0.5 w-full h-[22px] sm:h-[34px] bg-gradient-to-r from-[#9680EA33] to-[#BAA8FF33] rounded-full sm:w-5/6">
                     <div className="relative w-full h-full">
                         {/* 當前等級 */}
                         <div className="currentVip absolute z-10 left-0 h-full flex justify-center items-center aspect-square bg-[#9680EA] text-white text-base font-semibold rounded-full">
@@ -55,7 +55,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                                 <div style={{ width: `${validPercent}%` }} className="h-full bg-gradient-to-r from-[#D4C9FF] to-[#9680EA] rounded-tr-full" />
                                 <div className="absolute top-0 left-12 z-10 whitespace-nowrap h-full flex items-center justify-start gap-1">
                                     <AiFillStar color="#FDD92A" size={12} />
-                                    <span className="drop-shadow-[1px_1px_1px_#00000033] text-[10px] font-semibold text-white">{`${currentValid}/${nextValidUpgrade}`}</span>
+                                    <span className="drop-shadow-[1px_1px_1px_#00000033] text-[6px] sm:text-[10px] font-semibold text-white">{`${currentValid}/${nextValidUpgrade}`}</span>
                                 </div>
                             </div>
                             {/* 存款進度條 */}
@@ -63,14 +63,14 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                                 <div style={{ width: `${depositPercent}%` }} className="h-full bg-gradient-to-r from-[#D4C9FF] to-[#9680EA] rounded-br-full" />
                                 <div className="absolute top-0 left-12 z-10 whitespace-nowrap h-full flex items-center justify-start gap-1">
                                     <AiFillStar color="#FDD92A" size={12} />
-                                    <span className="drop-shadow-[1px_1px_1px_#00000033] text-[10px] font-semibold text-white">{`${currentDeposit}/${nextDepositUpgrade}`}</span>
+                                    <span className="drop-shadow-[1px_1px_1px_#00000033] text-[6px] sm:text-[10px] font-semibold text-white">{`${currentDeposit}/${nextDepositUpgrade}`}</span>
                                 </div>
                             </div>
                         </div>
                         {/* 下一等級 */}
                         <div className="nextVip absolute z-10 right-0 bottom-0 h-full flex justify-center items-center aspect-square bg-[#FFB930] text-white text-base font-semibold rounded-full">
                             <div className="relative">
-                                <img src={vipNextIcon} alt="" className="absolute -top-6 left-1/2 -translate-x-2/4 w-6" />
+                                <img src={vipNextIcon} alt="" className="absolute -top-2 sm:-top-3 left-1/2 -translate-x-2/4 w-4" />
                                 {(nextVip?.order as number) + 1}
                             </div>
                         </div>

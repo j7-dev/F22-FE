@@ -10,11 +10,12 @@ import { useShowPc } from '@/hooks/useShowPc';
 import SingIn from '../LoginPopUp/Login';
 import SingUp from '../LoginPopUp/SignUp';
 import ForwardedRef = React.ForwardedRef;
+
+//TODO 需要找時間整理一下NavBar 與Mobile的組件,統一下Atom
 /**
  * Header的NavBar子組件
  * 使用forwardRef將高度傳給父組件Header
  */
-//TODO 需要找時間整理一下NavBar 與Mobile的組件,統一下Atom
 const NavBar = forwardRef<HTMLDivElement>((props, ref: ForwardedRef<HTMLDivElement>) => {
     const { ...otherProps } = props;
     const showPc = useShowPc();

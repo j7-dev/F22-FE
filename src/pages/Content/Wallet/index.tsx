@@ -32,7 +32,7 @@ const Wallet: React.FC = () => {
     }, [activeMenu]);
     return (
         <Authenticated>
-            <div className="wallet px-4 my-8 sm:my-9 sm:w-full">
+            <div className="wallet px-4 my-6 sm:my-9 sm:w-full">
                 <Spin spinning={isLoading}>
                     <ShowSection />
                 </Spin>
