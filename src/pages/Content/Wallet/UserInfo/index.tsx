@@ -37,7 +37,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
 
     return (
         <div className="userInfo bg-white rounded-2xl grid grid-cols-2 gap-2.5 pb-3 sm:gap-6 sm:p-[30px] sm:grid-cols-4 shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
-            <div className="userName flex flex-col gap-4 col-span-2 sm:col-span-2  sm:p-0 px-4 pt-4">
+            <div className="userName h-fit flex flex-col gap-4 col-span-2 sm:col-span-2  sm:p-0 px-4 pt-4">
                 <div className="flex flex-col sm:flex-row sm:items-end text-3xl font-bold text-[#5932EA]">
                     {userName}
                     <span className="text-sm text-[#ACACAC] font-normal sm:ml-2">{userPhone}</span>
@@ -77,7 +77,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                     </div>
                 </div>
             </div>
-            <div className="userBalance h-full col-span-1 border-0 border-solid border-[#F0F0F0] flex gap-5 items-center pl-2 sm:border-l-2 sm:px-6 sm:-ml-4">
+            <div className="userBalance h-fit col-span-1 border-0 border-solid border-[#F0F0F0] flex gap-5 items-center pl-2 sm:border-l-2 sm:px-6 sm:-ml-4">
                 <div className="aspect-square p-3 sm:p-6 bg-gradient-to-r from-[#E7C9FF00] to-[#D4C9FFA3] rounded-full">
                     <img src={userBalanceIcon} alt="" className="w-5 sm:w-[30px] h-full" />
                 </div>
@@ -86,7 +86,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                     <div className="text-[#333333] text-base sm:text-3xl font-semibold">${balance.toLocaleString()}</div>
                 </div>
             </div>
-            <div className="userRolling h-full col-span-1 border-0 border-solid border-[#F0F0F0] flex gap-5 items-center pr-2 sm:border-l-2 sm:px-6">
+            <div className="userRolling h-fit col-span-1 border-0 border-solid border-[#F0F0F0] flex gap-5 items-center pr-2 sm:border-l-2 sm:px-6">
                 <div className="aspect-square p-3 sm:p-6 bg-gradient-to-r from-[#E7C9FF00] to-[#D4C9FFA3] rounded-full">
                     <img src={userBonusIcon} alt="" className="w-5 sm:w-[30px] h-full" />
                 </div>
