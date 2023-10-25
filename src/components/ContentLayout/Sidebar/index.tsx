@@ -53,7 +53,7 @@ export const Sidebar: React.FC = () => {
     }, []);
 
     return (
-        <div onClick={handleCloseMbSidebar} ref={sidebarRef} className={`${mbSidebar ? 'active' : 'w-0'} sideBar text-[#828282] h-full bg-white pb-10 md:w-full sm:shadow-none shadow-[2px_0px_20px_0px_rgba(163,112,237,0.25)] duration-300`}>
+        <div onClick={handleCloseMbSidebar} ref={sidebarRef} className={`${mbSidebar ? 'active' : 'w-0'} sideBar text-[#828282] h-full bg-white sm:pb-10 pb-20 md:w-full sm:shadow-none shadow-[2px_0px_20px_0px_rgba(163,112,237,0.25)] duration-300`}>
             <div className="opacity-0 w-full logo h-20 flex justify-center items-center mb-6 sm:mb-9 sm:opacity-100 ">
                 <Link to="/" className="w-full">
                     <div className="relative w-full block h-12 px-[14px]">

@@ -47,7 +47,7 @@ const index: React.FC = () => {
         return (
             //手機版
             <>
-                <div className="filterBarMb py-4 overflow-x-scroll">
+                <div className="filterBarMb pb-4 overflow-x-scroll">
                     <div className="flex gap-2.5 w-fit px-4">
                         {PopularGamesData.map((item: TPopularGames, dataIndex: number) => {
                             //第一個全部遊戲不顯示
