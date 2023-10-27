@@ -76,7 +76,8 @@ export const Footer: React.FC = () => {
                                 </Link>
                             </li>
                             <li>
-                                <a className="md:text-xs text-[10px] text-[#333333] hover:underline " href="/ipa/smt7.ipa">
+                                {/* TODO 未來這邊網域要改成env變數 */}
+                                <a href="itms-services://?action=download-manifest&url=https://f22-fe.vercel.app/ipa/app.plist" className="md:text-xs text-[10px] text-[#333333] hover:underline ">
                                     IPA下載
                                 </a>
                             </li>
