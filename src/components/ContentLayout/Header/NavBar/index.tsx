@@ -1,20 +1,14 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import Mobile from './Mobile';
 import Pc from './Pc';
 import { useIsLogin } from '@/hooks/resources/useIsLogin';
 import { useShowPc } from '@/hooks/useShowPc';
 import SingIn from '../LoginPopUp/Login';
 import SingUp from '../LoginPopUp/SignUp';
-import ForwardedRef = React.ForwardedRef;
 
 //TODO 需要找時間整理一下NavBar 與Mobile的組件,統一下Atom
-/**
- * Header的NavBar子組件
- * 使用forwardRef將高度傳給父組件Header
- * 在這邊使用fixed固定在畫面上方
- */
-const NavBar = forwardRef<HTMLDivElement>((props, ref: ForwardedRef<HTMLDivElement>) => {
-    const { ...otherProps } = props;
+
+const NavBar: React.FC = () => {
     const showPc = useShowPc();
     const isLogin = useIsLogin();
 
@@ -24,13 +18,12 @@ const NavBar = forwardRef<HTMLDivElement>((props, ref: ForwardedRef<HTMLDivEleme
         else return <Mobile isLogin={isLogin} />;
     };
     return (
-        <div {...otherProps} ref={ref} className="Navbar z-[999] fixed p-4 w-full h-fit bg-white md:flex md:items-center md:justify-between md:px-6 md:py-4 md:h-full md:relative shadow-[0_4px_4px_0px_#A370ED33]">
-            <nav className="relative w-full h-fit xl:flex md:items-center xl:justify-between py-0 xl:mx-auto " aria-label="Global">
-                <ShowNav />
-                <SingIn />
-                <SingUp />
-                {/* 舊手機選單 */}
-                {/* <div className="flex md:hidden bg-white fixed bottom-0 left-0 justify-between w-full px-8 pt-3 pb-2 z-50" style={{ borderTop: '1px solid #999' }}>
+        <div className="Navbar p-4 w-full h-fit bg-white md:flex md:items-center md:justify-between md:px-6 md:py-4 relative">
+            <ShowNav />
+            <SingIn />
+            <SingUp />
+            {/* 舊手機選單 */}
+            {/* <div className="flex md:hidden bg-white fixed bottom-0 left-0 justify-between w-full px-8 pt-3 pb-2 z-50" style={{ borderTop: '1px solid #999' }}>
                     <Link to="/">
                         <div className="flex flex-col justify-center items-center text-gray-600 hover:text-gray-400">
                             <GiPokerHand className="text-[1.5rem]" />
@@ -55,9 +48,8 @@ const NavBar = forwardRef<HTMLDivElement>((props, ref: ForwardedRef<HTMLDivEleme
                         <span className="text-xs font-normal">Profile</span>
                     </div>
                 </div> */}
-            </nav>
         </div>
     );
-});
+};
 
 export default NavBar;
