@@ -48,7 +48,7 @@ function App() {
                             resources={resources}
                             options={{
                                 syncWithLocation: false,
-                                warnWhenUnsavedChanges: true,
+                                warnWhenUnsavedChanges: false,
                                 disableTelemetry: true,
                                 projectId: 'DFwDAg-3y0BW1-GbOkSm',
                                 reactQuery: {

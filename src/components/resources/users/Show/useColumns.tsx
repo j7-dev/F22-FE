@@ -92,11 +92,6 @@ const useColumns = () => {
     const infoRightColumns = [
         ...allBalances,
         {
-            key: 'email',
-            title: 'Email',
-            dataIndex: 'email',
-        },
-        {
             key: 'display_name',
             title: 'Display Name',
             dataIndex: 'display_name',

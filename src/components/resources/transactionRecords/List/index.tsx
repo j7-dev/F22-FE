@@ -233,7 +233,7 @@ const index = () => {
                                 );
                             }}
                             expandable={{
-                                expandedRowRender: (record) => <UserSummary user_id={record?.user?.id} />,
+                                expandedRowRender: (record) => <UserSummary user={record?.user} />,
                                 rowExpandable: (record) => record.type === 'WITHDRAW',
                             }}
                         />

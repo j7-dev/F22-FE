@@ -3,11 +3,15 @@ import Amount from '@/components/Admin/Amount';
 import { useGetSiteSetting } from '@/hooks';
 import dayjs from 'dayjs';
 import { useList, useCustom, useApiUrl } from '@refinedev/core';
-import { TBetRecord, TTransaction } from '@/types';
-import { Table } from 'antd';
+import { TBetRecord, TTransaction, TUser } from '@/types';
+import { Table, Button, Modal } from 'antd';
 import useColumns from './useColumns';
+import { ExportOutlined } from '@ant-design/icons';
+import { useModal } from '@refinedev/antd';
+import BetRecordTable from '@/components/Admin/BetRecordTable';
 
-const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }) => {
+const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
+    const user_id = user?.id;
     const siteSetting = useGetSiteSetting();
     const support_game_providers = siteSetting?.support_game_providers || [];
     const { data } = useList({
@@ -48,7 +52,7 @@ const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }
             query: {
                 user_id,
                 startTime: latestDeposit?.createdAt,
-                pageSize: 1000,
+                pageSize: 10, // TODO
             },
         },
     });
@@ -83,7 +87,11 @@ const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }
         };
     });
 
+    const filteredDataSource = dataSource.filter((d) => d.txnAmount !== 0 || d.validBetAmount !== 0 || d.winLoss !== 0 || d.payOut !== 0);
+
     const columns = useColumns();
+
+    const { modalProps, show } = useModal();
 
     return (
         <div>
@@ -95,6 +103,10 @@ const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }
                     <p>
                         Date: from <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD')}</u> to <u>{dayjs().format('YYYY-MM-DD')}</u>
                     </p>
+                    <Button type="primary" onClick={() => show()}>
+                        Betting Records
+                        <ExportOutlined className="ml-2" />
+                    </Button>
                 </div>
             ) : (
                 'This user has no deposit record'
@@ -102,7 +114,7 @@ const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }
             <Table
                 loading={txnsIsLoading}
                 size="small"
-                dataSource={dataSource}
+                dataSource={filteredDataSource}
                 columns={columns}
                 summary={(pageData) => {
                     const totalTxnAmount = pageData.reduce((acc: number, cur) => acc + cur.txnAmount, 0);
@@ -129,6 +141,18 @@ const index: React.FC<{ user_id: number | undefined }> = React.memo(({ user_id }
                     );
                 }}
             />
+            <Modal
+                {...modalProps}
+                centered
+                width={1200}
+                title={
+                    <>
+                        <u>{user?.display_name}</u> bet records from <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD')}</u> to <u>{dayjs().format('YYYY-MM-DD')}</u>
+                    </>
+                }
+            >
+                <BetRecordTable user_id={user_id} />
+            </Modal>
         </div>
     );
 });
