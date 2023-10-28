@@ -1,8 +1,4 @@
 import React, { forwardRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSetAtom } from 'jotai';
-import { signInAtom } from '../LoginModule';
-import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 import Mobile from './Mobile';
 import Pc from './Pc';
 import { useIsLogin } from '@/hooks/resources/useIsLogin';
@@ -15,29 +11,18 @@ import ForwardedRef = React.ForwardedRef;
 /**
  * Header的NavBar子組件
  * 使用forwardRef將高度傳給父組件Header
+ * 在這邊使用fixed固定在畫面上方
  */
 const NavBar = forwardRef<HTMLDivElement>((props, ref: ForwardedRef<HTMLDivElement>) => {
     const { ...otherProps } = props;
     const showPc = useShowPc();
-    const setSignIn = useSetAtom(signInAtom);
-    const setSection = useSetAtom(activeMenuAtom);
     const isLogin = useIsLogin();
-    const Navigate = useNavigate();
 
-    const handleProfile = () => {
-        if (isLogin) {
-            Navigate('/wallet');
-            setSection('myPage');
-        } else {
-            setSignIn(true);
-        }
-    };
     //選擇顯示的選單
     const ShowNav = () => {
         if (showPc) return <Pc isLogin={isLogin} />;
-        else return <Mobile handleProfile={handleProfile} isLogin={isLogin} />;
+        else return <Mobile isLogin={isLogin} />;
     };
-
     return (
         <div {...otherProps} ref={ref} className="Navbar z-[999] fixed p-4 w-full h-fit bg-white md:flex md:items-center md:justify-between md:px-6 md:py-4 md:h-full md:relative shadow-[0_4px_4px_0px_#A370ED33]">
             <nav className="relative w-full h-fit xl:flex md:items-center xl:justify-between py-0 xl:mx-auto " aria-label="Global">
