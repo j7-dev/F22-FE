@@ -8,7 +8,7 @@ const index: React.FC<{
     formItemProps?: FormItemProps;
     inputNumberProps?: InputNumberProps;
     quickButtonProps?: {
-        symbol: string;
+        symbol?: string;
         className?: string;
         buttonProps?: ButtonProps;
         closeButtonIcon?: React.ReactNode;

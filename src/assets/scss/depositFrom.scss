@@ -1,18 +1,19 @@
 /*自訂depositAmount Css */
 .f22-content {
 	.depositAmount {
+		//手機版及通用
 		.ant-form-item-control-input-content {
 			width: 100%;
 			display: flex;
 			justify-content: end;
-			height: 150px;
-			border-radius: 16px;
+			height: 120px;
+			border-radius: 8px;
 			background-color: #f8f9ff;
 			padding: 15px 30px;
 			.ant-input-number-affix-wrapper {
 				width: 100%;
 				.ant-input-number-prefix {
-					font-size: 50px;
+					font-size: 30px;
 					color: #c6bbee;
 					font-weight: 600;
 				}
@@ -22,9 +23,29 @@
 						height: 100%;
 						input {
 							color: #9680ea;
-							font-size: 80px;
+							font-size: 40px;
 							font-weight: 700;
 							text-align: right;
+							height: 100%;
+						}
+					}
+				}
+			}
+		}
+		//電腦版
+		@media (min-width: 415px) {
+			height: 150px;
+			border-radius: 16px;
+			.ant-form-item-control-input-content {
+				.ant-input-number-affix-wrapper {
+					.ant-input-number-prefix {
+						font-size: 50px;
+					}
+					.ant-input-number {
+						.ant-input-number-input-wrap {
+							input {
+								font-size: 80px;
+							}
 						}
 					}
 				}
@@ -33,8 +54,8 @@
 	}
 	.depositChosenBonus {
 		width: 100%;
-		height: 60px;
-		border-radius: 16px;
+		height: 36px;
+		border-radius: 8px;
 		border: 1px solid #9680ea;
 		.ant-select-selector {
 			padding: 0 32px;
@@ -44,6 +65,11 @@
 				font-weight: 500;
 				color: #9680ea;
 			}
+		}
+		//電腦版
+		@media (min-width: 415px) {
+			height: 60px;
+			border-radius: 16px;
 		}
 	}
 }
