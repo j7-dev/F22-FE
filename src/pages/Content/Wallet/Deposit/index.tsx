@@ -160,9 +160,13 @@ const index: React.FC = () => {
                     /> */}
                 </Form>
             </div>
-            <Button onClick={handleClick} disabled={isDisabled} type="primary" className={`${isDisabled ? 'bg-[#BDBDBD]' : ''} w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold`}>
-                {t('Deposit')}
-            </Button>
+            <div className="grid grid-cols-2 sm:gap-4 gap-2">
+                <Button className="col-span-1 w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold text-[#9680EA] bg-[#F8F9FF] border-[#9680EA] hover:text-white hover:bg-[#9680EA]">{t('Codepay')}</Button>
+                <Button className="col-span-1 w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold text-[#9680EA] bg-[#F8F9FF] border-[#9680EA] hover:text-white hover:bg-[#9680EA]">{t('Transfer')}</Button>
+                <Button onClick={handleClick} disabled={isDisabled} type="primary" className={`${isDisabled ? 'bg-[#BDBDBD]' : ''} col-span-2 w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold`}>
+                    {t('Deposit')}
+                </Button>
+            </div>
             <Modal {...modalProps} centered footer={null} maskClosable={false} closeIcon={<AiFillCloseCircle color="#BDBDBD" size={30} />} confirmLoading={isLoading} width={330}>
                 <div className="grid grid-cols-1 gap-x-6 px-3">
                     <div className="col-span-1 my-8">

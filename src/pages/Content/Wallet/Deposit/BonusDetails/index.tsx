@@ -25,7 +25,7 @@ const index: React.FC = () => {
                 <Select
                     bordered={false}
                     className="depositChosenBonus"
-                    placeholder="Select Deposit Bonus"
+                    placeholder={t('Select Deposit Bonus')}
                     options={[
                         { value: 'Casino', label: 'Casino' }, //FIXME 有沒有辦法Value首字為小寫，但是watchChosenBonus取得是取label
                         { value: 'Sports', label: 'Sports' },
@@ -49,7 +49,7 @@ const index: React.FC = () => {
                     <span className="text-[#9680EA] text-base sm:text-4xl font-bold">{watchChosenBonus ? '5%' : '-'}</span>
                 </div>
                 <div className="flex flex-col w-full items-center gap-3 ">
-                    <span className="text-[8px] sm:text-lg font-medium">Rolling Percent into</span>
+                    <span className="text-[8px] sm:text-lg font-medium">{t('Rolling Percent into')}</span>
                     {/* TODO 這邊要接正確資料 */}
                     <span className="text-[#9680EA] text-base sm:text-4xl font-bold">{watchChosenBonus ? '300%' : '-'}</span>
                 </div>

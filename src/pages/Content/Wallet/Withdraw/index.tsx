@@ -3,11 +3,11 @@ import { Button, Form, Input, notification } from 'antd';
 import { useTranslation } from 'react-i18next';
 import QuickAmountInput from '@/components/form/QuickAmountInput';
 import { useCustomMutation, useGetIdentity, useApiUrl } from '@refinedev/core';
-import { TMe } from '@/types';
+import { TMe, TUser } from '@/types';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { useGetSiteSetting } from '@/hooks';
 
-const index: React.FC = () => {
+const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
     const { t } = useTranslation();
     const [form] = Form.useForm();
     const [isDisabled, setIsDisabled] = useState(true);
@@ -44,6 +44,9 @@ const index: React.FC = () => {
 
     const { default_currency } = useGetSiteSetting();
     const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
+    //取得用戶餘額
+    const balance = userInfo?.balances !== undefined ? userInfo?.balances.filter((item) => item.currency === default_currency && item.amount_type === 'CASH')[0].amount || 0 : 0;
+
     //監聽Form的值，都填寫完畢後，使Button可以點擊
     const values = Form.useWatch([], form);
     useEffect(() => {
@@ -64,9 +67,12 @@ const index: React.FC = () => {
             <div className="min-h-[180px]">
                 <span className="text-black font-bold text-2xl">{t('Withdraw')}</span>
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical" className="w-full">
+                    <div className="flex justify-between my-2 w-full">
+                        <span className="text-sm text-[#828282] font-medium">{t('Amount to transfer')}</span>
+                        <span className="text-sm text-[#828282] font-medium">餘額:{balance.toLocaleString()}/可提領額度:0</span>
+                    </div>
                     <QuickAmountInput
                         formItemProps={{
-                            label: <span className="mt-1 text-sm text-[#828282] font-medium">{t('Amount to transfer')}</span>,
                             name: ['amount'],
                             rules: [
                                 {

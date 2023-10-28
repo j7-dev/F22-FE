@@ -7,12 +7,16 @@ import { useVip } from '@/hooks/resources/useVip';
 import vipNextIcon from '@/assets/images/newMyPage/vipNextIcon.svg';
 import ConvertBtn from './ConvertBtn';
 import { AiFillStar } from 'react-icons/ai';
+import { useGetSiteSetting } from '@/hooks';
 
 const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
     const { t } = useTranslation();
+
+    const { default_currency } = useGetSiteSetting();
+
     //取得用戶資料
-    const balance = userInfo?.balances !== undefined ? userInfo?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'CASH')[0].amount || 0 : 0;
-    const turnoverBonus = userInfo?.balances !== undefined ? userInfo?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'TURNOVER_BONUS')[0].amount || 0 : 0;
+    const balance = userInfo?.balances !== undefined ? userInfo?.balances.filter((item) => item.currency === default_currency && item.amount_type === 'CASH')[0].amount || 0 : 0;
+    const turnoverBonus = userInfo?.balances !== undefined ? userInfo?.balances.filter((item) => item.currency === default_currency && item.amount_type === 'TURNOVER_BONUS')[0].amount || 0 : 0;
     const userName = userInfo?.username || 'userName';
     const userPhone = userInfo?.phone || 'No phone';
     //取得VIP資料

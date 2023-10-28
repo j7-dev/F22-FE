@@ -5,7 +5,6 @@ import { useOpenGame } from '@/hooks/gameProvider/useOpenGame';
 import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTableList';
 // import { getRandomIndexes } from '@/hooks/gameProvider/getRandomIndexes';
 import { gameCategories } from '@/utils/GameCategory';
-import igxImg from '@/assets/images/game_provider/igx_icon.png';
 import { sampleSize } from 'lodash-es';
 import { TGameCategory } from '@/types/games/gameCategory';
 
@@ -28,19 +27,9 @@ export const useGetPopularGames = () => {
     //只取得Live Casino 18款遊戲資料
     const liveGamesData = isLoading ? [] : (evoData || []).slice(0, 16);
 
-    //重組一個假的Golf遊戲資料
-    const golfGamesData = [
-        {
-            gameID: 'Golf',
-            gameImg: igxImg,
-            gameProviderName: 'Golf',
-            gameCategory: 'golf',
-        },
-    ];
-
     //重組所有遊戲資料
     const allGamesArray = useMemo(() => {
-        return isLoading ? [] : [...liveGamesData, ...slotGames, ...golfGamesData];
+        return isLoading ? [] : [...liveGamesData, ...slotGames];
     }, [isLoading]);
     // console.log('🚀  allGamesArray:', allGamesArray);
 

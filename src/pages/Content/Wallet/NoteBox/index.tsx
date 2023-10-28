@@ -29,7 +29,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
         show();
     };
     //取得資料
-    const { tableProps, dataCount } = useGetNoteBox();
+    const { tableProps } = useGetNoteBox();
     //轉換資料加上日期格式
     const fxnData =
         tableProps?.dataSource?.map((item) => {
@@ -88,7 +88,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
         <div className="bg-white h-full w-full py-6 px-4 gap-3 userBank flex flex-col rounded-2xl sm:py-[42px] sm:px-[32px] sm:gap-4 shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
             <div className="flex gap-2">
                 <span className="text-black font-bold sm:text-2xl text-sm">{t('Note Box')}</span>
-                <div className="flex justify-center items-center rounded-full bg-[#EB5757] aspect-square w-[30px] text-xl text-white font-bold">{dataCount}</div>
+                {/* <div className="flex justify-center items-center rounded-full bg-[#EB5757] aspect-square w-[30px] text-xl text-white font-bold">{dataCount}</div> */}
                 <ShowBtn />
             </div>
             <Table {...tableProps} className="customTable" pagination={paginationSetting}>
