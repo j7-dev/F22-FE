@@ -3,11 +3,12 @@ import { keyToWord } from '@/utils';
 
 const index = ({ bank_account }: { bank_account: TBankAccount | null }) => {
     if (!bank_account) return <></>;
+    const exclude_keys = ['id', 'createdAt', 'updatedAt', 'label', 'bank_code'];
 
     return (
         <div>
             {Object.keys(bank_account)
-                .filter((key) => !!bank_account?.[key as keyof typeof bank_account] && key !== 'id' && key !== 'createdAt' && key !== 'updatedAt' && key !== 'label')
+                .filter((key) => !!bank_account?.[key as keyof typeof bank_account] && !exclude_keys.includes(key))
                 .map((key) => {
                     return (
                         <p key={key} className="m-0">

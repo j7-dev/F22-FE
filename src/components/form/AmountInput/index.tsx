@@ -35,7 +35,7 @@ const index: React.FC<{
         <Space.Compact block className="w-full">
             {!hide && (
                 <Form.Item className="w-full" label={label} name={name} rules={[{ required: true, message: 'amount is required' }]}>
-                    <InputNumber min={0} precision={0} className="w-full relative -top-[1px]" />
+                    <InputNumber precision={0} className="w-full relative -top-[1px]" />
                 </Form.Item>
             )}
 

@@ -1,4 +1,4 @@
-import { Card, Tabs, TabsProps, Collapse } from 'antd';
+import { Card, Tabs, TabsProps } from 'antd';
 import { Show } from '@refinedev/antd';
 import { useCan } from '@/hooks';
 import { useShow, useResource } from '@refinedev/core';
@@ -50,7 +50,23 @@ const index = () => {
         ...dpWdUserInfo,
     };
 
+    const { infoLeftColumns, infoRightColumns } = useColumns();
+
     const items: TabsProps['items'] = [
+        {
+            key: 'userInfo',
+            label: 'User Info',
+            children: (
+                <div>
+                    <Card bordered={false} title="Info">
+                        <div className="grid grid-cols-2 xl:grid-cols-2 gap-6">
+                            <ObjectTable record={userData} columns={infoLeftColumns} />
+                            <ObjectTable record={userData} columns={infoRightColumns} />
+                        </div>
+                    </Card>
+                </div>
+            ),
+        },
         {
             key: 'moneyLog',
             label: 'Money Log',
@@ -98,8 +114,6 @@ const index = () => {
         },
     ];
 
-    const { infoLeftColumns, infoRightColumns } = useColumns();
-
     return (
         <>
             <Show
@@ -117,46 +131,30 @@ const index = () => {
                     },
                 }}
             >
-                <div>
-                    <Card bordered={false} title="Info">
-                        <div className="grid grid-cols-2 xl:grid-cols-2 gap-6">
-                            <ObjectTable record={userData} columns={infoLeftColumns} />
-                            <ObjectTable record={userData} columns={infoRightColumns} />
-                        </div>
-                    </Card>
-                </div>
-
-                <Collapse
+                <Card
+                    className="mb-8"
                     bordered={false}
-                    className="bg-white my-12"
-                    items={[
-                        {
-                            key: 'balanceAdjustment',
-                            label: (
-                                <span className="font-semibold text-base relative -top-0.5">
-                                    <DollarOutlined className="mr-2" />
-                                    Balance Adjustment
-                                </span>
-                            ),
-                            children: (
-                                <Create
-                                    title={<></>}
-                                    goBack={<></>}
-                                    breadcrumb={null}
-                                    contentProps={{
-                                        style: {
-                                            boxShadow: 'none',
-                                            padding: '0rem',
-                                        },
-                                    }}
-                                />
-                            ),
-                        },
-                    ]}
-                />
-                <div>
-                    <Tabs defaultActiveKey="moneyLog1" type="card" centered items={items} tabBarStyle={{ marginBottom: '0px' }} />
-                </div>
+                    title={
+                        <span className="font-semibold text-base relative -top-0.5">
+                            <DollarOutlined className="mr-2" />
+                            Balance Adjustment
+                        </span>
+                    }
+                >
+                    <Create
+                        title={<></>}
+                        goBack={<></>}
+                        breadcrumb={null}
+                        contentProps={{
+                            style: {
+                                boxShadow: 'none',
+                                padding: '0rem',
+                            },
+                        }}
+                    />
+                </Card>
+
+                <Tabs defaultActiveKey="moneyLog1" type="card" centered items={items} tabBarStyle={{ marginBottom: '0px' }} />
             </Show>
         </>
     );

@@ -18,7 +18,8 @@ const FormComponent: React.FC<{
     const watchCurrency = Form.useWatch(['currency'], form);
     const watchAmountType = Form.useWatch(['amount_type'], form);
     const { action, id, identifier } = useResource();
-    const userFieldIsDisabled = action === 'show' && identifier === 'members-list';
+    // 判斷是否在 User Show 畫面
+    const isUserAdjustment = action === 'show' && identifier === 'members-list';
 
     useEffect(() => {
         // User Show 畫面自動帶入當前 user
@@ -73,8 +74,8 @@ const FormComponent: React.FC<{
                     <Input />
                 </Form.Item>
 
-                <Form.Item name={['user_id']} label="User" initialValue={Number(id)} className="col-span-2 lg:col-span-1">
-                    <Select {...userSelectProps} allowClear disabled={userFieldIsDisabled} />
+                <Form.Item name={['user_id']} label="User" initialValue={Number(id)} className="col-span-2 lg:col-span-1" hidden={isUserAdjustment}>
+                    <Select {...userSelectProps} allowClear />
                 </Form.Item>
 
                 <div className="col-span-2 lg:col-span-1">
@@ -82,13 +83,13 @@ const FormComponent: React.FC<{
                     {watchUser && !isFetching && <Amount amount={Number(currencyBalanceAmount)} currency={watchCurrency} symbol />}
                     {isFetching && <LoadingOutlined />}
                 </div>
-                <Form.Item name={['type']} label="Type" className="col-span-2 lg:col-span-1" initialValue="DEPOSIT">
+                <Form.Item name={['type']} label="Type" className="col-span-2 lg:col-span-1" initialValue="DEPOSIT" hidden={isUserAdjustment}>
                     <Select options={['DEPOSIT', 'MANUAL'].map((type) => ({ label: type, value: type }))} />
                 </Form.Item>
                 <div className="col-span-4 md:col-span-2">
                     <AmountInput />
                 </div>
-                <Form.Item name={['description']} label="description" className="col-span-4 md:col-span-2">
+                <Form.Item name={['description']} label="description" className="col-span-4 md:col-span-2" hidden={isUserAdjustment}>
                     <Input.TextArea />
                 </Form.Item>
             </div>

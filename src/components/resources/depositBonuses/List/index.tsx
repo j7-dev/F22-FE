@@ -29,10 +29,6 @@ const index = () => {
             dataIndex: 'label',
         },
         {
-            title: 'deposit_type',
-            dataIndex: 'deposit_type',
-        },
-        {
             title: 'bonus_rate',
             dataIndex: 'bonus_rate',
         },
@@ -47,8 +43,14 @@ const index = () => {
             render: (v: number, record) => <Amount amount={v} currency={record?.currency} />,
         },
         {
-            title: 'amount_type',
-            dataIndex: 'amount_type',
+            title: 'rolling_percentage',
+            dataIndex: 'rolling_percentage',
+            render: (v: number) => `${v}%`,
+        },
+        {
+            title: 'allow_game_providers',
+            dataIndex: 'allow_game_providers',
+            render: (v: string[]) => (Array.isArray(v) ? v.join(', ') : ''),
         },
         {
             title: 'vips',
