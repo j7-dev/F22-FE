@@ -78,16 +78,22 @@ ex:
 電子存款紅利，限制只能玩電子，其他不能玩，並且會限制 rolling percentage
 不選擇紅利，就沒有限制 rolling percentage
 
-#### 個人限制條件 limit
+#### 個人限制條件
 
-identity 需要知道當前用戶的
-1. 屬於什麼限制情境
-2. 提款的有效投注限制金額
-3. 被限制只能由玩什麼遊戲
+每個 存款優惠 deposit_bonus 與 user 是一對多關係
+也就是說你在useGetIdentity 時 應該可以拿到存款優惠的資訊
 
-如果未達提款標準的  限制金額  ，就無法按下提款按鈕
+> 🔲當用戶按下存款時，就要發API update user 身上的 deposit_bonus: deposit_bonus_id
 
-直到用戶 Balance 歸0才解除限制
+如果 user 身上有 deposit_bonus 就代表身上有 "限制條件"
+
+這個限制是由他存款時，選擇哪個存款優惠決定的
+
+1. 🔲提款的有效投注有沒有達到限制金額，如果沒有達到，禁用提款按鈕
+限制金額 = rolling percentage * 當時存款金額
+2. 🔲被限制只能玩什麼遊戲
+3. 🔲直到他的 Balance 為 0 時才會解除限制條件 (這邊後端會判定)
+4. 🔲限制解除之前，存款也只能存當時的條件，前端要禁用其他的 BONUS
 
 #### 提款情境
 
