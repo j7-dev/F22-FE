@@ -24,6 +24,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                     <div className="wrap flex gap-1 items-center">
                         <FavoriteIcon item={item} />
                         {/* 有RTP率才顯示否則為空 */}
+                        {/* 手機版不會顯示 */}
                         {item.gameRTP ? <div className="RTP hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2"> RTP ${item.gameRTP}</div> : ''}
                     </div>
                     <img className="provider w-5 sm:w-10" src={item.gameListFavIcon} alt="" />
@@ -36,6 +37,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                 <div className="onTheTop flex justify-between items-center w-full">
                     <div className="wrap flex gap-1 items-center">
                         <FavoriteIcon item={item} />
+                        {/* 手機版不會顯示 */}
                         <div className="BetLimit hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${item['Bet Limit']?.KRW.max?.toLocaleString()}`}</div>
                     </div>
                     <img className="provider w-5 sm:w-10" src={item.casinoCategoryIcon} alt="" />
@@ -87,7 +89,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                     <div className="sm:hidden">
                         <MobileRTPAndBetLimit {...gameItem} />
                     </div>
-                    <span className="gameName font-bold sm:text-xl text-base text-white">{gameItem?.gameName}</span>
+                    <span className="gameName font-bold sm:text-xl text-sm text-white">{gameItem?.gameName}</span>
                 </div>
             </div>
         </div>

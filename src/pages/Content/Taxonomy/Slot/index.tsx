@@ -117,6 +117,9 @@ const index: React.FC = () => {
                             })}
                         </div>
                     </div>
+                    <div className="block px-4 sm:hidden">
+                        <SearchBar onFilter={filterGame} />
+                    </div>
                     <Spin spinning={isFetching}>
                         <GameList gameData={gameDataList} />
                     </Spin>
