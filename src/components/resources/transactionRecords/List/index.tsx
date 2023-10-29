@@ -18,6 +18,7 @@ import { useSetAtom } from 'jotai';
 import { useParams } from 'react-router-dom';
 import { useGetSiteSetting } from '@/hooks';
 import UserSummary from '@/components/Admin/UserSummary';
+import BankAccount from '@/components/Admin/BankAccount';
 
 const index = () => {
     const { type: listTypeLowerCase, roleType } = useParams<TParams>();
@@ -72,7 +73,7 @@ const index = () => {
         meta: {
             populate: {
                 user: {
-                    fields: ['id', 'display_name', 'username'],
+                    fields: ['id', 'display_name', 'username', 'bank_account'],
                     populate: {
                         vip: {
                             fields: ['label'],
@@ -141,9 +142,19 @@ const index = () => {
             render: (createdAt: string) => <DateTime value={createdAt} />,
         },
         {
+            title: 'update date',
+            dataIndex: 'updatedAt',
+            render: (updatedAt: string, record: DataType) => (record?.createdAt === updatedAt ? '' : <DateTime value={updatedAt} />),
+        },
+        {
             title: 'amount',
             dataIndex: 'amount',
             render: (amount, record) => <Amount amount={amount} currency={record?.currency} symbol />,
+        },
+        {
+            // TODO 這是什麼?
+            title: 'bonus',
+            dataIndex: 'bonus',
         },
         {
             title: 'status',
@@ -169,8 +180,9 @@ const index = () => {
             dataIndex: 'title',
         },
         {
-            title: 'type',
-            dataIndex: 'type',
+            title: 'Bank Account',
+            dataIndex: 'bankAccount',
+            render: (_, record) => <BankAccount bank_account={record?.user?.bank_account} />,
         },
     ];
 
@@ -203,7 +215,7 @@ const index = () => {
                     <Filter formProps={searchFormProps} />
                 </Col>
                 <Col lg={24} xs={24}>
-                    <Card bordered={false} title="Search Result">
+                    <Card bordered={false}>
                         <div className="mb-4">
                             <FilterTags key={filterTagsKey} form={searchFormProps.form} />
                         </div>
