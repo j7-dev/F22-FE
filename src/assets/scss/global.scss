@@ -41,6 +41,9 @@ table.table {
 	width: 100%;
 	border-collapse: collapse;
 	table-layout: auto; /* 让列宽自动分配 */
+	&.table-fixed {
+		table-layout: fixed; /* 让列宽平均分配 */
+	}
 	tr {
 		background-color: transparent;
 		transition: 0.3s ease-in-out;
@@ -53,9 +56,22 @@ table.table {
 		width: 0;
 		border: 1px solid #ddd;
 		padding: 0.75rem 0.5rem;
+		line-height: 1;
+	}
+	&.table-small {
+		td,
+		th {
+			padding: 0.25rem 0.5rem;
+			font-size: 0.625rem;
+		}
 	}
 	td {
 		text-align: right;
+	}
+	&.th-left {
+		th {
+			text-align: left;
+		}
 	}
 	th {
 		text-align: center;

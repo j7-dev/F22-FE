@@ -1,7 +1,7 @@
 import { TBankAccount } from '@/types';
 import { keyToWord } from '@/utils';
 
-const index = ({ bank_account }: { bank_account: TBankAccount | null }) => {
+const index = ({ bank_account }: { bank_account?: TBankAccount | null }) => {
     if (!bank_account) return <></>;
     const exclude_keys = ['id', 'createdAt', 'updatedAt', 'label', 'bank_code'];
 

@@ -3,9 +3,13 @@ import { TUser } from '@/types';
 import { Link } from 'react-router-dom';
 
 const index: React.FC<{ user?: TUser }> = ({ user }) => {
-    const display_name = user?.display_name;
+    const display_name = user?.display_name || user?.username || user?.email || user?.id;
     if (user) {
-        return <Link to={`/refine/members/show/${user?.id}`}>{display_name}</Link>;
+        return (
+            <Link to={`/refine/members/show/${user?.id}`}>
+                #{user?.id} {display_name}
+            </Link>
+        );
     }
     return null;
 };
