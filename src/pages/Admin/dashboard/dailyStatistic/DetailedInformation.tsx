@@ -2,6 +2,7 @@ import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { searchPropsAtom } from './atom';
 import { useAtomValue } from 'jotai';
+import { useCustom, useApiUrl } from '@refinedev/core';
 
 type DataType = {
     agentId: number;
@@ -21,61 +22,67 @@ const DetailedInformation = () => {
 
     const columns: ColumnsType<DataType> = [
         {
-            title: 'NO.',
-            dataIndex: 'agentId',
+            title: 'date',
+            dataIndex: 'date',
         },
         {
-            title: 'Member Account ',
-            dataIndex: 'memberAccount ',
+            title: 'deposit',
+            dataIndex: 'deposit ',
         },
         {
-            title: 'Agent Account',
-            dataIndex: 'agentAccount',
+            title: 'withdraw',
+            dataIndex: 'withdraw',
         },
         {
-            title: 'Total Bet Count',
-            dataIndex: 'totalBetCount',
+            title: 'DPWD',
+            dataIndex: 'dpWd',
         },
         {
-            title: 'Total Profit Amount',
-            dataIndex: 'totalProfitAmount',
+            title: 'valid bet amount',
+            dataIndex: 'validBet',
         },
         {
-            title: 'Total Bet Amount',
-            dataIndex: 'totalBetAmount',
+            title: 'payout',
+            dataIndex: 'payout',
         },
         {
-            title: 'Total Valid Bet Amount',
-            dataIndex: 'totalValidBetAmount',
+            title: 'winloss',
+            dataIndex: 'winloss',
         },
         {
-            title: 'Total Deposit Amount',
-            dataIndex: 'totalDepositAmount',
+            title: 'bonus & turnover bonus',
+            dataIndex: 'coupon',
         },
         {
-            title: 'Total Withdraw Amount(Including Amount still Applying)',
-            dataIndex: 'totalWithdrawAmount',
+            title: 'profit',
+            dataIndex: 'profit',
         },
         {
-            title: 'Total Bonus Amount',
-            dataIndex: 'totalBonusAmount',
+            title: 'new registered members',
+            dataIndex: 'numberOfRegistrants',
         },
         {
-            title: 'Total Discount Amount',
-            dataIndex: 'totalDiscountAmount',
-        },
-        {
-            title: 'Total AnyTime Discount Amount',
-            dataIndex: 'totalAnyTimeDiscountAmount',
+            title: 'betting members',
+            dataIndex: 'bettingMembers',
         },
     ];
 
-    const data: DataType[] = [];
+    const apiUrl = useApiUrl();
+    const { data, isLoading } = useCustom({
+        url: `${apiUrl}/utility/statistic/daily`,
+        method: 'get',
+        config: {
+            query: {
+                start: dateRange ? dateRange[0].toISOString() : undefined,
+                end: dateRange ? dateRange[1].toISOString() : undefined,
+            },
+        },
+    });
+    const dataSource = data?.data?.data || [];
+
     return (
         <>
-            <p>Detailed Information {dateRange ? dateRange.map((date) => (date ? date.format('YYYY/MM/DD') : '')).join(' ~ ') : ''}</p>
-            <Table rowKey="agentId" columns={columns} dataSource={data} />
-            <hr className="my-8" />
+            <Table rowKey="date" size="small" columns={columns} dataSource={dataSource} loading={isLoading} />
         </>
     );
 };
