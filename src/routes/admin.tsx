@@ -2,9 +2,8 @@ import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 
 const Home = lazy(() => import('@/pages/Admin/home'));
-const StatisticReport = lazy(() => import('@/pages/Admin/dashboard/statisticReport'));
-const AgentStatistic = lazy(() => import('@/pages/Admin/dashboard/agentStatistic'));
-const MemberStatistic = lazy(() => import('@/pages/Admin/dashboard/memberStatistic'));
+const AgentDailyStatistic = lazy(() => import('@/pages/Admin/dashboard/agentDailyStatistic'));
+const DailyStatistic = lazy(() => import('@/pages/Admin/dashboard/dailyStatistic'));
 const ListMember = lazy(() => import('@/pages/Admin/members/List'));
 const CreateMember = lazy(() => import('@/pages/Admin/members/Create'));
 const ShowMember = lazy(() => import('@/pages/Admin/members/Show'));
@@ -36,10 +35,9 @@ const adminRoutes = () => {
             <Route path="/refine/home/" element={<Home />} />
 
             <Route path="/refine/dashboard/">
-                <Route index element={<StatisticReport />} />
-                <Route path="statistic-report" element={<StatisticReport />} />
-                <Route path="agent-statistic" element={<AgentStatistic />} />
-                <Route path="member-statistic" element={<MemberStatistic />} />
+                <Route index element={<DailyStatistic />} />
+                <Route path="daily-statistic" element={<DailyStatistic />} />
+                <Route path="agent-daily-statistic" element={<AgentDailyStatistic />} />
             </Route>
             <Route path="/refine/members/">
                 <Route index element={<ListMember />} />

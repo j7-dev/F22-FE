@@ -1,3 +1,2 @@
-export { default as AgentStatistic } from './agentStatistic';
-export { default as MemberStatistic } from './memberStatistic';
-export { default as StatisticReport } from './statisticReport';
+export { default as AgentDailyStatistic } from './agentDailyStatistic';
+export { default as DailyStatistic } from './dailyStatistic';
