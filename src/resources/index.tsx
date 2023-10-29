@@ -20,30 +20,21 @@ export const resources = [
         },
     },
     {
-        name: 'statistic-report',
-        identifier: 'statistic-report',
-        list: '/refine/dashboard/statistic-report',
+        name: 'daily-statistic',
+        identifier: 'daily-statistic',
+        list: '/refine/dashboard/daily-statistic',
         meta: {
             parent: 'dashboard',
-            label: 'Statistic Report 統計報表',
+            label: 'Daily Statistic 每日統計',
         },
     },
     {
-        name: 'agent-statistic',
-        identifier: 'agent-statistic',
-        list: '/refine/dashboard/agent-statistic',
+        name: 'agent-daily-statistic',
+        identifier: 'agent-daily-statistic',
+        list: '/refine/dashboard/agent-daily-statistic',
         meta: {
             parent: 'dashboard',
-            label: 'Agent Statistic 代理績效報表',
-        },
-    },
-    {
-        name: 'member-statistic',
-        identifier: 'member-statistic',
-        list: '/refine/dashboard/member-statistic',
-        meta: {
-            parent: 'dashboard',
-            label: 'Member Statistic 會員績效報表',
+            label: 'Agent Daily Statistic 代理每日統計',
         },
     },
     {

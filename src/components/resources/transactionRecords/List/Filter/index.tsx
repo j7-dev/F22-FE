@@ -51,7 +51,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
                     <Form.Item label="User" name={['user']}>
                         <Select size="small" {...selectProps} allowClear />
                     </Form.Item>
-                    <Form.Item className="flex items-end">
+                    <Form.Item className="self-end">
                         <Button size="small" type="primary" htmlType="submit" className="w-full">
                             Filter
                         </Button>
