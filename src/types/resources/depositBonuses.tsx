@@ -21,4 +21,5 @@ export type TDepositBonus = BaseType & {
     extra_ratio: TRatioItem[];
     amount_type: string;
     currency: string;
+    rolling_percentage: number;
 };

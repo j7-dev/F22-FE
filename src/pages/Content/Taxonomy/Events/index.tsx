@@ -4,14 +4,13 @@ import { useList } from '@refinedev/core';
 import { useModal } from '@refinedev/antd';
 import { Spin, Modal } from 'antd';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
-import eventImg from '@/assets/images/eventImg.jpg';
 import { nanoid } from 'nanoid';
 import { API_URL } from '@/utils';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
-    const [eventContent, setEventContent] = useState('');
+    const [eventContent, setEventContent] = useState<{ url?: string }[]>([]);
     const { modalProps, show } = useModal();
     const { data: eventList, isFetching } = useList({
         resource: 'cms-posts',
@@ -43,13 +42,13 @@ const index: React.FC = () => {
                                     key={nanoid()}
                                     onClick={() => {
                                         //使用正則表達式取得括號內的SRC字串
-                                        setEventContent(item.content.match(/\(([^)]+)\)/)[1]);
+                                        setEventContent(item.content_images);
                                         show();
                                     }}
                                     className="eventWrap cursor-pointer"
                                 >
                                     <div className="eventImg rounded-2xl w-full mb-2 overflow-hidden">
-                                        <img src={eventImg} alt="" className="aspect-[342/250] w-full object-cover" />
+                                        <img src={API_URL + item.feature_image.url} alt="" className="aspect-[342/250] w-full object-cover" />
                                     </div>
                                     <div className="sm:flex-row sm:gap-5 flex-col flex gap-2 items-center">
                                         <div className="eventTitle text-base font-bold text-black ml-2.5">{t(item.title)}</div>
@@ -63,7 +62,9 @@ const index: React.FC = () => {
             </div>
             <Modal {...modalProps} footer={null} closeIcon={<AiFillCloseCircle color="#BDBDBD" size={30} />} centered width={'50vw'} classNames={{ content: 'p-0 my-20 rounded-2xl overflow-hidden' }}>
                 <div className="eventContent">
-                    <img src={API_URL + eventContent} alt="" className="w-full" />
+                    {eventContent.map((item) => (
+                        <img key={nanoid()} src={API_URL + item.url} alt="" className="w-full" />
+                    ))}
                 </div>
             </Modal>
         </div>
