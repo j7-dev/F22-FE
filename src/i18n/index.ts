@@ -7,13 +7,13 @@ i18n.use(Backend)
     .use(detector)
     .use(initReactI18next)
     .init({
-        supportedLngs: ['en', 'ko', 'tw', 'cn'],
+        supportedLngs: ['ko', 'en', 'tw', 'cn'],
         backend: {
             loadPath: '/locales/{{lng}}/{{ns}}.json',
         },
         ns: ['content', 'admin'],
         defaultNS: 'content',
-        fallbackLng: ['en', 'ko', 'tw', 'cn'], // 若當前語言沒有對應的翻譯則使用這個語言
+        fallbackLng: ['ko', 'en', 'tw', 'cn'], // 若當前語言沒有對應的翻譯則使用這個語言
     });
 
 export default i18n;
