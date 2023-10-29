@@ -23,7 +23,7 @@ const Wallet: React.FC = () => {
         if (activeMenu === 'siteNotify') return <NoteBox />;
         if (activeMenu === 'cashHistory') return <CashHistory userID={data?.id as number} />;
         if (activeMenu === 'couponHistory') return <CouponHistory userID={data?.id as number} />;
-        if (activeMenu === 'withdraw') return <Withdraw />;
+        if (activeMenu === 'withdraw') return <Withdraw userInfo={data as TMe} />;
         if (activeMenu === 'deposit') return <Deposit />;
         return <MyPage data={data as TMe} />;
     };

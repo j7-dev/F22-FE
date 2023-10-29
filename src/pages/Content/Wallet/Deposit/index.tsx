@@ -1,13 +1,5 @@
-import React from 'react';
-import {
-    Form,
-    // Alert,
-    Modal,
-    Button,
-    Divider,
-    notification,
-    Popconfirm,
-} from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Form, Modal, Button, notification } from 'antd';
 import { useTranslation } from 'react-i18next';
 import QuickAmountInput from '@/components/form/QuickAmountInput';
 import { useGetIdentity, useCreate } from '@refinedev/core';
@@ -19,13 +11,17 @@ import { useGetSiteSetting } from '@/hooks';
 import Amount from '@/components/Admin/Amount';
 import BonusDetails from './BonusDetails';
 import QRCode from 'qrcode';
+import { AiFillCloseCircle } from 'react-icons/ai';
+import { useShowPc } from '@/hooks/useShowPc';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const [form] = Form.useForm();
+    const [isDisabled, setIsDisabled] = useState(true);
     const { data: identity } = useGetIdentity<TMe>();
     const user_id = identity?.id;
     const CODEPAY_IDENTIFIER = `user_id:${user_id}`;
+    const showPc = useShowPc();
 
     const { modalProps, show, close } = useModal();
     const watchAmount = Form.useWatch(['amount'], form);
@@ -44,10 +40,15 @@ const index: React.FC = () => {
     const handleClick = () => {
         form.validateFields()
             .then(() => {
-                show();
+                //電腦版顯示Modal，手機版直接開啟網址
+                if (showPc) {
+                    show();
 
-                const qrString = `codp:${CODEPAY_SIMPLE_ADDRESS_TO}?type=payment&identifier=userid${user_id}&amount=${watchAmount}`;
-                generateQR(qrString);
+                    const qrString = `codp:${CODEPAY_SIMPLE_ADDRESS_TO}?type=payment&identifier=userid${user_id}&amount=${watchAmount}`;
+                    generateQR(qrString);
+                } else {
+                    handleOpenUrl();
+                }
             })
             .catch((errorInfo) => {
                 console.log('errorInfo', errorInfo);
@@ -58,7 +59,6 @@ const index: React.FC = () => {
     const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
 
     const codePayUrl = `${CODEPAY_APP_URL}/payment?type=payment&simpleAddress=${CODEPAY_SIMPLE_ADDRESS_TO}&tag=smtbet7&identifier=${CODEPAY_IDENTIFIER}&amount=${watchAmount}`;
-    //FIXME 這邊是不是要改成qrcode?
     const handleOpenUrl = () => {
         window.open(codePayUrl, '_blank');
     };
@@ -96,14 +96,26 @@ const index: React.FC = () => {
         );
     };
 
-    const handleCancel = () => {
-        close();
-    };
+    //監聽Form的值，都填寫完畢後，使Button可以點擊
+    const values = Form.useWatch([], form);
+    useEffect(() => {
+        form.validateFields({ validateOnly: true }).then(
+            () => {
+                setIsDisabled(false);
+            },
+            () => {
+                setIsDisabled(true);
+            },
+        );
+    }, [values]);
 
+    //取得id = header的元素高度
+    const header = document.getElementById('header');
+    const headerHeight = header?.clientHeight;
     return (
-        <div className="bg-white px-8 py-[42px] rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
-            <span className="text-black font-bold text-2xl">{t('Deposit')}</span>
+        <div style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)` }} className="flex flex-col justify-between bg-white px-8 py-[42px] rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
             <div className="min-h-[180px]">
+                <span className="text-black font-bold text-2xl">{t('Deposit')}</span>
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical">
                     <QuickAmountInput
                         formItemProps={{
@@ -119,6 +131,10 @@ const index: React.FC = () => {
                         }}
                         inputNumberProps={{
                             prefix: symbol,
+                        }}
+                        //隱藏快速按鈕
+                        quickButtonProps={{
+                            className: 'hidden',
                         }}
                     />
                     <BonusDetails />
@@ -142,51 +158,35 @@ const index: React.FC = () => {
                         type="info"
                         showIcon
                     /> */}
-                    <Button type="primary" className="w-full h-[65px] font-bold text-xl" onClick={handleClick}>
-                        {t('Deposit')}
-                    </Button>
-
-                    <Modal
-                        {...modalProps}
-                        centered
-                        title="Scan QR code to finish payment"
-                        footer={
-                            <div className="flex justify-between">
-                                <Popconfirm title={t('')} description={t('Are you sure to leave without notification?')} onConfirm={handleCancel} okText="Yes" cancelText="No">
-                                    <Button type="default">{t('Cancel')}</Button>
-                                </Popconfirm>
-                                <Button onClick={handleNotify} type="primary">
-                                    {t("Notify admin I've paid")}
-                                </Button>
-                            </div>
-                        }
-                        maskClosable={false}
-                        closeIcon={false}
-                        confirmLoading={isLoading}
-                        width={400}
-                    >
-                        <div className="grid grid-cols-1 gap-x-6">
-                            <div className="col-span-1">
-                                <table className="table table-vertical my-8 table-fixed">
-                                    <tr>
-                                        <th className="w-1/2">
-                                            <span>{t('Deposit Amount')}</span>
-                                        </th>
-                                        <td className="w-1/2">
-                                            <Amount amount={watchAmount} />
-                                        </td>
-                                    </tr>
-                                </table>
-                                {qrcode ? <img className="w-full" src={qrcode} /> : <>Loading</>}
-                                <Divider plain>or</Divider>
-                                <Button className="w-full mb-8" type="primary" ghost onClick={handleOpenUrl}>
-                                    Pay by URL
-                                </Button>
-                            </div>
-                        </div>
-                    </Modal>
                 </Form>
             </div>
+            <div className="grid grid-cols-2 sm:gap-4 gap-2">
+                <Button className="col-span-1 w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold text-[#9680EA] bg-[#F8F9FF] border-[#9680EA] hover:text-white hover:bg-[#9680EA]">{t('Codepay')}</Button>
+                <Button className="col-span-1 w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold text-[#9680EA] bg-[#F8F9FF] border-[#9680EA] hover:text-white hover:bg-[#9680EA]">{t('Transfer')}</Button>
+                <Button onClick={handleClick} disabled={isDisabled} type="primary" className={`${isDisabled ? 'bg-[#BDBDBD]' : ''} col-span-2 w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold`}>
+                    {t('Deposit')}
+                </Button>
+            </div>
+            <Modal {...modalProps} centered footer={null} maskClosable={false} closeIcon={<AiFillCloseCircle color="#BDBDBD" size={30} />} confirmLoading={isLoading} width={330}>
+                <div className="grid grid-cols-1 gap-x-6 px-3">
+                    <div className="col-span-1 my-8">
+                        <span className="text-center w-full block text-black font-bold text-base">{t('Scan QRcode to Finish Payment')}</span>
+                        <div className="flex justify-between items-center my-2.5">
+                            <span className="font-medium text-[#828282] text-xs">{t('Deposit Amount')}</span>
+                            <span className="font-medium text-black text-xl">
+                                <Amount amount={watchAmount} />
+                            </span>
+                        </div>
+                        <div className="qrCodeWrap aspect-square max-w-[200px] m-auto">{qrcode ? <img className="w-full " src={qrcode} /> : <>Loading</>}</div>
+                        <Button onClick={handleOpenUrl} className="w-full h-10 my-2 bg-[#5932EA] text-white rounded-2xl font-bold" type="primary" ghost>
+                            {t('or Pay by URL')}
+                        </Button>
+                        <Button onClick={handleNotify} className="w-full h-10 border-2 border-[#9680EA] text-[#9680EA] rounded-2xl font-bold">
+                            {t("Notify admin I've paid")}
+                        </Button>
+                    </div>
+                </div>
+            </Modal>
         </div>
     );
 };

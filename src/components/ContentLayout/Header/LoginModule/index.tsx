@@ -56,7 +56,7 @@ const Login: React.FC = () => {
             ) : (
                 <>
                     <div onClick={handleSingIn} className={`primaryButton loginBtn  whitespace-nowrap flex items-center justify-center cursor-pointer`}>
-                        <span>{t('Log in')}</span>
+                        <span>{t('Log In')}</span>
                     </div>
                     <div onClick={handleSingUp} className="secondaryButton RegisterBtn whitespace-nowrap flex justify-center items-center gap-x-2 md:px-6 md:py-2 cursor-pointer">
                         <span>{t('Register')}</span>

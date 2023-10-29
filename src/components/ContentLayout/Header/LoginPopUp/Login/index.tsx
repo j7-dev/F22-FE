@@ -113,15 +113,15 @@ const index: React.FC = () => {
             >
                 {/* <MobileCloseBtn /> */}
                 <div className="loginFromSection text-center flex flex-col gap-2.5 w-full">
-                    <span className="text-[30px] text-center font-semibold text-white mb-9">{t('User Login')}</span>
+                    <span className="text-[30px] text-center font-semibold text-white mb-9">{t('Sign In')}</span>
                     {/* 錯誤訊息 */}
                     {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
                     <Form form={form} onFinish={handleLogin} className="login">
                         <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }]}>
-                            <Input placeholder="User Name" prefix={<img src={userNameIcon} />} bordered={false} />
+                            <Input placeholder={t('User Name')} prefix={<img src={userNameIcon} />} bordered={false} />
                         </Form.Item>
                         <Form.Item name="userPas" rules={[{ required: true, message: 'Please input your Password' }]}>
-                            <Input.Password placeholder="User Password" prefix={<img src={passwordIcon} />} bordered={false} />
+                            <Input.Password placeholder={t('User Password')} prefix={<img src={passwordIcon} />} bordered={false} />
                         </Form.Item>
                         <HCaptcha size="invisible" ref={captchaLoginRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
                         <Form.Item className="mb-0">

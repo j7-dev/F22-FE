@@ -59,7 +59,8 @@ const index: React.FC = () => {
     const filterGame = (searchGame: string) => {
         if (searchGame === '') return setGameDataList(rawGameList as []);
         setChosenCategory(searchGame);
-        setGameDataList((rawGameList.filter((item) => item?.gameName?.includes(searchGame)) as []) || []);
+        //使用.toLowerCase()將字串轉為小寫，避免大小寫問題
+        setGameDataList((rawGameList.filter((item) => item?.gameName?.toLowerCase().includes(searchGame.toLowerCase())) as []) || []);
     };
 
     useEffect(() => {
@@ -76,7 +77,7 @@ const index: React.FC = () => {
         <div className="casinoPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col gap-4">
             <Banner />
             <NewsMarquee className="md:hidden" speed={15} marqueeText={marqueeText} />
-            <div className="slotSection relative sm:w-full">
+            <div className="casinoSection relative sm:w-full">
                 <div className="md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl md:py-4">
                     <div className="hidden slotTitle md:grid grid-cols-11 gap-4 py-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
                         <div className="col-span-1 flex justify-center">
@@ -100,6 +101,9 @@ const index: React.FC = () => {
                                 );
                             })}
                         </div>
+                    </div>
+                    <div className="block px-4 sm:hidden">
+                        <SearchBar onFilter={filterGame} />
                     </div>
                     <Spin spinning={isFetching}>
                         <GameList gameData={gameDataList} />

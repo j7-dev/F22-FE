@@ -12,6 +12,9 @@ import mgWhiteIcon from '@/assets/images/game_provider/mgWhite.svg';
 import agWhiteIcon from '@/assets/images/game_provider/agWhite.svg';
 import evoWhiteIcon from '@/assets/images/game_provider/evoWhite.svg';
 import ppWhiteIcon from '@/assets/images/game_provider/ppWhite.svg';
+// import ppProviderSmallIcon from '@/assets/images/game_provider/ppProviderSmallIcon.svg';
+// import mgProviderSmallIcon from '@/assets/images/game_provider/mgProviderSmallIcon.svg';
+// import agProviderSmallIcon from '@/assets/images/game_provider/agProviderSmallIcon.svg';
 
 export const providerData: TGameProvider[] = [
     {

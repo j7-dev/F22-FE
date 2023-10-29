@@ -70,7 +70,7 @@ const index: React.FC = () => {
     const filterGame = (searchGame: string) => {
         if (searchGame === '') return setGameDataList(rawGameList as []);
         setSlotGameProvider(searchGame);
-        setGameDataList((rawGameList.filter((item) => item?.gameName?.includes(searchGame)) as []) || []);
+        setGameDataList((rawGameList.filter((item) => item?.gameName?.toLowerCase().includes(searchGame.toLowerCase())) as []) || []);
     };
 
     //當載入完成後，將遊戲列表資料放入gameDataList
@@ -116,6 +116,9 @@ const index: React.FC = () => {
                                 );
                             })}
                         </div>
+                    </div>
+                    <div className="block px-4 sm:hidden">
+                        <SearchBar onFilter={filterGame} />
                     </div>
                     <Spin spinning={isFetching}>
                         <GameList gameData={gameDataList} />

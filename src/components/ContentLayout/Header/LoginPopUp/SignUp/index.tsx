@@ -7,6 +7,7 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { signInAtom, signUpAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { TRegisterPayload } from '@/types';
+// import { useCheckUserName } from '@/hooks/resources/useCheckUserName';
 import password from '@/assets/images/loginFrom/password.svg';
 import userName from '@/assets/images/loginFrom/userName.svg';
 import phoneNumber from '@/assets/images/loginFrom/phoneNumber.svg';
@@ -20,7 +21,8 @@ const index: React.FC = () => {
     //判斷Modal是否打開
     const [signUp, setSignUp] = useAtom(signUpAtom);
     const setSignIn = useSetAtom(signInAtom);
-
+    //取得檢查用戶名是否已存在方法
+    // const { checkUserName } = useCheckUserName();
     const captchaSignUpRef = useRef<HCaptcha>(null);
     const { mutate: register, isLoading } = useRegister<TRegisterPayload>();
     const [form] = Form.useForm();
@@ -66,7 +68,22 @@ const index: React.FC = () => {
         setSignUp(false);
         setSignIn(true);
     };
-
+    //自定義驗證規則=>用戶名，只能輸入英文與數字，並且長度大於等於3，且不能重複註冊
+    const userNameValidateFunction = (_: object, value: string) => {
+        // console.log('userNameValidateFunction', value);
+        if (value.length < 3) {
+            return Promise.reject('The length of user name must be greater than or equal to 3');
+        }
+        if (!/^[A-Za-z0-9]+$/.test(value)) {
+            return Promise.reject('User name can only enter English and numbers');
+        }
+        //FIXME 如何檢查用戶名是否已存在
+        // const { isExist } = checkUserName(value);
+        // if (isExist) {
+        //     return Promise.reject('User name already exists');
+        // }
+        return Promise.resolve();
+    };
     //自定義驗證規則=>確認密碼
     const validateFunction = (_: object, value: string) => {
         if (value !== form.getFieldValue('password')) {
@@ -109,31 +126,31 @@ const index: React.FC = () => {
                 {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
                 <Form form={form} onFinish={handleSignUp} className="signUp">
                     <Form.Item hidden name="userEmail" />
-                    <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }]}>
-                        <Input placeholder="User Name" prefix={<img src={userName} />} bordered={false} />
+                    <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }, { validator: userNameValidateFunction }]}>
+                        <Input placeholder={t('User Name')} prefix={<img src={userName} />} bordered={false} />
                     </Form.Item>
                     <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password' }]}>
-                        <Input.Password placeholder="User Password" prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
+                        <Input.Password placeholder={t('User Password')} prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
                     </Form.Item>
                     <Form.Item name="confirmPassword" rules={[{ required: true, message: 'Please input your Password' }, { validator: validateFunction }]}>
-                        <Input.Password placeholder="Confirm Password" prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
+                        <Input.Password placeholder={t('Confirm Password')} prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
                     </Form.Item>
                     <Form.Item name="userPhone" rules={[{ required: true, message: 'Please input your Phone' }]}>
-                        <Input placeholder="Phone Number" prefix={<img src={phoneNumber} />} bordered={false} />
+                        <Input placeholder={t('Phone Number')} prefix={<img src={phoneNumber} />} bordered={false} />
                     </Form.Item>
                     <Form.Item name={['bank_account', 'owner_real_name']} rules={[{ required: true, message: 'Please input your Phone' }]}>
-                        <Input placeholder="Full Name" prefix={<img src={bankName} />} bordered={false} />
+                        <Input placeholder={t('Full Name')} prefix={<img src={bankName} />} bordered={false} />
                     </Form.Item>
                     <Form.Item name={['bank_account', 'bank_code']} rules={[{ required: true, message: 'Please input your Phone' }]}>
-                        <Input placeholder="Bank Code" prefix={<img src={bankCode} />} bordered={false} />
+                        <Input placeholder={t('Bank Code')} prefix={<img src={bankCode} />} bordered={false} />
                     </Form.Item>
                     <Form.Item name={['bank_account', 'bank_account_number']} rules={[{ required: true, message: 'Please input your Phone' }]}>
-                        <Input.Password placeholder="Bank Account Number" prefix={<img src={bankNumber} />} bordered={false} />
+                        <Input.Password placeholder={t('Bank Account Number')} prefix={<img src={bankNumber} />} bordered={false} />
                     </Form.Item>
                     <Form.Item name="privacy" rules={[{ required: true, message: 'Please agree the Terms' }]}>
                         <Radio.Group>
                             <Radio value="yes" className="">
-                                {t('I agree with all the Terms and Conditions & Privacy Policy and I am over 18 years old.')}
+                                {t('I agree with all the Terms and Conditions & Privacy Policy and I am over 18 years old')}
                             </Radio>
                         </Radio.Group>
                     </Form.Item>

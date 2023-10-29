@@ -35,7 +35,7 @@ const index: React.FC = () => {
                             {PopularGamesData.map((item: TPopularGames) => {
                                 return (
                                     <div key={nanoid()} onClick={handleSwitchTab(item.value)} className={`filterTab relative cursor-pointer p-2`}>
-                                        <span className={`${activeTab === item.value ? 'text-black font-bold' : 'font-normal'} text-base`}>{item.label}</span>
+                                        <span className={`${activeTab === item.value ? 'text-black font-bold' : 'font-normal'} text-base`}>{t(item.label)}</span>
                                         <div className={`activeBorder ${activeTab === item.value ? 'h-1 rounded-full bg-[#9680EA]' : 'h-0'} absolute top-[96%] left-0 w-full h-0`}></div>
                                     </div>
                                 );
@@ -55,7 +55,7 @@ const index: React.FC = () => {
                             return (
                                 <div key={nanoid()} onClick={handleSwitchTab(item.value)} className={`${activeTab === item.value ? 'active' : ''} ${item.value} filterTab relative rounded-2xl flex flex-col justify-center items-center aspect-square w-[60px] gap-1 shadow-[0px_4px_10px_0px_#A370ED33] `}>
                                     <div className="favicon h-[24px] w-[20px]" />
-                                    <span className="text-[8px] whitespace-nowrap">{item.value}</span>
+                                    <span className="text-[8px] whitespace-nowrap">{t(item.label)}</span>
                                 </div>
                             );
                         })}

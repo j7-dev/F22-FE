@@ -20,6 +20,6 @@ export const useShowPc = () => {
         };
     }, [windowWidth]);
 
-    if (windowWidth > 834) return true;
+    if (windowWidth > 900) return true;
     return false;
 };

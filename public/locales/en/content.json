@@ -131,5 +131,9 @@
     "Golf": "Golf",
     "Events": "Events",
     "Slot": "Slot",
-    "POPULAR": "POPULAR"
+    "POPULAR": "POPULAR",
+    "Change": "Change",
+    "In Play": "In Play",
+    "Bonus Details": "Bonus Details",
+    "Bonus Type": "Bonus Type"
 }
