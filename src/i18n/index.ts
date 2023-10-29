@@ -7,6 +7,7 @@ i18n.use(Backend)
     .use(detector)
     .use(initReactI18next)
     .init({
+        lng: 'ko', //預設語言
         supportedLngs: ['ko', 'en', 'tw', 'cn'],
         backend: {
             loadPath: '/locales/{{lng}}/{{ns}}.json',
