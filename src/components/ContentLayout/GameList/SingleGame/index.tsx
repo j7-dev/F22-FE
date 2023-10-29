@@ -76,15 +76,15 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
         );
     };
     return (
-        <div className="singleGame w-full h-full relative overflow-hidden rounded-2xl sm:shadow-none shadow-[0_4px_4px_0_#A370ED33] group">
+        <div style={{ background: `url('${gameItem?.gameImg}')` }} className="singleGame bg-cover bg-center w-full h-full aspect-square relative overflow-hidden rounded-2xl sm:shadow-none shadow-[0_4px_4px_0_#A370ED33] group">
             <div onClick={openGame(gameItem)} className={`editOverlay opacity-0 hover:opacity-100 hover:bg-slate-600/50 z-10 cursor-pointer absolute inset-0 w-full h-full duration-300 text-white  flex justify-center items-center`}>
                 <PlayGameBtn />
             </div>
-            <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit pt-1 sm:px-5 px-2.5">
+            <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit pt-2 sm:px-5 px-2.5">
                 <OnTheTop {...gameItem} />
             </div>
-            <div className="gameWrap w-full h-full relative">
-                <img src={gameItem?.gameImg} alt="" className="aspect-square w-full h-full duration-500 group-hover:scale-125 object-cover" />
+            <div className="gameWrap w-full h-full relative bg-gradient-to-tr from-transparent via-transparent via-70% to-[#4D28EA]">
+                {/* <img src={gameItem?.gameImg} alt="" className="aspect-square w-full h-full duration-500 group-hover:scale-125 object-cover" /> */}
                 <div className="gameInfo absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent via-50% to-[#1A1A1A80] flex flex-col items-start justify-end sm:px-5 py-2.5 px-2.5">
                     <div className="sm:hidden">
                         <MobileRTPAndBetLimit {...gameItem} />

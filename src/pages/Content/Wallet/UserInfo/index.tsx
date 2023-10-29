@@ -22,6 +22,8 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
     //取得VIP資料
     const vipData = useVip();
     const { nextVip, diff } = vipData || { nextVip: null, prevVip: null, diff: null };
+    // console.log('🚀 ~ diff:', diff);
+    // console.log('🚀 ~ nextVip:', nextVip);
 
     //還差多少升級
     const depositUpgrade = diff?.deposit_upgrade_threshold || 0;
@@ -75,7 +77,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                         <div className="nextVip absolute z-10 right-0 bottom-0 h-full flex justify-center items-center aspect-square bg-[#FFB930] text-white text-base font-semibold rounded-full">
                             <div className="relative">
                                 <img src={vipNextIcon} alt="" className="absolute -top-2 sm:-top-3 left-1/2 -translate-x-2/4 w-4" />
-                                {(nextVip?.order as number) + 1}
+                                {(nextVip?.order as number) + 1 || 'MAX'}
                             </div>
                         </div>
                     </div>

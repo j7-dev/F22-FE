@@ -23,7 +23,7 @@ const index: React.FC = () => {
         }
     });
     return (
-        <div className="languageSwitchContain relative">
+        <div className="hidden languageSwitchContain relative">
             <div className="languageSwitch sm:gap-2 justify-start w-full flex z-10 gap-0.5">
                 {languages.map((item) => {
                     const changedLanguage = item.language;
