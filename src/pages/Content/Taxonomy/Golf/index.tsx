@@ -16,6 +16,7 @@ const index: React.FC = () => {
 
     const addUrl = `${gameServer}?otp_id=${otpId}&login_id=${identity?.id}&lang=ko-KR`;
     if (isFetching) return <Spin size="large" className="w-full h-screen flex justify-center items-center" />;
+    console.log('🚀 ~ addUrl:', addUrl);
 
     //如果未登入則不顯示,登入則顯示iframe
     const Container = () => {
@@ -25,11 +26,8 @@ const index: React.FC = () => {
                     <Button onClick={() => setSignIn(true)}>Login</Button>
                 </Empty>
             );
-        return (
-            <>
-                <iframe src={addUrl} name="output_frame" id="output_frame" className="w-full h-full border-0" />
-            </>
-        );
+        if (gameServer) window.open(addUrl);
+        return <>{/* <iframe src={addUrl} name="output_frame" id="output_frame" className="w-full h-full border-0" /> */}</>;
     };
 
     return (

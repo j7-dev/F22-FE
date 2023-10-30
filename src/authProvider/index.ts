@@ -82,7 +82,7 @@ export const authProvider: AuthBindings = {
         const confirmed = loginResult?.data?.user?.confirmed || false;
 
         if (!confirmed) {
-            const message = 'You have registered successfully, please wait for the administrator to confirm it.';
+            const message = 'You have registered successfully, please wait for the administrator to confirm it';
             notification.error({
                 message,
             });

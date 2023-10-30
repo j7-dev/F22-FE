@@ -74,10 +74,10 @@ const index: React.FC = () => {
     const userNameValidateFunction = (_: object, value: string) => {
         // console.log('userNameValidateFunction', value);
         if (value.length < 3) {
-            return Promise.reject('The length of user name must be greater than or equal to 3');
+            return Promise.reject(t('The length of user name must be greater than or equal to 3'));
         }
         if (!/^[A-Za-z0-9]+$/.test(value)) {
-            return Promise.reject('User name can only enter English and numbers');
+            return Promise.reject(t('User name can only enter English and numbers'));
         }
         return Promise.resolve();
     };
@@ -97,14 +97,14 @@ const index: React.FC = () => {
     //自訂驗證規則=>密碼長度大於6
     const passwordValidateFunction = (_: object, value: string) => {
         if (value.length < 6) {
-            return Promise.reject('The length of user name must be greater than or equal to 6');
+            return Promise.reject(t('The length of password must be greater than or equal to 6'));
         }
         return Promise.resolve();
     };
     //自定義驗證規則=>確認密碼
     const confirmPasswordValidator = (_: object, value: string) => {
         if (value !== form.getFieldValue('password')) {
-            return Promise.reject('The two passwords that you entered do not match!');
+            return Promise.reject(t('The two passwords that you entered do not match!'));
         }
         return Promise.resolve();
     };
@@ -144,28 +144,28 @@ const index: React.FC = () => {
                 {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
                 <Form form={form} onFinish={handleSignUp} className="signUp">
                     <Form.Item hidden name="userEmail" />
-                    <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }, { validator: userNameValidateFunction }]}>
+                    <Form.Item name="userName" rules={[{ required: true, message: t('Please input your Name') }, { validator: userNameValidateFunction }]}>
                         <Input onBlur={handleCheckUserName} placeholder={t('User Name')} prefix={<img src={userName} />} bordered={false} />
                     </Form.Item>
-                    <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password' }, { validator: passwordValidateFunction }]}>
+                    <Form.Item name="password" rules={[{ required: true, message: t('Please input your Password') }, { validator: passwordValidateFunction }]}>
                         <Input.Password placeholder={t('User Password')} prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
                     </Form.Item>
-                    <Form.Item name="confirmPassword" rules={[{ required: true, message: 'Please input your Password' }, { validator: confirmPasswordValidator }]}>
+                    <Form.Item name="confirmPassword" rules={[{ required: true, message: t('Please input your Password') }, { validator: confirmPasswordValidator }]}>
                         <Input.Password placeholder={t('Confirm Password')} prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
                     </Form.Item>
-                    <Form.Item name="userPhone" rules={[{ required: true, message: 'Please input your Phone' }]}>
+                    <Form.Item name="userPhone" rules={[{ required: true, message: t('Please input your Phone') }]}>
                         <Input placeholder={t('Phone Number')} prefix={<img src={phoneNumber} />} bordered={false} />
                     </Form.Item>
-                    <Form.Item name={['bank_account', 'owner_real_name']} rules={[{ required: true, message: 'Please input your Phone' }]}>
+                    <Form.Item name={['bank_account', 'owner_real_name']} rules={[{ required: true, message: t('Please input your Owner Real Name') }]}>
                         <Input placeholder={t('Full Name')} prefix={<img src={bankName} />} bordered={false} />
                     </Form.Item>
-                    <Form.Item name={['bank_account', 'bank_code']} rules={[{ required: true, message: 'Please input your Phone' }]}>
+                    <Form.Item name={['bank_account', 'bank_code']} rules={[{ required: true, message: t('Please input your Bank Code') }]}>
                         <Input placeholder={t('Bank Code')} prefix={<img src={bankCode} />} bordered={false} />
                     </Form.Item>
-                    <Form.Item name={['bank_account', 'bank_account_number']} rules={[{ required: true, message: 'Please input your Phone' }]}>
+                    <Form.Item name={['bank_account', 'bank_account_number']} rules={[{ required: true, message: t('Please input your Bank Account Number') }]}>
                         <Input.Password placeholder={t('Bank Account Number')} prefix={<img src={bankNumber} />} bordered={false} />
                     </Form.Item>
-                    <Form.Item name="privacy" rules={[{ required: true, message: 'Please agree the Terms' }]}>
+                    <Form.Item name="privacy" rules={[{ required: true, message: t('Please agree the Terms') }]}>
                         <Radio.Group>
                             <Radio value="yes" className="">
                                 {t('I agree with all the Terms and Conditions & Privacy Policy and I am over 18 years old')}

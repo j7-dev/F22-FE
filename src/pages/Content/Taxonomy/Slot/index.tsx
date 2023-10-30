@@ -110,7 +110,7 @@ const index: React.FC = () => {
                                     <div key={nanoid()} onClick={handleSwitchTab(item.value)} className={`${slotGameProvider === item.value ? 'bg-[#5932EA]' : 'bg-[#9680EA]'} basis-full flex-1 col-span-1 cursor-pointer rounded-2xl w-36 md:w-full`}>
                                         <div className="px-4 py-3 flex h-full items-center sm:gap-2 gap-1">
                                             <img src={item?.providerData?.providerSmallIcon} className="md:w-9 w-6 h-full object-center object-contain" alt="" />
-                                            <span className="whitespace-nowrap md:whitespace-normal font-medium md:text-base text-xs text-white">{item.label}</span>
+                                            <span className="whitespace-nowrap md:whitespace-normal font-medium md:text-base text-xs text-white">{t(item.label)}</span>
                                         </div>
                                     </div>
                                 );

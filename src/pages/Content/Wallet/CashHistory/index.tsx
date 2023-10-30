@@ -94,17 +94,17 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
                         title={
                             <div className="flex items-center gap-1">
                                 <BiSolidTimeFive color="#828282" size={20} />
-                                Date
+                                {t('Date')}
                             </div>
                         }
                         dataIndex="fxnCreatedAt"
                         key="fxnCreatedAt"
                         className="w-1/2 "
                     />
-                    <Column title="Cash For" dataIndex="type" key="type" className="w-1/6 " />
-                    <Column title="Cash Amount" dataIndex="amount" key="amount" className="w-1/6 " />
+                    <Column title={t('Cash For') as string} dataIndex="type" key="type" className="w-1/6 " />
+                    <Column title={t('Cash Amount') as string} dataIndex="amount" key="amount" className="w-1/6 " />
                     <Column
-                        title="Status"
+                        title={t('Status') as string}
                         dataIndex="status"
                         key="status"
                         className="w-1/6 "
@@ -114,7 +114,7 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
                             if (value === 'SUCCESS') color = '#22C55E';
                             return (
                                 <Tag color={color} className="rounded-2xl">
-                                    {value}
+                                    {t(value)}
                                 </Tag>
                             );
                         }}
