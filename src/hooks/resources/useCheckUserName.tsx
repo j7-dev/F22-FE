@@ -4,8 +4,8 @@
  */
 import { useList } from '@refinedev/core';
 export const useCheckUserName = () => {
-    const checkUserName = (username: string) => {
-        const { data, isFetching } = useList<{ username: string }>({
+    const checkUserName = async (username: string): Promise<boolean> => {
+        const { data } = useList({
             resource: 'users',
             filters: [
                 {
@@ -15,22 +15,10 @@ export const useCheckUserName = () => {
                 },
             ],
         });
-        return {
-            isFetching,
-            isExist: data?.length > 0,
-        };
-    };
-    // const { data, isFetching } = useList<{ username: string }>({
-    //     resource: 'users',
-    //     filters: [
-    //         {
-    //             field: 'username',
-    //             operator: 'eq',
-    //             value: username,
-    //         },
-    //     ],
-    // });
 
+        if (data && data?.total > 0) return true;
+        return false;
+    };
     return {
         checkUserName,
     };

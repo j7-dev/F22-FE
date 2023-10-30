@@ -23,6 +23,8 @@ const index: React.FC = () => {
     const setSignIn = useSetAtom(signInAtom);
     //取得檢查用戶名是否已存在方法
     // const { checkUserName } = useCheckUserName();
+    // const isExist = checkUserName('123');
+    // console.log('🚀 ~ isExist:', isExist);
     const captchaSignUpRef = useRef<HCaptcha>(null);
     const { mutate: register, isLoading } = useRegister<TRegisterPayload>();
     const [form] = Form.useForm();
@@ -77,12 +79,20 @@ const index: React.FC = () => {
         if (!/^[A-Za-z0-9]+$/.test(value)) {
             return Promise.reject('User name can only enter English and numbers');
         }
-        //FIXME 如何檢查用戶名是否已存在
-        // const { isExist } = checkUserName(value);
-        // if (isExist) {
-        //     return Promise.reject('User name already exists');
-        // }
         return Promise.resolve();
+    };
+    //FIXME 檢查用戶名是否已存在
+    const handleCheckUserName = async (e: any) => {
+        console.log(e.target.value);
+        // const isExist = await checkUserName(e.target.value);
+        // if (isExist) {
+        //     form.setFields([
+        //         {
+        //             name: 'username',
+        //             errors: ['User name already exists'],
+        //         },
+        //     ]);
+        // }
     };
     //自定義驗證規則=>確認密碼
     const validateFunction = (_: object, value: string) => {
@@ -127,7 +137,7 @@ const index: React.FC = () => {
                 <Form form={form} onFinish={handleSignUp} className="signUp">
                     <Form.Item hidden name="userEmail" />
                     <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }, { validator: userNameValidateFunction }]}>
-                        <Input placeholder={t('User Name')} prefix={<img src={userName} />} bordered={false} />
+                        <Input onBlur={handleCheckUserName} placeholder={t('User Name')} prefix={<img src={userName} />} bordered={false} />
                     </Form.Item>
                     <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password' }]}>
                         <Input.Password placeholder={t('User Password')} prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
