@@ -1,15 +1,18 @@
 /**取得IGX的otp_id
  * 返回identity, otp_id, isFetching
  */
-// import { useState } from 'react';
-import { useCustom, useGetIdentity } from '@refinedev/core';
+import { useState, useEffect } from 'react';
+import { useGetIdentity, useCustom } from '@refinedev/core';
 import { TMe } from '@/types';
 import { API_URL } from '@/utils';
+import { XMLParser } from 'fast-xml-parser';
 
 export const useIgxTopId = () => {
-    // const [otpId, setOtpId] = useState('');
+    const [otpId, setOtpId] = useState('');
+    const [gameServer, setGameServer] = useState('');
+    const parser = new XMLParser();
     const { data: identity } = useGetIdentity<TMe>();
-    const { data, isFetching } = useCustom({
+    const { data: otpData, isFetching } = useCustom({
         url: `${API_URL}/api/igx/login-11a`,
         method: 'post',
         config: {
@@ -22,7 +25,11 @@ export const useIgxTopId = () => {
             enabled: !!identity?.id,
         },
     });
-    // if (data?.data) return
-
-    return { data, identity, isFetching };
+    useEffect(() => {
+        if (otpData) {
+            setOtpId(parser.parse(otpData?.data as unknown as string).get_otp_id.otp_id);
+            setGameServer(parser.parse(otpData?.data as unknown as string).get_otp_id.game_server);
+        }
+    }, [otpData]);
+    return { identity, isFetching, otpId, gameServer };
 };

@@ -3,12 +3,18 @@ import { useSetAtom } from 'jotai';
 import { Spin, Empty, Button } from 'antd';
 import { useIgxTopId } from '@/hooks/gameProvider/IGX/useIgxTopId';
 import { signInAtom } from '@/components/ContentLayout/Header/LoginModule';
+// import { useGetLocale } from '@refinedev/core';
 
 const index: React.FC = () => {
     const setSignIn = useSetAtom(signInAtom);
-    const { identity, isFetching } = useIgxTopId();
-    // console.log('🚀 ~ data:', otpId);
+    //取得網站預設語言
+    // const locale = useGetLocale();
+    // const currentLocale = locale();
+    //取得IGX的otp_id跟gameServer
+    const { identity, isFetching, otpId, gameServer } = useIgxTopId();
+    console.log('🚀 ~ otpId:', otpId);
 
+    const addUrl = `${gameServer}?otp_id=${otpId}&login_id=${identity?.id}&lang=ko-KR`;
     if (isFetching) return <Spin size="large" className="w-full h-screen flex justify-center items-center" />;
 
     //如果未登入則不顯示,登入則顯示iframe
@@ -19,8 +25,11 @@ const index: React.FC = () => {
                     <Button onClick={() => setSignIn(true)}>Login</Button>
                 </Empty>
             );
-        return <></>;
-        // <iframe style={{ border: 'none' }} src={`https://prod20290-125166753.442hattrick.com/ko/korean-view${addUrl}`} className="w-full h-full" />;
+        return (
+            <>
+                <iframe src={addUrl} name="output_frame" id="output_frame" className="w-full h-full border-0" />
+            </>
+        );
     };
 
     return (
