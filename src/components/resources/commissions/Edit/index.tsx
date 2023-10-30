@@ -12,11 +12,20 @@ const index: React.FC<{
     const { id } = useParams();
     const { mutate: update } = useUpdate();
 
-    const { form, formProps, saveButtonProps } = useForm<TCommission, HttpError, TCommissionFields>();
+    const { form, formProps, saveButtonProps, formLoading } = useForm<TCommission, HttpError, TCommissionFields>({
+        meta: {
+            populate: {
+                agents: {
+                    fields: ['id'],
+                },
+            },
+        },
+    });
     const handleCreate = () => {
         if (!id) return;
         form.validateFields()
             .then((values) => {
+                console.log('⭐  values:', values);
                 update(
                     {
                         resource: 'commissions',
@@ -42,7 +51,7 @@ const index: React.FC<{
 
     return (
         <Edit saveButtonProps={saveButtonProps}>
-            <FormComponent formType="edit" formProps={formProps} handler={handleCreate} />
+            <FormComponent formType="edit" formProps={formProps} handler={handleCreate} formLoading={formLoading} />
         </Edit>
     );
 };

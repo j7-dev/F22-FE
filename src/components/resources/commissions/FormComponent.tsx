@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Form, Input, Switch, Select, FormProps, InputNumber, Button } from 'antd';
-import { commissionTypes } from '@/types';
+import { commissionTypes, TUser } from '@/types';
 import { useGetSiteSetting, useUserSelect } from '@/hooks';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 
@@ -8,7 +8,8 @@ const FormComponent: React.FC<{
     formType: 'create' | 'edit';
     formProps: FormProps;
     handler: () => void;
-}> = ({ formType, formProps, handler }) => {
+    formLoading?: boolean;
+}> = ({ formType, formProps, handler, formLoading }) => {
     const form = formProps.form;
     const { default_currency, default_amount_type, support_currencies, support_amount_types } = useGetSiteSetting();
 
@@ -30,6 +31,15 @@ const FormComponent: React.FC<{
             clearTimeout(timeout);
         };
     }, [default_currency, default_amount_type, form]);
+
+    useEffect(() => {
+        if (!formLoading && formProps.initialValues) {
+            if (Array.isArray(formProps?.initialValues?.agents as TUser[])) {
+                const agent_ids = ((formProps?.initialValues?.agents || []) as TUser[]).map((item) => item.id);
+                formProps.initialValues.agents = agent_ids;
+            }
+        }
+    }, [formLoading]);
 
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
