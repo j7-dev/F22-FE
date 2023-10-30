@@ -35,7 +35,7 @@ const index = () => {
                         message: 'date is required',
                     },
                 ]}
-                initialValue={[dayjs().subtract(7, 'day'), dayjs()]}
+                initialValue={[dayjs().startOf('week'), dayjs().endOf('week')]}
             >
                 <RangePicker size="small" className="w-full" />
             </Form.Item>

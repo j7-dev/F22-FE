@@ -22,8 +22,8 @@ const DetailedInformation = () => {
 
     const columns: ColumnsType<DataType> = [
         {
-            title: 'date',
-            dataIndex: 'date',
+            title: 'agent',
+            dataIndex: 'agent',
         },
         {
             title: 'deposit',
@@ -58,12 +58,14 @@ const DetailedInformation = () => {
             dataIndex: 'profit',
         },
         {
-            title: 'new registered members',
-            dataIndex: 'numberOfRegistrants',
+            // 佣金比例
+            title: 'commission',
+            dataIndex: 'commission',
         },
         {
-            title: 'betting members',
-            dataIndex: 'bettingMembers',
+            // 佣金結金額
+            title: 'commissionSettlement',
+            dataIndex: 'commissionSettlement',
         },
     ];
 

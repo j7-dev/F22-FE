@@ -28,6 +28,9 @@ const index: React.FC<{
                 role: {
                     fields: ['type'],
                 },
+                commission: {
+                    fields: '*',
+                },
             },
         },
     });

@@ -1,7 +1,7 @@
 import { Form, Button } from 'antd';
 import { searchPropsAtom, TSearchProps } from './atom';
 import { useSetAtom } from 'jotai';
-import DateRangePicker from '@/components/Admin/DateRangePicker';
+import DateRangePicker from '@/components/form/DateRangePicker';
 
 const Filter: React.FC = () => {
     const setSearchProps = useSetAtom(searchPropsAtom);
