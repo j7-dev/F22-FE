@@ -181,5 +181,11 @@
     "餘額": "잔액",
     "可提領額度": "출금가능금액",
     "Delete": "삭제",
-    "Confirm": "확인"
+    "Confirm": "확인",
+    "The two passwords that you entered do not match!": "비밀번호가 일치하지 않습니다",
+    "The length of password must be greater than or equal to 6": "비밀번호는 6자리 또는 그 이상이여야 합니다",
+    "Please input your Phone": "휴대폰 번호를 입력해 주세요",
+    "Please input your Owner Real Name": "소유자 본명을 입력해 주세요",
+    "Please input your Bank Code": "은행명을 입력해 주세요",
+    "Please input your Bank Account Number": "은행 계좌번호를 입력해 주세요"
 }

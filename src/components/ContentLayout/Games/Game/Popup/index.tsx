@@ -41,12 +41,6 @@ const index: React.FC = () => {
         // console.log('handleClick');
         setPopupIsOpen(false);
     };
-    //TODO bug=>選了Select之後會直接關閉彈窗
-    // const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
-    //     if (gamePopupRef.current && !gamePopupRef.current.contains(event.target as Node)) {
-    //         handleClick();
-    //     }
-    // };
     useEffect(() => {
         if (popupIsOpen) {
             document.body.style.overflow = 'hidden';
