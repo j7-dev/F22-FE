@@ -34,6 +34,10 @@ export const useOpenGame = () => {
                         id: '3ede6595ccf746bab923457b1bb48784',
                         ip: '192.168.0.1',
                     },
+                    group: {
+                        id: 'rn7ixj24vtakua35',
+                        action: 'assign',
+                    },
                 },
                 config: {
                     game: {
