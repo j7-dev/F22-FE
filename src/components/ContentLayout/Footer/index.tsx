@@ -90,7 +90,7 @@ export const Footer: React.FC = () => {
                                 return (
                                     <li key={nanoid()}>
                                         <Link to={item.path}>
-                                            <span className="md:text-xs text-[10px] text-[#333333] hover:underline ">{t(item.value)}</span>
+                                            <span className="md:text-xs text-[10px] text-[#333333] hover:underline ">{t(item.label)}</span>
                                         </Link>
                                     </li>
                                 );
@@ -104,7 +104,7 @@ export const Footer: React.FC = () => {
                                 return (
                                     <li key={nanoid()}>
                                         <Link to={item.path}>
-                                            <span className="md:text-xs text-[10px] text-[#333333] hover:underline ">{t(item.value)}</span>
+                                            <span className="md:text-xs text-[10px] text-[#333333] hover:underline ">{t(item.label)}</span>
                                         </Link>
                                     </li>
                                 );
