@@ -33,12 +33,14 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
         }
         if (item.gameCategory === 'casino') {
             //判斷是否為收藏遊戲
+            //自訂baccarat大小注
+            const maxBet = item.casinoCategory === 'baccarat' ? '10,000,000' : item['Bet Limit']?.KRW.max?.toLocaleString();
             return (
                 <div className="onTheTop flex justify-between items-center w-full">
                     <div className="wrap flex gap-1 items-center">
                         <FavoriteIcon item={item} />
                         {/* 手機版不會顯示 */}
-                        <div className="BetLimit hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${item['Bet Limit']?.KRW.max?.toLocaleString()}`}</div>
+                        <div className="BetLimit hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${maxBet}`}</div>
                     </div>
                     <img className="provider w-5 sm:w-10" src={item.casinoCategoryIcon} alt="" />
                 </div>
@@ -58,9 +60,11 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
         }
         if (item.gameCategory === 'casino') {
             //判斷是否為收藏遊戲
+            //自訂baccarat大小注
+            const maxBet = item.casinoCategory === 'baccarat' ? '10,000,000' : item['Bet Limit']?.KRW.max?.toLocaleString();
             return (
                 <>
-                    <div className="BetLimit text-[10px] font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${item['Bet Limit']?.KRW.max?.toLocaleString()}`}</div>
+                    <div className="BetLimit text-[10px] font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${maxBet}`}</div>
                 </>
             );
         }
