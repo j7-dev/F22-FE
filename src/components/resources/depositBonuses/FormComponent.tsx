@@ -5,6 +5,7 @@ import ResourceSelect from '@/components/form/ResourceSelect';
 import { isObject } from 'lodash-es';
 import { TVip } from '@/types';
 import { CloseOutlined } from '@ant-design/icons';
+import { gameCategories } from '@/utils/GameCategory';
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
@@ -13,7 +14,8 @@ const FormComponent: React.FC<{
     formLoading?: boolean;
 }> = ({ formType, formProps, handler, formLoading }) => {
     const form = formProps.form;
-    const { default_currency, default_amount_type, support_game_providers, support_currencies, support_amount_types } = useGetSiteSetting();
+    const { default_currency, default_amount_type, support_currencies, support_amount_types } = useGetSiteSetting();
+    const game_categories = gameCategories.map((category) => category.value);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -64,8 +66,8 @@ const FormComponent: React.FC<{
 
                 <ResourceSelect formItemProps={{ label: 'VIPS', name: ['vips'] }} fetchProps={{ resource: 'vips', optionLabel: 'label', optionValue: 'id' }} selectProps={{ allowClear: true, mode: 'multiple' }} />
 
-                <Form.Item name="allow_game_providers" label="Allow Game Providers" initialValue={formType === 'create' ? support_game_providers : undefined}>
-                    <Checkbox.Group options={support_game_providers} />
+                <Form.Item name="allow_game_categories" label="Allow Game Categories" initialValue={formType === 'create' ? game_categories : undefined}>
+                    <Checkbox.Group options={game_categories} />
                 </Form.Item>
 
                 <div className="bg-gray-100 p-4 rounded-xl mb-4 hidden">

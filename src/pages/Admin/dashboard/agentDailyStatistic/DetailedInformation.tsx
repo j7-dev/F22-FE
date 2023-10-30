@@ -2,6 +2,7 @@ import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { searchPropsAtom } from './atom';
 import { useAtomValue } from 'jotai';
+import { useCustom, useApiUrl } from '@refinedev/core';
 
 type DataType = {
     agentId: number;
@@ -21,149 +22,69 @@ const DetailedInformation = () => {
 
     const columns: ColumnsType<DataType> = [
         {
-            title: 'Agent DisPlayname',
-            dataIndex: 'agentId',
+            title: 'date',
+            dataIndex: 'date',
         },
         {
-            title: 'Register',
-            children: [
-                {
-                    title: 'Register',
-                    dataIndex: 'register',
-                },
-                {
-                    title: 'Number of first-time depositors',
-                    dataIndex: 'numberOfFirstTimeDepositors',
-                },
-                {
-                    title: 'First-time Deposit Rate',
-                    dataIndex: 'firstTimeDepositRate',
-                },
-            ],
+            title: 'deposit',
+            dataIndex: 'deposit ',
         },
         {
-            title: 'Deposit',
-            children: [
-                {
-                    title: 'Number of Depositors',
-                    dataIndex: 'numberOfDepositors',
-                },
-                {
-                    title: 'Deposit times',
-                    dataIndex: 'depositTimes',
-                },
-                {
-                    title: 'Deposit ratio',
-                    dataIndex: 'depositRatio',
-                },
-                {
-                    title: 'Deposit Amount',
-                    dataIndex: 'depositAmount',
-                },
-            ],
+            title: 'withdraw',
+            dataIndex: 'withdraw',
         },
         {
-            title: 'Withdrawal',
-            children: [
-                {
-                    title: 'Number of Withdrawals',
-                    dataIndex: 'numberOfWithdrawals',
-                },
-                {
-                    title: 'Withdrawal times',
-                    dataIndex: 'withdrawalTimes',
-                },
-                {
-                    title: 'Withdrawal Amount',
-                    dataIndex: 'withdrawalAmount',
-                },
-                {
-                    title: 'Withdrawal Rate',
-                    dataIndex: 'withdrawalRate',
-                },
-            ],
+            title: 'DPWD',
+            dataIndex: 'dpWd',
         },
         {
-            title: 'Revenue',
-            children: [
-                {
-                    title: 'Revenue',
-                    dataIndex: 'revenue',
-                },
-                {
-                    title: 'Revenue Rate',
-                    dataIndex: 'revenueRate',
-                },
-            ],
+            title: 'valid bet amount',
+            dataIndex: 'validBet',
         },
         {
-            title: 'Total Bet & Turnover',
-            children: [
-                {
-                    title: 'Total Bet Amount',
-                    dataIndex: 'totalBetAmount',
-                },
-                {
-                    title: 'Average Rolling Rate',
-                    dataIndex: 'averageRollingRate',
-                },
-            ],
+            title: 'payout',
+            dataIndex: 'payout',
         },
         {
-            title: 'Bonus',
-            children: [
-                {
-                    title: 'Cash Bonus',
-                    dataIndex: 'cashBonus',
-                },
-                {
-                    title: 'Point Bonus',
-                    dataIndex: 'pointBonus',
-                },
-                {
-                    title: 'Bonus Rate',
-                    dataIndex: 'bonusRate',
-                },
-            ],
+            title: 'winloss',
+            dataIndex: 'winloss',
         },
         {
-            title: 'Agent Commission',
-            children: [
-                {
-                    title: 'Agent Commission',
-                    dataIndex: 'agentCommission',
-                },
-                {
-                    title: 'Agent Withdrawal',
-                    dataIndex: 'agentWithdrawal',
-                },
-                {
-                    title: 'Rate',
-                    dataIndex: 'rate',
-                },
-            ],
+            title: 'bonus & turnover bonus',
+            dataIndex: 'coupon',
         },
         {
-            title: 'Actual revenue',
-            children: [
-                {
-                    title: 'Actual revenue',
-                    dataIndex: 'actualRevenue',
-                },
-                {
-                    title: 'Rate',
-                    dataIndex: 'rate',
-                },
-            ],
+            title: 'profit',
+            dataIndex: 'profit',
+        },
+        {
+            title: 'new registered members',
+            dataIndex: 'numberOfRegistrants',
+        },
+        {
+            title: 'betting members',
+            dataIndex: 'bettingMembers',
         },
     ];
 
-    const data: DataType[] = [];
+    const apiUrl = useApiUrl();
+    const { data, isLoading } = useCustom({
+        url: `${apiUrl}/utility/statistic/daily`,
+        method: 'get',
+        config: {
+            query: {
+                start: dateRange ? dateRange[0].toISOString() : undefined,
+                end: dateRange ? dateRange[1].toISOString() : undefined,
+            },
+        },
+    });
+    const dataSource = data?.data?.data || [];
+
+    //TODO API 抓出某個AGENT底下的所有資料
+
     return (
         <>
-            <p>Detailed Information {dateRange ? dateRange.map((date) => (date ? date.format('YYYY/MM/DD') : '')).join(' ~ ') : ''}</p>
-            <Table rowKey="agentId" columns={columns} dataSource={data} />
-            <hr className="my-8" />
+            <Table rowKey="date" size="small" columns={columns} dataSource={dataSource} loading={isLoading} />
         </>
     );
 };

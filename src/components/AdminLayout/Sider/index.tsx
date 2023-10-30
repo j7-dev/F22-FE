@@ -131,7 +131,6 @@ const CustomSider: typeof Sider = () => {
                     {items}
                 </Menu>
             </AntdLayout.Sider>
-            {/* ENHANCE: 未來有空在換成動畫 */}
             <div className="block" style={{ width: isMobile || collapsed ? '80px' : siderWidth }}></div>
         </>
     );

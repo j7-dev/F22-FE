@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Form, Input, Switch, Radio, DatePicker, Select, FormProps, Checkbox, Typography } from 'antd';
-import { TRole, TRoleType, TUser, TVip, BANK_ACCOUNT_FIELDS } from '@/types';
+import { TRole, TRoleType, TUser, TVip, BANK_ACCOUNT_FIELDS, TCommission } from '@/types';
 import dayjs, { Dayjs } from 'dayjs';
 import { isString, isObject } from 'lodash-es';
 import { useUserSelect, useGetSiteSetting } from '@/hooks';
 import { useSelect } from '@refinedev/antd';
 import { DefaultOptionType } from 'rc-select/lib/Select';
 import { keyToWord } from '@/utils';
-import { BankOutlined } from '@ant-design/icons';
+import { BankOutlined, MoneyCollectOutlined } from '@ant-design/icons';
+import CommissionTable from '@/components/Admin/CommissionTable';
 
 const { Title } = Typography;
 
@@ -20,6 +21,8 @@ const FormComponent: React.FC<{
 }> = ({ formType, formProps, handler, defaultRoleType = 'authenticated', formLoading }) => {
     const form = formProps.form;
     const [isEditing, setIsEditing] = useState(false);
+    const [userRole, setUserRole] = useState('Auntenticated');
+
     const siteSetting = useGetSiteSetting();
     const rolesMapping = siteSetting?.roles || {};
     const roleSelectProps = {
@@ -56,6 +59,7 @@ const FormComponent: React.FC<{
     useEffect(() => {
         if (!formLoading && formProps.initialValues) {
             if (isObject(formProps.initialValues.role as number | TRole)) {
+                setUserRole(formProps.initialValues.role.type);
                 formProps.initialValues.role = formProps.initialValues.role.id;
             }
             if (isObject(formProps.initialValues.vip as number | TVip)) {
@@ -167,6 +171,16 @@ const FormComponent: React.FC<{
                     </Form.Item>
                 )}
             </div>
+
+            {(userRole === 'agent' || userRole === 'top_agent') && (
+                <div className="bg-blue-50 rounded-xl p-6 mt-16">
+                    <Title level={5}>
+                        <MoneyCollectOutlined className="mr-2" /> Commission
+                    </Title>
+                    <CommissionTable commission={formProps.initialValues?.commission as TCommission} />
+                </div>
+            )}
+
             <div className="bg-yellow-50 rounded-xl p-6 mt-16">
                 <Title level={5}>
                     <BankOutlined className="mr-2" /> Bank Account

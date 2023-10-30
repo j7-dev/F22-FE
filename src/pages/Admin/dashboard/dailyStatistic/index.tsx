@@ -6,13 +6,13 @@ const index = () => {
     return (
         <>
             <Row gutter={[16, 16]}>
-                <Col lg={6} xs={24}>
-                    <Card title="Filters">
+                <Col lg={24} xs={24}>
+                    <Card bordered={false}>
                         <Filter />
                     </Card>
                 </Col>
-                <Col lg={18} xs={24}>
-                    <Card bordered={false} title="Search Result">
+                <Col lg={24} xs={24}>
+                    <Card bordered={false}>
                         <DetailedInformation />
                     </Card>
                 </Col>

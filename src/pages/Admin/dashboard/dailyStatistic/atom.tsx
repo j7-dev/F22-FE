@@ -1,9 +1,9 @@
 import { atom } from 'jotai';
-import { Dayjs } from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 export type TSearchProps = {
     agent?: string;
     dateRange?: [Dayjs, Dayjs] | undefined;
 };
 
-export const searchPropsAtom = atom<TSearchProps>({ agent: undefined, dateRange: undefined });
+export const searchPropsAtom = atom<TSearchProps>({ dateRange: [dayjs().startOf('week'), dayjs().endOf('week')] });

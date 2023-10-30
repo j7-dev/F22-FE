@@ -14,7 +14,7 @@ const EditAgent = lazy(() => import('@/pages/Admin/agents/Edit'));
 const ListCommission = lazy(() => import('@/pages/Admin/agents/commissionSetting/List'));
 const CreateCommission = lazy(() => import('@/pages/Admin/agents/commissionSetting/Create'));
 const EditCommission = lazy(() => import('@/pages/Admin/agents/commissionSetting/Edit'));
-const CommissionSettlement = lazy(() => import('@/pages/Admin/agents/commissionSettlement/List'));
+const CommissionSettlement = lazy(() => import('@/pages/Admin/agents/commissionSettlement'));
 const AffCommissionTransactions = lazy(() => import('@/pages/Admin/agents/affCommissionTransactions'));
 const AffTransactions = lazy(() => import('@/pages/Admin/agents/affTransactions'));
 const VipSetting = lazy(() => import('@/pages/Admin/systemSetting/vipSetting'));

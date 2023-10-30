@@ -203,21 +203,14 @@ const DetailedInformation: React.FC<{
                 <Filter formProps={searchFormProps} />
             </Col>
             <Col lg={24} xs={24}>
-                <Card
-                    bordered={false}
-                    title={
-                        <div className="flex justify-between items-end">
-                            <span>Search Result</span>
-                            <span className="text-xs">
-                                <Tooltip title="click to expand table">
-                                    <Switch size="small" onChange={handleExpand} />
-                                </Tooltip>
-                            </span>
+                <Card bordered={false}>
+                    <div className="mb-4 flex justify-between">
+                        <div>
+                            <FilterTags form={searchFormProps?.form} />
                         </div>
-                    }
-                >
-                    <div className="mb-4">
-                        <FilterTags form={searchFormProps?.form} />
+                        <Tooltip title="click to expand table">
+                            <Switch size="small" onChange={handleExpand} />
+                        </Tooltip>
                     </div>
                     <Table {...formattedTableProps} />
                     <hr className="my-8" />
