@@ -17,21 +17,25 @@ const index = ({ atom }: Props) => {
     const agents = selectProps.options || [];
     const [searchProps, setSearchProps] = useAtom(atom);
 
-    return agents.map((agent) => (
-        <Tag
-            key={agent.value}
-            className={`w-full cursor-pointer px-2 py-1 my-1 rounded-lg`}
-            color={searchProps?.agent === agent.value ? 'cyan' : ''}
-            onClick={() =>
-                setSearchProps({
-                    ...searchProps,
-                    agent: agent.value as number,
-                })
-            }
-        >
-            {agent.label}
-        </Tag>
-    ));
+    return (
+        <>
+            {agents.map((agent) => (
+                <Tag
+                    key={agent.value}
+                    className={`w-full cursor-pointer px-2 py-1 my-1 rounded-lg`}
+                    color={searchProps?.agent === agent.value ? 'cyan' : ''}
+                    onClick={() =>
+                        setSearchProps({
+                            ...searchProps,
+                            agent: agent.value as number,
+                        })
+                    }
+                >
+                    {agent.label}
+                </Tag>
+            ))}
+        </>
+    );
 };
 
 export default index;
