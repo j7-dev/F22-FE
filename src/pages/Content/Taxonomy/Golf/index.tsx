@@ -6,8 +6,8 @@ import { signInAtom } from '@/components/ContentLayout/Header/LoginModule';
 
 const index: React.FC = () => {
     const setSignIn = useSetAtom(signInAtom);
-    const { identity, otpId, isFetching } = useIgxTopId();
-    console.log('🚀 ~ data:', otpId);
+    const { identity, isFetching } = useIgxTopId();
+    // console.log('🚀 ~ data:', otpId);
 
     if (isFetching) return <Spin size="large" className="w-full h-screen flex justify-center items-center" />;
 
