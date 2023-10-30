@@ -66,7 +66,7 @@ export const Footer: React.FC = () => {
                 ) : (
                     ''
                 )}
-                <div className="rightZone w-full md:col-span-3 md:grid-cols-3 md:gap-4 col-span-4 grid grid-cols-4 gap-1">
+                <div className="hidden  rightZone w-full md:col-span-3 md:grid-cols-3 md:gap-4 col-span-4 sm:grid grid-cols-4 gap-1">
                     <div className="aboutWrap text-center md:col-span-1 md:flex md:flex-col md:gap-4 col-span-4 grid grid-cols-4">
                         <span className="md:text-lg md:h-10 text-[10px] col-span-1 flex items-center justify-center text-black font-bold">{t('About Us')}</span>
                         <ul className="md:flex-col md:justify-center md:gap-0 col-span-3 flex flex-row justify-start items-center gap-1 p-0 m-0">
