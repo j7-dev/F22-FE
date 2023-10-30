@@ -94,8 +94,15 @@ const index: React.FC = () => {
         //     ]);
         // }
     };
+    //自訂驗證規則=>密碼長度大於6
+    const passwordValidateFunction = (_: object, value: string) => {
+        if (value.length < 6) {
+            return Promise.reject('The length of user name must be greater than or equal to 6');
+        }
+        return Promise.resolve();
+    };
     //自定義驗證規則=>確認密碼
-    const validateFunction = (_: object, value: string) => {
+    const confirmPasswordValidator = (_: object, value: string) => {
         if (value !== form.getFieldValue('password')) {
             return Promise.reject('The two passwords that you entered do not match!');
         }
@@ -103,14 +110,15 @@ const index: React.FC = () => {
     };
     // Watch all values
     const values = Form.useWatch([], form);
-    // console.log('values', values);
     useEffect(() => {
         //動態賦予userEmail
         form.setFieldsValue({ userEmail: `${values?.userName}@smtbet7.com` });
         form.validateFields({ validateOnly: true }).then(
+            //成功回調
             () => {
                 setSubmitTable(true);
             },
+            //失敗回調
             () => {
                 setSubmitTable(false);
             },
@@ -139,10 +147,10 @@ const index: React.FC = () => {
                     <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }, { validator: userNameValidateFunction }]}>
                         <Input onBlur={handleCheckUserName} placeholder={t('User Name')} prefix={<img src={userName} />} bordered={false} />
                     </Form.Item>
-                    <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password' }]}>
+                    <Form.Item name="password" rules={[{ required: true, message: 'Please input your Password' }, { validator: passwordValidateFunction }]}>
                         <Input.Password placeholder={t('User Password')} prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
                     </Form.Item>
-                    <Form.Item name="confirmPassword" rules={[{ required: true, message: 'Please input your Password' }, { validator: validateFunction }]}>
+                    <Form.Item name="confirmPassword" rules={[{ required: true, message: 'Please input your Password' }, { validator: confirmPasswordValidator }]}>
                         <Input.Password placeholder={t('Confirm Password')} prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
                     </Form.Item>
                     <Form.Item name="userPhone" rules={[{ required: true, message: 'Please input your Phone' }]}>
