@@ -16,20 +16,16 @@ const useColumns = () => {
             dataIndex: 'id',
             key: 'id',
         },
-        {
-            title: 'Risk Management',
-            dataIndex: 'memberAccount ',
-            key: 'RiskManagement',
-        },
+
         {
             title: 'Account',
             dataIndex: 'username',
             key: 'Account',
         },
         {
-            title: 'Display Name',
+            title: 'Real Name',
             dataIndex: 'display_name',
-            key: 'DisplayName',
+            key: 'RealName',
         },
         {
             title: 'Agent',

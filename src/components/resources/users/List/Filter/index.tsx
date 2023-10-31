@@ -47,7 +47,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
                     <Form.Item label="top agent" name={['top_agent']}>
                         <Select size="small" {...topAgentSelectProps} allowClear />
                     </Form.Item>
-                    <BooleanRadioButton
+                    {/* <BooleanRadioButton
                         formItemProps={{
                             initialValue: undefined,
                             label: 'blocked',
@@ -56,11 +56,11 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
                         radioGroupProps={{
                             size: 'small',
                         }}
-                    />
+                    /> */}
                     <BooleanRadioButton
                         formItemProps={{
                             initialValue: undefined,
-                            label: 'confirmed',
+                            label: 'status',
                             name: ['confirmed'],
                         }}
                         radioGroupProps={{
