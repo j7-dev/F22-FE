@@ -4,7 +4,7 @@ import { useTable, List } from '@refinedev/antd';
 import Filter from './Filter';
 import FilterTags from '@/components/Admin/FilterTags';
 import { getStatusTag } from '@/utils';
-import { TUser, TTransactionType } from '@/types';
+import { TUser, TTransactionType, TDepositBonus } from '@/types';
 import UserLink from '@/components/Admin/UserLink';
 import VipLink from '@/components/Admin/VipLink';
 import Amount from '@/components/Admin/Amount';
@@ -19,6 +19,7 @@ import { useParams } from 'react-router-dom';
 import { useGetSiteSetting } from '@/hooks';
 import UserSummary from '@/components/Admin/UserSummary';
 import BankAccount from '@/components/Admin/BankAccount';
+import DepositBonusAmount from '@/components/Admin/DepositBonusAmount';
 
 const index = () => {
     const { type: listTypeLowerCase, roleType } = useParams<TParams>();
@@ -137,27 +138,29 @@ const index = () => {
             dataIndex: 'id',
         },
         {
-            title: 'date',
+            title: 'Date',
             dataIndex: 'createdAt',
             render: (createdAt: string) => <DateTime value={createdAt} />,
         },
         {
-            title: 'update date',
+            title: 'Update Date',
             dataIndex: 'updatedAt',
             render: (updatedAt: string, record: DataType) => (record?.createdAt === updatedAt ? '' : <DateTime value={updatedAt} />),
         },
         {
-            title: 'amount',
+            title: 'Amount',
             dataIndex: 'amount',
             render: (amount, record) => <Amount amount={amount} currency={record?.currency} symbol />,
         },
         {
-            // TODO 這是什麼?
-            title: 'bonus',
-            dataIndex: 'bonus',
+            title: 'Deposit Bonus',
+            dataIndex: 'deposit_bonus',
+            render: (deposit_bonus: TDepositBonus, record) => {
+                return <DepositBonusAmount deposit_bonus={deposit_bonus} deposit_amount={record?.amount} />;
+            },
         },
         {
-            title: 'status',
+            title: 'Status',
             dataIndex: 'status',
             render: (status: string) => getStatusTag(status),
         },
@@ -167,11 +170,11 @@ const index = () => {
             render: (user: TUser) => <UserLink user={user} />,
         },
         {
-            title: 'agent',
+            title: 'Agent',
             dataIndex: 'agent',
         },
         {
-            title: 'vip',
+            title: 'Vip',
             dataIndex: 'vip',
             render: (_, record) => <VipLink vip={record?.user?.vip} />,
         },
