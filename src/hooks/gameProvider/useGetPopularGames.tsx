@@ -1,16 +1,15 @@
 import { useMemo } from 'react';
-import { TPopularGamesData, TPopularGame, TPopularGames } from '@/types/games/popularGames';
+import { useTranslation } from 'react-i18next';
+import { TPopularGamesData, TPopularGames, TGame } from '@/types/games';
 import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
-import { useOpenGame } from '@/hooks/gameProvider/useOpenGame';
 import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTableList';
-// import { getRandomIndexes } from '@/hooks/gameProvider/getRandomIndexes';
 import { gameCategories } from '@/utils/GameCategory';
 import { sampleSize } from 'lodash-es';
 import { TGameCategory } from '@/types/games/gameCategory';
-
+import btiIcon from '@/assets/images/game_provider/bti_icon.png';
+import igxIcon from '@/assets/images/game_provider/igx_icon.png';
 export const useGetPopularGames = () => {
-    //取得openGame函式
-    const { isLoading: openGameLoading, handleClick } = useOpenGame();
+    const { t } = useTranslation();
     //取得pp遊戲資料
     const { data: ppData, isLoading: ppLoading } = useGetPPTableList();
     //取得evo遊戲資料
@@ -22,16 +21,40 @@ export const useGetPopularGames = () => {
     //只取得Slot Games 18款遊戲資料
     const slotGames = isLoading ? [] : (ppData || [])?.slice(0, 16);
 
-    // console.log('slotGames:', slotGames);
-
     //只取得Live Casino 18款遊戲資料
     const liveGamesData = isLoading ? [] : (evoData || []).slice(0, 16);
+    //設定Sport Games 為BTI
+    const sportGamesData = [
+        {
+            gameName: t('Sports'),
+            gameCategory: 'sports',
+            gameProviderName: 'sports',
+            gameImg: btiIcon,
+        },
+    ];
+    //InPlay Games 為BTI#live
+    const inPlayGamesData = [
+        {
+            gameName: t('In Play'),
+            gameCategory: 'inPlay',
+            gameProviderName: 'inPlay',
+            gameImg: btiIcon,
+        },
+    ];
+    //Golf Games 為IGX
+    const golfGamesData = [
+        {
+            gameName: t('Golf'),
+            gameCategory: 'golf',
+            gameProviderName: 'golf',
+            gameImg: igxIcon,
+        },
+    ];
 
     //重組所有遊戲資料
     const allGamesArray = useMemo(() => {
-        return isLoading ? [] : [...liveGamesData, ...slotGames];
+        return isLoading ? [] : [...liveGamesData, ...slotGames, ...sportGamesData, ...inPlayGamesData, ...golfGamesData];
     }, [isLoading]);
-    // console.log('🚀  allGamesArray:', allGamesArray);
 
     // 獲取隨機的6個元素
     const sixPoplarAllGames = useMemo(() => {
@@ -43,9 +66,7 @@ export const useGetPopularGames = () => {
         {
             label: 'All Games',
             value: 'allGames',
-            gameData: sixPoplarAllGames as TPopularGame[],
-            openGameLoading: openGameLoading,
-            openGame: handleClick,
+            gameData: sixPoplarAllGames as TGame[],
         },
         ...(gameCategories
             .filter((CategoryItem: TGameCategory) => CategoryItem.value !== 'events') //過濾掉events
@@ -54,8 +75,6 @@ export const useGetPopularGames = () => {
                     label: CategoryItem.label,
                     value: CategoryItem.value,
                     gameData: allGamesArray.filter((game) => game?.gameCategory === CategoryItem?.value),
-                    openGameLoading: openGameLoading,
-                    openGame: handleClick,
                 };
             }) as TPopularGames[]),
     ];
