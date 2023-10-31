@@ -23,9 +23,9 @@ const useColumns = () => {
             key: 'Account',
         },
         {
-            title: 'Display Name',
+            title: 'Real Name',
             dataIndex: 'display_name',
-            key: 'DisplayName',
+            key: 'RealName',
         },
         {
             title: 'Agent',
