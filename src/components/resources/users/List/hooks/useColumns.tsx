@@ -16,11 +16,7 @@ const useColumns = () => {
             dataIndex: 'id',
             key: 'id',
         },
-        {
-            title: 'Risk Management',
-            dataIndex: 'memberAccount ',
-            key: 'RiskManagement',
-        },
+
         {
             title: 'Account',
             dataIndex: 'username',
