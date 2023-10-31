@@ -1,6 +1,6 @@
-import { TPopularGame } from '@/types/games/popularGames';
+import { TGame } from '@/types/games';
 
-export const getRandomIndexes = (arr: TPopularGame[], count: number) => {
+export const getRandomIndexes = (arr: TGame[], count: number) => {
     const indexes = [];
     const arrLength = arr.length;
 
