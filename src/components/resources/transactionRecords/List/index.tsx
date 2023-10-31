@@ -182,7 +182,7 @@ const index = () => {
         {
             title: 'Bank Account',
             dataIndex: 'bankAccount',
-            render: (_, record) => <BankAccount bank_account={record?.user?.bank_account} />,
+            render: (_, record) => <BankAccount bank_account={record?.user?.bank_account} display="flex" />,
         },
     ];
 

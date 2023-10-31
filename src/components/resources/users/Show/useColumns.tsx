@@ -123,7 +123,7 @@ const useColumns = () => {
             key: 'bank_account',
             title: 'Bank Account',
             dataIndex: 'bank_account',
-            render: (bank_account: TBankAccount | null) => <BankAccount bank_account={bank_account} />,
+            render: (bank_account: TBankAccount | null) => <BankAccount bank_account={bank_account} display="flex" />,
         },
         {
             key: 'createdAt',
