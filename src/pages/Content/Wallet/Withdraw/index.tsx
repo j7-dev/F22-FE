@@ -8,6 +8,7 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 import { useGetSiteSetting } from '@/hooks';
 
 const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
+    console.log('🚀 ~ userInfo:', userInfo);
     const { t } = useTranslation();
     const [form] = Form.useForm();
     const [isDisabled, setIsDisabled] = useState(true);
@@ -46,7 +47,14 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
     const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
     //取得用戶餘額
     const balance = userInfo?.balances !== undefined ? userInfo?.balances.filter((item) => item.currency === default_currency && item.amount_type === 'CASH')[0].amount || 0 : 0;
-
+    /**
+     * 取得用戶可提款餘額
+     * 如果用戶身上有deposit_bonus則判斷有效投注有沒有達到限制金額，如果沒有達到，禁用提款按鈕
+     * 限制金額=rolling percentage * 當時存款金額
+     * 否則，直接顯示可提款餘額balance
+     * TODO 等存款紅利限制API串接後，再來判斷
+     */
+    const withdrawable = userInfo?.deposit_bonus == null ? balance : 0;
     //監聽Form的值，都填寫完畢後，使Button可以點擊
     const values = Form.useWatch([], form);
     useEffect(() => {
@@ -69,7 +77,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical" className="w-full">
                     <div className="flex justify-between my-2 w-full">
                         <span className="text-sm text-[#828282] font-medium">{t('Amount to withdraw')}</span>
-                        <span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()}/${t('可提領額度')}:0`}</span>
+                        <span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()} / ${t('可提領額度')}:${withdrawable.toLocaleString()}`}</span>
                     </div>
                     <QuickAmountInput
                         formItemProps={{
@@ -84,6 +92,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                         }}
                         inputNumberProps={{
                             prefix: symbol,
+                            max: withdrawable,
                         }}
                         //隱藏快速按鈕
                         quickButtonProps={{
