@@ -47,7 +47,7 @@ const Login: React.FC = () => {
                 <>
                     <div onClick={handleWallet} className="primaryButton WalletBtn whitespace-nowrap flex items-center gap-x-2 cursor-pointer">
                         <img src={Icon_Wallet_white} alt="" />
-                        <span>{t('My Wallet')}</span>
+                        <span>{t('My Page')}</span>
                     </div>
                     <div onClick={handleLogout} className={`secondaryButton loginBtn whitespace-nowrap flex items-center justify-center cursor-pointer`}>
                         <span>{t('Log out')}</span>
