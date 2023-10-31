@@ -33,12 +33,14 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
         }
         if (item.gameCategory === 'casino') {
             //判斷是否為收藏遊戲
+            //自訂baccarat大小注
+            const maxBet = item.casinoCategory === 'baccarat' ? '10,000,000' : item['Bet Limit']?.KRW.max?.toLocaleString();
             return (
                 <div className="onTheTop flex justify-between items-center w-full">
                     <div className="wrap flex gap-1 items-center">
                         <FavoriteIcon item={item} />
                         {/* 手機版不會顯示 */}
-                        <div className="BetLimit hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${item['Bet Limit']?.KRW.max?.toLocaleString()}`}</div>
+                        <div className="BetLimit hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${maxBet}`}</div>
                     </div>
                     <img className="provider w-5 sm:w-10" src={item.casinoCategoryIcon} alt="" />
                 </div>
@@ -58,9 +60,11 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
         }
         if (item.gameCategory === 'casino') {
             //判斷是否為收藏遊戲
+            //自訂baccarat大小注
+            const maxBet = item.casinoCategory === 'baccarat' ? '10,000,000' : item['Bet Limit']?.KRW.max?.toLocaleString();
             return (
                 <>
-                    <div className="BetLimit text-[10px] font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${item['Bet Limit']?.KRW.max?.toLocaleString()}`}</div>
+                    <div className="BetLimit text-[10px] font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${maxBet}`}</div>
                 </>
             );
         }
@@ -76,15 +80,16 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
         );
     };
     return (
-        <div style={{ background: `url('${gameItem?.gameImg}')` }} className="singleGame bg-cover bg-center w-full h-full aspect-square relative overflow-hidden rounded-2xl sm:shadow-none shadow-[0_4px_4px_0_#A370ED33] group">
+        <div className="singleGame  w-full h-full aspect-square relative overflow-hidden rounded-2xl sm:shadow-none shadow-[0_4px_4px_0_#A370ED33] group">
             <div onClick={openGame(gameItem)} className={`editOverlay opacity-0 hover:opacity-100 hover:bg-slate-600/50 z-10 cursor-pointer absolute inset-0 w-full h-full duration-300 text-white  flex justify-center items-center`}>
                 <PlayGameBtn />
             </div>
             <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit pt-2 sm:px-5 px-2.5">
                 <OnTheTop {...gameItem} />
             </div>
-            <div className="gameWrap w-full h-full relative bg-gradient-to-tr from-transparent via-transparent via-70% to-[#4D28EA]">
-                {/* <img src={gameItem?.gameImg} alt="" className="aspect-square w-full h-full duration-500 group-hover:scale-125 object-cover" /> */}
+            <div className="gameWrap w-full h-full relative ">
+                <img src={gameItem?.gameImg} alt="" className="aspect-square w-full h-full duration-500 group-hover:scale-125 object-cover" />
+                <div className="imgOverlay absolute top-0 w-full h-full bg-gradient-to-tr from-transparent via-transparent via-70% to-[#4D28EA]" />
                 <div className="gameInfo absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent via-50% to-[#1A1A1A80] flex flex-col items-start justify-end sm:px-5 py-2.5 px-2.5">
                     <div className="sm:hidden">
                         <MobileRTPAndBetLimit {...gameItem} />

@@ -119,13 +119,13 @@ const index: React.FC = () => {
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical">
                     <QuickAmountInput
                         formItemProps={{
-                            label: <span className="mt-1 text-sm text-[#828282] font-medium">{t('Amount to transfer')}</span>,
+                            label: <span className="mt-1 text-sm text-[#828282] font-medium">{t('Amount to deposit')}</span>,
                             name: ['amount'],
                             rules: [
                                 {
                                     type: 'number',
                                     min: 1,
-                                    message: 'Please input amount greater than 0 !',
+                                    message: t('Please input amount greater than 0 !'),
                                 },
                             ],
                         }}

@@ -21,11 +21,11 @@ const index: React.FC<{
     }, [categoryData]);
     return (
         <div className="w-full bg-white rounded-lg shadow-[0_0px_29px_0px_rgba(43, 50, 64, 0.09)] flex flex-col gap-2.5 p-4">
-            <div className="pageHeader font-bold text-[#2B3240] text-sm p-2.5">{categoryData?.[0].category?.value}</div>
+            <div className="pageHeader font-bold text-[#2B3240] text-sm p-2.5">{t(categoryData?.[0].category?.value as string)}</div>
             {isShowContent && <PostDetail postData={postContent} />}
             <div className="pageContent w-full flex flex-col">
                 <div className="tableHeader h-10 w-full items-center flex flex-row bg-[#2B3240] text-white p-2 font-bold text-[13px]">
-                    <div className="tableNo w-20 text-center">{t('No.')}</div>
+                    <div className="tableNo w-20 text-center">{t('No')}</div>
                     <div className="tableTitle w-8/12">{t('Title')}</div>
                     <div className="tableDate w-48 text-center">{t('Date Created')}</div>
                 </div>

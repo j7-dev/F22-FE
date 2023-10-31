@@ -68,8 +68,8 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                 <span className="text-black font-bold text-2xl">{t('Withdraw')}</span>
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical" className="w-full">
                     <div className="flex justify-between my-2 w-full">
-                        <span className="text-sm text-[#828282] font-medium">{t('Amount to transfer')}</span>
-                        <span className="text-sm text-[#828282] font-medium">餘額:{balance.toLocaleString()}/可提領額度:0</span>
+                        <span className="text-sm text-[#828282] font-medium">{t('Amount to withdraw')}</span>
+                        <span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()}/${t('可提領額度')}:0`}</span>
                     </div>
                     <QuickAmountInput
                         formItemProps={{

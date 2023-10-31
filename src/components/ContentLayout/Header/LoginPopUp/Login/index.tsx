@@ -117,10 +117,10 @@ const index: React.FC = () => {
                     {/* 錯誤訊息 */}
                     {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
                     <Form form={form} onFinish={handleLogin} className="login">
-                        <Form.Item name="userName" rules={[{ required: true, message: 'Please input your Name' }]}>
+                        <Form.Item name="userName" rules={[{ required: true, message: t('Please input your Name') }]}>
                             <Input placeholder={t('User Name')} prefix={<img src={userNameIcon} />} bordered={false} />
                         </Form.Item>
-                        <Form.Item name="userPas" rules={[{ required: true, message: 'Please input your Password' }]}>
+                        <Form.Item name="userPas" rules={[{ required: true, message: t('Please input your Password') }]}>
                             <Input.Password placeholder={t('User Password')} prefix={<img src={passwordIcon} />} bordered={false} />
                         </Form.Item>
                         <HCaptcha size="invisible" ref={captchaLoginRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />

@@ -43,7 +43,6 @@ const index: React.FC = () => {
                         <InputNumber />
                     </Form.Item>
                     <SendButton label={t('Use Point')} className="w-auto md:w-1/5 mb-0" />
-                    {/* TODO: 這個組件是否可以沿用? */}
                 </Form>
             </div>
             {selectedSection === 'CompBonus' ? <CompBonus /> : ''}

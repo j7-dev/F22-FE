@@ -99,7 +99,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                 <div className="">
                     <div className="text-[#ACACAC] text-[8px] sm:text-sm font-normal">{t('Rolling Point')}</div>
                     <div className="text-[#333333] text-base sm:text-3xl font-semibold">${turnoverBonus.toLocaleString()}</div>
-                    <ConvertBtn rollingPoint={turnoverBonus as number} />
+                    <ConvertBtn />
                 </div>
             </div>
         </div>

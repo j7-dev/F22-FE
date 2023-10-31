@@ -80,9 +80,9 @@ export const authProvider: AuthBindings = {
 
         const loginResult = await strapiAuthHelper.login(userName, password);
         const confirmed = loginResult?.data?.user?.confirmed || false;
-
+        //FIXME 這邊的翻譯怎麼改
         if (!confirmed) {
-            const message = 'You have registered successfully, please wait for the administrator to confirm it.';
+            const message = 'You have registered successfully, please wait for the administrator to confirm it';
             notification.error({
                 message,
             });
