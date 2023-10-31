@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSetAtom, useAtom } from 'jotai';
-import { Form, Input, Button, Modal, Radio } from 'antd';
+import { Form, Input, Button, Modal, Radio, notification } from 'antd';
 import { useRegister } from '@refinedev/core';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { signInAtom, signUpAtom } from '@/components/ContentLayout/Header/LoginModule';
@@ -30,9 +30,9 @@ const index: React.FC = () => {
     const [submitTable, setSubmitTable] = useState(false);
 
     //點擊註冊會員
-    const handleSignUp = async (values: TRegisterPayload) => {
+    const handleSignUp = (values: TRegisterPayload) => {
         if (captchaSignUpRef?.current) {
-            await captchaSignUpRef.current
+            captchaSignUpRef.current
                 ?.execute({ async: true })
                 .then((_token) => {
                     // console.log('SignUpValues', values);
@@ -48,7 +48,12 @@ const index: React.FC = () => {
                             // handle success
                             setSignUp(false);
                         },
-                        onError: (error) => {
+                        onError: (error: any) => {
+                            const message = error?.response?.data?.error || 'Something went wrong';
+                            notification.error({
+                                key: 'register',
+                                message,
+                            });
                             console.log('錯誤訊息', error);
                         },
                     });
