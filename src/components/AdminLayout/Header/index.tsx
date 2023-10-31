@@ -107,6 +107,9 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
                     style={{
                         backgroundColor: '#fde3cf',
                         color: '#f56a00',
+                        minWidth: '2rem',
+                        width: '2rem',
+                        marginLeft: '1rem',
                     }}
                 >
                     {displayName?.charAt(0).toUpperCase()}

@@ -104,12 +104,12 @@ const index = () => {
                 {
                     field: 'createdAt',
                     operator: 'gt',
-                    value: values?.dateRange ? values?.dateRange[0]?.format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
+                    value: values?.dateRange ? values?.dateRange[0]?.startOf('day').format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
                 },
                 {
                     field: 'createdAt',
                     operator: 'lt',
-                    value: values?.dateRange ? values?.dateRange[1]?.format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
+                    value: values?.dateRange ? values?.dateRange[1]?.endOf('day').format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
                 },
                 {
                     field: 'type',
