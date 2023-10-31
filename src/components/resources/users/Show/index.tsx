@@ -59,6 +59,23 @@ const index = () => {
             children: (
                 <div>
                     <Card bordered={false} title="Info">
+                        <div className="mb-12">
+                            <p>
+                                <DollarOutlined className="mr-2" />
+                                Balance Adjustment
+                            </p>
+                            <Create
+                                title={<></>}
+                                goBack={<></>}
+                                breadcrumb={null}
+                                contentProps={{
+                                    style: {
+                                        boxShadow: 'none',
+                                        padding: '0rem',
+                                    },
+                                }}
+                            />
+                        </div>
                         <div className="grid grid-cols-2 xl:grid-cols-2 gap-6">
                             <ObjectTable record={userData} columns={infoLeftColumns} />
                             <ObjectTable record={userData} columns={infoRightColumns} />
@@ -131,29 +148,6 @@ const index = () => {
                     },
                 }}
             >
-                <Card
-                    className="mb-8"
-                    bordered={false}
-                    title={
-                        <span className="font-semibold text-base relative -top-0.5">
-                            <DollarOutlined className="mr-2" />
-                            Balance Adjustment
-                        </span>
-                    }
-                >
-                    <Create
-                        title={<></>}
-                        goBack={<></>}
-                        breadcrumb={null}
-                        contentProps={{
-                            style: {
-                                boxShadow: 'none',
-                                padding: '0rem',
-                            },
-                        }}
-                    />
-                </Card>
-
                 <Tabs defaultActiveKey="moneyLog1" type="card" centered items={items} tabBarStyle={{ marginBottom: '0px' }} />
             </Show>
         </>
