@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Modal, Button, notification } from 'antd';
+import { Form, Modal, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import QuickAmountInput from '@/components/form/QuickAmountInput';
 import { useGetIdentity, useCreate } from '@refinedev/core';
@@ -13,6 +13,7 @@ import BonusDetails from './BonusDetails';
 import QRCode from 'qrcode';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { useShowPc } from '@/hooks/useShowPc';
+import DepositMethod from './DepositMethod';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
@@ -37,6 +38,7 @@ const index: React.FC = () => {
         }
     };
 
+    const { mutate: create, isLoading } = useCreate();
     const handleClick = () => {
         form.validateFields()
             .then(() => {
@@ -49,6 +51,28 @@ const index: React.FC = () => {
                 } else {
                     handleOpenUrl();
                 }
+                //當按下Deposit按鈕直接送出表單
+                const values = form.getFieldsValue();
+                create(
+                    {
+                        resource: 'transaction-records',
+                        values: {
+                            ...values,
+                            type: 'DEPOSIT',
+                            title: `Deposit by user ${user_id}`,
+                            status: 'PENDING',
+                            user: user_id,
+                            by: 'USER',
+                            currency: default_currency,
+                            amount_type: default_amount_type,
+                        },
+                    },
+                    {
+                        onSuccess: () => {
+                            form.resetFields();
+                        },
+                    },
+                );
             })
             .catch((errorInfo) => {
                 console.log('errorInfo', errorInfo);
@@ -63,41 +87,9 @@ const index: React.FC = () => {
         window.open(codePayUrl, '_blank');
     };
 
-    const { mutate: create, isLoading } = useCreate();
-
-    const handleNotify = () => {
-        const values = form.getFieldsValue();
-        create(
-            {
-                resource: 'transaction-records',
-                values: {
-                    ...values,
-                    type: 'DEPOSIT',
-                    title: `Deposit by user ${user_id}`,
-                    status: 'PENDING',
-                    user: user_id,
-                    by: 'USER',
-                    currency: default_currency,
-                    amount_type: default_amount_type,
-                },
-            },
-            {
-                onSuccess: () => {
-                    form.resetFields();
-                    close();
-                    notification.success({
-                        key: 'deposit',
-                        message: `Submit $${values.amount} deposit notification Success`,
-                        description: 'Please wait for the administrator to review, we will reply in 3 working days.',
-                        duration: null,
-                    });
-                },
-            },
-        );
-    };
-
     //監聽Form的值，都填寫完畢後，使Button可以點擊
     const values = Form.useWatch([], form);
+    console.log('🚀 ~ values:', values);
     useEffect(() => {
         form.validateFields({ validateOnly: true }).then(
             () => {
@@ -138,31 +130,10 @@ const index: React.FC = () => {
                         }}
                     />
                     <BonusDetails />
-                    {/* <Alert
-                        message={<span className="font-semibold">{t("Don't have Code Pay account?")}</span>}
-                        description={
-                            <div>
-                                <a href="http://www.codepay.co.kr/" target="_blank">
-                                    <img className="w-[100px] my-2" src="http://www.codepay.co.kr/img/logo.png" />
-                                </a>
-                                <p>
-                                    go to{' '}
-                                    <a href="http://www.codepay.co.kr/" target="_blank">
-                                        http://www.codepay.co.kr/
-                                    </a>{' '}
-                                    to register an account.
-                                </p>
-                            </div>
-                        }
-                        className="my-6"
-                        type="info"
-                        showIcon
-                    /> */}
+                    <DepositMethod />
                 </Form>
             </div>
             <div className="grid grid-cols-2 sm:gap-4 gap-2">
-                <Button className="col-span-1 w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold text-[#9680EA] bg-[#F8F9FF] border-[#9680EA] hover:text-white hover:bg-[#9680EA]">{t('Codepay')}</Button>
-                <Button className="col-span-1 w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold text-[#9680EA] bg-[#F8F9FF] border-[#9680EA] hover:text-white hover:bg-[#9680EA]">{t('Transfer')}</Button>
                 <Button onClick={handleClick} disabled={isDisabled} type="primary" className={`${isDisabled ? 'bg-[#BDBDBD]' : ''} col-span-2 w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold`}>
                     {t('Deposit')}
                 </Button>
@@ -170,19 +141,37 @@ const index: React.FC = () => {
             <Modal {...modalProps} centered footer={null} maskClosable={false} closeIcon={<AiFillCloseCircle color="#BDBDBD" size={30} />} confirmLoading={isLoading} width={330}>
                 <div className="grid grid-cols-1 gap-x-6 px-3">
                     <div className="col-span-1 my-8">
-                        <span className="text-center w-full block text-black font-bold text-base">{t('Scan QRcode to Finish Payment')}</span>
-                        <div className="flex justify-between items-center my-2.5">
-                            <span className="font-medium text-[#828282] text-xs">{t('Deposit Amount')}</span>
-                            <span className="font-medium text-black text-xl">
-                                <Amount amount={watchAmount} />
-                            </span>
-                        </div>
-                        <div className="qrCodeWrap aspect-square max-w-[200px] m-auto">{qrcode ? <img className="w-full " src={qrcode} /> : <>Loading</>}</div>
-                        <Button onClick={handleOpenUrl} className="w-full h-10 my-2 bg-[#5932EA] text-white rounded-2xl font-bold" type="primary" ghost>
+                        {
+                            //顯示QRCode或匯款帳號
+                            values?.depositMethod === 'codePay' ? (
+                                <>
+                                    <span className="text-center w-full block text-black font-bold text-base">{t('Scan QRcode to Finish Payment')}</span>
+                                    <div className="flex justify-between items-center my-2.5">
+                                        <span className="font-medium text-[#828282] text-xs">{t('Deposit Amount')}</span>
+                                        <span className="font-medium text-black text-xl">
+                                            <Amount amount={watchAmount} />
+                                        </span>
+                                    </div>
+                                    <div className="qrCodeWrap aspect-square max-w-[200px] m-auto">{qrcode ? <img className="w-full " src={qrcode} /> : <>Loading</>}</div>
+                                    <span className="block font-medium text-[#828282] text-xs text-center">{t('Please be inform that it might take a moment to process')}</span>
+                                </>
+                            ) : (
+                                <>
+                                    <span className="block font-bold text-black text-base text-center  ">{t('Transfer to Finish Payment')}</span>
+                                    <div className="flex flex-col gap-2 my-2.5">
+                                        <span className="block font-medium text-[#828282] text-xs text-center">{t('Please remit to the following account number')}</span>
+                                        <span className="block font-medium text-[#9680EA] text-xl text-center whitespace-nowrap">"0000-0000-0000-0000"</span>
+                                        <span className="block font-medium text-[#9680EA] text-xs text-center">{t('Please pay from your nominated bank account')}</span>
+                                        <span className="block font-medium text-[#828282] text-xs text-center">{t('Please be inform that it might take a moment to process')}</span>
+                                    </div>
+                                </>
+                            )
+                        }
+                        {/* <Button onClick={handleOpenUrl} className="w-full h-10 my-2 bg-[#5932EA] text-white rounded-2xl font-bold" type="primary" ghost>
                             {t('or Pay by URL')}
-                        </Button>
-                        <Button onClick={handleNotify} className="w-full h-10 border-2 border-[#9680EA] text-[#9680EA] rounded-2xl font-bold">
-                            {t("Notify admin I've paid")}
+                        </Button> */}
+                        <Button onClick={close} className="w-full h-10 my-2 bg-[#5932EA] text-white rounded-2xl font-bold">
+                            {t('I’ve paid')}
                         </Button>
                     </div>
                 </div>

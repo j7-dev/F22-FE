@@ -7,8 +7,9 @@ import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import { nanoid } from 'nanoid';
 import { API_URL } from '@/utils';
 import { AiFillCloseCircle } from 'react-icons/ai';
-
+import { useShowPc } from '@/hooks/useShowPc';
 const index: React.FC = () => {
+    const isPc = useShowPc();
     const { t } = useTranslation();
     const [eventContent, setEventContent] = useState<{ url?: string }[]>([]);
     const { modalProps, show } = useModal();
@@ -60,7 +61,7 @@ const index: React.FC = () => {
                     </div>
                 </Spin>
             </div>
-            <Modal {...modalProps} footer={null} closeIcon={<AiFillCloseCircle color="#BDBDBD" size={30} />} centered width={'50vw'} classNames={{ content: 'p-0 my-20 rounded-2xl overflow-hidden' }}>
+            <Modal {...modalProps} footer={null} closeIcon={<AiFillCloseCircle color="#BDBDBD" size={30} />} centered width={isPc ? '30vw' : '100vw'} classNames={{ content: 'p-0 my-20 rounded-2xl overflow-hidden' }}>
                 <div className="eventContent">
                     {eventContent.map((item) => (
                         <img key={nanoid()} src={API_URL + item.url} alt="" className="w-full" />

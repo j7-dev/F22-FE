@@ -1,4 +1,4 @@
-import { BaseType, TRole, TVip, TBalance } from '@/types';
+import { BaseType, TRole, TVip, TBalance, TDepositBonus } from '@/types';
 
 export const USER_NOTES_FIELDS = new Array(6).fill(0).map((_, i) => i);
 
@@ -31,6 +31,7 @@ export type TUser = BaseType & {
     favorite_games?: TFavoriteGames | null;
     user_notes?: TUserNote;
     bank_account?: TBankAccount;
+    deposit_bonus?: TDepositBonus | null;
 };
 
 export const BANK_ACCOUNT_FIELDS = ['bank_name', 'bank_code', 'bank_account_number', 'owner_real_name'] as const;

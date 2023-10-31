@@ -20,12 +20,14 @@ const index: React.FC = () => {
                     <Button onClick={() => setSignIn(true)}>Login</Button>
                 </Empty>
             );
-        return <iframe style={{ border: 'none' }} src={`https://prod20290-125166753.442hattrick.com/ko/korean-view${addUrl}#Live`} className="w-full h-full" />;
+        return <iframe style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)`, border: 'none' }} src={`https://prod20290-125166753.442hattrick.com/ko/korean-view${addUrl}#Live`} className="w-full h-full" />;
     };
-
+    //取得id = header的元素高度
+    const header = document.getElementById('header');
+    const headerHeight = header?.clientHeight;
     return (
         <div className="inPlayPage sm:my-9 sm:gap-8 my-4 w-full h-screen">
-            <div className="bg-white flex justify-center items-center h-full sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl overflow-hidden">
+            <div className="bg-white flex justify-center items-center h-fit sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl overflow-hidden">
                 <Container />
             </div>
         </div>

@@ -176,7 +176,7 @@
     "Don't have an account yet?": "아직 계정이 없으신가요?",
     "The length of user name must be greater than or equal to 3": "아이디는 3자리 또는 그 이상이여야 합니다",
     "Search": "검색",
-    "Codepay": "코드페이",
+    "CodePay": "코드페이",
     "Transfer": "계좌입금",
     "餘額": "잔액",
     "可提領額度": "출금가능금액",
@@ -187,5 +187,6 @@
     "Please input your Phone": "휴대폰 번호를 입력해 주세요",
     "Please input your Owner Real Name": "소유자 본명을 입력해 주세요",
     "Please input your Bank Code": "은행명을 입력해 주세요",
-    "Please input your Bank Account Number": "은행 계좌번호를 입력해 주세요"
+    "Please input your Bank Account Number": "은행 계좌번호를 입력해 주세요",
+    "Details": "상세보기"
 }

@@ -35,7 +35,7 @@ function App() {
                             },
                             components: {
                                 Button: {
-                                    borderRadius: 12,
+                                    borderRadius: 16,
                                 },
                             },
                         }}

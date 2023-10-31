@@ -29,7 +29,9 @@ const index: React.FC = () => {
         if (gameServer) window.open(addUrl);
         return <>{/* <iframe src={addUrl} name="output_frame" id="output_frame" className="w-full h-full border-0" /> */}</>;
     };
-
+    //取得id = header的元素高度
+    // const header = document.getElementById('header');
+    // const headerHeight = header?.clientHeight;
     return (
         <div className="IGXPage sm:my-9 sm:gap-8 my-4 w-full h-screen">
             <div className="bg-white flex justify-center items-center h-full sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl overflow-hidden">

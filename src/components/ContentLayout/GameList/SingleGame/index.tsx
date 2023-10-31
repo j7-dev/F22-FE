@@ -12,10 +12,8 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
     //如果沒有遊戲資料則不渲染
     if (!gameItem) return <></>;
 
-    //TODO 未來開啟遊戲方法搬出去取得遊戲的Hook
     //取得開啟遊戲方法
-    const { isLoading: openGameLoading, handleClick: openGame } = useOpenGame();
-
+    const { handleClick: openGame, isLoading: openGameLoading } = useOpenGame();
     //上方列組件/收藏/大小注/RTP/遊戲商圖示
     const OnTheTop = (item: TGame) => {
         if (item.gameCategory === 'slot') {

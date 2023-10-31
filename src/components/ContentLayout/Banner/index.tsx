@@ -6,11 +6,24 @@ import { Pagination } from 'swiper/modules';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
-import banner_A from '@/assets/images/banner_A.jpg';
-import banner_B from '@/assets/images/banner_B.jpg';
 import { useShowPc } from '@/hooks/useShowPc';
+import banner_A from '@/assets/images/newBanner/banner_A.jpg';
+import banner_B from '@/assets/images/newBanner/banner_B.jpg';
+import banner_A_mobile from '@/assets/images/newBanner/banner_A_mobile.jpg';
+import banner_B_mobile from '@/assets/images/newBanner/banner_B_mobile.jpg';
 
-const Banner: React.FC<{ bannerData?: { img: string; img_mobile?: string }[] }> = ({ bannerData = [{ img: banner_A }, { img: banner_B }] }) => {
+const Banner: React.FC<{ bannerData?: { img: string; img_mobile?: string }[] }> = ({
+    bannerData = [
+        {
+            img: banner_A,
+            img_mobile: banner_A_mobile,
+        },
+        {
+            img: banner_B,
+            img_mobile: banner_B_mobile,
+        },
+    ],
+}) => {
     const isPc = useShowPc();
     //Banner圖片陣列
     const bannerArray = bannerData;
