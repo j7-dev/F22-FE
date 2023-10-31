@@ -7,6 +7,9 @@ import { TBetRecord } from '@/types';
 
 const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ user_id }) => {
     const apiUrl = useApiUrl();
+    // TODO 限制後端一次拿100筆之類的
+    // 目前做無限滾動
+
     const { data, isLoading } = useCustom({
         url: `${apiUrl}/utility/betting-records`,
         method: 'get',
@@ -61,7 +64,17 @@ const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ 
         },
     ];
 
-    return <Table dataSource={dataSource} columns={columns} rowKey="uuid" loading={isLoading} />;
+    return (
+        <Table
+            dataSource={dataSource}
+            columns={columns}
+            rowKey="uuid"
+            loading={isLoading}
+            pagination={{
+                pageSize: 100,
+            }}
+        />
+    );
 });
 
 export default index;
