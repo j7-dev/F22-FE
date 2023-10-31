@@ -83,8 +83,9 @@ const FormComponent: React.FC<{
                     {watchUser && !isFetching && <Amount amount={Number(currencyBalanceAmount)} currency={watchCurrency} symbol />}
                     {isFetching && <LoadingOutlined />}
                 </div>
-                <Form.Item name={['type']} label="Type" className="col-span-2 lg:col-span-1" initialValue="DEPOSIT" hidden={isUserAdjustment}>
-                    <Select options={['DEPOSIT', 'MANUAL'].map((type) => ({ label: type, value: type }))} />
+                <Form.Item name={['type']} label="Type" className="col-span-2 lg:col-span-1" initialValue="MANUAL" hidden={isUserAdjustment}>
+                    {/* <Select options={['DEPOSIT', 'MANUAL'].map((type) => ({ label: type, value: type }))} /> */}
+                    <Input />
                 </Form.Item>
                 <div className="col-span-4 md:col-span-2">
                     <AmountInput />
