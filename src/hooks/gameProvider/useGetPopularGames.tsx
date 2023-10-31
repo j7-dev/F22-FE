@@ -47,13 +47,17 @@ export const useGetPopularGames = () => {
             openGameLoading: openGameLoading,
             openGame: handleClick,
         },
-        ...(gameCategories.map((CategoryItem: TGameCategory) => ({
-            label: CategoryItem.label,
-            value: CategoryItem.value,
-            gameData: allGamesArray.filter((game) => game?.gameCategory === CategoryItem?.value),
-            openGameLoading: openGameLoading,
-            openGame: handleClick,
-        })) as TPopularGames[]),
+        ...(gameCategories
+            .filter((CategoryItem: TGameCategory) => CategoryItem.value !== 'events') //過濾掉events
+            .map((CategoryItem: TGameCategory) => {
+                return {
+                    label: CategoryItem.label,
+                    value: CategoryItem.value,
+                    gameData: allGamesArray.filter((game) => game?.gameCategory === CategoryItem?.value),
+                    openGameLoading: openGameLoading,
+                    openGame: handleClick,
+                };
+            }) as TPopularGames[]),
     ];
     return { PopularGamesData, isLoading };
 };
