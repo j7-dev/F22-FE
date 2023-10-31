@@ -1,5 +1,5 @@
 import { Table, Row, Col, Card, TablePaginationConfig, TableProps } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import type { ColumnType } from 'antd/es/table';
 import { useTable, List } from '@refinedev/antd';
 import Filter from './Filter';
 import FilterTags from '@/components/Admin/FilterTags';
@@ -131,7 +131,7 @@ const index = () => {
         },
     });
 
-    const columns: ColumnsType<DataType> = [
+    const columns: ColumnType<DataType>[] = [
         {
             title: '#',
             dataIndex: 'id',
@@ -175,21 +175,24 @@ const index = () => {
             dataIndex: 'vip',
             render: (_, record) => <VipLink vip={record?.user?.vip} />,
         },
-        {
-            title: 'title',
-            dataIndex: 'title',
-        },
+
         {
             title: 'Bank Account',
             dataIndex: 'bankAccount',
             render: (_, record) => <BankAccount bank_account={record?.user?.bank_account} display="flex" />,
         },
+        {
+            title: 'Note',
+            dataIndex: 'title',
+        },
     ];
+
+    const depositColumns = columns.filter((column) => column.dataIndex !== 'bankAccount');
 
     const formattedTableProps = {
         ...tableProps,
         scroll: { x: 1600 },
-        columns,
+        columns: listType === 'DEPOSIT' ? depositColumns : columns,
         rowKey: 'id',
         pagination: {
             showSizeChanger: true,
