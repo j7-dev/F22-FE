@@ -88,19 +88,19 @@ export const resources = [
             label: 'All Agents 代理商管理',
         },
     },
-    {
-        name: 'commissions',
-        identifier: 'commissions',
-        list: '/refine/agent/commissions',
-        show: '/refine/agent/commissions/show/:id',
-        create: '/refine/agent/commissions/create',
-        edit: '/refine/agent/commissions/edit/:id',
-        delete: '/refine/agent/commissions/delete/:id',
-        meta: {
-            parent: 'agent',
-            label: 'Commission Setting 佣金設定',
-        },
-    },
+    // {
+    //     name: 'commissions',
+    //     identifier: 'commissions',
+    //     list: '/refine/agent/commissions',
+    //     show: '/refine/agent/commissions/show/:id',
+    //     create: '/refine/agent/commissions/create',
+    //     edit: '/refine/agent/commissions/edit/:id',
+    //     delete: '/refine/agent/commissions/delete/:id',
+    //     meta: {
+    //         parent: 'agent',
+    //         label: 'Commission Setting 佣金設定',
+    //     },
+    // },
     {
         name: 'commission-settlement',
         identifier: 'commission-settlement',
@@ -111,15 +111,15 @@ export const resources = [
         },
     },
 
-    {
-        name: 'transaction-records',
-        identifier: 'aff-transactions',
-        list: '/refine/agent/all/aff-transactions',
-        meta: {
-            parent: 'agent',
-            label: 'AFF Transactions 代理交易紀錄查詢',
-        },
-    },
+    // {
+    //     name: 'transaction-records',
+    //     identifier: 'aff-transactions',
+    //     list: '/refine/agent/all/aff-transactions',
+    //     meta: {
+    //         parent: 'agent',
+    //         label: 'AFF Transactions 代理交易紀錄查詢',
+    //     },
+    // },
     // {
     //     name: 'aff-commission-transactions',
     //     identifier: 'aff-commission-transactions',
