@@ -3,14 +3,15 @@ import BetRecordTable from '@/components/Admin/BetRecordTable';
 import { Card, Col, Row, Form } from 'antd';
 import Filter from './Filter';
 import FilterTags from '@/components/Admin/FilterTags';
+import { enabledAtom } from './atom';
+import { useAtom } from 'jotai';
 
 const index = () => {
     const [form] = Form.useForm();
 
     const filterTagsKey = JSON.stringify(form?.getFieldsValue());
 
-    // TODO ATOM
-    const user_id = Form.useWatch(['user'], form);
+    const [enabled, setEnabled] = useAtom(enabledAtom);
 
     return (
         <List canCreate={false}>
@@ -25,7 +26,7 @@ const index = () => {
                                 <FilterTags key={filterTagsKey} form={form} />
                             </div>
 
-                            <BetRecordTable user_id={user_id} />
+                            <BetRecordTable enabled={enabled} setEnabled={setEnabled} />
                         </Card>
                     </Col>
                 </Row>

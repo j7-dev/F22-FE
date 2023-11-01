@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCustom, useApiUrl } from '@refinedev/core';
-import { Table, Empty } from 'antd';
+import { Table, Empty, Form } from 'antd';
 import Amount from '@/components/Admin/Amount';
 import { TBetRecord, TUser } from '@/types';
 import UserLink from '@/components/Admin/UserLink';
@@ -9,10 +9,13 @@ import { ColumnsType } from 'antd/es/table';
 /**
  * TODO 限制後端一次拿100筆之類的
  * TODO 未來做無限滾動
+ * TODO 依照時間篩選
  */
 
-const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ user_id }) => {
+const index: React.FC<{ enabled: boolean; setEnabled: any }> = ({ enabled, setEnabled }) => {
     const apiUrl = useApiUrl();
+    const form = Form.useFormInstance();
+    const user_id = form.getFieldValue(['user_id']);
 
     const { data, isLoading } = useCustom({
         url: `${apiUrl}/utility/betting-records`,
@@ -22,7 +25,17 @@ const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ 
                 user_id,
             },
         },
+        queryOptions: {
+            enabled,
+        },
     });
+
+    useEffect(() => {
+        if (!isLoading) {
+            setEnabled(false);
+        }
+    }, [isLoading]);
+
     if (!user_id) return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="please select user" />;
 
     const dataSource: TBetRecord[] = data?.data?.data || [];
@@ -194,6 +207,6 @@ const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ 
             scroll={{ x: 2400 }}
         />
     );
-});
+};
 
 export default index;
