@@ -17,6 +17,7 @@ const Sports = lazy(() => import('@/pages/Content/Taxonomy/Sports'));
 const Golf = lazy(() => import('@/pages/Content/Taxonomy/Golf'));
 const Games = lazy(() => import('@/pages/Content/Taxonomy/Games'));
 const Events = lazy(() => import('@/pages/Content/Taxonomy/Events'));
+const Token = lazy(() => import('@/pages/Content/Taxonomy/Token'));
 const SportsRegulations = lazy(() => import('@/pages/Content/SportsRegulations'));
 const BattingRegulations = lazy(() => import('@/pages/Content/BattingRegulations'));
 
@@ -34,6 +35,7 @@ const contentRoutes = () => {
             <Route path="/casino" element={<Casino />} />
             <Route path="/games" element={<Games />} />
             <Route path="/events" element={<Events />} />
+            <Route path="/token" element={<Token />} />
             <Route path="/about" element={<About />} />
             <Route path="/promotion" element={<PromotionPage />} />
             <Route path="/bti" element={<Bti />} />
