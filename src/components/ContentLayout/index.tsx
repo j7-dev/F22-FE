@@ -3,7 +3,7 @@ import { Footer } from './Footer';
 import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import GamePopup from './Games/Game/Popup';
-// import { LiveChatWidget } from '@livechat/widget-react';
+import { LiveChatWidget } from '@livechat/widget-react';
 //TODO 等Kevin把LiveChat註冊好再放回來
 const Layout = () => {
     return (
@@ -17,7 +17,7 @@ const Layout = () => {
                 <Footer />
                 <GamePopup />
             </div>
-            {/* <LiveChatWidget license="16505370" visibility="maximized" /> */}
+            <LiveChatWidget license="16519437" visibility="maximized" />
         </div>
     );
 };
