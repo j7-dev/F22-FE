@@ -33,6 +33,12 @@ TABLE transaction-records `amount_type=CASH` && `currency=KRW`
 7. 取得戶用戶取款金額 Transaction `type=WITHDRAW` && `status=SUCCESS`
 8. 取得存取差DPWD  (1. 用戶存款金額) - (7. 戶用戶取款金額)
 <br><br>
+有效投注定义
+
+视讯
+1. 结果为和局，则本次投注不列为有效投注
+2. 如果玩家在同一局，押注 “庄” 100，同时押注“闲” 50 那么此局有效投注为 50
+<br><br>
 
 #### 🔹 洗碼 TURNOVER_BONUS
 TABLE transaction-records `amount_type=TURNOVER_BONUS` && `currency=KRW`
@@ -159,3 +165,5 @@ o 存取差額 = 存款 – 取款
 o winloss = 有效投注 – payout(中獎金額)
 o 收益 = winloss – (紅利 + 洗碼)
 o 需要檢查：存取差額 應等於 收益
+
+

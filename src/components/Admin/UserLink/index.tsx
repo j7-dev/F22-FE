@@ -7,7 +7,7 @@ const index: React.FC<{ user?: TUser }> = ({ user }) => {
     if (user) {
         return (
             <Link to={`/refine/members/show/${user?.id}`}>
-                #{user?.id} {display_name}
+                {user?.username} / {display_name}
             </Link>
         );
     }
