@@ -62,6 +62,7 @@ const index: React.FC = () => {
                         user_id,
                         currency: default_currency,
                         amount_type: default_amount_type,
+                        deposit_bonus: values?.chosen_bonus,
                     },
                 });
             })
