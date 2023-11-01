@@ -1,92 +1,35 @@
-import { SearchOutlined } from '@ant-design/icons';
-import { Form, Input, Button, DatePicker, FormProps, Collapse, Select } from 'antd';
-import { useSelect } from '@refinedev/antd';
+import { Form, Button, DatePicker, Select, Card } from 'antd';
+import dayjs from 'dayjs';
 import { useUserSelect } from '@/hooks';
-import BooleanRadioButton from '@/components/form/BooleanRadioButton';
+import { enabledAtom } from '../atom';
+import { useSetAtom } from 'jotai';
 
 const { RangePicker } = DatePicker;
-const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
-    const { selectProps: vipSelectProps } = useSelect({
-        resource: 'vips',
-        optionLabel: 'label',
-        optionValue: 'id',
+const Filter = () => {
+    const { selectProps } = useUserSelect({
+        roleType: 'authenticated',
     });
-    const { selectProps: agentSelectProps } = useUserSelect({
-        roleType: 'agent',
-    });
-
-    const { selectProps: topAgentSelectProps } = useUserSelect({
-        roleType: 'top_agent',
-    });
-
-    const children = (
-        <Form {...formProps} layout="vertical">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-4 gap-y-0">
-                <Form.Item label="Register Date" name={['dateRange']}>
-                    <RangePicker size="small" className="w-full" />
-                </Form.Item>
-                <Form.Item label="User Id" name={['id']}>
-                    <Input size="small" allowClear placeholder="search user Id or leave blank" prefix={<SearchOutlined />} />
-                </Form.Item>
-                <Form.Item label="User name" name={['username']}>
-                    <Input size="small" allowClear placeholder="search username or leave blank" prefix={<SearchOutlined />} />
-                </Form.Item>
-                <Form.Item label="phone" name={['phone']}>
-                    <Input size="small" allowClear placeholder="search user phone or leave blank" prefix={<SearchOutlined />} />
-                </Form.Item>
-                <Form.Item label="display name" name={['display_name']}>
-                    <Input size="small" allowClear placeholder="search user display name or leave blank" prefix={<SearchOutlined />} />
-                </Form.Item>
-                <Form.Item label="VIP" name={['vip']}>
-                    <Select size="small" {...vipSelectProps} allowClear />
-                </Form.Item>
-                <Form.Item label="agent" name={['agent']}>
-                    <Select size="small" {...agentSelectProps} allowClear />
-                </Form.Item>
-                <Form.Item label="top agent" name={['top_agent']}>
-                    <Select size="small" {...topAgentSelectProps} allowClear />
-                </Form.Item>
-                <BooleanRadioButton
-                    formItemProps={{
-                        initialValue: undefined,
-                        label: 'blocked',
-                        name: ['blocked'],
-                    }}
-                    radioGroupProps={{
-                        size: 'small',
-                    }}
-                />
-                <BooleanRadioButton
-                    formItemProps={{
-                        initialValue: undefined,
-                        label: 'confirmed',
-                        name: ['confirmed'],
-                    }}
-                    radioGroupProps={{
-                        size: 'small',
-                    }}
-                />
-            </div>
-            <Form.Item>
-                <Button size="small" type="primary" htmlType="submit" className="w-full">
-                    Filter
-                </Button>
-            </Form.Item>
-        </Form>
-    );
+    const form = Form.useFormInstance();
+    const setEnabled = useSetAtom(enabledAtom);
 
     return (
-        <Collapse
-            bordered={false}
-            className="bg-white"
-            items={[
-                {
-                    key: 'filters',
-                    label: <span className="font-semibold text-base relative -top-0.5">Filters</span>,
-                    children,
-                },
-            ]}
-        />
+        <Card bordered={false}>
+            <Form form={form} layout="vertical">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-4 gap-y-0">
+                    <Form.Item label="Date" name={['dateRange']} initialValue={[dayjs().subtract(6, 'day').startOf('day'), dayjs().endOf('day')]}>
+                        <RangePicker size="small" className="w-full" />
+                    </Form.Item>
+                    <Form.Item label="User" name={['user_id']}>
+                        <Select size="small" {...selectProps} allowClear />
+                    </Form.Item>
+                    <Form.Item className="self-end">
+                        <Button size="small" type="primary" className="w-full" onClick={() => setEnabled(true)}>
+                            Filter
+                        </Button>
+                    </Form.Item>
+                </div>
+            </Form>
+        </Card>
     );
 };
 

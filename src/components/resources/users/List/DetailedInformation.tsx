@@ -101,8 +101,8 @@ const DetailedInformation: React.FC<{
             ],
         },
         onSearch: (values: TSearchProps) => {
-            const start = values?.dateRange ? values?.dateRange[0]?.toISOString() : undefined;
-            const end = values?.dateRange ? values?.dateRange[1]?.toISOString() : undefined;
+            const start = values?.dateRange ? values?.dateRange[0]?.startOf('day').format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined;
+            const end = values?.dateRange ? values?.dateRange[1]?.endOf('day').format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined;
 
             const defaultFilters = [
                 {

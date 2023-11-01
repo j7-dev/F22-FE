@@ -33,6 +33,12 @@ TABLE transaction-records `amount_type=CASH` && `currency=KRW`
 7. 取得戶用戶取款金額 Transaction `type=WITHDRAW` && `status=SUCCESS`
 8. 取得存取差DPWD  (1. 用戶存款金額) - (7. 戶用戶取款金額)
 <br><br>
+有效投注定义
+
+视讯
+1. 结果为和局，则本次投注不列为有效投注
+2. 如果玩家在同一局，押注 “庄” 100，同时押注“闲” 50 那么此局有效投注为 50
+<br><br>
 
 #### 🔹 洗碼 TURNOVER_BONUS
 TABLE transaction-records `amount_type=TURNOVER_BONUS` && `currency=KRW`
@@ -151,9 +157,38 @@ deposit_type 有不同 type，優惠能否共用?
 洗碼可以轉換成現金，但是要有一個轉換的比例，例如 1:1
 
 
+#### 其他代整理
 
+直接推薦人才可以抽取輸贏佣金，父可以抽子，如果有隔代，父不可以抽孫
 
 o 存取差額 = 存款 – 取款
 o winloss = 有效投注 – payout(中獎金額)
 o 收益 = winloss – (紅利 + 洗碼)
 o 需要檢查：存取差額 應等於 收益
+
+#### 遊戲分類
+
+我們平台上的分類
+inPlay = BTI Live
+Sports=BTI
+Golf = IGX
+Casino= EVO & PP 的live games
+Slot=PP的Scratch card
+Games=空
+
+PP的遊戲總共有以下8種分類
+"Video Slots"
+"Live games"
+"Blackjack"
+"Classic Slots"
+"Baccarat"
+"Baccarat New"
+"Roulette"
+"Scratch card"
+
+只保留
+live games到 我们的casino分类
+Scratch card到 slot分类
+其他6個分類遊戲都不要
+
+

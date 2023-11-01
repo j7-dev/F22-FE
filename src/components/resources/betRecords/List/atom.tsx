@@ -1,6 +1,3 @@
-import { Dayjs } from 'dayjs';
+import { atom } from 'jotai';
 
-export type TSearchProps = {
-    agent?: string;
-    dateRange?: [Dayjs, Dayjs] | undefined;
-};
+export const enabledAtom = atom(false);

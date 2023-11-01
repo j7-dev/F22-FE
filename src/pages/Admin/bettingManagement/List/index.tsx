@@ -1,7 +1,5 @@
 import { List } from '@/components/resources/betRecords';
 
-const index = () => {
-    return <List />;
-};
+const index = () => <List />;
 
 export default index;

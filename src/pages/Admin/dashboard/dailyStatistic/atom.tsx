@@ -6,4 +6,4 @@ export type TSearchProps = {
     dateRange?: [Dayjs, Dayjs] | undefined;
 };
 
-export const searchPropsAtom = atom<TSearchProps>({ dateRange: [dayjs().startOf('week'), dayjs().endOf('week')] });
+export const searchPropsAtom = atom<TSearchProps>({ dateRange: [dayjs().startOf('month'), dayjs().endOf('month')] });

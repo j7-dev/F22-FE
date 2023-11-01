@@ -73,8 +73,8 @@ const DetailedInformation = () => {
         method: 'get',
         config: {
             query: {
-                start: dateRange ? dateRange[0].toISOString() : undefined,
-                end: dateRange ? dateRange[1].toISOString() : undefined,
+                start: dateRange ? dateRange[0].format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
+                end: dateRange ? dateRange[1].format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
             },
         },
     });
