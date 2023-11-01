@@ -6,9 +6,11 @@ import { useCustomMutation, useGetIdentity, useApiUrl } from '@refinedev/core';
 import { TMe, TUser } from '@/types';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { useGetSiteSetting } from '@/hooks';
+import { useShowPc } from '@/hooks/useShowPc';
 
 const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
-    console.log('🚀 ~ userInfo:', userInfo);
+    const isPc = useShowPc();
+    // console.log('🚀 ~ userInfo:', userInfo);
     const { t } = useTranslation();
     const [form] = Form.useForm();
     const [isDisabled, setIsDisabled] = useState(true);
@@ -76,7 +78,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                 <span className="text-black font-bold text-2xl">{t('Withdraw')}</span>
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical" className="w-full">
                     <div className="flex justify-between my-2 w-full">
-                        <span className="text-sm text-[#828282] font-medium">{t('Amount to withdraw')}</span>
+                        <span className="text-sm text-[#828282] font-medium">{isPc ? t('Amount to withdraw') : ''}</span>
                         <span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()} / ${t('可提領額度')}:${withdrawable.toLocaleString()}`}</span>
                     </div>
                     <QuickAmountInput
