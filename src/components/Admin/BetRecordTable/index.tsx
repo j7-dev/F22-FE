@@ -12,10 +12,10 @@ import { ColumnsType } from 'antd/es/table';
  * TODO 依照時間篩選
  */
 
-const index: React.FC<{ enabled: boolean; setEnabled: any }> = ({ enabled, setEnabled }) => {
+const index: React.FC<{ user_id?: number | string | undefined; enabled?: boolean; setEnabled?: any }> = ({ user_id: userId, enabled, setEnabled }) => {
     const apiUrl = useApiUrl();
     const form = Form.useFormInstance();
-    const user_id = form.getFieldValue(['user_id']);
+    const user_id = userId ? userId : form.getFieldValue(['user_id']);
 
     const { data, isLoading } = useCustom({
         url: `${apiUrl}/utility/betting-records`,
@@ -26,12 +26,12 @@ const index: React.FC<{ enabled: boolean; setEnabled: any }> = ({ enabled, setEn
             },
         },
         queryOptions: {
-            enabled,
+            enabled: userId ? true : enabled,
         },
     });
 
     useEffect(() => {
-        if (!isLoading) {
+        if (!isLoading && setEnabled) {
             setEnabled(false);
         }
     }, [isLoading]);
