@@ -1,4 +1,4 @@
-import { TUser, BaseType, AmountType } from '@/types';
+import { TUser, BaseType, TDepositBonus, AmountType } from '@/types';
 
 export const transactionTypes = ['DEPOSIT', 'WITHDRAW', 'MANUAL', 'COUPON', 'DEBIT', 'CREDIT'] as const;
 export const transactionBy = ['SYSTEM', 'ADMIN', 'USER'] as const;
@@ -19,6 +19,7 @@ export type TTransaction = BaseType &
         updated_by_user_id?: number;
         bet_record?: any;
         balance_after_mutate?: number | null;
+        deposit_bonus?: TDepositBonus | null;
     };
 
 export type TTransactionFields = TTransaction & {

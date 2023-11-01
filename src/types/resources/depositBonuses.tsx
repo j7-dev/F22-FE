@@ -22,4 +22,5 @@ export type TDepositBonus = BaseType & {
     amount_type: string;
     currency: string;
     rolling_percentage: number;
+    allow_game_categories: string[];
 };

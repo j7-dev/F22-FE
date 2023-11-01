@@ -10,7 +10,6 @@ import { useShowPc } from '@/hooks/useShowPc';
 
 const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
     const isPc = useShowPc();
-    console.log('🚀 ~ userInfo:', userInfo);
     const { t } = useTranslation();
     const [form] = Form.useForm();
     const [isDisabled, setIsDisabled] = useState(true);
@@ -56,9 +55,9 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
      */
     const LimitAmountFn = () => {
         //如果用戶身上有deposit_bonus及last_deposit
-        if (userInfo?.last_deposit && userInfo?.deposit_bonus) {
+        if (userInfo?.last_deposit?.deposit_bonus) {
             //判斷有效投注有沒有達到限制金額
-            if (userInfo?.validBetAmount > userInfo?.last_deposit?.amount * userInfo?.deposit_bonus?.rolling_percentage)
+            if (userInfo?.validBetAmount > userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage)
                 //有則顯示可提款餘額balance
                 return balance;
             //否則為0，自然就禁用提款按鈕
