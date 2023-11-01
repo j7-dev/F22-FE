@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Form, Modal, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import QuickAmountInput from '@/components/form/QuickAmountInput';
-import { useGetIdentity, useCreate } from '@refinedev/core';
+import { useGetIdentity, useApiUrl, useCustomMutation } from '@refinedev/core';
 import { TMe } from '@/types';
 import { useModal } from '@refinedev/antd';
 import { CODEPAY_APP_URL, CODEPAY_SIMPLE_ADDRESS_TO } from '@/utils';
@@ -21,7 +21,7 @@ const index: React.FC = () => {
     const [isDisabled, setIsDisabled] = useState(true);
     const { data: identity } = useGetIdentity<TMe>();
     const user_id = identity?.id;
-    const CODEPAY_IDENTIFIER = `user_id:${user_id}`;
+    const CODEPAY_IDENTIFIER = `userId${user_id}`;
     const showPc = useShowPc();
 
     const { modalProps, show, close } = useModal();
@@ -38,7 +38,8 @@ const index: React.FC = () => {
         }
     };
 
-    const { mutate: create, isLoading } = useCreate();
+    const { mutate: doDeposit, isLoading } = useCustomMutation();
+    const apiUrl = useApiUrl();
     const handleClick = () => {
         form.validateFields()
             .then(() => {
@@ -53,26 +54,16 @@ const index: React.FC = () => {
                 }
                 //當按下Deposit按鈕直接送出表單
                 const values = form.getFieldsValue();
-                create(
-                    {
-                        resource: 'transaction-records',
-                        values: {
-                            ...values,
-                            type: 'DEPOSIT',
-                            title: `Deposit by user ${user_id}`,
-                            status: 'PENDING',
-                            user: user_id,
-                            by: 'USER',
-                            currency: default_currency,
-                            amount_type: default_amount_type,
-                        },
+                doDeposit({
+                    url: `${apiUrl}/wallet-api/cash/deposit`,
+                    method: 'post',
+                    values: {
+                        ...values,
+                        user_id,
+                        currency: default_currency,
+                        amount_type: default_amount_type,
                     },
-                    {
-                        onSuccess: () => {
-                            form.resetFields();
-                        },
-                    },
-                );
+                });
             })
             .catch((errorInfo) => {
                 console.log('errorInfo', errorInfo);

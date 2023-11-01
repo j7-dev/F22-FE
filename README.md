@@ -166,4 +166,29 @@ o winloss = 有效投注 – payout(中獎金額)
 o 收益 = winloss – (紅利 + 洗碼)
 o 需要檢查：存取差額 應等於 收益
 
+#### 遊戲分類
+
+我們平台上的分類
+inPlay = BTI Live
+Sports=BTI
+Golf = IGX
+Casino= EVO & PP 的live games
+Slot=PP的Scratch card
+Games=空
+
+PP的遊戲總共有以下8種分類
+"Video Slots"
+"Live games"
+"Blackjack"
+"Classic Slots"
+"Baccarat"
+"Baccarat New"
+"Roulette"
+"Scratch card"
+
+只保留
+live games到 我们的casino分类
+Scratch card到 slot分类
+其他6個分類遊戲都不要
+
 
