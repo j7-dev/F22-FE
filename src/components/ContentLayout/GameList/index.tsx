@@ -5,6 +5,8 @@ import { Empty } from 'antd';
 import { FixedSizeGrid as Grid } from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { useRwd } from '@/hooks/useRwd';
+import underConstructionIcon from '@/assets/images/game_provider/Under_construction.svg';
+import { useTranslation } from 'react-i18next';
 
 type TGameListProp = {
     gameData?: TGame[];
@@ -19,9 +21,23 @@ type TCell = {
 };
 
 const index: React.FC<TGameListProp> = React.memo(({ gameData = [], gridColumnCount = 4 }) => {
-    if (gameData.length === 0) return <Empty description={<span>Data Not Found</span>}></Empty>;
-
+    const { t } = useTranslation();
     const { isLg, isMd } = useRwd();
+    if (gameData.length === 0)
+        return (
+            <Empty
+                className="flex flex-col items-center "
+                image={null}
+                imageStyle={{ height: 0 }}
+                description={
+                    <>
+                        <img src={underConstructionIcon} className={`${isMd ? 'w-[360px]' : 'w-[240px]'} h-auto`} alt="" />
+                        <div className="sm:text-4xl text-base font-bold text-[#5932EA]">{t("We're under construction.")}</div>
+                        <div className="sm:text-base text-xs font-medium text-[#828282]">{t('We need a few time to make everything perfect.Please check back later.')}</div>
+                    </>
+                }
+            />
+        );
 
     const columnCount = isLg ? gridColumnCount : isMd ? 3 : 2;
 

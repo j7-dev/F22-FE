@@ -4,8 +4,13 @@ import { mappingRTP } from '@/utils/providerData/PPGameRTP';
 // import { useGetPPImg } from '@/hooks/gameProvider/pragmatic/useGetPPImg';
 import ProviderS_PragmaticPlay from '@/assets/images/game_provider/ProviderS_PragmaticPlay.svg';
 import { TGame } from '@/types/games';
+import { useGetSiteSetting } from '@/hooks/useGetSiteSetting';
 
 export const useGetPPTableList = () => {
+    //取得網站設定support_game_providers是否有包含PP
+    const { support_game_providers } = useGetSiteSetting();
+    const inSupport = support_game_providers.includes('PP');
+
     const apiUrl = useApiUrl();
     const gameServerDomain = 'https://smart-bet.prerelease-env.biz';
 
@@ -19,6 +24,7 @@ export const useGetPPTableList = () => {
         queryOptions: {
             staleTime: 1000 * 60 * 60 * 24,
             cacheTime: 1000 * 60 * 60 * 24,
+            enabled: inSupport,
         },
     });
     const data =

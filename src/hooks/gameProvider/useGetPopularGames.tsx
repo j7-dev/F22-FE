@@ -11,9 +11,9 @@ import igxIcon from '@/assets/images/game_provider/igx_icon.png';
 export const useGetPopularGames = () => {
     const { t } = useTranslation();
     //取得pp遊戲資料
-    const { data: ppData, isLoading: ppLoading } = useGetPPTableList();
+    const { data: ppData, isFetching: ppLoading } = useGetPPTableList();
     //取得evo遊戲資料
-    const { data: evoData, isLoading: evoLoading } = useGetEVOTableList();
+    const { data: evoData, isFetching: evoLoading } = useGetEVOTableList();
 
     //取得所有資料後再重組
     const isLoading = evoLoading || ppLoading;
