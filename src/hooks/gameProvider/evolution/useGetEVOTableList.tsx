@@ -34,6 +34,6 @@ export const useGetEVOTableList = () => {
                     casinoCategory: mappingCasinoCategory({ category: item['Game Type'] as string }),
                     casinoCategoryIcon: mappingCasinoCategoryIcon({ category: item['Game Type'] as string }),
                 };
-            }) || [];
+            }) || ([] as TGame[]);
     return { data, isFetching };
 };

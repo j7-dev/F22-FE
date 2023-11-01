@@ -40,7 +40,7 @@ export const useGetPPTableList = () => {
                     gameListFavIcon: ProviderS_PragmaticPlay,
                     gameRTP: mappingRTP(item.gameID as string),
                 };
-            }) || ([] as TGame[]);
+            }) || [];
     return {
         data,
         isLoading,
