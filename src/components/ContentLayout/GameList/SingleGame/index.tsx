@@ -4,6 +4,8 @@ import { useOpenGame } from '@/hooks/gameProvider/useOpenGame';
 import { AiOutlineLoading3Quarters, AiFillPlayCircle } from 'react-icons/ai';
 import FavoriteIcon from '@/components/general/FavoriteIcon';
 import { useGetDepositBonus } from '@/hooks/resources/useGetDepositBonus';
+import getSymbolFromCurrency from 'currency-symbol-map';
+import { useGetSiteSetting } from '@/hooks';
 
 type SingleGameProp = {
     gameItem?: TGame;
@@ -13,6 +15,8 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
     //如果沒有遊戲資料則不渲染
     if (!gameItem) return <></>;
     const { allowGameCategories } = useGetDepositBonus();
+    const { default_currency } = useGetSiteSetting();
+    const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
 
     //取得開啟遊戲方法
     const { handleClick: openGame, isLoading: openGameLoading } = useOpenGame();
@@ -25,7 +29,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                         <FavoriteIcon item={item} />
                         {/* 有RTP率才顯示否則為空 */}
                         {/* 手機版不會顯示 */}
-                        {item.gameRTP ? <div className="RTP hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2"> RTP ${item.gameRTP}</div> : ''}
+                        {item.gameRTP ? <div className="RTP hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2"> RTP {(symbol as string) + item.gameRTP}</div> : ''}
                     </div>
                     <img className="provider w-5 sm:w-10" src={item.gameListFavIcon} alt="" />
                 </div>
@@ -40,7 +44,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                     <div className="wrap flex gap-1 items-center">
                         <FavoriteIcon item={item} />
                         {/* 手機版不會顯示 */}
-                        <div className="BetLimit hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${maxBet}`}</div>
+                        <div className="BetLimit hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`${(symbol as string) + item['Bet Limit']?.KRW.min?.toLocaleString()}-${maxBet}`}</div>
                     </div>
                     <img className="provider w-5 sm:w-10" src={item.casinoCategoryIcon} alt="" />
                 </div>
@@ -54,7 +58,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
             return (
                 <>
                     {/* 有RTP率才顯示否則為空 */}
-                    {item.gameRTP ? <div className="RTP text-[10px] font-bold text-white bg-[#00000080] rounded-full py-1 px-2"> RTP ${item.gameRTP}</div> : ''}
+                    {item.gameRTP ? <div className="RTP text-[10px] font-bold text-white bg-[#00000080] rounded-full py-1 px-2"> RTP {(symbol as string) + item.gameRTP}</div> : ''}
                 </>
             );
         }
@@ -64,7 +68,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
             const maxBet = item.casinoCategory === 'baccarat' ? '10,000,000' : item['Bet Limit']?.KRW.max?.toLocaleString();
             return (
                 <>
-                    <div className="BetLimit text-[10px] font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`$ ${item['Bet Limit']?.KRW.min?.toLocaleString()}-${maxBet}`}</div>
+                    <div className="BetLimit text-[10px] font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`${(symbol as string) + item['Bet Limit']?.KRW.min?.toLocaleString()}-${maxBet}`}</div>
                 </>
             );
         }
