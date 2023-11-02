@@ -50,7 +50,13 @@ const index: React.FC = () => {
                     const qrString = `codp:${CODEPAY_SIMPLE_ADDRESS_TO}?type=payment&identifier=userid${user_id}&amount=${watchAmount}`;
                     generateQR(qrString);
                 } else {
-                    handleOpenUrl();
+                    //在手機版如果是transfer，顯示Modal
+                    if (form.getFieldsValue(['depositMethod']).depositMethod === 'transfer') {
+                        show();
+                    } else {
+                        //在手機版如果是codePay，直接開啟網址
+                        handleOpenUrl();
+                    }
                 }
                 //當按下Deposit按鈕直接送出表單
                 const values = form.getFieldsValue();
@@ -81,7 +87,7 @@ const index: React.FC = () => {
 
     //監聽Form的值，都填寫完畢後，使Button可以點擊
     const values = Form.useWatch([], form);
-    console.log('🚀 ~ values:', values);
+    // console.log('🚀 ~ values:', values);
     useEffect(() => {
         form.validateFields({ validateOnly: true }).then(
             () => {

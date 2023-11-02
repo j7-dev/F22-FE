@@ -24,15 +24,15 @@ export const usePpOpenGame = () => {
             {
                 onSuccess: (entryData) => {
                     const url = entryData.data.gameURL;
-                    const a = document.createElement('a');
-                    document.body.appendChild(a);
-                    a.style.display = 'none';
-                    a.href = url;
-                    a.target = '_blank';
-                    a.click();
-                    document.body.removeChild(a);
-
-                    // window.open(entryData.data.gameURL, '_blank');
+                    //判斷是否為safari
+                    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                    if (isSafari) {
+                        //當前頁面跳轉
+                        window.location.href = url;
+                    } else {
+                        //否則開新分頁
+                        window.open(entryData.data.entry, '_blank');
+                    }
                 },
                 onError: (error) => {
                     console.log('error', error);
