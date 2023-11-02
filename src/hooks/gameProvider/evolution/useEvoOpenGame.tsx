@@ -58,9 +58,15 @@ export const useEvoOpenGame = () => {
             },
             {
                 onSuccess: (entryData) => {
-                    const safariWindow = window.open();
-                    (safariWindow as Window).opener = null;
-                    (safariWindow as Window).location.href = entryData.data.gameURL;
+                    const url = entryData.data.gameURL;
+                    const a = document.createElement('a');
+                    document.body.appendChild(a);
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.target = '_black';
+                    a.click();
+                    document.body.removeChild(a);
+
                     // window.open(entryData.data.entry, '_blank');
                 },
                 onError: (error) => {
