@@ -3,8 +3,8 @@ import { AuthHelper } from './AuthHelper';
 import { API_URL } from '@/utils';
 import { axiosInstance } from '@/providers/strapi-v4/';
 import axios from 'axios';
-import { notification } from 'antd';
-
+import { Modal } from 'antd';
+import React from 'react';
 const strapiAuthHelper = AuthHelper(`${API_URL}/api`);
 
 export const authProvider: AuthBindings = {
@@ -18,8 +18,8 @@ export const authProvider: AuthBindings = {
 
         if (!confirmed) {
             const message = 'Your account is not confirmed yet';
-            notification.error({
-                message,
+            Modal.error({
+                content: message,
             });
 
             return {
@@ -81,10 +81,17 @@ export const authProvider: AuthBindings = {
         const loginResult = await strapiAuthHelper.login(userName, password);
         const confirmed = loginResult?.data?.user?.confirmed || false;
         //FIXME 這邊的翻譯怎麼改
+        const message = 'Your account is not confirmed yet';
         if (!confirmed) {
-            const message = 'You have registered successfully, please wait for the administrator to confirm it';
-            notification.error({
-                message,
+            Modal.success({
+                centered: true,
+                title: '회원가입신청',
+                content: (
+                    <div className="flex flex-col">
+                        <span>가입 신청이 완료 되었습니다. </span>
+                        <span>잠시 기다려 주시면 확인 후 처리 도와 드리겠습니다</span>
+                    </div>
+                ),
             });
 
             return {
