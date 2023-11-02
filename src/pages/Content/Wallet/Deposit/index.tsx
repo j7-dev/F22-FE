@@ -80,7 +80,7 @@ const index: React.FC = () => {
     const { default_currency, default_amount_type } = useGetSiteSetting();
     const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
 
-    const codePayUrl = `${CODEPAY_APP_URL}/payment?type=payment&simpleAddress=${CODEPAY_SIMPLE_ADDRESS_TO}&tag=smtbet7&identifier=${CODEPAY_IDENTIFIER}&amount=${watchAmount}`;
+    const codePayUrl = `${CODEPAY_APP_URL}/payment?type=payment&simpleAddress=${CODEPAY_SIMPLE_ADDRESS_TO}&identifier=${CODEPAY_IDENTIFIER}&amount=${watchAmount}`;
     const handleOpenUrl = () => {
         window.open(codePayUrl, '_blank');
     };
