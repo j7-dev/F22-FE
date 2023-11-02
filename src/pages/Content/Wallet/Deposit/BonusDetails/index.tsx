@@ -4,10 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { useList } from '@refinedev/core';
 import { nanoid } from 'nanoid';
 import { TDepositBonus } from '@/types';
+import { useGetDepositBonus } from '@/hooks/resources/useGetDepositBonus';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
-
+    const { depositBonus } = useGetDepositBonus();
     //帶入選擇的Bonus內容
     const [chosenBonus, setChosenBonus] = useState<TDepositBonus>();
 
@@ -15,7 +16,7 @@ const index: React.FC = () => {
     const { data: bonusList, isFetching } = useList<TDepositBonus>({
         resource: 'deposit-bonuses',
     });
-
+    const fxnBonusList = depositBonus !== null ? bonusList?.data?.filter((bonus) => bonus.id === depositBonus) : bonusList?.data;
     return (
         <div className="bonusDetails my-8">
             <Spin spinning={isFetching}>
@@ -37,7 +38,7 @@ const index: React.FC = () => {
                         placeholder={t('Select Deposit Bonus')}
                         popupClassName="depositChosenBonusPopup"
                     >
-                        {bonusList?.data?.map((bonus) => (
+                        {fxnBonusList?.map((bonus) => (
                             <Select.Option key={nanoid()} value={bonus.id} className="depositChosenBonusOption">
                                 {bonus.label}
                             </Select.Option>

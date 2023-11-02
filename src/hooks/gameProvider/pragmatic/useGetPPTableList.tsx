@@ -28,17 +28,19 @@ export const useGetPPTableList = () => {
         },
     });
     const data =
-        fetchData?.data?.gameList?.map((item: TGame) => {
-            return {
-                ...item,
-                gameCategory: mappingGameCategory({ gameProviderName: 'pragmaticPlay' }),
-                gameProviderName: 'pragmaticPlay',
-                gameImg: `${gameServerDomain}/game_pic/rec/325/${item.gameID}.png`,
-                gameListFavIcon: ProviderS_PragmaticPlay,
-                gameRTP: mappingRTP(item.gameID as string),
-            };
-        }) || [];
-
+        fetchData?.data?.gameList
+            //只篩選出Live games和Scratch card兩個分類
+            ?.filter((item) => item.typeDescription === 'Live games' || item.typeDescription === 'Scratch card')
+            .map((item: TGame) => {
+                return {
+                    ...item,
+                    gameCategory: mappingGameCategory({ gameProviderName: 'pragmaticPlay', gameProviderCategory: item.typeDescription }),
+                    gameProviderName: 'pragmaticPlay',
+                    gameImg: `${gameServerDomain}/game_pic/rec/325/${item.gameID}.png`,
+                    gameListFavIcon: ProviderS_PragmaticPlay,
+                    gameRTP: mappingRTP(item.gameID as string),
+                };
+            }) || [];
     return {
         data,
         isLoading,

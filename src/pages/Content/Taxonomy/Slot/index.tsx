@@ -54,7 +54,7 @@ const index: React.FC = () => {
 
     //取得遊戲列表
     const { data: ppData, isFetching } = useGetPPTableList();
-    const rawGameList = useMemo(() => ppData || [], [isFetching]);
+    const rawGameList = useMemo(() => ppData.filter((item) => item.gameCategory === 'slot') || [], [isFetching]);
     // console.log('🚀 ~ ppData:', ppData);
     // const rawGameList = [...ppData];
 

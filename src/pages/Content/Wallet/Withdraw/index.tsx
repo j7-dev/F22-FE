@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, Input, notification } from 'antd';
 import { useTranslation } from 'react-i18next';
 import QuickAmountInput from '@/components/form/QuickAmountInput';
-import { useCustomMutation, useGetIdentity, useApiUrl } from '@refinedev/core';
-import { TMe, TUser } from '@/types';
+import { useCustomMutation, useApiUrl } from '@refinedev/core';
+import { TMe } from '@/types';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { useGetSiteSetting } from '@/hooks';
+import { useShowPc } from '@/hooks/useShowPc';
 
-const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
-    console.log('🚀 ~ userInfo:', userInfo);
+const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
+    const isPc = useShowPc();
     const { t } = useTranslation();
     const [form] = Form.useForm();
     const [isDisabled, setIsDisabled] = useState(true);
-    const { data: identity } = useGetIdentity<TMe>();
-    const userId = identity?.id;
+    const userId = userInfo?.id;
     const { mutate: withdraw, isLoading } = useCustomMutation();
     const apiUrl = useApiUrl();
     const handleWithdraw = () => {
@@ -52,9 +52,22 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
      * 如果用戶身上有deposit_bonus則判斷有效投注有沒有達到限制金額，如果沒有達到，禁用提款按鈕
      * 限制金額=rolling percentage * 當時存款金額
      * 否則，直接顯示可提款餘額balance
-     * TODO 等存款紅利限制API串接後，再來判斷
      */
-    const withdrawable = userInfo?.deposit_bonus == null ? balance : 0;
+    const LimitAmountFn = () => {
+        //如果用戶身上有deposit_bonus及last_deposit
+        if (userInfo?.last_deposit?.deposit_bonus) {
+            //判斷有效投注有沒有達到限制金額
+            if (userInfo?.validBetAmount > userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage)
+                //有則顯示可提款餘額balance
+                return balance;
+            //否則為0，自然就禁用提款按鈕
+            else return 0;
+        }
+        //如果沒有存款紅利限制，則可提款餘額為balance
+        return balance;
+    };
+    const withdrawable = LimitAmountFn();
+
     //監聽Form的值，都填寫完畢後，使Button可以點擊
     const values = Form.useWatch([], form);
     useEffect(() => {
@@ -76,7 +89,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                 <span className="text-black font-bold text-2xl">{t('Withdraw')}</span>
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical" className="w-full">
                     <div className="flex justify-between my-2 w-full">
-                        <span className="text-sm text-[#828282] font-medium">{t('Amount to withdraw')}</span>
+                        <span className="text-sm text-[#828282] font-medium">{isPc ? t('Amount to withdraw') : ''}</span>
                         <span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()} / ${t('可提領額度')}:${withdrawable.toLocaleString()}`}</span>
                     </div>
                     <QuickAmountInput

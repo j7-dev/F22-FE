@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { nanoid } from 'nanoid';
 import { Spin } from 'antd';
 import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTableList';
+import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
 import Banner from '@/components/ContentLayout/Banner';
 import { casinoCategory } from '@/utils/GameCategory/casinoCategory';
 import GameList from '@/components/ContentLayout/GameList';
@@ -13,6 +14,7 @@ import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
 import slot_favorite_icon from '@/assets/images/game_provider/slot_favorite_icon.svg';
 import { useIsFavorite } from '@/hooks/useIsFavorite';
 import allImg from '@/assets/images/casino/Icon_CasinoFilter_All.svg';
+import { TGame } from '@/types/games';
 
 //由五大分類而來的分類表
 const fxnCasinoCategory = [
@@ -41,15 +43,17 @@ const index: React.FC = () => {
         return item?.content;
     });
     //取得遊戲列表
-    const { data: evoData, isFetching } = useGetEVOTableList();
-    const rawGameList = useMemo(() => evoData || [], [isFetching]);
+    const { data: evoData, isFetching: evoIsFetching } = useGetEVOTableList();
+    const { data: ppData, isFetching: ppIsFetching } = useGetPPTableList();
+    const isFetching = evoIsFetching || ppIsFetching;
+    const rawGameList = useMemo(() => [...evoData, ...ppData.filter((item) => item.gameCategory === 'casino')] || [], [isFetching]);
     // console.log('⭐  rawGameList:', rawGameList);
     //切換分類
     const handleSwitchTab = (key: string) => () => {
         setChosenCategory(key);
         if (key === 'all') return setGameDataList(rawGameList as []);
         //如果為Favorite遊戲渲染Favorite組件
-        if (key === 'favorite') return setGameDataList(rawGameList.filter((item) => isFavorite(item)) as []);
+        if (key === 'favorite') return setGameDataList(rawGameList.filter((item) => isFavorite(item as TGame)) as []);
         setGameDataList(rawGameList.filter((item) => item.casinoCategory === key) as []);
     };
     // const favoriteFilter=(item:TGame)=>{
