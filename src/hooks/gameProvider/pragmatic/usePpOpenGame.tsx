@@ -28,7 +28,7 @@ export const usePpOpenGame = () => {
                     document.body.appendChild(a);
                     a.style.display = 'none';
                     a.href = url;
-                    a.target = '_black';
+                    a.target = '_blank';
                     a.click();
                     document.body.removeChild(a);
 

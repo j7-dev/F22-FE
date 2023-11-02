@@ -58,12 +58,12 @@ export const useEvoOpenGame = () => {
             },
             {
                 onSuccess: (entryData) => {
-                    const url = entryData.data.gameURL;
+                    const url = entryData.data.entry;
                     const a = document.createElement('a');
                     document.body.appendChild(a);
                     a.style.display = 'none';
                     a.href = url;
-                    a.target = '_black';
+                    a.target = '_blank';
                     a.click();
                     document.body.removeChild(a);
 
