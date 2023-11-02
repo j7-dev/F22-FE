@@ -82,7 +82,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
             );
         }
         return (
-            <div onClick={openGame(gameItem)} className="flex gap-2 items-center bg-white w-fit h-10 rounded-2xl border-2 border-[#5932EA] px-6 py-2 ">
+            <div className="flex gap-2 items-center bg-white w-fit h-10 rounded-2xl border-2 border-[#5932EA] px-6 py-2 ">
                 {openGameLoading ? <AiOutlineLoading3Quarters color="#5932EA" className={`block animate-spin`} /> : <AiFillPlayCircle color="#5932EA" />}
                 <span className="font-bold text-base text-[#5932EA]">Play</span>
             </div>
@@ -90,7 +90,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
     };
     return (
         <div className="singleGame  w-full h-full aspect-square relative overflow-hidden rounded-2xl sm:shadow-none shadow-[0_4px_4px_0_#A370ED33] group">
-            <div className={`editOverlay opacity-0 hover:opacity-100 hover:bg-slate-600/50 z-10 cursor-pointer absolute inset-0 w-full h-full duration-300 text-white  flex justify-center items-center`}>
+            <div onClick={openGame(gameItem)} className={`editOverlay opacity-0 hover:opacity-100 hover:bg-slate-600/50 z-10 cursor-pointer absolute inset-0 w-full h-full duration-300 text-white  flex justify-center items-center`}>
                 <PlayGameBtn />
             </div>
             <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit pt-2 sm:px-5 px-2.5">

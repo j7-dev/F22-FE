@@ -27,11 +27,11 @@ export const usePpOpenGame = () => {
                     //判斷是否為safari
                     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
                     if (isSafari) {
-                        //當前頁面跳轉
+                        //彈窗
                         window.location.href = url;
                     } else {
                         //否則開新分頁
-                        window.open(entryData.data.entry, '_blank');
+                        window.open(entryData.data.gameURL, '_blank');
                     }
                 },
                 onError: (error) => {
