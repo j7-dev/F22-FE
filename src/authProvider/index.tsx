@@ -4,7 +4,7 @@ import { API_URL } from '@/utils';
 import { axiosInstance } from '@/providers/strapi-v4/';
 import axios from 'axios';
 import { Modal } from 'antd';
-import React from 'react';
+
 const strapiAuthHelper = AuthHelper(`${API_URL}/api`);
 
 export const authProvider: AuthBindings = {
