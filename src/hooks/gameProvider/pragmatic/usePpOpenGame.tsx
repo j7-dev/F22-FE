@@ -31,7 +31,7 @@ export const usePpOpenGame = () => {
                         window.location.href = url;
                     } else {
                         //否則開新分頁
-                        window.open(entryData.data.gameURL, '_blank');
+                        window.open(url, '_blank');
                     }
                 },
                 onError: (error) => {
