@@ -75,12 +75,11 @@ export const Footer: React.FC = () => {
                                     <span className="md:text-xs text-[10px] text-[#333333] hover:underline ">{t('About Us')}</span>
                                 </Link>
                             </li>
-                            <li>
-                                {/* TODO 未來這邊網域要改成env變數 */}
+                            {/* <li>
                                 <a href="itms-services://?action=download-manifest&url=https://f22-fe.vercel.app/ipa/app.plist" className="md:text-xs text-[10px] text-[#333333] hover:underline ">
                                     IPA下載
                                 </a>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <div className="betRuleWrap text-center md:col-span-1 md:flex md:flex-col md:gap-4 col-span-4 grid grid-cols-4">

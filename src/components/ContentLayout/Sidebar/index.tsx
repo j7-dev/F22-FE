@@ -9,6 +9,8 @@ import WallerContainer from './WallerContainer';
 import GameNavContainer from './GameNavContainer';
 // import LanguageSwitch from '@/components/ContentLayout/Header/LanguageSwitch';
 import { signInAtom } from '@/components/ContentLayout/Header/LoginModule';
+import appStore from '@/assets/images/sideBar/appStore.png';
+import googlePlay from '@/assets/images/sideBar/googlePlay.png';
 
 export const activeMenuAtom = atom('');
 export const mbSidebarAtom = atom(false); //手機版選單是否打開
@@ -77,11 +79,21 @@ export const Sidebar: React.FC = () => {
                         </span>
                     </div>
                 </div>
+                {/* 手機版IPA與APK下載連結 */}
+                {/* TODO 未來這邊網域要改成env變數 */}
+                <div className="appDownload sm:hidden flex flex-col gap-2 mt-[50px] w-full px-6">
+                    <a href="itms-services://?action=download-manifest&url=https://f22-fe.vercel.app/ipa/app.plist" className="">
+                        <img src={appStore} alt="" className="w-[144px]" />
+                    </a>
+                    <a href="/apk/app-release.apk" className="">
+                        <img src={googlePlay} alt="" className="w-[144px]" />
+                    </a>
+                </div>
                 {/* 手機版登出 */}
                 {isLogin ? (
-                    <div onClick={handleLogOut} className="sm:hidden w-full flex justify-center logout mt-[50px]">
-                        <div className=" px-3 py-1.5 bg-black rounded-xl">
-                            <span className=" text-xs text-white font-bold">{t('Log Out')}</span>
+                    <div onClick={handleLogOut} className="sm:hidden w-full flex justify-center logout mt-3">
+                        <div className=" px-3 py-1.5 border border-solid border-black rounded-xl">
+                            <span className=" text-xs text-black font-bold">{t('Log Out')}</span>
                         </div>
                     </div>
                 ) : (
