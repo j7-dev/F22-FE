@@ -32,7 +32,7 @@ export const useOpenGame = () => {
         } else if (item.gameProviderName === 'golf') {
             navigate(`/golf`);
         } else {
-            Modal.error({ title: 'Error', content: 'Game not found' });
+            Modal.error({ centered: true, title: 'Error', content: 'OpenGame function not found' });
         }
     };
     return { isLoading, handleClick };
