@@ -57,17 +57,6 @@ export const resources = [
             label: 'All Members 會員查詢',
         },
     },
-
-    {
-        name: 'transaction-records',
-        identifier: 'balance-adjustment',
-        list: '/refine/members/balance-adjustment',
-        meta: {
-            parent: 'members',
-            label: 'Balance Adjustment 人工存提',
-        },
-    },
-
     {
         name: 'agent',
         meta: {
