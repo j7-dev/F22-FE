@@ -58,7 +58,10 @@ export const useEvoOpenGame = () => {
             },
             {
                 onSuccess: (entryData) => {
-                    window.open(entryData.data.entry, '_blank');
+                    const safariWindow = window.open();
+                    (safariWindow as Window).opener = null;
+                    (safariWindow as Window).location.href = entryData.data.gameURL;
+                    // window.open(entryData.data.entry, '_blank');
                 },
                 onError: (error) => {
                     console.log('error', error);
