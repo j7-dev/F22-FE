@@ -73,9 +73,10 @@ const ModalForm: React.FC<{ modalProps: ModalProps }> = ({ modalProps }) => {
                     >
                         <InputNumber min={0} className="w-full" />
                     </Form.Item>
+
                     <Form.Item
-                        name="deposit_downgrade_threshold"
-                        label="Retain - Deposit Amount"
+                        name="turnover_rate"
+                        label="Turnover rate"
                         rules={[
                             {
                                 required: true,
@@ -83,19 +84,7 @@ const ModalForm: React.FC<{ modalProps: ModalProps }> = ({ modalProps }) => {
                             },
                         ]}
                     >
-                        <InputNumber min={0} className="w-full" />
-                    </Form.Item>
-                    <Form.Item
-                        name="valid_bet_amount_downgrade_threshold"
-                        label="Retain - Valid Bet"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input a value',
-                            },
-                        ]}
-                    >
-                        <InputNumber min={0} className="w-full" />
+                        <InputNumber min={0} className="w-full" addonAfter="%" />
                     </Form.Item>
 
                     <Form.Item
