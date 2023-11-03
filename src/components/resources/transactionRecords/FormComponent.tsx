@@ -1,7 +1,6 @@
 import { Form, Input, Select, FormProps } from 'antd';
 import { useUserSelect } from '@/hooks';
 import AmountInput from '@/components/form/AmountInput';
-import Amount from '@/components/Admin/Amount';
 import { useCustom, useApiUrl, useResource } from '@refinedev/core';
 import { TBalance } from '@/types';
 import { useEffect } from 'react';
@@ -80,7 +79,7 @@ const FormComponent: React.FC<{
 
                 <div className="col-span-2 lg:col-span-1">
                     <p className="mb-2">User's balance</p>
-                    {watchUser && !isFetching && <Amount amount={Number(currencyBalanceAmount)} currency={watchCurrency} symbol />}
+                    {watchUser && !isFetching && Number(currencyBalanceAmount).toLocaleString()}
                     {isFetching && <LoadingOutlined />}
                 </div>
                 <Form.Item name={['type']} label="Type" className="col-span-2 lg:col-span-1" initialValue="MANUAL" hidden={isUserAdjustment}>

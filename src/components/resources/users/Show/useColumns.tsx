@@ -2,12 +2,10 @@ import { DateTime } from '@/components/PureComponents';
 import ReferralLink from '@/components/general/ReferralLink';
 import { TBankAccount, TVip } from '@/types';
 import VipLink from '@/components/Admin/VipLink';
-import Amount from '@/components/Admin/Amount';
-import { useGetSiteSetting, useBalanceColumns } from '@/hooks';
+import { useBalanceColumns } from '@/hooks';
 import BankAccount from '@/components/Admin/BankAccount';
 
 const useColumns = () => {
-    const { default_currency } = useGetSiteSetting();
     const allBalances = useBalanceColumns();
 
     const infoLeftColumns = [
@@ -26,55 +24,55 @@ const useColumns = () => {
             key: 'dayDp',
             title: 'Deposit in today',
             dataIndex: 'dayDp',
-            render: (v: number) => <Amount amount={v} currency={default_currency} symbol />,
+            render: (v: number) => v.toLocaleString(),
         },
         {
             key: 'monthDp',
             title: 'Deposit in recent 30 days',
             dataIndex: 'monthDp',
-            render: (v: number) => <Amount amount={v} currency={default_currency} symbol />,
+            render: (v: number) => v.toLocaleString(),
         },
         {
             key: 'totalDp',
             title: 'Total Deposit',
             dataIndex: 'totalDp',
-            render: (v: number) => <Amount amount={v} currency={default_currency} symbol />,
+            render: (v: number) => v.toLocaleString(),
         },
         {
             key: 'dayWd',
             title: 'Withdraw in today',
             dataIndex: 'dayWd',
-            render: (v: number) => <Amount amount={v} currency={default_currency} symbol />,
+            render: (v: number) => v.toLocaleString(),
         },
         {
             key: 'monthWd',
             title: 'Withdraw in recent 30 days',
             dataIndex: 'monthWd',
-            render: (v: number) => <Amount amount={v} currency={default_currency} symbol />,
+            render: (v: number) => v.toLocaleString(),
         },
         {
             key: 'totalWd',
             title: 'Total Withdraw',
             dataIndex: 'totalWd',
-            render: (v: number) => <Amount amount={v} currency={default_currency} symbol />,
+            render: (v: number) => v.toLocaleString(),
         },
         {
             key: 'dayDpWd',
             title: 'DP-WD in today',
             dataIndex: 'dayDpWd',
-            render: (_: undefined, record: any) => <Amount amount={record?.dayDp - record?.dayWd} currency={default_currency} symbol />,
+            render: (_: undefined, record: any) => (record?.dayDp - record?.dayWd).toLocaleString(),
         },
         {
             key: 'monthDpWd',
             title: 'DP-WD in recent 30 days',
             dataIndex: 'monthDpWd',
-            render: (_: undefined, record: any) => <Amount amount={record?.monthDp - record?.monthWd} currency={default_currency} symbol />,
+            render: (_: undefined, record: any) => (record?.monthDp - record?.monthWd).toLocaleString(),
         },
         {
             key: 'totalDpWd',
             title: 'Total DP-WD',
             dataIndex: 'totalDpWd',
-            render: (_: undefined, record: any) => <Amount amount={record?.totalDp - record?.totalWd} currency={default_currency} symbol />,
+            render: (_: undefined, record: any) => (record?.totalDp - record?.totalWd).toLocaleString(),
         },
         {
             key: 'referralLink',

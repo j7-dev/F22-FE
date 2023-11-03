@@ -1,5 +1,4 @@
 import { useCustom, useApiUrl } from '@refinedev/core';
-import Amount from '@/components/Admin/Amount';
 import { Spin } from 'antd';
 
 const HeaderInfo = () => {
@@ -23,33 +22,23 @@ const HeaderInfo = () => {
                     <table className="table table-small table-nowrap th-left w-[300px]">
                         <tr>
                             <th className="w-8">total balance</th>
-                            <td>
-                                <Amount amount={table1?.cashBalanceAmount} symbol />
-                            </td>
+                            <td>{(table1?.cashBalanceAmount || 0).toLocaleString()}</td>
                         </tr>
                         <tr>
                             <th>total point</th>
-                            <td>
-                                <Amount amount={table1?.turnoverBonusBalanceAmount} symbol />
-                            </td>
+                            <td>{(table1?.turnoverBonusBalanceAmount || 0).toLocaleString()}</td>
                         </tr>
                         <tr>
                             <th>total deposit (users)</th>
-                            <td>
-                                <Amount amount={table1?.dpAmount} symbol /> ({table1?.dpUsers})
-                            </td>
+                            <td>{`${(table1?.dpAmount || 0).toLocaleString()} (${table1?.dpUsers})`}</td>
                         </tr>
                         <tr>
                             <th>total withdraw (users)</th>
-                            <td>
-                                <Amount amount={table1?.wdAmount} symbol /> ({table1?.wdUsers})
-                            </td>
+                            <td>{`${(table1?.wdAmount || 0).toLocaleString()} (${table1?.wdUsers})`}</td>
                         </tr>
                         <tr>
                             <th>DPWD</th>
-                            <td>
-                                <Amount amount={table1?.dpWd} symbol />
-                            </td>
+                            <td>{(table1?.dpWd || 0).toLocaleString()}</td>
                         </tr>
                     </table>
 
@@ -64,25 +53,15 @@ const HeaderInfo = () => {
                         </tr>
 
                         {table2.map((item: any) => {
-                            const { label, total, evo, pp, bti, igx } = item;
+                            const { label = '', total = 0, evo = 0, pp = 0, bti = 0, igx = 0 } = item;
                             return (
                                 <tr key={label}>
                                     <th className="w-1/4">{label}</th>
-                                    <td>
-                                        <Amount amount={total} symbol />
-                                    </td>
-                                    <td>
-                                        <Amount amount={evo} symbol />
-                                    </td>
-                                    <td>
-                                        <Amount amount={pp} symbol />
-                                    </td>
-                                    <td>
-                                        <Amount amount={bti} symbol />
-                                    </td>
-                                    <td>
-                                        <Amount amount={igx} symbol />
-                                    </td>
+                                    <td>{total.toLocaleString()}</td>
+                                    <td>{evo.toLocaleString()}</td>
+                                    <td>{pp.toLocaleString()}</td>
+                                    <td>{bti.toLocaleString()}</td>
+                                    <td>{igx.toLocaleString()}</td>
                                 </tr>
                             );
                         })}

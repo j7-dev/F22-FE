@@ -1,5 +1,4 @@
 import React from 'react';
-import Amount from '@/components/Admin/Amount';
 import { useGetSiteSetting } from '@/hooks';
 import dayjs from 'dayjs';
 import { useList, useCustom, useApiUrl } from '@refinedev/core';
@@ -98,7 +97,7 @@ const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
             {latestDeposit ? (
                 <div>
                     <p>
-                        Latest Deposit: <Amount amount={latestDeposit?.amount} className="bg-yellow-200 px-3" /> at <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}</u>
+                        Latest Deposit: <span className="bg-yellow-200 px-3">{(latestDeposit?.amount || 0).toLocaleString()}</span> at <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}</u>
                     </p>
                     <p>
                         Date: from <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD')}</u> to <u>{dayjs().format('YYYY-MM-DD')}</u>
@@ -127,15 +126,9 @@ const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
                             <Table.Summary.Row>
                                 <Table.Summary.Cell index={0}>Total</Table.Summary.Cell>
                                 <Table.Summary.Cell index={1}>{totalTxnAmount}</Table.Summary.Cell>
-                                <Table.Summary.Cell index={2}>
-                                    <Amount amount={totalValidBetAmount} />
-                                </Table.Summary.Cell>
-                                <Table.Summary.Cell index={3}>
-                                    <Amount amount={totalPayOut} />
-                                </Table.Summary.Cell>
-                                <Table.Summary.Cell index={4}>
-                                    <Amount amount={totalWinLoss} />
-                                </Table.Summary.Cell>
+                                <Table.Summary.Cell index={2}>{totalValidBetAmount.toLocaleString()}</Table.Summary.Cell>
+                                <Table.Summary.Cell index={3}>{totalPayOut.toLocaleString()}</Table.Summary.Cell>
+                                <Table.Summary.Cell index={4}>{totalWinLoss.toLocaleString()}</Table.Summary.Cell>
                             </Table.Summary.Row>
                         </Table.Summary>
                     );

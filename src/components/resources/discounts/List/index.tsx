@@ -4,7 +4,6 @@ import { useTable, List, EditButton, DeleteButton } from '@refinedev/antd';
 import { DateTime } from '@/components/PureComponents';
 import { DataType } from './types';
 
-import Amount from '@/components/Admin/Amount';
 import { TVip } from '@/types';
 
 const index = () => {
@@ -27,12 +26,12 @@ const index = () => {
         {
             title: 'valid_bet_amount_threshold',
             dataIndex: 'valid_bet_amount_threshold',
-            render: (v: number, record) => <Amount amount={v} currency={record?.currency} />,
+            render: (v: number) => v.toLocaleString(),
         },
         {
             title: 'discount_limit',
             dataIndex: 'discount_limit',
-            render: (v: number, record) => <Amount amount={v} currency={record?.currency} />,
+            render: (v: number) => v.toLocaleString(),
         },
         {
             title: 'amount_type',

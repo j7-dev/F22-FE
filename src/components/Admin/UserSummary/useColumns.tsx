@@ -1,5 +1,4 @@
 import type { ColumnsType } from 'antd/es/table';
-import Amount from '@/components/Admin/Amount';
 
 type DataType = any;
 
@@ -19,19 +18,19 @@ const useColumns = () => {
             title: 'Valid Bet Amount',
             dataIndex: 'validBetAmount',
             key: 'validBetAmount',
-            render: (v: number) => <Amount amount={v || 0} />,
+            render: (v: number) => v.toLocaleString(),
         },
         {
             title: 'Pay out',
             dataIndex: 'payOut',
             key: 'payOut',
-            render: (v: number) => <Amount amount={v || 0} />,
+            render: (v: number) => v.toLocaleString(),
         },
         {
             title: 'win/loss',
             dataIndex: 'winLoss',
             key: 'winLoss',
-            render: (v: number) => <Amount amount={v || 0} />,
+            render: (v: number) => v.toLocaleString(),
         },
     ];
 

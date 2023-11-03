@@ -3,8 +3,6 @@ import type { ColumnsType } from 'antd/es/table';
 import { useTable, List, EditButton, DeleteButton } from '@refinedev/antd';
 import { DateTime } from '@/components/PureComponents';
 import { DataType } from './types';
-
-import Amount from '@/components/Admin/Amount';
 import { TVip } from '@/types';
 
 const index = () => {
@@ -35,12 +33,12 @@ const index = () => {
         {
             title: 'min_deposit_amount',
             dataIndex: 'min_deposit_amount',
-            render: (v: number, record) => <Amount amount={v} currency={record?.currency} />,
+            render: (v: number) => v.toLocaleString(),
         },
         {
             title: 'max_bonus_amount',
             dataIndex: 'max_bonus_amount',
-            render: (v: number, record) => <Amount amount={v} currency={record?.currency} />,
+            render: (v: number) => v.toLocaleString(),
         },
         {
             title: 'rolling_percentage',

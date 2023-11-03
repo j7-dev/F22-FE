@@ -1,6 +1,5 @@
 import { TBalance } from '@/types';
 import { useGetSiteSetting } from '@/hooks';
-import Amount from '@/components/Admin/Amount';
 
 /**
  * 取得 Balance Column[]
@@ -19,7 +18,7 @@ export const useBalanceColumns = () => {
                     key: `balances-${currency}-${amount_type}`,
                     render: (balances: TBalance[]) => {
                         const balance = (balances || []).find((b) => b.currency === currency && b.amount_type === amount_type);
-                        return <Amount amount={Number(balance?.amount || '0')} currency={currency} symbol />;
+                        return Number(balance?.amount || '0').toLocaleString();
                     },
                 };
             });

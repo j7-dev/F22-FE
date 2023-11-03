@@ -7,10 +7,8 @@ import { getStatusTag } from '@/utils';
 import { TUser, TTransactionType, TDepositBonus } from '@/types';
 import UserLink from '@/components/Admin/UserLink';
 import VipLink from '@/components/Admin/VipLink';
-import Amount from '@/components/Admin/Amount';
 import { CrudFilters } from '@refinedev/core';
 import { DateTime } from '@/components/PureComponents';
-import { nanoid } from 'nanoid';
 import ApproveButton from './ApporveButton';
 import { DataType, TSearchProps, TParams } from './types';
 import { selectedRecordsAtom } from './atom';
@@ -163,7 +161,7 @@ const index = () => {
         {
             title: 'Amount',
             dataIndex: 'amount',
-            render: (amount, record) => <Amount amount={amount} currency={record?.currency} symbol />,
+            render: (amount) => amount.toLocaleString(),
         },
         {
             title: 'Deposit Bonus',
@@ -251,7 +249,7 @@ const index = () => {
                                             <Table.Summary.Cell index={2}>
                                                 {uniqueCurrencies.map((currency) => {
                                                     const totalByCurrency = pageData.filter((data) => data.currency === currency).reduce((sum, record) => sum + record.amount, 0);
-                                                    return <Amount key={nanoid()} amount={totalByCurrency} currency={currency} symbol />;
+                                                    return totalByCurrency.toLocaleString();
                                                 })}
                                             </Table.Summary.Cell>
                                         </Table.Summary.Row>
