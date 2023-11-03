@@ -12,11 +12,6 @@ const useColumns = () => {
 
     const infoLeftColumns = [
         {
-            key: 'id',
-            title: 'ID',
-            dataIndex: 'id',
-        },
-        {
             key: 'username',
             title: 'Username',
             dataIndex: 'username',
