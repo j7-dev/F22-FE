@@ -99,6 +99,14 @@ const index = () => {
                       ]
                     : undefined,
         },
+        sorters: {
+            initial: [
+                {
+                    field: 'createdAt',
+                    order: 'desc',
+                },
+            ],
+        },
         onSearch: (values: TSearchProps) => {
             const filters = [
                 {
@@ -138,15 +146,20 @@ const index = () => {
             dataIndex: 'id',
         },
         {
-            title: 'Date',
-            dataIndex: 'createdAt',
-            render: (createdAt: string) => <DateTime value={createdAt} />,
+            title: 'Agent',
+            dataIndex: 'agent',
         },
         {
-            title: 'Update Date',
-            dataIndex: 'updatedAt',
-            render: (updatedAt: string, record: DataType) => (record?.createdAt === updatedAt ? '' : <DateTime value={updatedAt} />),
+            title: 'user',
+            dataIndex: 'user',
+            render: (user: TUser) => <UserLink user={user} />,
         },
+        {
+            title: 'Vip',
+            dataIndex: 'vip',
+            render: (_, record) => <VipLink vip={record?.user?.vip} />,
+        },
+
         {
             title: 'Amount',
             dataIndex: 'amount',
@@ -165,24 +178,19 @@ const index = () => {
             render: (status: string) => getStatusTag(status),
         },
         {
-            title: 'user',
-            dataIndex: 'user',
-            render: (user: TUser) => <UserLink user={user} />,
-        },
-        {
-            title: 'Agent',
-            dataIndex: 'agent',
-        },
-        {
-            title: 'Vip',
-            dataIndex: 'vip',
-            render: (_, record) => <VipLink vip={record?.user?.vip} />,
-        },
-
-        {
             title: 'Bank Account',
             dataIndex: 'bankAccount',
-            render: (_, record) => <BankAccount bank_account={record?.user?.bank_account} display="flex" />,
+            render: (_, record) => <BankAccount bank_account={record?.user?.bank_account} display="text" />,
+        },
+        {
+            title: 'Date',
+            dataIndex: 'createdAt',
+            render: (createdAt: string) => <DateTime value={createdAt} />,
+        },
+        {
+            title: 'Update Date',
+            dataIndex: 'updatedAt',
+            render: (updatedAt: string, record: DataType) => (record?.createdAt === updatedAt ? '' : <DateTime value={updatedAt} />),
         },
         {
             title: 'Note',
@@ -190,7 +198,7 @@ const index = () => {
         },
     ];
 
-    const depositColumns = columns.filter((column) => column.dataIndex !== 'bankAccount');
+    const depositColumns = columns.filter((column) => !['bankAccount', 'deposit_bonus'].includes(column.dataIndex as string));
 
     const formattedTableProps = {
         ...tableProps,

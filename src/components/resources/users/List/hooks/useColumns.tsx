@@ -54,7 +54,7 @@ const useColumns = () => {
                 <BooleanIndicator
                     enabled={confirmed}
                     tooltipProps={{
-                        title: confirmed ? 'Confirmed' : 'Note Confirmed',
+                        title: confirmed ? 'Confirmed' : 'Not Confirmed',
                         enabled: true,
                     }}
                 />

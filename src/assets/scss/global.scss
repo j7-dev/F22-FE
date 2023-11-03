@@ -65,6 +65,12 @@ table.table {
 			font-size: 0.75rem;
 		}
 	}
+	&.table-nowrap {
+		td,
+		th {
+			white-space: nowrap;
+		}
+	}
 	td {
 		text-align: right;
 	}

@@ -57,17 +57,6 @@ export const resources = [
             label: 'All Members 會員查詢',
         },
     },
-
-    {
-        name: 'transaction-records',
-        identifier: 'balance-adjustment',
-        list: '/refine/members/balance-adjustment',
-        meta: {
-            parent: 'members',
-            label: 'Balance Adjustment 人工存提',
-        },
-    },
-
     {
         name: 'agent',
         meta: {
@@ -189,18 +178,18 @@ export const resources = [
             label: 'Deposit Bonus 存款紅利',
         },
     },
-    {
-        name: 'discounts',
-        identifier: 'discounts',
-        list: '/refine/promotion/discounts',
-        create: '/refine/promotion/discounts/create',
-        edit: '/refine/promotion/discounts/edit/:id',
-        delete: '/refine/promotion/discounts/delete/:id',
-        meta: {
-            parent: 'promotion',
-            label: 'Turnover Bonus 返水設定',
-        },
-    },
+    // {
+    //     name: 'discounts',
+    //     identifier: 'discounts',
+    //     list: '/refine/promotion/discounts',
+    //     create: '/refine/promotion/discounts/create',
+    //     edit: '/refine/promotion/discounts/edit/:id',
+    //     delete: '/refine/promotion/discounts/delete/:id',
+    //     meta: {
+    //         parent: 'promotion',
+    //         label: 'Turnover Bonus 返水設定',
+    //     },
+    // },
     {
         name: 'system-setting',
         meta: {

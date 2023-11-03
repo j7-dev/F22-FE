@@ -65,11 +65,15 @@ const CustomSider: typeof Sider = () => {
                 breakpoint="lg"
                 onCollapse={(isCollapsed: boolean): void => setCollapsed(isCollapsed)}
                 style={{
-                    position: 'fixed',
-                    height: '100vh',
                     zIndex: 999,
                     backgroundColor: token.colorBgContainer,
                     borderRight: `1px solid ${token.colorBgElevated}`,
+                    overflow: 'auto',
+                    height: '100vh',
+                    position: 'fixed',
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
                 }}
                 trigger={
                     !isMobile && (
