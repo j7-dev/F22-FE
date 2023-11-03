@@ -28,6 +28,9 @@ const EditDiscount = lazy(() => import('@/pages/Admin/discounts/Edit'));
 const ListDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/List'));
 const CreateDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/Create'));
 const EditDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/Edit'));
+const ListSiteNotifications = lazy(() => import('@/pages/Admin/systemSetting/siteNotifications/List'));
+const CreateSiteNotifications = lazy(() => import('@/pages/Admin/systemSetting/siteNotifications/Create'));
+const EditSiteNotifications = lazy(() => import('@/pages/Admin/systemSetting/siteNotifications/Edit'));
 
 const adminRoutes = () => {
     return (
@@ -75,6 +78,9 @@ const adminRoutes = () => {
                 <Route index element={<VipSetting />} />
                 <Route path="vips" element={<VipSetting />} />
                 <Route path="site-setting" element={<SiteSetting />} />
+                <Route path="site-notifications" element={<ListSiteNotifications />} />
+                <Route path="site-notifications/create" element={<CreateSiteNotifications />} />
+                <Route path="site-notifications/edit/:id" element={<EditSiteNotifications />} />
             </Route>
             <Route path="/refine/promotion/">
                 <Route index element={<ListDiscount />} />

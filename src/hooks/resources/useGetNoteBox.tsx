@@ -20,11 +20,11 @@ export const useGetNoteBox = () => {
                     operator: 'eq',
                     value: 'siteNotify',
                 },
-                // {
-                //     field: 'send_to_user_ids',
-                //     operator: 'in',
-                //     value: identity?.id,
-                // },
+                {
+                    field: 'send_to_user_ids',
+                    operator: 'in',
+                    value: identity?.id,
+                },
             ],
         },
         sorters: {

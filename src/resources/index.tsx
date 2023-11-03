@@ -219,4 +219,16 @@ export const resources = [
             label: 'Settings',
         },
     },
+    {
+        name: 'cms-posts',
+        identifier: 'site-notifications',
+        list: '/refine/system-setting/site-notifications',
+        create: '/refine/system-setting/site-notifications/create',
+        edit: '/refine/system-setting/site-notifications/edit/:id',
+        delete: '/refine/system-setting/site-notifications/delete/:id',
+        meta: {
+            parent: 'system-setting',
+            label: 'Site Notify',
+        },
+    },
 ];

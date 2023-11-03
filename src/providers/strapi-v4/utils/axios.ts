@@ -8,6 +8,7 @@ axiosInstance.interceptors.response.use(
         return response;
     },
     (error) => {
+        console.log('⭐  error:', error);
         const response = error?.response?.data?.error || 'Error';
         const message = typeof response === 'string' ? response : response?.message || JSON.stringify(response);
 

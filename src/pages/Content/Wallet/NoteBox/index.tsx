@@ -13,6 +13,7 @@ import { BiSolidTimeFive } from 'react-icons/bi';
 import { BsFillCaretLeftFill } from 'react-icons/bs';
 import { TSiteNotify } from '@/types/resources';
 import noteBoxDeleteIcon from '@/assets/images/newMyPage/noteBoxDelete.svg';
+import { renderHTML } from '@/utils';
 
 const { Column } = Table;
 
@@ -133,7 +134,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
                     </div>
                     <div className="divider my-4 border-0 border-solid border-b border-[#E0E0E0] w-full" />
                     <div className="font-normal sm:text-base text-xs text-[#828282]">
-                        <span>{modalContent.content}</span>
+                        <span>{renderHTML(modalContent.content)}</span>
                     </div>
                     <div className="mt-6 w-full flex justify-center">
                         <Button onClick={close} className="h-full px-6 py-2 bg-[#5932EA] rounded-2xl text-white text-base font-bold">

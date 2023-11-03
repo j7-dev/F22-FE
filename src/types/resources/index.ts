@@ -22,3 +22,8 @@ export type AmountType = {
     currency: string;
     amount_type: string;
 };
+
+export type TMeta = {
+    meta_key: string;
+    meta_value: string;
+};
