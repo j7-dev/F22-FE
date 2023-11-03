@@ -10,6 +10,8 @@ import aecasino from '@/assets/images/game_provider/aecasino.jpg';
 import agcasino from '@/assets/images/game_provider/agcasino.jpg';
 import mglive from '@/assets/images/game_provider/mglive.jpg';
 
+// 排除 Token 的 EVO & PP
+
 export const tokenData: TGame[] = [
     {
         gameName: '룰렛',

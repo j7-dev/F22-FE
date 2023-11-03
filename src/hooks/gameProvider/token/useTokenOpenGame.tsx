@@ -3,9 +3,8 @@ import { TGame } from '@/types/games';
 import { TMe } from '@/types';
 import { API_URL } from '@/utils';
 
-/**
+const TOKEN_OPEN_GAME_URL = 'https://api.tgame365.com/api/';
 
- */
 export const useTokenOpenGame = () => {
     const { mutate: openGame, isLoading } = useCustomMutation();
 
@@ -20,18 +19,29 @@ export const useTokenOpenGame = () => {
                 },
             },
             {
-                onSuccess: (entryData) => {
-                    console.log('⭐  entryData:', entryData);
-                    // const url = entryData.data.entry;
-                    // //判斷是否為safari
-                    // const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-                    // if (isSafari) {
-                    // 		//當前頁面跳轉
-                    // 		window.location.href = url;
-                    // } else {
-                    // 		//否則開新分頁
-                    // 		window.open(url, '_blank');
-                    // }
+                onSuccess: (entryData: any) => {
+                    //{"statuscode":"0","message":"OK","user_id":"1","uid":"2429837"}
+                    const { uid, hash } = entryData;
+
+                    const args = {
+                        gtype: 'graph',
+                        uid,
+                        hash,
+                    };
+
+                    const params = new URLSearchParams();
+                    Object.keys(args).forEach((key) => params.append(key, args[key as keyof typeof args]));
+
+                    const url = `${TOKEN_OPEN_GAME_URL}?${params.toString()}`;
+                    //判斷是否為safari
+                    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                    if (isSafari) {
+                        //當前頁面跳轉
+                        window.location.href = url;
+                    } else {
+                        //否則開新分頁
+                        window.open(url, '_blank');
+                    }
                 },
                 onError: (error) => {
                     console.log('error', error);
