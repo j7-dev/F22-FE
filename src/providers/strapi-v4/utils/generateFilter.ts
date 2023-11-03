@@ -3,7 +3,7 @@ import { mapOperator } from './mapOperator';
 import { stringify, parse } from 'qs';
 
 export const generateNestedFilterField = (field: string) => {
-    const fields = field.split('.');
+    const fields = field ? field.split('.') : [];
 
     if (fields.length > 1) {
         let fieldQuery = '';
@@ -15,9 +15,10 @@ export const generateNestedFilterField = (field: string) => {
 };
 
 export const generateFilter = (filters?: CrudFilters) => {
+    console.log('⭐  filters:', filters);
     let rawQuery = '';
 
-    if (filters) {
+    if (filters && Array.isArray(filters)) {
         filters.map((filter) => {
             if (filter.operator !== 'or' && filter.operator !== 'and' && 'field' in filter) {
                 const { field, operator, value } = filter;

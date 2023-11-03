@@ -1,6 +1,8 @@
 import { Form, FormProps, Input, Select } from 'antd';
 import { useEffect } from 'react';
-import { useUserSelect } from '@/hooks';
+import { useSelect } from '@refinedev/antd';
+import { TUser } from '@/types';
+import { useGetSiteSetting } from '@/hooks';
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
@@ -8,8 +10,18 @@ const FormComponent: React.FC<{
     handler: () => void;
     formLoading?: boolean;
 }> = ({ formType, formProps, handler, formLoading }) => {
-    const { selectProps } = useUserSelect({
-        roleType: 'authenticated',
+    const { roles } = useGetSiteSetting();
+    const { selectProps } = useSelect<TUser>({
+        resource: 'users',
+        optionLabel: 'display_name',
+        optionValue: 'uuid',
+        filters: [
+            {
+                field: 'role.id',
+                operator: 'eq',
+                value: roles?.['authenticated'],
+            },
+        ],
     });
 
     useEffect(() => {

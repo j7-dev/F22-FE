@@ -21,6 +21,7 @@ export type TUser = BaseType & {
     phone: string | null;
     gender: string | null;
     birthday: string | null;
+    uuid: string;
     role: TRole;
     vip?: TVip;
     balances?: TBalance[];

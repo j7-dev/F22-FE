@@ -1,7 +1,6 @@
 import FormComponent from '../FormComponent';
-import { useUpdate, HttpError, useResource, useInvalidate } from '@refinedev/core';
+import { useUpdate, useResource, useInvalidate } from '@refinedev/core';
 import { Edit, useForm } from '@refinedev/antd';
-import { TCommission, TCommissionFields } from '@/types';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { useParams } from 'react-router-dom';
@@ -15,7 +14,15 @@ const index: React.FC<{
     const { resource } = useResource(RESOURCE);
     const invalidate = useInvalidate();
 
-    const { form, formProps, saveButtonProps, formLoading } = useForm<TCommission, HttpError, TCommissionFields>();
+    const { form, formProps, saveButtonProps, formLoading } = useForm({
+        meta: {
+            populate: {
+                send_to_user_ids: {
+                    fields: ['id'],
+                },
+            },
+        },
+    });
     const handleCreate = () => {
         if (!id) return;
         form.validateFields()

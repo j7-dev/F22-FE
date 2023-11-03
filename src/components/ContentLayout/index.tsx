@@ -18,7 +18,7 @@ const Layout = () => {
                 <Footer />
                 <GamePopup />
             </div>
-            <LiveChatWidget license="16519437" visibility="hidden" />
+            <LiveChatWidget license="16519437" visibility="minimized" />
         </div>
     );
 };

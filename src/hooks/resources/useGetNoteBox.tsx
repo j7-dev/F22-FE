@@ -7,7 +7,7 @@ import { TMe } from '@/types';
  */
 export const useGetNoteBox = () => {
     const { data: identity } = useGetIdentity<TMe>();
-    //FIXME 麻煩Jerry再開API來接站內通知
+    const uuid = identity?.uuid;
     const { tableProps } = useTable<HttpError>({
         resource: 'cms-posts',
         meta: {
@@ -16,21 +16,58 @@ export const useGetNoteBox = () => {
         filters: {
             initial: [
                 {
-                    field: 'post_type',
-                    operator: 'eq',
-                    value: 'siteNotify',
-                },
-                {
-                    field: 'send_to_user_ids',
-                    operator: 'in',
-                    value: identity?.id,
+                    operator: 'or',
+                    value: [
+                        {
+                            // 全站的，且沒隱藏
+                            operator: 'and',
+                            value: [
+                                {
+                                    field: 'post_type',
+                                    operator: 'eq',
+                                    value: 'siteNotify',
+                                },
+                                {
+                                    field: 'send_to_user_ids',
+                                    operator: 'null',
+                                    value: true,
+                                },
+                                {
+                                    field: 'hide_to_user_ids',
+                                    operator: 'ncontains',
+                                    value: uuid,
+                                },
+                            ],
+                        },
+                        {
+                            // 給個人  但沒隱藏
+                            operator: 'and',
+                            value: [
+                                {
+                                    field: 'post_type',
+                                    operator: 'eq',
+                                    value: 'siteNotify',
+                                },
+                                {
+                                    field: 'send_to_user_ids',
+                                    operator: 'contains',
+                                    value: uuid,
+                                },
+                                {
+                                    field: 'hide_to_user_ids',
+                                    operator: 'ncontains',
+                                    value: uuid,
+                                },
+                            ],
+                        },
+                    ],
                 },
             ],
         },
         sorters: {
             initial: [
                 {
-                    field: 'createdAt',
+                    field: 'publishedAt',
                     order: 'desc',
                 },
             ],
