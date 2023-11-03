@@ -178,18 +178,18 @@ export const resources = [
             label: 'Deposit Bonus 存款紅利',
         },
     },
-    {
-        name: 'discounts',
-        identifier: 'discounts',
-        list: '/refine/promotion/discounts',
-        create: '/refine/promotion/discounts/create',
-        edit: '/refine/promotion/discounts/edit/:id',
-        delete: '/refine/promotion/discounts/delete/:id',
-        meta: {
-            parent: 'promotion',
-            label: 'Turnover Bonus 返水設定',
-        },
-    },
+    // {
+    //     name: 'discounts',
+    //     identifier: 'discounts',
+    //     list: '/refine/promotion/discounts',
+    //     create: '/refine/promotion/discounts/create',
+    //     edit: '/refine/promotion/discounts/edit/:id',
+    //     delete: '/refine/promotion/discounts/delete/:id',
+    //     meta: {
+    //         parent: 'promotion',
+    //         label: 'Turnover Bonus 返水設定',
+    //     },
+    // },
     {
         name: 'system-setting',
         meta: {
