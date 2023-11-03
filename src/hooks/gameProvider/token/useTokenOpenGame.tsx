@@ -8,7 +8,8 @@ const TOKEN_OPEN_GAME_URL = 'https://api.tgame365.com/api/';
 export const useTokenOpenGame = () => {
     const { mutate: openGame, isLoading } = useCustomMutation();
 
-    const handleClick = ({ item: _, identity }: { item: TGame; identity: TMe }) => {
+    const handleClick = ({ item, identity }: { item: TGame; identity: TMe }) => {
+        console.log('⭐  item:', item);
         //http: api.tgame365.com/api/?gtype=graph&uid=2427051&hash=8b2da7d6cf0bf16793042c186815b9e3
         openGame(
             {
@@ -20,8 +21,9 @@ export const useTokenOpenGame = () => {
             },
             {
                 onSuccess: (entryData: any) => {
+                    console.log('⭐  entryData:', entryData);
                     //{"statuscode":"0","message":"OK","user_id":"1","uid":"2429837"}
-                    const { uid, hash } = entryData;
+                    const { uid, hash } = entryData?.data || {};
 
                     const args = {
                         gtype: 'graph',
