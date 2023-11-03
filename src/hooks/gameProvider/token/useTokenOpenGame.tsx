@@ -26,7 +26,7 @@ export const useTokenOpenGame = () => {
                     const { uid, hash } = entryData?.data || {};
 
                     const args = {
-                        gtype: 'graph',
+                        gtype: item?.gtype,
                         uid,
                         hash,
                     };
