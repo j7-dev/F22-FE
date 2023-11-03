@@ -158,7 +158,7 @@ const index: React.FC = () => {
                                     <span className="block font-bold text-black text-base text-center  ">{t('계좌입금신청')}</span>
                                     <div className="flex flex-col gap-2 my-2.5">
                                         <span className="block font-medium text-[#828282] text-xs text-center">{t('* 입금하실 은행정보는 쪽지로 발송됩니다')}</span>
-                                        <span className="block font-medium text-[#9680EA] text-xl text-center whitespace-nowrap">{t('* 본인 외 계좌만 입금처리 됩니다')}</span>
+                                        <span className="block font-medium text-[#9680EA] text-xl text-center">{t('* 본인명의의 계좌만 입금처리 됩니다')}</span>
                                         <span className="block font-medium text-[#9680EA] text-xs text-center">{t('* 금융사기 보이스피싱 통협 절대 타협 없음')}</span>
                                     </div>
                                 </>
