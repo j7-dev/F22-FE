@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, Input, notification } from 'antd';
+import { Button, Form, Input, Modal } from 'antd';
 import { useTranslation } from 'react-i18next';
 import QuickAmountInput from '@/components/form/QuickAmountInput';
 import { useCustomMutation, useApiUrl } from '@refinedev/core';
@@ -26,14 +26,24 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                         values: { ...values, user_id: userId },
                     },
                     {
-                        onSuccess: (data) => {
-                            const txnId = data?.data?.data?.id;
-                            notification.success({
-                                key: 'withdraw',
-                                message: `Submit $${values.amount} withdraw  Success #${txnId}`,
-                                description: 'Please wait for the administrator to review, we will reply in 3 working days.',
-                                duration: null,
+                        onSuccess: (_data) => {
+                            // const txnId = data?.data?.data?.id;
+                            Modal.success({
+                                centered: true,
+                                title: '출금신청',
+                                content: (
+                                    <div className="flex flex-col">
+                                        <span>* 정상적으로 출금신청 되었습니다</span>
+                                        <span>* 완료까지는 5~15분이 소요될 예정입니다</span>
+                                    </div>
+                                ),
                             });
+                            // notification.success({
+                            //     key: 'withdraw',
+                            //     message: `Submit $${values.amount} withdraw  Success #${txnId}`,
+                            //     description: 'Please wait for the administrator to review, we will reply in 3 working days.',
+                            //     duration: null,
+                            // });
                         },
                     },
                 );

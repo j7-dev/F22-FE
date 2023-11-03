@@ -6,6 +6,8 @@ export const mappingGameCategory = ({ gameProviderName, gameProviderCategory }: 
     if (gameProviderName === 'evolution') return 'casino';
     if (gameProviderName === 'pragmaticPlay' && gameProviderCategory === 'Live games') return 'casino';
     if (gameProviderName === 'pragmaticPlay' && gameProviderCategory === 'Scratch card') return 'slot';
+    if (gameProviderName === 'pragmaticPlay' && gameProviderCategory === 'Video Slots') return 'slot';
+    if (gameProviderName === 'pragmaticPlay' && gameProviderCategory === 'Classic Slots') return 'slot';
     return 'events';
 };
 //用此來判斷此遊戲廠商是否有包含此分類

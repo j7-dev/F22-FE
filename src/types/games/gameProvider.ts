@@ -15,7 +15,8 @@ export type TProviderData = {
 };
 
 export type TGame = TEvolutionGame &
-    TPragmaticGame & {
+    TPragmaticGame &
+    TToken & {
         gameID?: string;
         casinoCategory?: string; //casino 遊戲分類
         casinoCategoryIcon?: string; //casino 遊戲分類 icon
@@ -53,4 +54,8 @@ export type TPragmaticGame = {
     gameIdNumeric?: number;
     jurisdictions?: string[];
     gameRTP?: number;
+};
+export type TToken = {
+    gtype?: string;
+    openFn?: 'blank' | 'iframe';
 };

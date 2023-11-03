@@ -8,6 +8,8 @@ import { sampleSize } from 'lodash-es';
 import { TGameCategory } from '@/types/games/gameCategory';
 import btiIcon from '@/assets/images/game_provider/bti_icon.png';
 import igxIcon from '@/assets/images/game_provider/igx_icon.png';
+import { tokenData } from '@/utils/providerData/Token';
+
 export const useGetPopularGames = () => {
     const { t } = useTranslation();
     //取得pp遊戲資料
@@ -51,9 +53,11 @@ export const useGetPopularGames = () => {
         },
     ];
 
+    //取得Token遊戲資料
+    const tokenGamesData = tokenData;
     //重組所有遊戲資料
     const allGamesArray = useMemo(() => {
-        return isLoading ? [] : [...liveGamesData, ...slotGames, ...sportGamesData, ...inPlayGamesData, ...golfGamesData];
+        return isLoading ? [] : [...liveGamesData, ...slotGames, ...sportGamesData, ...inPlayGamesData, ...golfGamesData, ...tokenGamesData];
     }, [isLoading]);
 
     // 獲取隨機的6個元素
@@ -74,7 +78,10 @@ export const useGetPopularGames = () => {
                 return {
                     label: CategoryItem.label,
                     value: CategoryItem.value,
-                    gameData: allGamesArray.filter((game) => game?.gameCategory === CategoryItem?.value),
+                    gameData: sampleSize(
+                        allGamesArray.filter((game) => game?.gameCategory === CategoryItem?.value),
+                        16,
+                    ),
                 };
             }) as TPopularGames[]),
     ];

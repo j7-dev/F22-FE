@@ -6,7 +6,7 @@ import { TMe } from '@/types';
 import { useEvoOpenGame } from './evolution/useEvoOpenGame';
 import { usePpOpenGame } from './pragmatic/usePpOpenGame';
 import { useNavigate } from 'react-router-dom';
-import { notification } from 'antd';
+import { Modal } from 'antd';
 
 export const useOpenGame = () => {
     const { data: identity } = useGetIdentity<TMe>();
@@ -32,7 +32,7 @@ export const useOpenGame = () => {
         } else if (item.gameProviderName === 'golf') {
             navigate(`/golf`);
         } else {
-            notification.error({ message: 'Error', description: 'Game not found' });
+            Modal.error({ centered: true, title: 'Error', content: 'OpenGame function not found' });
         }
     };
     return { isLoading, handleClick };

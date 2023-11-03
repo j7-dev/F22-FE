@@ -30,7 +30,7 @@ export const useGetPPTableList = () => {
     const data =
         fetchData?.data?.gameList
             //只篩選出Live games和Scratch card兩個分類
-            ?.filter((item) => item.typeDescription === 'Live games' || item.typeDescription === 'Scratch card')
+            ?.filter((item) => item.typeDescription === 'Live games' || item.typeDescription === 'Scratch card' || item.typeDescription === 'Video Slots' || item.typeDescription === 'Classic Slot')
             .map((item: TGame) => {
                 return {
                     ...item,
@@ -41,6 +41,7 @@ export const useGetPPTableList = () => {
                     gameRTP: mappingRTP(item.gameID as string),
                 };
             }) || [];
+
     return {
         data,
         isLoading,
