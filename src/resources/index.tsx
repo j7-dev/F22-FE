@@ -15,7 +15,7 @@ export const resources = [
     {
         name: 'dashboard',
         meta: {
-            label: 'Dashboard 資訊看板',
+            label: 'Dashboard',
             icon: <LineChartOutlined />,
         },
     },
@@ -25,7 +25,7 @@ export const resources = [
         list: '/refine/dashboard/daily-statistic',
         meta: {
             parent: 'dashboard',
-            label: 'Daily Statistic 每日統計',
+            label: 'Daily Statistic',
         },
     },
     {
@@ -34,13 +34,13 @@ export const resources = [
         list: '/refine/dashboard/agent-daily-statistic',
         meta: {
             parent: 'dashboard',
-            label: 'Agent Daily Statistic 代理每日統計',
+            label: 'Agent Daily Statistic',
         },
     },
     {
         name: 'members',
         meta: {
-            label: 'Member Management 會員管理',
+            label: 'Member Management',
             icon: <PiUsersThree />,
         },
     },
@@ -54,13 +54,13 @@ export const resources = [
         delete: '/refine/members/delete/:id',
         meta: {
             parent: 'members',
-            label: 'All Members 會員查詢',
+            label: 'All Members',
         },
     },
     {
         name: 'agent',
         meta: {
-            label: 'Member Management 代理商管理',
+            label: 'Member Management',
             icon: <UserAddOutlined />,
         },
     },
@@ -74,7 +74,7 @@ export const resources = [
         delete: '/refine/agent/delete/:id',
         meta: {
             parent: 'agent',
-            label: 'All Agents 代理商管理',
+            label: 'All Agents',
         },
     },
     // {
@@ -96,7 +96,7 @@ export const resources = [
         list: '/refine/agent/commission-settlement',
         meta: {
             parent: 'agent',
-            label: 'Commission Settlement 佣金計算',
+            label: 'Commission Settlement',
         },
     },
 
@@ -121,7 +121,7 @@ export const resources = [
     {
         name: 'payments',
         meta: {
-            label: 'Payments 支付管理',
+            label: 'Payments',
             icon: <TransactionOutlined />,
         },
     },
@@ -131,7 +131,7 @@ export const resources = [
         list: '/refine/payments/deposit/list',
         meta: {
             parent: 'payments',
-            label: 'All Deposits 公司入款審核',
+            label: 'All Deposits',
         },
     },
     {
@@ -140,13 +140,13 @@ export const resources = [
         list: '/refine/payments/withdraw/list',
         meta: {
             parent: 'payments',
-            label: 'All Withdraws 取款審核',
+            label: 'All Withdraws',
         },
     },
     {
         name: 'betting-management',
         meta: {
-            label: 'Betting Management 注單管理',
+            label: 'Betting Management',
             icon: <AuditOutlined />,
         },
     },
@@ -156,13 +156,13 @@ export const resources = [
         list: '/refine/betting-management/betting-records',
         meta: {
             parent: 'betting-management',
-            label: 'All Betting Records 投注記錄查詢',
+            label: 'All Betting Records',
         },
     },
     {
         name: 'promotion',
         meta: {
-            label: 'Promotion 優惠管理',
+            label: 'Promotion',
             icon: <CiDiscount1 />,
         },
     },
@@ -175,7 +175,7 @@ export const resources = [
         delete: '/refine/promotion/deposit-bonuses/delete/:id',
         meta: {
             parent: 'promotion',
-            label: 'Deposit Bonus 存款紅利',
+            label: 'Deposit Bonus',
         },
     },
     // {
@@ -193,7 +193,7 @@ export const resources = [
     {
         name: 'system-setting',
         meta: {
-            label: 'System Setting 系統設定',
+            label: 'System Setting',
             icon: <SettingOutlined />,
         },
     },
@@ -206,7 +206,7 @@ export const resources = [
         delete: '/refine/system-setting/vips/delete/:id',
         meta: {
             parent: 'system-setting',
-            label: 'VIP Upgrade Rule VIP等級管理',
+            label: 'VIP Upgrade Rule',
         },
     },
     {
@@ -216,7 +216,7 @@ export const resources = [
         edit: '/refine/system-setting/site-setting/edit/',
         meta: {
             parent: 'system-setting',
-            label: 'Settings 設定',
+            label: 'Settings',
         },
     },
 ];
