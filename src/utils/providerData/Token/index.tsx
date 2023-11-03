@@ -14,7 +14,7 @@ import fw from '@/assets/images/game_provider/fw.jpeg';
 import allbet from '@/assets/images/game_provider/allbet.png';
 import og from '@/assets/images/game_provider/og.png';
 import pt from '@/assets/images/game_provider/pt.png';
-import snail from '@/assets/images/game_provider/snail.jpg';
+// import snail from '@/assets/images/game_provider/snail.jpg';
 import slot from '@/assets/images/game_provider/slot.jpg';
 import vsport from '@/assets/images/game_provider/vsport.jpeg';
 
@@ -77,14 +77,14 @@ export const tokenData: TGame[] = [
         gameCategory: 'games',
         gameProviderName: 'token',
     },
-    {
-        gameName: '토큰 달팽이레이싱',
-        gtype: 'snail3 / snail4',
-        openFn: 'iframe',
-        gameImg: snail,
-        gameCategory: 'games',
-        gameProviderName: 'token',
-    },
+    // { // 因為打不開，所以先隱藏
+    //     gameName: '토큰 달팽이레이싱',
+    //     gtype: 'snail3 / snail4',
+    //     openFn: 'iframe',
+    //     gameImg: snail,
+    //     gameCategory: 'games',
+    //     gameProviderName: 'token',
+    // },
     // { //未上市 不用接
     //     gameName: '토큰 카지노',
     //     gtype: 'tokencasino',
