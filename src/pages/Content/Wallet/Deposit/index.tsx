@@ -51,7 +51,7 @@ const index: React.FC = () => {
                     generateQR(qrString);
                 } else {
                     //在手機版如果是transfer，顯示Modal
-                    if (form.getFieldsValue(['depositMethod']).depositMethod === 'transfer') {
+                    if (form.getFieldsValue(['depositMethod']).depositMethod === 'TRANSFER') {
                         show();
                     } else {
                         //在手機版如果是codePay，直接開啟網址
