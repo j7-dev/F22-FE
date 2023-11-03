@@ -5,6 +5,7 @@ import { signInAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { TMe } from '@/types';
 import { useEvoOpenGame } from './evolution/useEvoOpenGame';
 import { usePpOpenGame } from './pragmatic/usePpOpenGame';
+import { useTokenOpenGame } from './token/useTokenOpenGame';
 import { useNavigate } from 'react-router-dom';
 import { Modal } from 'antd';
 
@@ -12,9 +13,11 @@ export const useOpenGame = () => {
     const { data: identity } = useGetIdentity<TMe>();
     const { handleClick: handleClickEvo, isLoading: evoLoading } = useEvoOpenGame();
     const { handleClick: handleClickPp, isLoading: ppLoading } = usePpOpenGame();
+    const { handleClick: handleClickToken, isLoading: tokenLoading } = useTokenOpenGame();
+
     const navigate = useNavigate();
     const setSignIn = useSetAtom(signInAtom);
-    const isLoading = evoLoading || ppLoading;
+    const isLoading = evoLoading || ppLoading || tokenLoading;
     const handleClick = (item: TGame) => () => {
         if (!identity) {
             setSignIn(true);
@@ -31,6 +34,8 @@ export const useOpenGame = () => {
             navigate(`/inPlay`);
         } else if (item.gameProviderName === 'golf') {
             navigate(`/golf`);
+        } else if (item.gameProviderName === 'token') {
+            handleClickToken({ item, identity });
         } else {
             Modal.error({ centered: true, title: 'Error', content: 'OpenGame function not found' });
         }

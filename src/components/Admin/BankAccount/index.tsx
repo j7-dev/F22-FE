@@ -4,7 +4,7 @@ import { Typography } from 'antd';
 
 const { Paragraph } = Typography;
 
-const index = ({ bank_account, display = 'block', copyable = false }: { bank_account?: TBankAccount | null; display?: 'block' | 'text'; copyable: boolean }) => {
+const index: React.FC<{ bank_account?: TBankAccount | null; display?: 'block' | 'text'; copyable?: boolean }> = ({ bank_account, display = 'block', copyable = false }) => {
     if (!bank_account) return <></>;
     const exclude_keys = ['id', 'createdAt', 'updatedAt', 'label', 'bank_code'];
 
@@ -31,6 +31,8 @@ const index = ({ bank_account, display = 'block', copyable = false }: { bank_acc
             </div>
         );
     }
+
+    return <></>;
 };
 
 export default index;

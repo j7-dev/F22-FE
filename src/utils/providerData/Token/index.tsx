@@ -1,9 +1,14 @@
 import { TGame } from '@/types/games';
-import evoIcon from '@/assets/images/game_provider/evo_icon.png';
-import ppIcon from '@/assets/images/game_provider/ppIcon.svg';
+// import evoIcon from '@/assets/images/game_provider/evo_icon.png';
+// import ppIcon from '@/assets/images/game_provider/ppIcon.svg';
 import casinoIcon from '@/assets/images/Icon_Menu_Outlined_Casino.svg';
 import slotIcon from '@/assets/images/Icon_Menu_Outlined_Slot.svg';
 import gamesIcon from '@/assets/images/Icon_Menu_Outlined_Games.svg';
+import cq9 from '@/assets/images/game_provider/cq9.jpg';
+import wm from '@/assets/images/game_provider/wm.jpg';
+import aecasino from '@/assets/images/game_provider/aecasino.jpg';
+import agcasino from '@/assets/images/game_provider/agcasino.jpg';
+import mglive from '@/assets/images/game_provider/mglive.jpg';
 
 export const tokenData: TGame[] = [
     {
@@ -94,35 +99,35 @@ export const tokenData: TGame[] = [
         gameCategory: 'games',
         gameProviderName: 'token',
     },
-    {
-        gameName: '에볼루션',
-        gtype: 'evolution',
-        openFn: 'blank',
-        gameImg: evoIcon,
-        gameCategory: 'casino',
-        gameProviderName: 'token',
-    },
+    // {
+    //     gameName: '에볼루션',
+    //     gtype: 'evolution',
+    //     openFn: 'blank',
+    //     gameImg: evoIcon,
+    //     gameCategory: 'casino',
+    //     gameProviderName: 'token',
+    // },
     {
         gameName: '섹시게이밍',
         gtype: 'aecasino',
         openFn: 'blank',
-        gameImg: casinoIcon,
+        gameImg: aecasino,
         gameCategory: 'casino',
         gameProviderName: 'token',
     },
-    {
-        gameName: '프래그마틱 플레이',
-        gtype: 'pp',
-        openFn: 'blank',
-        gameImg: ppIcon,
-        gameCategory: 'slot',
-        gameProviderName: 'token',
-    },
+    // {
+    //     gameName: '프래그마틱 플레이',
+    //     gtype: 'pp',
+    //     openFn: 'blank',
+    //     gameImg: ppIcon,
+    //     gameCategory: 'slot',
+    //     gameProviderName: 'token',
+    // },
     {
         gameName: 'CQ9',
         gtype: 'cq9',
         openFn: 'blank',
-        gameImg: casinoIcon,
+        gameImg: cq9,
         gameCategory: 'casino',
         gameProviderName: 'token',
     },
@@ -138,7 +143,7 @@ export const tokenData: TGame[] = [
         gameName: '마이크로게이밍',
         gtype: 'mglive',
         openFn: 'blank',
-        gameImg: casinoIcon,
+        gameImg: mglive,
         gameCategory: 'casino',
         gameProviderName: 'token',
     },
@@ -162,7 +167,7 @@ export const tokenData: TGame[] = [
         gameName: 'WM카지노',
         gtype: 'wm',
         openFn: 'blank',
-        gameImg: casinoIcon,
+        gameImg: wm,
         gameCategory: 'casino',
         gameProviderName: 'token',
     },
@@ -170,7 +175,7 @@ export const tokenData: TGame[] = [
         gameName: '아시아게이밍',
         gtype: 'agcasino',
         openFn: 'blank',
-        gameImg: casinoIcon,
+        gameImg: agcasino,
         gameCategory: 'casino',
         gameProviderName: 'token',
     },

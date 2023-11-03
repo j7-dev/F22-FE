@@ -55,6 +55,7 @@ export const useGetPopularGames = () => {
 
     //取得Token遊戲資料
     const tokenGamesData = tokenData;
+    console.log('⭐  tokenGamesData:', tokenGamesData);
     //重組所有遊戲資料
     const allGamesArray = useMemo(() => {
         return isLoading ? [] : [...liveGamesData, ...slotGames, ...sportGamesData, ...inPlayGamesData, ...golfGamesData, ...tokenGamesData];
