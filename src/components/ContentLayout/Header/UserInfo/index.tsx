@@ -35,11 +35,11 @@ const index: React.FC = () => {
                 <div className="userBalancesWrap flex justify-center items-center gap-2 px-2 py-1.5 rounded-2xl bg-[#ECE8FA]">
                     <div className="userBalance flex gap-2 items-center ">
                         <img src={userBalanceIcon} alt="" />
-                        <span>{balance.toLocaleString()}</span>
+                        <span>{(balance || 0).toLocaleString()}</span>
                     </div>
                     <div className="userBonus flex gap-2 items-center ">
                         <img src={userBonusIcon} alt="" />
-                        <span>{turnoverBonus.toLocaleString()}</span>
+                        <span>{(turnoverBonus || 0).toLocaleString()}</span>
                     </div>
                     <div className="divider h-[17px] border-r border-0 border-solid border-[#9680EA] bg-[#9680EA] " />
                     <div onClick={handleNavigate('deposit')} className="userDeposit cursor-pointer flex gap-2 items-center px-3 py-1 bg-white rounded-2xl hover:text-[#828282]">

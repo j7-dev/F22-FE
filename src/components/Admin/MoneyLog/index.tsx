@@ -29,19 +29,19 @@ const index: React.FC<{
             title: 'credit',
             dataIndex: 'credit',
             key: 'credit',
-            render: (credit: number) => credit.toLocaleString(),
+            render: (credit: number) => (credit || 0).toLocaleString(),
         },
         {
             title: 'debit',
             dataIndex: 'debit',
             key: 'debit',
-            render: (debit: number) => debit.toLocaleString(),
+            render: (debit: number) => (debit || 0).toLocaleString(),
         },
         {
             title: 'balance',
             dataIndex: 'balance_after_mutate',
             key: 'balance_after_mutate',
-            render: (balance_after_mutate: number) => balance_after_mutate.toLocaleString(),
+            render: (balance_after_mutate: number) => (balance_after_mutate || 0).toLocaleString(),
         },
         {
             title: 'description',

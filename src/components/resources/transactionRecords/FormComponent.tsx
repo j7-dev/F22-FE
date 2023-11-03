@@ -79,7 +79,7 @@ const FormComponent: React.FC<{
 
                 <div className="col-span-2 lg:col-span-1">
                     <p className="mb-2">User's balance</p>
-                    {watchUser && !isFetching && Number(currencyBalanceAmount).toLocaleString()}
+                    {watchUser && !isFetching && Number(currencyBalanceAmount || 0).toLocaleString()}
                     {isFetching && <LoadingOutlined />}
                 </div>
                 <Form.Item name={['type']} label="Type" className="col-span-2 lg:col-span-1" initialValue="MANUAL" hidden={isUserAdjustment}>

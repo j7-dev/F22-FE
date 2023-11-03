@@ -63,13 +63,13 @@ const useColumns = () => {
             title: 'Total Deposits',
             dataIndex: 'totalDp',
             key: 'totalDp',
-            render: (v: number) => v.toLocaleString(),
+            render: (v: number) => (v || 0).toLocaleString(),
         },
         {
             title: 'Total Withdrawal',
             dataIndex: 'totalWd',
             key: 'totalWd',
-            render: (v: number) => v.toLocaleString(),
+            render: (v: number) => (v || 0).toLocaleString(),
         },
         {
             title: 'DP-WD',
@@ -77,7 +77,7 @@ const useColumns = () => {
             key: 'DP-WD',
             render: (_: undefined, record: any) => {
                 const v = Number(record.totalDp || 0) - Number(record.totalWd || 0);
-                return v.toLocaleString();
+                return (v || 0).toLocaleString();
             },
         },
         {

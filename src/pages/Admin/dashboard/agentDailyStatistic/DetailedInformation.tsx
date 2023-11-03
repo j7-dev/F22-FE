@@ -27,7 +27,7 @@ const DetailedInformation = () => {
         },
         {
             title: 'deposit',
-            dataIndex: 'deposit ',
+            dataIndex: 'deposit',
         },
         {
             title: 'withdraw',

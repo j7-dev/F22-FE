@@ -126,9 +126,9 @@ const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
                             <Table.Summary.Row>
                                 <Table.Summary.Cell index={0}>Total</Table.Summary.Cell>
                                 <Table.Summary.Cell index={1}>{totalTxnAmount}</Table.Summary.Cell>
-                                <Table.Summary.Cell index={2}>{totalValidBetAmount.toLocaleString()}</Table.Summary.Cell>
-                                <Table.Summary.Cell index={3}>{totalPayOut.toLocaleString()}</Table.Summary.Cell>
-                                <Table.Summary.Cell index={4}>{totalWinLoss.toLocaleString()}</Table.Summary.Cell>
+                                <Table.Summary.Cell index={2}>{(totalValidBetAmount || 0).toLocaleString()}</Table.Summary.Cell>
+                                <Table.Summary.Cell index={3}>{(totalPayOut || 0).toLocaleString()}</Table.Summary.Cell>
+                                <Table.Summary.Cell index={4}>{(totalWinLoss || 0).toLocaleString()}</Table.Summary.Cell>
                             </Table.Summary.Row>
                         </Table.Summary>
                     );

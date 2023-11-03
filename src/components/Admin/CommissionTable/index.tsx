@@ -21,7 +21,7 @@ const index = ({ commission }: TProps) => {
                     return {
                         children: (
                             <div className="flex justify-between w-60">
-                                {item.gt.toLocaleString()}
+                                {(item?.gt || 0).toLocaleString()}
                                 <Tag className="ml-4" color="magenta">
                                     {item.ratio}%
                                 </Tag>

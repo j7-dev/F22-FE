@@ -13,11 +13,11 @@ const index = () => {
 
     const tableData: DataType[] = winLossData.map((item, i) => ({
         date: item.date,
-        onlineMembers: onlineMembersData[i].value.toLocaleString(),
-        bettingAmount: bettingAmountData[i].value.toLocaleString(),
-        validBet: validBetData[i].value.toLocaleString(),
-        winLoss: item.value.toLocaleString(),
-        totalDeposit: totalDeposit[i].value.toLocaleString(),
+        onlineMembers: (onlineMembersData?.[i]?.value || 0).toLocaleString(),
+        bettingAmount: (bettingAmountData?.[i]?.value || 0).toLocaleString(),
+        validBet: (validBetData?.[i]?.value || 0).toLocaleString(),
+        winLoss: (item?.value || 0).toLocaleString(),
+        totalDeposit: (totalDeposit?.[i]?.value || 0).toLocaleString(),
     }));
 
     const columns: ColumnsType<DataType> = [

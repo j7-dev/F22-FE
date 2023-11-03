@@ -161,7 +161,7 @@ const index = () => {
         {
             title: 'Amount',
             dataIndex: 'amount',
-            render: (amount) => amount.toLocaleString(),
+            render: (amount) => (amount || 0).toLocaleString(),
         },
         {
             title: 'Deposit Bonus',

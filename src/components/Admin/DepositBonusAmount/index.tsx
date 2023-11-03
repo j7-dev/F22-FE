@@ -10,7 +10,7 @@ const index: React.FC<{
 
     const bonus_rate = deposit_bonus?.bonus_rate || 0;
     const deposit_bonus_amount = bonus_rate * deposit_amount;
-    return <Link to={`/refine/promotion/deposit-bonuses/edit/${deposit_bonus?.id}`}>{deposit_bonus_amount.toLocaleString()}</Link>;
+    return <Link to={`/refine/promotion/deposit-bonuses/edit/${deposit_bonus?.id}`}>{(deposit_bonus_amount || 0).toLocaleString()}</Link>;
 };
 
 export default index;

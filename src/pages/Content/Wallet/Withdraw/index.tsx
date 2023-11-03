@@ -100,7 +100,9 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical" className="w-full">
                     <div className="flex justify-between my-2 w-full">
                         <span className="text-sm text-[#828282] font-medium">{isPc ? t('Amount to withdraw') : ''}</span>
-                        <span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()} / ${t('可提領額度')}:${withdrawable.toLocaleString()}`}</span>
+                        {/* 暫時性隱藏
+
+												<span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()} / ${t('可提領額度')}:${withdrawable.toLocaleString()}`}</span> */}
                     </div>
                     <QuickAmountInput
                         formItemProps={{

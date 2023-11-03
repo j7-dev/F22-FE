@@ -33,12 +33,12 @@ const index = () => {
         {
             title: 'min_deposit_amount',
             dataIndex: 'min_deposit_amount',
-            render: (v: number) => v.toLocaleString(),
+            render: (v: number) => (v || 0).toLocaleString(),
         },
         {
             title: 'max_bonus_amount',
             dataIndex: 'max_bonus_amount',
-            render: (v: number) => v.toLocaleString(),
+            render: (v: number) => (v || 0).toLocaleString(),
         },
         {
             title: 'rolling_percentage',

@@ -26,12 +26,12 @@ const index = () => {
         {
             title: 'valid_bet_amount_threshold',
             dataIndex: 'valid_bet_amount_threshold',
-            render: (v: number) => v.toLocaleString(),
+            render: (v: number) => (v || 0).toLocaleString(),
         },
         {
             title: 'discount_limit',
             dataIndex: 'discount_limit',
-            render: (v: number) => v.toLocaleString(),
+            render: (v: number) => (v || 0).toLocaleString(),
         },
         {
             title: 'amount_type',
