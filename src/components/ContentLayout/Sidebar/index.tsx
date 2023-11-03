@@ -85,7 +85,7 @@ export const Sidebar: React.FC = () => {
                     <a href="itms-services://?action=download-manifest&url=https://f22-fe.vercel.app/ipa/app.plist" className="">
                         <img src={appStore} alt="" className="w-[144px]" />
                     </a>
-                    <a href="/apk/smtbet.apk" className="">
+                    <a href="/apk/smtbet7.apk" className="">
                         <img src={googlePlay} alt="" className="w-[144px]" />
                     </a>
                 </div>
