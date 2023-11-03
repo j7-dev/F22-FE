@@ -109,6 +109,12 @@ const useColumns = () => {
             render: (allow_payments: string[] | null) => (allow_payments || []).join(', '),
         },
         {
+            key: 'deposit_account_for_user',
+            title: 'Deposit Account for User',
+            dataIndex: 'deposit_account_for_user',
+            render: (deposit_account_for_user: TBankAccount | null) => <BankAccount bank_account={deposit_account_for_user} display="text" copyable />,
+        },
+        {
             key: 'allow_game_providers',
             title: 'Allow Game Providers',
             dataIndex: 'allow_game_providers',
@@ -118,7 +124,7 @@ const useColumns = () => {
             key: 'bank_account',
             title: 'Bank Account',
             dataIndex: 'bank_account',
-            render: (bank_account: TBankAccount | null) => <BankAccount bank_account={bank_account} display="flex" />,
+            render: (bank_account: TBankAccount | null) => <BankAccount bank_account={bank_account} display="text" />,
         },
         {
             key: 'createdAt',

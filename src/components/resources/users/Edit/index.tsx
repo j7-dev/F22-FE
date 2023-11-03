@@ -1,5 +1,5 @@
 import FormComponent from '@/components/resources/users/FormComponent';
-import { useUpdate, HttpError } from '@refinedev/core';
+import { useUpdate, HttpError, useInvalidate } from '@refinedev/core';
 import { Edit, useForm } from '@refinedev/antd';
 import { TUser } from '@/types';
 import dayjs, { Dayjs } from 'dayjs';
@@ -12,6 +12,7 @@ const index: React.FC<{
 }> = ({ notificationConfig = {} }) => {
     const { mutate: update } = useUpdate();
     const { id } = useParams();
+    const invalidate = useInvalidate();
 
     const { form, formProps, saveButtonProps, formLoading } = useForm<TUser, HttpError, TUser & { birthday: Dayjs }>({
         meta: {
@@ -61,6 +62,11 @@ const index: React.FC<{
                                 key: 'edit-user',
                                 message: 'Edit user successfully',
                                 ...notificationConfig,
+                            });
+
+                            invalidate({
+                                resource: 'users',
+                                invalidates: ['list'],
                             });
                         },
                     },

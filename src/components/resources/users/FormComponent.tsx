@@ -191,9 +191,19 @@ const FormComponent: React.FC<{
                             <Input />
                         </Form.Item>
                     ))}
-                    <Form.Item hidden name={['bank_account', 'id']}>
-                        <Input />
-                    </Form.Item>
+                </div>
+            </div>
+
+            <div className="bg-blue-50 rounded-xl p-6 mt-16">
+                <Title level={5}>
+                    <BankOutlined className="mr-2" /> Deposit Account for User
+                </Title>
+                <div className="grid grid-cols-2 gap-6">
+                    {BANK_ACCOUNT_FIELDS.map((field) => (
+                        <Form.Item key={field} label={keyToWord(field)} name={['deposit_account_for_user', field]}>
+                            <Input />
+                        </Form.Item>
+                    ))}
                 </div>
             </div>
             <div className="grid grid-cols-2 gap-6 mt-16">
