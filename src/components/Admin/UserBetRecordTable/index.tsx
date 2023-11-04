@@ -46,6 +46,7 @@ const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ 
     if (!user_id) return <p>can't get user_id</p>;
 
     const allTxns = (txnResult?.data || []) as TTransaction[];
+    console.log('⭐  allTxns:', allTxns);
 
     const formattedTxns = allTxns.map((txn) => {
         if (txn.type === 'DEBIT') {
@@ -67,6 +68,7 @@ const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ 
             };
         }
     });
+    console.log('⭐  formattedTxns:', formattedTxns);
 
     // TODO CHECK 有沒有合併成功
 
@@ -81,6 +83,7 @@ const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ 
         }
         return acc;
     }, [] as DataType[]);
+    console.log('⭐  combinedTxns:', combinedTxns);
 
     const columns = [
         {
