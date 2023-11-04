@@ -22,7 +22,7 @@ const index: React.FC = () => {
     return (
         <div className="bg-white h-full w-full py-6 px-4 gap-3 userBank flex flex-col rounded-2xl sm:py-[42px] sm:px-[32px] sm:gap-4 shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
             <span className="text-black font-bold sm:text-2xl text-sm">{t('Change Password')}</span>
-            <div className="ifShowForm flex items-center justify-center w-full flex-col relative sm:min-h-[200px] sm:aspect-[240/200] min-h-[90px] aspect-[130-90]">
+            <div className="ifShowForm flex items-center justify-center w-full flex-col relative sm:h-[200px] sm:aspect-[240/200] h-[90px] aspect-[130-90]">
                 <div className="flex flex-col h-full items-center justify-between">
                     <img src={ChangPasIcon} className="aspect-square sm:mt-6 sm:w-[140px] w-[70px]" alt="" />
                     {/* TODO 確認一下這邊的文字大小跟Read More 按鈕是否一樣大 */}

@@ -4,10 +4,8 @@ import { TMe } from '@/types';
 /**
  * 使用useTable取得站內通知資料
  * @returns tableProps dataCount
- * TODO 這邊缺少page的設定，目前是一次拿全部資料（參考CashHistory設定）
- * 先不處理，等到要做分頁時再處理
  */
-export const useGetNoteBox = () => {
+export const useGetNoteBox = ({ pageSize = 10 }: { pageSize?: number }) => {
     const { data: identity } = useGetIdentity<TMe>();
     // const uuid = identity?.uuid;
     const { tableProps } = useTable<HttpError>({
@@ -32,8 +30,12 @@ export const useGetNoteBox = () => {
                 },
             ],
         },
+        pagination: {
+            mode: 'server',
+            pageSize: pageSize,
+        },
         queryOptions: {
-            enabled: !!identity?.id,
+            enabled: !!identity,
         },
     });
 

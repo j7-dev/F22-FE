@@ -30,7 +30,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
         show();
     };
     //取得資料
-    const { tableProps } = useGetNoteBox();
+    const { tableProps } = useGetNoteBox({ pageSize: pageSize });
     console.log('🚀 ~ tableProps:', tableProps);
     //轉換資料加上日期格式
     const fxnData =
