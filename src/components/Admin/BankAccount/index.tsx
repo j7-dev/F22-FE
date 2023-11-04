@@ -10,10 +10,10 @@ const index: React.FC<{ bank_account?: TBankAccount | null; display?: 'block' | 
 
     if ('text' === display) {
         if (copyable) {
-            return <Paragraph copyable className="m-0">{`${bank_account?.bank_name}-${bank_account?.owner_real_name} -${bank_account?.bank_account_number}`}</Paragraph>;
+            return <Paragraph copyable className="m-0">{`${bank_account?.bank_name || ''}-${bank_account?.owner_real_name || ''} -${bank_account?.bank_account_number || ''}`}</Paragraph>;
         }
 
-        return <>{`${bank_account?.bank_name}-${bank_account?.owner_real_name} -${bank_account?.bank_account_number}`}</>;
+        return <>{`${bank_account?.bank_name || ''}-${bank_account?.owner_real_name || ''} -${bank_account?.bank_account_number || ''}`}</>;
     }
 
     if ('block' === display) {
