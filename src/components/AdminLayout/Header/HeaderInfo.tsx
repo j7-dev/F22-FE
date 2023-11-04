@@ -10,6 +10,7 @@ const HeaderInfo = () => {
             queryKey: ['headerInfo'],
             refetchInterval: 1000 * 10,
             cacheTime: 1000 * 10,
+            staleTime: 0,
         },
     });
     const dataSource = data?.data?.data || {};

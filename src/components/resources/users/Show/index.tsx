@@ -5,7 +5,7 @@ import { useShow, useResource } from '@refinedev/core';
 import ObjectTable from '@/components/general/ObjectTable';
 import MoneyLog from '@/components/Admin/MoneyLog';
 import LoginDetail from '@/components/Admin/LoginDetail';
-import BetRecordTable from '@/components/Admin/BetRecordTable';
+import UserBetRecordTable from '@/components/Admin/UserBetRecordTable';
 import { useParams } from 'react-router-dom';
 import { TUser, TDiscount } from '@/types';
 import TurnoverBonusTable from '@/components/Admin/TurnoverBonusTable';
@@ -107,7 +107,7 @@ const index = () => {
             label: 'Betting Records',
             children: (
                 <Card bordered={false} title="Betting Records">
-                    <BetRecordTable user_id={id} />
+                    <UserBetRecordTable user_id={id} />
                 </Card>
             ),
         },

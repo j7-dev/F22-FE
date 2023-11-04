@@ -1,5 +1,5 @@
 import { List } from '@refinedev/antd';
-import BetRecordTable from '@/components/Admin/BetRecordTable';
+import UserBetRecordTable from '@/components/Admin/UserBetRecordTable';
 import { Card, Col, Row, Form } from 'antd';
 import Filter from './Filter';
 import FilterTags from '@/components/Admin/FilterTags';
@@ -26,7 +26,7 @@ const index = () => {
                                 <FilterTags key={filterTagsKey} form={form} />
                             </div>
 
-                            <BetRecordTable enabled={enabled} setEnabled={setEnabled} />
+                            <UserBetRecordTable enabled={enabled} setEnabled={setEnabled} />
                         </Card>
                     </Col>
                 </Row>

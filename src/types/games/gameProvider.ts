@@ -1,9 +1,13 @@
+import { gameProviderTxnEnum } from '@/utils';
+
 export type TGameProvider = {
     label: string;
     value: string;
     gameCategories: string[];
     providerData?: TProviderData;
 };
+
+export type TGameProviderTxnEnum = keyof typeof gameProviderTxnEnum;
 
 export type TProviderData = {
     providerMainImg?: string;
