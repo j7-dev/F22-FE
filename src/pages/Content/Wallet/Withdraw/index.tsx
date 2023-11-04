@@ -86,7 +86,8 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
         console.log('沒有存款紅利限制');
         return balance;
     };
-    const withdrawable = LimitAmountFn();
+    LimitAmountFn();
+    const withdrawable = balance;
 
     //監聽Form的值，都填寫完畢後，使Button可以點擊
     const values = Form.useWatch([], form);
