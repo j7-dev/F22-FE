@@ -28,7 +28,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
     });
 
     useEffect(() => {
-        form?.setFieldValue(['status'], listType === 'WITHDRAW' ? 'PENDING' : undefined);
+        form?.setFieldValue(['status'], 'PENDING');
         form?.submit();
     }, [listType]);
 

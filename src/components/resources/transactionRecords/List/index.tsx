@@ -9,7 +9,7 @@ import UserLink from '@/components/Admin/UserLink';
 import VipLink from '@/components/Admin/VipLink';
 import { CrudFilters } from '@refinedev/core';
 import { DateTime } from '@/components/PureComponents';
-import ApproveButton from './ApporveButton';
+import BatchEditButton from './BatchEditButton';
 import { DataType, TSearchProps, TParams } from './types';
 import { selectedRecordsAtom } from './atom';
 import { useSetAtom } from 'jotai';
@@ -86,16 +86,13 @@ const index = () => {
         },
         filters: {
             permanent: permanentFilters,
-            initial:
-                listType === 'WITHDRAW'
-                    ? [
-                          {
-                              field: 'status',
-                              operator: 'eq',
-                              value: 'PENDING',
-                          },
-                      ]
-                    : undefined,
+            initial: [
+                {
+                    field: 'status',
+                    operator: 'eq',
+                    value: 'PENDING',
+                },
+            ],
         },
         sorters: {
             initial: [
@@ -196,12 +193,13 @@ const index = () => {
         },
     ];
 
-    const depositColumns = columns.filter((column) => !['bankAccount', 'deposit_bonus'].includes(column.dataIndex as string));
+    const depositColumns = columns.filter((column) => !['bankAccount'].includes(column.dataIndex as string));
+    const withdrawColumns = columns.filter((column) => !['deposit_bonus'].includes(column.dataIndex as string));
 
     const formattedTableProps = {
         ...tableProps,
         scroll: { x: 1600 },
-        columns: listType === 'DEPOSIT' ? depositColumns : columns,
+        columns: listType === 'DEPOSIT' ? depositColumns : withdrawColumns,
         rowKey: 'id',
         pagination: {
             showSizeChanger: true,
@@ -232,7 +230,8 @@ const index = () => {
                             <FilterTags key={filterTagsKey} form={searchFormProps.form} />
                         </div>
                         <div className="mb-4">
-                            <ApproveButton />
+                            <BatchEditButton type={listType} text="Approve" status="SUCCESS" />
+                            <BatchEditButton type={listType} text="Cancel" status="CANCEL" className="ml-4" />
                         </div>
 
                         <Table
@@ -244,9 +243,14 @@ const index = () => {
                                 return (
                                     <Table.Summary fixed>
                                         <Table.Summary.Row>
-                                            <Table.Summary.Cell index={0}>Total</Table.Summary.Cell>
-                                            <Table.Summary.Cell index={1}></Table.Summary.Cell>
-                                            <Table.Summary.Cell index={2}>
+                                            <Table.Summary.Cell index={0}></Table.Summary.Cell>
+                                            <Table.Summary.Cell index={1}>Total</Table.Summary.Cell>
+                                            <Table.Summary.Cell index={2}></Table.Summary.Cell>
+                                            <Table.Summary.Cell index={3}></Table.Summary.Cell>
+                                            <Table.Summary.Cell index={4}></Table.Summary.Cell>
+                                            <Table.Summary.Cell index={5}></Table.Summary.Cell>
+
+                                            <Table.Summary.Cell index={6}>
                                                 {uniqueCurrencies.map((currency) => {
                                                     const totalByCurrency = pageData.filter((data) => data.currency === currency).reduce((sum, record) => sum + record.amount, 0);
                                                     return totalByCurrency.toLocaleString();

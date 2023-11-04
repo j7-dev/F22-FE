@@ -31,12 +31,8 @@ const index = () => {
                         <Table.Column dataIndex="label" title="label" />
                         <Table.Column dataIndex="deposit_upgrade_threshold" title="Upgrade - Deposit Amount" />
                         <Table.Column dataIndex="valid_bet_amount_upgrade_threshold" title="Upgrade - Valid Bet" />
-                        <Table.Column dataIndex="deposit_downgrade_threshold" title="Retain - Deposit Amount" />
-                        <Table.Column dataIndex="valid_bet_amount_downgrade_threshold" title="Retain - Valid Bet" />
-                        <Table.Column dataIndex="upgrade_award" title="Vip Upgrade Reward" />
                         <Table.Column dataIndex="activated" title="status" render={(activated) => <Tag color={activated ? '#87d068' : '#ff4d4f'}>{activated ? 'Enable' : 'Disable'}</Tag>} />
                         <Table.Column dataIndex="upgrade_evaluation_interval" title="Interval" />
-                        <Table.Column dataIndex="vip_duration" title="vip_duration" />
                         <Table.Column dataIndex="action" render={(_, record: DataType) => <EditButton record={record} />} />
                     </Table>
 
