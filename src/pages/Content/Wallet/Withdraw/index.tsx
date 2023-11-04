@@ -7,6 +7,7 @@ import { TMe } from '@/types';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import { useGetSiteSetting } from '@/hooks';
 import { useShowPc } from '@/hooks/useShowPc';
+import { useQueryClient } from '@tanstack/react-query';
 
 const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
     const isPc = useShowPc();
@@ -14,6 +15,7 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
     const [form] = Form.useForm();
     const [isDisabled, setIsDisabled] = useState(true);
     const userId = userInfo?.id;
+    const queryClient = useQueryClient();
     const { mutate: withdraw, isLoading } = useCustomMutation();
     const apiUrl = useApiUrl();
     const handleWithdraw = () => {
@@ -27,6 +29,7 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                     },
                     {
                         onSuccess: (_data) => {
+                            queryClient.invalidateQueries(['getUserIdentity']);
                             // const txnId = data?.data?.data?.id;
                             Modal.success({
                                 centered: true,
