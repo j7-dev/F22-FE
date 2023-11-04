@@ -86,16 +86,13 @@ const index = () => {
         },
         filters: {
             permanent: permanentFilters,
-            initial:
-                listType === 'WITHDRAW'
-                    ? [
-                          {
-                              field: 'status',
-                              operator: 'eq',
-                              value: 'PENDING',
-                          },
-                      ]
-                    : undefined,
+            initial: [
+                {
+                    field: 'status',
+                    operator: 'eq',
+                    value: 'PENDING',
+                },
+            ],
         },
         sorters: {
             initial: [
