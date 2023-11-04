@@ -63,20 +63,20 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
      * 限制金額=rolling percentage * 當時存款金額
      * 否則，直接顯示可提款餘額balance
      */
-    const LimitAmountFn = () => {
-        //如果用戶身上有deposit_bonus及last_deposit
-        if (userInfo?.last_deposit?.deposit_bonus) {
-            //判斷有效投注有沒有達到限制金額
-            if (userInfo?.validBetAmount > userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage)
-                //有則顯示可提款餘額balance
-                return balance;
-            //否則為0，自然就禁用提款按鈕
-            else return 0;
-        }
-        //如果沒有存款紅利限制，則可提款餘額為balance
-        return balance;
-    };
-    const withdrawable = LimitAmountFn();
+    // const LimitAmountFn = () => {
+    //     //如果用戶身上有deposit_bonus及last_deposit
+    //     if (userInfo?.last_deposit?.deposit_bonus) {
+    //         //判斷有效投注有沒有達到限制金額
+    //         if (userInfo?.validBetAmount > userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage)
+    //             //有則顯示可提款餘額balance
+    //             return balance;
+    //         //否則為0，自然就禁用提款按鈕
+    //         else return 0;
+    //     }
+    //     //如果沒有存款紅利限制，則可提款餘額為balance
+    //     return balance;
+    // };
+    const withdrawable = balance;
 
     //監聽Form的值，都填寫完畢後，使Button可以點擊
     const values = Form.useWatch([], form);

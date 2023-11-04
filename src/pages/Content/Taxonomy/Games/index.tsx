@@ -25,41 +25,6 @@ const fxnTokenCategory = [
         name: 'Favorite',
         Category: 'favorite',
     },
-    {
-        img: allImg,
-        name: 'Roulette',
-        Category: 'roulette',
-    },
-    {
-        img: allImg,
-        name: 'Hilo',
-        Category: 'hilo',
-    },
-    {
-        img: allImg,
-        name: 'Graph',
-        Category: 'graph',
-    },
-    {
-        img: allImg,
-        name: 'Baccarat',
-        Category: 'baccarat',
-    },
-    {
-        img: allImg,
-        name: 'Horse',
-        Category: 'horse',
-    },
-    {
-        img: allImg,
-        name: 'Fw',
-        Category: 'fw',
-    },
-    {
-        img: allImg,
-        name: 'VsPorts',
-        Category: 'vsports',
-    },
 ];
 
 const index: React.FC = () => {
@@ -113,7 +78,7 @@ const index: React.FC = () => {
                         <div className="col-span-1 flex justify-center">
                             <img src={Icon_Main_Title} alt="" className="" />
                         </div>
-                        <span className="col-span-1 font-bold text-3xl text-[#9680EA] -ml-3 flex items-center">{t('CASINO')}</span>
+                        <span className="whitespace-nowrap col-span-1 font-bold text-3xl text-[#9680EA] -ml-3 flex items-center">{t('GAMES')}</span>
                         <div className="col-start-7 col-span-4 relative flex">
                             <SearchBar onFilter={filterGame} />
                         </div>
