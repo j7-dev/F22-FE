@@ -43,21 +43,22 @@ const index: React.FC = () => {
     const handleClick = () => {
         form.validateFields()
             .then(() => {
-                //電腦版顯示Modal，手機版直接開啟網址
-                if (showPc) {
+                //判斷付款方式是否為TRANSFER
+                const isTransfer = form.getFieldsValue(['depositMethod']).depositMethod === 'TRANSFER';
+                //如果是TRANSFER，不論裝置都顯示Modal
+                //如果是CODEPAY，判斷裝置顯示Modal或開啟網址
+                if (isTransfer) {
                     show();
-
-                    const qrString = `codp:${CODEPAY_SIMPLE_ADDRESS_TO}?type=payment&identifier=userid${user_id}&amount=${watchAmount}`;
-                    generateQR(qrString);
                 } else {
-                    //在手機版如果是transfer，顯示Modal
-                    if (form.getFieldsValue(['depositMethod']).depositMethod === 'TRANSFER') {
+                    if (showPc) {
                         show();
+                        const qrString = `codp:${CODEPAY_SIMPLE_ADDRESS_TO}?type=payment&identifier=userid${user_id}&amount=${watchAmount}`;
+                        generateQR(qrString);
                     } else {
-                        //在手機版如果是codePay，直接開啟網址
                         handleOpenUrl();
                     }
                 }
+
                 //當按下Deposit按鈕直接送出表單
                 const values = form.getFieldsValue();
                 doDeposit({
@@ -69,6 +70,7 @@ const index: React.FC = () => {
                         currency: default_currency,
                         amount_type: default_amount_type,
                         deposit_bonus: values?.chosen_bonus,
+                        method: values?.depositMethod,
                     },
                 });
             })
@@ -141,7 +143,7 @@ const index: React.FC = () => {
                     <div className="col-span-1 my-8">
                         {
                             //顯示QRCode或匯款帳號
-                            values?.depositMethod === 'codePay' ? (
+                            values?.depositMethod === 'CODEPAY' ? (
                                 <>
                                     <span className="text-center w-full block text-black font-bold text-base">{t('Scan QRcode to Finish Payment')}</span>
                                     <div className="flex justify-between items-center my-2.5">
