@@ -36,7 +36,7 @@ export type TUser = BaseType & {
     last_deposit?: TTransaction | null;
 };
 
-export const BANK_ACCOUNT_FIELDS = ['bank_name', 'bank_code', 'bank_account_number', 'owner_real_name'] as const;
+export const BANK_ACCOUNT_FIELDS = ['bank_name', 'bank_account_number', 'owner_real_name'] as const;
 
 type BankAccountField = (typeof BANK_ACCOUNT_FIELDS)[number];
 
