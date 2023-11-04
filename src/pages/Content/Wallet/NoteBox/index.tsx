@@ -31,7 +31,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
     };
     //取得資料
     const { tableProps } = useGetNoteBox({ pageSize: pageSize });
-    console.log('🚀 ~ tableProps:', tableProps);
+    // console.log('🚀 ~ tableProps:', tableProps);
     //轉換資料加上日期格式
     const fxnData =
         tableProps?.dataSource?.map((item) => {
@@ -41,7 +41,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
             };
         }) || [];
     tableProps.dataSource = fxnData;
-    console.log('🚀 ~ fxnData:', fxnData);
+    // console.log('🚀 ~ fxnData:', fxnData);
 
     //分頁條設定
     const paginationSetting: TablePaginationConfig = {
