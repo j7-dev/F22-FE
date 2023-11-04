@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { nanoid } from 'nanoid';
 import { Spin } from 'antd';
-import GameList from './GameList';
+import GameList from '@/components/ContentLayout/GameListNormal';
 import { useGetPopularGames } from '@/hooks/gameProvider/useGetPopularGames';
 import { useShowPc } from '@/hooks/useShowPc';
 import { TPopularGames } from '@/types/games/popularGames';

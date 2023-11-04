@@ -23,6 +23,7 @@ import vsport from '@/assets/images/game_provider/vsport.jpeg';
 export const tokenData: TGame[] = [
     {
         gameName: '룰렛',
+        gameID: '룰렛',
         gtype: 'roulette',
         openFn: 'iframe',
         gameImg: roulette,
@@ -31,6 +32,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: '하이로우',
+        gameID: '하이로우',
         gtype: 'hilo',
         openFn: 'iframe',
         gameImg: hilo,
@@ -39,6 +41,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: '하이로우5초',
+        gameID: '하이로우5초',
         gtype: 'hilo_5s',
         openFn: 'iframe',
         gameImg: hilo5s,
@@ -47,6 +50,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: '그래프',
+        gameID: '그래프',
         gtype: 'graph',
         openFn: 'iframe',
         gameImg: graph,
@@ -55,6 +59,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: '토큰바카라',
+        gameID: '토큰바카라',
         gtype: 'baccarat',
         openFn: 'iframe',
         gameImg: baccarat,
@@ -63,6 +68,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: '가상경마',
+        gameID: '가상경마',
         gtype: 'horse',
         openFn: 'iframe',
         gameImg: horse,
@@ -71,6 +77,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: '토큰휠',
+        gameID: '토큰휠',
         gtype: 'fw',
         openFn: 'iframe',
         gameImg: fw,
@@ -95,6 +102,7 @@ export const tokenData: TGame[] = [
     // },
     {
         gameName: '토큰슬롯',
+        gameID: '토큰슬롯',
         gtype: 'slot',
         openFn: 'blank',
         gameImg: slot,
@@ -103,6 +111,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: '가상스포츠',
+        gameID: '가상스포츠',
         gtype: 'vsports',
         openFn: 'blank',
         gameImg: vsport,
@@ -119,6 +128,7 @@ export const tokenData: TGame[] = [
     // },
     {
         gameName: '섹시게이밍',
+        gameID: '섹시게이밍',
         gtype: 'aecasino',
         openFn: 'blank',
         gameImg: aecasino,
@@ -135,6 +145,7 @@ export const tokenData: TGame[] = [
     // },
     {
         gameName: 'CQ9',
+        gameID: 'CQ9',
         gtype: 'cq9',
         openFn: 'blank',
         gameImg: cq9,
@@ -143,6 +154,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: '플레이텍',
+        gameID: '플레이텍',
         gtype: 'pt',
         openFn: 'blank',
         gameImg: pt,
@@ -151,6 +163,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: '마이크로게이밍',
+        gameID: '마이크로게이밍',
         gtype: 'mglive',
         openFn: 'blank',
         gameImg: mglive,
@@ -159,6 +172,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: '오리엔탈 게이밍',
+        gameID: '오리엔탈 게이밍',
         gtype: 'og',
         openFn: 'blank',
         gameImg: og,
@@ -167,6 +181,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: '올뱃',
+        gameID: '올뱃',
         gtype: 'allbet',
         openFn: 'blank',
         gameImg: allbet,
@@ -175,6 +190,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: 'WM카지노',
+        gameID: 'WM카지노',
         gtype: 'wm',
         openFn: 'blank',
         gameImg: wm,
@@ -183,6 +199,7 @@ export const tokenData: TGame[] = [
     },
     {
         gameName: '아시아게이밍',
+        gameID: '아시아게이밍',
         gtype: 'agcasino',
         openFn: 'blank',
         gameImg: agcasino,

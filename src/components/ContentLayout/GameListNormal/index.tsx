@@ -26,7 +26,7 @@ const index = ({ gameData }: { gameData: TGame[] }) => {
         );
     return (
         <div className="gameList grid sm:grid-cols-11 sm:px-0 px-4">
-            <div className="col-span-9 sm:col-start-2 h-fit sm:-mx-2 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div className="col-span-9 sm:col-start-2 h-fit grid grid-cols-2 gap-4 sm:grid-cols-4">
                 {gameData.map((item) => {
                     return <SingleGame key={nanoid()} gameItem={item} />;
                 })}
