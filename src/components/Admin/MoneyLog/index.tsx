@@ -3,6 +3,7 @@ import { useTable } from '@refinedev/antd';
 import { TTransaction } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
 import { DateTime } from '@/components/PureComponents';
+import { useGetSiteSetting } from '@/hooks';
 
 type DataType = {
     id: number;
@@ -15,8 +16,11 @@ type DataType = {
 
 const index: React.FC<{
     user_id: string | number | undefined;
-}> = ({ user_id }) => {
+    currency?: string;
+    amount_type?: string;
+}> = ({ user_id, currency, amount_type }) => {
     if (!user_id) return <p>can't get user_id</p>;
+    const { default_currency, default_amount_type } = useGetSiteSetting();
 
     const columns: ColumnsType<DataType> = [
         {
@@ -63,6 +67,16 @@ const index: React.FC<{
                     field: 'user.id',
                     operator: 'eq',
                     value: user_id,
+                },
+                {
+                    field: 'currency',
+                    operator: 'eq',
+                    value: currency || default_currency,
+                },
+                {
+                    field: 'amount_type',
+                    operator: 'eq',
+                    value: amount_type || default_amount_type,
                 },
             ],
         },

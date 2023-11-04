@@ -13,7 +13,7 @@ const index: React.FC<{
     const currency = rawCurrency || default_currency;
     return (
         <span className={`whitespace-nowrap ${amount < 0 ? 'text-red-500 ' : ' '} ${className}`}>
-            <span>{symbol ? getSymbolFromCurrency(currency.toUpperCase()) : currency.toUpperCase()}</span> {amount.toLocaleString()}
+            <span>{symbol ? getSymbolFromCurrency(currency.toUpperCase()) : currency.toUpperCase()}</span> {(amount || 0).toLocaleString()}
         </span>
     );
 };
