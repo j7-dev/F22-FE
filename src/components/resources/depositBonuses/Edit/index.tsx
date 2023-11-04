@@ -1,7 +1,6 @@
 import FormComponent from '../FormComponent';
-import { useUpdate, HttpError, useGo } from '@refinedev/core';
+import { useUpdate, useGo } from '@refinedev/core';
 import { Edit, useForm } from '@refinedev/antd';
-import { TCommission, TCommissionFields } from '@/types';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { useParams } from 'react-router-dom';
@@ -13,7 +12,7 @@ const index: React.FC<{
     const { mutate: update } = useUpdate();
     const go = useGo();
 
-    const { form, formProps, saveButtonProps, formLoading } = useForm<TCommission, HttpError, TCommissionFields>({
+    const { form, formProps, saveButtonProps, formLoading } = useForm({
         meta: {
             populate: {
                 vips: {
@@ -22,10 +21,11 @@ const index: React.FC<{
             },
         },
     });
-    const handleCreate = () => {
+    const handleEdit = () => {
         if (!id) return;
         form.validateFields()
             .then((values) => {
+                console.log('⭐  values:', values);
                 update(
                     {
                         resource: 'deposit-bonuses',
@@ -36,8 +36,8 @@ const index: React.FC<{
                         onSuccess: () => {
                             form.resetFields();
                             notification.success({
-                                key: 'create-deposit-bonuses',
-                                message: 'Create Turnover bonus successfully',
+                                key: 'edit-deposit-bonuses',
+                                message: 'Edit Turnover bonus successfully',
                                 ...notificationConfig,
                             });
 
@@ -55,7 +55,7 @@ const index: React.FC<{
 
     return (
         <Edit saveButtonProps={saveButtonProps}>
-            <FormComponent formType="edit" formProps={formProps} formLoading={formLoading} handler={handleCreate} />
+            <FormComponent formType="edit" formProps={formProps} formLoading={formLoading} handler={handleEdit} />
         </Edit>
     );
 };

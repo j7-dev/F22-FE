@@ -22,9 +22,6 @@ const ListBettingRecords = lazy(() => import('@/pages/Admin/bettingManagement/Li
 const ListDeposits = lazy(() => import('@/pages/Admin/payments/listDeposits'));
 const ListWithdraws = lazy(() => import('@/pages/Admin/payments/listWithdraws'));
 const SiteSetting = lazy(() => import('@/pages/Admin/systemSetting/siteSetting/List'));
-const ListDiscount = lazy(() => import('@/pages/Admin/discounts/List'));
-const CreateDiscount = lazy(() => import('@/pages/Admin/discounts/Create'));
-const EditDiscount = lazy(() => import('@/pages/Admin/discounts/Edit'));
 const ListDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/List'));
 const CreateDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/Create'));
 const EditDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/Edit'));
@@ -83,11 +80,7 @@ const adminRoutes = () => {
                 <Route path="site-notifications/edit/:id" element={<EditSiteNotifications />} />
             </Route>
             <Route path="/refine/promotion/">
-                <Route index element={<ListDiscount />} />
-                <Route path="discounts" element={<ListDiscount />} />
-                <Route path="discounts/create" element={<CreateDiscount />} />
-                <Route path="discounts/edit/:id" element={<EditDiscount />} />
-                <Route path="deposit-bonuses" element={<ListDepositBonuses />} />
+                <Route index path="deposit-bonuses" element={<ListDepositBonuses />} />
                 <Route path="deposit-bonuses/create" element={<CreateDepositBonuses />} />
                 <Route path="deposit-bonuses/edit/:id" element={<EditDepositBonuses />} />
             </Route>

@@ -5,10 +5,9 @@ import { useShow, useResource } from '@refinedev/core';
 import ObjectTable from '@/components/general/ObjectTable';
 import MoneyLog from '@/components/Admin/MoneyLog';
 import LoginDetail from '@/components/Admin/LoginDetail';
-import BetRecordTable from '@/components/Admin/BetRecordTable';
+import UserBetRecordTable from '@/components/Admin/UserBetRecordTable';
 import { useParams } from 'react-router-dom';
-import { TUser, TDiscount } from '@/types';
-import TurnoverBonusTable from '@/components/Admin/TurnoverBonusTable';
+import { TUser } from '@/types';
 import { Create } from '@/components/resources/transactionRecords';
 import { DollarOutlined } from '@ant-design/icons';
 import useDpWdUserInfo from '../List/hooks/useDpWdUserInfo';
@@ -25,7 +24,7 @@ const index = () => {
         meta: {
             populate: {
                 vip: {
-                    fields: ['label'],
+                    fields: ['label', 'turnover_rate'],
                     populate: {
                         discount: {
                             fields: '*',
@@ -41,7 +40,6 @@ const index = () => {
     const { data, isLoading } = queryResult;
 
     const theUser = (data?.data || {}) as TUser;
-    const discount = (theUser?.vip?.discount || { ratio: [] }) as TDiscount;
 
     const { data: dpWdUserInfoData } = useDpWdUserInfo({ user_ids: [Number(id)] });
     const { user_id: _user_id, ...dpWdUserInfo } = dpWdUserInfoData?.data?.data?.[0] || {};
@@ -107,7 +105,7 @@ const index = () => {
             label: 'Betting Records',
             children: (
                 <Card bordered={false} title="Betting Records">
-                    <BetRecordTable user_id={id} />
+                    <UserBetRecordTable user_id={id} />
                 </Card>
             ),
         },
@@ -116,7 +114,8 @@ const index = () => {
             label: 'Turnover Bonus',
             children: (
                 <Card bordered={false} title="Turnover Bonus">
-                    <TurnoverBonusTable discount={discount} />
+                    <p>Turnover Bonus Rate: {theUser?.vip?.turnover_rate || 0}%</p>
+                    <MoneyLog user_id={id} amount_type="TURNOVER_BONUS" />
                 </Card>
             ),
         },
@@ -135,7 +134,7 @@ const index = () => {
         <>
             <Show
                 isLoading={isLoading}
-                title={`【${theUser?.display_name}】Member Detail`}
+                title={`【${theUser?.display_name}】 Member Detail`}
                 resource={identifier}
                 recordItemId={id}
                 canDelete={canDelete}

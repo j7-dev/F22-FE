@@ -18,9 +18,17 @@ export const statusColorEnum: {
     FAILED: 'volcano',
     CANCEL: '#ccccc',
     PENDING: 'orange',
-    REJECTED: 'red',
 };
 
 export const getStatusTag = (status: string) => {
     return <Tag color={statusColorEnum?.[status] || 'default'}>{status}</Tag>;
+};
+
+// ⚠️⚠️⚠️這個改的話，BE後端也要改
+export const gameProviderTxnEnum = {
+    EVO: 'EVO',
+    BTI: 'bti-api',
+    PP: 'PP',
+    TOKEN: 'TOKENGP',
+    IGX: 'IGX',
 };
