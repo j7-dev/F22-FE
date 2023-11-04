@@ -9,6 +9,8 @@ const SearchBar: React.FC<{ onFilter: (value: string) => void }> = ({ onFilter }
     const [form] = Form.useForm();
     //使用onValuesChange在輸入時即時觸發，並且加上debounce
     const onFinishFilter = ({ searchGame }: { searchGame: string }) => {
+        //重新定義searchGame 如果為空值則等於all
+        searchGame = searchGame || 'all';
         onFilter(searchGame);
     };
     return (
