@@ -7,7 +7,7 @@ import { Table, Button, Modal } from 'antd';
 import useColumns from './useColumns';
 import { ExportOutlined } from '@ant-design/icons';
 import { useModal } from '@refinedev/antd';
-import UserBetRecordTable from '@/components/Admin/UserBetRecordTable';
+import ListBettingRecords from '@/components/resources/betRecords/List';
 import { gameProviderTxnEnum } from '@/utils';
 
 type TGameProviderTxnEnum = keyof typeof gameProviderTxnEnum;
@@ -164,7 +164,7 @@ const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
                     </>
                 }
             >
-                <UserBetRecordTable user_id={user_id} />
+                <ListBettingRecords user_id={user_id as number} />
             </Modal>
         </div>
     );

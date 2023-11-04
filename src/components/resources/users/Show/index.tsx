@@ -5,7 +5,7 @@ import { useShow, useResource } from '@refinedev/core';
 import ObjectTable from '@/components/general/ObjectTable';
 import MoneyLog from '@/components/Admin/MoneyLog';
 import LoginDetail from '@/components/Admin/LoginDetail';
-import UserBetRecordTable from '@/components/Admin/UserBetRecordTable';
+import ListBettingRecords from '@/components/resources/betRecords/List';
 import { useParams } from 'react-router-dom';
 import { TUser } from '@/types';
 import { Create } from '@/components/resources/transactionRecords';
@@ -57,6 +57,10 @@ const index = () => {
             children: (
                 <div>
                     <Card bordered={false} title="Info">
+                        <div className="grid grid-cols-2 xl:grid-cols-2 gap-6">
+                            <ObjectTable record={userData} columns={infoLeftColumns} />
+                            <ObjectTable record={userData} columns={infoRightColumns} />
+                        </div>
                         <div className="mb-12">
                             <p>
                                 <DollarOutlined className="mr-2" />
@@ -73,10 +77,6 @@ const index = () => {
                                     },
                                 }}
                             />
-                        </div>
-                        <div className="grid grid-cols-2 xl:grid-cols-2 gap-6">
-                            <ObjectTable record={userData} columns={infoLeftColumns} />
-                            <ObjectTable record={userData} columns={infoRightColumns} />
                         </div>
                     </Card>
                 </div>
@@ -105,7 +105,7 @@ const index = () => {
             label: 'Betting Records',
             children: (
                 <Card bordered={false} title="Betting Records">
-                    <UserBetRecordTable user_id={id} />
+                    <ListBettingRecords user_id={id} />
                 </Card>
             ),
         },
@@ -143,11 +143,11 @@ const index = () => {
                     style: {
                         backgroundColor: 'transparent',
                         boxShadow: 'none',
-                        padding: '24px 0px 24px 0px',
+                        padding: '0px 0px 24px 0px',
                     },
                 }}
             >
-                <Tabs defaultActiveKey="moneyLog1" type="card" centered items={items} tabBarStyle={{ marginBottom: '0px' }} />
+                <Tabs className="-mt-8" defaultActiveKey="moneyLog1" type="card" centered items={items} tabBarStyle={{ marginBottom: '0px' }} />
             </Show>
         </>
     );
