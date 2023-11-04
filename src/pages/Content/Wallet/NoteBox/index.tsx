@@ -59,6 +59,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
     //如果傳入pageSize則設定分頁條的每頁筆數
     if (pageSize !== undefined) {
         paginationSetting.total = pageSize;
+        console.log('🚀 ~ paginationSetting:', paginationSetting);
     }
     //渲染點擊Read More按鈕=>如果傳入pageSize代表只渲染固定筆數則不顯示按鈕
     const ShowBtn = () => {
@@ -102,7 +103,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
                         return (
                             <>
                                 <span onClick={handleModal(record as TSiteNotify)} className="cursor-pointer">
-                                    {text}
+                                    {t(text)}
                                 </span>
                             </>
                         );
@@ -112,7 +113,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
                     title={
                         <div className="flex items-center gap-1">
                             <BiSolidTimeFive color="#828282" size={20} />
-                            Date
+                            {t('Date')}
                         </div>
                     }
                     dataIndex="fxnCreatedAt"
