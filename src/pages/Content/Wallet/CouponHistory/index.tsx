@@ -2,7 +2,7 @@ import React from 'react';
 import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { Table, Tag } from 'antd';
-import dayjs from 'dayjs';
+// import dayjs from 'dayjs';
 import { List } from '@refinedev/antd';
 import { useShowPc } from '@/hooks/useShowPc';
 import { useGetTransactionRecords } from '@/hooks/useGetTransactionRecords';
@@ -26,13 +26,13 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
     const { tableProps } = useGetTransactionRecords({ type: ['TURNOVER_BONUS_TO_CASH'], userID, pageSize });
 
     //轉換資料加上新日期格式
-    const fxnData = tableProps?.dataSource?.map((item) => {
-        return {
-            ...item,
-            fxnCreatedAt: dayjs(item.createdAt).format('MMMM DD,YYYY') as string,
-        };
-    });
-    tableProps.dataSource = fxnData;
+    // const fxnData = tableProps?.dataSource?.map((item) => {
+    //     return {
+    //         ...item,
+    //         fxnCreatedAt: dayjs(item.createdAt).format('MMMM DD,YYYY') as string,
+    //     };
+    // });
+    tableProps.dataSource = [];
 
     //分頁條設定
     const paginationSetting: TablePaginationConfig = {
