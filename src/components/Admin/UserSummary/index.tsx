@@ -156,7 +156,8 @@ const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
             <Modal
                 {...modalProps}
                 centered
-                width={1200}
+                width={1600}
+                footer={null}
                 title={
                     <>
                         <u>{user?.display_name}</u> bet records from <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD')}</u> to <u>{dayjs().format('YYYY-MM-DD')}</u>

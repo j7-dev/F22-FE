@@ -7,7 +7,6 @@ export * from './balances';
 export * from './SiteNotify';
 export * from './loginDetails';
 export * from './faq';
-export * from './discounts';
 export * from './depositBonuses';
 export * from './betRecords';
 
