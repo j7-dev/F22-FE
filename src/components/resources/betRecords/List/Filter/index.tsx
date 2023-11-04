@@ -37,7 +37,7 @@ const index: React.FC<{ user_id?: string | number }> = ({ user_id }) => {
                         <Input size="small" allowClear placeholder="search transaction id or leave blank" prefix={<SearchOutlined />} />
                     </Form.Item>
 
-                    <ResourceSelect formItemProps={{ label: 'User', name: ['user_id'] }} fetchProps={{ resource: 'users', optionLabel: 'display_name', optionValue: 'id' }} selectProps={{ allowClear: true, size: 'small' }} />
+                    <ResourceSelect formItemProps={{ label: 'User', name: ['user_id'], hidden: !!user_id }} fetchProps={{ resource: 'users', optionLabel: 'display_name', optionValue: 'id' }} selectProps={{ allowClear: true, size: 'small' }} />
 
                     <Form.Item label="Game Provider" name={['gameProvider']}>
                         <Select

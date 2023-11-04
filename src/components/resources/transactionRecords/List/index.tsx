@@ -198,7 +198,7 @@ const index = () => {
 
     const formattedTableProps = {
         ...tableProps,
-        scroll: { x: 1600 },
+        scroll: { x: 1400 },
         columns: listType === 'DEPOSIT' ? depositColumns : withdrawColumns,
         rowKey: 'id',
         pagination: {
@@ -265,7 +265,6 @@ const index = () => {
                                 rowExpandable: (record) => record.type === 'WITHDRAW',
                             }}
                         />
-                        <hr className="my-8" />
                     </Card>
                 </Col>
             </Row>
