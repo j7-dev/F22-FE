@@ -82,7 +82,7 @@ const DetailedInformation = () => {
 
     return (
         <>
-            <Table rowKey="date" size="small" columns={columns} dataSource={dataSource} loading={isLoading} />
+            <Table pagination={false} rowKey="date" size="small" columns={columns} dataSource={dataSource} loading={isLoading} />
         </>
     );
 };

@@ -11,6 +11,9 @@ type DataType = any;
 const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ user_id }) => {
     const { data: txnResult, isLoading } = useList({
         resource: 'transaction-records',
+        pagination: {
+            mode: 'off',
+        },
         filters: [
             {
                 field: 'user.id',
@@ -63,6 +66,7 @@ const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ 
             };
         }
     });
+    console.log('⭐  formattedTxns:', formattedTxns);
 
     // TODO CHECK 有沒有合併成功
 
