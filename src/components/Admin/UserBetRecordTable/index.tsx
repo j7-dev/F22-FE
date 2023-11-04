@@ -9,6 +9,7 @@ import { gameProviderTxnEnum } from '@/utils';
 type DataType = any;
 
 const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ user_id }) => {
+    // TODO 未來再從後端優化分頁功能
     const { data: txnResult, isLoading } = useList({
         resource: 'transaction-records',
         pagination: {
@@ -66,7 +67,6 @@ const index: React.FC<{ user_id: string | number | undefined }> = React.memo(({ 
             };
         }
     });
-    console.log('⭐  formattedTxns:', formattedTxns);
 
     // TODO CHECK 有沒有合併成功
 
