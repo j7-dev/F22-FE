@@ -15,6 +15,7 @@ import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import slot_all_icon from '@/assets/images/game_provider/slot_all_icon.svg';
 import slot_favorite_icon from '@/assets/images/game_provider/slot_favorite_icon.svg';
 import { TGame } from '@/types/games';
+import { tokenData } from '@/utils/providerData/Token';
 
 //由遊戲廠商而來的分類表
 const slotProviderResource = providerData.filter((item) => item.gameCategories.includes('slot'));
@@ -54,7 +55,9 @@ const index: React.FC = () => {
 
     //取得遊戲列表
     const { data: ppData, isFetching } = useGetPPTableList();
-    const rawGameList = useMemo(() => ppData.filter((item) => item.gameCategory === 'slot') || [], [isFetching]);
+    const ppGameData = ppData.filter((item) => item.gameCategory === 'slot');
+    const tokenGamesData = tokenData.filter((item) => item.gameCategory === 'slot');
+    const rawGameList = useMemo(() => [...ppGameData, ...tokenGamesData] || [], [isFetching]);
 
     //切換分類
     const handleSwitchTab = (key: string) => () => {

@@ -15,7 +15,7 @@ export const generateNestedFilterField = (field: string) => {
 };
 
 export const generateFilter = (filters?: CrudFilters) => {
-    console.log('⭐  filters:', filters);
+    // console.log('⭐  filters:', filters);
     let rawQuery = '';
 
     if (filters && Array.isArray(filters)) {

@@ -31,6 +31,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
     };
     //取得資料
     const { tableProps } = useGetNoteBox();
+    console.log('🚀 ~ tableProps:', tableProps);
     //轉換資料加上日期格式
     const fxnData =
         tableProps?.dataSource?.map((item) => {
@@ -40,6 +41,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
             };
         }) || [];
     tableProps.dataSource = fxnData;
+    console.log('🚀 ~ fxnData:', fxnData);
 
     //分頁條設定
     const paginationSetting: TablePaginationConfig = {
@@ -59,7 +61,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
     //如果傳入pageSize則設定分頁條的每頁筆數
     if (pageSize !== undefined) {
         paginationSetting.total = pageSize;
-        console.log('🚀 ~ paginationSetting:', paginationSetting);
+        // console.log('🚀 ~ paginationSetting:', paginationSetting);
     }
     //渲染點擊Read More按鈕=>如果傳入pageSize代表只渲染固定筆數則不顯示按鈕
     const ShowBtn = () => {

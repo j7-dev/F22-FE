@@ -15,6 +15,7 @@ import slot_favorite_icon from '@/assets/images/game_provider/slot_favorite_icon
 import { useIsFavorite } from '@/hooks/useIsFavorite';
 import allImg from '@/assets/images/casino/Icon_CasinoFilter_All.svg';
 import { TGame } from '@/types/games';
+import { tokenData } from '@/utils/providerData/Token';
 
 //由五大分類而來的分類表
 const fxnCasinoCategory = [
@@ -45,8 +46,10 @@ const index: React.FC = () => {
     //取得遊戲列表
     const { data: evoData, isFetching: evoIsFetching } = useGetEVOTableList();
     const { data: ppData, isFetching: ppIsFetching } = useGetPPTableList();
+    const ppGameData = ppData.filter((item) => item.gameCategory === 'casino');
+    const tokenGamesData = tokenData.filter((item) => item.gameCategory === 'casino');
     const isFetching = evoIsFetching || ppIsFetching;
-    const rawGameList = useMemo(() => [...evoData, ...ppData.filter((item) => item.gameCategory === 'casino')] || [], [isFetching]);
+    const rawGameList = useMemo(() => [...evoData, ...ppGameData, ...tokenGamesData] || [], [isFetching]);
     // console.log('⭐  rawGameList:', rawGameList);
     //切換分類
     const handleSwitchTab = (key: string) => () => {
@@ -56,9 +59,6 @@ const index: React.FC = () => {
         if (key === 'favorite') return setGameDataList(rawGameList.filter((item) => isFavorite(item as TGame)) as []);
         setGameDataList(rawGameList.filter((item) => item.casinoCategory === key) as []);
     };
-    // const favoriteFilter=(item:TGame)=>{
-    // 	const {}
-    // }
     //搜尋遊戲
     const filterGame = (searchGame: string) => {
         if (searchGame === '') return setGameDataList(rawGameList as []);

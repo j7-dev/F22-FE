@@ -23,7 +23,7 @@ export const useGetPopularGames = () => {
     //只取得Slot Games 18款遊戲資料
     const slotGames = isLoading ? [] : ([...ppData].filter((item) => item.gameCategory === 'slot') || [])?.slice(0, 16);
 
-    //只取得Live Casino 18款遊戲資料
+    //只取得Casino 18款遊戲資料
     const liveGamesData = isLoading ? [] : ([...evoData, ...ppData.filter((item) => item.gameCategory === 'casino')] || [])?.slice(0, 16);
     //設定Sport Games 為BTI
     const sportGamesData = [
