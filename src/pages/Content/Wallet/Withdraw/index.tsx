@@ -67,16 +67,27 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
         //如果用戶身上有deposit_bonus及last_deposit
         if (userInfo?.last_deposit?.deposit_bonus) {
             //判斷有效投注有沒有達到限制金額
-            if (userInfo?.validBetAmount > userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage)
+            if (userInfo?.validBetAmount > userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage) {
+                console.log('已達到提款金額');
+                console.log('有效投注', userInfo?.validBetAmount);
+                console.log('限制金額', userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage);
                 //有則顯示可提款餘額balance
                 return balance;
+            }
             //否則為0，自然就禁用提款按鈕
-            else return 0;
+            else {
+                console.log('未達到提款金額');
+                console.log('有效投注', userInfo?.validBetAmount);
+                console.log('限制金額', userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage);
+                return 0;
+            }
         }
         //如果沒有存款紅利限制，則可提款餘額為balance
+        console.log('沒有存款紅利限制');
         return balance;
     };
-    const withdrawable = LimitAmountFn();
+    LimitAmountFn();
+    const withdrawable = balance;
 
     //監聽Form的值，都填寫完畢後，使Button可以點擊
     const values = Form.useWatch([], form);
@@ -100,8 +111,8 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical" className="w-full">
                     <div className="flex justify-between my-2 w-full">
                         <span className="text-sm text-[#828282] font-medium">{isPc ? t('Amount to withdraw') : ''}</span>
-                        {/* 暫時性隱藏
-												<span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()} / ${t('可提領額度')}:${withdrawable.toLocaleString()}`}</span> */}
+                        {/* 暫時性隱藏*/}
+                        <span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()} / ${t('可提領額度')}:${withdrawable.toLocaleString()}`}</span>
                     </div>
                     <QuickAmountInput
                         formItemProps={{
