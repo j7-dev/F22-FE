@@ -15,10 +15,6 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
         roleType: 'agent',
     });
 
-    const { selectProps: topAgentSelectProps } = useUserSelect({
-        roleType: 'top_agent',
-    });
-
     return (
         <Card bordered={false}>
             <Form {...formProps} layout="vertical">
@@ -26,17 +22,14 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
                     <Form.Item label="Register Date" name={['dateRange']}>
                         <RangePicker size="small" className="w-full" />
                     </Form.Item>
-                    <Form.Item label="User Id" name={['id']}>
-                        <Input size="small" allowClear placeholder="search user Id or leave blank" prefix={<SearchOutlined />} />
-                    </Form.Item>
                     <Form.Item label="User name" name={['username']}>
                         <Input size="small" allowClear placeholder="search username or leave blank" prefix={<SearchOutlined />} />
                     </Form.Item>
                     <Form.Item label="phone" name={['phone']}>
                         <Input size="small" allowClear placeholder="search user phone or leave blank" prefix={<SearchOutlined />} />
                     </Form.Item>
-                    <Form.Item label="display name" name={['display_name']}>
-                        <Input size="small" allowClear placeholder="search user display name or leave blank" prefix={<SearchOutlined />} />
+                    <Form.Item label="real name" name={['display_name']}>
+                        <Input size="small" allowClear placeholder="search user real name or leave blank" prefix={<SearchOutlined />} />
                     </Form.Item>
                     <Form.Item label="VIP" name={['vip']}>
                         <Select size="small" {...vipSelectProps} allowClear />
@@ -44,9 +37,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
                     <Form.Item label="agent" name={['agent']}>
                         <Select size="small" {...agentSelectProps} allowClear />
                     </Form.Item>
-                    <Form.Item label="top agent" name={['top_agent']}>
-                        <Select size="small" {...topAgentSelectProps} allowClear />
-                    </Form.Item>
+
                     {/* <BooleanRadioButton
                         formItemProps={{
                             initialValue: undefined,
