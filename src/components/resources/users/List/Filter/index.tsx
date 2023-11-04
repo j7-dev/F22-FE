@@ -22,19 +22,19 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
                     <Form.Item label="Register Date" name={['dateRange']}>
                         <RangePicker size="small" className="w-full" />
                     </Form.Item>
-                    <Form.Item label="User name" name={['username']}>
+                    <Form.Item label="Account" name={['username']}>
                         <Input size="small" allowClear placeholder="search username or leave blank" prefix={<SearchOutlined />} />
                     </Form.Item>
-                    <Form.Item label="phone" name={['phone']}>
+                    <Form.Item label="Phone" name={['phone']}>
                         <Input size="small" allowClear placeholder="search user phone or leave blank" prefix={<SearchOutlined />} />
                     </Form.Item>
-                    <Form.Item label="real name" name={['display_name']}>
+                    <Form.Item label="Real name" name={['display_name']}>
                         <Input size="small" allowClear placeholder="search user real name or leave blank" prefix={<SearchOutlined />} />
                     </Form.Item>
                     <Form.Item label="VIP" name={['vip']}>
                         <Select size="small" {...vipSelectProps} allowClear />
                     </Form.Item>
-                    <Form.Item label="agent" name={['agent']}>
+                    <Form.Item label="Agent" name={['agent']}>
                         <Select size="small" {...agentSelectProps} allowClear />
                     </Form.Item>
 
@@ -51,7 +51,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
                     <BooleanRadioButton
                         formItemProps={{
                             initialValue: undefined,
-                            label: 'status',
+                            label: 'Status',
                             name: ['confirmed'],
                         }}
                         radioGroupProps={{
