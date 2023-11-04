@@ -64,7 +64,7 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
         const inCouponHistory = section === 'couponHistory';
         return (
             <div className="flex gap-2 justify-between">
-                <div className="flex gap-2">
+                <div className="flex gap-2 items-center">
                     <span className="text-black font-bold sm:text-2xl text-sm">{t('Coupon History')}</span>
                     {inMyPage && isPc && <ShowBtn />}
                 </div>

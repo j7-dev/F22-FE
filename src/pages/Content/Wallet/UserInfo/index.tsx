@@ -91,6 +91,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                 </div>
                 <div className="">
                     <div className="text-[#ACACAC] text-[8px] sm:text-sm font-normal">{t('Total Balance')}</div>
+                    {/*TODO 改成Admin 裡面的Account組件 */}
                     <div className="text-[#333333] text-base sm:text-3xl font-semibold">{symbol + (balance || 0).toLocaleString()}</div>
                 </div>
             </div>

@@ -59,15 +59,15 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
     //2.在cashHistory頁面需要有返回按鈕
     const TopTitle = () => {
         const inMyPage = section === 'myPage';
-        const incashHistory = section === 'cashHistory';
+        const inCashHistory = section === 'cashHistory';
         return (
             <div className="flex gap-2 justify-between">
-                <div className="flex gap-2">
-                    <span className="text-black font-bold sm:text-2xl text-sm">{t('Coupon History')}</span>
+                <div className="flex gap-2 items-center">
+                    <span className="text-black font-bold sm:text-2xl text-sm">{t('Cash History')}</span>
                     {inMyPage && isPc && <ShowBtn />}
                 </div>
 
-                {incashHistory && (
+                {inCashHistory && (
                     <button onClick={() => setSection('myPage')} className="cursor-pointer font-bold border-0 px-3 py-1.5 rounded-xl text-xs bg-[#5932EA] text-white">
                         {t('Go back')}
                     </button>
