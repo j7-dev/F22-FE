@@ -1,5 +1,6 @@
 import { useCustom, useApiUrl } from '@refinedev/core';
 import { Spin } from 'antd';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 const HeaderInfo = () => {
     const apiUrl = useApiUrl();
@@ -16,6 +17,8 @@ const HeaderInfo = () => {
     const dataSource = data?.data?.data || {};
     const { table1, table2 = [], table3 = [], table4 = [] } = dataSource;
 
+    const betAmountUser = table2.find((item: any) => item.label === 'bet users');
+    const formattedTabled2 = table2.filter((item: any) => item.label !== 'bet users');
     return (
         <Spin spinning={isFetching}>
             <div className="overflow-x-auto">
@@ -23,23 +26,35 @@ const HeaderInfo = () => {
                     <table className="table table-small table-nowrap th-left w-[300px]">
                         <tr>
                             <th className="w-8">total balance</th>
-                            <td>{(table1?.cashBalanceAmount || 0).toLocaleString()}</td>
+                            <td>
+                                <SimpleAmount amount={table1?.cashBalanceAmount} />
+                            </td>
                         </tr>
                         <tr>
                             <th>total point</th>
-                            <td>{(table1?.turnoverBonusBalanceAmount || 0).toLocaleString()}</td>
+                            <td>
+                                <SimpleAmount amount={table1?.turnoverBonusBalanceAmount} />
+                            </td>
                         </tr>
                         <tr>
                             <th>total deposit (users)</th>
-                            <td>{`${(table1?.dpAmount || 0).toLocaleString()} (${table1?.dpUsers})`}</td>
+                            <td>
+                                <SimpleAmount amount={table1?.dpAmount} />
+                                {` (${table1?.dpUsers})`}
+                            </td>
                         </tr>
                         <tr>
                             <th>total withdraw (users)</th>
-                            <td>{`${(table1?.wdAmount || 0).toLocaleString()} (${table1?.wdUsers})`}</td>
+                            <td>
+                                <SimpleAmount amount={table1?.wdAmount} />
+                                {` (${table1?.wdUsers})`}
+                            </td>
                         </tr>
                         <tr>
                             <th>DPWD</th>
-                            <td>{(table1?.dpWd || 0).toLocaleString()}</td>
+                            <td>
+                                <SimpleAmount amount={table1?.dpWd} />
+                            </td>
                         </tr>
                     </table>
 
@@ -53,16 +68,27 @@ const HeaderInfo = () => {
                             <th>igx</th>
                         </tr>
 
-                        {table2.map((item: any) => {
+                        {formattedTabled2.map((item: any) => {
                             const { label = '', total = 0, evo = 0, pp = 0, bti = 0, igx = 0 } = item;
+                            const users = label === 'bet amount(users)' ? `(${betAmountUser.total || 0})` : '';
                             return (
                                 <tr key={label}>
                                     <th className="w-1/4">{label}</th>
-                                    <td>{total.toLocaleString()}</td>
-                                    <td>{evo.toLocaleString()}</td>
-                                    <td>{pp.toLocaleString()}</td>
-                                    <td>{bti.toLocaleString()}</td>
-                                    <td>{igx.toLocaleString()}</td>
+                                    <td>
+                                        <SimpleAmount amount={total} /> {users}
+                                    </td>
+                                    <td>
+                                        <SimpleAmount amount={evo} /> {users}
+                                    </td>
+                                    <td>
+                                        <SimpleAmount amount={pp} /> {users}
+                                    </td>
+                                    <td>
+                                        <SimpleAmount amount={bti} /> {users}
+                                    </td>
+                                    <td>
+                                        <SimpleAmount amount={igx} /> {users}
+                                    </td>
                                 </tr>
                             );
                         })}
