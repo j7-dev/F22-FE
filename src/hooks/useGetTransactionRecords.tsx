@@ -7,7 +7,7 @@ import { useTable } from '@refinedev/antd';
  * @returns
  */
 
-export const useGetTransactionRecords = ({ type, userID, pageSize = 10 }: { type: string[]; userID: number; pageSize?: number }) => {
+export const useGetTransactionRecords = ({ type, userID, pageSize = 10 }: { type?: string[]; userID?: number; pageSize?: number }) => {
     //取得交易紀錄
     const { tableProps } = useTable<HttpError>({
         resource: 'transaction-records',
@@ -35,6 +35,12 @@ export const useGetTransactionRecords = ({ type, userID, pageSize = 10 }: { type
         pagination: {
             mode: 'server',
             pageSize: pageSize,
+        },
+        sorters: {
+            initial: [{ field: 'createdAt', order: 'desc' }],
+        },
+        queryOptions: {
+            enabled: userID !== undefined,
         },
     });
 

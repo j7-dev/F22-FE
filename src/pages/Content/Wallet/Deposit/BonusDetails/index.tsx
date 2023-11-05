@@ -20,15 +20,7 @@ const index: React.FC = () => {
     return (
         <div className="bonusDetails my-8">
             <Spin spinning={isFetching}>
-                <Form.Item
-                    name={['chosen_bonus']}
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please Select Bonus Type!',
-                        },
-                    ]}
-                >
+                <Form.Item name={['chosen_bonus']}>
                     <Select
                         onChange={(value) => {
                             setChosenBonus(bonusList?.data?.find((bonus) => bonus.id === value));

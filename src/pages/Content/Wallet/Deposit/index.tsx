@@ -14,21 +14,29 @@ import QRCode from 'qrcode';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import { useShowPc } from '@/hooks/useShowPc';
 import DepositMethod from './DepositMethod';
+import { useGetTransactionRecords } from '@/hooks/useGetTransactionRecords';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const [form] = Form.useForm();
-    const [isDisabled, setIsDisabled] = useState(true);
+    const showPc = useShowPc();
+    const { modalProps, show, close } = useModal();
+    const [isDisabled, setIsDisabled] = useState(true); //按鈕點擊狀態
+    //取得預設幣別
+    const { default_currency, default_amount_type } = useGetSiteSetting();
+    const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
+    //取得identity
     const { data: identity } = useGetIdentity<TMe>();
     const user_id = identity?.id;
+    //取得上一筆交易紀錄狀態
+    const { tableProps } = useGetTransactionRecords({ type: ['DEPOSIT'], userID: user_id, pageSize: 1 });
+    const lastTransaction = tableProps?.dataSource?.[0]?.status;
     const CODEPAY_IDENTIFIER = `userId${user_id}`;
-    const showPc = useShowPc();
-
-    const { modalProps, show, close } = useModal();
-    const watchAmount = Form.useWatch(['amount'], form);
-
+    //監聽Form的值
+    const values = Form.useWatch([], form);
+    const watchAmount = values?.amount;
+    //QRCode
     const [qrcode, setQrcode] = React.useState('');
-
     const generateQR = async (text: string) => {
         try {
             const url = await QRCode.toDataURL(text);
@@ -37,59 +45,67 @@ const index: React.FC = () => {
             console.error(err);
         }
     };
-
+    //送出表單
     const { mutate: doDeposit, isLoading } = useCustomMutation();
     const apiUrl = useApiUrl();
     const handleClick = () => {
         form.validateFields()
             .then(() => {
-                //判斷付款方式是否為TRANSFER
-                const isTransfer = form.getFieldsValue(['depositMethod']).depositMethod === 'TRANSFER';
-                //如果是TRANSFER，不論裝置都顯示Modal
-                //如果是CODEPAY，判斷裝置顯示Modal或開啟網址
-                if (isTransfer) {
-                    show();
+                //當按下Deposit按鈕前先驗證上筆存款狀態
+                //如果上筆存款狀態為PENDING則跳出彈窗提示
+                if (lastTransaction === 'PENDING') {
+                    Modal.info({
+                        centered: true,
+                        title: t('주의'),
+                        content: (
+                            <div>
+                                <p>{t('현재 대기중인 입금건이 있습니다')}</p>
+                                <p>{t('입금완료후 신청바랍니다')}</p>
+                            </div>
+                        ),
+                        okText: t('OK'),
+                        onOk: () => {
+                            close();
+                        },
+                    });
+                    return;
                 } else {
-                    if (showPc) {
+                    //否則執行送出表單
+                    //判斷付款方式是否為TRANSFER
+                    const isTransfer = values.depositMethod === 'TRANSFER';
+                    //如果是TRANSFER，不論裝置都顯示Modal
+                    //如果是CODEPAY，判斷裝置顯示Modal或開啟網址
+                    if (isTransfer) {
                         show();
-                        const qrString = `codp:${CODEPAY_SIMPLE_ADDRESS_TO}?type=payment&identifier=userid${user_id}&amount=${watchAmount}`;
-                        generateQR(qrString);
                     } else {
-                        handleOpenUrl();
+                        if (showPc) {
+                            show();
+                            const qrString = `codp:${CODEPAY_SIMPLE_ADDRESS_TO}?type=payment&identifier=userid${user_id}&amount=${watchAmount}`;
+                            generateQR(qrString);
+                        } else {
+                            const codePayUrl = `${CODEPAY_APP_URL}/payment?type=payment&simpleAddress=${CODEPAY_SIMPLE_ADDRESS_TO}&identifier=${CODEPAY_IDENTIFIER}&amount=${watchAmount}`;
+                            window.open(codePayUrl, '_blank');
+                        }
                     }
+                    doDeposit({
+                        url: `${apiUrl}/wallet-api/cash/deposit`,
+                        method: 'post',
+                        values: {
+                            ...values,
+                            user_id,
+                            currency: default_currency,
+                            amount_type: default_amount_type,
+                            deposit_bonus: values?.chosen_bonus,
+                            method: values?.depositMethod,
+                        },
+                    });
                 }
-
-                //當按下Deposit按鈕直接送出表單
-                const values = form.getFieldsValue();
-                doDeposit({
-                    url: `${apiUrl}/wallet-api/cash/deposit`,
-                    method: 'post',
-                    values: {
-                        ...values,
-                        user_id,
-                        currency: default_currency,
-                        amount_type: default_amount_type,
-                        deposit_bonus: values?.chosen_bonus,
-                        method: values?.depositMethod,
-                    },
-                });
             })
             .catch((errorInfo) => {
                 console.log('errorInfo', errorInfo);
             });
     };
-
-    const { default_currency, default_amount_type } = useGetSiteSetting();
-    const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
-
-    const codePayUrl = `${CODEPAY_APP_URL}/payment?type=payment&simpleAddress=${CODEPAY_SIMPLE_ADDRESS_TO}&identifier=${CODEPAY_IDENTIFIER}&amount=${watchAmount}`;
-    const handleOpenUrl = () => {
-        window.open(codePayUrl, '_blank');
-    };
-
-    //監聽Form的值，都填寫完畢後，使Button可以點擊
-    const values = Form.useWatch([], form);
-    // console.log('🚀 ~ values:', values);
+    //驗證表單值都填寫完畢後，才使Button可以點擊
     useEffect(() => {
         form.validateFields({ validateOnly: true }).then(
             () => {
@@ -100,7 +116,6 @@ const index: React.FC = () => {
             },
         );
     }, [values]);
-
     //取得id = header的元素高度
     const header = document.getElementById('header');
     const headerHeight = header?.clientHeight;
