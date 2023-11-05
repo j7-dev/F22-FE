@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { useGetIdentity, useApiUrl, useCustomMutation } from '@refinedev/core';
+import { useModal } from '@refinedev/antd';
 import { Form, Modal, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
-import QuickAmountInput from '@/components/form/QuickAmountInput';
-import { useGetIdentity, useApiUrl, useCustomMutation } from '@refinedev/core';
-import { TMe } from '@/types';
-import { useModal } from '@refinedev/antd';
-import { CODEPAY_APP_URL, CODEPAY_SIMPLE_ADDRESS_TO } from '@/utils';
+import { useSetAtom } from 'jotai';
+import QRCode from 'qrcode';
 import getSymbolFromCurrency from 'currency-symbol-map';
+import QuickAmountInput from '@/components/form/QuickAmountInput';
+import { TMe } from '@/types';
+import { CODEPAY_APP_URL, CODEPAY_SIMPLE_ADDRESS_TO } from '@/utils';
+import { useGetTransactionRecords } from '@/hooks/useGetTransactionRecords';
 import { useGetSiteSetting } from '@/hooks';
+import { useShowPc } from '@/hooks/useShowPc';
 import Amount from '@/components/Admin/Amount';
 import BonusDetails from './BonusDetails';
-import QRCode from 'qrcode';
-import { AiFillCloseCircle } from 'react-icons/ai';
-import { useShowPc } from '@/hooks/useShowPc';
 import DepositMethod from './DepositMethod';
-import { useGetTransactionRecords } from '@/hooks/useGetTransactionRecords';
+import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
+    const setActiveMenu = useSetAtom(activeMenuAtom);
     const [form] = Form.useForm();
     const showPc = useShowPc();
     const { modalProps, show, close } = useModal();
@@ -184,7 +187,12 @@ const index: React.FC = () => {
                         {/* <Button onClick={handleOpenUrl} className="w-full h-10 my-2 bg-[#5932EA] text-white rounded-2xl font-bold" type="primary" ghost>
                             {t('or Pay by URL')}
                         </Button> */}
-                        <Button onClick={close} className="w-full h-10 my-2 bg-[#5932EA] text-white rounded-2xl font-bold">
+                        <Button
+                            onClick={() => {
+                                setActiveMenu('myPage');
+                            }}
+                            className="w-full h-10 my-2 bg-[#5932EA] text-white rounded-2xl font-bold"
+                        >
                             {t('I’ve paid')}
                         </Button>
                     </div>
