@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useSelect } from '@refinedev/antd';
 import { TUser } from '@/types';
 import { useGetSiteSetting } from '@/hooks';
+import { useTranslation } from 'react-i18next';
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
@@ -10,6 +11,7 @@ const FormComponent: React.FC<{
     handler: () => void;
     formLoading?: boolean;
 }> = ({ formType, formProps, handler, formLoading }) => {
+    const { t } = useTranslation();
     const { roles } = useGetSiteSetting();
     const { selectProps } = useSelect<TUser>({
         resource: 'users',
@@ -36,15 +38,15 @@ const FormComponent: React.FC<{
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
             <div className="grid grid-cols-3 gap-6">
-                <Form.Item className="w-full" label="title" name={['title']} rules={[{ required: true, message: 'value is required' }]}>
+                <Form.Item className="w-full" label={t('title')} name={['title']} rules={[{ required: true, message: 'value is required' }]}>
                     <Input className="w-full" />
                 </Form.Item>
 
-                <Form.Item className="w-full" label="Send to Users" name={['send_to_user_ids']} help="Leave empty to send to all users">
+                <Form.Item className="w-full" label={t('Send to Users')} name={['send_to_user_ids']} help="Leave empty to send to all users">
                     <Select {...selectProps} mode="multiple" />
                 </Form.Item>
             </div>
-            <Form.Item className="w-full" label="content" name={['content']} rules={[{ required: true, message: 'value is required' }]}>
+            <Form.Item className="w-full" label={t('content')} name={['content']} rules={[{ required: true, message: 'value is required' }]}>
                 <Input.TextArea className="w-full h-60" />
             </Form.Item>
         </Form>

@@ -13,8 +13,10 @@ import { DollarOutlined } from '@ant-design/icons';
 import useDpWdUserInfo from '../List/hooks/useDpWdUserInfo';
 import useColumns from './useColumns';
 import NotesForm from './NotesForm';
+import { useTranslation } from 'react-i18next';
 
 const index = () => {
+    const { t } = useTranslation();
     const { identifier } = useResource();
     const { canDelete, canEdit } = useCan();
     const { id } = useParams<{ id: string }>();
@@ -53,7 +55,7 @@ const index = () => {
     const items: TabsProps['items'] = [
         {
             key: 'userInfo',
-            label: 'User Info',
+            label: t('User Info'),
             children: (
                 <div>
                     <Card bordered={false} title="Info">
@@ -64,7 +66,7 @@ const index = () => {
                         <div className="mb-12">
                             <p>
                                 <DollarOutlined className="mr-2" />
-                                Balance Adjustment
+                                {t('Balance Adjustment')}
                             </p>
                             <Create
                                 title={<></>}
@@ -84,7 +86,7 @@ const index = () => {
         },
         {
             key: 'moneyLog',
-            label: 'Money Log',
+            label: t('Money Log'),
             children: (
                 <Card bordered={false} title="Money Log">
                     <MoneyLog user_id={id} />
@@ -93,7 +95,7 @@ const index = () => {
         },
         {
             key: 'loginDetail',
-            label: 'Login History',
+            label: t('Login History'),
             children: (
                 <Card bordered={false} title="Login History">
                     <LoginDetail user_id={id} />
@@ -102,7 +104,7 @@ const index = () => {
         },
         {
             key: 'betRecordTable',
-            label: 'Betting Records',
+            label: t('Betting Records'),
             children: (
                 <Card bordered={false} title="Betting Records">
                     <ListBettingRecords user_id={id} />
@@ -111,17 +113,19 @@ const index = () => {
         },
         {
             key: 'turnoverBonus',
-            label: 'Turnover Bonus',
+            label: t('Turnover Bonus'),
             children: (
                 <Card bordered={false} title="Turnover Bonus">
-                    <p>Turnover Bonus Rate: {theUser?.vip?.turnover_rate || 0}%</p>
+                    <p>
+                        {t('Turnover Bonus Rate')}: {theUser?.vip?.turnover_rate || 0}%
+                    </p>
                     <MoneyLog user_id={id} amount_type="TURNOVER_BONUS" />
                 </Card>
             ),
         },
         {
             key: 'userNotes',
-            label: 'User Notes',
+            label: t('User Notes'),
             children: (
                 <Card bordered={false} title="User Notes">
                     <NotesForm user_notes={theUser?.user_notes} />
@@ -134,7 +138,7 @@ const index = () => {
         <>
             <Show
                 isLoading={isLoading}
-                title={`【${theUser?.display_name}】 Member Detail`}
+                title={`【${theUser?.display_name}】 ${t('Member Detail')}`}
                 resource={identifier}
                 recordItemId={id}
                 canDelete={canDelete}

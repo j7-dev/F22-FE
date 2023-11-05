@@ -3,6 +3,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { searchPropsAtom } from './atom';
 import { useAtomValue } from 'jotai';
 import { useCustom, useApiUrl } from '@refinedev/core';
+import { useTranslation } from 'react-i18next';
 
 type DataType = {
     agentId: number;
@@ -17,52 +18,53 @@ type DataType = {
 };
 
 const DetailedInformation = () => {
+    const { t } = useTranslation();
     const searchProps = useAtomValue(searchPropsAtom);
     const dateRange = searchProps.dateRange || undefined;
 
     const columns: ColumnsType<DataType> = [
         {
-            title: 'date',
+            title: t('date'),
             dataIndex: 'date',
         },
         {
-            title: 'deposit',
+            title: t('deposit'),
             dataIndex: 'deposit',
         },
         {
-            title: 'withdraw',
+            title: t('withdraw'),
             dataIndex: 'withdraw',
         },
         {
-            title: 'DPWD',
+            title: t('DPWD'),
             dataIndex: 'dpWd',
         },
         {
-            title: 'valid bet amount',
+            title: t('valid bet amount'),
             dataIndex: 'validBet',
         },
         {
-            title: 'payout',
+            title: t('payout'),
             dataIndex: 'payout',
         },
         {
-            title: 'winloss',
+            title: t('winloss'),
             dataIndex: 'winloss',
         },
         {
-            title: 'bonus & turnover bonus',
+            title: t('bonus & turnover bonus'),
             dataIndex: 'coupon',
         },
         {
-            title: 'profit',
+            title: t('profit'),
             dataIndex: 'profit',
         },
         {
-            title: 'new registered members',
+            title: t('new registered members'),
             dataIndex: 'numberOfRegistrants',
         },
         {
-            title: 'betting members',
+            title: t('betting members'),
             dataIndex: 'bettingMembers',
         },
     ];

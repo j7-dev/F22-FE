@@ -1,8 +1,11 @@
 import { useCustom, useApiUrl } from '@refinedev/core';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 const Table = () => {
+    const { t } = useTranslation();
     const apiUrl = useApiUrl();
     const { data, isLoading } = useCustom({
         url: `${apiUrl}/utility/statistic/important`,
@@ -23,117 +26,147 @@ const Table = () => {
                         <tr>
                             <th></th>
                             <th></th>
-                            <th>Today</th>
-                            <th>Yesterday</th>
-                            <th>This Week</th>
-                            <th>Last Week</th>
-                            <th>This Month.</th>
-                            <th>Last Month.</th>
+                            <th>{t('Today')}</th>
+                            <th>{t('Yesterday')}</th>
+                            <th>{t('This Week')}</th>
+                            <th>{t('Last Week')}</th>
+                            <th>{t('This Month.')}</th>
+                            <th>{t('Last Month.')}</th>
                         </tr>
                     </thead>
                     <tbody>
                         {/* Agent's information */}
                         <tr>
-                            <th rowSpan={4}>New Members</th>
-                            <th>New Top Agents</th>
+                            <th rowSpan={4}>{t('New Members')}</th>
+                            <th>{t('New Top Agents')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.agentInfo_newTopAgent?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.agentInfo_newTopAgent?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         <tr>
-                            <th>New Agents</th>
+                            <th>{t('New Agents')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.agentInfo_newAgent?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.agentInfo_newAgent?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         <tr>
-                            <th>New members</th>
+                            <th>{t('New members')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.newMembers_newMembers?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.newMembers_newMembers?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         <tr>
-                            <th>Amount for the deposit members</th>
+                            <th>{t('Amount for the deposit members')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.newMembers_amountForDepositMembers?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.newMembers_amountForDepositMembers?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         {/* Turnover information */}
                         <tr>
-                            <th rowSpan={2}>Turnover information</th>
-                            <th>Total</th>
+                            <th rowSpan={2}>{t('Turnover information')}</th>
+                            <th>{t('Total')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.turnoverInfo_total?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.turnoverInfo_total?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         <tr>
-                            <th>Total members</th>
+                            <th>{t('Total members')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.turnoverInfo_totalMember?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.turnoverInfo_totalMember?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         {/* Betting information */}
                         <tr>
-                            <th rowSpan={2}>Betting information</th>
-                            <th>Valid Bet Amount</th>
+                            <th rowSpan={2}>{t('Betting information')}</th>
+                            <th>{t('Valid Bet Amount')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.bettingInfo_validBetAmount?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.bettingInfo_validBetAmount?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         <tr>
-                            <th>Win / Loss</th>
+                            <th>{t('Win / Loss')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.bettingInfo_winLoss?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.bettingInfo_winLoss?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         {/* Deposit information */}
                         <tr>
-                            <th rowSpan={3}>Deposit information</th>
-                            <th>Total</th>
+                            <th rowSpan={3}>{t('Deposit information')}</th>
+                            <th>{t('Total')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.depositInfo_total?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.depositInfo_total?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         <tr>
-                            <th>Total members</th>
+                            <th>{t('Total members')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.depositInfo_totalMember?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.depositInfo_totalMember?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         <tr>
-                            <th>Total Quantity</th>
+                            <th>{t('Total Quantity')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.depositInfo_totalQty?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.depositInfo_totalQty?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         {/* Withdrawal information */}
                         <tr>
-                            <th rowSpan={3}>Withdrawal information</th>
-                            <th>Total</th>
+                            <th rowSpan={3}>{t('Withdrawal information')}</th>
+                            <th>{t('Total')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.withdrawInfo_total?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.withdrawInfo_total?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         <tr>
-                            <th>Total members</th>
+                            <th>{t('Total members')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.withdrawInfo_totalMember?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.withdrawInfo_totalMember?.[column]} />
+                                </td>
                             ))}
                         </tr>
                         <tr>
-                            <th>Total Quantity</th>
+                            <th>{t('Total Quantity')}</th>
                             {columns.map((column) => (
-                                <td key={column}>{dataSource?.withdrawInfo_totalQty?.[column]}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={dataSource?.withdrawInfo_totalQty?.[column]} />
+                                </td>
                             ))}
                         </tr>
                     </tbody>
                     <tfoot className="bg-green-200">
                         <tr>
                             <th colSpan={2} className="text-green-800">
-                                Total revenue (Total deposit - Total withdrawal)
+                                {t('Total revenue (Total deposit - Total withdrawal)')}
                             </th>
                             {columns.map((column) => (
-                                <td key={column}>{Number(dataSource?.depositInfo_total?.[column]) - Number(dataSource?.withdrawInfo_total?.[column])}</td>
+                                <td key={column}>
+                                    <SimpleAmount amount={Number(dataSource?.depositInfo_total?.[column]) - Number(dataSource?.withdrawInfo_total?.[column])} />
+                                </td>
                             ))}
                         </tr>
                     </tfoot>

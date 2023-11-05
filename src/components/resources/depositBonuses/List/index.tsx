@@ -5,8 +5,10 @@ import { DateTime } from '@/components/PureComponents';
 import { DataType } from './types';
 import { TVip } from '@/types';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
+import { useTranslation } from 'react-i18next';
 
 const index = () => {
+    const { t } = useTranslation();
     const { tableProps } = useTable({
         resource: 'deposit-bonuses',
         meta: {
@@ -20,44 +22,44 @@ const index = () => {
 
     const columns: ColumnsType<DataType> = [
         {
-            title: '#',
+            title: t('#'),
             dataIndex: 'id',
         },
         {
-            title: 'Label',
+            title: t('Label'),
             dataIndex: 'label',
         },
         {
-            title: 'Bonus Rate',
+            title: t('Bonus Rate'),
             dataIndex: 'bonus_rate',
         },
         {
-            title: 'Min Deposit Amount',
+            title: t('Min Deposit Amount'),
             dataIndex: 'min_deposit_amount',
             render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'Max Bonus Amount',
+            title: t('Max Bonus Amount'),
             dataIndex: 'max_bonus_amount',
             render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'Rolling Percentage',
+            title: t('Rolling Percentage'),
             dataIndex: 'rolling_percentage',
             render: (v: number) => `${v}%`,
         },
         {
-            title: 'Allow Game Categories',
+            title: t('Allow Game Categories'),
             dataIndex: 'allow_game_categories',
             render: (v: string[]) => (Array.isArray(v) ? v.join(', ') : ''),
         },
         {
-            title: 'VIPS',
+            title: t('VIPS'),
             dataIndex: 'vips',
             render: (v: TVip[]) => (v || [])?.map((vip: any) => vip?.label).join(', '),
         },
         {
-            title: 'Date',
+            title: t('Date'),
             dataIndex: 'createdAt',
             render: (createdAt: string) => <DateTime value={createdAt} />,
         },

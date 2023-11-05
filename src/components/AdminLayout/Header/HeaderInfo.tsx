@@ -1,9 +1,11 @@
 import { useCustom, useApiUrl } from '@refinedev/core';
 import { Spin } from 'antd';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
+import { useTranslation } from 'react-i18next';
 
 const HeaderInfo = () => {
     const apiUrl = useApiUrl();
+    const { t } = useTranslation();
     const { data, isFetching } = useCustom({
         url: `${apiUrl}/utility/statistic/today`,
         method: 'get',
@@ -25,33 +27,33 @@ const HeaderInfo = () => {
                 <div className="flex w-[1300px]">
                     <table className="table table-small table-nowrap th-left w-[300px]">
                         <tr>
-                            <th className="w-8">total balance</th>
+                            <th className="w-8">{t('total balance')}</th>
                             <td>
                                 <SimpleAmount amount={table1?.cashBalanceAmount} />
                             </td>
                         </tr>
                         <tr>
-                            <th>total point</th>
+                            <th>{t('total point')}</th>
                             <td>
                                 <SimpleAmount amount={table1?.turnoverBonusBalanceAmount} />
                             </td>
                         </tr>
                         <tr>
-                            <th>total deposit (users)</th>
+                            <th>{t('total deposit (users)')}</th>
                             <td>
                                 <SimpleAmount amount={table1?.dpAmount} />
                                 {` (${table1?.dpUsers})`}
                             </td>
                         </tr>
                         <tr>
-                            <th>total withdraw (users)</th>
+                            <th>{t('total withdraw (users)')}</th>
                             <td>
                                 <SimpleAmount amount={table1?.wdAmount} />
                                 {` (${table1?.wdUsers})`}
                             </td>
                         </tr>
                         <tr>
-                            <th>DPWD</th>
+                            <th>{t('DPWD')}</th>
                             <td>
                                 <SimpleAmount amount={table1?.dpWd} />
                             </td>
@@ -61,11 +63,11 @@ const HeaderInfo = () => {
                     <table className="table table-fixed table-small table-nowrap th-left w-[600px] ml-4">
                         <tr>
                             <th className="w-1/4"></th>
-                            <th>total</th>
-                            <th>evo</th>
-                            <th>pp</th>
-                            <th>bti</th>
-                            <th>igx</th>
+                            <th>{t('total')}</th>
+                            <th>{t('evo')}</th>
+                            <th>{t('pp')}</th>
+                            <th>{t('bti')}</th>
+                            <th>{t('igx')}</th>
                         </tr>
 
                         {formattedTabled2.map((item: any) => {
@@ -73,7 +75,7 @@ const HeaderInfo = () => {
                             const users = label === 'bet amount(users)' ? `(${betAmountUser.total || 0})` : '';
                             return (
                                 <tr key={label}>
-                                    <th className="w-1/4">{label}</th>
+                                    <th className="w-1/4">{t(label)}</th>
                                     <td>
                                         <SimpleAmount amount={total} /> {users}
                                     </td>
@@ -97,14 +99,14 @@ const HeaderInfo = () => {
                     <table className="table table-fixed table-small table-nowrap th-left w-[300px] ml-4">
                         <tr>
                             <th></th>
-                            <th>pending</th>
-                            <th>confirmed</th>
+                            <th>{t('pending')}</th>
+                            <th>{t('confirmed')}</th>
                         </tr>
                         {table3.map((item: any) => {
                             const { label, pending, confirmed } = item;
                             return (
                                 <tr key={label}>
-                                    <th className="w-1/4">{label}</th>
+                                    <th className="w-1/4">{t(label)}</th>
                                     <td>{pending}</td>
                                     <td>{confirmed}</td>
                                 </tr>
@@ -120,13 +122,13 @@ const HeaderInfo = () => {
                     <table className="table table-small table-nowrap th-left w-[240px] ml-4">
                         <tr>
                             <th>&nbsp;</th>
-                            <th>人數</th>
+                            <th>{t('人數')}</th>
                         </tr>
                         {table4.map((item: any) => {
                             const { label, count } = item;
                             return (
                                 <tr key={label}>
-                                    <th className="w-1/4">{label}</th>
+                                    <th className="w-1/4">{t(label)}</th>
                                     <td>{count}</td>
                                 </tr>
                             );

@@ -2,12 +2,14 @@ import { Button, Form } from 'antd';
 import { useCreate } from '@refinedev/core';
 import { modalPropsAtom, modalShowAtom } from '../atom';
 import { useAtom, useSetAtom } from 'jotai';
+import { useTranslation } from 'react-i18next';
 
 const CreateButton = () => {
     const { mutate: create, isLoading } = useCreate();
     const [modalProps, setModalProps] = useAtom(modalPropsAtom);
     const setModalShow = useSetAtom(modalShowAtom);
     const form = Form.useFormInstance();
+    const { t } = useTranslation();
 
     const handleCreate = () => {
         form.validateFields()
@@ -35,7 +37,7 @@ const CreateButton = () => {
         setModalShow(true);
         setModalProps({
             ...modalProps,
-            title: 'Create VIP',
+            title: `${t('Create')} VIP`,
             onOk: handleCreate,
             confirmLoading: isLoading,
         });
@@ -44,7 +46,7 @@ const CreateButton = () => {
     return (
         <>
             <Button type="primary" onClick={handleClick}>
-                Create
+                {t('Create')}
             </Button>
         </>
     );

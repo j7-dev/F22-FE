@@ -4,10 +4,12 @@ import { Edit, useForm } from '@refinedev/antd';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const index: React.FC<{
     notificationConfig?: ArgsProps;
 }> = ({ notificationConfig = {} }) => {
+    const { t } = useTranslation();
     const { id } = useParams();
     const { mutate: update } = useUpdate();
     const go = useGo();
@@ -37,7 +39,7 @@ const index: React.FC<{
                             form.resetFields();
                             notification.success({
                                 key: 'edit-deposit-bonuses',
-                                message: 'Edit Turnover bonus successfully',
+                                message: t('Edit Turnover bonus successfully'),
                                 ...notificationConfig,
                             });
 

@@ -6,10 +6,12 @@ import dayjs, { Dayjs } from 'dayjs';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const index: React.FC<{
     notificationConfig?: ArgsProps;
 }> = ({ notificationConfig = {} }) => {
+    const { t } = useTranslation();
     const { mutate: update } = useUpdate();
     const { id } = useParams();
     const invalidate = useInvalidate();
@@ -60,7 +62,7 @@ const index: React.FC<{
                             form.resetFields();
                             notification.success({
                                 key: 'edit-user',
-                                message: 'Edit user successfully',
+                                message: t('Edit user successfully'),
                                 ...notificationConfig,
                             });
 

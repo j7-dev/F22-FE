@@ -6,12 +6,14 @@ import { TBalance } from '@/types';
 import { useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
+import { useTranslation } from 'react-i18next';
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
     formProps: FormProps;
     handler: () => void;
 }> = ({ formProps, handler }) => {
+    const { t } = useTranslation();
     const form = formProps.form;
     const apiUrl = useApiUrl();
     const watchUser = Form.useWatch(['user_id'], form);
@@ -62,7 +64,7 @@ const FormComponent: React.FC<{
             <div className="grid grid-cols-4 gap-6">
                 <Form.Item
                     name={['title']}
-                    label="title"
+                    label={t('title')}
                     rules={[
                         {
                             required: true,
@@ -74,23 +76,23 @@ const FormComponent: React.FC<{
                     <Input />
                 </Form.Item>
 
-                <Form.Item name={['user_id']} label="User" initialValue={Number(id)} className="col-span-2 lg:col-span-1" hidden={isUserAdjustment}>
+                <Form.Item name={['user_id']} label={t('User')} initialValue={Number(id)} className="col-span-2 lg:col-span-1" hidden={isUserAdjustment}>
                     <Select {...userSelectProps} allowClear />
                 </Form.Item>
 
                 <div className="col-span-2 lg:col-span-1">
-                    <p className="mb-2">User's balance</p>
+                    <p className="mb-2">{t("User's balance")}</p>
                     {watchUser && !isFetching && <SimpleAmount amount={Number(currencyBalanceAmount)} />}
                     {isFetching && <LoadingOutlined />}
                 </div>
-                <Form.Item name={['type']} label="Type" className="col-span-2 lg:col-span-1" initialValue="MANUAL" hidden={isUserAdjustment}>
+                <Form.Item name={['type']} label={t('Type')} className="col-span-2 lg:col-span-1" initialValue="MANUAL" hidden={isUserAdjustment}>
                     {/* <Select options={['DEPOSIT', 'MANUAL'].map((type) => ({ label: type, value: type }))} /> */}
                     <Input />
                 </Form.Item>
                 <div className="col-span-4 md:col-span-2">
                     <AmountInput />
                 </div>
-                <Form.Item name={['description']} label="description" className="col-span-4 md:col-span-2" hidden={isUserAdjustment}>
+                <Form.Item name={['description']} label={t('description')} className="col-span-4 md:col-span-2" hidden={isUserAdjustment}>
                     <Input.TextArea />
                 </Form.Item>
             </div>

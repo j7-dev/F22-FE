@@ -2,8 +2,10 @@ import { Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import useDashboard from '../hooks/useDashboard';
 import { TLineData, DataType } from '../types';
+import { useTranslation } from 'react-i18next';
 
 const index = () => {
+    const { t } = useTranslation();
     const { data, isLoading } = useDashboard();
     const winLossData = (data?.data?.data?.winLossRatio || []) as TLineData[];
     const validBetData = (data?.data?.data?.validBet || []) as TLineData[];
@@ -22,27 +24,27 @@ const index = () => {
 
     const columns: ColumnsType<DataType> = [
         {
-            title: 'Date',
+            title: t('Date'),
             dataIndex: 'date',
         },
         {
-            title: 'Online Members',
+            title: t('Online Members'),
             dataIndex: 'onlineMembers',
         },
         {
-            title: 'Betting Amount',
+            title: t('Betting Amount'),
             dataIndex: 'bettingAmount',
         },
         {
-            title: 'Valid Bet',
+            title: t('Valid Bet'),
             dataIndex: 'validBet',
         },
         {
-            title: 'Win / Loss',
+            title: t('Win / Loss'),
             dataIndex: 'winLoss',
         },
         {
-            title: 'Total Deposit',
+            title: t('Total Deposit'),
             dataIndex: 'totalDeposit',
         },
     ];

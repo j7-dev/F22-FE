@@ -4,6 +4,7 @@ import { searchPropsAtom } from './atom';
 import { useAtomValue } from 'jotai';
 import { useCustom, useApiUrl } from '@refinedev/core';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
+import { useTranslation } from 'react-i18next';
 
 type DataType = {
     agentId: number;
@@ -18,60 +19,61 @@ type DataType = {
 };
 
 const DetailedInformation = () => {
+    const { t } = useTranslation();
     const searchProps = useAtomValue(searchPropsAtom);
     const dateRange = searchProps.dateRange || undefined;
 
     const columns: ColumnsType<DataType> = [
         {
-            title: 'Date',
+            title: t('Date'),
             dataIndex: 'date',
         },
         {
-            title: 'Deposit',
+            title: t('Deposit'),
             dataIndex: 'deposit',
             render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'Withdraw',
+            title: t('Withdraw'),
             dataIndex: 'withdraw',
             render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'DPWD',
+            title: t('DPWD'),
             dataIndex: 'dpWd',
             render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'Valid Bet Amount',
+            title: t('Valid Bet Amount'),
             dataIndex: 'validBet',
             render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'Payout',
+            title: t('Payout'),
             dataIndex: 'payout',
             render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'winloss',
+            title: t('winloss'),
             dataIndex: 'winloss',
             render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'Bonus & Turnover Bonus',
+            title: t('Bonus & Turnover Bonus'),
             dataIndex: 'coupon',
             render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'Profit',
+            title: t('Profit'),
             dataIndex: 'profit',
             render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'New Registered Members',
+            title: t('New Registered Members'),
             dataIndex: 'numberOfRegistrants',
         },
         {
-            title: 'Betting Members',
+            title: t('Betting Members'),
             dataIndex: 'bettingMembers',
         },
     ];

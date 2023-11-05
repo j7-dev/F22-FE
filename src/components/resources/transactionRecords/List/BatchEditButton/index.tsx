@@ -5,11 +5,7 @@ import { selectedRecordsAtom } from '../atom';
 import { useAtom } from 'jotai';
 import { TMe } from '@/types';
 import { RESOURCE } from '../../constants';
-
-/**
- * BUG 同時變更多筆資料會產生死鎖
- * Insert ignore into transaction_records_updated_by_user_id_links (`transaction_record_id`, `user_id`) values (116, 26) - ER_LOCK_DEADLOCK: Deadlock found when trying to get lock; try restarting transaction
- */
+import { useTranslation } from 'react-i18next';
 
 type TBatchEditButtonProps = {
     status: 'SUCCESS' | 'CANCEL';
@@ -19,6 +15,7 @@ type TBatchEditButtonProps = {
 };
 
 const index: React.FC<TBatchEditButtonProps> = ({ status, text, type, className }) => {
+    const { t } = useTranslation();
     const [selectedRecords, setSelectedRecords] = useAtom(selectedRecordsAtom);
     const { data: identity } = useGetIdentity<TMe>();
     const { mutate, isLoading } = useUpdateMany();
@@ -38,7 +35,7 @@ const index: React.FC<TBatchEditButtonProps> = ({ status, text, type, className 
                     notification.success({
                         key: `${text}-${type}`,
                         message: 'Success',
-                        description: `${text} ${type} successfully`,
+                        description: `${t(text)} ${type} successfully`,
                     });
                     setSelectedRecords([]);
                 },
@@ -50,9 +47,9 @@ const index: React.FC<TBatchEditButtonProps> = ({ status, text, type, className 
     };
 
     return (
-        <Popconfirm className={className} title={`${text} ${type}`} description={`"Are you sure to ${text.toLowerCase()} these ${type.toLowerCase()} ?"`} onConfirm={handleUpdate} okText="Yes" cancelText="No" okButtonProps={{ loading: isLoading }}>
+        <Popconfirm className={className} title={`${t(text)} ${type}`} description={`"Are you sure to ${text.toLowerCase()} these ${type.toLowerCase()} ?"`} onConfirm={handleUpdate} okText="Yes" cancelText="No" okButtonProps={{ loading: isLoading }}>
             <Button size="small" shape="round" type="primary" icon={text === 'Approve' ? <CheckOutlined /> : <CloseOutlined />} disabled={!selectedRecords.length} danger={text !== 'Approve'}>
-                {text} Selected {selectedRecords.length ? `(${selectedRecords.length})` : null}
+                {t(text)} {t('Selected')} {selectedRecords.length ? `(${selectedRecords.length})` : null}
             </Button>
         </Popconfirm>
     );

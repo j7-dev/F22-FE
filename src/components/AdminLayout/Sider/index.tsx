@@ -7,12 +7,14 @@ import { UnorderedListOutlined, RightOutlined, LeftOutlined } from '@ant-design/
 import { nanoid } from 'nanoid';
 import logo from '@/assets/images/1002_logo_f.png';
 import logo_s from '@/assets/images/1002_logo_s.png';
+import { useTranslation } from 'react-i18next';
 
 const { useToken } = theme;
 const siderWidth = 320;
 
 const CustomSider: typeof Sider = () => {
     const { token } = useToken();
+    const { t } = useTranslation();
     const [collapsed, setCollapsed] = useState<boolean>(false);
     const { menuItems, selectedKey, defaultOpenKeys } = useMenu();
     const { SubMenu } = Menu;
@@ -48,7 +50,7 @@ const CustomSider: typeof Sider = () => {
                         }}
                         icon={icon ?? (isRoute && <UnorderedListOutlined />)}
                     >
-                        {route ? <Link to={route || '/'}>{label}</Link> : label}
+                        {route ? <Link to={route || '/'}>{t(label)}</Link> : label}
                         {!collapsed && isSelected && <div className="ant-menu-tree-arrow" />}
                     </Menu.Item>
                 </CanAccess>

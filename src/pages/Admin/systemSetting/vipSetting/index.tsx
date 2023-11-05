@@ -8,6 +8,7 @@ import ModalForm from './ModalForm';
 import { DataType } from './types';
 import { modalPropsAtom } from './atom';
 import { useAtomValue } from 'jotai';
+import { useTranslation } from 'react-i18next';
 
 const index = () => {
     const { tableProps } = useTable<DataType, HttpError>({
@@ -17,6 +18,7 @@ const index = () => {
     };
     const [form] = Form.useForm();
     const modalProps = useAtomValue(modalPropsAtom);
+    const { t } = useTranslation();
 
     return (
         <>
@@ -27,14 +29,14 @@ const index = () => {
                     </div>
 
                     <Table {...tableProps} rowKey="id">
-                        <Table.Column dataIndex="order" title="level" />
-                        <Table.Column dataIndex="label" title="label" />
-                        <Table.Column dataIndex="turnover_rate" title="Turnover Rate" render={(v) => `${v || 0}%`} />
+                        <Table.Column dataIndex="order" title={t('level') as string} />
+                        <Table.Column dataIndex="label" title={t('label') as string} />
+                        <Table.Column dataIndex="turnover_rate" title={t('Turnover Rate') as string} render={(v) => `${v || 0}%`} />
 
-                        <Table.Column dataIndex="deposit_upgrade_threshold" title="Upgrade - Deposit Amount" />
-                        <Table.Column dataIndex="valid_bet_amount_upgrade_threshold" title="Upgrade - Valid Bet" />
-                        <Table.Column dataIndex="activated" title="status" render={(activated) => <Tag color={activated ? '#87d068' : '#ff4d4f'}>{activated ? 'Enable' : 'Disable'}</Tag>} />
-                        <Table.Column dataIndex="upgrade_evaluation_interval" title="Interval" />
+                        <Table.Column dataIndex="deposit_upgrade_threshold" title={t('Upgrade - Deposit Amount') as string} />
+                        <Table.Column dataIndex="valid_bet_amount_upgrade_threshold" title={t('Upgrade - Valid Bet') as string} />
+                        <Table.Column dataIndex="activated" title={t('status') as string} render={(activated) => <Tag color={activated ? '#87d068' : '#ff4d4f'}>{activated ? 'Enable' : 'Disable'}</Tag>} />
+                        <Table.Column dataIndex="upgrade_evaluation_interval" title={t('Interval') as string} />
                         <Table.Column dataIndex="action" render={(_, record: DataType) => <EditButton record={record} />} />
                     </Table>
 

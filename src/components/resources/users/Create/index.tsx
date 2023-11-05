@@ -5,11 +5,13 @@ import { TUser, TRoleType } from '@/types';
 import dayjs, { Dayjs } from 'dayjs';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
+import { useTranslation } from 'react-i18next';
 
 const index: React.FC<{
     defaultRoleType?: TRoleType;
     notificationConfig?: ArgsProps;
 }> = ({ notificationConfig = {}, defaultRoleType }) => {
+    const { t } = useTranslation();
     const { mutate: create } = useCreate();
     const { form, formProps, saveButtonProps, formLoading } = useForm<TUser, HttpError, TUser & { birthday: Dayjs }>();
     const handleCreate = () => {
@@ -34,7 +36,7 @@ const index: React.FC<{
                             form.resetFields();
                             notification.success({
                                 key: 'create-user',
-                                message: 'Create user successfully',
+                                message: t('Create user successfully'),
                                 ...notificationConfig,
                             });
                         },
