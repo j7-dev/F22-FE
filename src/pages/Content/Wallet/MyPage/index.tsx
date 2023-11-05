@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSetAtom } from 'jotai';
 import { TMe } from '@/types';
 import UserInfo from '../UserInfo';
 import BankCard from '../BankCard';
@@ -6,7 +7,12 @@ import ChangPas from '../ChangPas';
 import NoteBox from '../NoteBox';
 import CashHistory from '../CashHistory';
 import CouponHistory from '../CouponHistory';
+import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 const index: React.FC<{ data: TMe }> = ({ data }) => {
+    const setSection = useSetAtom(activeMenuAtom);
+    useEffect(() => {
+        setSection('myPage');
+    }, []);
     return (
         <div className="myPage relative flex flex-col gap-2 sm:gap-6 ">
             <UserInfo userInfo={data} />

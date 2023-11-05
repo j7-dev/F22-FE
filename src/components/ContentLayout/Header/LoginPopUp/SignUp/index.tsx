@@ -164,8 +164,8 @@ const index: React.FC = () => {
                     <Form.Item name={['bank_account', 'owner_real_name']} rules={[{ required: true, message: t('Please input your Owner Real Name') }]}>
                         <Input placeholder={t('Full Name')} prefix={<img src={bankName} />} bordered={false} />
                     </Form.Item>
-                    <Form.Item name={['bank_account', 'bank_code']} rules={[{ required: true, message: t('Please input your Bank Code') }]}>
-                        <Input placeholder={t('Bank Code')} prefix={<img src={bankCode} />} bordered={false} />
+                    <Form.Item name={['bank_account', 'bank_name']} rules={[{ required: true, message: t('Please input your Bank Name') }]}>
+                        <Input placeholder={t('Bank Name')} prefix={<img src={bankCode} />} bordered={false} />
                     </Form.Item>
                     <Form.Item name={['bank_account', 'bank_account_number']} rules={[{ required: true, message: t('Please input your Bank Account Number') }]}>
                         <Input.Password placeholder={t('Bank Account Number')} prefix={<img src={bankNumber} />} bordered={false} />

@@ -36,6 +36,7 @@ export const useGetPPTableList = () => {
                     ...item,
                     gameCategory: mappingGameCategory({ gameProviderName: 'pragmaticPlay', gameProviderCategory: item.typeDescription }),
                     gameProviderName: 'pragmaticPlay',
+                    casinoCategory: 'all', //TODO 之後在區分他的分類
                     gameImg: `${gameServerDomain}/game_pic/rec/325/${item.gameID}.png`,
                     gameListFavIcon: ProviderS_PragmaticPlay,
                     gameRTP: mappingRTP(item.gameID as string),

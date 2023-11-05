@@ -14,7 +14,10 @@ type SingleGameProp = {
 const index: React.FC<SingleGameProp> = ({ gameItem }) => {
     //如果沒有遊戲資料則不渲染
     if (!gameItem) return <></>;
+
+    //當前遊戲是否能玩
     const { allowGameCategories } = useGetDepositBonus();
+    const isCanPlay = allowGameCategories !== null && allowGameCategories?.includes(gameItem.gameCategory as string);
     const { default_currency } = useGetSiteSetting();
     const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
 
@@ -87,7 +90,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
     //開啟遊戲組件
     const PlayGameBtn = () => {
         //如果allowGameCategories存在(!=null)且不包含遊戲類別則顯示不能玩
-        if (allowGameCategories !== null && !allowGameCategories?.includes(gameItem.gameCategory as string)) {
+        if (!isCanPlay) {
             return (
                 <div className="flex gap-2 items-center bg-white w-fit h-10 rounded-2xl border-2 border-[#5932EA] px-6 py-2 ">
                     <span className=" whitespace-nowrap font-bold text-base text-[red]">Can't Play</span>
@@ -103,7 +106,16 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
     };
     return (
         <div className="singleGame  w-full h-full aspect-square relative overflow-hidden rounded-2xl sm:shadow-none shadow-[0_4px_4px_0_#A370ED33] group">
-            <div onClick={openGame(gameItem)} className={`editOverlay opacity-0 hover:opacity-100 hover:bg-slate-600/50 z-10 cursor-pointer absolute inset-0 w-full h-full duration-300 text-white  flex justify-center items-center`}>
+            <div
+                onClick={
+                    isCanPlay
+                        ? openGame(gameItem)
+                        : () => {
+                              console.log("not can't play");
+                          }
+                }
+                className={`editOverlay opacity-0 hover:opacity-100 hover:bg-slate-600/50 z-10 cursor-pointer absolute inset-0 w-full h-full duration-300 text-white  flex justify-center items-center`}
+            >
                 <PlayGameBtn />
             </div>
             <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit pt-2 sm:px-5 px-2.5">
