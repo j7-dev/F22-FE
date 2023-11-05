@@ -35,7 +35,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
         tableProps?.dataSource?.map((item) => {
             return {
                 ...item,
-                fxnCreatedAt: dayjs(item.createdAt).format('MMMM DD,YYYY') as string,
+                fxnCreatedAt: dayjs(item.createdAt).format('YYYY MM DD , HH:mm') as string,
             };
         }) || [];
     tableProps.dataSource = fxnData;
