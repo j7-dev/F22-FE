@@ -5,12 +5,14 @@ import { TTransaction, TTransactionFields, TMe } from '@/types';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { useQueryClient } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 
 const index: React.FC<
     CreateProps & {
         notificationConfig?: ArgsProps;
     }
 > = ({ notificationConfig = {}, ...createProps }) => {
+    const { t } = useTranslation();
     const invalidate = useInvalidate();
     const queryClient = useQueryClient();
     const { mutate: add } = useCustomMutation<TTransactionFields>();
@@ -42,7 +44,7 @@ const index: React.FC<
                             queryClient.invalidateQueries(['wallet-api', 'balance', 'get']);
                             notification.success({
                                 key: 'add balance',
-                                message: 'Balance Adjustment successfully',
+                                message: t('Balance Adjustment successfully'),
                                 ...notificationConfig,
                             });
                         },

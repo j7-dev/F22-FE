@@ -1,10 +1,12 @@
 import { Form, Input, InputNumber, Switch, Modal, ModalProps } from 'antd';
 import { modalShowAtom } from './atom';
 import { useAtom } from 'jotai';
+import { useTranslation } from 'react-i18next';
 
 const ModalForm: React.FC<{ modalProps: ModalProps }> = ({ modalProps }) => {
     const form = Form.useFormInstance();
     const [modalShow, setModalShow] = useAtom(modalShowAtom);
+    const { t } = useTranslation();
 
     return (
         <Modal {...modalProps} open={modalShow} onCancel={() => setModalShow(false)}>
@@ -12,11 +14,11 @@ const ModalForm: React.FC<{ modalProps: ModalProps }> = ({ modalProps }) => {
                 <div className="grid grid-cols-2 gap-6">
                     <Form.Item
                         name="label"
-                        label="Label"
+                        label={t('Label')}
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input a value',
+                                message: t('Please input a value'),
                             },
                         ]}
                     >
@@ -24,38 +26,27 @@ const ModalForm: React.FC<{ modalProps: ModalProps }> = ({ modalProps }) => {
                     </Form.Item>
                     <Form.Item
                         name="order"
-                        label="Level"
+                        label={t('Level')}
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input a value',
+                                message: t('Please input a value'),
                             },
                         ]}
                     >
                         <InputNumber min={0} className="w-full" />
                     </Form.Item>
-                    <Form.Item
-                        name="upgrade_award"
-                        label="Vip Upgrade Reward"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input a value',
-                            },
-                        ]}
-                    >
-                        <InputNumber min={0} className="w-full" />
-                    </Form.Item>
-                    <Form.Item name="activated" valuePropName="checked" label="Activated" initialValue={true}>
+
+                    <Form.Item name="activated" valuePropName="checked" label={t('Activated')} initialValue={true}>
                         <Switch />
                     </Form.Item>
                     <Form.Item
                         name="deposit_upgrade_threshold"
-                        label="Upgrade - Deposit Amount"
+                        label={t('Upgrade - Deposit Amount')}
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input a value',
+                                message: t('Please input a value'),
                             },
                         ]}
                     >
@@ -63,11 +54,11 @@ const ModalForm: React.FC<{ modalProps: ModalProps }> = ({ modalProps }) => {
                     </Form.Item>
                     <Form.Item
                         name="valid_bet_amount_upgrade_threshold"
-                        label="Upgrade - Valid Bet"
+                        label={t('Upgrade - Valid Bet')}
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input a value',
+                                message: t('Please input a value'),
                             },
                         ]}
                     >
@@ -76,28 +67,15 @@ const ModalForm: React.FC<{ modalProps: ModalProps }> = ({ modalProps }) => {
 
                     <Form.Item
                         name="turnover_rate"
-                        label="Turnover rate"
+                        label={t('Turnover rate')}
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input a value',
+                                message: t('Please input a value'),
                             },
                         ]}
                     >
                         <InputNumber min={0} className="w-full" addonAfter="%" />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="vip_duration"
-                        label="VIP Duration"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input a value',
-                            },
-                        ]}
-                    >
-                        <InputNumber min={0} className="w-full" />
                     </Form.Item>
                 </div>
             </Form>

@@ -18,8 +18,11 @@ import { useGetSiteSetting } from '@/hooks';
 import UserSummary from '@/components/Admin/UserSummary';
 import BankAccount from '@/components/Admin/BankAccount';
 import DepositBonusAmount from '@/components/Admin/DepositBonusAmount';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
+import { useTranslation } from 'react-i18next';
 
 const index = () => {
+    const { t } = useTranslation();
     const { type: listTypeLowerCase, roleType } = useParams<TParams>();
     const siteSetting = useGetSiteSetting();
     const rolesMapping = siteSetting?.roles || {};
@@ -137,58 +140,58 @@ const index = () => {
 
     const columns: ColumnType<DataType>[] = [
         {
-            title: '#',
+            title: t('#'),
             dataIndex: 'id',
         },
         {
-            title: 'Agent',
+            title: t('Agent'),
             dataIndex: 'agent',
         },
         {
-            title: 'user',
+            title: t('user'),
             dataIndex: 'user',
             render: (user: TUser) => <UserLink user={user} />,
         },
         {
-            title: 'Vip',
+            title: t('Vip'),
             dataIndex: 'vip',
             render: (_, record) => <VipLink vip={record?.user?.vip} />,
         },
 
         {
-            title: 'Amount',
+            title: t('Amount'),
             dataIndex: 'amount',
-            render: (amount) => (amount || 0).toLocaleString(),
+            render: (amount) => <SimpleAmount amount={amount} />,
         },
         {
-            title: 'Deposit Bonus',
+            title: t('Deposit Bonus'),
             dataIndex: 'deposit_bonus',
             render: (deposit_bonus: TDepositBonus, record) => {
                 return <DepositBonusAmount deposit_bonus={deposit_bonus} deposit_amount={record?.amount} />;
             },
         },
         {
-            title: 'Status',
+            title: t('Status'),
             dataIndex: 'status',
             render: (status: string) => getStatusTag(status),
         },
         {
-            title: 'Bank Account',
+            title: t('Bank Account'),
             dataIndex: 'bankAccount',
             render: (_, record) => <BankAccount bank_account={record?.user?.bank_account} display="text" />,
         },
         {
-            title: 'Date',
+            title: t('Date'),
             dataIndex: 'createdAt',
             render: (createdAt: string) => <DateTime value={createdAt} />,
         },
         {
-            title: 'Update Date',
+            title: t('Update Date'),
             dataIndex: 'updatedAt',
             render: (updatedAt: string, record: DataType) => (record?.createdAt === updatedAt ? '' : <DateTime value={updatedAt} />),
         },
         {
-            title: 'Note',
+            title: t('Note'),
             dataIndex: 'title',
         },
     ];
@@ -244,7 +247,7 @@ const index = () => {
                                     <Table.Summary fixed>
                                         <Table.Summary.Row>
                                             <Table.Summary.Cell index={0}></Table.Summary.Cell>
-                                            <Table.Summary.Cell index={1}>Total</Table.Summary.Cell>
+                                            <Table.Summary.Cell index={1}>{t('Total')}</Table.Summary.Cell>
                                             <Table.Summary.Cell index={2}></Table.Summary.Cell>
                                             <Table.Summary.Cell index={3}></Table.Summary.Cell>
                                             <Table.Summary.Cell index={4}></Table.Summary.Cell>
@@ -253,7 +256,7 @@ const index = () => {
                                             <Table.Summary.Cell index={6}>
                                                 {uniqueCurrencies.map((currency) => {
                                                     const totalByCurrency = pageData.filter((data) => data.currency === currency).reduce((sum, record) => sum + record.amount, 0);
-                                                    return totalByCurrency.toLocaleString();
+                                                    return <SimpleAmount amount={totalByCurrency} />;
                                                 })}
                                             </Table.Summary.Cell>
                                         </Table.Summary.Row>

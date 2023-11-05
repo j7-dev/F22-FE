@@ -6,10 +6,12 @@ import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { RESOURCE, POST_TYPE } from '../constants';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 
 const index: React.FC<{
     notificationConfig?: ArgsProps;
 }> = ({ notificationConfig = {} }) => {
+    const { t } = useTranslation();
     const { mutate: create } = useCreate();
     const go = useGo();
     const { resource } = useResource(RESOURCE);
@@ -32,7 +34,7 @@ const index: React.FC<{
                             form.resetFields();
                             notification.success({
                                 key: `create-${RESOURCE}`,
-                                message: `create ${resource?.meta?.label} successfully`,
+                                message: `${t('create')} ${resource?.meta?.label} ${t('successfully')}`,
                                 ...notificationConfig,
                             });
                             go({

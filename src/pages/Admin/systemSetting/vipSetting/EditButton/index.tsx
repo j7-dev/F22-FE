@@ -4,12 +4,14 @@ import { modalPropsAtom, modalShowAtom } from '../atom';
 import { useAtom, useSetAtom } from 'jotai';
 import { EditOutlined } from '@ant-design/icons';
 import { DataType } from '../types';
+import { useTranslation } from 'react-i18next';
 
 const EditButton: React.FC<{ record: DataType }> = ({ record }) => {
     const { mutate: update, isLoading } = useUpdate();
     const [modalProps, setModalProps] = useAtom(modalPropsAtom);
     const setModalShow = useSetAtom(modalShowAtom);
     const form = Form.useFormInstance();
+    const { t } = useTranslation();
 
     const handleEdit = () => {
         form.validateFields()
@@ -39,7 +41,7 @@ const EditButton: React.FC<{ record: DataType }> = ({ record }) => {
         setModalShow(true);
         setModalProps({
             ...modalProps,
-            title: `Edit VIP ${record?.label}`,
+            title: `${t('Edit')} VIP ${record?.label}`,
             onOk: handleEdit,
             confirmLoading: isLoading,
         });

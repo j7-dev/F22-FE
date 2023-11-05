@@ -7,12 +7,15 @@ import { nanoid } from 'nanoid';
 import { searchPropsAtom, TSearchProps } from '../atom';
 import { useAtomValue } from 'jotai';
 import { gameProviderTxnEnum } from '@/utils';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
+import { useTranslation } from 'react-i18next';
 
 type DataType = any;
 
 const index = () => {
     // TODO 未來再從後端優化分頁功能
 
+    const { t } = useTranslation();
     const searchProps = useAtomValue(searchPropsAtom);
     const status = searchProps?.status;
     const { data: txnResult, isFetching } = useList({
@@ -97,7 +100,7 @@ const index = () => {
 
     const columns = [
         {
-            title: 'Game Provider',
+            title: t('Game Provider'),
             dataIndex: 'by',
             render: (by: string) => {
                 //get key of gameProviderTxnEnum
@@ -106,51 +109,51 @@ const index = () => {
             },
         },
         {
-            title: 'Transaction id',
+            title: t('Transaction id'),
             dataIndex: 'ref_id',
         },
         {
-            title: 'user',
+            title: t('user'),
             dataIndex: 'user',
             render: (user: TUser) => <UserLink user={user} />,
         },
         {
-            title: 'Debit Amount',
+            title: t('Debit Amount'),
             dataIndex: 'debit_amount',
-            render: (v: number) => (-v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={-v} />,
         },
         {
-            title: 'Pay Out',
+            title: t('Pay Out'),
             dataIndex: 'credit_amount',
-            render: (v: number) => (-v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={-v} />,
         },
         // {
         //     title: 'Valid Bet Amount',
         //     dataIndex: 'valid_bet_amount',
-        //     render: (v: number) => (v || 0).toLocaleString(),
+        //     render: (v: number) => <SimpleAmount amount={v} />,
         // },
         {
-            title: 'win/loss',
+            title: t('win/loss'),
             dataIndex: 'winloss',
-            render: (_: undefined, record: DataType) => ((-record?.debit_amount || 0) + (-record?.credit_amount || 0)).toLocaleString(),
+            render: (_: undefined, record: DataType) => <SimpleAmount amount={(-record?.debit_amount || 0) + (-record?.credit_amount || 0)} />,
         },
         {
-            title: 'Status',
+            title: t('Status'),
             dataIndex: 'status',
         },
         {
-            title: 'Bet Time',
+            title: t('Bet Time'),
             dataIndex: 'betTime',
             render: (_: undefined, record: DataType) => {
-                const betTime = allTxns.find((t: TTransaction) => t.ref_id === record.ref_id && t.type === 'DEBIT' && !!record.ref_id)?.createdAt;
+                const betTime = allTxns.find((txn: TTransaction) => txn.ref_id === record.ref_id && txn.type === 'DEBIT' && !!record.ref_id)?.createdAt;
                 return betTime ? <DateTime value={betTime} /> : <></>;
             },
         },
         {
-            title: 'Update Time',
+            title: t('Update Time'),
             dataIndex: 'updateTime',
             render: (_: undefined, record: DataType) => {
-                const updateTime = allTxns.find((t: TTransaction) => t.ref_id === record.ref_id && t.type === 'CREDIT' && !!record.ref_id)?.createdAt;
+                const updateTime = allTxns.find((txn: TTransaction) => txn.ref_id === record.ref_id && txn.type === 'CREDIT' && !!record.ref_id)?.createdAt;
                 return updateTime ? <DateTime value={updateTime} /> : <></>;
             },
         },

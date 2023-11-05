@@ -5,47 +5,50 @@ import { Link } from 'react-router-dom';
 import { TUser, TVip } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
 import { useBalanceColumns } from '@/hooks';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
+import { useTranslation } from 'react-i18next';
 
 const useColumns = () => {
+    const { t } = useTranslation();
     const allBalances = useBalanceColumns();
 
     const columns: ColumnsType<DataType> = [
         {
-            title: '#',
+            title: t('#'),
             dataIndex: 'id',
             key: 'id',
         },
 
         {
-            title: 'Account',
+            title: t('Account'),
             dataIndex: 'username',
             key: 'Account',
         },
         {
-            title: 'Real Name',
+            title: t('Real Name'),
             dataIndex: 'display_name',
             key: 'RealName',
         },
         {
-            title: 'Agent',
+            title: t('Agent'),
             dataIndex: 'agent',
             key: 'Agent',
             render: (agent: TUser) => (agent ? <Link to={`/refine/agent/show/${agent?.id}`}>{agent?.display_name}</Link> : null),
         },
         ...allBalances,
         {
-            title: 'phone',
+            title: t('phone'),
             dataIndex: 'phone',
             key: 'phone',
         },
         {
-            title: 'vip',
+            title: t('vip'),
             dataIndex: 'vip',
             key: 'vip',
             render: (vip: TVip) => <Link to="/refine/system-setting/vips">{vip?.label}</Link>,
         },
         {
-            title: 'status',
+            title: t('status'),
             dataIndex: 'confirmed',
             key: 'status',
             align: 'center',
@@ -60,40 +63,40 @@ const useColumns = () => {
             ),
         },
         {
-            title: 'Total Deposits',
+            title: t('Total Deposits'),
             dataIndex: 'totalDp',
             key: 'totalDp',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'Total Withdrawal',
+            title: t('Total Withdrawal'),
             dataIndex: 'totalWd',
             key: 'totalWd',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'DP-WD',
+            title: t('DP-WD'),
             dataIndex: 'DP-WD',
             key: 'DP-WD',
             render: (_: undefined, record: any) => {
                 const v = Number(record.totalDp || 0) - Number(record.totalWd || 0);
-                return (v || 0).toLocaleString();
+                return <SimpleAmount amount={v} />;
             },
         },
         {
-            title: 'Join Date',
+            title: t('Join Date'),
             dataIndex: 'createdAt',
             key: 'JoinDate',
             render: (createdAt: string) => <DateTime value={createdAt} />,
         },
         {
-            title: 'Last BetTime',
+            title: t('Last BetTime'),
             dataIndex: 'lastBetTime',
             key: 'LastBetTime',
             render: (lastBetTime: string) => <DateTime value={lastBetTime} />,
         },
         {
-            title: '',
+            title: t(''),
             fixed: 'right',
             dataIndex: 'action',
             key: 'action',

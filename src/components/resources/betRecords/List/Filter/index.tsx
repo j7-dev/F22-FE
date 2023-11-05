@@ -5,11 +5,13 @@ import { useGetSiteSetting } from '@/hooks';
 import { searchPropsAtom } from '../atom';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';
+import { useTranslation } from 'react-i18next';
 
 const { RangePicker } = DatePicker;
 const STATUSES = ['NORMAL', 'PENDING', 'CANCELLED'];
 
 const index: React.FC<{ user_id?: string | number }> = ({ user_id }) => {
+    const { t } = useTranslation();
     const [form] = Form.useForm();
     const { support_game_providers } = useGetSiteSetting();
     const handleSearch = () => {
@@ -30,16 +32,16 @@ const index: React.FC<{ user_id?: string | number }> = ({ user_id }) => {
         <Card bordered={false}>
             <Form form={form} layout="vertical" onFinish={handleSearch}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-4 gap-y-0">
-                    <Form.Item label="Register Date" name={['dateRange']}>
+                    <Form.Item label={t('Register Date')} name={['dateRange']}>
                         <RangePicker size="small" className="w-full" />
                     </Form.Item>
-                    <Form.Item label="Transaction Id" name={['txnId']}>
-                        <Input size="small" allowClear placeholder="search transaction id or leave blank" prefix={<SearchOutlined />} />
+                    <Form.Item label={t('Transaction Id')} name={['txnId']}>
+                        <Input size="small" allowClear placeholder={t('search transaction id or leave blank')} prefix={<SearchOutlined />} />
                     </Form.Item>
 
-                    <ResourceSelect formItemProps={{ label: 'User', name: ['user_id'], hidden: !!user_id }} fetchProps={{ resource: 'users', optionLabel: 'display_name', optionValue: 'id' }} selectProps={{ allowClear: true, size: 'small' }} />
+                    <ResourceSelect formItemProps={{ label: t('User'), name: ['user_id'], hidden: !!user_id }} fetchProps={{ resource: 'users', optionLabel: 'display_name', optionValue: 'id' }} selectProps={{ allowClear: true, size: 'small' }} />
 
-                    <Form.Item label="Game Provider" name={['gameProvider']}>
+                    <Form.Item label={t('Game Provider')} name={['gameProvider']}>
                         <Select
                             size="small"
                             options={support_game_providers.map((item: string) => ({
@@ -49,7 +51,7 @@ const index: React.FC<{ user_id?: string | number }> = ({ user_id }) => {
                             allowClear
                         />
                     </Form.Item>
-                    <Form.Item label="Status" name={['status']}>
+                    <Form.Item label={t('Status')} name={['status']}>
                         <Select
                             size="small"
                             options={STATUSES.map((item: string) => ({
@@ -62,7 +64,7 @@ const index: React.FC<{ user_id?: string | number }> = ({ user_id }) => {
 
                     <Form.Item className="self-end">
                         <Button size="small" type="primary" className="w-full" htmlType="submit">
-                            Filter
+                            {t('Filter')}
                         </Button>
                     </Form.Item>
                 </div>

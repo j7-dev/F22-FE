@@ -3,10 +3,12 @@ import { useCreate, useGo } from '@refinedev/core';
 import { Create, useForm } from '@refinedev/antd';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
+import { useTranslation } from 'react-i18next';
 
 const index: React.FC<{
     notificationConfig?: ArgsProps;
 }> = ({ notificationConfig = {} }) => {
+    const { t } = useTranslation();
     const { mutate: create } = useCreate();
     const go = useGo();
 
@@ -24,7 +26,7 @@ const index: React.FC<{
                             form.resetFields();
                             notification.success({
                                 key: 'create-discount',
-                                message: 'Create turnover bonus successfully',
+                                message: t('Create turnover bonus successfully'),
                                 ...notificationConfig,
                             });
                             go({

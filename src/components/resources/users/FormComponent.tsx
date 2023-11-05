@@ -9,6 +9,7 @@ import { DefaultOptionType } from 'rc-select/lib/Select';
 import { keyToWord } from '@/utils';
 import { BankOutlined, MoneyCollectOutlined } from '@ant-design/icons';
 import CommissionTable from '@/components/Admin/CommissionTable';
+import { useTranslation } from 'react-i18next';
 
 const { Title } = Typography;
 
@@ -20,6 +21,7 @@ const FormComponent: React.FC<{
     formLoading?: boolean;
 }> = ({ formType, formProps, handler, defaultRoleType = 'authenticated', formLoading }) => {
     const form = formProps.form;
+    const { t } = useTranslation();
     const [isEditing, setIsEditing] = useState(false);
     const [userRole, setUserRole] = useState('Auntenticated');
 
@@ -97,7 +99,7 @@ const FormComponent: React.FC<{
             <div className="grid grid-cols-2 gap-6">
                 <Form.Item
                     name="username"
-                    label="username"
+                    label={t('username')}
                     rules={[
                         {
                             required: true,
@@ -113,7 +115,7 @@ const FormComponent: React.FC<{
                 </Form.Item>
                 <Form.Item
                     name="phone"
-                    label="phone"
+                    label={t('phone')}
                     rules={[
                         {
                             required: true,
@@ -123,7 +125,7 @@ const FormComponent: React.FC<{
                 >
                     <Input />
                 </Form.Item>
-                <Form.Item name="gender" label="gender" initialValue="MALE" hidden>
+                <Form.Item name="gender" label={t('gender')} initialValue="MALE" hidden>
                     <Radio.Group
                         options={[
                             { label: 'Male', value: 'MALE' },
@@ -134,39 +136,39 @@ const FormComponent: React.FC<{
                     />
                 </Form.Item>
 
-                <Form.Item name="birthday" label="birthday" hidden>
+                <Form.Item name="birthday" label={t('birthday')} hidden>
                     {!isString(formProps.initialValues?.birthday) && formProps.initialValues?.birthday ? <DatePicker className="w-full" /> : <Input />}
                 </Form.Item>
 
-                <Form.Item name="confirmed" valuePropName="checked" label="status" initialValue={formType === 'create' ? true : undefined}>
+                <Form.Item name="confirmed" valuePropName="checked" label={t('status')} initialValue={formType === 'create' ? true : undefined}>
                     <Switch />
                 </Form.Item>
 
-                <Form.Item name="allow_payments" label="Allow Payments" initialValue={formType === 'create' ? support_payments : undefined}>
+                <Form.Item name="allow_payments" label={t('Allow Payments')} initialValue={formType === 'create' ? support_payments : undefined}>
                     <Checkbox.Group options={support_payments} />
                 </Form.Item>
 
-                <Form.Item name="allow_game_providers" label="Allow Game Providers" initialValue={formType === 'create' ? support_game_providers : undefined}>
+                <Form.Item name="allow_game_providers" label={t('Allow Game Providers')} initialValue={formType === 'create' ? support_game_providers : undefined}>
                     <Checkbox.Group options={support_game_providers} />
                 </Form.Item>
 
-                <Form.Item hidden={watchRoleType !== 'agent' && watchRoleType !== 'top_agent'} name="role" label="role" initialValue={formType === 'create' ? rolesMapping?.[defaultRoleType] : undefined}>
+                <Form.Item hidden={watchRoleType !== 'agent' && watchRoleType !== 'top_agent'} name="role" label={t('role')} initialValue={formType === 'create' ? rolesMapping?.[defaultRoleType] : undefined}>
                     {watchRoleType !== 'agent' && watchRoleType !== 'top_agent' ? <Input /> : <Select {...roleSelectProps} />}
                 </Form.Item>
                 {watchRoleType === 'authenticated' && (
-                    <Form.Item name="vip" label="vip">
+                    <Form.Item name="vip" label={t('vip')}>
                         <Select {...vipSelectProps} />
                     </Form.Item>
                 )}
 
                 {watchRoleType === 'agent' && (
-                    <Form.Item name="top_agent" label="Top Agent">
+                    <Form.Item name="top_agent" label={t('Top Agent')}>
                         <Select {...topAgentSelectProps} />
                     </Form.Item>
                 )}
 
                 {watchRoleType === 'authenticated' && (
-                    <Form.Item name="agent" label="Agent">
+                    <Form.Item name="agent" label={t('Agent')}>
                         <Select {...agentSelectProps} />
                     </Form.Item>
                 )}
@@ -175,7 +177,7 @@ const FormComponent: React.FC<{
             {(userRole === 'agent' || userRole === 'top_agent') && (
                 <div className="bg-blue-50 rounded-xl p-6 mt-16">
                     <Title level={5}>
-                        <MoneyCollectOutlined className="mr-2" /> Commission
+                        <MoneyCollectOutlined className="mr-2" /> {t('Commission')}
                     </Title>
                     <CommissionTable commission={formProps.initialValues?.commission as TCommission} />
                 </div>
@@ -183,7 +185,7 @@ const FormComponent: React.FC<{
 
             <div className="bg-yellow-50 rounded-xl p-6 mt-16">
                 <Title level={5}>
-                    <BankOutlined className="mr-2" /> Bank Account
+                    <BankOutlined className="mr-2" /> {t('Bank Account')}
                 </Title>
                 <div className="grid grid-cols-2 gap-6">
                     {BANK_ACCOUNT_FIELDS.map((field) => (
@@ -196,7 +198,7 @@ const FormComponent: React.FC<{
 
             <div className="bg-blue-50 rounded-xl p-6 mt-16">
                 <Title level={5}>
-                    <BankOutlined className="mr-2" /> Deposit Account for User
+                    <BankOutlined className="mr-2" /> {t('Deposit Account for User')}
                 </Title>
                 <div className="grid grid-cols-2 gap-6">
                     {BANK_ACCOUNT_FIELDS.map((field) => (
@@ -209,7 +211,7 @@ const FormComponent: React.FC<{
             <div className="grid grid-cols-2 gap-6 mt-16">
                 <div>
                     <p className="mb-2">
-                        change password <Switch size="small" onChange={handleChangePassword} className="ml-4" />
+                        {t('change password')} <Switch size="small" onChange={handleChangePassword} className="ml-4" />
                     </p>
 
                     <Form.Item name="password" className="mt-4">

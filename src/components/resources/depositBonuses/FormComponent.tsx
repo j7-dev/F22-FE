@@ -6,6 +6,7 @@ import { isObject } from 'lodash-es';
 import { TVip } from '@/types';
 import { CloseOutlined } from '@ant-design/icons';
 import { gameCategories } from '@/utils/GameCategory';
+import { useTranslation } from 'react-i18next';
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
@@ -13,6 +14,7 @@ const FormComponent: React.FC<{
     handler: () => void;
     formLoading?: boolean;
 }> = ({ formType, formProps, handler, formLoading }) => {
+    const { t } = useTranslation();
     const form = formProps.form;
     const { default_currency, default_amount_type, support_currencies, support_amount_types } = useGetSiteSetting();
     const game_categories = gameCategories.map((category) => category.value);
@@ -45,34 +47,34 @@ const FormComponent: React.FC<{
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
             <div className="grid grid-cols-3 gap-6">
-                <Form.Item className="w-full" label="Label" name={['label']} rules={[{ required: true, message: 'value is required' }]}>
+                <Form.Item className="w-full" label={t('Label')} name={['label']} rules={[{ required: true, message: 'value is required' }]}>
                     <Input className="w-full" />
                 </Form.Item>
-                <Form.Item className="w-full" label="Bonus Rate" name={['bonus_rate']} rules={[{ required: true, message: 'value is required' }]}>
+                <Form.Item className="w-full" label={t('Bonus Rate')} name={['bonus_rate']} rules={[{ required: true, message: 'value is required' }]}>
                     <InputNumber min={0} addonAfter="%" className="w-full" />
                 </Form.Item>
-                <Form.Item className="w-full" label="Rolling Percentage" name={['rolling_percentage']}>
+                <Form.Item className="w-full" label={t('Rolling Percentage')} name={['rolling_percentage']}>
                     <InputNumber min={0} addonAfter="%" className="w-full" />
                 </Form.Item>
-                <Form.Item className="w-full" label="Min Deposit Amount" name={['min_deposit_amount']}>
+                <Form.Item className="w-full" label={t('Min Deposit Amount')} name={['min_deposit_amount']}>
                     <InputNumber min={0} precision={0} className="w-full" />
                 </Form.Item>
-                <Form.Item className="w-full" label="Max Bonus Amount" name={['max_bonus_amount']}>
+                <Form.Item className="w-full" label={t('Max Bonus Amount')} name={['max_bonus_amount']}>
                     <InputNumber min={0} precision={0} className="w-full" />
                 </Form.Item>
                 <Form.Item hidden name={['deposit_type']} initialValue="NORMAL">
                     <Input className="w-full" />
                 </Form.Item>
 
-                <ResourceSelect formItemProps={{ label: 'VIPS', name: ['vips'] }} fetchProps={{ resource: 'vips', optionLabel: 'label', optionValue: 'id' }} selectProps={{ allowClear: true, mode: 'multiple' }} />
+                <ResourceSelect formItemProps={{ label: t('VIPS'), name: ['vips'] }} fetchProps={{ resource: 'vips', optionLabel: 'label', optionValue: 'id' }} selectProps={{ allowClear: true, mode: 'multiple' }} />
 
-                <Form.Item name="allow_game_categories" label="Allow Game Categories" initialValue={formType === 'create' ? game_categories : undefined}>
+                <Form.Item name="allow_game_categories" label={t('Allow Game Categories')} initialValue={formType === 'create' ? game_categories : undefined}>
                     <Checkbox.Group options={game_categories} />
                 </Form.Item>
 
                 <div className="bg-gray-100 p-4 rounded-xl mb-4 hidden">
                     <div className="flex items-center">
-                        <Form.Item className="mr-6 w-full" label="Currency" name={['currency']}>
+                        <Form.Item className="mr-6 w-full" label={t('Currency')} name={['currency']}>
                             <Select
                                 options={support_currencies.map((currency: string) => ({
                                     label: currency,
@@ -81,7 +83,7 @@ const FormComponent: React.FC<{
                                 disabled={support_currencies.length < 2}
                             />
                         </Form.Item>
-                        <Form.Item className="mr-6 w-full" label="Amount Type" name={['amount_type']}>
+                        <Form.Item className="mr-6 w-full" label={t('Amount Type')} name={['amount_type']}>
                             <Select
                                 options={support_amount_types.map((amountType: string) => ({
                                     label: amountType,

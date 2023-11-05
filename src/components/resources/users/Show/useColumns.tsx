@@ -4,79 +4,82 @@ import { TBankAccount, TVip } from '@/types';
 import VipLink from '@/components/Admin/VipLink';
 import { useBalanceColumns } from '@/hooks';
 import BankAccount from '@/components/Admin/BankAccount';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
+import { useTranslation } from 'react-i18next';
 
 const useColumns = () => {
     const allBalances = useBalanceColumns();
+    const { t } = useTranslation();
 
     const infoLeftColumns = [
         {
             key: 'username',
-            title: 'Username',
+            title: t('Username'),
             dataIndex: 'username',
         },
         {
             key: 'vip',
-            title: 'vip',
+            title: t('vip'),
             dataIndex: 'vip',
             render: (vip: TVip) => <VipLink vip={vip} />,
         },
         {
             key: 'dayDp',
-            title: 'Deposit in today',
+            title: t('Deposit in today'),
             dataIndex: 'dayDp',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             key: 'monthDp',
-            title: 'Deposit in recent 30 days',
+            title: t('Deposit in recent 30 days'),
             dataIndex: 'monthDp',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             key: 'totalDp',
-            title: 'Total Deposit',
+            title: t('Total Deposit'),
             dataIndex: 'totalDp',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             key: 'dayWd',
-            title: 'Withdraw in today',
+            title: t('Withdraw in today'),
             dataIndex: 'dayWd',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             key: 'monthWd',
-            title: 'Withdraw in recent 30 days',
+            title: t('Withdraw in recent 30 days'),
             dataIndex: 'monthWd',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             key: 'totalWd',
-            title: 'Total Withdraw',
+            title: t('Total Withdraw'),
             dataIndex: 'totalWd',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             key: 'dayDpWd',
-            title: 'DP-WD in today',
+            title: t('DP-WD in today'),
             dataIndex: 'dayDpWd',
-            render: (_: undefined, record: any) => (record?.dayDp - record?.dayWd).toLocaleString(),
+            render: (_: undefined, record: any) => <SimpleAmount amount={record?.dayDp - record?.dayWd} />,
         },
         {
             key: 'monthDpWd',
-            title: 'DP-WD in recent 30 days',
+            title: t('DP-WD in recent 30 days'),
             dataIndex: 'monthDpWd',
-            render: (_: undefined, record: any) => (record?.monthDp - record?.monthWd).toLocaleString(),
+            render: (_: undefined, record: any) => <SimpleAmount amount={record?.monthDp - record?.monthWd} />,
         },
         {
             key: 'totalDpWd',
-            title: 'Total DP-WD',
+            title: t('Total DP-WD'),
             dataIndex: 'totalDpWd',
-            render: (_: undefined, record: any) => (record?.totalDp - record?.totalWd).toLocaleString(),
+            render: (_: undefined, record: any) => <SimpleAmount amount={record?.totalDp - record?.totalWd} />,
         },
         {
             key: 'referralLink',
-            title: 'Referral Link',
+            title: t('Referral Link'),
             dataIndex: 'uuid',
             render: (uuid: string) => <ReferralLink uuid={uuid} />,
         },
@@ -86,53 +89,53 @@ const useColumns = () => {
         ...allBalances,
         {
             key: 'display_name',
-            title: 'Display Name',
+            title: t('Display Name'),
             dataIndex: 'display_name',
         },
         {
             key: 'phone',
-            title: 'Phone',
+            title: t('Phone'),
             dataIndex: 'phone',
         },
         {
             key: 'uuid',
-            title: 'UUID',
+            title: t('UUID'),
             dataIndex: 'uuid',
         },
 
         {
             key: 'allow_payments',
-            title: 'Allow Payments',
+            title: t('Allow Payments'),
             dataIndex: 'allow_payments',
             render: (allow_payments: string[] | null) => (allow_payments || []).join(', '),
         },
         {
             key: 'deposit_account_for_user',
-            title: 'Deposit Account for User',
+            title: t('Deposit Account for User'),
             dataIndex: 'deposit_account_for_user',
             render: (deposit_account_for_user: TBankAccount | null) => <BankAccount bank_account={deposit_account_for_user} display="text" copyable />,
         },
         {
             key: 'allow_game_providers',
-            title: 'Allow Game Providers',
+            title: t('Allow Game Providers'),
             dataIndex: 'allow_game_providers',
             render: (allow_game_providers: string[] | null) => (allow_game_providers || []).join(', '),
         },
         {
             key: 'bank_account',
-            title: 'Bank Account',
+            title: t('Bank Account'),
             dataIndex: 'bank_account',
             render: (bank_account: TBankAccount | null) => <BankAccount bank_account={bank_account} display="text" />,
         },
         {
             key: 'createdAt',
-            title: 'Created At',
+            title: t('Created At'),
             dataIndex: 'createdAt',
             render: (createdAt: string) => <DateTime value={createdAt} />,
         },
         {
             key: 'updatedAt',
-            title: 'Updated At',
+            title: t('Updated At'),
             dataIndex: 'updatedAt',
             render: (updatedAt: string) => <DateTime value={updatedAt} />,
         },

@@ -1,9 +1,11 @@
 import { Form, DatePicker, Tag } from 'antd';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 
 const { RangePicker } = DatePicker;
 
 const index = () => {
+    const { t } = useTranslation();
     const form = Form.useFormInstance();
 
     const handleThisWeek = () => {
@@ -27,12 +29,12 @@ const index = () => {
     return (
         <div className="relative">
             <Form.Item
-                label="Date"
+                label={t('Date')}
                 name={['dateRange']}
                 rules={[
                     {
                         required: true,
-                        message: 'date is required',
+                        message: t('date is required'),
                     },
                 ]}
                 initialValue={[dayjs().startOf('week'), dayjs().endOf('week')]}
@@ -41,13 +43,13 @@ const index = () => {
             </Form.Item>
             <div className="flex absolute -top-100 left-0">
                 <Tag className="cursor-pointer" color="purple" onClick={handleThisWeek}>
-                    this week
+                    {t('this week')}
                 </Tag>
                 <Tag className="cursor-pointer" color="purple" onClick={handleThisMonth}>
-                    this month
+                    {t('this month')}
                 </Tag>
                 <Tag className="cursor-pointer" color="purple" onClick={handleLastMonth}>
-                    last month
+                    {t('last month')}
                 </Tag>
             </div>
         </div>

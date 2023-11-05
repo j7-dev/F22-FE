@@ -4,8 +4,10 @@ import { useTable, List, EditButton, DeleteButton } from '@refinedev/antd';
 import { DateTime } from '@/components/PureComponents';
 import { DataType } from './types';
 import { POST_TYPE, RESOURCE } from '../constants';
+import { useTranslation } from 'react-i18next';
 
 const index = () => {
+    const { t } = useTranslation();
     const { tableProps } = useTable({
         resource: RESOURCE,
         filters: {
@@ -29,28 +31,28 @@ const index = () => {
 
     const columns: ColumnsType<DataType> = [
         {
-            title: '#',
+            title: t('#'),
             dataIndex: 'id',
         },
         {
-            title: 'title',
+            title: t('title'),
             dataIndex: 'title',
         },
         {
-            title: 'content',
+            title: t('content'),
             dataIndex: 'content',
         },
         {
-            title: 'send_to_user_ids',
+            title: t('send_to_user_ids'),
             dataIndex: 'send_to_user_ids',
         },
         {
-            title: 'date',
+            title: t('date'),
             dataIndex: 'createdAt',
             render: (createdAt: string) => <DateTime value={createdAt} />,
         },
         {
-            title: '',
+            title: t(''),
             fixed: 'right',
             dataIndex: 'action',
             render: (_, record) => (

@@ -5,10 +5,12 @@ import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { useParams } from 'react-router-dom';
 import { RESOURCE } from '../constants';
+import { useTranslation } from 'react-i18next';
 
 const index: React.FC<{
     notificationConfig?: ArgsProps;
 }> = ({ notificationConfig = {} }) => {
+    const { t } = useTranslation();
     const { id } = useParams();
     const { mutate: update } = useUpdate();
     const { resource } = useResource(RESOURCE);
@@ -38,7 +40,7 @@ const index: React.FC<{
                             form.resetFields();
                             notification.success({
                                 key: `edit-${RESOURCE}`,
-                                message: `edit ${resource?.meta?.label} successfully`,
+                                message: `${t('edit')} ${resource?.meta?.label} ${t('successfully')}`,
                                 ...notificationConfig,
                             });
                             invalidate({

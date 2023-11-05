@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TDepositBonus } from '@/types';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 const index: React.FC<{
     deposit_amount: number;
@@ -10,7 +11,11 @@ const index: React.FC<{
 
     const bonus_rate = deposit_bonus?.bonus_rate || 0;
     const deposit_bonus_amount = bonus_rate * deposit_amount;
-    return <Link to={`/refine/promotion/deposit-bonuses/edit/${deposit_bonus?.id}`}>{(deposit_bonus_amount || 0).toLocaleString()}</Link>;
+    return (
+        <Link to={`/refine/promotion/deposit-bonuses/edit/${deposit_bonus?.id}`}>
+            <SimpleAmount amount={deposit_bonus_amount} />
+        </Link>
+    );
 };
 
 export default index;
