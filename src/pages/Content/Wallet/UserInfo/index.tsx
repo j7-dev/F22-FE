@@ -8,13 +8,12 @@ import vipNextIcon from '@/assets/images/newMyPage/vipNextIcon.svg';
 import ConvertBtn from './ConvertBtn';
 import { AiFillStar } from 'react-icons/ai';
 import { useGetSiteSetting } from '@/hooks';
-import getSymbolFromCurrency from 'currency-symbol-map';
+import Amount from '@/components/Admin/Amount';
 
 const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
     const { t } = useTranslation();
 
     const { default_currency } = useGetSiteSetting();
-    const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
 
     //取得用戶資料
     const balance = userInfo?.balances !== undefined ? userInfo?.balances.filter((item) => item.currency === default_currency && item.amount_type === 'CASH')[0].amount || 0 : 0;
@@ -92,7 +91,9 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                 <div className="">
                     <div className="text-[#ACACAC] text-[8px] sm:text-sm font-normal">{t('Total Balance')}</div>
                     {/*TODO 改成Admin 裡面的Account組件 */}
-                    <div className="text-[#333333] text-base sm:text-3xl font-semibold">{symbol + (balance || 0).toLocaleString()}</div>
+                    <div className="text-[#333333] text-base sm:text-3xl font-semibold">
+                        <Amount amount={Number(balance)} symbol />
+                    </div>
                 </div>
             </div>
             <div className="userRolling h-fit col-span-1 border-0 border-solid border-[#F0F0F0] flex gap-5 items-center pr-2 sm:border-l-2 sm:px-6">
@@ -101,7 +102,9 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                 </div>
                 <div className="">
                     <div className="text-[#ACACAC] text-[8px] sm:text-sm font-normal">{t('Rolling Point')}</div>
-                    <div className="text-[#333333] text-base sm:text-3xl font-semibold">{symbol + (turnoverBonus || 0).toLocaleString()}</div>
+                    <div className="text-[#333333] text-base sm:text-3xl font-semibold">
+                        <Amount amount={Number(turnoverBonus)} symbol />
+                    </div>
                     <ConvertBtn />
                 </div>
             </div>
