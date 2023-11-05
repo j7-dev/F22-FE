@@ -1,9 +1,6 @@
 import React from 'react';
 import { InputNumber, Form, FormItemProps, InputNumberProps, Button, ButtonProps } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
-import { useGetIdentity } from '@refinedev/core';
-import { useGetSiteSetting } from '@/hooks';
-import { TMe } from '@/types';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 const QUICK_BUTTON_VALUES = [100, 1000, 10000, 100000, 1000000];
@@ -32,27 +29,16 @@ const index: React.FC<{
     const form = Form.useFormInstance();
     // 取得 amount Field 的即時數值
     const watchAmount: number = Form.useWatch(formItemProps?.name, form);
-    const { default_currency, default_amount_type } = useGetSiteSetting();
-    const { data: identity } = useGetIdentity<TMe>();
-    const balances = identity?.balances || [];
-    const theBalanace = balances.find((item) => item.currency === default_currency && item.amount_type === default_amount_type);
-    const max = Number(theBalanace?.amount || '0');
 
     const handleClick = (value: number) => {
         const newAmount = Number(watchAmount) + Number(value);
         form.setFieldsValue({ amount: newAmount });
     };
 
-    const handleKeyUp = () => {
-        if (watchAmount >= max) {
-            form.setFieldValue(formItemProps?.name, max);
-        }
-    };
-
     return (
         <div>
             <Form.Item {...formItemProps} className="depositAmount">
-                <InputNumber onKeyUp={handleKeyUp} min={0} max={max} className="" bordered={false} controls={false} formatter={(value: string | number | undefined) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={(value) => Number(value!.replace(/\$\s?|(,*)/g, ''))} {...inputNumberProps} value={10000} />
+                <InputNumber min={0} className="" bordered={false} controls={false} formatter={(value: string | number | undefined) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={(value) => Number(value?.replace(/\$\s?|(,*)/g, ''))} {...inputNumberProps} />
             </Form.Item>
             <div className={quickButtonProps.className}>
                 {QUICK_BUTTON_VALUES.map((value) => (
