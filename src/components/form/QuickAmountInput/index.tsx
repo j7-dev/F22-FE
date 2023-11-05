@@ -4,6 +4,7 @@ import { CloseOutlined } from '@ant-design/icons';
 import { useGetIdentity } from '@refinedev/core';
 import { useGetSiteSetting } from '@/hooks';
 import { TMe } from '@/types';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 const QUICK_BUTTON_VALUES = [100, 1000, 10000, 100000, 1000000];
 
@@ -62,7 +63,8 @@ const index: React.FC<{
                             handleClick(value);
                         }}
                     >
-                        {`${inputNumberProps?.prefix || ''} ${(value || 0).toLocaleString()}`}
+                        {`${inputNumberProps?.prefix || ''} `}
+                        <SimpleAmount amount={Number(value)} />
                     </Button>
                 ))}
                 {/* <Button

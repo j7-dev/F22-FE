@@ -60,7 +60,7 @@ export const resources = [
     {
         name: 'agent',
         meta: {
-            label: 'Member Management',
+            label: 'Agent Management',
             icon: <UserAddOutlined />,
         },
     },
@@ -209,16 +209,16 @@ export const resources = [
             label: 'VIP Upgrade Rule',
         },
     },
-    {
-        name: 'site-setting',
-        identifier: 'site-setting',
-        list: '/refine/system-setting/site-setting',
-        edit: '/refine/system-setting/site-setting/edit/',
-        meta: {
-            parent: 'system-setting',
-            label: 'Settings',
-        },
-    },
+    // {
+    //     name: 'site-setting',
+    //     identifier: 'site-setting',
+    //     list: '/refine/system-setting/site-setting',
+    //     edit: '/refine/system-setting/site-setting/edit/',
+    //     meta: {
+    //         parent: 'system-setting',
+    //         label: 'Settings',
+    //     },
+    // },
     {
         name: 'cms-posts',
         identifier: 'site-notifications',

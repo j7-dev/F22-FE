@@ -4,6 +4,7 @@ import { useTable, List, EditButton, DeleteButton } from '@refinedev/antd';
 import { DateTime } from '@/components/PureComponents';
 import { DataType } from './types';
 import { TVip } from '@/types';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 const index = () => {
     const { tableProps } = useTable({
@@ -33,12 +34,12 @@ const index = () => {
         {
             title: 'Min Deposit Amount',
             dataIndex: 'min_deposit_amount',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: 'Max Bonus Amount',
             dataIndex: 'max_bonus_amount',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: 'Rolling Percentage',

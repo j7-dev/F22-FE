@@ -5,6 +5,7 @@ import { useCustom, useApiUrl, useResource } from '@refinedev/core';
 import { TBalance } from '@/types';
 import { useEffect } from 'react';
 import { LoadingOutlined } from '@ant-design/icons';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
@@ -79,7 +80,7 @@ const FormComponent: React.FC<{
 
                 <div className="col-span-2 lg:col-span-1">
                     <p className="mb-2">User's balance</p>
-                    {watchUser && !isFetching && Number(currencyBalanceAmount || 0).toLocaleString()}
+                    {watchUser && !isFetching && <SimpleAmount amount={Number(currencyBalanceAmount)} />}
                     {isFetching && <LoadingOutlined />}
                 </div>
                 <Form.Item name={['type']} label="Type" className="col-span-2 lg:col-span-1" initialValue="MANUAL" hidden={isUserAdjustment}>

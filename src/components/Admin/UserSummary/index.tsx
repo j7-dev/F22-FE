@@ -9,6 +9,7 @@ import { ExportOutlined } from '@ant-design/icons';
 import { useModal } from '@refinedev/antd';
 import ListBettingRecords from '@/components/resources/betRecords/List';
 import { gameProviderTxnEnum } from '@/utils';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 type TGameProviderTxnEnum = keyof typeof gameProviderTxnEnum;
 
@@ -116,7 +117,11 @@ const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
             {latestDeposit ? (
                 <div>
                     <p>
-                        Latest Deposit: <span className="bg-yellow-200 px-3">{(latestDeposit?.amount || 0).toLocaleString()}</span> at <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}</u>
+                        Latest Deposit:{' '}
+                        <span className="bg-yellow-200 px-3">
+                            <SimpleAmount amount={latestDeposit?.amount} />
+                        </span>{' '}
+                        at <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}</u>
                     </p>
                     <p>
                         Date: from <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD')}</u> to <u>{dayjs().format('YYYY-MM-DD')}</u>
@@ -145,9 +150,15 @@ const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
                             <Table.Summary.Row>
                                 <Table.Summary.Cell index={0}>Total</Table.Summary.Cell>
                                 <Table.Summary.Cell index={1}>{totalTxnAmount}</Table.Summary.Cell>
-                                <Table.Summary.Cell index={2}>{(totalValidBetAmount || 0).toLocaleString()}</Table.Summary.Cell>
-                                <Table.Summary.Cell index={3}>{(totalPayOut || 0).toLocaleString()}</Table.Summary.Cell>
-                                <Table.Summary.Cell index={4}>{(totalWinLoss || 0).toLocaleString()}</Table.Summary.Cell>
+                                <Table.Summary.Cell index={2}>
+                                    <SimpleAmount amount={totalValidBetAmount} />
+                                </Table.Summary.Cell>
+                                <Table.Summary.Cell index={3}>
+                                    <SimpleAmount amount={totalPayOut} />
+                                </Table.Summary.Cell>
+                                <Table.Summary.Cell index={4}>
+                                    <SimpleAmount amount={totalWinLoss} />
+                                </Table.Summary.Cell>
                             </Table.Summary.Row>
                         </Table.Summary>
                     );

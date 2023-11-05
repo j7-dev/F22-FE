@@ -29,6 +29,8 @@ const index = () => {
                     <Table {...tableProps} rowKey="id">
                         <Table.Column dataIndex="order" title="level" />
                         <Table.Column dataIndex="label" title="label" />
+                        <Table.Column dataIndex="turnover_rate" title="Turnover Rate" render={(v) => `${v || 0}%`} />
+
                         <Table.Column dataIndex="deposit_upgrade_threshold" title="Upgrade - Deposit Amount" />
                         <Table.Column dataIndex="valid_bet_amount_upgrade_threshold" title="Upgrade - Valid Bet" />
                         <Table.Column dataIndex="activated" title="status" render={(activated) => <Tag color={activated ? '#87d068' : '#ff4d4f'}>{activated ? 'Enable' : 'Disable'}</Tag>} />

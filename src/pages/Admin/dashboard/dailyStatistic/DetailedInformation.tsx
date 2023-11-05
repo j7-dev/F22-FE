@@ -3,6 +3,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { searchPropsAtom } from './atom';
 import { useAtomValue } from 'jotai';
 import { useCustom, useApiUrl } from '@refinedev/core';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 type DataType = {
     agentId: number;
@@ -22,47 +23,55 @@ const DetailedInformation = () => {
 
     const columns: ColumnsType<DataType> = [
         {
-            title: 'date',
+            title: 'Date',
             dataIndex: 'date',
         },
         {
-            title: 'deposit',
+            title: 'Deposit',
             dataIndex: 'deposit',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'withdraw',
+            title: 'Withdraw',
             dataIndex: 'withdraw',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: 'DPWD',
             dataIndex: 'dpWd',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'valid bet amount',
+            title: 'Valid Bet Amount',
             dataIndex: 'validBet',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'payout',
+            title: 'Payout',
             dataIndex: 'payout',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: 'winloss',
             dataIndex: 'winloss',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'bonus & turnover bonus',
+            title: 'Bonus & Turnover Bonus',
             dataIndex: 'coupon',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'profit',
+            title: 'Profit',
             dataIndex: 'profit',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
-            title: 'new registered members',
+            title: 'New Registered Members',
             dataIndex: 'numberOfRegistrants',
         },
         {
-            title: 'betting members',
+            title: 'Betting Members',
             dataIndex: 'bettingMembers',
         },
     ];

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { TUser, TVip } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
 import { useBalanceColumns } from '@/hooks';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 const useColumns = () => {
     const allBalances = useBalanceColumns();
@@ -63,13 +64,13 @@ const useColumns = () => {
             title: 'Total Deposits',
             dataIndex: 'totalDp',
             key: 'totalDp',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: 'Total Withdrawal',
             dataIndex: 'totalWd',
             key: 'totalWd',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: 'DP-WD',
@@ -77,7 +78,7 @@ const useColumns = () => {
             key: 'DP-WD',
             render: (_: undefined, record: any) => {
                 const v = Number(record.totalDp || 0) - Number(record.totalWd || 0);
-                return (v || 0).toLocaleString();
+                return <SimpleAmount amount={v} />;
             },
         },
         {

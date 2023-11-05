@@ -7,6 +7,7 @@ import { nanoid } from 'nanoid';
 import { searchPropsAtom, TSearchProps } from '../atom';
 import { useAtomValue } from 'jotai';
 import { gameProviderTxnEnum } from '@/utils';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 type DataType = any;
 
@@ -117,22 +118,22 @@ const index = () => {
         {
             title: 'Debit Amount',
             dataIndex: 'debit_amount',
-            render: (v: number) => (-v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={-v} />,
         },
         {
             title: 'Pay Out',
             dataIndex: 'credit_amount',
-            render: (v: number) => (-v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={-v} />,
         },
         // {
         //     title: 'Valid Bet Amount',
         //     dataIndex: 'valid_bet_amount',
-        //     render: (v: number) => (v || 0).toLocaleString(),
+        //     render: (v: number) => <SimpleAmount amount={v} />,
         // },
         {
             title: 'win/loss',
             dataIndex: 'winloss',
-            render: (_: undefined, record: DataType) => ((-record?.debit_amount || 0) + (-record?.credit_amount || 0)).toLocaleString(),
+            render: (_: undefined, record: DataType) => <SimpleAmount amount={(-record?.debit_amount || 0) + (-record?.credit_amount || 0)} />,
         },
         {
             title: 'Status',

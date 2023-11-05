@@ -1,5 +1,6 @@
 import { TCommission } from '@/types';
 import { Tag, Timeline } from 'antd';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 type TProps = {
     commission: TCommission;
@@ -21,7 +22,7 @@ const index = ({ commission }: TProps) => {
                     return {
                         children: (
                             <div className="flex justify-between w-60">
-                                {(item?.gt || 0).toLocaleString()}
+                                <SimpleAmount amount={item?.gt} />
                                 <Tag className="ml-4" color="magenta">
                                     {item.ratio}%
                                 </Tag>

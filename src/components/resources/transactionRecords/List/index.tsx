@@ -18,6 +18,7 @@ import { useGetSiteSetting } from '@/hooks';
 import UserSummary from '@/components/Admin/UserSummary';
 import BankAccount from '@/components/Admin/BankAccount';
 import DepositBonusAmount from '@/components/Admin/DepositBonusAmount';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 const index = () => {
     const { type: listTypeLowerCase, roleType } = useParams<TParams>();
@@ -158,7 +159,7 @@ const index = () => {
         {
             title: 'Amount',
             dataIndex: 'amount',
-            render: (amount) => (amount || 0).toLocaleString(),
+            render: (amount) => <SimpleAmount amount={amount} />,
         },
         {
             title: 'Deposit Bonus',
@@ -253,7 +254,7 @@ const index = () => {
                                             <Table.Summary.Cell index={6}>
                                                 {uniqueCurrencies.map((currency) => {
                                                     const totalByCurrency = pageData.filter((data) => data.currency === currency).reduce((sum, record) => sum + record.amount, 0);
-                                                    return totalByCurrency.toLocaleString();
+                                                    return <SimpleAmount amount={totalByCurrency} />;
                                                 })}
                                             </Table.Summary.Cell>
                                         </Table.Summary.Row>

@@ -4,6 +4,7 @@ import { TBankAccount, TVip } from '@/types';
 import VipLink from '@/components/Admin/VipLink';
 import { useBalanceColumns } from '@/hooks';
 import BankAccount from '@/components/Admin/BankAccount';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 const useColumns = () => {
     const allBalances = useBalanceColumns();
@@ -24,55 +25,55 @@ const useColumns = () => {
             key: 'dayDp',
             title: 'Deposit in today',
             dataIndex: 'dayDp',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             key: 'monthDp',
             title: 'Deposit in recent 30 days',
             dataIndex: 'monthDp',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             key: 'totalDp',
             title: 'Total Deposit',
             dataIndex: 'totalDp',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             key: 'dayWd',
             title: 'Withdraw in today',
             dataIndex: 'dayWd',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             key: 'monthWd',
             title: 'Withdraw in recent 30 days',
             dataIndex: 'monthWd',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             key: 'totalWd',
             title: 'Total Withdraw',
             dataIndex: 'totalWd',
-            render: (v: number) => (v || 0).toLocaleString(),
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             key: 'dayDpWd',
             title: 'DP-WD in today',
             dataIndex: 'dayDpWd',
-            render: (_: undefined, record: any) => (record?.dayDp - record?.dayWd).toLocaleString(),
+            render: (_: undefined, record: any) => <SimpleAmount amount={record?.dayDp - record?.dayWd} />,
         },
         {
             key: 'monthDpWd',
             title: 'DP-WD in recent 30 days',
             dataIndex: 'monthDpWd',
-            render: (_: undefined, record: any) => (record?.monthDp - record?.monthWd).toLocaleString(),
+            render: (_: undefined, record: any) => <SimpleAmount amount={record?.monthDp - record?.monthWd} />,
         },
         {
             key: 'totalDpWd',
             title: 'Total DP-WD',
             dataIndex: 'totalDpWd',
-            render: (_: undefined, record: any) => (record?.totalDp - record?.totalWd).toLocaleString(),
+            render: (_: undefined, record: any) => <SimpleAmount amount={record?.totalDp - record?.totalWd} />,
         },
         {
             key: 'referralLink',

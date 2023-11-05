@@ -4,6 +4,7 @@ import { TTransaction } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
 import { DateTime } from '@/components/PureComponents';
 import { useGetSiteSetting } from '@/hooks';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 type DataType = {
     id: number;
@@ -33,19 +34,19 @@ const index: React.FC<{
             title: 'credit',
             dataIndex: 'credit',
             key: 'credit',
-            render: (credit: number) => (credit || 0).toLocaleString(),
+            render: (credit: number) => <SimpleAmount amount={credit} />,
         },
         {
             title: 'debit',
             dataIndex: 'debit',
             key: 'debit',
-            render: (debit: number) => (debit || 0).toLocaleString(),
+            render: (debit: number) => <SimpleAmount amount={debit} />,
         },
         {
             title: 'balance',
             dataIndex: 'balance_after_mutate',
             key: 'balance_after_mutate',
-            render: (balance_after_mutate: number) => (balance_after_mutate || 0).toLocaleString(),
+            render: (balance_after_mutate: number) => <SimpleAmount amount={balance_after_mutate} />,
         },
         {
             title: 'description',

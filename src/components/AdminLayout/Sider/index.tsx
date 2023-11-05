@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { ITreeMenu, CanAccess, useMenu } from '@refinedev/core';
 import { Link } from 'react-router-dom';
-import { Sider, ThemedTitleV2 } from '@refinedev/antd';
+import { Sider } from '@refinedev/antd';
 import { Layout as AntdLayout, Menu, Grid, theme, Button } from 'antd';
-import { UnorderedListOutlined, RightOutlined, LeftOutlined, RadarChartOutlined } from '@ant-design/icons';
+import { UnorderedListOutlined, RightOutlined, LeftOutlined } from '@ant-design/icons';
 import { nanoid } from 'nanoid';
+import logo from '@/assets/images/1002_logo_f.png';
+import logo_s from '@/assets/images/1002_logo_s.png';
 
 const { useToken } = theme;
 const siderWidth = 320;
@@ -116,7 +118,7 @@ const CustomSider: typeof Sider = () => {
                         fontSize: '14px',
                     }}
                 >
-                    <ThemedTitleV2 collapsed={collapsed} icon={<RadarChartOutlined className="text-[1.5rem]" />} text="SmartBet" />
+                    {collapsed ? <img src={logo_s} className="h-8" /> : <img src={logo} className="h-8" />}
                 </div>
                 <Menu
                     defaultOpenKeys={defaultOpenKeys}

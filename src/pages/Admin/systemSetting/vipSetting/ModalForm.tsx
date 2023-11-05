@@ -34,18 +34,7 @@ const ModalForm: React.FC<{ modalProps: ModalProps }> = ({ modalProps }) => {
                     >
                         <InputNumber min={0} className="w-full" />
                     </Form.Item>
-                    <Form.Item
-                        name="upgrade_award"
-                        label="Vip Upgrade Reward"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input a value',
-                            },
-                        ]}
-                    >
-                        <InputNumber min={0} className="w-full" />
-                    </Form.Item>
+
                     <Form.Item name="activated" valuePropName="checked" label="Activated" initialValue={true}>
                         <Switch />
                     </Form.Item>
@@ -85,19 +74,6 @@ const ModalForm: React.FC<{ modalProps: ModalProps }> = ({ modalProps }) => {
                         ]}
                     >
                         <InputNumber min={0} className="w-full" addonAfter="%" />
-                    </Form.Item>
-
-                    <Form.Item
-                        name="vip_duration"
-                        label="VIP Duration"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input a value',
-                            },
-                        ]}
-                    >
-                        <InputNumber min={0} className="w-full" />
                     </Form.Item>
                 </div>
             </Form>
