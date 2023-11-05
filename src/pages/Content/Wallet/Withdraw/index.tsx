@@ -30,7 +30,6 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                     {
                         onSuccess: (_data) => {
                             queryClient.invalidateQueries(['getUserIdentity']);
-                            // const txnId = data?.data?.data?.id;
                             Modal.success({
                                 centered: true,
                                 title: '출금신청',
@@ -41,12 +40,6 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                                     </div>
                                 ),
                             });
-                            // notification.success({
-                            //     key: 'withdraw',
-                            //     message: `Submit $${values.amount} withdraw  Success #${txnId}`,
-                            //     description: 'Please wait for the administrator to review, we will reply in 3 working days.',
-                            //     duration: null,
-                            // });
                         },
                     },
                 );
@@ -115,7 +108,16 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                     <div className="flex justify-between my-2 w-full">
                         <span className="text-sm text-[#828282] font-medium">{isPc ? t('Amount to withdraw') : ''}</span>
                         {/* 暫時性隱藏*/}
-                        <span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()} / ${t('可提領額度')}:${withdrawable.toLocaleString()}`}</span>
+                        <div className="flex flex-col">
+                            <span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()} / ${t('可提領額度')}:${withdrawable.toLocaleString()}`}</span>
+                            <Button
+                                onClick={() => {
+                                    form.setFieldsValue({ amount: withdrawable });
+                                }}
+                            >
+                                全額提款
+                            </Button>
+                        </div>
                     </div>
                     <QuickAmountInput
                         formItemProps={{
