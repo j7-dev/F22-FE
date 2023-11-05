@@ -15,9 +15,9 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
     //如果沒有遊戲資料則不渲染
     if (!gameItem) return <></>;
 
-    //當前遊戲是否能玩
+    //當前遊戲是否能玩=>1.沒有限制 或 2.有限制但包含當前遊戲類別
     const { allowGameCategories } = useGetDepositBonus();
-    const isCanPlay = allowGameCategories !== null && allowGameCategories?.includes(gameItem.gameCategory as string);
+    const isCanPlay = allowGameCategories === null || allowGameCategories?.includes(gameItem.gameCategory as string);
     const { default_currency } = useGetSiteSetting();
     const symbol = getSymbolFromCurrency(default_currency.toUpperCase());
 
