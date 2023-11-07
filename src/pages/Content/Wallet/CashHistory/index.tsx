@@ -98,13 +98,13 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
         return (
             <List>
                 <Table className="customTable" {...tableProps} pagination={paginationSetting}>
-                    <Column title={t('Cash For') as string} dataIndex="type" key="type" className="w-1/4 " />
-                    <Column title={t('Cash Amount') as string} dataIndex="amount" key="amount" className="w-1/4 " />
+                    <Column title={t('Cash For') as string} dataIndex="type" key="type" className="w-1/4 whitespace-nowrap" />
+                    <Column title={t('Cash Amount') as string} dataIndex="amount" key="amount" className="w-1/4 whitespace-nowrap" />
                     <Column
                         title={t('Status') as string}
                         dataIndex="status"
                         key="status"
-                        className="w-1/4"
+                        className="w-1/4 whitespace-nowrap"
                         render={(value) => {
                             let color = '#EB5757';
                             if (value === 'PENDING') color = '#BDBDBD';
@@ -118,14 +118,14 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
                     />
                     <Column
                         title={
-                            <div className="flex items-center gap-1">
+                            <div className="flex items-center gap-1 whitespace-nowrap">
                                 <BiSolidTimeFive color="#828282" size={20} />
                                 {t('Date')}
                             </div>
                         }
                         dataIndex="fxnCreatedAt"
                         key="fxnCreatedAt"
-                        className="w-1/4 "
+                        className="w-1/4"
                     />
                 </Table>
             </List>

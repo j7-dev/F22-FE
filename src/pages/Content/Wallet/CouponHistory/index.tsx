@@ -97,6 +97,7 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
                     setTimeout(() => resolve(), 2000); // 注意這裡的 resolve() 要帶上括號
                 }).catch(() => console.log('Oops errors!'));
             },
+            okCancel: true,
         });
     };
     //Table組件
@@ -113,13 +114,13 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
         return (
             <List>
                 <Table className="customTable" {...tableProps} pagination={paginationSetting}>
-                    <Column title={t('Title') as string} dataIndex="title" key="title" className="w-1/4" />
-                    <Column title={t('Point Amount') as string} dataIndex="coupon_amount" key="coupon_amount" className="w-1/4" />
+                    <Column title={t('Title') as string} dataIndex="title" key="title" className="w-1/4 whitespace-nowrap" />
+                    <Column title={t('Point Amount') as string} dataIndex="coupon_amount" key="coupon_amount" className="w-1/4 whitespace-nowrap" />
                     <Column
                         title={t('Status') as string}
                         dataIndex="is_claimed"
                         key="is_claimed"
-                        className="w-1/4"
+                        className="w-1/4 whitespace-nowrap"
                         render={(value) => {
                             //如果為false
                             if (!value)
@@ -138,7 +139,7 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
                     />
                     <Column
                         title={
-                            <div className="flex items-center gap-1">
+                            <div className="flex items-center gap-1 whitespace-nowrap">
                                 <BiSolidTimeFive color="#828282" size={20} />
                                 {t('Date')}
                             </div>
