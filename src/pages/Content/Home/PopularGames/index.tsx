@@ -26,7 +26,7 @@ const index: React.FC = () => {
             //PC版
             return (
                 <>
-                    <div className="hidden popularTitle sm:grid grid-cols-11 gap-4 pb-0.5 pt-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
+                    <div className="hidden popularTitle md:grid grid-cols-11 gap-4 pb-0.5 pt-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
                         <div className="col-span-1 flex justify-center">
                             <img src={Icon_Main_Title} alt="" className="" />
                         </div>
@@ -67,11 +67,11 @@ const index: React.FC = () => {
         setGameDataList(PopularGamesData.filter((item) => item.value === activeTab)[0].gameData as []);
     }, [isLoading]);
     return (
-        <div className="relative PopularGames sm:w-full">
-            <div className="sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl">
+        <div className="relative PopularGames md:w-full">
+            <div className="md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl">
                 <FilterBar />
                 <Spin spinning={isLoading}>
-                    <div className="sm:py-9">
+                    <div className="md:py-9">
                         <GameList gameData={gameDataList} />
                     </div>
                 </Spin>
