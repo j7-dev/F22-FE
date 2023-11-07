@@ -1,5 +1,5 @@
 import FormComponent from '../FormComponent';
-import { useCustomMutation, HttpError, useGetIdentity, useApiUrl, useInvalidate } from '@refinedev/core';
+import { useCustomMutation, HttpError, useGetIdentity, useApiUrl, useInvalidate, useResource } from '@refinedev/core';
 import { Create, useForm, CreateProps } from '@refinedev/antd';
 import { TTransaction, TTransactionFields, TMe } from '@/types';
 import { notification } from 'antd';
@@ -55,12 +55,24 @@ const index: React.FC<
                 console.log(err);
             });
     };
+    const { action, identifier } = useResource();
+    const isUserAdjustment = action === 'show' && identifier === 'members-list';
 
     // TODO 可以加上顯示API結果方便除錯
 
     return (
-        <Create {...createProps} saveButtonProps={saveButtonProps}>
-            <FormComponent formType="create" formProps={formProps} handler={handleCreate} />
+        <Create
+            {...createProps}
+            saveButtonProps={
+                isUserAdjustment
+                    ? {
+                          ...saveButtonProps,
+                          className: 'hidden',
+                      }
+                    : saveButtonProps
+            }
+        >
+            <FormComponent formType="create" formProps={formProps} handler={handleCreate} saveButtonProps={saveButtonProps} />
         </Create>
     );
 };

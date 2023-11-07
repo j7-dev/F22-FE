@@ -30,7 +30,7 @@ const LineChart: React.FC<{
 
     return (
         <div>
-            <Tag color={titleColor} className="mb-8">
+            <Tag color={titleColor} className="mb-4">
                 {t(title)}
             </Tag>
             <div className="h-[200px] w-full relative">

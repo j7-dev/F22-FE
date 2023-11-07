@@ -11,7 +11,7 @@ const index = () => {
 
     return (
         <>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-32 py-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8 py-4">
                 <LineChart data={dpWd} title="DP-WD" titleColor="#108ee9" yAxis="Amount" isLoading={isLoading} />
 
                 <LineChart data={validBetData} title="Valid Bet" titleColor="#f50" yAxis="Transaction Amount" isLoading={isLoading} />
