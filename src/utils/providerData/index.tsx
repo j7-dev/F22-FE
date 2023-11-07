@@ -20,7 +20,7 @@ export const providerData: TGameProvider[] = [
     {
         label: 'Pragmatic Play',
         value: 'pragmaticPlay',
-        gameCategories: ['slot'],
+        gameCategories: ['slot', 'casino'],
         providerData: {
             providerMainImg: sloggamePpImg,
             providerSmallIcon: slot_all_icon,
