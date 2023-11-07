@@ -52,7 +52,7 @@ const index = () => {
     // 只會顯示最近7天  不含今天
     return (
         <>
-            <Table loading={isLoading} rowKey="date" columns={columns} dataSource={tableData} pagination={false} />;
+            <Table loading={isLoading} rowKey="date" columns={columns} dataSource={tableData} pagination={false} />
         </>
     );
 };

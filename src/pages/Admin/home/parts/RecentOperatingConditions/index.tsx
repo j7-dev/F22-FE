@@ -34,7 +34,7 @@ const index = () => {
     ];
 
     return (
-        <div className="mb-32">
+        <div className="mb-8">
             <Title level={5}>
                 <InfoCircleFilled className="mr-2" />
                 {t('Recent Operating Conditions')}

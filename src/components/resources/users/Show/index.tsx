@@ -63,7 +63,7 @@ const index = () => {
                             <ObjectTable record={userData} columns={infoLeftColumns} />
                             <ObjectTable record={userData} columns={infoRightColumns} />
                         </div>
-                        <div className="mb-12">
+                        <div className="mt-4">
                             <p>
                                 <DollarOutlined className="mr-2" />
                                 {t('Balance Adjustment')}
@@ -76,6 +76,8 @@ const index = () => {
                                     style: {
                                         boxShadow: 'none',
                                         padding: '0rem',
+                                        marginTop: '-4rem',
+                                        backgroundColor: 'transparent',
                                     },
                                 }}
                             />

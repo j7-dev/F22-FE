@@ -1,6 +1,5 @@
-import { Form, Input, Select, FormProps } from 'antd';
-import { useUserSelect } from '@/hooks';
-import AmountInput from '@/components/form/AmountInput';
+import { Form, Input, Select, FormProps, InputNumber, ButtonProps, Button } from 'antd';
+import { useUserSelect, useGetSiteSetting } from '@/hooks';
 import { useCustom, useApiUrl, useResource } from '@refinedev/core';
 import { TBalance } from '@/types';
 import { useEffect } from 'react';
@@ -12,7 +11,8 @@ const FormComponent: React.FC<{
     formType: 'create' | 'edit';
     formProps: FormProps;
     handler: () => void;
-}> = ({ formProps, handler }) => {
+    saveButtonProps: ButtonProps;
+}> = ({ formProps, handler, saveButtonProps }) => {
     const { t } = useTranslation();
     const form = formProps.form;
     const apiUrl = useApiUrl();
@@ -20,6 +20,7 @@ const FormComponent: React.FC<{
     const watchCurrency = Form.useWatch(['currency'], form);
     const watchAmountType = Form.useWatch(['amount_type'], form);
     const { action, id, identifier } = useResource();
+    const { default_currency, default_amount_type } = useGetSiteSetting();
     // 判斷是否在 User Show 畫面
     const isUserAdjustment = action === 'show' && identifier === 'members-list';
 
@@ -61,7 +62,7 @@ const FormComponent: React.FC<{
 
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
-            <div className="grid grid-cols-4 gap-6">
+            <div className="grid grid-cols-6 gap-6">
                 <Form.Item
                     name={['title']}
                     label={t('title')}
@@ -73,11 +74,11 @@ const FormComponent: React.FC<{
                     ]}
                     className="col-span-2 lg:col-span-1"
                 >
-                    <Input />
+                    <Input size="small" />
                 </Form.Item>
 
                 <Form.Item name={['user_id']} label={t('User')} initialValue={Number(id)} className="col-span-2 lg:col-span-1" hidden={isUserAdjustment}>
-                    <Select {...userSelectProps} allowClear />
+                    <Select size="small" {...userSelectProps} allowClear />
                 </Form.Item>
 
                 <div className="col-span-2 lg:col-span-1">
@@ -87,13 +88,28 @@ const FormComponent: React.FC<{
                 </div>
                 <Form.Item name={['type']} label={t('Type')} className="col-span-2 lg:col-span-1" initialValue="MANUAL" hidden={isUserAdjustment}>
                     {/* <Select options={['DEPOSIT', 'MANUAL'].map((type) => ({ label: type, value: type }))} /> */}
-                    <Input />
+                    <Input size="small" />
                 </Form.Item>
-                <div className="col-span-4 md:col-span-2">
-                    <AmountInput />
+                <div className="col-span-2 lg:col-span-1">
+                    <Form.Item className="w-full" label="Amount" name={['amount']} rules={[{ required: true, message: 'amount is required' }]}>
+                        <InputNumber size="small" precision={0} className="w-full relative -top-[1px]" />
+                    </Form.Item>
                 </div>
+
+                <Form.Item hidden name={['currency']} initialValue={default_currency}>
+                    <Input size="small" />
+                </Form.Item>
+                <Form.Item hidden name={['amount_type']} initialValue={default_amount_type}>
+                    <Input size="small" />
+                </Form.Item>
+
                 <Form.Item name={['description']} label={t('description')} className="col-span-4 md:col-span-2" hidden={isUserAdjustment}>
                     <Input.TextArea />
+                </Form.Item>
+                <Form.Item label="&nbsp;" className="col-span-2 ls:col-span-1">
+                    <Button size="small" type="primary" {...saveButtonProps}>
+                        {t('Save')}
+                    </Button>
                 </Form.Item>
             </div>
         </Form>
