@@ -21,7 +21,7 @@ const index = () => {
     return (
         <>
             <div className="w-full my-4 text-center">
-                <span className="text-sm sm:text-2xl font-bold text-black">{t('Deposit Method')}</span>
+                <span className="text-sm md:text-2xl font-bold text-black">{t('Deposit Method')}</span>
             </div>
             <Form.Item
                 name={['depositMethod']}
@@ -35,10 +35,10 @@ const index = () => {
             >
                 <Input hidden />
             </Form.Item>
-            <div className="flex flex-nowrap sm:gap-4 gap-2 mb-8">
+            <div className="flex flex-nowrap md:gap-4 gap-2 mb-8">
                 {DEPOSIT_METHOD?.map((item) => (
                     <div className="w-full">
-                        <Button key={item.name} onClick={handleClick(item.name)} className={`${isSelect === item.name ? 'bg-[#9680EA] text-white' : 'bg-[#F8F9FF] text-[#9680EA]'} col-span-1 w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold border-[#9680EA] hover:text-white hover:bg-[#9680EA]`}>
+                        <Button key={item.name} onClick={handleClick(item.name)} className={`${isSelect === item.name ? 'bg-[#9680EA] text-white' : 'bg-[#F8F9FF] text-[#9680EA]'} col-span-1 w-full h-10 md:h-[65px] md:text-xl text-base font-bold border-[#9680EA] hover:text-white hover:bg-[#9680EA]`}>
                             {t(item.name)}
                         </Button>
                         {item.name === 'CODEPAY' ? (

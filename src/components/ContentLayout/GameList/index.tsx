@@ -32,8 +32,8 @@ const index: React.FC<TGameListProp> = React.memo(({ gameData = [], gridColumnCo
                 description={
                     <>
                         <img src={underConstructionIcon} className={`${isMd ? 'w-[360px]' : 'w-[240px]'} h-auto`} alt="" />
-                        <div className="sm:text-4xl text-base font-bold text-[#5932EA]">{t("We're under construction.")}</div>
-                        <div className="sm:text-base text-xs font-medium text-[#828282]">{t('We need a few time to make everything perfect.Please check back later.')}</div>
+                        <div className="md:text-4xl text-base font-bold text-[#5932EA]">{t("We're under construction.")}</div>
+                        <div className="md:text-base text-xs font-medium text-[#828282]">{t('We need a few time to make everything perfect.Please check back later.')}</div>
                     </>
                 }
             />
@@ -57,8 +57,8 @@ const index: React.FC<TGameListProp> = React.memo(({ gameData = [], gridColumnCo
     };
 
     return (
-        <div className="gameList grid sm:grid-cols-11 px-4 sm:p-0 sm:mx-0 w-full">
-            <div className="col-span-9 sm:col-start-2 grid h-screen sm:-mx-2">
+        <div className="gameList grid md:grid-cols-11 px-4 md:p-0 md:mx-0 w-full">
+            <div className="col-span-9 md:col-start-2 grid h-screen md:-mx-2">
                 <AutoSizer className="autoSizerWrap">
                     {({ height, width }: { height: number; width: number }) => {
                         const columnWidth = width / columnCount;

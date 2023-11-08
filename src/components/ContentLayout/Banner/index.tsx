@@ -44,8 +44,8 @@ const Banner: React.FC<{ bannerData?: { img: string; img_mobile?: string }[] }> 
                     // 判斷是否為PC，是的話就用item.img，不是的話就用item.img_mobile，如果沒有item.img_mobile就用item.img
                     const imgSrc = isPc ? item?.img : item?.img_mobile ? item?.img_mobile : item?.img;
                     return (
-                        <SwiperSlide key={nanoid()} className="h-fit w-full sm:w-full sm:max-h-[360px] sm:aspect-auto aspect-[342/180] ">
-                            <img src={imgSrc} alt="" className="sm:h-fit rounded-2xl w-full h-full object-cover sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] shadow-[0_4px_4px_0px_#A370ED33]" />
+                        <SwiperSlide key={nanoid()} className="h-fit w-full md:w-full md:max-h-[360px] md:aspect-auto aspect-[342/180] ">
+                            <img src={imgSrc} alt="" className="md:h-fit rounded-2xl w-full h-full object-cover md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] shadow-[0_4px_4px_0px_#A370ED33]" />
                         </SwiperSlide>
                     );
                 })}

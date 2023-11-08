@@ -101,7 +101,7 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
     const header = document.getElementById('header');
     const headerHeight = header?.clientHeight;
     return (
-        <div style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)` }} className="flex flex-col justify-between bg-white px-8 py-[42px] rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
+        <div style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)` }} className="flex flex-col justify-between bg-white px-8 py-[42px] rounded-2xl md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
             <div className="min-h-[180px]">
                 <span className="text-black font-bold text-2xl">{t('Withdraw')}</span>
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical" className="w-full">
@@ -150,7 +150,7 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                     </Form.Item>
                 </Form>
             </div>
-            <Button disabled={isDisabled} onClick={handleWithdraw} type="primary" loading={isLoading} className={`${isDisabled ? 'bg-[#BDBDBD]' : ''} w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold`}>
+            <Button disabled={isDisabled} onClick={handleWithdraw} type="primary" loading={isLoading} className={`${isDisabled ? 'bg-[#BDBDBD]' : ''} w-full h-10 md:h-[65px] md:text-xl text-base font-bold`}>
                 {t('Withdraw')}
             </Button>
         </div>

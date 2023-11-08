@@ -51,11 +51,11 @@ const index: React.FC = () => {
                         onClick={() => {
                             handleClick(wallet.label);
                         }}
-                        className={`${activeMenu === wallet.label && isLogin ? 'active' : ''} ${wallet.label} relative transition-all cursor-pointer  px-6 sm:px-0 sm:rounded-2xl `}
+                        className={`${activeMenu === wallet.label && isLogin ? 'active' : ''} ${wallet.label} relative transition-all cursor-pointer  px-6 md:px-0 md:rounded-2xl `}
                     >
-                        <span className="flex items-center text-sm overflow-hidden sm:pr-2.5 pr-5 gap-2">
-                            <div className="favicon min-w-[44px] min-h-[44px] sm:min-w-[60px] sm:min-h-[60px] flex justify-center items-center" />
-                            <span className={`whitespace-nowrap sm:text-lg text-[10px] font-normal`}>{t(wallet.value)}</span>
+                        <span className="flex items-center text-sm overflow-hidden md:pr-2.5 pr-5 gap-2">
+                            <div className="favicon min-w-[44px] min-h-[44px] md:min-w-[60px] md:min-h-[60px] flex justify-center items-center" />
+                            <span className={`whitespace-nowrap md:text-lg text-[10px] font-normal`}>{t(wallet.value)}</span>
                         </span>
                     </li>
                 );

@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { Table, Tag, Modal } from 'antd';
 import dayjs from 'dayjs';
-import { List } from '@refinedev/antd';
+// import { List } from '@refinedev/antd';
 import { useShowPc } from '@/hooks/useShowPc';
 import { useGetCoupon } from '@/hooks/resources/';
 import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
@@ -65,7 +65,7 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
         return (
             <div className="flex gap-2 justify-between">
                 <div className="flex gap-2 items-center">
-                    <span className="text-black font-bold sm:text-2xl text-sm">{t('Coupon History')}</span>
+                    <span className="text-black font-bold md:text-2xl text-sm">{t('Coupon History')}</span>
                     {inMyPage && isPc && <ShowBtn />}
                 </div>
 
@@ -112,49 +112,49 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
             );
         }
         return (
-            <List>
-                <Table className="customTable" {...tableProps} pagination={paginationSetting}>
-                    <Column title={t('Title') as string} dataIndex="title" key="title" className="w-1/4 whitespace-nowrap" />
-                    <Column title={t('Point Amount') as string} dataIndex="coupon_amount" key="coupon_amount" className="w-1/4 whitespace-nowrap" />
-                    <Column
-                        title={t('Status') as string}
-                        dataIndex="is_claimed"
-                        key="is_claimed"
-                        className="w-1/4 whitespace-nowrap"
-                        render={(value) => {
-                            //如果為false
-                            if (!value)
-                                return (
-                                    <Tag onClick={handleReceiveCoupon} color="#22C55E" className="cursor-pointer rounded-2xl">
-                                        {t('CLICK ME')}
-                                    </Tag>
-                                );
-                            //如果為true
+            // <List>
+            <Table className="customTable" {...tableProps} pagination={paginationSetting}>
+                <Column title={t('Title') as string} dataIndex="title" key="title" className="w-1/4 whitespace-nowrap" />
+                <Column title={t('Point Amount') as string} dataIndex="coupon_amount" key="coupon_amount" className="w-1/4 whitespace-nowrap" />
+                <Column
+                    title={t('Status') as string}
+                    dataIndex="is_claimed"
+                    key="is_claimed"
+                    className="w-1/4 whitespace-nowrap"
+                    render={(value) => {
+                        //如果為false
+                        if (!value)
                             return (
-                                <Tag color="#BDBDBD" className="rounded-2xl">
-                                    {t('RECEIVED')}
+                                <Tag onClick={handleReceiveCoupon} color="#22C55E" className="cursor-pointer rounded-2xl">
+                                    {t('CLICK ME')}
                                 </Tag>
                             );
-                        }}
-                    />
-                    <Column
-                        title={
-                            <div className="flex items-center gap-1 whitespace-nowrap">
-                                <BiSolidTimeFive color="#828282" size={20} />
-                                {t('Date')}
-                            </div>
-                        }
-                        dataIndex="fxnCreatedAt"
-                        key="fxnCreatedAt"
-                        className="w-1/4 min-w-[115px]"
-                    />
-                </Table>
-            </List>
+                        //如果為true
+                        return (
+                            <Tag color="#BDBDBD" className="rounded-2xl">
+                                {t('RECEIVED')}
+                            </Tag>
+                        );
+                    }}
+                />
+                <Column
+                    title={
+                        <div className="flex items-center gap-1 whitespace-nowrap">
+                            <BiSolidTimeFive color="#828282" size={20} />
+                            {t('Date')}
+                        </div>
+                    }
+                    dataIndex="fxnCreatedAt"
+                    key="fxnCreatedAt"
+                    className="w-1/4 min-w-[115px]"
+                />
+            </Table>
+            // {/* </List> */}
         );
     };
 
     return (
-        <div className="bg-white h-full w-full py-6 px-4 gap-5 userBank flex flex-col rounded-2xl sm:py-[42px] sm:px-[32px] sm:gap-4 shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
+        <div className="bg-white h-full w-full py-6 px-4 gap-5 userBank flex flex-col rounded-2xl md:py-[42px] md:px-[32px] md:gap-4 shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
             <TopTitle />
             <TableSection />
         </div>

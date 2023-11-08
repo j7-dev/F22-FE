@@ -69,10 +69,10 @@ const index: React.FC = () => {
     }, []);
 
     return (
-        <div className="casinoPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col gap-4">
+        <div className="casinoPage md:my-9 md:gap-8 my-4 w-full flex flex-col gap-4">
             <Banner />
             <NewsMarquee className="md:hidden" speed={15} marqueeText={marqueeText} />
-            <div className="casinoSection relative sm:w-full">
+            <div className="casinoSection relative md:w-full">
                 <div className="md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl md:py-4">
                     <div className="hidden slotTitle md:grid grid-cols-11 gap-4 py-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
                         <div className="col-span-1 flex justify-center">
@@ -97,7 +97,7 @@ const index: React.FC = () => {
                             })}
                         </div>
                     </div>
-                    <div className="block px-4 sm:hidden">
+                    <div className="block px-4 md:hidden">
                         <SearchBar onFilter={filterGame} />
                     </div>
                     <Spin spinning={isFetching}>

@@ -19,12 +19,12 @@ export const Footer: React.FC = () => {
 
     return (
         <div className="bg-white w-full text-black font-normal z-10 ">
-            <div className="footerImgWrap grid md:grid-cols-11 sm:pb-20 sm:py-9 grid-cols-4 gap-4 w-full h-auto border-solid border-b-2 border-0 border-[#E0E0E0] py-6 px-4">
+            <div className="footerImgWrap grid md:grid-cols-11 md:pb-20 md:py-9 grid-cols-4 gap-4 w-full h-auto border-solid border-b-2 border-0 border-[#E0E0E0] py-6 px-4">
                 <div className="aboutWrap md:flex md:flex-col md:col-start-2 md:col-span-3 col-span-4 gap-4 grid grid-cols-4">
                     <div className="footerLogo md:h-10 col-span-1 h-full text-center">
                         <img src={showPc ? logo : logo2} alt="" className="md:w-full w-[30px] h-full object-left object-contain" />
                     </div>
-                    <div className="txt sm:py-4 sm:border-t-2 sm:border-l-0 sm:text-xs border-l-2 pl-2.5 col-span-3 text-[#333333] font-normal border-solid border-0 border-[#E0E0E0] text-[8px]">{t('COPYRIGHT 2023, SMART BET. ALL RIGHTS RESERVED. GAMBLING CAN BE ADDICTIVE, PLEASE PLAY RESPONSIBLY. FOR MORE INFORMATION ON SUPPORT TOOLS, PLEASE VISIT OUR RESPONSIBLE GAMBLING PAGE PAYMENT SUPPORTED BY CODE PAY')}</div>
+                    <div className="txt md:py-4 md:border-t-2 md:border-l-0 md:text-xs border-l-2 pl-2.5 col-span-3 text-[#333333] font-normal border-solid border-0 border-[#E0E0E0] text-[8px]">{t('COPYRIGHT 2023, SMART BET. ALL RIGHTS RESERVED. GAMBLING CAN BE ADDICTIVE, PLEASE PLAY RESPONSIBLY. FOR MORE INFORMATION ON SUPPORT TOOLS, PLEASE VISIT OUR RESPONSIBLE GAMBLING PAGE PAYMENT SUPPORTED BY CODE PAY')}</div>
                     {/* 電腦版翻譯選單 */}
                     {showPc ? <LanguageSwitch /> : ''}
                 </div>
@@ -46,8 +46,8 @@ export const Footer: React.FC = () => {
                                     <div className="w-full h-full flex justify-center items-center">
                                         <Link to={item.link}>
                                             <div className="flex flex-col justify-center items-center">
-                                                <img src={item.icon} alt="" className="md:w-[30px] w-[15px] sm:mb-2 aspect-square" />
-                                                <span className="hidden sm:block text-[#9680EA] md:text-xs text-[6px] leading-[8px] font-bold text-center">{t(item.value)}</span>
+                                                <img src={item.icon} alt="" className="md:w-[30px] w-[15px] md:mb-2 aspect-square" />
+                                                <span className="hidden md:block text-[#9680EA] md:text-xs text-[6px] leading-[8px] font-bold text-center">{t(item.value)}</span>
                                             </div>
                                         </Link>
                                     </div>
@@ -66,7 +66,7 @@ export const Footer: React.FC = () => {
                 ) : (
                     ''
                 )}
-                <div className="hidden  rightZone w-full md:col-span-3 md:grid-cols-3 md:gap-4 col-span-4 sm:grid grid-cols-4 gap-1">
+                <div className="hidden  rightZone w-full md:col-span-3 md:grid-cols-3 md:gap-4 col-span-4 md:grid grid-cols-4 gap-1">
                     <div className="aboutWrap text-center md:col-span-1 md:flex md:flex-col md:gap-4 col-span-4 grid grid-cols-4">
                         <span className="md:text-lg md:h-10 text-[10px] col-span-1 flex items-center justify-center text-black font-bold">{t('About Us')}</span>
                         <ul className="md:flex-col md:justify-center md:gap-0 col-span-3 flex flex-row justify-start items-center gap-1 p-0 m-0">
@@ -112,11 +112,11 @@ export const Footer: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full block py-2 sm:py-4 sm:px-20 sm:text-base text-xs text-center font-normal text-gray-500">
-                <ul className="grid grid-cols-6 pl-0 sm:gap-4 gap-2">
+            <div className="w-full block py-2 md:py-4 md:px-20 md:text-base text-xs text-center font-normal text-gray-500">
+                <ul className="grid grid-cols-6 pl-0 md:gap-4 gap-2">
                     {fakeProviderData.map((item) => {
                         return (
-                            <li key={nanoid()} className="sm:h-20 h-[20px]">
+                            <li key={nanoid()} className="md:h-[75px] h-[20px]">
                                 <img src={item.ProviderImg2} alt="" className="w-full h-full object-contain" />
                             </li>
                         );

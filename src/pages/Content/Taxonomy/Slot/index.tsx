@@ -89,10 +89,10 @@ const index: React.FC = () => {
         }
     }, []);
     return (
-        <div className="slotPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col  gap-4">
+        <div className="slotPage md:my-9 md:gap-8 my-4 w-full flex flex-col  gap-4">
             <Banner />
             <NewsMarquee className="md:hidden" speed={15} marqueeText={marqueeText} />
-            <div className="slotSection relative sm:w-full">
+            <div className="slotSection relative md:w-full">
                 <div className="slotWrap md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl">
                     <div className="hidden slotTitle md:grid grid-cols-11 gap-4 py-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
                         <div className="col-span-1 flex justify-center">
@@ -109,7 +109,7 @@ const index: React.FC = () => {
                             {fxnSlotProvider.map((item) => {
                                 return (
                                     <div key={nanoid()} onClick={handleSwitchTab(item.value)} className={`${slotGameProvider === item.value ? 'bg-[#5932EA]' : 'bg-[#9680EA]'} basis-full flex-1 col-span-1 cursor-pointer rounded-2xl w-36 md:w-full`}>
-                                        <div className="px-4 py-3 flex h-full items-center sm:gap-2 gap-1">
+                                        <div className="px-4 py-3 flex h-full items-center md:gap-2 gap-1">
                                             <img src={item?.providerData?.providerSmallIcon} className="md:w-9 w-6 h-full object-center object-contain" alt="" />
                                             <span className="whitespace-nowrap md:whitespace-normal font-medium md:text-base text-xs text-white">{t(item.label)}</span>
                                         </div>
@@ -118,7 +118,7 @@ const index: React.FC = () => {
                             })}
                         </div>
                     </div>
-                    <div className="block px-4 sm:hidden">
+                    <div className="block px-4 md:hidden">
                         <SearchBar onFilter={filterGame} />
                     </div>
                     <Spin spinning={isFetching}>

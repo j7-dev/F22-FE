@@ -137,14 +137,14 @@ const index: React.FC = () => {
             centered
             closeIcon={<AiFillCloseCircle color="#FFFFFF" size={30} />}
             footer={null}
-            className="formWrap sm:w-[600px] sm:h-auto w-screen max-w-none"
+            className="formWrap md:w-[600px] md:h-auto w-screen max-w-none"
             classNames={{
                 mask: 'bg-[#000000d9] blur-sm',
-                content: 'bg-gradient-to-b from-[#BAA8FF] to-[#5932EA] shadow-[0px_0px_10px_4px_#D4C9FF33] py-[50px] sm:px-[100px] px-[45px]',
+                content: 'bg-gradient-to-b from-[#BAA8FF] to-[#5932EA] shadow-[0px_0px_10px_4px_#D4C9FF33] py-[50px] md:px-[100px] px-[45px]',
             }}
         >
-            <div className="signUpFromSection text-center flex flex-col sm:gap-2.5 w-full h-full">
-                <span className="text-[30px] text-center font-semibold text-white sm:mb-9 mb-8">{t('User Sign Up')}</span>
+            <div className="signUpFromSection text-center flex flex-col md:gap-2.5 w-full h-full">
+                <span className="text-[30px] text-center font-semibold text-white md:mb-9 mb-8">{t('User Sign Up')}</span>
                 {/* 錯誤訊息 */}
                 {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
                 <Form form={form} onFinish={handleSignUp} className="signUp">

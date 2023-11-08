@@ -10,7 +10,7 @@ const Pc: React.FC<{ isLogin: boolean }> = ({ isLogin }) => {
         return item?.content;
     });
     return (
-        <div className="pcMenu hidden w-full relative transition-all duration-300 basis-full grow sm:flex flex-row gap-16 justify-between items-center">
+        <div className="pcMenu hidden w-full relative transition-all duration-300 basis-full grow md:flex flex-row gap-16 justify-between items-center">
             <NewsMarquee marqueeText={marqueeText} />
             <div className="userSection flex items-center gap-2.5">
                 {isLogin ? <UserInfo /> : ''}

@@ -123,7 +123,7 @@ const index: React.FC = () => {
     const header = document.getElementById('header');
     const headerHeight = header?.clientHeight;
     return (
-        <div style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)` }} className="flex flex-col justify-between bg-white px-8 py-[42px] rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
+        <div style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)` }} className="flex flex-col justify-between bg-white px-8 py-[42px] rounded-2xl md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
             <div className="min-h-[180px]">
                 <span className="text-black font-bold text-2xl">{t('Deposit')}</span>
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical">
@@ -151,8 +151,8 @@ const index: React.FC = () => {
                     <DepositMethod />
                 </Form>
             </div>
-            <div className="grid grid-cols-2 sm:gap-4 gap-2">
-                <Button onClick={handleClick} disabled={isDisabled} type="primary" className={`${isDisabled ? 'bg-[#BDBDBD]' : ''} col-span-2 w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold`}>
+            <div className="grid grid-cols-2 md:gap-4 gap-2">
+                <Button onClick={handleClick} disabled={isDisabled} type="primary" className={`${isDisabled ? 'bg-[#BDBDBD]' : ''} col-span-2 w-full h-10 md:h-[65px] md:text-xl text-base font-bold`}>
                     {t('Deposit')}
                 </Button>
             </div>

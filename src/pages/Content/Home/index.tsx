@@ -20,7 +20,7 @@ const Home = () => {
         setActiveMenu('');
     }, []);
     return (
-        <div className="home sm:my-9 my-4 w-full flex flex-col sm:gap-8 gap-4">
+        <div className="home md:my-9 my-4 w-full flex flex-col md:gap-8 gap-4">
             <Banner />
             {!showPc ? <NewsMarquee speed={15} marqueeText={marqueeText} /> : ''}
             <PopularGames />

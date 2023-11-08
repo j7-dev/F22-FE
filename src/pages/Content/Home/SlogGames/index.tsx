@@ -34,7 +34,7 @@ const index: React.FC = () => {
                     {gameCategoriesData
                         .filter((item) => item?.providerData?.length !== 0)
                         .map((item) => (
-                            <SwiperSlide key={nanoid()} className="h-fit w-full sm:w-full sm:aspect-[1260/360] aspect-[342/180] shadow-[0_4px_4px_0px_#A370ED33]">
+                            <SwiperSlide key={nanoid()} className="h-fit w-full md:w-full md:aspect-[1260/360] aspect-[342/180] shadow-[0_4px_4px_0px_#A370ED33]">
                                 <CategorySection provider={item.providerData} categoryName={item.label} />
                             </SwiperSlide>
                         ))}

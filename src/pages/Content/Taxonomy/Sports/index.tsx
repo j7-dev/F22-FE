@@ -35,8 +35,8 @@ const index: React.FC = () => {
                     description={
                         <>
                             <img src={underConstructionIcon} className={`${isPc ? 'w-[360px]' : 'w-[240px]'} h-auto`} alt="" />
-                            <div className="sm:text-4xl text-base font-bold text-[#5932EA]">{t("We're under construction.")}</div>
-                            <div className="sm:text-base text-xs font-medium text-[#828282]">{t('We need a few time to make everything perfect.Please check back later.')}</div>
+                            <div className="md:text-4xl text-base font-bold text-[#5932EA]">{t("We're under construction.")}</div>
+                            <div className="md:text-base text-xs font-medium text-[#828282]">{t('We need a few time to make everything perfect.Please check back later.')}</div>
                         </>
                     }
                 />
@@ -47,8 +47,8 @@ const index: React.FC = () => {
     const header = document.getElementById('header');
     const headerHeight = header?.clientHeight;
     return (
-        <div className="sportPage sm:my-9 sm:gap-8 my-4 w-full">
-            <div style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)` }} className="bg-white flex justify-center items-center h-fit sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl overflow-hidden">
+        <div className="sportPage md:my-9 md:gap-8 my-4 w-full">
+            <div style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)` }} className="bg-white flex justify-center items-center h-fit md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl overflow-hidden">
                 <Container />
             </div>
         </div>
