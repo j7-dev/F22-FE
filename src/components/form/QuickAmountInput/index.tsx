@@ -8,6 +8,7 @@ const QUICK_BUTTON_VALUES = [100, 1000, 10000, 100000, 1000000];
 const index: React.FC<{
     formItemProps?: FormItemProps;
     inputNumberProps?: InputNumberProps;
+    inputNumberMax?: string | number;
     quickButtonProps?: {
         symbol?: string;
         className?: string;
@@ -17,6 +18,7 @@ const index: React.FC<{
 }> = ({
     formItemProps,
     inputNumberProps,
+    inputNumberMax,
     quickButtonProps = {
         className: 'grid grid-cols-2 lg:grid-cols-5 gap-4',
         buttonProps: {
@@ -37,8 +39,41 @@ const index: React.FC<{
 
     return (
         <div>
-            <Form.Item {...formItemProps} className="depositAmount">
-                <InputNumber min={0} className="" bordered={false} controls={false} formatter={(value: string | number | undefined) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} parser={(value) => Number(value?.replace(/\$\s?|(,*)/g, ''))} {...inputNumberProps} />
+            <Form.Item
+                {...formItemProps}
+                className="depositAmount"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please input amount!',
+                    },
+                ]}
+            >
+                <InputNumber
+                    min={0}
+                    className=""
+                    bordered={false}
+                    controls={false}
+                    formatter={(value: string | number | undefined) => {
+                        const number = Number(value);
+                        const max = Number(inputNumberMax);
+                        if (number > max) {
+                            return `${max}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        } else {
+                            return `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                        }
+                    }}
+                    parser={(value) => Number(value?.replace(/\$\s?|(,*)/g, ''))}
+                    {...inputNumberProps}
+                />
+                {/* <InputNumber
+                    onKeyUp={(e) => {
+                        const value = e.target.value;
+                    		const pattern = /^[0-9]*$/;
+                    		pattern.test(value)
+                        console.log('🚀 ~ value:', value);
+                    }}
+                /> */}
             </Form.Item>
             <div className={quickButtonProps.className}>
                 {QUICK_BUTTON_VALUES.map((value) => (

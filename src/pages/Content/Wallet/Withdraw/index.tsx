@@ -82,8 +82,8 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
         console.log('沒有存款紅利限制');
         return balance;
     };
-    LimitAmountFn();
-    const withdrawable = balance;
+    // LimitAmountFn();
+    const withdrawable = LimitAmountFn();
 
     //監聽Form的值，都填寫完畢後，使Button可以點擊
     const values = Form.useWatch([], form);
@@ -110,13 +110,6 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                         {/* 暫時性隱藏*/}
                         <div className="flex flex-col">
                             <span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()} / ${t('可提領額度')}:${withdrawable.toLocaleString()}`}</span>
-                            <Button
-                                onClick={() => {
-                                    form.setFieldsValue({ amount: withdrawable });
-                                }}
-                            >
-                                全額提款
-                            </Button>
                         </div>
                     </div>
                     <QuickAmountInput
@@ -132,13 +125,23 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                         }}
                         inputNumberProps={{
                             prefix: symbol,
-                            max: withdrawable,
+                            // max: withdrawable,
                         }}
+                        inputNumberMax={withdrawable}
                         //隱藏快速按鈕
                         quickButtonProps={{
                             className: 'hidden',
                         }}
                     />
+                    <div className="w-full text-right">
+                        <Button
+                            onClick={() => {
+                                form.setFieldsValue({ amount: withdrawable });
+                            }}
+                        >
+                            전액환전
+                        </Button>
+                    </div>
                     <Form.Item name={['currency']} hidden initialValue="KRW">
                         <Input />
                     </Form.Item>
