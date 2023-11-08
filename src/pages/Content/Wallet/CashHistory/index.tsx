@@ -33,7 +33,6 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
         };
     });
     tableProps.dataSource = fxnData;
-
     //分頁條設定
     const paginationSetting: TablePaginationConfig = {
         ...tableProps.pagination,
@@ -125,7 +124,7 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
                         }
                         dataIndex="fxnCreatedAt"
                         key="fxnCreatedAt"
-                        className="w-1/4"
+                        className="w-1/4 min-w-[115px]"
                     />
                 </Table>
             </List>

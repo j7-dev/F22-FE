@@ -146,7 +146,7 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
                         }
                         dataIndex="fxnCreatedAt"
                         key="fxnCreatedAt"
-                        className="w-1/4"
+                        className="w-1/4 min-w-[115px]"
                     />
                 </Table>
             </List>
