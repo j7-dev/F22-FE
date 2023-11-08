@@ -1,14 +1,12 @@
 import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation, Trans } from 'react-i18next';
-import { atom, useAtom, useSetAtom } from 'jotai';
+import { useTranslation } from 'react-i18next';
+import { atom, useAtom } from 'jotai';
 import { useQueryClient } from '@tanstack/react-query';
 import { useIsLogin } from '@/hooks/resources/useIsLogin';
 import { useLogout } from '@refinedev/core';
 import WallerContainer from './WallerContainer';
 import GameNavContainer from './GameNavContainer';
-// import LanguageSwitch from '@/components/ContentLayout/Header/LanguageSwitch';
-import { signInAtom } from '@/components/ContentLayout/Header/LoginModule';
 import appStore from '@/assets/images/sideBar/appStore.png';
 import googlePlay from '@/assets/images/sideBar/googlePlay.png';
 
@@ -19,7 +17,6 @@ export const Sidebar: React.FC = () => {
     const sidebarRef = useRef<HTMLDivElement>(null);
     const { t } = useTranslation();
     const [mbSidebar, setMbSidebar] = useAtom(mbSidebarAtom);
-    const setSignIn = useSetAtom(signInAtom);
     const isLogin = useIsLogin();
     //登出
     const queryClient = useQueryClient();
@@ -27,10 +24,6 @@ export const Sidebar: React.FC = () => {
     const handleLogOut = () => {
         logout();
         queryClient.clear();
-    };
-    //點擊START NOW登入彈窗
-    const handleClick = () => {
-        setSignIn(true);
     };
 
     //點擊選單本身關閉手機選單
@@ -68,21 +61,9 @@ export const Sidebar: React.FC = () => {
                 <GameNavContainer />
                 <div className="divider border-0 border-solid border-t mx-[14px] my-[46px] border-[#828282]" />
                 <WallerContainer />
-                {/* 電腦登入 */}
-                <div className="hidden sm:flex flex-col startNow opacity-0 w-full transition-all mt-52">
-                    <div className="contain flex flex-col py-5 gap-5 p-[14px] font-semibold text-sm justify-center items-center bg-gradient-to-r from-[#E9AAF1] to-[#8155EC] rounded-[20px]">
-                        <p className="text-white">
-                            <Trans i18nKey="Lorem ipsum dolor sit" />
-                        </p>
-                        <span onClick={handleClick} className="startNowBtn cursor-pointer flex justify-center items-center text-black bg-white shadow-[2px_4px_4px_0_#4F2AEA2B] rounded-2xl h-10 w-full py-2.5 px-6">
-                            {t('START NOW')}
-                        </span>
-                    </div>
-                </div>
                 {/* 手機版IPA與APK下載連結 */}
-                {/* TODO 未來這邊網域要改成env變數 */}
                 <div className="appDownload sm:hidden flex flex-col gap-2 mt-[50px] w-full px-6">
-                    <a href="itms-services://?action=download-manifest&url=https://f22-fe.vercel.app/ipa/app.plist" className="">
+                    <a href={`itms-services://?action=download-manifest&url=https://${window.location.hostname}/ipa/app.plist`} className="">
                         <img src={appStore} alt="" className="w-[144px]" />
                     </a>
                     <a href="/apk/smtbet7.apk" className="">
