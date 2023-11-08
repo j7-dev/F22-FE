@@ -63,7 +63,7 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
         //如果用戶身上有deposit_bonus及last_deposit
         if (userInfo?.last_deposit?.deposit_bonus) {
             //判斷有效投注有沒有達到限制金額
-            if (userInfo?.validBetAmount > userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage) {
+            if (userInfo?.validBetAmount >= userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage) {
                 console.log('已達到提款金額');
                 console.log('有效投注', userInfo?.validBetAmount);
                 console.log('限制金額', userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage);

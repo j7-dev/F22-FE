@@ -39,16 +39,7 @@ const index: React.FC<{
 
     return (
         <div>
-            <Form.Item
-                {...formItemProps}
-                className="depositAmount"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input amount!',
-                    },
-                ]}
-            >
+            <Form.Item {...formItemProps} className="depositAmount">
                 <InputNumber
                     min={0}
                     className=""
