@@ -35,7 +35,8 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
     const nextValidUpgrade = nextVip?.valid_bet_amount_upgrade_threshold || 0;
 
     //當前積分
-    const currentDeposit = nextDepositUpgrade - depositUpgrade;
+    //解存款為負數的BUG，如果小於0就設為0，否則相減顯示當前積分
+    const currentDeposit = nextDepositUpgrade - depositUpgrade < 0 ? 0 : nextDepositUpgrade - depositUpgrade;
     const currentValid = nextValidUpgrade - validUpgrade;
 
     //百分比

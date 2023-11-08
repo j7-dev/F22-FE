@@ -78,6 +78,7 @@ const index: React.FC = () => {
     const { data: evoData, isFetching: evoIsFetching } = useGetEVOTableList();
     const { data: ppData, isFetching: ppIsFetching } = useGetPPTableList();
     const ppGameData = ppData.filter((item) => item.gameCategory === 'casino');
+    // console.log('🚀 ~ ppGameData:', ppGameData);
     const tokenGamesData = tokenData.filter((item) => item.gameCategory === 'casino');
 
     const isFetching = evoIsFetching || ppIsFetching;
