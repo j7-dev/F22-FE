@@ -30,7 +30,7 @@ const index: React.FC = () => {
 
     useEffect(() => {
         // 每5秒重新取得用戶資料
-        const timer = setTimeout(() => {
+        const timer = setInterval(() => {
             queryClient.invalidateQueries(['getUserIdentity']);
         }, 5000);
 
