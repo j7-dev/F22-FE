@@ -18,7 +18,7 @@ const Filter: React.FC = () => {
                 <DateRangePicker />
                 <Form.Item className="self-end">
                     <Button size="small" htmlType="submit" type="primary" className="w-full">
-                        {t('Filter')}
+                        {t('Search')}
                     </Button>
                 </Form.Item>
             </div>

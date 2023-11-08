@@ -64,7 +64,7 @@ const index: React.FC<{ user_id?: string | number }> = ({ user_id }) => {
 
                     <Form.Item className="self-end">
                         <Button size="small" type="primary" className="w-full" htmlType="submit">
-                            {t('Filter')}
+                            {t('Search')}
                         </Button>
                     </Form.Item>
                 </div>

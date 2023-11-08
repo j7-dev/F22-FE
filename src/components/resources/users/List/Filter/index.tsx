@@ -62,7 +62,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
                     />
                     <Form.Item className="self-end">
                         <Button size="small" type="primary" htmlType="submit" className="w-full">
-                            {t('Filter')}
+                            {t('Search')}
                         </Button>
                     </Form.Item>
                 </div>
