@@ -63,7 +63,7 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
         //如果用戶身上有deposit_bonus及last_deposit
         if (userInfo?.last_deposit?.deposit_bonus) {
             //判斷有效投注有沒有達到限制金額
-            if (userInfo?.validBetAmount > userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage) {
+            if (userInfo?.validBetAmount >= userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage) {
                 console.log('已達到提款金額');
                 console.log('有效投注', userInfo?.validBetAmount);
                 console.log('限制金額', userInfo?.last_deposit?.amount * userInfo?.last_deposit?.deposit_bonus?.rolling_percentage);
@@ -82,8 +82,8 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
         console.log('沒有存款紅利限制');
         return balance;
     };
-    LimitAmountFn();
-    const withdrawable = balance;
+    // LimitAmountFn();
+    const withdrawable = LimitAmountFn();
 
     //監聽Form的值，都填寫完畢後，使Button可以點擊
     const values = Form.useWatch([], form);
@@ -101,7 +101,7 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
     const header = document.getElementById('header');
     const headerHeight = header?.clientHeight;
     return (
-        <div style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)` }} className="flex flex-col justify-between bg-white px-8 py-[42px] rounded-2xl sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
+        <div style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)` }} className="flex flex-col justify-between bg-white px-8 py-[42px] rounded-2xl md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] ">
             <div className="min-h-[180px]">
                 <span className="text-black font-bold text-2xl">{t('Withdraw')}</span>
                 <Form form={form} initialValues={{ amount: '0' }} layout="vertical" className="w-full">
@@ -110,13 +110,6 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                         {/* 暫時性隱藏*/}
                         <div className="flex flex-col">
                             <span className="text-sm text-[#828282] font-medium">{`${t('餘額')}:${balance.toLocaleString()} / ${t('可提領額度')}:${withdrawable.toLocaleString()}`}</span>
-                            <Button
-                                onClick={() => {
-                                    form.setFieldsValue({ amount: withdrawable });
-                                }}
-                            >
-                                全額提款
-                            </Button>
                         </div>
                     </div>
                     <QuickAmountInput
@@ -132,13 +125,23 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                         }}
                         inputNumberProps={{
                             prefix: symbol,
-                            max: withdrawable,
+                            // max: withdrawable,
                         }}
+                        inputNumberMax={withdrawable}
                         //隱藏快速按鈕
                         quickButtonProps={{
                             className: 'hidden',
                         }}
                     />
+                    <div className="w-full text-right">
+                        <Button
+                            onClick={() => {
+                                form.setFieldsValue({ amount: withdrawable });
+                            }}
+                        >
+                            전액환전
+                        </Button>
+                    </div>
                     <Form.Item name={['currency']} hidden initialValue="KRW">
                         <Input />
                     </Form.Item>
@@ -150,7 +153,7 @@ const index: React.FC<{ userInfo?: TMe }> = ({ userInfo }) => {
                     </Form.Item>
                 </Form>
             </div>
-            <Button disabled={isDisabled} onClick={handleWithdraw} type="primary" loading={isLoading} className={`${isDisabled ? 'bg-[#BDBDBD]' : ''} w-full h-10 sm:h-[65px] sm:text-xl text-base font-bold`}>
+            <Button disabled={isDisabled} onClick={handleWithdraw} type="primary" loading={isLoading} className={`${isDisabled ? 'bg-[#BDBDBD]' : ''} w-full h-10 md:h-[65px] md:text-xl text-base font-bold`}>
                 {t('Withdraw')}
             </Button>
         </div>

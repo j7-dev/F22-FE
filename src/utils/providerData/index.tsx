@@ -1,29 +1,29 @@
 import { TGameProvider } from '@/types/games';
-import sloggameAgImg from '@/assets/images/game_provider/new_slog_ag.png';
-import sloggameMgImg from '@/assets/images/game_provider/new_slog_mg.png';
-import sloggamePpImg from '@/assets/images/game_provider/new_slog_pp.png';
+import slogGameAgImg from '@/assets/images/game_provider/new_slog_ag.png';
+import slogGameMgImg from '@/assets/images/game_provider/new_slog_mg.png';
+import slogGamePpImg from '@/assets/images/game_provider/new_slog_pp.png';
 import casinoGameEvoImg from '@/assets/images/game_provider/new_casino_evo.png';
 import pragmaticplayProviderImg2 from '@/assets/images/game_provider/pragmaticplay2.png';
-import microgamingProviderImg2 from '@/assets/images/game_provider/microgaming2.png';
-import asiagamingProviderImg2 from '@/assets/images/game_provider/asiagaming2.png';
+import microGamingProviderImg2 from '@/assets/images/game_provider/microgaming2.png';
+import asiaGamingProviderImg2 from '@/assets/images/game_provider/asiagaming2.png';
 import evolutionProviderImg2 from '@/assets/images/game_provider/evoIcon.svg';
-import slot_all_icon from '@/assets/images/game_provider/slot_all_icon.svg';
+import slot_all_icon from '@/assets/images/Icon_Menu_Filled_Slot.svg';
 import mgWhiteIcon from '@/assets/images/game_provider/mgWhite.svg';
 import agWhiteIcon from '@/assets/images/game_provider/agWhite.svg';
 import evoWhiteIcon from '@/assets/images/game_provider/evoWhite.svg';
 import ppWhiteIcon from '@/assets/images/game_provider/ppWhite.svg';
-// import ppProviderSmallIcon from '@/assets/images/game_provider/ppProviderSmallIcon.svg';
-// import mgProviderSmallIcon from '@/assets/images/game_provider/mgProviderSmallIcon.svg';
-// import agProviderSmallIcon from '@/assets/images/game_provider/agProviderSmallIcon.svg';
+import agProviderSmallIconPc from '@/assets/images/casino/Icon_CasinoFilter_Baccarat.svg';
+import mgProviderSmallIconPc from '@/assets/images/casino/Icon_CasinoFilter_Blackjack.svg';
+import ppProviderSmallIconPc from '@/assets/images/casino/Icon_CasinoFilter_Dice.svg';
 
 export const providerData: TGameProvider[] = [
     {
         label: 'Pragmatic Play',
         value: 'pragmaticPlay',
-        gameCategories: ['slot'],
+        gameCategories: ['slot', 'casino'],
         providerData: {
-            providerMainImg: sloggamePpImg,
-            providerSmallIcon: slot_all_icon,
+            providerMainImg: slogGamePpImg,
+            providerSmallIcon: ppProviderSmallIconPc,
             providerFavIcon: pragmaticplayProviderImg2,
             providerWhiteIcon: ppWhiteIcon,
             providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
@@ -35,9 +35,9 @@ export const providerData: TGameProvider[] = [
         value: 'microGaming',
         gameCategories: ['slot'],
         providerData: {
-            providerMainImg: sloggameMgImg,
-            providerSmallIcon: slot_all_icon,
-            providerFavIcon: microgamingProviderImg2,
+            providerMainImg: slogGameMgImg,
+            providerSmallIcon: mgProviderSmallIconPc,
+            providerFavIcon: microGamingProviderImg2,
             providerWhiteIcon: mgWhiteIcon,
             providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
             providerPath: 'microGaming',
@@ -48,9 +48,9 @@ export const providerData: TGameProvider[] = [
         value: 'asiaGaming',
         gameCategories: ['slot'],
         providerData: {
-            providerMainImg: sloggameAgImg,
-            providerSmallIcon: slot_all_icon,
-            providerFavIcon: asiagamingProviderImg2,
+            providerMainImg: slogGameAgImg,
+            providerSmallIcon: agProviderSmallIconPc,
+            providerFavIcon: asiaGamingProviderImg2,
             providerWhiteIcon: agWhiteIcon,
             providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
             providerPath: 'asiaGaming',
@@ -65,7 +65,7 @@ export const providerData: TGameProvider[] = [
             providerSmallIcon: slot_all_icon,
             providerFavIcon: evolutionProviderImg2,
             providerWhiteIcon: evoWhiteIcon,
-            providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
+            providerDescribe: 'GAME SHOWS – REDEFINING YOUR LIVE CASINO Evolution has combined your favourite traditional table games and money wheel games with elements of world-famous game shows and board games for an immersive and totally involving gaming experience. Our Game Shows category delivers more entertainment, interaction and thrills to players than ever before with the addition of multipliers that add extra layers of excitement',
             providerPath: 'evolution',
         },
     },

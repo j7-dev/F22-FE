@@ -24,13 +24,13 @@ const index: React.FC = () => {
     });
     return (
         <div className="hidden languageSwitchContain relative">
-            <div className="languageSwitch sm:gap-2 justify-start w-full flex z-10 gap-0.5">
+            <div className="languageSwitch md:gap-2 justify-start w-full flex z-10 gap-0.5">
                 {languages.map((item) => {
                     const changedLanguage = item.language;
                     const changeLanguageName = item.name;
                     return (
                         <div key={nanoid()} className="flex justify-center items-center h-[30px] px-3 cursor-pointer rounded-xl border border-solid border-Black">
-                            <span className={`inline-flex whitespace-nowrap justify-center items-center font-bold text-black sm:text-xs text-[10px]`} onClick={() => handleChangeLanguage(changedLanguage)}>
+                            <span className={`inline-flex whitespace-nowrap justify-center items-center font-bold text-black md:text-xs text-[10px]`} onClick={() => handleChangeLanguage(changedLanguage)}>
                                 {changeLanguageName}
                             </span>
                         </div>

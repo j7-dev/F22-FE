@@ -35,7 +35,8 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
     const nextValidUpgrade = nextVip?.valid_bet_amount_upgrade_threshold || 0;
 
     //當前積分
-    const currentDeposit = nextDepositUpgrade - depositUpgrade;
+    //解存款為負數的BUG，如果小於0就設為0，否則相減顯示當前積分
+    const currentDeposit = nextDepositUpgrade - depositUpgrade < 0 ? 0 : nextDepositUpgrade - depositUpgrade;
     const currentValid = nextValidUpgrade - validUpgrade;
 
     //百分比
@@ -43,18 +44,18 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
     const validPercent = (currentValid / nextValidUpgrade) * 100 || 0;
 
     return (
-        <div className="userInfo bg-white rounded-2xl grid grid-cols-2 gap-2.5 pb-3 sm:gap-6 sm:p-[30px] sm:grid-cols-4 shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
-            <div className="userName h-fit flex flex-col gap-4 col-span-2 sm:col-span-2  sm:p-0 px-4 pt-4">
-                <div className="flex flex-col sm:flex-row sm:items-end text-3xl font-bold text-[#5932EA]">
+        <div className="userInfo bg-white rounded-2xl grid grid-cols-2 gap-2.5 pb-3 md:gap-[30px] md:p-[30px] md:grid-cols-3 shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
+            <div className="userName h-fit flex flex-col gap-4 col-span-2 md:col-span-1 md:p-0 px-4 pt-4">
+                <div className="flex flex-col md:flex-row md:items-end text-3xl font-bold text-[#5932EA]">
                     {userName}
-                    <span className="text-sm text-[#ACACAC] font-normal sm:ml-2">{userPhone}</span>
+                    <span className="text-sm text-[#ACACAC] font-normal md:ml-2">{userPhone}</span>
                 </div>
                 {/* VIP進度條 */}
-                <div className="relative p-0.5 w-full h-[22px] sm:h-[34px] bg-gradient-to-r from-[#9680EA33] to-[#BAA8FF33] rounded-full sm:w-5/6">
+                <div className="relative p-0.5 w-full h-[22px] md:h-[34px] bg-gradient-to-r from-[#9680EA33] to-[#BAA8FF33] rounded-full">
                     <div className="relative w-full h-full">
                         {/* 當前等級 */}
-                        <div className="currentVip absolute z-10 left-0 h-full flex justify-center items-center aspect-square bg-[#9680EA] text-white text-base font-semibold rounded-full">
-                            <div>{nextVip?.order}</div>
+                        <div className="currentVip absolute z-10 left-0 h-full flex justify-center items-center aspect-square bg-[#9680EA] rounded-full">
+                            <span className="text-white md:text-base text-xs font-semibold md:leading-[30px]">{nextVip?.order}</span>
                         </div>
                         <div className="progressBar w-full h-full rounded-full overflow-hidden flex flex-col gap-0.5">
                             {/* 有效投注進度條 */}
@@ -62,7 +63,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                                 <div style={{ width: `${validPercent}%` }} className="h-full bg-gradient-to-r from-[#D4C9FF] to-[#9680EA] rounded-tr-full" />
                                 <div className="absolute top-0 left-12 z-10 whitespace-nowrap h-full flex items-center justify-start gap-1">
                                     <AiFillStar color="#FDD92A" size={12} />
-                                    <span className="drop-shadow-[1px_1px_1px_#00000033] text-[6px] sm:text-[10px] font-semibold text-white">{`${currentValid}/${nextValidUpgrade}`}</span>
+                                    <span className="drop-shadow-[1px_1px_1px_#00000033] text-[6px] md:text-[10px] font-semibold text-white">{`${currentValid}/${nextValidUpgrade}`}</span>
                                 </div>
                             </div>
                             {/* 存款進度條 */}
@@ -70,39 +71,39 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                                 <div style={{ width: `${depositPercent}%` }} className="h-full bg-gradient-to-r from-[#D4C9FF] to-[#9680EA] rounded-br-full" />
                                 <div className="absolute top-0 left-12 z-10 whitespace-nowrap h-full flex items-center justify-start gap-1">
                                     <AiFillStar color="#FDD92A" size={12} />
-                                    <span className="drop-shadow-[1px_1px_1px_#00000033] text-[6px] sm:text-[10px] font-semibold text-white">{`${currentDeposit}/${nextDepositUpgrade}`}</span>
+                                    <span className="drop-shadow-[1px_1px_1px_#00000033] text-[6px] md:text-[10px] font-semibold text-white">{`${currentDeposit}/${nextDepositUpgrade}`}</span>
                                 </div>
                             </div>
                         </div>
                         {/* 下一等級 */}
-                        <div className="nextVip absolute z-10 right-0 bottom-0 h-full flex justify-center items-center aspect-square bg-[#FFB930] text-white text-base font-semibold rounded-full">
+                        <div className="nextVip absolute z-10 right-0 bottom-0 h-full flex justify-center items-center aspect-square bg-[#FFB930] rounded-full">
                             <div className="relative">
-                                <img src={vipNextIcon} alt="" className="absolute -top-2 sm:-top-3 left-1/2 -translate-x-2/4 w-4" />
-                                {(nextVip?.order as number) + 1 || 'MAX'}
+                                <img src={vipNextIcon} alt="" className="absolute -top-2 md:-top-3 left-1/2 -translate-x-2/4 w-4" />
+                                <span className="text-white md:text-base text-xs font-semibold md:leading-[30px]">{(nextVip?.order as number) + 1 || 'MAX'}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="userBalance h-fit col-span-1 border-0 border-solid border-[#F0F0F0] flex gap-5 items-center pl-2 sm:border-l-2 sm:px-6 sm:-ml-4">
-                <div className="aspect-square p-3 sm:p-6 bg-gradient-to-r from-[#E7C9FF00] to-[#D4C9FFA3] rounded-full">
-                    <img src={userBalanceIcon} alt="" className="w-5 sm:w-[30px] h-full" />
+            <div className="userBalance h-fit col-span-1 whitespace-nowrap  flex gap-5 items-center pl-2 md:p-0 ">
+                <div className="p-3 md:p-6 bg-gradient-to-r from-[#E7C9FF00] to-[#D4C9FFA3] rounded-full">
+                    <img src={userBalanceIcon} alt="" className="aspect-square w-5 md:w-10 h-full" />
                 </div>
                 <div className="">
-                    <div className="text-[#ACACAC] text-[8px] sm:text-sm font-normal">{t('Total Balance')}</div>
+                    <div className="text-[#ACACAC] text-[8px] md:text-sm font-normal">{t('Total Balance')}</div>
                     {/*TODO 改成Admin 裡面的Account組件 */}
-                    <div className="text-[#333333] text-base sm:text-3xl font-semibold">
+                    <div className="text-[#333333] text-base md:text-2xl font-semibold">
                         <Amount amount={Number(balance)} symbol />
                     </div>
                 </div>
             </div>
-            <div className="userRolling h-fit col-span-1 border-0 border-solid border-[#F0F0F0] flex gap-5 items-center pr-2 sm:border-l-2 sm:px-6">
-                <div className="aspect-square p-3 sm:p-6 bg-gradient-to-r from-[#E7C9FF00] to-[#D4C9FFA3] rounded-full">
-                    <img src={userBonusIcon} alt="" className="w-5 sm:w-[30px] h-full" />
+            <div className="userRolling h-fit col-span-1 whitespace-nowrap flex gap-5 items-center pr-2 md:p-0">
+                <div className="p-3 md:p-6 bg-gradient-to-r from-[#E7C9FF00] to-[#D4C9FFA3] rounded-full">
+                    <img src={userBonusIcon} alt="" className="aspect-square w-5 md:w-10 h-full" />
                 </div>
                 <div className="">
-                    <div className="text-[#ACACAC] text-[8px] sm:text-sm font-normal">{t('Rolling Point')}</div>
-                    <div className="text-[#333333] text-base sm:text-3xl font-semibold">
+                    <div className="text-[#ACACAC] text-[8px] md:text-sm font-normal">{t('Rolling Point')}</div>
+                    <div className="text-[#333333] text-base md:text-2xl font-semibold">
                         <Amount amount={Number(turnoverBonus)} symbol />
                     </div>
                     <ConvertBtn />

@@ -40,9 +40,9 @@ const index: React.FC = () => {
 
     return (
         <>
-            <button onClick={showModal} className="convertAll cursor-pointer px-1 py-0.5 sm:mt-2 sm:py-[6.5px] sm:px-3 sm:gap-2 border-0 rounded-xl bg-primary flex items-center gap-0.5">
-                <img className="aspect-square w-2.5 sm:w-4" src={convertAllIcon} alt="" />
-                <span className="font-bold text-white text-[6px] sm:text-xs">{t('Convert All')}</span>
+            <button onClick={showModal} className="convertAll cursor-pointer px-1 py-0.5 md:py-[6.5px] md:px-3 md:gap-2 border-0 rounded-xl bg-primary flex items-center gap-0.5">
+                <img className="aspect-square w-2.5 md:w-4" src={convertAllIcon} alt="" />
+                <span className="font-bold text-white text-[6px] md:text-xs">{t('Convert All')}</span>
             </button>
             <Modal title="Confirm Convert?" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                 <div className="text-center">

@@ -4,27 +4,35 @@ import { nanoid } from 'nanoid';
 import { Spin, Button } from 'antd';
 import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTableList';
 import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
-import Banner from '@/components/ContentLayout/Banner';
+import { useGameFilter } from '@/hooks/gameProvider/useGameFilter';
+import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
+import { useShowPc } from '@/hooks/useShowPc';
 import { casinoCategory } from '@/utils/GameCategory/casinoCategory';
+import { tokenData } from '@/utils/providerData/Token';
+import { TGame } from '@/types/games';
+import Banner from '@/components/ContentLayout/Banner';
 import GameList from '@/components/ContentLayout/GameList';
 import NewsMarquee from '@/components/ContentLayout/NewsMarquee';
 import SearchBar from '@/components/ContentLayout/SearchBar';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
-import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
 import slot_favorite_icon from '@/assets/images/game_provider/slot_favorite_icon.svg';
+import slot_favorite_icon2 from '@/assets/images/game_provider/slot_favorite_icon2.svg';
 import allImg from '@/assets/images/casino/Icon_CasinoFilter_All.svg';
-import { TGame } from '@/types/games';
-import { tokenData } from '@/utils/providerData/Token';
-import { useGameFilter } from '@/hooks/gameProvider/useGameFilter';
+import allImg2 from '@/assets/images/casino/Icon_CasinoFilter_All2.svg';
+
+//TODO 有空再把這邊做優化整理，太長了
+
 //由五大分類而來的分類表
 const fxnCasinoCategory = [
     {
         img: allImg,
+        mbImg: allImg2,
         name: 'All',
         Category: 'all',
     },
     {
         img: slot_favorite_icon,
+        mbImg: slot_favorite_icon2,
         name: 'Favorite',
         Category: 'favorite',
     },
@@ -33,11 +41,15 @@ const fxnCasinoCategory = [
 //Casino遊戲商
 const casinoProvider = [
     {
+        name: 'All',
+        provider: 'all',
+    },
+    {
         name: 'Evolution',
         provider: 'evolution',
     },
     {
-        name: 'Pragmatic Play',
+        name: 'PP',
         provider: 'pragmaticPlay',
     },
     {
@@ -47,6 +59,7 @@ const casinoProvider = [
 ];
 
 const index: React.FC = () => {
+    const showPc = useShowPc();
     const { t } = useTranslation();
     //跑馬燈
     const { data } = useGetMarketingContent({ position: 'header' });
@@ -55,7 +68,7 @@ const index: React.FC = () => {
     });
     //篩選條件
     const [chosenCategory, setChosenCategory] = useState('all');
-    const [chosenProvider, setChosenProvider] = useState('evolution');
+    const [chosenProvider, setChosenProvider] = useState('all');
     const [isDisabled, setIsDisabled] = useState(false);
     const { filterGame: filterGameFn } = useGameFilter();
     //遊戲列表State
@@ -65,6 +78,7 @@ const index: React.FC = () => {
     const { data: evoData, isFetching: evoIsFetching } = useGetEVOTableList();
     const { data: ppData, isFetching: ppIsFetching } = useGetPPTableList();
     const ppGameData = ppData.filter((item) => item.gameCategory === 'casino');
+    // console.log('🚀 ~ ppGameData:', ppGameData);
     const tokenGamesData = tokenData.filter((item) => item.gameCategory === 'casino');
 
     const isFetching = evoIsFetching || ppIsFetching;
@@ -75,6 +89,12 @@ const index: React.FC = () => {
     const handleProviderChange = (provider: string) => () => {
         setChosenProvider(provider);
         setChosenCategory('all');
+        //如果為all，則直接渲染所有遊戲列表
+        if (provider === 'all') {
+            setIsDisabled(false);
+            setGameDataList(rawGameList as TGame[]);
+            return;
+        }
         //如果為token遊戲商，則直接渲染token遊戲列表，並且禁用第二層分類
         if (provider === 'other') {
             setIsDisabled(true);
@@ -82,6 +102,7 @@ const index: React.FC = () => {
             return;
         }
 
+        //如果為其他遊戲商，則直接渲染其他遊戲商遊戲列表，並且啟用第二層分類
         if (isDisabled) setIsDisabled(false);
         const filterGameList = filterGameFn({ provider: provider, category: chosenCategory, gameData: rawGameList as TGame[] });
         setGameDataList(filterGameList);
@@ -91,15 +112,6 @@ const index: React.FC = () => {
         const filterGameList = filterGameFn({ provider: chosenProvider, category: category, gameData: rawGameList as TGame[] });
         setGameDataList(filterGameList);
     };
-
-    // const handleSwitchTab = (key: string) => () => {
-    //     setChosenCategory(key);
-    //     if (key === 'all') return setGameDataList(rawGameList as []);
-    //     //如果為Favorite遊戲渲染isFavorite Data
-    //     if (key === 'favorite') return setGameDataList(rawGameList.filter((item) => isFavorite(item as TGame)) as []);
-    //     //如果為其他分類，則渲染該分類的Data
-    //     setGameDataList(rawGameList.filter((item) => item.casinoCategory === key) as []);
-    // };
 
     //搜尋遊戲函式，傳入SearchBar組件
     const filterGame = (searchGame: string) => {
@@ -120,42 +132,39 @@ const index: React.FC = () => {
     }, []);
 
     return (
-        <div className="casinoPage sm:my-9 sm:gap-8 my-4 w-full flex flex-col gap-4">
+        <div className="casinoPage md:my-9 md:gap-8 my-4 w-full flex flex-col gap-4">
             <Banner />
             <NewsMarquee className="md:hidden" speed={15} marqueeText={marqueeText} />
-            <div className="casinoSection relative sm:w-full">
+            <div className="casinoSection relative md:w-full">
                 <div className="md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl md:py-4">
-                    <div className="hidden slotTitle md:grid grid-cols-11 gap-4 py-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
-                        <div className="col-span-1 flex justify-center">
+                    <div className="slotTitle md:grid grid-cols-11 gap-4 border-0 border-solid border-b border-[#d5d8dc] md:shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] md:pt-9">
+                        <div className="hidden col-span-1 md:flex justify-center">
                             <img src={Icon_Main_Title} alt="" className="" />
                         </div>
-                        <span className="col-span-1 font-bold text-3xl text-[#9680EA] -ml-3 flex items-center">{t('CASINO')}</span>
-                        <div className="col-start-7 col-span-4 relative flex">
+                        <span className="hidden whitespace-nowrap col-span-1 font-bold text-3xl text-[#9680EA] md:flex items-center">{t('CASINO')}</span>
+                        <div className="hidden col-start-7 col-span-4 relative md:flex">
                             <SearchBar onFilter={filterGame} />
                         </div>
-                    </div>
-                    <div className="filterSection flex flex-col gap-2 pb-3 md:pt-4">
-                        <div className="casinoProviderSection px-4 overflow-x-scroll md:grid md:grid-cols-11 md:px-0 md:overflow-hidden">
-                            <div className="w-fit flex flex-nowrap col-span-3 grid-cols-7 gap-2 md:w-full md:grid md:col-start-2 md:col-span-9 ">
-                                {casinoProvider.map((item) => {
-                                    return (
-                                        <Button key={nanoid()} onClick={handleProviderChange(item.provider)} type="primary" className={`${chosenProvider == item.provider ? 'font-bold bg-[#5932EA]' : 'font-medium bg-[#C6BBEE]'} h-fit basis-full flex-1 col-span-1 cursor-pointer rounded-2xl w-28 md:w-full border-0`}>
-                                            <div className="px-4 py-3 flex justify-center items-center md:gap-2 gap-1">
-                                                <span className="md:text-base text-xs md:leading-9 leading-9 text-white">{t(item.name)}</span>
-                                            </div>
-                                        </Button>
-                                    );
-                                })}
-                            </div>
+                        <div className="filterProviderBar col-start-2 col-span-9 grid grid-cols-4 px-4 md:p-0 md:gap-2.5 md:flex ">
+                            {casinoProvider.map((item) => {
+                                return (
+                                    <div key={nanoid()} onClick={handleProviderChange(item.provider)} className={`filterTab relative cursor-pointer p-2 text-center`}>
+                                        <span className={`${chosenProvider === item.provider ? 'text-black font-bold' : 'font-normal'} text-base `}>{t(item.name)}</span>
+                                        <div className={`activeBorder ${chosenProvider === item.provider ? 'h-1 rounded-full bg-[#9680EA]' : 'h-0'} absolute top-[96%] left-0 w-full h-0`}></div>
+                                    </div>
+                                );
+                            })}
                         </div>
+                    </div>
+                    <div className="filterSection flex flex-col gap-2 py-3 md:pt-4">
                         <div className="casinoCategorySection px-4 overflow-x-scroll md:grid md:grid-cols-11 md:px-0 md:overflow-hidden">
-                            <div className="w-fit flex flex-nowrap col-span-3 grid-cols-7 gap-2 md:w-full md:grid md:col-start-2 md:col-span-9 ">
+                            <div className="w-fit flex flex-nowrap col-span-3 grid-cols-7 gap-1 md:w-full md:grid md:col-start-2 md:col-span-9 ">
                                 {fxnCasinoCategory.map((item) => {
                                     return (
-                                        <Button disabled={isDisabled} key={nanoid()} onClick={handleCategoryChange(item.Category)} className={`${isDisabled ? 'bg-[#BDBDBD]' : chosenCategory == item.Category ? 'font-bold bg-[#5932EA]' : 'font-medium bg-[#C6BBEE]'} h-fit basis-full flex-1 col-span-1 cursor-pointer rounded-2xl w-28 md:w-full border-0`}>
-                                            <div className="px-4 py-3 flex items-center md:gap-2 gap-1">
-                                                <img src={item.img} className="md:w-9 w-6 h-full object-center object-contain" alt="" />
-                                                <span className="md:text-base text-xs text-white">{t(item.name)}</span>
+                                        <Button disabled={isDisabled} key={nanoid()} onClick={handleCategoryChange(item.Category)} className={`${isDisabled ? 'bg-[#BDBDBD]' : chosenCategory == item.Category ? 'font-bold bg-[#5932EA] border-[#5932EA]' : 'font-medium md:bg-[#C6BBEE] border-[#9680EA]'} h-fit basis-full flex-1 col-span-1 cursor-pointer rounded-2xl md:w-full md:border-0 px-2 py-1 md:px-4 md:py-2.5`}>
+                                            <div className="flex items-center md:gap-2 gap-1">
+                                                <img src={showPc ? item.img : chosenCategory == item.Category ? item.img : item.mbImg} className="md:w-9 w-5 h-full object-center object-contain" alt="" />
+                                                <span className={`${chosenCategory == item.Category ? 'text-white' : 'text-[#9680EA]'} md:text-white md:text-base text-xs `}>{t(item.name)}</span>
                                             </div>
                                         </Button>
                                     );
@@ -164,7 +173,7 @@ const index: React.FC = () => {
                         </div>
                     </div>
 
-                    <div className="block px-4 sm:hidden">
+                    <div className="block px-4 md:hidden">
                         <SearchBar onFilter={filterGame} />
                     </div>
                     <Spin spinning={isFetching}>

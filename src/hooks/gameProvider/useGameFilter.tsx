@@ -19,9 +19,15 @@ export const useGameFilter = () => {
     const filterGame =
         ({ provider, category, gameData }: filterGameProp) =>
         () => {
-            //如果為all遊戲直接返回全部Data
+            //如果都為all遊戲直接不篩選
+            if (provider === 'all' && category === 'all') return gameData;
+            //如果為all廠商及收藏分類
+            if (provider === 'all' && category === 'favorite') return gameData.filter((item) => isFavorite(item as TGame)) as [];
+            //如果廠商為all篩選遊戲分類
+            if (provider === 'all') return gameData.filter((item) => item?.casinoCategory === category);
+            //如果遊戲分類為all篩選廠商分類
             if (category === 'all') return gameData.filter((item) => item?.gameProviderName === provider);
-            //如果為Favorite遊戲渲染Favorite Data
+            //如果遊戲分類為Favorite遊戲渲染Favorite Data
             if (category === 'favorite') return gameData.filter((item) => item?.gameProviderName === provider && isFavorite(item as TGame)) as [];
             //如果為其他分類，則渲染該分類的DataList
             return gameData.filter((item) => item?.gameProviderName === provider && item?.casinoCategory === category);

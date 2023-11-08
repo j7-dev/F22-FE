@@ -1,6 +1,7 @@
 import React from 'react';
 import { atom, useAtom } from 'jotai';
 import { uniqBy } from 'lodash-es';
+import { Spin } from 'antd';
 import { TFaq } from '@/types/resources';
 import { useGetFaqs } from '@/hooks/useGetFaq';
 import CategoryList from '@/components/ContentLayout/Faq/CategoryList';
@@ -27,9 +28,7 @@ const index: React.FC = () => {
     });
     return (
         <div className="w-full bg-[#F6F7F7] min-h-[500px]">
-            {isLoading ? (
-                <div>loading...</div>
-            ) : (
+            <Spin spinning={isLoading}>
                 <div className="flex flex-row gap-5 md:flex-nowrap flex-wrap max-w-[1260px] w-full m-auto justify-start items-start p-5 pb-10">
                     <div className="md:max-w-[300px] w-full ">
                         <CategoryList onFilter={onFilter} categoryListData={fxnCategoryList} />
@@ -38,7 +37,7 @@ const index: React.FC = () => {
                         <PostList categoryData={fxnCategoryData} />
                     </div>
                 </div>
-            )}
+            </Spin>
         </div>
     );
 };

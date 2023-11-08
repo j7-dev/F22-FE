@@ -27,7 +27,7 @@ const CategorySection = ({ categoryName, provider = [] }: { categoryName: string
     };
     return (
         <>
-            <div className="sm:grid grid-cols-11 gap-4 pb-0.5 py-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A]">
+            <div className="md:grid grid-cols-11 gap-4 pb-0.5 py-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A]">
                 <div className="col-span-1 flex justify-center">
                     <img src={Icon_Main_Title} alt="" className="" />
                 </div>
@@ -45,7 +45,7 @@ const CategorySection = ({ categoryName, provider = [] }: { categoryName: string
                 </div>
             </div>
             {/* 廠商內容 */}
-            <div className="sm:py-9">
+            <div className="md:py-9">
                 {fxnProvider.map((item: TGameProvider) => {
                     return (
                         <div className="providerInfo h-full w-full grid grid-cols-11 gap-4">

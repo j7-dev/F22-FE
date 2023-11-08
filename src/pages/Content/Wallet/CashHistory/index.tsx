@@ -3,7 +3,6 @@ import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { Table, Tag } from 'antd';
 import dayjs from 'dayjs';
-import { List } from '@refinedev/antd';
 import { useShowPc } from '@/hooks/useShowPc';
 import { useGetTransactionRecords } from '@/hooks/useGetTransactionRecords';
 import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
@@ -33,7 +32,6 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
         };
     });
     tableProps.dataSource = fxnData;
-
     //分頁條設定
     const paginationSetting: TablePaginationConfig = {
         ...tableProps.pagination,
@@ -63,7 +61,7 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
         return (
             <div className="flex gap-2 justify-between">
                 <div className="flex gap-2 items-center">
-                    <span className="text-black font-bold sm:text-2xl text-sm">{t('Cash History')}</span>
+                    <span className="text-black font-bold md:text-2xl text-sm">{t('Cash History')}</span>
                     {inMyPage && isPc && <ShowBtn />}
                 </div>
 
@@ -96,44 +94,44 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
             );
         }
         return (
-            <List>
-                <Table className="customTable" {...tableProps} pagination={paginationSetting}>
-                    <Column
-                        title={
-                            <div className="flex items-center gap-1">
-                                <BiSolidTimeFive color="#828282" size={20} />
-                                {t('Date')}
-                            </div>
-                        }
-                        dataIndex="fxnCreatedAt"
-                        key="fxnCreatedAt"
-                        className="w-1/2 "
-                    />
-                    <Column title={t('Cash For') as string} dataIndex="type" key="type" className="w-1/6 " />
-                    <Column title={t('Cash Amount') as string} dataIndex="amount" key="amount" className="w-1/6 " />
-                    <Column
-                        title={t('Status') as string}
-                        dataIndex="status"
-                        key="status"
-                        className="w-1/6 "
-                        render={(value) => {
-                            let color = '#EB5757';
-                            if (value === 'PENDING') color = '#BDBDBD';
-                            if (value === 'SUCCESS') color = '#22C55E';
-                            return (
-                                <Tag color={color} className="rounded-2xl">
-                                    {t(value)}
-                                </Tag>
-                            );
-                        }}
-                    />
-                </Table>
-            </List>
+            // <List>
+            <Table className="customTable" {...tableProps} pagination={paginationSetting}>
+                <Column title={t('Cash For') as string} dataIndex="type" key="type" className="w-1/4 whitespace-nowrap" />
+                <Column title={t('Cash Amount') as string} dataIndex="amount" key="amount" className="w-1/4 whitespace-nowrap" />
+                <Column
+                    title={t('Status') as string}
+                    dataIndex="status"
+                    key="status"
+                    className="w-1/4 whitespace-nowrap"
+                    render={(value) => {
+                        let color = '#EB5757';
+                        if (value === 'PENDING') color = '#BDBDBD';
+                        if (value === 'SUCCESS') color = '#22C55E';
+                        return (
+                            <Tag color={color} className="rounded-2xl">
+                                {t(value)}
+                            </Tag>
+                        );
+                    }}
+                />
+                <Column
+                    title={
+                        <div className="flex items-center gap-1 whitespace-nowrap">
+                            <BiSolidTimeFive color="#828282" size={20} />
+                            {t('Date')}
+                        </div>
+                    }
+                    dataIndex="fxnCreatedAt"
+                    key="fxnCreatedAt"
+                    className="w-1/4 min-w-[115px]"
+                />
+            </Table>
+            // {/* </List> */}
         );
     };
 
     return (
-        <div className="bg-white h-full w-full py-6 px-4 gap-5 userBank flex flex-col rounded-2xl sm:py-[42px] sm:px-[32px] sm:gap-4 shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
+        <div className="bg-white h-full w-full py-6 px-4 gap-5 userBank flex flex-col rounded-2xl md:py-[42px] md:px-[32px] md:gap-4 shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
             <TopTitle />
             <TableSection />
         </div>

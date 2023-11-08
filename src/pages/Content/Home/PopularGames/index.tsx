@@ -26,11 +26,11 @@ const index: React.FC = () => {
             //PC版
             return (
                 <>
-                    <div className="hidden popularTitle sm:grid grid-cols-11 gap-4 pb-0.5 pt-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
+                    <div className="hidden popularTitle md:grid grid-cols-11 gap-4 pb-0.5 pt-9 border-0 border-solid border-b border-[#d5d8dc] shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
                         <div className="col-span-1 flex justify-center">
                             <img src={Icon_Main_Title} alt="" className="" />
                         </div>
-                        <span className="col-span-1 font-bold text-3xl text-[#9680EA] -ml-3 flex items-center">{t('POPULAR')}</span>
+                        <span className="whitespace-nowrap col-span-1 font-bold text-3xl text-[#9680EA] -ml-3 flex items-center">{t('POPULAR')}</span>
                         <div className="filterBar col-start-2 col-span-9 flex gap-2.5 -ml-2">
                             {PopularGamesData.map((item: TPopularGames) => {
                                 return (
@@ -49,9 +49,7 @@ const index: React.FC = () => {
             <>
                 <div className="filterBarMb pb-4 overflow-x-scroll">
                     <div className="flex gap-2.5 w-fit px-4">
-                        {PopularGamesData.map((item: TPopularGames, dataIndex: number) => {
-                            //第一個全部遊戲不顯示
-                            if (dataIndex === 0) return;
+                        {PopularGamesData.map((item: TPopularGames) => {
                             return (
                                 <div key={nanoid()} onClick={handleSwitchTab(item.value)} className={`${activeTab === item.value ? 'active' : ''} ${item.value} filterTab relative rounded-2xl flex flex-col justify-center items-center aspect-square w-[60px] gap-1 shadow-[0px_4px_10px_0px_#A370ED33] `}>
                                     <div className="favicon h-[24px] w-[20px]" />
@@ -69,11 +67,11 @@ const index: React.FC = () => {
         setGameDataList(PopularGamesData.filter((item) => item.value === activeTab)[0].gameData as []);
     }, [isLoading]);
     return (
-        <div className="relative PopularGames sm:w-full">
-            <div className="sm:mx-4 sm:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl">
+        <div className="relative PopularGames md:w-full">
+            <div className="md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl">
                 <FilterBar />
                 <Spin spinning={isLoading}>
-                    <div className="sm:py-9">
+                    <div className="md:py-9">
                         <GameList gameData={gameDataList} />
                     </div>
                 </Spin>

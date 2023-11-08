@@ -10,7 +10,7 @@ const index: React.FC = () => {
     if (isFetching) return <Spin size="large" className="w-full h-screen flex justify-center items-center" />;
 
     return (
-        <div className="sportPage  sm:my-9 sm:gap-8 my-4 w-full ">
+        <div className="sportPage  md:my-9 md:gap-8 my-4 w-full ">
             <iframe src={`https://prod20290-125166753.442hattrick.com`} className="w-full h-full" />
         </div>
     );

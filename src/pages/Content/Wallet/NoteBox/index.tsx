@@ -70,7 +70,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
         return (
             <div className="flex gap-2 justify-between">
                 <div className="flex gap-2 items-center">
-                    <span className="text-black font-bold sm:text-2xl text-sm">{t('Note Box')}</span>
+                    <span className="text-black font-bold md:text-2xl text-sm">{t('Note Box')}</span>
                     {inMyPage && <ShowBtn />}
                 </div>
 
@@ -99,7 +99,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
     // };
 
     return (
-        <div className="bg-white h-full w-full py-6 px-4 gap-3 userBank flex flex-col rounded-2xl sm:py-[42px] sm:px-[32px] sm:gap-4 shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
+        <div className="bg-white h-full w-full py-6 px-4 gap-3 userBank flex flex-col rounded-2xl md:py-[42px] md:px-[32px] md:gap-4 shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)]">
             <TopTitle />
             <Table {...tableProps} className="customTable" pagination={paginationSetting}>
                 <Column
@@ -132,17 +132,17 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
             <Modal {...modalProps} centered closeIcon={false} footer={false} width={`${isXs ? '80%' : '60%'}`}>
                 <div className="flex flex-col pt-10 pb-8 px-6">
                     <div className="flex justify-between">
-                        <span className="font-bold sm:text-2xl text-base text-black">{modalContent.title}</span>
+                        <span className="font-bold md:text-2xl text-base text-black">{modalContent.title}</span>
                         <div className="cursor-pointer flex items-center gap-2 px-3 py-2.5 rounded-xl hover:bg-[#ECE8FA]">
                             <img src={noteBoxDeleteIcon} alt="" />
-                            <span className="hidden sm:block">{t('Delete')}</span>
+                            <span className="hidden md:block">{t('Delete')}</span>
                         </div>
                     </div>
                     <div className="text-[#828282] text-[10px] font-medium">
                         <span>{dayjs(modalContent.createdAt).format('MMMM DD,YYYY')}</span>
                     </div>
                     <div className="divider my-4 border-0 border-solid border-b border-[#E0E0E0] w-full" />
-                    <div className="font-normal sm:text-base text-xs text-[#828282]">
+                    <div className="font-normal md:text-base text-xs text-[#828282]">
                         <span>{renderHTML(modalContent.content)}</span>
                     </div>
                     <div className="mt-6 w-full flex justify-center">

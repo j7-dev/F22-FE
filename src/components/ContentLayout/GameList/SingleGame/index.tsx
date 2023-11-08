@@ -32,9 +32,9 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                         <FavoriteIcon item={item} />
                         {/* 有RTP率才顯示否則為空 */}
                         {/* 手機版不會顯示 */}
-                        {item.gameRTP ? <div className="RTP hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2"> RTP {(symbol as string) + item.gameRTP}</div> : ''}
+                        {item.gameRTP ? <div className="RTP hidden md:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2"> RTP {(symbol as string) + item.gameRTP}</div> : ''}
                     </div>
-                    <img className="provider w-5 sm:w-10" src={item.gameListFavIcon} alt="" />
+                    <img className="provider object-contain h-[20px] md:h-[30px]" src={item.gameListFavIcon} alt="" />
                 </div>
             );
         }
@@ -48,9 +48,9 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                         <FavoriteIcon item={item} />
                         {/* 有大小注才顯示否則為空 */}
                         {/* 手機版不會顯示 */}
-                        {item['Bet Limit'] ? <div className="BetLimit hidden sm:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`${(symbol as string) + (item?.['Bet Limit']?.KRW?.min || 0)?.toLocaleString()}-${maxBet}`}</div> : ''}
+                        {item['Bet Limit'] ? <div className="BetLimit hidden md:block text-xs font-bold text-white bg-[#00000080] rounded-full py-1 px-2">{`${(symbol as string) + (item?.['Bet Limit']?.KRW?.min || 0)?.toLocaleString()}-${maxBet}`}</div> : ''}
                     </div>
-                    <img className="provider w-5 sm:w-10" src={item.casinoCategoryIcon} alt="" />
+                    <img className="provider object-contain h-[20px] md:h-[30px]" src={item.casinoCategoryIcon} alt="" />
                 </div>
             );
         }
@@ -59,7 +59,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
                 <div className="wrap flex gap-1 items-center">
                     <FavoriteIcon item={item} />
                 </div>
-                <img className="provider w-5 sm:w-10" src={item.casinoCategoryIcon} alt="" />
+                <img className="provider object-contain h-[20px] md:h-[30px]" src={item.casinoCategoryIcon} alt="" />
             </div>
         );
     };
@@ -105,7 +105,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
         );
     };
     return (
-        <div className="singleGame  w-full h-full aspect-square relative overflow-hidden rounded-2xl sm:shadow-none shadow-[0_4px_4px_0_#A370ED33] group">
+        <div className="singleGame  w-full h-full aspect-square relative overflow-hidden rounded-2xl md:shadow-none shadow-[0_4px_4px_0_#A370ED33] group">
             <div
                 onClick={
                     isCanPlay
@@ -118,17 +118,17 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
             >
                 <PlayGameBtn />
             </div>
-            <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit pt-2 sm:px-5 px-2.5">
+            <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit p-2.5">
                 <OnTheTop {...gameItem} />
             </div>
             <div className="gameWrap w-full h-full relative ">
                 <img src={gameItem?.gameImg} alt="" className="aspect-square w-full h-full duration-500 group-hover:scale-125 object-cover" />
                 <div className="imgOverlay absolute top-0 w-full h-full bg-gradient-to-tr from-transparent via-transparent via-70% to-[#4D28EA]" />
-                <div className="gameInfo absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent via-50% to-[#1A1A1A80] flex flex-col items-start justify-end sm:px-5 py-2.5 px-2.5">
-                    <div className="sm:hidden">
+                <div className="gameInfo absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent via-50% to-[#1A1A1A80] flex flex-col items-start justify-end md:px-5 py-2.5 px-2.5">
+                    <div className="md:hidden">
                         <MobileRTPAndBetLimit {...gameItem} />
                     </div>
-                    <span className="gameName font-bold sm:text-xl text-sm text-white">{gameItem?.gameName}</span>
+                    <span className="gameName font-bold md:text-xl text-sm text-white">{gameItem?.gameName}</span>
                 </div>
             </div>
         </div>

@@ -105,10 +105,10 @@ const index: React.FC = () => {
                 centered
                 closeIcon={<AiFillCloseCircle color="#FFFFFF" size={30} />}
                 footer={null}
-                className="formWrap sm:w-[600px] sm:h-auto w-screen max-w-none"
+                className="formWrap md:w-[600px] md:h-auto w-screen max-w-none"
                 classNames={{
-                    mask: 'sm:bg-[#000000d9] blur-sm ',
-                    content: 'bg-gradient-to-b from-[#BAA8FF] to-[#5932EA] shadow-[0px_0px_10px_4px_#D4C9FF33] sm:px-[100px] py-[50px] px-[45px]',
+                    mask: 'md:bg-[#000000d9] blur-sm ',
+                    content: 'bg-gradient-to-b from-[#BAA8FF] to-[#5932EA] shadow-[0px_0px_10px_4px_#D4C9FF33] md:px-[100px] py-[50px] px-[45px]',
                 }}
             >
                 {/* <MobileCloseBtn /> */}
