@@ -12,7 +12,7 @@ import GameList from '@/components/ContentLayout/GameList';
 import SearchBar from '@/components/ContentLayout/SearchBar';
 import { useIsFavorite } from '@/hooks/useIsFavorite';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
-import slot_all_icon from '@/assets/images/game_provider/slot_all_icon.svg';
+import slot_all_icon from '@/assets/images/Icon_Menu_Filled_Slot.svg';
 import slot_favorite_icon from '@/assets/images/game_provider/slot_favorite_icon.svg';
 import { TGame } from '@/types/games';
 import { tokenData } from '@/utils/providerData/Token';
