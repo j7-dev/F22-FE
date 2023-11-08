@@ -20,7 +20,7 @@ export const useGameFilter = () => {
         ({ provider, category, gameData }: filterGameProp) =>
         () => {
             //如果都為all遊戲直接不篩選
-            if (provider && category === 'all') return gameData;
+            if (provider === 'all' && category === 'all') return gameData;
             //如果為all廠商及收藏分類
             if (provider === 'all' && category === 'favorite') return gameData.filter((item) => isFavorite(item as TGame)) as [];
             //如果廠商為all篩選遊戲分類
