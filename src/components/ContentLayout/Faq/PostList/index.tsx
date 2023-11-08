@@ -24,7 +24,7 @@ const index: React.FC<{
             <div className="pageHeader font-bold text-[#2B3240] text-sm p-2.5">{t(categoryData?.[0].category?.value as string)}</div>
             {isShowContent && <PostDetail postData={postContent} />}
             <div className="pageContent w-full flex flex-col">
-                <div className="tableHeader h-10 w-full items-center flex flex-row bg-[#2B3240] text-white p-2 font-bold text-[13px]">
+                <div className="tableHeader h-10 w-full items-center flex flex-row bg-[#5932EA] text-white p-2 font-bold text-[13px]">
                     <div className="tableNo w-20 text-center">{t('No')}</div>
                     <div className="tableTitle w-8/12">{t('Title')}</div>
                     <div className="tableDate w-48 text-center">{t('Date Created')}</div>
@@ -33,7 +33,7 @@ const index: React.FC<{
                     {categoryData?.map((item) => (
                         <div key={nanoid()} className="contentList min-h-[40px] w-full items-center flex flex-row  p-2 font-bold text-[13px]">
                             <div className="tableNo w-20 text-center">{item.id}</div>
-                            <div className="tableTitle w-8/12 hover:text-[#78D39D] cursor-pointer" onClick={() => handleSetPost(item)}>
+                            <div className="tableTitle w-8/12 hover:text-[#828282] cursor-pointer" onClick={() => handleSetPost(item)}>
                                 {t(item.title)}
                             </div>
                             <div className="tableDate w-48 text-center">{item.createdAt}</div>
