@@ -12,48 +12,80 @@ export const useTokenOpenGame = () => {
         console.log('⭐  item:', item);
         //http: api.tgame365.com/api/?gtype=graph&uid=2427051&hash=8b2da7d6cf0bf16793042c186815b9e3
 
-        // const openGameUrl = item.openFn === 'iframe' ? `${API_URL}/api/tokenapi/opengame` : `${API_URL}/api/tokenapi/startgame`;
-        openGame(
-            {
-                url: `${API_URL}/api/tokenapi/opengame`,
-                method: 'post',
-                values: {
-                    user_id: identity.id,
+        if (item.openFn === 'iframe') {
+            openGame(
+                {
+                    url: `${API_URL}/api/tokenapi/opengame`,
+                    method: 'post',
+                    values: {
+                        user_id: identity.id,
+                    },
                 },
-            },
-            {
-                onSuccess: (entryData: any) => {
-                    console.log('⭐  entryData:', entryData);
-                    //{"statuscode":"0","message":"OK","user_id":"1","uid":"2429837"}
-                    const { uid, hash } = entryData?.data || {};
+                {
+                    onSuccess: (entryData: any) => {
+                        console.log('⭐  entryData:', entryData);
+                        //{"statuscode":"0","message":"OK","user_id":"1","uid":"2429837"}
+                        const { uid, hash } = entryData?.data || {};
 
-                    const args = {
+                        const args = {
+                            gtype: item?.gtype,
+                            uid,
+                            hash,
+                        };
+
+                        const params = new URLSearchParams();
+                        Object.keys(args).forEach((key) => params.append(key, args[key as keyof typeof args]));
+
+                        //區分不同遊戲要打哪一支api
+                        const url = `${TOKEN_OPEN_GAME_URL}?${params.toString()}`;
+                        //判斷是否為safari
+                        const isSmartBet = /smartbet/i.test(navigator.userAgent);
+                        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                        if (isSafari || isSmartBet) {
+                            //當前頁面跳轉
+                            window.location.href = url;
+                        } else {
+                            //否則開新分頁
+                            window.open(url, '_blank');
+                        }
+                    },
+                    onError: (error) => {
+                        console.log('error', error);
+                    },
+                },
+            );
+        } else {
+            openGame(
+                {
+                    url: `${API_URL}/api/tokenapi/startgame`,
+                    method: 'post',
+                    values: {
+                        user_id: identity.id,
                         gtype: item?.gtype,
-                        uid,
-                        hash,
-                    };
-
-                    const params = new URLSearchParams();
-                    Object.keys(args).forEach((key) => params.append(key, args[key as keyof typeof args]));
-
-                    //區分不同遊戲要打哪一支api
-                    const url = `${item.openFn === 'iframe' ? TOKEN_OPEN_GAME_URL : `${TOKEN_OPEN_GAME_URL}startgame/`}?${params.toString()}`;
-                    //判斷是否為safari
-                    const isSmartBet = /smartbet/i.test(navigator.userAgent);
-                    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-                    if (isSafari || isSmartBet) {
-                        //當前頁面跳轉
-                        window.location.href = url;
-                    } else {
-                        //否則開新分頁
-                        window.open(url, '_blank');
-                    }
+                    },
                 },
-                onError: (error) => {
-                    console.log('error', error);
+                {
+                    onSuccess: (entryData: any) => {
+                        console.log('⭐  entryData:', entryData);
+                        //{"statuscode":"0","message":"OK","user_id":"1","uid":"2429837"}
+                        const { url } = entryData?.data || {};
+                        //判斷是否為safari
+                        const isSmartBet = /smartbet/i.test(navigator.userAgent);
+                        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                        if (isSafari || isSmartBet) {
+                            //當前頁面跳轉
+                            window.location.href = url;
+                        } else {
+                            //否則開新分頁
+                            window.open(url, '_blank');
+                        }
+                    },
+                    onError: (error) => {
+                        console.log('error', error);
+                    },
                 },
-            },
-        );
+            );
+        }
     };
 
     return {
