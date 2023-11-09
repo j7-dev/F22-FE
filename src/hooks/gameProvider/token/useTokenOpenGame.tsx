@@ -12,11 +12,10 @@ export const useTokenOpenGame = () => {
         console.log('⭐  item:', item);
         //http: api.tgame365.com/api/?gtype=graph&uid=2427051&hash=8b2da7d6cf0bf16793042c186815b9e3
 
-        //區分不同遊戲要打哪一支api
-        const openGameUrl = item.openFn === 'iframe' ? `${API_URL}/api/tokenapi/opengame` : `${API_URL}/api/tokenapi/startgame`;
+        // const openGameUrl = item.openFn === 'iframe' ? `${API_URL}/api/tokenapi/opengame` : `${API_URL}/api/tokenapi/startgame`;
         openGame(
             {
-                url: openGameUrl,
+                url: `${API_URL}/api/tokenapi/opengame`,
                 method: 'post',
                 values: {
                     user_id: identity.id,
@@ -37,7 +36,8 @@ export const useTokenOpenGame = () => {
                     const params = new URLSearchParams();
                     Object.keys(args).forEach((key) => params.append(key, args[key as keyof typeof args]));
 
-                    const url = `${TOKEN_OPEN_GAME_URL}?${params.toString()}`;
+                    //區分不同遊戲要打哪一支api
+                    const url = `${item.openFn === 'iframe' ? TOKEN_OPEN_GAME_URL : `${TOKEN_OPEN_GAME_URL}startgame/`}?${params.toString()}`;
                     //判斷是否為safari
                     const isSmartBet = /smartbet/i.test(navigator.userAgent);
                     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
