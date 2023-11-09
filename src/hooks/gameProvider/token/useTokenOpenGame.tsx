@@ -11,9 +11,12 @@ export const useTokenOpenGame = () => {
     const handleClick = ({ item, identity }: { item: TGame; identity: TMe }) => {
         console.log('⭐  item:', item);
         //http: api.tgame365.com/api/?gtype=graph&uid=2427051&hash=8b2da7d6cf0bf16793042c186815b9e3
+
+        //區分不同遊戲要打哪一支api
+        const openGameUrl = item.openFn === 'iframe' ? `${API_URL}/api/tokenapi/opengame` : `${API_URL}/api/tokenapi/startgame`;
         openGame(
             {
-                url: `${API_URL}/api/tokenapi/opengame`,
+                url: openGameUrl,
                 method: 'post',
                 values: {
                     user_id: identity.id,
