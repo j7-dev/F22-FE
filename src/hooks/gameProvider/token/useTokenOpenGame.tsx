@@ -36,8 +36,9 @@ export const useTokenOpenGame = () => {
 
                     const url = `${TOKEN_OPEN_GAME_URL}?${params.toString()}`;
                     //判斷是否為safari
+                    const isSmartBet = /smartbet/i.test(navigator.userAgent);
                     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-                    if (isSafari) {
+                    if (isSafari || isSmartBet) {
                         //當前頁面跳轉
                         window.location.href = url;
                     } else {

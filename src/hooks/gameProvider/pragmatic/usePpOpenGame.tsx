@@ -25,8 +25,9 @@ export const usePpOpenGame = () => {
                 onSuccess: (entryData) => {
                     const url = entryData.data.gameURL;
                     //判斷是否為safari
+                    const isSmartBet = /smartbet/i.test(navigator.userAgent);
                     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-                    if (isSafari) {
+                    if (isSafari || isSmartBet) {
                         //彈窗
                         window.location.href = url;
                     } else {

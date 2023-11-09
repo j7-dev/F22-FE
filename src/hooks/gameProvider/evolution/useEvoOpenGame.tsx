@@ -60,8 +60,9 @@ export const useEvoOpenGame = () => {
                 onSuccess: (entryData) => {
                     const url = entryData.data.entry;
                     //判斷是否為safari
+                    const isSmartBet = /smartbet/i.test(navigator.userAgent);
                     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-                    if (isSafari) {
+                    if (isSafari || isSmartBet) {
                         //當前頁面跳轉
                         window.location.href = url;
                     } else {
