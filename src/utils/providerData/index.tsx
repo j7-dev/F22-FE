@@ -12,9 +12,9 @@ import mgWhiteIcon from '@/assets/images/game_provider/mgWhite.svg';
 import agWhiteIcon from '@/assets/images/game_provider/agWhite.svg';
 import evoWhiteIcon from '@/assets/images/game_provider/evoWhite.svg';
 import ppWhiteIcon from '@/assets/images/game_provider/ppWhite.svg';
-import agProviderSmallIconPc from '@/assets/images/casino/Icon_CasinoFilter_Baccarat.svg';
-import mgProviderSmallIconPc from '@/assets/images/casino/Icon_CasinoFilter_Blackjack.svg';
-import ppProviderSmallIconPc from '@/assets/images/casino/Icon_CasinoFilter_Dice.svg';
+import ProviderS_PragmaticPlay from '@/assets/images/game_provider/ProviderS_PragmaticPlay.svg';
+import ProviderS_AsiaGaming from '@/assets/images/game_provider/ProviderS_AsiaGaming.svg';
+import ProviderS_Microgaming from '@/assets/images/game_provider/ProviderS_Microgaming.svg';
 
 export const providerData: TGameProvider[] = [
     {
@@ -23,7 +23,7 @@ export const providerData: TGameProvider[] = [
         gameCategories: ['slot', 'casino'],
         providerData: {
             providerMainImg: slogGamePpImg,
-            providerSmallIcon: ppProviderSmallIconPc,
+            providerSmallIcon: ProviderS_PragmaticPlay,
             providerFavIcon: pragmaticplayProviderImg2,
             providerWhiteIcon: ppWhiteIcon,
             providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
@@ -36,7 +36,7 @@ export const providerData: TGameProvider[] = [
         gameCategories: ['slot'],
         providerData: {
             providerMainImg: slogGameMgImg,
-            providerSmallIcon: mgProviderSmallIconPc,
+            providerSmallIcon: ProviderS_Microgaming,
             providerFavIcon: microGamingProviderImg2,
             providerWhiteIcon: mgWhiteIcon,
             providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
@@ -49,7 +49,7 @@ export const providerData: TGameProvider[] = [
         gameCategories: ['slot'],
         providerData: {
             providerMainImg: slogGameAgImg,
-            providerSmallIcon: agProviderSmallIconPc,
+            providerSmallIcon: ProviderS_AsiaGaming,
             providerFavIcon: asiaGamingProviderImg2,
             providerWhiteIcon: agWhiteIcon,
             providerDescribe: 'Lorem ipsum dolor sit amet consectetur. Auctor interdum platea nibh ornare ac. Est sit elit viverra scelerisque venenatis.',
