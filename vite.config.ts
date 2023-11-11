@@ -5,16 +5,10 @@ import * as path from 'path';
 import viteImagemin from 'vite-plugin-imagemin';
 
 // https://vitejs.dev/config/
-
-export default defineConfig({
-    resolve: {
-        alias: {
-            '@': path.resolve(__dirname, './src'),
-        },
-    },
-    plugins: [
-        react(),
-        tsconfigPaths(),
+const env = process?.env;
+const plugins = [react(), tsconfigPaths()];
+if (env?.NODE_ENV === 'env') {
+    plugins.push(
         viteImagemin({
             gifsicle: {
                 optimizationLevel: 7,
@@ -42,7 +36,16 @@ export default defineConfig({
                 ],
             },
         }),
-    ],
+    );
+}
+
+export default defineConfig({
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, './src'),
+        },
+    },
+    plugins,
     build: {
         target: 'es2015',
     },
