@@ -71,6 +71,8 @@ const index = () => {
 
     const combinedTxns = formattedTxns.reduce((acc: DataType[], curr: DataType) => {
         const existingItem = acc.find((item) => item.ref_id === curr.ref_id && !!curr.ref_id);
+        console.log('⭐  existingItem:', existingItem);
+        console.log('⭐  getStatus:', getStatus(allTxns, curr));
         if (existingItem) {
             // 合并具有相同ref_id的项
             Object.assign(existingItem, curr);
@@ -82,6 +84,7 @@ const index = () => {
         }
         return acc;
     }, []);
+    console.log('⭐  combinedTxns:', combinedTxns);
 
     const filteredTxns = combinedTxns.filter((txn) => (status ? txn.status === status : true));
 
