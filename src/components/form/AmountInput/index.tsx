@@ -39,7 +39,7 @@ const index: React.FC<{
                 </Form.Item>
             )}
 
-            <Form.Item className="min-w-[5rem]" label="&nbsp;" name={['currency']} initialValue={default_currency}>
+            <Form.Item hidden={hide} className="min-w-[5rem]" label="&nbsp;" name={['currency']} initialValue={default_currency}>
                 <Select
                     options={support_currencies.map((currency: string) => ({
                         label: currency,
@@ -48,7 +48,7 @@ const index: React.FC<{
                     disabled={support_currencies.length < 2}
                 />
             </Form.Item>
-            <Form.Item className="min-w-[10rem]" label="&nbsp;" name={['amount_type']} initialValue={default_amount_type}>
+            <Form.Item hidden={hide} className="min-w-[10rem]" label="&nbsp;" name={['amount_type']} initialValue={default_amount_type}>
                 <Select
                     options={support_amount_types.map((amountType: string) => ({
                         label: amountType,

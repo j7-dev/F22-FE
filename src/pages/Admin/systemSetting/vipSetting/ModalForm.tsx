@@ -2,6 +2,7 @@ import { Form, Input, InputNumber, Switch, Modal, ModalProps } from 'antd';
 import { modalShowAtom } from './atom';
 import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
+import AmountInput from '@/components/form/AmountInput';
 
 const ModalForm: React.FC<{ modalProps: ModalProps }> = ({ modalProps }) => {
     const form = Form.useFormInstance();
@@ -11,6 +12,7 @@ const ModalForm: React.FC<{ modalProps: ModalProps }> = ({ modalProps }) => {
     return (
         <Modal {...modalProps} open={modalShow} onCancel={() => setModalShow(false)}>
             <Form form={form} layout="vertical">
+                <AmountInput amountProps={{ hide: true }} />
                 <div className="grid grid-cols-2 gap-6">
                     <Form.Item
                         name="label"
