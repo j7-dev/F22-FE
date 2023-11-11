@@ -7,7 +7,7 @@ import viteImagemin from 'vite-plugin-imagemin';
 // https://vitejs.dev/config/
 const env = process?.env;
 const plugins = [react(), tsconfigPaths()];
-if (env?.NODE_ENV === 'env') {
+if (env?.NODE_ENV === 'dev') {
     plugins.push(
         viteImagemin({
             gifsicle: {
