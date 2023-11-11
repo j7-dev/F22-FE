@@ -74,7 +74,6 @@ const index = () => {
         if (existingItem) {
             // 合并具有相同ref_id的项
             Object.assign(existingItem, curr);
-            existingItem.status = getStatus(allTxns, curr);
             existingItem.key = curr.ref_id;
         } else {
             // 如果没有相同的ref_id，添加到结果数组中
@@ -120,12 +119,12 @@ const index = () => {
         {
             title: t('Debit Amount'),
             dataIndex: 'debit_amount',
-            render: (v: number) => <SimpleAmount amount={-v} />,
+            render: (v: number) => (v === undefined ? '' : <SimpleAmount amount={-v} />),
         },
         {
             title: t('Pay Out'),
             dataIndex: 'credit_amount',
-            render: (v: number) => <SimpleAmount amount={-v} />,
+            render: (v: number) => (v === undefined ? '' : <SimpleAmount amount={-v} />),
         },
         // {
         //     title: 'Valid Bet Amount',
@@ -140,6 +139,7 @@ const index = () => {
         {
             title: t('Status'),
             dataIndex: 'status',
+            render: (_v: undefined, record: DataType) => getStatus(allTxns, record),
         },
         {
             title: t('Bet Time'),
@@ -163,11 +163,11 @@ const index = () => {
 };
 
 function getStatus(allTxns: TTransaction[], record: DataType) {
-    if (!!record?.debit_amount && !!record?.credit_amount) return 'NORMAL';
-    if (!!record?.debit_amount && !record?.credit_amount) return 'PENDING';
+    if (record?.debit_amount !== undefined && record?.credit_amount !== undefined) return 'NORMAL';
+    if (record?.debit_amount !== undefined && record?.credit_amount === undefined) return 'PENDING';
 
     const findTxn = allTxns.find((t: TTransaction) => t.ref_id === record.ref_id && !!record.ref_id);
-    if (!!record?.debit_amount && findTxn?.type === 'CANCEL') return 'CANCEL';
+    if (record?.debit_amount !== undefined && findTxn?.type === 'CANCEL') return 'CANCEL';
     return '';
 }
 
