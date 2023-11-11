@@ -1,10 +1,11 @@
 import FormComponent from '../FormComponent';
-import { useUpdate, useGo } from '@refinedev/core';
+import { useUpdate, useGo, useResource } from '@refinedev/core';
 import { Edit, useForm } from '@refinedev/antd';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { RESOURCE } from '../constants';
 
 const index: React.FC<{
     notificationConfig?: ArgsProps;
@@ -13,12 +14,16 @@ const index: React.FC<{
     const { id } = useParams();
     const { mutate: update } = useUpdate();
     const go = useGo();
+    const { resource } = useResource(RESOURCE);
 
     const { form, formProps, saveButtonProps, formLoading } = useForm({
         meta: {
             populate: {
-                vips: {
+                user: {
                     fields: ['id'],
+                },
+                period: {
+                    fields: '*',
                 },
             },
         },
@@ -27,10 +32,9 @@ const index: React.FC<{
         if (!id) return;
         form.validateFields()
             .then((values) => {
-                console.log('⭐  values:', values);
                 update(
                     {
-                        resource: 'deposit-bonuses',
+                        resource: RESOURCE,
                         values,
                         id,
                     },
@@ -38,13 +42,12 @@ const index: React.FC<{
                         onSuccess: () => {
                             form.resetFields();
                             notification.success({
-                                key: 'edit-deposit-bonuses',
-                                message: t('Edit Turnover bonus successfully'),
+                                key: `edit-${RESOURCE}`,
+                                message: t(`Edit ${RESOURCE} successfully`),
                                 ...notificationConfig,
                             });
-
                             go({
-                                to: '/refine/promotion/deposit-bonuses',
+                                to: (resource?.list || '') as string,
                             });
                         },
                     },
