@@ -1,0 +1,77 @@
+/**
+*手機版底部選單css
+*/
+$NavBar_Deposit_Filled: url("@/assets/images/mobileBottom/NavBar_Deposit_Filled.svg");
+$NavBar_Deposit_Outlined: url("@/assets/images/mobileBottom/NavBar_Deposit_Outlined.svg");
+$NavBar_Event_Filled: url("@/assets/images/mobileBottom/NavBar_Event_Filled.svg");
+$NavBar_Event_Outlined: url("@/assets/images/mobileBottom/NavBar_Event_Outlined.svg");
+$NavBar_Home_Filled: url("@/assets/images/mobileBottom/NavBar_Home_Filled.svg");
+$NavBar_Home_Outlined: url("@/assets/images/mobileBottom/NavBar_Home_Outlined.svg");
+$NavBar_Withdraw_Filled: url("@/assets/images/mobileBottom/NavBar_Withdraw_Filled.svg");
+$NavBar_Withdraw_Outlined: url("@/assets/images/mobileBottom/NavBar_Withdraw_Outlined.svg");
+$couponHistoryFavicon: url("@/assets/images/newMenuIcon/Icon_Menu_Outlined_PointDetails.svg");
+$couponHistoryFaviconWhite: url("@/assets/images/newMenuIcon/Icon_Menu_Filled_PointDetailsCopy.svg");
+
+.f22-content {
+	.mobileBottom {
+		.mobileSection {
+			.btnWrap {
+				border : {
+					color: transparent;
+					width: 2px 0 0 0;
+					style: solid;
+				}
+				span {
+					color: #828282;
+				}
+				.favicon {
+					background: {
+						position: center center;
+						repeat: no-repeat;
+						size: contain;
+					}
+				}
+				&.deposit .favicon {
+					background-image: $NavBar_Deposit_Outlined;
+				}
+				&.events .favicon {
+					background-image: $NavBar_Event_Outlined;
+				}
+				&.home .favicon {
+					background-image: $NavBar_Home_Outlined;
+				}
+				&.withdraw .favicon {
+					background-image: $NavBar_Withdraw_Outlined;
+				}
+				&.coupon .favicon {
+					background-image: $couponHistoryFavicon;
+				}
+				&.active {
+					span {
+						color: #5932ea;
+					}
+					border : {
+						color: #5932ea;
+						width: 2px 0 0 0;
+						style: solid;
+					}
+					&.deposit .favicon {
+						background-image: $NavBar_Deposit_Filled;
+					}
+					&.events .favicon {
+						background-image: $NavBar_Event_Filled;
+					}
+					&.home .favicon {
+						background-image: $NavBar_Home_Filled;
+					}
+					&.withdraw .favicon {
+						background-image: $NavBar_Withdraw_Filled;
+					}
+					&.coupon .favicon {
+						background-image: $couponHistoryFaviconWhite;
+					}
+				}
+			}
+		}
+	}
+}

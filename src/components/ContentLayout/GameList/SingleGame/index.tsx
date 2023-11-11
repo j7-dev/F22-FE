@@ -92,8 +92,12 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
         //如果allowGameCategories存在(!=null)且不包含遊戲類別則顯示不能玩
         if (!isCanPlay) {
             return (
-                <div className="flex gap-2 items-center bg-white w-fit h-10 rounded-2xl border-2 border-[#5932EA] px-6 py-2 ">
-                    <span className=" whitespace-nowrap font-bold text-base text-[red]">Can't Play</span>
+                <div className="flex gap-2 justify-center items-center bg-white md:w-fit w-full h-fit md:rounded-2xl border-2 border-[#5932EA] md:px-6">
+                    <span className="text-center p-2 font-bold text-base text-[red]">
+                        신청한 보너스 타입
+                        <br />
+                        게임 아님
+                    </span>
                 </div>
             );
         }

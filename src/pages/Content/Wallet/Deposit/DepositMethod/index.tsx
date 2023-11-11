@@ -2,7 +2,7 @@ import { Form, Button, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useGetIdentity } from '@refinedev/core';
 import { TMe } from '@/types';
-
+import { nanoid } from 'nanoid';
 // const DEPOSIT_METHOD = [
 //     { name: 'CodePay', value: 'codePay' },
 //     { name: 'Transfer', value: 'transfer' },
@@ -37,7 +37,7 @@ const index = () => {
             </Form.Item>
             <div className="flex flex-nowrap md:gap-4 gap-2 mb-8">
                 {DEPOSIT_METHOD?.map((item) => (
-                    <div className="w-full">
+                    <div className="w-full" key={nanoid()}>
                         <Button key={item.name} onClick={handleClick(item.name)} className={`${isSelect === item.name ? 'bg-[#9680EA] text-white' : 'bg-[#F8F9FF] text-[#9680EA]'} col-span-1 w-full h-10 md:h-[65px] md:text-xl text-base font-bold border-[#9680EA] hover:text-white hover:bg-[#9680EA]`}>
                             {t(item.name)}
                         </Button>
