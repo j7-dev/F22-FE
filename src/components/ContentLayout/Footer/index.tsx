@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
                         <img src={showPc ? logo : logo2} alt="" className="md:w-full w-[30px] h-full object-left object-contain" />
                     </div>
                     {/* qr code */}
-                    <div className="p-4 grid grid-cols-2">
+                    <div className="p-4 grid grid-cols-2 col-span-3">
                         <div className="androidQrCode">
                             <img src={androidQrCode} alt="" className="w-full" />
                             <a href={androidUrl}>

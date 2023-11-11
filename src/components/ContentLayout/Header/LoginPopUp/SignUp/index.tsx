@@ -85,7 +85,7 @@ const index: React.FC = () => {
         }
         return Promise.resolve();
     };
-
+    //檢查用戶名是否已存在
     const handleCheckUserName = async (e: any) => {
         const checkUserNameData = await checkUserName(e.target.value);
         //{data:true/false , message:"available"/"registered, please try another one" , status:"200"}
@@ -93,7 +93,7 @@ const index: React.FC = () => {
             form.setFields([
                 {
                     name: 'userName',
-                    errors: [t(checkUserNameData.message)],
+                    errors: ['이미 가입된 아이디 입니다,다시 입력해주세요'],
                 },
             ]);
         }
