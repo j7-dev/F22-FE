@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -26,16 +26,18 @@ export const Footer: React.FC = () => {
     const [iosQrCode, setIosQrCode] = React.useState('');
     const generateQR = async ({ setAndroidUrl, setIosUrl }: { setAndroidUrl: string; setIosUrl: string }) => {
         try {
-            const getAndroidQrCode = await QRCode.toDataURL(setAndroidUrl);
-            const getIosQrCode = await QRCode.toDataURL(setIosUrl);
-            setAndroidQrCode(getAndroidQrCode);
-            setIosQrCode(getIosQrCode);
+            const androidResponse = await QRCode.toDataURL(setAndroidUrl);
+            const iosResponse = await QRCode.toDataURL(setIosUrl);
+            setAndroidQrCode(androidResponse);
+            setIosQrCode(iosResponse);
         } catch (err) {
             console.error(err);
+            return '';
         }
     };
-    generateQR({ setAndroidUrl: androidUrl, setIosUrl: iosUrl });
-
+    useEffect(() => {
+        generateQR({ setAndroidUrl: androidUrl, setIosUrl: iosUrl });
+    }, []);
     return (
         <div className="bg-white w-full text-black font-normal z-10 ">
             <div className="footerImgWrap grid md:grid-cols-11 md:pb-20 md:py-9 grid-cols-4 gap-4 w-full h-auto border-solid border-b-2 border-0 border-[#E0E0E0] py-6 px-4">
@@ -57,7 +59,6 @@ export const Footer: React.FC = () => {
                                 <img src={appStore} alt="" className="w-full px-2" />
                             </a>
                         </div>
-                        {/* {t('COPYRIGHT 2023, SMART BET. ALL RIGHTS RESERVED. GAMBLING CAN BE ADDICTIVE, PLEASE PLAY RESPONSIBLY. FOR MORE INFORMATION ON SUPPORT TOOLS, PLEASE VISIT OUR RESPONSIBLE GAMBLING PAGE PAYMENT SUPPORTED BY CODE PAY')} */}
                     </div>
                     {/* 電腦版翻譯選單 */}
                     {showPc ? <LanguageSwitch /> : ''}
@@ -70,7 +71,7 @@ export const Footer: React.FC = () => {
                                 <span className="">{t('SMART BET HELP')}</span>
                             </>
                         ) : (
-                            <span className="w-full h-full flex justify-center items-center">{t('HELPS')}</span>
+                            <span className="w-full h-full flex justify-center items-center">{t('SMRAT BET')}</span>
                         )}
                     </div>
                     <ul className="socialMedia md:grid-cols-4 gap-1.5 p-0 m-0 col-span-3 grid grid-cols-5">
