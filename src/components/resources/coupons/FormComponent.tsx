@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import { Form, FormProps, InputNumber, Checkbox, Input, Select } from 'antd';
-import { useGetSiteSetting } from '@/hooks';
+import { Form, FormProps, InputNumber, Checkbox, Input } from 'antd';
 import ResourceSelect from '@/components/form/ResourceSelect';
 import { isObject } from 'lodash-es';
 import { TVip } from '@/types';
-import { CloseOutlined } from '@ant-design/icons';
 import { gameCategories } from '@/utils/GameCategory';
 import { useTranslation } from 'react-i18next';
+import AmountInput from '@/components/form/AmountInput';
+import PeriodInput from '@/components/Admin/Period/Input';
+import dayjs from 'dayjs';
 
 const FormComponent: React.FC<{
     formType: 'create' | 'edit';
@@ -15,86 +16,49 @@ const FormComponent: React.FC<{
     formLoading?: boolean;
 }> = ({ formType, formProps, handler, formLoading }) => {
     const { t } = useTranslation();
-    const form = formProps.form;
-    const { default_currency, default_amount_type, support_currencies, support_amount_types } = useGetSiteSetting();
     const game_categories = gameCategories.map((category) => category.value);
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            if (default_currency && default_amount_type && form) {
-                // 設定表單預設值
-                form?.setFieldsValue({
-                    currency: default_currency,
-                    amount_type: default_amount_type,
-                });
-            }
-        }, 0);
+        console.log('⭐  formProps.initialValues', formProps.initialValues);
 
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, [default_currency, default_amount_type, form]);
-
-    useEffect(() => {
         // 編輯時重組資料
         if (!formLoading && formProps.initialValues && formType === 'edit') {
             if (Array.isArray(formProps?.initialValues?.vips as number[] | TVip[]) && formProps?.initialValues?.vips.every((v: number | TVip) => isObject(v))) {
                 formProps.initialValues.vips = (formProps?.initialValues?.vips || []).map((v: TVip) => v.id);
+            }
+            if (formProps?.initialValues?.period?.start_datetime) {
+                formProps.initialValues.period.start_datetime = dayjs(formProps?.initialValues?.period?.start_datetime);
+            }
+            if (formProps?.initialValues?.period?.end_datetime) {
+                formProps.initialValues.period.end_datetime = dayjs(formProps?.initialValues?.period?.end_datetime);
             }
         }
     }, [formLoading]);
 
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
+            <AmountInput amountProps={{ hide: true }} />
+
             <div className="grid grid-cols-3 gap-6">
-                <Form.Item className="w-full" label={t('Label')} name={['label']} rules={[{ required: true, message: 'value is required' }]}>
-                    <Input className="w-full" />
-                </Form.Item>
-                <Form.Item className="w-full" label={t('Bonus Rate')} name={['bonus_rate']} rules={[{ required: true, message: 'value is required' }]}>
-                    <InputNumber min={0} addonAfter="%" className="w-full" />
-                </Form.Item>
-                <Form.Item className="w-full" label={t('Rolling Percentage')} name={['rolling_percentage']}>
-                    <InputNumber min={0} addonAfter="%" className="w-full" />
-                </Form.Item>
-                <Form.Item className="w-full" label={t('Min Deposit Amount')} name={['min_deposit_amount']}>
-                    <InputNumber min={0} precision={0} className="w-full" />
-                </Form.Item>
-                <Form.Item className="w-full" label={t('Max Bonus Amount')} name={['max_bonus_amount']}>
-                    <InputNumber min={0} precision={0} className="w-full" />
-                </Form.Item>
-                <Form.Item hidden name={['deposit_type']} initialValue="NORMAL">
+                <Form.Item className="w-full" label={t('Title')} name={['title']} rules={[{ required: true, message: 'value is required' }]}>
                     <Input className="w-full" />
                 </Form.Item>
 
-                <ResourceSelect formItemProps={{ label: t('VIPS'), name: ['vips'] }} fetchProps={{ resource: 'vips', optionLabel: 'label', optionValue: 'id' }} selectProps={{ allowClear: true, mode: 'multiple' }} />
+                <ResourceSelect formItemProps={{ label: t('User'), name: ['user'] }} fetchProps={{ resource: 'users', optionLabel: 'display_name', optionValue: 'id' }} selectProps={{ allowClear: true, size: 'small' }} />
+
+                <Form.Item className="w-full" label={t('Amount')} name={['coupon_amount']} rules={[{ required: true, message: 'value is required' }]}>
+                    <InputNumber min={0} className="w-full" />
+                </Form.Item>
 
                 <Form.Item name="allow_game_categories" label={t('Allow Game Categories')} initialValue={formType === 'create' ? game_categories : undefined}>
                     <Checkbox.Group options={game_categories} />
                 </Form.Item>
 
-                <div className="bg-gray-100 p-4 rounded-xl mb-4 hidden">
-                    <div className="flex items-center">
-                        <Form.Item className="mr-6 w-full" label={t('Currency')} name={['currency']}>
-                            <Select
-                                options={support_currencies.map((currency: string) => ({
-                                    label: currency,
-                                    value: currency,
-                                }))}
-                                disabled={support_currencies.length < 2}
-                            />
-                        </Form.Item>
-                        <Form.Item className="mr-6 w-full" label={t('Amount Type')} name={['amount_type']}>
-                            <Select
-                                options={support_amount_types.map((amountType: string) => ({
-                                    label: amountType,
-                                    value: amountType,
-                                }))}
-                                disabled={support_amount_types.length < 2}
-                            />
-                        </Form.Item>
-                        <CloseOutlined className="opacity-0" />
-                    </div>
-                </div>
+                <Form.Item className="w-full" label={t('Description')} name={['description']}>
+                    <Input.TextArea className="w-full" />
+                </Form.Item>
+
+                <PeriodInput />
             </div>
         </Form>
     );

@@ -1,9 +1,10 @@
 import FormComponent from '../FormComponent';
-import { useCreate, useGo } from '@refinedev/core';
+import { useCreate, useGo, useResource } from '@refinedev/core';
 import { Create, useForm } from '@refinedev/antd';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { useTranslation } from 'react-i18next';
+import { RESOURCE } from '../constants';
 
 const index: React.FC<{
     notificationConfig?: ArgsProps;
@@ -11,26 +12,28 @@ const index: React.FC<{
     const { t } = useTranslation();
     const { mutate: create } = useCreate();
     const go = useGo();
+    const { resource } = useResource(RESOURCE);
 
     const { form, formProps, saveButtonProps, formLoading } = useForm();
     const handleCreate = () => {
         form.validateFields()
             .then((values) => {
+                console.log('⭐  values:', values);
                 create(
                     {
-                        resource: 'deposit-bonuses',
+                        resource: RESOURCE,
                         values,
                     },
                     {
                         onSuccess: () => {
                             form.resetFields();
                             notification.success({
-                                key: 'create-discount',
-                                message: t('Create turnover bonus successfully'),
+                                key: `create-${RESOURCE}`,
+                                message: t(`Create ${RESOURCE} successfully`),
                                 ...notificationConfig,
                             });
                             go({
-                                to: '/refine/promotion/deposit-bonuses',
+                                to: (resource?.list || '') as string,
                             });
                         },
                     },

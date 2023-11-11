@@ -9,6 +9,7 @@ export * from './loginDetails';
 export * from './faq';
 export * from './depositBonuses';
 export * from './betRecords';
+export * from './coupons';
 
 export type BaseType = {
     id: number;
@@ -25,4 +26,10 @@ export type AmountType = {
 export type TMeta = {
     meta_key: string;
     meta_value: string;
+};
+
+export type TPeriod = {
+    id: number;
+    start_datetime: string; // 2023-11-22T16:00:00.000Z
+    end_datetime: string;
 };

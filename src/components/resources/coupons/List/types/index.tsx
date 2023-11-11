@@ -1,3 +1,4 @@
-import { TDepositBonus } from '@/types';
+import { TCoupon } from '@/types';
 
-export type DataType = TDepositBonus;
+export type DataType = TCoupon;
+export type TSearchProps = any;
