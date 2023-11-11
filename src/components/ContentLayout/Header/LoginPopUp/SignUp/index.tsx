@@ -23,8 +23,7 @@ const index: React.FC = () => {
     const setSignIn = useSetAtom(signInAtom);
     //取得檢查用戶名是否已存在方法
     const { checkUserName } = useCheckUserName();
-    const checkUserNameData = checkUserName('123111');
-    console.log('🚀 ~ isExist:', checkUserNameData);
+
     const captchaSignUpRef = useRef<HCaptcha>(null);
     const { mutate: register, isLoading } = useRegister<TRegisterPayload>();
     const [form] = Form.useForm();
@@ -86,18 +85,18 @@ const index: React.FC = () => {
         }
         return Promise.resolve();
     };
-    //FIXME 檢查用戶名是否已存在
+
     const handleCheckUserName = async (e: any) => {
-        console.log(e.target.value);
-        // const isExist = await checkUserName(e.target.value);
-        // if (isExist) {
-        //     form.setFields([
-        //         {
-        //             name: 'username',
-        //             errors: ['User name already exists'],
-        //         },
-        //     ]);
-        // }
+        const checkUserNameData = await checkUserName(e.target.value);
+        //{data:true/false , message:"available"/"registered, please try another one" , status:"200"}
+        if (!checkUserNameData.data) {
+            form.setFields([
+                {
+                    name: 'userName',
+                    errors: [t(checkUserNameData.message)],
+                },
+            ]);
+        }
     };
     //自訂驗證規則=>密碼長度大於6
     const passwordValidateFunction = (_: object, value: string) => {
@@ -121,7 +120,10 @@ const index: React.FC = () => {
         form.validateFields({ validateOnly: true }).then(
             //成功回調
             () => {
-                setSubmitTable(true);
+                //判斷是否有錯誤訊息，沒有的話就可以提交表單
+                if (form.getFieldsError(['userName'])[0].errors.length === 0) {
+                    setSubmitTable(true);
+                }
             },
             //失敗回調
             () => {
