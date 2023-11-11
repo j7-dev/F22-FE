@@ -120,12 +120,12 @@ const index = () => {
         {
             title: t('Debit Amount'),
             dataIndex: 'debit_amount',
-            render: (v: number) => <SimpleAmount amount={-v} />,
+            render: (v: number) => (v === undefined ? '' : <SimpleAmount amount={-v} />),
         },
         {
             title: t('Pay Out'),
             dataIndex: 'credit_amount',
-            render: (v: number) => <SimpleAmount amount={-v} />,
+            render: (v: number) => (v === undefined ? '' : <SimpleAmount amount={-v} />),
         },
         // {
         //     title: 'Valid Bet Amount',
