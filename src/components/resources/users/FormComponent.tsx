@@ -107,12 +107,9 @@ const FormComponent: React.FC<{
                         },
                     ]}
                 >
-                    <Input disabled />
+                    <Input disabled={formType === 'edit'} />
                 </Form.Item>
 
-                <Form.Item name="display_name" label="display name">
-                    <Input />
-                </Form.Item>
                 <Form.Item
                     name="phone"
                     label={t('phone')}

@@ -1,31 +1,21 @@
 import { Table, Row, Col, Card, TableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useTable, List, EditButton, DeleteButton } from '@refinedev/antd';
-import { DateTime } from '@/components/PureComponents';
 import { DataType } from './types';
-import { POST_TYPE, RESOURCE } from '../constants';
+import { TUser } from '@/types';
 import { useTranslation } from 'react-i18next';
+import UserLink from '@/components/Admin/UserLink';
 
 const index = () => {
     const { t } = useTranslation();
     const { tableProps } = useTable({
-        resource: RESOURCE,
-        filters: {
-            permanent: [
-                {
-                    field: 'post_type',
-                    operator: 'eq',
-                    value: POST_TYPE,
+        resource: 'coupons',
+        meta: {
+            populate: {
+                user: {
+                    fields: ['id', 'display_name'],
                 },
-            ],
-        },
-        sorters: {
-            initial: [
-                {
-                    field: 'createdAt',
-                    order: 'desc',
-                },
-            ],
+            },
         },
     });
 
@@ -35,24 +25,41 @@ const index = () => {
             dataIndex: 'id',
         },
         {
-            title: t('title'),
+            title: t('Title'),
             dataIndex: 'title',
         },
         {
-            title: t('content'),
-            dataIndex: 'content',
+            title: t('Description'),
+            dataIndex: 'description',
         },
         {
-            title: t('send_to_user_ids'),
-            dataIndex: 'send_to_user_ids',
+            title: t('Amount'),
+            dataIndex: 'coupon_amount',
         },
         {
-            title: t('date'),
-            dataIndex: 'createdAt',
-            render: (createdAt: string) => <DateTime value={createdAt} />,
+            title: t('Is Claimed'),
+            dataIndex: 'is_claimed',
         },
         {
-            title: t(''),
+            title: t('User'),
+            dataIndex: 'user',
+            render: (user: TUser) => <UserLink user={user} />,
+        },
+        {
+            title: t('Allow Game Categories'),
+            dataIndex: 'allow_game_categories',
+            render: (v: string[]) => (Array.isArray(v) ? v.join(', ') : ''),
+        },
+        {
+            title: t('Period'),
+            dataIndex: 'period',
+            render: (period: any) => {
+                console.log('⭐  period:', period);
+                return <></>;
+            },
+        },
+        {
+            title: '',
             fixed: 'right',
             dataIndex: 'action',
             render: (_, record) => (
@@ -73,7 +80,7 @@ const index = () => {
 
     return (
         <List
-            resource={RESOURCE}
+            resource="coupons"
             canCreate
             createButtonProps={{
                 children: t('Create'),

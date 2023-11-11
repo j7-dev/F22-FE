@@ -84,7 +84,13 @@ const index = () => {
     } as TableProps<DataType>;
 
     return (
-        <List resource="deposit-bonuses" canCreate>
+        <List
+            resource="deposit-bonuses"
+            canCreate
+            createButtonProps={{
+                children: t('Create'),
+            }}
+        >
             <Row gutter={[16, 16]}>
                 <Col lg={24} xs={24}>
                     <Card bordered={false}>

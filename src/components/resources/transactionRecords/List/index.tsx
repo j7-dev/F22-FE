@@ -3,7 +3,6 @@ import type { ColumnType } from 'antd/es/table';
 import { useTable, List } from '@refinedev/antd';
 import Filter from './Filter';
 import FilterTags from '@/components/Admin/FilterTags';
-import { getStatusTag } from '@/utils';
 import { TUser, TTransactionType, TDepositBonus } from '@/types';
 import UserLink from '@/components/Admin/UserLink';
 import VipLink from '@/components/Admin/VipLink';
@@ -14,7 +13,7 @@ import { DataType, TSearchProps, TParams } from './types';
 import { selectedRecordsAtom } from './atom';
 import { useSetAtom } from 'jotai';
 import { useParams } from 'react-router-dom';
-import { useGetSiteSetting } from '@/hooks';
+import { useGetSiteSetting, useGetStatusTag } from '@/hooks';
 import UserSummary from '@/components/Admin/UserSummary';
 import BankAccount from '@/components/Admin/BankAccount';
 import DepositBonusAmount from '@/components/Admin/DepositBonusAmount';
@@ -26,6 +25,7 @@ const index = () => {
     const { type: listTypeLowerCase, roleType } = useParams<TParams>();
     const siteSetting = useGetSiteSetting();
     const rolesMapping = siteSetting?.roles || {};
+    const { getStatusTag } = useGetStatusTag();
 
     const listType = (listTypeLowerCase || '')?.toUpperCase() as TTransactionType & 'ALL';
 
@@ -84,6 +84,9 @@ const index = () => {
                             fields: ['id'],
                         },
                     },
+                },
+                deposit_bonus: {
+                    fields: '*',
                 },
             },
         },

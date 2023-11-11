@@ -5,8 +5,10 @@ import { DateTime, BooleanIndicator } from '@/components/PureComponents';
 import { DataType } from './types';
 import { selectedRecordsAtom } from './atom';
 import { useSetAtom } from 'jotai';
+import { useTranslation } from 'react-i18next';
 
 const index = () => {
+    const { t } = useTranslation();
     const setSelectedRecords = useSetAtom(selectedRecordsAtom);
 
     const { tableProps } = useTable({
@@ -86,7 +88,12 @@ const index = () => {
     } as TableProps<DataType>;
 
     return (
-        <List canCreate>
+        <List
+            canCreate
+            createButtonProps={{
+                children: t('Create'),
+            }}
+        >
             <Row gutter={[16, 16]}>
                 <Col lg={24} xs={24}>
                     <Card bordered={false}>

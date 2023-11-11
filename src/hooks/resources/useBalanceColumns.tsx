@@ -1,6 +1,7 @@
 import { TBalance } from '@/types';
 import { useGetSiteSetting } from '@/hooks';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
+import { useTranslation } from 'react-i18next';
 
 /**
  * 取得 Balance Column[]
@@ -8,13 +9,14 @@ import SimpleAmount from '@/components/Admin/SimpleAmount';
  * 原本 Balances 是一個 TBalance[]，這邊將其轉換成 Column[]
  */
 export const useBalanceColumns = () => {
+    const { t } = useTranslation();
     const { support_amount_types, support_currencies } = useGetSiteSetting();
     const allBalances = support_currencies
         .map((currency) => {
             const amount_type_balances = support_amount_types.map((amount_type) => {
                 return {
                     with: 300,
-                    title: `${currency.toLowerCase()} ${amount_type.toLowerCase()} balance`,
+                    title: t(`${currency.toLowerCase()} ${amount_type.toLowerCase()} balance`),
                     dataIndex: `balances`,
                     key: `balances-${currency}-${amount_type}`,
                     render: (balances: TBalance[]) => {
