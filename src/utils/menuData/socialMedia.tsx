@@ -27,7 +27,7 @@ export const socialMedia = [
         label: 'telegramGroup',
         value: 'Telegram Group',
         icon: GroupIcon,
-        link: '',
+        link: 'https://t.me/sb8279',
     },
     {
         label: 'customService',

@@ -7,7 +7,7 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { signInAtom, signUpAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { TRegisterPayload } from '@/types';
-// import { useCheckUserName } from '@/hooks/resources/useCheckUserName';
+import { useCheckUserName } from '@/hooks/resources/useCheckUserName';
 import password from '@/assets/images/loginFrom/password.svg';
 import userName from '@/assets/images/loginFrom/userName.svg';
 import phoneNumber from '@/assets/images/loginFrom/phoneNumber.svg';
@@ -22,9 +22,8 @@ const index: React.FC = () => {
     const [signUp, setSignUp] = useAtom(signUpAtom);
     const setSignIn = useSetAtom(signInAtom);
     //取得檢查用戶名是否已存在方法
-    // const { checkUserName } = useCheckUserName();
-    // const isExist = checkUserName('123');
-    // console.log('🚀 ~ isExist:', isExist);
+    const { checkUserName } = useCheckUserName();
+
     const captchaSignUpRef = useRef<HCaptcha>(null);
     const { mutate: register, isLoading } = useRegister<TRegisterPayload>();
     const [form] = Form.useForm();
@@ -86,18 +85,18 @@ const index: React.FC = () => {
         }
         return Promise.resolve();
     };
-    //FIXME 檢查用戶名是否已存在
+    //檢查用戶名是否已存在
     const handleCheckUserName = async (e: any) => {
-        console.log(e.target.value);
-        // const isExist = await checkUserName(e.target.value);
-        // if (isExist) {
-        //     form.setFields([
-        //         {
-        //             name: 'username',
-        //             errors: ['User name already exists'],
-        //         },
-        //     ]);
-        // }
+        const checkUserNameData = await checkUserName(e.target.value);
+        //{data:true/false , message:"available"/"registered, please try another one" , status:"200"}
+        if (!checkUserNameData.data) {
+            form.setFields([
+                {
+                    name: 'userName',
+                    errors: ['이미 가입된 아이디 입니다,다시 입력해주세요'],
+                },
+            ]);
+        }
     };
     //自訂驗證規則=>密碼長度大於6
     const passwordValidateFunction = (_: object, value: string) => {
@@ -121,7 +120,10 @@ const index: React.FC = () => {
         form.validateFields({ validateOnly: true }).then(
             //成功回調
             () => {
-                setSubmitTable(true);
+                //判斷是否有錯誤訊息，沒有的話就可以提交表單
+                if (form.getFieldsError(['userName'])[0].errors.length === 0) {
+                    setSubmitTable(true);
+                }
             },
             //失敗回調
             () => {
@@ -137,7 +139,7 @@ const index: React.FC = () => {
             centered
             closeIcon={<AiFillCloseCircle color="#FFFFFF" size={30} />}
             footer={null}
-            className="formWrap md:w-[600px] md:h-auto w-screen max-w-none"
+            className="formWrap w-[600px] md:h-auto max-w-none"
             classNames={{
                 mask: 'bg-[#000000d9] blur-sm',
                 content: 'bg-gradient-to-b from-[#BAA8FF] to-[#5932EA] shadow-[0px_0px_10px_4px_#D4C9FF33] py-[50px] md:px-[100px] px-[45px]',

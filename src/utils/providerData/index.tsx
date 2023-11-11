@@ -15,7 +15,7 @@ import ppWhiteIcon from '@/assets/images/game_provider/ppWhite.svg';
 import ProviderS_PragmaticPlay from '@/assets/images/game_provider/ProviderS_PragmaticPlay.svg';
 import ProviderS_AsiaGaming from '@/assets/images/game_provider/ProviderS_AsiaGaming.svg';
 import ProviderS_Microgaming from '@/assets/images/game_provider/ProviderS_Microgaming.svg';
-
+//TODO 有空把這邊的providerData跟HOME裡面的ProviderData整合
 export const providerData: TGameProvider[] = [
     {
         label: 'Pragmatic Play',

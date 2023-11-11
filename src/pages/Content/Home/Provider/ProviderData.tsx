@@ -9,14 +9,14 @@ import pragmaticplayProviderImg2 from '@/assets/images/game_provider/ppIcon.svg'
 import microgamingProviderImg2 from '@/assets/images/game_provider/mgIcon.svg';
 import asiagamingProviderImg2 from '@/assets/images/game_provider/agIcon.svg';
 import btiProviderImg2 from '@/assets/images/game_provider/btiIcon.svg';
-import gigxProviderImg2 from '@/assets/images/game_provider/igxIcon.svg';
+import gigxProviderImg2 from '@/assets/images/game_provider/igx_icon.png';
 import pragmaticplayFavicon from '@/assets/images/game_provider/pragmaticplay_icon.png';
 import evolutionFavicon from '@/assets/images/game_provider/evo_icon.png';
 // import golfFavicon from '@/assets/images/golf_favicon.ico';
 // import btiFavicon from '@/assets/images/bti_favicon.ico';
 import mgFavicon from '@/assets/images/game_provider/microgaming_icon.png';
 import agFavicon from '@/assets/images/game_provider/asiagaming_icon.png';
-
+//TODO 有空把這邊的providerData跟utils裡面的ProviderData整合
 export const fakeProviderData = [
     {
         ProviderImg: btiProviderImg,
