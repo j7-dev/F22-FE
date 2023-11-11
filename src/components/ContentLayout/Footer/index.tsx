@@ -7,15 +7,34 @@ import { useTranslation } from 'react-i18next';
 import LanguageSwitch from '@/components/ContentLayout/Header/LanguageSwitch';
 import { socialMedia } from '@/utils/menuData/socialMedia';
 import { gameCategories } from '@/utils/GameCategory';
+import QRCode from 'qrcode';
 import logo from '@/assets/images/1002_logo_f.svg';
 import logo2 from '@/assets/images/1002_logo_s.svg';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import { fakeProviderData } from '@/pages/Content/Home/Provider/ProviderData';
 import { useShowPc } from '@/hooks/useShowPc';
+import appStore from '@/assets/images/sideBar/appStore.png';
+import googlePlay from '@/assets/images/sideBar/googlePlay.png';
 
 export const Footer: React.FC = () => {
     const showPc = useShowPc();
     const { t } = useTranslation();
+    //QRCode
+    const androidUrl = `https://${window.location.hostname}/apk/app.apk`;
+    const iosUrl = `itms-services://?action=download-manifest&url=https://${window.location.hostname}/ipa/app.plist`;
+    const [androidQrCode, setAndroidQrCode] = React.useState('');
+    const [iosQrCode, setIosQrCode] = React.useState('');
+    const generateQR = async ({ setAndroidUrl, setIosUrl }: { setAndroidUrl: string; setIosUrl: string }) => {
+        try {
+            const getAndroidQrCode = await QRCode.toDataURL(setAndroidUrl);
+            const getIosQrCode = await QRCode.toDataURL(setIosUrl);
+            setAndroidQrCode(getAndroidQrCode);
+            setIosQrCode(getIosQrCode);
+        } catch (err) {
+            console.error(err);
+        }
+    };
+    generateQR({ setAndroidUrl: androidUrl, setIosUrl: iosUrl });
 
     return (
         <div className="bg-white w-full text-black font-normal z-10 ">
@@ -24,7 +43,22 @@ export const Footer: React.FC = () => {
                     <div className="footerLogo md:h-10 col-span-1 h-full text-center">
                         <img src={showPc ? logo : logo2} alt="" className="md:w-full w-[30px] h-full object-left object-contain" />
                     </div>
-                    <div className="txt md:py-4 md:border-t-2 md:border-l-0 md:text-xs border-l-2 pl-2.5 col-span-3 text-[#333333] font-normal border-solid border-0 border-[#E0E0E0] text-[8px]">{t('COPYRIGHT 2023, SMART BET. ALL RIGHTS RESERVED. GAMBLING CAN BE ADDICTIVE, PLEASE PLAY RESPONSIBLY. FOR MORE INFORMATION ON SUPPORT TOOLS, PLEASE VISIT OUR RESPONSIBLE GAMBLING PAGE PAYMENT SUPPORTED BY CODE PAY')}</div>
+                    {/* qr code */}
+                    <div className="p-4 grid grid-cols-2">
+                        <div className="androidQrCode">
+                            <img src={androidQrCode} alt="" className="w-full" />
+                            <a href={androidUrl}>
+                                <img src={googlePlay} alt="" className="w-full px-2" />
+                            </a>
+                        </div>
+                        <div className="iosQrCode">
+                            <img src={iosQrCode} alt="" className="w-full" />
+                            <a href={iosUrl}>
+                                <img src={appStore} alt="" className="w-full px-2" />
+                            </a>
+                        </div>
+                        {/* {t('COPYRIGHT 2023, SMART BET. ALL RIGHTS RESERVED. GAMBLING CAN BE ADDICTIVE, PLEASE PLAY RESPONSIBLY. FOR MORE INFORMATION ON SUPPORT TOOLS, PLEASE VISIT OUR RESPONSIBLE GAMBLING PAGE PAYMENT SUPPORTED BY CODE PAY')} */}
+                    </div>
                     {/* 電腦版翻譯選單 */}
                     {showPc ? <LanguageSwitch /> : ''}
                 </div>
