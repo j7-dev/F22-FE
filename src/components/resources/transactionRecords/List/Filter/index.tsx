@@ -7,21 +7,21 @@ import { TTransactionType, transactionStatus, transactionTypes } from '@/types';
 import { TParams } from '../types';
 import { useTranslation } from 'react-i18next';
 
-export const statusOptions = transactionStatus.map((s) => ({
-    label: s,
-    value: s,
-}));
-
-export const typeOptions = transactionTypes.map((s) => ({
-    label: s,
-    value: s,
-}));
-
 const { RangePicker } = DatePicker;
 const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
     const { t } = useTranslation();
     const { type: listTypeLowerCase } = useParams<TParams>();
     const listType = (listTypeLowerCase || '')?.toUpperCase() as TTransactionType & 'ALL';
+
+    const statusOptions = transactionStatus.map((s) => ({
+        label: t(s),
+        value: s,
+    }));
+
+    const typeOptions = transactionTypes.map((s) => ({
+        label: t(s),
+        value: s,
+    }));
 
     const form = formProps.form;
 

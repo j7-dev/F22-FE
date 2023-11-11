@@ -28,6 +28,9 @@ const EditDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/Edit'
 const ListSiteNotifications = lazy(() => import('@/pages/Admin/systemSetting/siteNotifications/List'));
 const CreateSiteNotifications = lazy(() => import('@/pages/Admin/systemSetting/siteNotifications/Create'));
 const EditSiteNotifications = lazy(() => import('@/pages/Admin/systemSetting/siteNotifications/Edit'));
+const ListCoupons = lazy(() => import('@/pages/Admin/coupons/List'));
+const CreateCoupons = lazy(() => import('@/pages/Admin/coupons/Create'));
+const EditCoupons = lazy(() => import('@/pages/Admin/coupons/Edit'));
 
 const adminRoutes = () => {
     return (
@@ -83,6 +86,9 @@ const adminRoutes = () => {
                 <Route index path="deposit-bonuses" element={<ListDepositBonuses />} />
                 <Route path="deposit-bonuses/create" element={<CreateDepositBonuses />} />
                 <Route path="deposit-bonuses/edit/:id" element={<EditDepositBonuses />} />
+                <Route index path="coupons" element={<ListCoupons />} />
+                <Route path="coupons/create" element={<CreateCoupons />} />
+                <Route path="coupons/edit/:id" element={<EditCoupons />} />
             </Route>
         </>
     );

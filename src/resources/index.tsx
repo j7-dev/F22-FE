@@ -178,6 +178,18 @@ export const resources = [
             label: 'Deposit Bonus',
         },
     },
+    {
+        name: 'coupons',
+        identifier: 'coupons',
+        list: '/refine/promotion/coupons',
+        create: '/refine/promotion/coupons/create',
+        edit: '/refine/promotion/coupons/edit/:id',
+        delete: '/refine/promotion/coupons/delete/:id',
+        meta: {
+            parent: 'promotion',
+            label: 'Coupons',
+        },
+    },
     // {
     //     name: 'discounts',
     //     identifier: 'discounts',

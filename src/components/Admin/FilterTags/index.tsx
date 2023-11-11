@@ -2,6 +2,7 @@ import React from 'react';
 import { Tag, FormInstance } from 'antd';
 import dayjs, { Dayjs } from 'dayjs';
 import { CloseCircleOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 const FilterTags: React.FC<{ form?: FormInstance }> = ({ form }) => {
     const searchValues = form ? form.getFieldsValue() : {};
@@ -11,6 +12,7 @@ const FilterTags: React.FC<{ form?: FormInstance }> = ({ form }) => {
     };
 
     const searchKeys = Object.keys(searchValues || {});
+    const { t } = useTranslation();
 
     return (
         <>
@@ -21,7 +23,7 @@ const FilterTags: React.FC<{ form?: FormInstance }> = ({ form }) => {
                     if (Array.isArray(searchValues?.[key]) && searchValues[key].every((item: any) => item instanceof dayjs)) {
                         return (
                             <Tag key={key} bordered={false} color="cyan" className="px-2.5 py-0.5" closeIcon={<CloseCircleOutlined />} onClose={handleClearSearchProps(key)}>
-                                {key}: {(searchValues[key] as Dayjs[]).map((date) => (date ? date.format('YYYY/MM/DD') : '')).join(' ~ ')}
+                                {t(key)}: {(searchValues[key] as Dayjs[]).map((date) => (date ? date.format('YYYY/MM/DD') : '')).join(' ~ ')}
                             </Tag>
                         );
                     }
@@ -29,14 +31,14 @@ const FilterTags: React.FC<{ form?: FormInstance }> = ({ form }) => {
                     if (typeof searchValues?.[key] === 'boolean') {
                         return (
                             <Tag key={key} bordered={false} color="cyan" className="px-2.5 py-0.5" closeIcon={<CloseCircleOutlined />} onClose={handleClearSearchProps(key)}>
-                                {key}: {searchValues?.[key].toString()}
+                                {t(key)}: {t(searchValues?.[key].toString())}
                             </Tag>
                         );
                     }
 
                     return (
                         <Tag key={key} bordered={false} color="cyan" className="px-2.5 py-0.5" closeIcon={<CloseCircleOutlined />} onClose={handleClearSearchProps(key)}>
-                            {key}: {searchValues?.[key]}
+                            {t(key)}: {t(searchValues?.[key])}
                         </Tag>
                     );
                 })}
