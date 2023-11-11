@@ -76,7 +76,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
 
                 {inSiteNotify && (
                     <button onClick={() => setSection('myPage')} className="cursor-pointer font-bold border-0 px-3 py-1.5 rounded-xl text-xs bg-[#5932EA] text-white">
-                        {t('Go back')}
+                        {t('Go Back')}
                     </button>
                 )}
             </div>
@@ -103,7 +103,7 @@ const index: React.FC<{ pageSize?: number | undefined }> = ({ pageSize }) => {
             <TopTitle />
             <Table {...tableProps} className="customTable" pagination={paginationSetting}>
                 <Column
-                    title="Title"
+                    title={t('Title') as string}
                     dataIndex="title"
                     key="title"
                     className=""

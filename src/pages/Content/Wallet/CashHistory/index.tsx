@@ -67,7 +67,7 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
 
                 {inCashHistory && (
                     <button onClick={() => setSection('myPage')} className="cursor-pointer font-bold border-0 px-3 py-1.5 rounded-xl text-xs bg-[#5932EA] text-white">
-                        {t('Go back')}
+                        {t('Go Back')}
                     </button>
                 )}
             </div>

@@ -7,7 +7,7 @@ import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { signInAtom, signUpAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { TRegisterPayload } from '@/types';
-// import { useCheckUserName } from '@/hooks/resources/useCheckUserName';
+import { useCheckUserName } from '@/hooks/resources/useCheckUserName';
 import password from '@/assets/images/loginFrom/password.svg';
 import userName from '@/assets/images/loginFrom/userName.svg';
 import phoneNumber from '@/assets/images/loginFrom/phoneNumber.svg';
@@ -22,9 +22,9 @@ const index: React.FC = () => {
     const [signUp, setSignUp] = useAtom(signUpAtom);
     const setSignIn = useSetAtom(signInAtom);
     //取得檢查用戶名是否已存在方法
-    // const { checkUserName } = useCheckUserName();
-    // const isExist = checkUserName('123');
-    // console.log('🚀 ~ isExist:', isExist);
+    const { checkUserName } = useCheckUserName();
+    const checkUserNameData = checkUserName('123111');
+    console.log('🚀 ~ isExist:', checkUserNameData);
     const captchaSignUpRef = useRef<HCaptcha>(null);
     const { mutate: register, isLoading } = useRegister<TRegisterPayload>();
     const [form] = Form.useForm();
@@ -137,7 +137,7 @@ const index: React.FC = () => {
             centered
             closeIcon={<AiFillCloseCircle color="#FFFFFF" size={30} />}
             footer={null}
-            className="formWrap md:w-[600px] md:h-auto w-screen max-w-none"
+            className="formWrap w-[600px] md:h-auto max-w-none"
             classNames={{
                 mask: 'bg-[#000000d9] blur-sm',
                 content: 'bg-gradient-to-b from-[#BAA8FF] to-[#5932EA] shadow-[0px_0px_10px_4px_#D4C9FF33] py-[50px] md:px-[100px] px-[45px]',

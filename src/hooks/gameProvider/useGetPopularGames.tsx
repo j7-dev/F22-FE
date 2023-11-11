@@ -7,7 +7,7 @@ import { gameCategories } from '@/utils/GameCategory';
 import { sampleSize } from 'lodash-es';
 import { TGameCategory } from '@/types/games/gameCategory';
 import btiIcon from '@/assets/images/game_provider/bti_icon.png';
-import igxIcon from '@/assets/images/game_provider/igx_icon.png';
+import igxIcon from '@/assets/images/game_provider/igx.png';
 import { tokenData } from '@/utils/providerData/Token';
 
 export const useGetPopularGames = () => {
