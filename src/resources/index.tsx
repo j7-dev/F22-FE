@@ -69,7 +69,6 @@ export const resources = [
         identifier: 'agents-create',
         list: '/refine/agent/list',
         create: '/refine/agent/create',
-        show: '/refine/agent/show/:id',
         edit: '/refine/agent/edit/:id',
         delete: '/refine/agent/delete/:id',
         meta: {

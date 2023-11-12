@@ -34,6 +34,7 @@ export type TUser = BaseType & {
     bank_account?: TBankAccount;
     deposit_bonus?: TDepositBonus | null;
     last_deposit?: TTransaction | null;
+    commission_rate?: number;
 };
 
 export const BANK_ACCOUNT_FIELDS = ['bank_name', 'bank_account_number', 'owner_real_name'] as const;
