@@ -19,10 +19,6 @@ const index = () => {
                     field: 'order',
                     order: 'asc',
                 },
-                {
-                    field: 'updated_at',
-                    order: 'asc',
-                },
             ],
         },
     }) as {
