@@ -30,6 +30,22 @@ export const useGetTransactionRecords = ({ type, userID, pageSize = 10 }: { type
                     operator: 'in',
                     value: type,
                 },
+                //排除is_hide為true的資料=>為了兼容舊資料is_hide為null的資料
+                {
+                    operator: 'or',
+                    value: [
+                        {
+                            field: 'is_hide',
+                            operator: 'null',
+                            value: true,
+                        },
+                        {
+                            field: 'is_hide',
+                            operator: 'eq',
+                            value: false,
+                        },
+                    ],
+                },
             ],
         },
         pagination: {

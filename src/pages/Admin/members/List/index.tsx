@@ -1,7 +1,7 @@
 import { List } from '@/components/resources/users';
 
 const index = () => {
-    return <List roleType={['authenticated', 'agent']} />;
+    return <List />;
 };
 
 export default index;
