@@ -25,7 +25,7 @@ export const useGetNoteBox = ({ pageSize = 10 }: { pageSize?: number }) => {
         sorters: {
             initial: [
                 {
-                    field: 'publishedAt',
+                    field: 'createdAt',
                     order: 'desc',
                 },
             ],
