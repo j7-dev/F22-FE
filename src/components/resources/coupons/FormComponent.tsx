@@ -22,7 +22,6 @@ const FormComponent: React.FC<{
     const { action, id, identifier } = useResource();
     const isUserAdjustment = action === 'show' && identifier === 'members-list';
     const default_user_id = isUserAdjustment ? Number(id) : undefined;
-    console.log('⭐  default_user_id:', default_user_id);
 
     useEffect(() => {
         console.log('⭐  formProps.initialValues', formProps.initialValues);

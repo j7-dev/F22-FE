@@ -13,7 +13,7 @@ import { CrudFilters } from '@refinedev/core';
 import { gameProviderTxnEnum } from '@/utils';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 
-const index = () => {
+const index: React.FC<{ user_id?: string | number }> = ({ user_id }) => {
     const { t } = useTranslation();
     const { tableProps, searchFormProps } = useTable({
         resource: RESOURCE,
@@ -35,15 +35,26 @@ const index = () => {
                 },
             ],
         },
+        filters: user_id
+            ? {
+                  permanent: [
+                      {
+                          field: 'user.id',
+                          operator: 'eq',
+                          value: user_id,
+                      },
+                  ],
+              }
+            : undefined,
         onSearch: (values: TSearchProps) => {
             const filters = [
                 {
-                    field: 'createdAt',
+                    field: 'updatedAt',
                     operator: 'gt',
                     value: values?.dateRange ? values?.dateRange[0]?.startOf('day').format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
                 },
                 {
-                    field: 'createdAt',
+                    field: 'updatedAt',
                     operator: 'lt',
                     value: values?.dateRange ? values?.dateRange[1]?.endOf('day').format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
                 },

@@ -4,6 +4,7 @@ import { useUserSelect, useGetSiteSetting } from '@/hooks';
 import { useTranslation } from 'react-i18next';
 import { SearchOutlined } from '@ant-design/icons';
 import ResourceSelect from '@/components/form/ResourceSelect';
+import { useResource } from '@refinedev/core';
 
 const { RangePicker } = DatePicker;
 const STATUSES = ['NORMAL', 'PENDING', 'CANCEL'];
@@ -16,7 +17,10 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
         roleType: 'authenticated',
     });
 
-    const user_id = 1;
+    const { action, id, identifier } = useResource();
+    const isUserAdjustment = action === 'show' && identifier === 'members-list';
+
+    const user_id = isUserAdjustment ? Number(id) : undefined;
 
     return (
         <Card bordered={false}>
@@ -26,7 +30,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
                         <RangePicker size="small" className="w-full" />
                     </Form.Item>
 
-                    <Form.Item label={t('User')} name={['user']}>
+                    <Form.Item label={t('User')} name={['user']} hidden={!!user_id}>
                         <Select size="small" {...selectProps} allowClear />
                     </Form.Item>
 
