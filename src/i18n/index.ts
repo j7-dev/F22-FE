@@ -14,7 +14,7 @@ i18n.use(Backend)
         },
         ns: ['content', 'admin'],
         defaultNS: 'content',
-        fallbackLng: ['ko', 'en', 'tw', 'cn'], // 若當前語言沒有對應的翻譯則使用這個語言
+        fallbackLng: ['en'], // 若當前語言沒有對應的翻譯則使用這個語言
     });
 
 export default i18n;

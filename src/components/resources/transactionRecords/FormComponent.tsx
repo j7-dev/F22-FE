@@ -62,7 +62,7 @@ const FormComponent: React.FC<{
 
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
-            <div className="grid grid-cols-6 gap-6">
+            <div className="grid grid-cols-4 gap-6">
                 <Form.Item
                     name={['title']}
                     label={t('title')}
@@ -72,25 +72,24 @@ const FormComponent: React.FC<{
                             message: 'Please input a value',
                         },
                     ]}
-                    className="col-span-2 lg:col-span-1"
                 >
                     <Input size="small" />
                 </Form.Item>
 
-                <Form.Item name={['user_id']} label={t('User')} initialValue={Number(id)} className="col-span-2 lg:col-span-1" hidden={isUserAdjustment}>
+                <Form.Item name={['user_id']} label={t('User')} initialValue={Number(id)} hidden={isUserAdjustment}>
                     <Select size="small" {...userSelectProps} allowClear />
                 </Form.Item>
 
-                <div className="col-span-2 lg:col-span-1">
+                <div>
                     <p className="mb-2">{t("User's balance")}</p>
                     {watchUser && !isFetching && <SimpleAmount amount={Number(currencyBalanceAmount)} />}
                     {isFetching && <LoadingOutlined />}
                 </div>
-                <Form.Item name={['type']} label={t('Type')} className="col-span-2 lg:col-span-1" initialValue="MANUAL" hidden={isUserAdjustment}>
+                <Form.Item name={['type']} label={t('Type')} initialValue="MANUAL" hidden={isUserAdjustment}>
                     {/* <Select options={['DEPOSIT', 'MANUAL'].map((type) => ({ label: type, value: type }))} /> */}
                     <Input size="small" />
                 </Form.Item>
-                <div className="col-span-2 lg:col-span-1">
+                <div>
                     <Form.Item className="w-full" label="Amount" name={['amount']} rules={[{ required: true, message: 'amount is required' }]}>
                         <InputNumber size="small" precision={0} className="w-full relative -top-[1px]" />
                     </Form.Item>
@@ -103,10 +102,10 @@ const FormComponent: React.FC<{
                     <Input size="small" />
                 </Form.Item>
 
-                <Form.Item name={['description']} label={t('description')} className="col-span-4 md:col-span-2" hidden={isUserAdjustment}>
+                <Form.Item name={['description']} label={t('description')} hidden={isUserAdjustment}>
                     <Input.TextArea />
                 </Form.Item>
-                <Form.Item label="&nbsp;" className="col-span-2 ls:col-span-1">
+                <Form.Item label="&nbsp;">
                     <Button size="small" type="primary" {...saveButtonProps}>
                         {t('Save')}
                     </Button>

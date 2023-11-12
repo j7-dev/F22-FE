@@ -7,10 +7,10 @@ const Input: React.FC<{ formItemProps?: FormItemProps }> = ({ formItemProps }) =
     return (
         <div>
             <Form.Item name={['period', 'start_datetime']} label={t('start')} {...formItemProps}>
-                <DatePicker className="w-full" showTime={{ format: 'HH:mm' }} format="YYYY-MM-DD HH:mm" />
+                <DatePicker size="small" className="w-full" showTime={{ format: 'HH:mm' }} format="YYYY-MM-DD HH:mm" />
             </Form.Item>
             <Form.Item name={['period', 'end_datetime']} label={t('end')} {...formItemProps}>
-                <DatePicker className="w-full" showTime={{ format: 'HH:mm' }} format="YYYY-MM-DD HH:mm" />
+                <DatePicker size="small" className="w-full" showTime={{ format: 'HH:mm' }} format="YYYY-MM-DD HH:mm" />
             </Form.Item>
         </div>
     );

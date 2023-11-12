@@ -43,7 +43,9 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
 
     const displayName = user?.display_name || 'Unknown';
 
-    const languages = (i18n?.languages || []).filter((lang) => lang === 'en' || lang === 'ko');
+    const languages = (i18n?.languages || []).filter((lang) => {
+        return lang === 'en' || lang === 'ko';
+    });
 
     const userOptions: MenuProps['items'] = [
         {
