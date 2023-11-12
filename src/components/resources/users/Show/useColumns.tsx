@@ -80,8 +80,8 @@ const useColumns = () => {
         {
             key: 'referralLink',
             title: t('Referral Link'),
-            dataIndex: 'uuid',
-            render: (uuid: string) => <ReferralLink uuid={uuid} />,
+            dataIndex: 'username',
+            render: (username: string) => <ReferralLink uuid={username} />,
         },
     ];
 
@@ -97,12 +97,6 @@ const useColumns = () => {
             title: t('Phone'),
             dataIndex: 'phone',
         },
-        {
-            key: 'uuid',
-            title: t('UUID'),
-            dataIndex: 'uuid',
-        },
-
         {
             key: 'allow_payments',
             title: t('Allow Payments'),
