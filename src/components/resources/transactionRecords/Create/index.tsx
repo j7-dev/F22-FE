@@ -32,6 +32,7 @@ const index: React.FC<
                             ...values,
                             by: 'ADMIN',
                             updated_by_user_id,
+                            is_hide: true,
                         },
                     },
                     {
