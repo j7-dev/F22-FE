@@ -29,7 +29,7 @@ const FormComponent: React.FC<{
     const rolesMapping = siteSetting?.roles || {};
     const roleSelectProps = {
         options: Object.keys(rolesMapping)
-            .filter((k) => k === 'agent' || k === 'top_agent')
+            .filter((k) => k === 'agent')
             .map((key) => {
                 return {
                     label: key,
@@ -45,10 +45,6 @@ const FormComponent: React.FC<{
         resource: 'vips',
         optionLabel: 'label',
         optionValue: 'id',
-    });
-
-    const { selectProps: topAgentSelectProps } = useUserSelect({
-        roleType: 'top_agent',
     });
 
     const { selectProps: agentSelectProps } = useUserSelect({
@@ -70,9 +66,7 @@ const FormComponent: React.FC<{
             if (isObject(formProps.initialValues.agent as number | TUser)) {
                 formProps.initialValues.agent = formProps.initialValues.agent.id;
             }
-            if (isObject(formProps.initialValues.top_agent as number | TUser)) {
-                formProps.initialValues.top_agent = formProps.initialValues.top_agent.id;
-            }
+
             if (isString(formProps.initialValues?.birthday as string | Dayjs)) {
                 formProps.initialValues.birthday = dayjs(formProps.initialValues?.birthday, 'YYYY-MM-DD');
             }
@@ -149,18 +143,12 @@ const FormComponent: React.FC<{
                     <Checkbox.Group options={support_game_providers} />
                 </Form.Item>
 
-                <Form.Item hidden={watchRoleType !== 'agent' && watchRoleType !== 'top_agent'} name="role" label={t('role')} initialValue={formType === 'create' ? rolesMapping?.[defaultRoleType] : undefined}>
-                    {watchRoleType !== 'agent' && watchRoleType !== 'top_agent' ? <Input /> : <Select {...roleSelectProps} />}
+                <Form.Item hidden={watchRoleType !== 'agent'} name="role" label={t('role')} initialValue={formType === 'create' ? rolesMapping?.[defaultRoleType] : undefined}>
+                    {watchRoleType !== 'agent' ? <Input /> : <Select {...roleSelectProps} />}
                 </Form.Item>
                 {watchRoleType === 'authenticated' && (
                     <Form.Item name="vip" label={t('vip')}>
                         <Select {...vipSelectProps} />
-                    </Form.Item>
-                )}
-
-                {watchRoleType === 'agent' && (
-                    <Form.Item name="top_agent" label={t('Top Agent')}>
-                        <Select {...topAgentSelectProps} />
                     </Form.Item>
                 )}
 
@@ -171,7 +159,7 @@ const FormComponent: React.FC<{
                 )}
             </div>
 
-            {(userRole === 'agent' || userRole === 'top_agent') && (
+            {userRole === 'agent' && (
                 <div className="bg-blue-50 rounded-xl p-6 mt-16">
                     <Title level={5}>
                         <MoneyCollectOutlined className="mr-2" /> {t('Commission')}

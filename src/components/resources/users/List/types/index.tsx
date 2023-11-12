@@ -7,7 +7,6 @@ export type DataType = {
     username: string;
     display_name: string;
     agent: TUser | null;
-    top_agent: TUser | null;
     birthday: string;
     balances: TBalance[];
     phone: string;
@@ -29,7 +28,6 @@ export type TSearchProps = {
     display_name?: string | undefined;
     vip?: string | undefined;
     agent?: string | undefined;
-    top_agent?: string | undefined;
     blocked?: boolean | undefined;
     confirmed?: boolean | undefined;
     [key: string]: any;

@@ -25,9 +25,6 @@ const index: React.FC<{
                 agent: {
                     fields: ['id'],
                 },
-                top_agent: {
-                    fields: ['id'],
-                },
                 role: {
                     fields: ['type'],
                 },

@@ -146,11 +146,6 @@ const DetailedInformation: React.FC<{
                     value: values?.agent,
                 },
                 {
-                    field: 'top_agent.id',
-                    operator: 'eq',
-                    value: values?.top_agent,
-                },
-                {
                     field: 'blocked',
                     operator: 'eq',
                     value: values?.blocked,
