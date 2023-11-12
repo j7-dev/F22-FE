@@ -15,7 +15,7 @@ const FormComponent: React.FC<{
     const { roles } = useGetSiteSetting();
     const { selectProps } = useSelect<TUser>({
         resource: 'users',
-        optionLabel: 'display_name',
+        optionLabel: 'username',
         optionValue: 'uuid',
         filters: [
             {

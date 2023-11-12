@@ -49,10 +49,7 @@ const DetailedInformation: React.FC<{
                     fields: ['type'],
                 },
                 agent: {
-                    fields: ['display_name'],
-                },
-                top_agent: {
-                    fields: ['display_name'],
+                    fields: ['display_name', 'username'],
                 },
                 balances: {
                     fields: ['amount', 'currency', 'amount_type'],

@@ -33,7 +33,7 @@ const useColumns = () => {
             title: t('Agent'),
             dataIndex: 'agent',
             key: 'Agent',
-            render: (agent: TUser) => (agent ? <Link to={`/refine/agent/show/${agent?.id}`}>{agent?.display_name}</Link> : null),
+            render: (agent: TUser) => (agent ? <Link to={`/refine/agent/show/${agent?.id}`}>{agent?.username}</Link> : null),
         },
         ...allBalances,
         {

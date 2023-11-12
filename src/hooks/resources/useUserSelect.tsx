@@ -36,7 +36,7 @@ export const useUserSelect = ({ roleType }: { roleType?: string | string[] }) =>
 
     const result = useSelect<TUser>({
         resource: 'users',
-        optionLabel: 'display_name',
+        optionLabel: 'username',
         filters,
     });
 

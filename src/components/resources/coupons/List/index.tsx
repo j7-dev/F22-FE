@@ -19,7 +19,7 @@ const index = () => {
         meta: {
             populate: {
                 user: {
-                    fields: ['id', 'display_name'],
+                    fields: ['id', 'display_name', 'username'],
                 },
                 period: {
                     fields: '*',
