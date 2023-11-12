@@ -22,9 +22,9 @@ const index: React.FC<{
     };
     return (
         <div className="w-full bg-white rounded-lg shadow-[0_0px_29px_0px_rgba(43, 50, 64, 0.09)] flex flex-col gap-2.5 p-4">
-            <div>
+            {/* <div>
                 <span className="text-[#2b324080] text-sm font-bold">{t('Service Center')}</span>
-            </div>
+            </div> */}
             <div>
                 <ul className="m-0 p-0 flex flex-col gap-2.5">
                     {categoryListData.map((item) => (

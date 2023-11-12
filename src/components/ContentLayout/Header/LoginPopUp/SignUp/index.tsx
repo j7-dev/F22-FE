@@ -103,7 +103,7 @@ const index: React.FC = () => {
     };
     //自訂驗證規則=>密碼長度大於6
     const passwordValidateFunction = (_: object, value: string) => {
-        if (value.length < 6) {
+        if (value?.length < 6) {
             return Promise.reject(t('The length of password must be greater than or equal to 6'));
         }
         return Promise.resolve();
@@ -112,6 +112,16 @@ const index: React.FC = () => {
     const confirmPasswordValidator = (_: object, value: string) => {
         if (value !== form.getFieldValue('password')) {
             return Promise.reject(t('The two passwords that you entered do not match!'));
+        }
+        return Promise.resolve();
+    };
+    //驗證規則=>只能輸入數字
+    const numberValidator = (_: object, value: string) => {
+        const userPhoneValue = value;
+        const pattern = /^[0-9]*$/;
+        pattern.test(userPhoneValue);
+        if (!pattern.test(userPhoneValue)) {
+            return Promise.reject(t('Please input Number'));
         }
         return Promise.resolve();
     };
@@ -162,8 +172,8 @@ const index: React.FC = () => {
                     <Form.Item name="confirmPassword" rules={[{ required: true, message: t('Please input your Password') }, { validator: confirmPasswordValidator }]}>
                         <Input.Password placeholder={t('Confirm Password')} prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
                     </Form.Item>
-                    <Form.Item name="userPhone" rules={[{ required: true, message: t('Please input your Phone') }]}>
-                        <Input placeholder={t('Phone Number')} prefix={<img src={phoneNumber} />} bordered={false} />
+                    <Form.Item name="userPhone" rules={[{ required: true, message: t('Please input your Phone') }, { validator: numberValidator }]}>
+                        <Input placeholder={t('Phone Number')} prefix={<img src={phoneNumber} />} bordered={false} pattern="/^[0-9]+$/" />
                     </Form.Item>
                     <Form.Item name={['bank_account', 'owner_real_name']} rules={[{ required: true, message: t('Please input your Owner Real Name') }]}>
                         <Input placeholder={t('Full Name')} prefix={<img src={bankName} />} bordered={false} />
