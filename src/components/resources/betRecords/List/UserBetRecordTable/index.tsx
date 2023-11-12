@@ -169,6 +169,7 @@ const index = () => {
             loading={isFetching}
             rowKey="key"
             pagination={{
+                total: filteredTxns.length,
                 pageSize,
                 showSizeChanger: true,
                 pageSizeOptions: ['20', '50', '100', '500', '1000'],
