@@ -7,6 +7,7 @@ import { ColumnsType } from 'antd/es/table';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 /**
+ * @deprecated
  * TODO 限制後端一次拿100筆之類的
  * TODO 未來做無限滾動
  * TODO 依照時間篩選
