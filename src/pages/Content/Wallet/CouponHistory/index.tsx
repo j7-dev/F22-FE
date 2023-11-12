@@ -162,7 +162,16 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
             // <List>
             <Table className="customTable" {...tableProps} pagination={paginationSetting}>
                 <Column title={t('Title') as string} dataIndex="title" key="title" className="w-1/4 whitespace-nowrap" />
-                <Column title={t('Point Amount') as string} dataIndex="coupon_amount" key="coupon_amount" className="w-1/4 whitespace-nowrap" />
+                <Column
+                    title={t('Point Amount') as string}
+                    dataIndex="coupon_amount"
+                    key="coupon_amount"
+                    className="w-1/4 whitespace-nowrap"
+                    render={(value) => {
+                        return <>{value.toLocaleString()}</>;
+                    }}
+                />
+
                 <Column
                     title={t('Status') as string}
                     dataIndex="is_claimed"
