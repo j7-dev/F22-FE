@@ -40,6 +40,9 @@ const DetailedInformation: React.FC<{
 
     const { tableProps, searchFormProps } = useTable({
         resource: 'users',
+        pagination: {
+            pageSize: 20,
+        },
         meta: {
             populate: {
                 vip: {
@@ -182,6 +185,11 @@ const DetailedInformation: React.FC<{
         size: 'small',
         columns,
         rowKey: 'userId',
+        pagination: {
+            ...tableProps?.pagination,
+            showSizeChanger: true,
+            pageSizeOptions: ['20', '50', '100', '500', '1000'],
+        },
     } as TableProps<DataType>;
 
     const handleExpand = (checked: boolean) => {

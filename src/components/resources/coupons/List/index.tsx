@@ -16,6 +16,9 @@ const index = () => {
     const { t } = useTranslation();
     const { tableProps, searchFormProps } = useTable({
         resource: RESOURCE,
+        pagination: {
+            pageSize: 20,
+        },
         meta: {
             populate: {
                 user: {
@@ -119,6 +122,11 @@ const index = () => {
         scroll: { x: 1000 },
         columns,
         rowKey: 'id',
+        pagination: {
+            ...tableProps?.pagination,
+            showSizeChanger: true,
+            pageSizeOptions: ['20', '50', '100', '500', '1000'],
+        },
     } as TableProps<DataType>;
 
     const filterTagsKey = JSON.stringify(searchFormProps?.form?.getFieldsValue());

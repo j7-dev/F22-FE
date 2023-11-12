@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useList, CrudFilters } from '@refinedev/core';
 import { Table } from 'antd';
 import { DateTime } from '@/components/PureComponents';
@@ -14,6 +15,7 @@ type DataType = any;
 
 const index = () => {
     // TODO 未來再從後端優化分頁功能
+    const [pageSize, setPageSize] = useState(20);
 
     const { t } = useTranslation();
     const searchProps = useAtomValue(searchPropsAtom);
@@ -159,10 +161,25 @@ const index = () => {
         },
     ];
 
-    return <Table size="small" dataSource={filteredTxns} columns={columns} loading={isFetching} rowKey="key" />;
+    return (
+        <Table
+            size="small"
+            dataSource={filteredTxns}
+            columns={columns}
+            loading={isFetching}
+            rowKey="key"
+            pagination={{
+                pageSize,
+                showSizeChanger: true,
+                pageSizeOptions: ['20', '50', '100', '500', '1000'],
+                onShowSizeChange: (current, size) => setPageSize(size),
+            }}
+        />
+    );
 };
 
 function getStatus(allTxns: TTransaction[], record: DataType) {
+    console.log('⭐  record:', record);
     if (record?.debit_amount !== undefined && record?.credit_amount !== undefined) return 'NORMAL';
     if (record?.debit_amount !== undefined && record?.credit_amount === undefined) return 'PENDING';
 
