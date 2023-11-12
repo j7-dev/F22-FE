@@ -7,7 +7,7 @@ import { useGetFaqs } from '@/hooks/useGetFaq';
 import CategoryList from '@/components/ContentLayout/Faq/CategoryList';
 import PostList from '@/components/ContentLayout/Faq/PostList';
 
-export const categoryListAtom = atom<string>('notice');
+export const categoryListAtom = atom<string>('announcement');
 
 const index: React.FC = () => {
     const [categoryListLabel, setCategoryListValue] = useAtom(categoryListAtom);
