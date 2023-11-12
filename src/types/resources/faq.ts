@@ -9,6 +9,7 @@ export type TFaq = {
     publishedAt: string;
     title: string;
     updatedAt: string;
+    fxnDate?: string;
     category?: {
         label: string;
         value: string;

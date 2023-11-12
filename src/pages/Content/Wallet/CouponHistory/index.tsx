@@ -3,7 +3,8 @@ import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { Table, Tag, Modal } from 'antd';
 import dayjs from 'dayjs';
-// import { List } from '@refinedev/antd';
+import { useCustomMutation, useApiUrl } from '@refinedev/core';
+import { useQueryClient } from '@tanstack/react-query';
 import { useShowPc } from '@/hooks/useShowPc';
 import { useGetCoupon } from '@/hooks/resources/';
 import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
@@ -20,10 +21,14 @@ import couponIcon from '@/assets/images/newMyPage/coupon.svg';
 const { Column } = Table;
 const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSize }) => {
     const isPc = useShowPc();
+    const apiUrl = useApiUrl();
+    const queryClient = useQueryClient();
     const [section, setSection] = useAtom(activeMenuAtom);
+    const { mutate: doCoupon } = useCustomMutation();
     const { t } = useTranslation();
     //取得資料
     const { tableProps } = useGetCoupon({ userID, pageSize });
+    // console.log('🚀 ~ tableProps:', tableProps);
 
     //轉換資料加上新日期格式
     const fxnData = tableProps?.dataSource?.map((item) => {
@@ -86,15 +91,40 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
         );
     };
 
+    //領取coupon
+    const handleDoCoupon = (coupon_id: number, resolve: () => void) => {
+        doCoupon(
+            {
+                url: `${apiUrl}/coupon/claim`,
+                method: 'post',
+                values: {
+                    coupon_id: coupon_id,
+                },
+            },
+            {
+                onSuccess: () => {
+                    queryClient.invalidateQueries(['getUserIdentity']); // 清除getIdentity數據
+                    queryClient.invalidateQueries(['coupons']);
+                    resolve();
+                },
+                onError: (error) => {
+                    console.log('error', error);
+                    resolve();
+                },
+            },
+        );
+    };
     //點擊領取coupon按鈕
-    const handleReceiveCoupon = () => {
+    const handleReceiveCoupon = (coupon_id: number) => () => {
         Modal.info({
             centered: true,
             title: t('Do you want to receive it?'),
             okText: t('RECEIVE'),
             onOk: () => {
                 return new Promise<void>((resolve) => {
-                    setTimeout(() => resolve(), 2000); // 注意這裡的 resolve() 要帶上括號
+                    handleDoCoupon(coupon_id, resolve);
+                    // resolve();
+                    // setTimeout(() => resolve(), 2000); // 注意這裡的 resolve() 要帶上括號
                 }).catch(() => console.log('Oops errors!'));
             },
             okCancel: true,
@@ -121,11 +151,11 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
                     dataIndex="is_claimed"
                     key="is_claimed"
                     className="w-1/4 whitespace-nowrap"
-                    render={(value) => {
+                    render={(value, record) => {
                         //如果為false
                         if (!value)
                             return (
-                                <Tag onClick={handleReceiveCoupon} color="#22C55E" className="cursor-pointer rounded-2xl">
+                                <Tag onClick={handleReceiveCoupon((record as { id: number }).id)} color="#22C55E" className="cursor-pointer rounded-2xl">
                                     {t('CLICK ME')}
                                 </Tag>
                             );

@@ -2,10 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 import { useAtom } from 'jotai';
+import { signInAtom } from '@/components/ContentLayout/Header/LoginModule';
+import { useIsLogin } from '@/hooks/resources/useIsLogin';
 
 const MobileBottom = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
+    const isLogin = useIsLogin();
+    const [_signIn, setSignIn] = useAtom(signInAtom);
     const [activeMenu, setActiveMenu] = useAtom(activeMenuAtom);
     const inDeposit = window.location.pathname === '/wallet' && activeMenu === 'deposit' ? 'active' : '';
     const inWithdraw = window.location.pathname === '/wallet' && activeMenu === 'withdraw' ? 'active' : '';
@@ -16,12 +20,17 @@ const MobileBottom = () => {
     const handleClick =
         ({ path, atom }: { path: string; atom?: string }) =>
         () => {
+            //如果沒登入就跳登入彈窗並且直接返回
+            if (path === '/wallet' && !isLogin) {
+                setSignIn(true);
+                return;
+            }
             if (atom) setActiveMenu(atom);
             navigate(path);
         };
 
     return (
-        <div className="mobileBottom bg-[#F8F9FF] pt-6 fixed bottom-0 left-0 h-fit w-full z-50">
+        <div className="md:hidden mobileBottom fixed bottom-0 left-0 h-fit w-full z-50">
             <div className="mobileSection md:hidden grid bg-white grid-cols-5 w-full px-3 pb-[30px] gap-2">
                 <div onClick={handleClick({ path: '/wallet', atom: 'deposit' })} className={`${inDeposit} btnWrap deposit pt-3`}>
                     <div className="flex flex-col justify-center items-center gap-1.5">

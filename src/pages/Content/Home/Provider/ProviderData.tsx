@@ -3,13 +3,13 @@ import pragmaticplayProviderImg from '@/assets/images/game_provider/pragmaticpla
 import microgamingProviderImg from '@/assets/images/game_provider/microgaming.png';
 import asiagamingProviderImg from '@/assets/images/game_provider/asiagaming.png';
 import btiProviderImg from '@/assets/images/game_provider/bti.png';
-import gigxProviderImg from '@/assets/images/game_provider/igx.png';
+// import gigxProviderImg from '@/assets/images/game_provider/igx.png';
 import evolutionProviderImg2 from '@/assets/images/game_provider/evoIcon.svg';
 import pragmaticplayProviderImg2 from '@/assets/images/game_provider/ppIcon.svg';
 import microgamingProviderImg2 from '@/assets/images/game_provider/mgIcon.svg';
 import asiagamingProviderImg2 from '@/assets/images/game_provider/agIcon.svg';
 import btiProviderImg2 from '@/assets/images/game_provider/btiIcon.svg';
-import gigxProviderImg2 from '@/assets/images/game_provider/igx_icon.png';
+// import gigxProviderImg2 from '@/assets/images/game_provider/igx_icon.png';
 import pragmaticplayFavicon from '@/assets/images/game_provider/pragmaticplay_icon.png';
 import evolutionFavicon from '@/assets/images/game_provider/evo_icon.png';
 // import golfFavicon from '@/assets/images/golf_favicon.ico';
@@ -26,14 +26,15 @@ export const fakeProviderData = [
         ProviderFavicon: btiProviderImg,
         ProviderType: ['Sports'],
     },
-    {
-        ProviderImg: gigxProviderImg,
-        ProviderImg2: gigxProviderImg2,
-        ProviderName: 'IGX Golf',
-        ProviderPath: '/gigx',
-        ProviderFavicon: gigxProviderImg,
-        ProviderType: ['Sports'],
-    },
+    //TODO IGX先隱藏
+    // {
+    //     ProviderImg: gigxProviderImg,
+    //     ProviderImg2: gigxProviderImg2,
+    //     ProviderName: 'IGX Golf',
+    //     ProviderPath: '/gigx',
+    //     ProviderFavicon: gigxProviderImg,
+    //     ProviderType: ['Sports'],
+    // },
     {
         ProviderImg: evolutionProviderImg,
         ProviderImg2: evolutionProviderImg2,
