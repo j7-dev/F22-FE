@@ -8,12 +8,13 @@ import LoginDetail from '@/components/Admin/LoginDetail';
 import ListBettingRecords from '@/components/resources/betRecords/List';
 import { useParams } from 'react-router-dom';
 import { TUser } from '@/types';
-import { Create } from '@/components/resources/transactionRecords';
 import { DollarOutlined } from '@ant-design/icons';
 import useDpWdUserInfo from '../List/hooks/useDpWdUserInfo';
 import useColumns from './useColumns';
 import NotesForm from './NotesForm';
 import { useTranslation } from 'react-i18next';
+import { RiCoupon3Line } from 'react-icons/ri';
+import BalanceAdjustment from './BalanceAdjustment';
 
 const index = () => {
     const { t } = useTranslation();
@@ -58,29 +59,10 @@ const index = () => {
             label: t('User Info'),
             children: (
                 <div>
-                    <Card bordered={false} title="Info">
+                    <Card bordered={false} title={t('Info')}>
                         <div className="grid grid-cols-2 xl:grid-cols-2 gap-6">
                             <ObjectTable record={userData} columns={infoLeftColumns} />
                             <ObjectTable record={userData} columns={infoRightColumns} />
-                        </div>
-                        <div className="mt-4">
-                            <p>
-                                <DollarOutlined className="mr-2" />
-                                {t('Balance Adjustment')}
-                            </p>
-                            <Create
-                                title={<></>}
-                                goBack={<></>}
-                                breadcrumb={null}
-                                contentProps={{
-                                    style: {
-                                        boxShadow: 'none',
-                                        padding: '0rem',
-                                        marginTop: '-4rem',
-                                        backgroundColor: 'transparent',
-                                    },
-                                }}
-                            />
                         </div>
                     </Card>
                 </div>
@@ -131,6 +113,28 @@ const index = () => {
             children: (
                 <Card bordered={false} title="User Notes">
                     <NotesForm user_notes={theUser?.user_notes} />
+                </Card>
+            ),
+        },
+        {
+            key: 'balanceAdjustment',
+            label: t('Balance Adjustment'),
+            children: (
+                <Card bordered={false} title={t('Balance Adjustment')}>
+                    <div className="mb-8">
+                        <p>
+                            <RiCoupon3Line className="mr-2" />
+                            {t('Coupon')}
+                        </p>
+                        <BalanceAdjustment type="coupon" />
+                    </div>
+                    <div className="mb-8">
+                        <p>
+                            <DollarOutlined className="mr-2" />
+                            {t('Balance Adjustment')}
+                        </p>
+                        <BalanceAdjustment type="balance" />
+                    </div>
                 </Card>
             ),
         },
