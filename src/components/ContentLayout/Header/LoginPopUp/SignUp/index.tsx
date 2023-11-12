@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSetAtom, useAtom } from 'jotai';
 import { Form, Input, Button, Modal, Radio, notification } from 'antd';
-import { useRegister } from '@refinedev/core';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { useRegister, useGetLocale } from '@refinedev/core';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { signInAtom, signUpAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { TRegisterPayload } from '@/types';
@@ -15,8 +15,10 @@ import bankNumber from '@/assets/images/loginFrom/bankNumber.svg';
 import bankName from '@/assets/images/loginFrom/bankName.svg';
 import bankCode from '@/assets/images/loginFrom/bankCode.svg';
 import { AiFillCloseCircle } from 'react-icons/ai';
+import { RECAPTCHA_SITE_KEY } from '@/utils/env';
 
 const index: React.FC = () => {
+    const locale = useGetLocale()(); //取得語系
     const { t } = useTranslation();
     //判斷Modal是否打開
     const [signUp, setSignUp] = useAtom(signUpAtom);
@@ -24,50 +26,51 @@ const index: React.FC = () => {
     //取得檢查用戶名是否已存在方法
     const { checkUserName } = useCheckUserName();
 
-    const captchaSignUpRef = useRef<HCaptcha>(null);
     const { mutate: register, isLoading } = useRegister<TRegisterPayload>();
     const [form] = Form.useForm();
     const [verifyError, setVerifyError] = useState('');
     const [submitTable, setSubmitTable] = useState(false);
-
+    //Google驗證
+    const reCaptchaRef = useRef<ReCAPTCHA>(null);
+    const [reCaptcha, setReCaptcha] = useState<null | string>(null);
+    //成功回調
+    const onChange = (value: string | null) => {
+        setVerifyError('');
+        setReCaptcha(value);
+    };
+    //錯誤回調
+    const onErrored = () => {
+        setVerifyError('Verification Failed');
+        setReCaptcha(null);
+    };
+    //過期回調
+    const onExpired = () => {
+        setVerifyError('Verification Expired');
+        setReCaptcha(null);
+    };
     //點擊註冊會員
     const handleSignUp = (values: TRegisterPayload) => {
-        if (captchaSignUpRef?.current) {
-            captchaSignUpRef.current
-                ?.execute({ async: true })
-                .then((_token) => {
-                    // console.log('SignUpValues', values);
-                    const sendValues = {
-                        ...values,
-                        redirectPath: '/wallet',
-                    };
-                    register(sendValues, {
-                        onSuccess: (data) => {
-                            if (!data.success) {
-                                // handle error
-                            }
-                            // handle success
-                            setSignUp(false);
-                        },
-                        onError: (error: any) => {
-                            const message = error?.response?.data?.error || 'Something went wrong';
-                            notification.error({
-                                key: 'register',
-                                message,
-                            });
-                            console.log('錯誤訊息', error);
-                        },
-                    });
-                })
-                .catch((err) => {
-                    console.error(err);
-                    setVerifyError('Verification failed');
-                    return;
+        const sendValues = {
+            ...values,
+            redirectPath: '/wallet',
+        };
+        register(sendValues, {
+            onSuccess: (data) => {
+                if (!data.success) {
+                    // handle error
+                }
+                // handle success
+                setSignUp(false);
+            },
+            onError: (error: any) => {
+                const message = error?.response?.data?.error || 'Something went wrong';
+                notification.error({
+                    key: 'register',
+                    message,
                 });
-        } else {
-            console.error('captchaSignUpRef.current is null');
-            return;
-        }
+                console.log('錯誤訊息', error);
+            },
+        });
     };
 
     const handleToLogin = () => {
@@ -121,16 +124,15 @@ const index: React.FC = () => {
             //成功回調
             () => {
                 //判斷是否有錯誤訊息，沒有的話就可以提交表單
-                if (form.getFieldsError(['userName'])[0].errors.length === 0) {
-                    setSubmitTable(true);
-                }
+                if (form.getFieldsError(['userName'])[0].errors.length === 0 && reCaptcha !== null) return setSubmitTable(true);
+                setSubmitTable(false);
             },
             //失敗回調
             () => {
                 setSubmitTable(false);
             },
         );
-    }, [values]);
+    }, [values, reCaptcha]);
 
     return (
         <Modal
@@ -179,7 +181,7 @@ const index: React.FC = () => {
                             </Radio>
                         </Radio.Group>
                     </Form.Item>
-                    <HCaptcha id='id="signUpHCaptcha"' size="invisible" ref={captchaSignUpRef} sitekey="8a2b9bf5-aaeb-415f-b9a0-3243eefd798f" />
+                    <ReCAPTCHA ref={reCaptchaRef} hl={locale} onChange={(token: string | null) => onChange(token)} onErrored={() => onErrored()} onExpired={() => onExpired()} className="flex justify-center" sitekey={RECAPTCHA_SITE_KEY} />
                     <Form.Item className="mb-0">
                         <Button loading={isLoading} disabled={!submitTable} className="border-0 mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
                             {t('Sign Up')}
