@@ -39,7 +39,7 @@ const index = () => {
                         </div>
                     }
                 >
-                    {adminRoutes()}
+                    {adminRoutes(role)}
                 </Route>
             ) : null}
 

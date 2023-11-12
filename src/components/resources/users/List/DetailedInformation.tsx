@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Table, Row, Col, Card, Switch, TableProps, Tooltip } from 'antd';
 import { useTable } from '@refinedev/antd';
-import { TRoleType, TUser } from '@/types';
-import { CrudFilters } from '@refinedev/core';
+import { TMe, TUser } from '@/types';
+import { useGetIdentity, CrudFilters } from '@refinedev/core';
 import Filter from './Filter';
 import FilterTags from '@/components/Admin/FilterTags';
 import { useGetSiteSetting } from '@/hooks';
@@ -10,33 +10,24 @@ import useColumns from './hooks/useColumns';
 import { DataType, TSearchProps } from './types';
 import useDpWdUserInfo from './hooks/useDpWdUserInfo';
 
-const DetailedInformation: React.FC<{
-    roleType?: TRoleType | TRoleType[];
-}> = ({ roleType = 'authenticated' }) => {
+const DetailedInformation = () => {
+    const { data: identity } = useGetIdentity<TMe>();
+    const role = identity?.role?.type || '';
+    const defaultAgentId = role === 'agent' ? identity?.id : undefined;
     const siteSetting = useGetSiteSetting();
     const currency = siteSetting?.default_currency || 'KRW';
     const amount_type = siteSetting?.default_amount_type || 'CASH';
-    const rolesMapping = siteSetting?.roles || {};
     const columns = useColumns();
 
-    const filters: CrudFilters = Array.isArray(roleType)
+    const filters: CrudFilters = defaultAgentId
         ? [
               {
-                  operator: 'or',
-                  value: roleType.map((r) => ({
-                      field: 'role.id',
-                      operator: 'eq',
-                      value: rolesMapping?.[r],
-                  })),
+                  field: 'agent.id',
+                  operator: 'eq',
+                  value: defaultAgentId,
               },
           ]
-        : [
-              {
-                  field: 'role.id',
-                  operator: 'eq',
-                  value: rolesMapping?.[roleType],
-              },
-          ];
+        : [];
 
     const { tableProps, searchFormProps } = useTable({
         resource: 'users',

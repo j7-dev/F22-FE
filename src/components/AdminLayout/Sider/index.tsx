@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ITreeMenu, CanAccess, useMenu } from '@refinedev/core';
+import { ITreeMenu, CanAccess, useMenu, useGetIdentity } from '@refinedev/core';
 import { Link } from 'react-router-dom';
 import { Sider } from '@refinedev/antd';
 import { Layout as AntdLayout, Menu, Grid, theme, Button } from 'antd';
@@ -8,11 +8,14 @@ import { nanoid } from 'nanoid';
 import logo from '@/assets/images/1002_logo_f.png';
 import logo_s from '@/assets/images/1002_logo_s.png';
 import { useTranslation } from 'react-i18next';
+import { TMe } from '@/types';
 
 const { useToken } = theme;
 const siderWidth = 320;
 
 const CustomSider: typeof Sider = () => {
+    const { data: identity } = useGetIdentity<TMe>();
+    const role = identity?.role?.type || '';
     const { token } = useToken();
     const { t } = useTranslation();
     const [collapsed, setCollapsed] = useState<boolean>(false);
@@ -24,38 +27,48 @@ const CustomSider: typeof Sider = () => {
     const isMobile = typeof breakpoint.lg === 'undefined' ? false : !breakpoint.lg;
 
     const renderTreeView = (tree: ITreeMenu[], theSelectedKey: string) => {
-        return tree.map((item: ITreeMenu) => {
-            const { name, children, meta, key, list } = item;
+        return tree
+            .filter((item: ITreeMenu) => {
+                if (role === 'agent') {
+                    const allow = ['members', 'users', 'dashboard', 'daily-statistic'];
+                    return allow.includes(item.name);
+                }
+                if (role === 'admin') {
+                    return true;
+                }
+            })
+            .map((item: ITreeMenu) => {
+                const { name, children, meta, key, list } = item;
 
-            const icon = meta?.icon;
-            const label = meta?.label ?? name;
-            const parent = meta?.parent;
-            const route = typeof list === 'string' ? list : typeof list !== 'function' ? list?.path : key;
+                const icon = meta?.icon;
+                const label = meta?.label ?? name;
+                const parent = meta?.parent;
+                const route = typeof list === 'string' ? list : typeof list !== 'function' ? list?.path : key;
 
-            if (children.length > 0) {
+                if (children.length > 0) {
+                    return (
+                        <SubMenu key={nanoid()} icon={icon ?? <UnorderedListOutlined />} title={label}>
+                            {renderTreeView(children, theSelectedKey)}
+                        </SubMenu>
+                    );
+                }
+                const isSelected = route === theSelectedKey;
+                const isRoute = !(parent !== undefined && children.length === 0);
                 return (
-                    <SubMenu key={nanoid()} icon={icon ?? <UnorderedListOutlined />} title={label}>
-                        {renderTreeView(children, theSelectedKey)}
-                    </SubMenu>
+                    <CanAccess key={nanoid()} resource={name.toLowerCase()} action="list" params={{ resource: item }}>
+                        <Menu.Item
+                            key={route}
+                            style={{
+                                textTransform: 'capitalize',
+                            }}
+                            icon={icon ?? (isRoute && <UnorderedListOutlined />)}
+                        >
+                            {route ? <Link to={route || '/'}>{t(label)}</Link> : label}
+                            {!collapsed && isSelected && <div className="ant-menu-tree-arrow" />}
+                        </Menu.Item>
+                    </CanAccess>
                 );
-            }
-            const isSelected = route === theSelectedKey;
-            const isRoute = !(parent !== undefined && children.length === 0);
-            return (
-                <CanAccess key={nanoid()} resource={name.toLowerCase()} action="list" params={{ resource: item }}>
-                    <Menu.Item
-                        key={route}
-                        style={{
-                            textTransform: 'capitalize',
-                        }}
-                        icon={icon ?? (isRoute && <UnorderedListOutlined />)}
-                    >
-                        {route ? <Link to={route || '/'}>{t(label)}</Link> : label}
-                        {!collapsed && isSelected && <div className="ant-menu-tree-arrow" />}
-                    </Menu.Item>
-                </CanAccess>
-            );
-        });
+            });
     };
 
     const items = renderTreeView(menuItems, selectedKey);

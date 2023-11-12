@@ -1,11 +1,8 @@
 import DetailedInformation from './DetailedInformation';
 import { List } from '@refinedev/antd';
-import { TRoleType } from '@/types';
 import { useTranslation } from 'react-i18next';
 
-const index: React.FC<{
-    roleType?: TRoleType | TRoleType[];
-}> = ({ roleType = 'authenticated' }) => {
+const index = () => {
     const { t } = useTranslation();
     return (
         <List
@@ -14,7 +11,7 @@ const index: React.FC<{
                 children: t('Create'),
             }}
         >
-            <DetailedInformation roleType={roleType} />
+            <DetailedInformation />
         </List>
     );
 };

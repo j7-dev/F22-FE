@@ -32,7 +32,7 @@ const ListCoupons = lazy(() => import('@/pages/Admin/coupons/List'));
 const CreateCoupons = lazy(() => import('@/pages/Admin/coupons/Create'));
 const EditCoupons = lazy(() => import('@/pages/Admin/coupons/Edit'));
 
-const adminRoutes = () => {
+const adminRoutes = (role: string) => {
     return (
         <>
             <Route path="/refine/home/" element={<Home />} />
@@ -50,46 +50,50 @@ const adminRoutes = () => {
                 <Route path="edit/:id" element={<EditMember />} />
             </Route>
 
-            <Route path="/refine/:roleType/">
-                <Route index element={<ListAgent />} />
-                <Route path="list" element={<ListAgent />} />
-                <Route path="create" element={<CreateAgent />} />
-                <Route path="show/:id" element={<ShowMember />} />
-                <Route path="edit/:id" element={<EditAgent />} />
-                <Route path="commissions" element={<ListCommission />} />
-                <Route path="commissions/create" element={<CreateCommission />} />
-                <Route path="commissions/edit/:id" element={<EditCommission />} />
+            {role === 'admin' && (
+                <>
+                    <Route path="/refine/:roleType/">
+                        <Route index element={<ListAgent />} />
+                        <Route path="list" element={<ListAgent />} />
+                        <Route path="create" element={<CreateAgent />} />
+                        <Route path="show/:id" element={<ShowMember />} />
+                        <Route path="edit/:id" element={<EditAgent />} />
+                        <Route path="commissions" element={<ListCommission />} />
+                        <Route path="commissions/create" element={<CreateCommission />} />
+                        <Route path="commissions/edit/:id" element={<EditCommission />} />
 
-                <Route path="commission-settlement" element={<CommissionSettlement />} />
-                <Route path=":type/aff-transactions" element={<AffTransactions />} />
-                <Route path="aff-commission-settlement" element={<AffCommissionTransactions />} />
-            </Route>
+                        <Route path="commission-settlement" element={<CommissionSettlement />} />
+                        <Route path=":type/aff-transactions" element={<AffTransactions />} />
+                        <Route path="aff-commission-settlement" element={<AffCommissionTransactions />} />
+                    </Route>
 
-            <Route path="/refine/payments/">
-                <Route index element={<ListDeposits />} />
-                <Route path=":type/list" element={<ListDeposits />} />
-                <Route path=":type/list" element={<ListWithdraws />} />
-            </Route>
-            <Route path="/refine/betting-management/">
-                <Route index element={<ListBettingRecords />} />
-                <Route path="betting-records" element={<ListBettingRecords />} />
-            </Route>
-            <Route path="/refine/system-setting/">
-                <Route index element={<VipSetting />} />
-                <Route path="vips" element={<VipSetting />} />
-                <Route path="site-setting" element={<SiteSetting />} />
-                <Route path="site-notifications" element={<ListSiteNotifications />} />
-                <Route path="site-notifications/create" element={<CreateSiteNotifications />} />
-                <Route path="site-notifications/edit/:id" element={<EditSiteNotifications />} />
-            </Route>
-            <Route path="/refine/promotion/">
-                <Route index path="deposit-bonuses" element={<ListDepositBonuses />} />
-                <Route path="deposit-bonuses/create" element={<CreateDepositBonuses />} />
-                <Route path="deposit-bonuses/edit/:id" element={<EditDepositBonuses />} />
-                <Route index path="coupons" element={<ListCoupons />} />
-                <Route path="coupons/create" element={<CreateCoupons />} />
-                <Route path="coupons/edit/:id" element={<EditCoupons />} />
-            </Route>
+                    <Route path="/refine/payments/">
+                        <Route index element={<ListDeposits />} />
+                        <Route path=":type/list" element={<ListDeposits />} />
+                        <Route path=":type/list" element={<ListWithdraws />} />
+                    </Route>
+                    <Route path="/refine/betting-management/">
+                        <Route index element={<ListBettingRecords />} />
+                        <Route path="betting-records" element={<ListBettingRecords />} />
+                    </Route>
+                    <Route path="/refine/system-setting/">
+                        <Route index element={<VipSetting />} />
+                        <Route path="vips" element={<VipSetting />} />
+                        <Route path="site-setting" element={<SiteSetting />} />
+                        <Route path="site-notifications" element={<ListSiteNotifications />} />
+                        <Route path="site-notifications/create" element={<CreateSiteNotifications />} />
+                        <Route path="site-notifications/edit/:id" element={<EditSiteNotifications />} />
+                    </Route>
+                    <Route path="/refine/promotion/">
+                        <Route index path="deposit-bonuses" element={<ListDepositBonuses />} />
+                        <Route path="deposit-bonuses/create" element={<CreateDepositBonuses />} />
+                        <Route path="deposit-bonuses/edit/:id" element={<EditDepositBonuses />} />
+                        <Route index path="coupons" element={<ListCoupons />} />
+                        <Route path="coupons/create" element={<CreateCoupons />} />
+                        <Route path="coupons/edit/:id" element={<EditCoupons />} />
+                    </Route>
+                </>
+            )}
         </>
     );
 };

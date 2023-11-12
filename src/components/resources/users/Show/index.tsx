@@ -1,13 +1,13 @@
 import { Card, Tabs, TabsProps } from 'antd';
 import { Show } from '@refinedev/antd';
 import { useCan } from '@/hooks';
-import { useShow, useResource } from '@refinedev/core';
+import { useShow, useResource, useGetIdentity } from '@refinedev/core';
 import ObjectTable from '@/components/general/ObjectTable';
 import MoneyLog from '@/components/Admin/MoneyLog';
 import LoginDetail from '@/components/Admin/LoginDetail';
 import ListBettingRecords from '@/components/resources/betRecords/List';
 import { useParams } from 'react-router-dom';
-import { TUser } from '@/types';
+import { TUser, TMe } from '@/types';
 import { DollarOutlined } from '@ant-design/icons';
 import useDpWdUserInfo from '../List/hooks/useDpWdUserInfo';
 import useColumns from './useColumns';
@@ -18,6 +18,9 @@ import CreateCoupon from '@/components/resources/coupons/Create';
 import CreateTxn from '@/components/resources/transactionRecords/Create';
 
 const index = () => {
+    const { data: identity } = useGetIdentity<TMe>();
+    const role = identity?.role?.type || '';
+
     const { t } = useTranslation();
     const { identifier } = useResource();
     const { canDelete, canEdit } = useCan();
@@ -53,6 +56,21 @@ const index = () => {
     };
 
     const { infoLeftColumns, infoRightColumns } = useColumns();
+
+    const userNotes =
+        role === 'admin'
+            ? [
+                  {
+                      key: 'userNotes',
+                      label: t('User Notes'),
+                      children: (
+                          <Card bordered={false} title="User Notes">
+                              <NotesForm user_notes={theUser?.user_notes} />
+                          </Card>
+                      ),
+                  },
+              ]
+            : [];
 
     const items: TabsProps['items'] = [
         {
@@ -108,15 +126,7 @@ const index = () => {
                 </Card>
             ),
         },
-        {
-            key: 'userNotes',
-            label: t('User Notes'),
-            children: (
-                <Card bordered={false} title="User Notes">
-                    <NotesForm user_notes={theUser?.user_notes} />
-                </Card>
-            ),
-        },
+        ...userNotes,
         {
             key: 'balanceAdjustment',
             label: t('Balance Adjustment'),
