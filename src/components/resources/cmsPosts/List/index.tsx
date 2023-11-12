@@ -86,6 +86,7 @@ const index = () => {
             createButtonProps={{
                 children: t('Create'),
             }}
+            title={t('Site notifies')}
         >
             <Row gutter={[16, 16]}>
                 <Col lg={24} xs={24}>

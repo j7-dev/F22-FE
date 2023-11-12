@@ -33,7 +33,7 @@ const index = () => {
 
     return (
         <>
-            <List canCreate={false}>
+            <List canCreate={false} title={t('Vip upgrade rules')}>
                 <Form form={form} layout="vertical">
                     <div className="mb-4">
                         <CreateButton />

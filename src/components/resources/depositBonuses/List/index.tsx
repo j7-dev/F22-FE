@@ -93,6 +93,7 @@ const index = () => {
 
     return (
         <List
+            title={t('Deposit Bonuses')}
             resource="deposit-bonuses"
             canCreate
             createButtonProps={{

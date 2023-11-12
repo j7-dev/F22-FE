@@ -105,7 +105,7 @@ const index: React.FC<{ user_id?: string | number }> = ({ user_id }) => {
         {
             title: t('Debit Amount'),
             dataIndex: 'debit_amount',
-            render: (v: number) => (v === undefined ? '' : <SimpleAmount amount={v} />),
+            render: (v: number) => (v === undefined ? '' : <SimpleAmount amount={-v} />),
         },
         {
             title: t('Pay Out'),
@@ -115,11 +115,12 @@ const index: React.FC<{ user_id?: string | number }> = ({ user_id }) => {
         {
             title: t('win/loss'),
             dataIndex: 'winloss',
-            render: (_: undefined, record: DataType) => <SimpleAmount amount={(record?.debit_amount || 0) - (record?.credit_amount || 0)} />,
+            render: (_: undefined, record: DataType) => <SimpleAmount amount={((record?.debit_amount || 0) + (record?.credit_amount || 0)) * -1} />,
         },
         {
             title: t('Status'),
             dataIndex: 'status',
+            render: (v: string) => t(v),
         },
         {
             title: t('Bet Time'),
