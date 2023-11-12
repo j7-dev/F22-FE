@@ -7,7 +7,7 @@ import { gameCategories } from '@/utils/GameCategory';
 import { sampleSize } from 'lodash-es';
 import { TGameCategory } from '@/types/games/gameCategory';
 import btiIcon from '@/assets/images/game_provider/bti_icon.png';
-import igxIcon from '@/assets/images/game_provider/igx.png';
+// import igxIcon from '@/assets/images/game_provider/igx.png';
 import { tokenData } from '@/utils/providerData/Token';
 
 export const useGetPopularGames = () => {
@@ -43,22 +43,23 @@ export const useGetPopularGames = () => {
             gameImg: btiIcon,
         },
     ];
+    //TODO IGX有問題先隱藏
     //Golf Games 為IGX
-    const golfGamesData = [
-        {
-            gameName: t('Golf'),
-            gameCategory: 'golf',
-            gameProviderName: 'golf',
-            gameImg: igxIcon,
-        },
-    ];
+    // const golfGamesData = [
+    //     {
+    //         gameName: t('Golf'),
+    //         gameCategory: 'golf',
+    //         gameProviderName: 'golf',
+    //         gameImg: igxIcon,
+    //     },
+    // ];
 
     //取得Token遊戲資料
     const tokenGamesData = tokenData;
 
     //重組所有遊戲資料
     const allGamesArray = useMemo(() => {
-        return isLoading ? [] : [...liveGamesData, ...slotGames, ...sportGamesData, ...inPlayGamesData, ...golfGamesData, ...tokenGamesData];
+        return isLoading ? [] : [...liveGamesData, ...slotGames, ...sportGamesData, ...inPlayGamesData, ...tokenGamesData];
     }, [isLoading]);
 
     // 獲取隨機的6個元素
