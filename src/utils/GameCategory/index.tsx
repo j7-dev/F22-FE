@@ -25,11 +25,12 @@ export const gameCategories: TGameCategory[] = [
         value: 'sports',
         path: 'sports',
     },
-    {
-        label: 'Golf',
-        value: 'golf',
-        path: 'golf',
-    },
+    //TODO IGX先隱藏
+    // {
+    //     label: 'Golf',
+    //     value: 'golf',
+    //     path: 'golf',
+    // },
     {
         label: 'Casino',
         value: 'casino',
