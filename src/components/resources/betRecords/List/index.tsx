@@ -149,13 +149,7 @@ const index: React.FC<{ user_id?: string | number }> = ({ user_id }) => {
     const filterTagsKey = JSON.stringify(searchFormProps?.form?.getFieldsValue());
 
     return (
-        <List
-            resource="coupons"
-            canCreate
-            createButtonProps={{
-                children: t('Create'),
-            }}
-        >
+        <List resource={RESOURCE} canCreate={false}>
             <Row gutter={[16, 16]}>
                 <Col lg={24} xs={24}>
                     <Filter formProps={searchFormProps} />
