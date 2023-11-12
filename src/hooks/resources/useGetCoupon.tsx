@@ -15,10 +15,25 @@ export const useGetCoupon = ({ userID, pageSize = 10 }: { userID?: number; pageS
         filters: {
             initial: [
                 {
-                    field: 'users.id',
+                    field: 'user.id',
                     operator: 'eq',
                     value: userID,
                 },
+                // {
+                //     operator: 'or',
+                //     value: [
+                //         {
+                //             field: 'user',
+                //             operator: 'eq',
+                //             value: null,
+                //         },
+                //         {
+                //             field: 'user.id',
+                //             operator: 'eq',
+                //             value: userID,
+                //         },
+                //     ],
+                // },
             ],
         },
         pagination: {
