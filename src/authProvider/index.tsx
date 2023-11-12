@@ -18,8 +18,13 @@ export const authProvider: AuthBindings = {
 
         if (!confirmed) {
             const message = 'Your account is not confirmed yet';
-            Modal.error({
-                content: message,
+            Modal.warning({
+                centered: true,
+                title: <div className="text-center">{message}</div>,
+                icon: null,
+                okButtonProps: {
+                    className: 'w-full text-center bg-[#5932EA] rounded-2xl',
+                },
             });
 
             return {
@@ -85,13 +90,17 @@ export const authProvider: AuthBindings = {
         if (!confirmed) {
             Modal.success({
                 centered: true,
-                title: '회원가입신청',
+                icon: null,
+                title: <div className="text-center">회원가입신청</div>,
                 content: (
-                    <div className="flex flex-col">
+                    <div className="flex flex-col text-content">
                         <span>가입 신청이 완료 되었습니다. </span>
                         <span>잠시 기다려 주시면 확인 후 처리 도와 드리겠습니다</span>
                     </div>
                 ),
+                okButtonProps: {
+                    className: 'w-full text-center bg-[#5932EA] rounded-2xl',
+                },
             });
 
             return {
