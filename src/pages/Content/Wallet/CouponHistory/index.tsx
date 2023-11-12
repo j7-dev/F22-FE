@@ -3,6 +3,7 @@ import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { Table, Tag, Modal } from 'antd';
 import dayjs from 'dayjs';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import { useCustomMutation, useApiUrl } from '@refinedev/core';
 import { useQueryClient } from '@tanstack/react-query';
 import { useShowPc } from '@/hooks/useShowPc';
@@ -12,6 +13,7 @@ import type { TablePaginationConfig } from 'antd/es/table/interface';
 import { BiSolidTimeFive } from 'react-icons/bi';
 import { BsFillCaretLeftFill } from 'react-icons/bs';
 import couponIcon from '@/assets/images/newMyPage/coupon.svg';
+
 /**
  * 取得CouponHistory資料
  * 接收userID, pageSize=>如果有傳入pageSize代表只渲染固定筆數,否則全拿
@@ -25,6 +27,9 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
     const queryClient = useQueryClient();
     const [section, setSection] = useAtom(activeMenuAtom);
     const { mutate: doCoupon } = useCustomMutation();
+    //取得當前時間
+    const now = dayjs();
+    dayjs.extend(isSameOrAfter);
     const { t } = useTranslation();
     //取得資料
     const { tableProps } = useGetCoupon({ userID, pageSize });
@@ -118,13 +123,25 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
     const handleReceiveCoupon = (coupon_id: number) => () => {
         Modal.info({
             centered: true,
-            title: t('Do you want to receive it?'),
-            okText: t('RECEIVE'),
+            icon: null,
+            title: <div className="text-center">이 쿠폰을 사용 하시겠습니까?</div>,
+            okText: '사용',
+            okButtonProps: {
+                className: 'mx-0 w-full text-center bg-[#5932EA] rounded-2xl outline-none',
+            },
+            cancelText: '취소',
+            cancelButtonProps: {
+                className: 'mx-0 w-full text-center rounded-2xl outline-none',
+            },
+            footer: (_, { OkBtn, CancelBtn }) => (
+                <div className="flex justify-between gap-2">
+                    <CancelBtn />
+                    <OkBtn />
+                </div>
+            ),
             onOk: () => {
                 return new Promise<void>((resolve) => {
                     handleDoCoupon(coupon_id, resolve);
-                    // resolve();
-                    // setTimeout(() => resolve(), 2000); // 注意這裡的 resolve() 要帶上括號
                 }).catch(() => console.log('Oops errors!'));
             },
             okCancel: true,
@@ -151,11 +168,21 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
                     dataIndex="is_claimed"
                     key="is_claimed"
                     className="w-1/4 whitespace-nowrap"
-                    render={(value, record) => {
+                    render={(value, record: { id: number; period?: { end_datetime: string } }) => {
+                        //取得coupon的過期時間
+                        const end_datetime = dayjs(record?.period?.end_datetime);
+                        //判斷是否過期=>是否存在end_datetime且現在時間是否大於end_datetime
+                        if (now.isSameOrAfter(end_datetime) && record?.period)
+                            return (
+                                <Tag color="#EB5757" className="rounded-2xl">
+                                    {t('EXPIRED')}
+                                </Tag>
+                            );
+
                         //如果為false
                         if (!value)
                             return (
-                                <Tag onClick={handleReceiveCoupon((record as { id: number }).id)} color="#22C55E" className="cursor-pointer rounded-2xl">
+                                <Tag onClick={handleReceiveCoupon(record.id)} color="#22C55E" className="cursor-pointer rounded-2xl">
                                     {t('CLICK ME')}
                                 </Tag>
                             );
@@ -165,6 +192,7 @@ const index: React.FC<{ userID: number; pageSize?: number }> = ({ userID, pageSi
                                 {t('RECEIVED')}
                             </Tag>
                         );
+                        //TODO 需要再加上一個已過期的狀態
                     }}
                 />
                 <Column
