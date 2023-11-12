@@ -497,5 +497,8 @@
     "Deposit Method": "입금방식",
     "Go Back": "이전",
     "announcement": "공지사항",
-    "ANNOUNCEMENT": "공지사항"
+    "ANNOUNCEMENT": "공지사항",
+    "CLICK ME": "사용가능",
+    "RECEIVED": "사용완료",
+    "EXPIRED": "기간만료"
 }

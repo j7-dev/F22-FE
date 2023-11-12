@@ -42,9 +42,9 @@ const index: React.FC = () => {
                 <span className="text-sm md:text-2xl font-bold text-black">{t('Bonus Details')}</span>
             </div>
             <div className="w-full grid grid-cols-3 md:py-12 py-4 place-items-center rounded-2xl bg-[#F8F9FF]">
-                <div className="flex flex-col w-full items-center gap-3 ">
+                <div className="flex flex-col w-full items-center gap-3 px-2">
                     <span className="text-[8px] md:text-lg font-medium ">{t('Bonus Type')}</span>
-                    <span className="text-[#9680EA] text-base md:text-4xl font-bold whitespace-nowrap">{chosenBonus?.label ?? '-'}</span>
+                    <span className="text-[#9680EA] text-base md:text-4xl font-bold text-center">{chosenBonus?.label ?? '-'}</span>
                 </div>
                 <div className="flex flex-col w-full items-center gap-3 border-0 md:border md:border-y-0 border-[#C6BBEE] border-solid">
                     <span className="text-[8px] md:text-lg font-medium">{t('Deposit Bonus')}</span>
