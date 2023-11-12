@@ -11,22 +11,10 @@ const index: React.FC = () => {
             </div>
             <div className="m-2 space-y-4 font-medium">
                 <p>
-                    <strong>* </strong>
-                    <strong>최대베팅수익금</strong>
-                    <strong> (</strong>
-                    <strong>경기전</strong>
-                    <strong>/</strong>
-                    <strong>라이브</strong>
-                    <strong>/</strong>
-                    <strong>시스템 베팅</strong>
-                    <strong>)</strong>
+                    <strong>*최대베팅수익금(경기전/라이브/시스템 베팅)</strong>
                 </p>
                 <p>
-                    <strong>베팅수익금</strong>
-                    <strong>=</strong>
-                    <strong>예상당첨금</strong>
-                    <strong>-</strong>
-                    <strong>베팅금</strong>
+                    <strong>베팅수익금=예상당첨금-베팅금</strong>
                 </p>
                 <p>위와 같이 최대 베팅수익금은 예상당첨금에서 베팅금을 뺀 금액입니다 폴더별 최대배팅수익금은 아래와 같이 운영됩니다.</p>
                 <p>단폴： 경기전 1000만원, 라이브 600만원</p>
@@ -40,9 +28,7 @@ const index: React.FC = () => {
                 <p>조합배당: 3.0,</p>
                 <p>최대베팅1000만원 * 배당 3.0 = 예상당첨금 3000만원</p>
                 <p>
-                    <strong>원금 빼면 최대 수익금</strong>
-                    <strong> 2000</strong>
-                    <strong>만원</strong>
+                    <strong>원금 빼면 최대 수익금 2000만원</strong>
                 </p>
                 <p>최대 수익이 2000만원(경기전) 1000만(라이브)을 넘는 조합 베팅을 하더라도 최대수익은 2000만원(경기전) 1000만원(라이브)으로 적용되어 출금됩니다</p>
                 <p>조합 배팅, 시스템 배팅에 라이브가 포함되면 최대베팅수익규정은 라이브 배팅기준으로 적용됩니다.</p>
@@ -53,15 +39,7 @@ const index: React.FC = () => {
                     <strong>&nbsp;</strong>
                 </p>
                 <p>
-                    <strong>* </strong>
-                    <strong>롤링규정</strong>
-                    <strong> (</strong>
-                    <strong>경기전</strong>
-                    <strong>/</strong>
-                    <strong>라이브</strong>
-                    <strong>/</strong>
-                    <strong>시스템 베팅</strong>
-                    <strong>)</strong>
+                    <strong>*롤링규정(경기전/라이브/시스템 베팅)</strong>
                 </p>
                 <p>단폴: 200%</p>
                 <p>조합: 100%</p>
@@ -69,53 +47,22 @@ const index: React.FC = () => {
                     <strong>&nbsp;</strong>
                 </p>
                 <p>
-                    <strong>* </strong>
-                    <strong>최대 배당</strong>
-                    <strong> 100</strong>
-                    <strong>배</strong>
-                    <strong> (</strong>
-                    <strong>경기전</strong>
-                    <strong>/</strong>
-                    <strong>라이브</strong>
-                    <strong>/</strong>
-                    <strong>시스템 베팅</strong>
-                    <strong>)</strong>
+                    <strong>* 최대 배당 100배 (경기전/라이브/시스템 베팅)</strong>
                 </p>
                 <p>100배당이 넘는 조합을 하더라도 최종배당은 100배당으로 적용되어 출금됩니다</p>
                 <p>최대 배당이랑 최대 수익금 동시 초과시 최대 수익금 기준으로 적용됩니다</p>
                 <p>
-                    <strong>* 1.30 </strong>
-                    <strong>이하 배당 </strong>
-                    <strong>(</strong>
-                    <strong>경기전</strong>
-                    <strong>/</strong>
-                    <strong>라이브</strong>
-                    <strong>/</strong>
-                    <strong>시스템 베팅</strong>
-                    <strong>)</strong>
+                    <strong>* 1.30이하 배당 (경기전/라이브/시스템 베팅)</strong>
                 </p>
                 <p>1.3 이하 배당은 최대수익금 입금 보너스규정 롤링규정관련 폴더수로 원칙상 인정하지 않습니다.</p>
                 <p>
-                    <strong>예시</strong>
-                    <strong>:</strong>
+                    <strong>예시:</strong>
                 </p>
                 <p>베팅A 배당 2.0 , 베팅B 배당 1.25 두폴 조합베팅 시&nbsp; 위 규정에 의해 단폴 경기로 간주,</p>
                 <p>롤링은 200% 최대수익금은 경기전 1000만원 라이브 600만원으로 정산됩니다</p>
                 <p>&nbsp;</p>
                 <p>
-                    <strong>* </strong>
-                    <strong>보험 베팅</strong>
-                    <strong>/</strong>
-                    <strong>축 베팅</strong>
-                    <strong>/</strong>
-                    <strong>더블찬스 </strong>
-                    <strong>(</strong>
-                    <strong>경기전</strong>
-                    <strong>/</strong>
-                    <strong>라이브</strong>
-                    <strong>/</strong>
-                    <strong>시스템 베팅</strong>
-                    <strong>)</strong>
+                    <strong>* 보험 베팅/축 베팅/더블찬스(경기전/라이브/시스템 베팅)</strong>
                 </p>
                 <p>지속적인 패스트 마켓, 캐시아웃, 매치 팔레이, 크로스 베팅, 더블찬스 및 시스템 베팅을 이용한 보험 베팅, 축 베팅 그리고 타사와의 양방 베팅으로 의심될 경우 제재대상이 될 수 있습니다</p>
                 <p>운영진 판단 하에 악용으로 간주되면 이유 불문 전액 몰수 처리됩니다.</p>
@@ -123,9 +70,7 @@ const index: React.FC = () => {
                     <strong>&nbsp;</strong>
                 </p>
                 <p>
-                    <strong>공통약관</strong>
-                    <strong>/</strong>
-                    <strong>규정</strong>
+                    <strong>공통약관/규정</strong>
                 </p>
                 <ol>
                     <li>경기 시작 전 경기가 중단/취소되거나 정규시간이 종료되기 전에 중단된 경우 24시간 이내에 재개하지 않으면 경기가 취소된 것으로 간주됩니다 게임이 중단된 시점에서 결과가 이미 결정된 베팅은 제외하고 모두 적중특례 처리됩니다. (일부 종목 제외)</li>
@@ -155,15 +100,10 @@ const index: React.FC = () => {
                     <li>조합 베팅 - 예를 들어 트리플이 더블이 되고 더블이 싱글이 됩니다.</li>
                 </ul>
                 <p>
-                    <strong>모든 베팅 타입에서</strong>
-                    <strong> (Home)</strong>
-                    <strong>은 좌측에 위치한 팀</strong>
-                    <strong>, </strong>
+                    <strong>모든 베팅 타입에서(Home)은 좌측에 위치한 팀, </strong>
                 </p>
                 <p>
-                    <strong>(Away)</strong>
-                    <strong>는 우측에 위치한 팀을 의미합니다</strong>
-                    <strong>.</strong>
+                    <strong>(Away)는 우측에 위치한 팀을 의미합니다.</strong>
                 </p>
                 <p>&nbsp;</p>
                 <p>
@@ -186,13 +126,7 @@ const index: React.FC = () => {
                 <p>시스템 베팅은 두 개의 숫자가 슬래시로 나누어집니다 (예: 2/4). 첫 번째 숫자는 베팅의 종류를 나타냅니다. (현재의 경우 더블을 나타냅니다.) 그리고 두 번째 숫자는 선택한 이벤트 갯수를 나타냅니다.</p>
                 <p>예를 들어 2/4 시스템 베팅은 4개 이벤트를 선택하고 베팅 슬립 위에 있는 &lsquo;시스템 탭&rsquo; 이라는 것을 클릭하면 시스템 베팅 옵션들이 보입니다. 2/4 시스템은 6가지의 두 폴조합으로 만들어졌습니다. 4개의 이벤트를 A, B, C, D라고 했을 때 AB, AC, AD, BC, BD, CD 6개의 두 폴로 베팅 됩니다 그러므로 10000원, 2/4시스템베팅은 60000천원을 지불하셔야 합니다. 최소 2개의 이벤트만 적중해도 수익금을 수령할 수 있습니다, 4개의 이벤트가 전부 적중일시에는 6가지 조합 전부 적중입니다</p>
                 <p>
-                    <strong>패스트 마켓</strong>
-                    <strong>/</strong>
-                    <strong>캐시아웃</strong>
-                    <strong>/</strong>
-                    <strong>매치 팔레이</strong>
-                    <strong>/</strong>
-                    <strong>크로스 베팅</strong>
+                    <strong>패스트 마켓/캐시아웃/매치 팔레이/크로스 베팅</strong>
                 </p>
                 <p>상세내용 및 이용약관은 유저페이지 좌측상단 &lt;베팅규칙&gt; 참고바랍니다</p>
                 <p>
@@ -221,8 +155,7 @@ const index: React.FC = () => {
                 <p>유저페이지 좌측상단 &lt;베팅 규칙&gt; 종목별 규정 참고바랍니다</p>
                 <p>&nbsp;</p>
                 <p>
-                    <strong>업데이트 일시</strong>
-                    <strong> 2023-0922</strong>
+                    <strong>업데이트 일시 2023-0922</strong>
                 </p>
             </div>
         </div>

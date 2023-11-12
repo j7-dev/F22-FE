@@ -7,7 +7,9 @@ const PostDetail: React.FC<{ postData: TFaq }> = ({ postData }) => {
                 <div className="postTitle">{postData?.title}</div>
                 <div className="postDate ">{postData?.createdAt}</div>
             </div>
-            <div className="postContent bg-[#F3F3F4] py-3 px-5 font-bold text-[13px]">{postData?.content}</div>
+            <div className="postContent bg-[#F3F3F4] py-3 px-5 font-bold text-[13px]">
+                <pre>{postData?.content}</pre>
+            </div>
         </div>
     );
 };
