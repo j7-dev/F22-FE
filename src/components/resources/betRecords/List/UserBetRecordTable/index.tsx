@@ -139,7 +139,7 @@ const index = () => {
         {
             title: t('Status'),
             dataIndex: 'status',
-            render: (_v: undefined, record: DataType) => getStatus(allTxns, record),
+            render: (_v: undefined, record: DataType) => t(getStatus(allTxns, record)),
         },
         {
             title: t('Bet Time'),
