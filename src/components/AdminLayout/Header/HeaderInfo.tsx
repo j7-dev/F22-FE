@@ -82,19 +82,19 @@ const HeaderInfo = () => {
                                 <tr key={label}>
                                     <th className="w-1/4">{t(label)}</th>
                                     <td>
-                                        <SimpleAmount amount={total} /> {betAmountUser?.total}
+                                        <SimpleAmount amount={total} /> ({betAmountUser?.total})
                                     </td>
                                     <td>
-                                        <SimpleAmount amount={evo} /> {betAmountUser?.evo}
+                                        <SimpleAmount amount={evo} /> ({betAmountUser?.evo})
                                     </td>
                                     <td>
-                                        <SimpleAmount amount={pp} /> {betAmountUser?.pp}
+                                        <SimpleAmount amount={pp} /> ({betAmountUser?.pp})
                                     </td>
                                     <td>
-                                        <SimpleAmount amount={bti} /> {betAmountUser?.bti}
+                                        <SimpleAmount amount={bti} /> ({betAmountUser?.bti})
                                     </td>
                                     <td>
-                                        <SimpleAmount amount={igx} /> {betAmountUser?.igx}
+                                        <SimpleAmount amount={igx} /> ({betAmountUser?.igx})
                                     </td>
                                 </tr>
                             );

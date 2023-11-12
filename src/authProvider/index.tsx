@@ -74,12 +74,15 @@ export const authProvider: AuthBindings = {
     register: async (props) => {
         const { userName, userEmail, userPhone, password, bank_account, redirectPath = '/' } = props;
         const url = `${API_URL}/api/auth/local/register`;
+        const ref = localStorage.getItem('ref') || '';
+
         const registerPayload = {
             username: userName,
             email: userEmail,
             password: password,
             phone: userPhone,
             bank_account: bank_account,
+            ref,
         };
         const { data, status } = await axios.post(url, registerPayload);
 
