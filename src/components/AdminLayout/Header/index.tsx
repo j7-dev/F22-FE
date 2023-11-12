@@ -30,7 +30,7 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
     if (sticky) {
         headerStyles.position = 'sticky';
         headerStyles.top = 0;
-        headerStyles.zIndex = 1;
+        headerStyles.zIndex = 100;
     }
 
     const queryClient = useQueryClient();
