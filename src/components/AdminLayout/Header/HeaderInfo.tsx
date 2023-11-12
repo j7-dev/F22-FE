@@ -2,6 +2,7 @@ import { useCustom, useApiUrl } from '@refinedev/core';
 import { Spin } from 'antd';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
+import { TTable1, TTable2, TTable3, TTable4 } from './types';
 
 const HeaderInfo = () => {
     const apiUrl = useApiUrl();
@@ -16,11 +17,16 @@ const HeaderInfo = () => {
             staleTime: 0,
         },
     });
-    const dataSource = data?.data?.data || {};
+    const dataSource = (data?.data?.data || {}) as {
+        table1: TTable1;
+        table2: TTable2;
+        table3: TTable3;
+        table4: TTable4;
+    };
     const { table1, table2 = [], table3 = [], table4 = [] } = dataSource;
 
-    const betAmountUser = table2.find((item: any) => item.label === 'bet users');
-    const formattedTabled2 = table2.filter((item: any) => item.label !== 'bet users');
+    const betAmountUser = table2.find((item) => item.label === 'bet users');
+    const formattedTabled2 = table2.filter((item) => item.label !== 'bet users');
     return (
         <Spin spinning={isFetching}>
             <div className="overflow-x-auto">
@@ -70,26 +76,25 @@ const HeaderInfo = () => {
                             <th>{t('igx')}</th>
                         </tr>
 
-                        {formattedTabled2.map((item: any) => {
+                        {formattedTabled2.map((item) => {
                             const { label = '', total = 0, evo = 0, pp = 0, bti = 0, igx = 0 } = item;
-                            const users = label === 'bet amount(users)' ? `(${betAmountUser.total || 0})` : '';
                             return (
                                 <tr key={label}>
                                     <th className="w-1/4">{t(label)}</th>
                                     <td>
-                                        <SimpleAmount amount={total} /> {users}
+                                        <SimpleAmount amount={total} /> {betAmountUser?.total}
                                     </td>
                                     <td>
-                                        <SimpleAmount amount={evo} /> {users}
+                                        <SimpleAmount amount={evo} /> {betAmountUser?.evo}
                                     </td>
                                     <td>
-                                        <SimpleAmount amount={pp} /> {users}
+                                        <SimpleAmount amount={pp} /> {betAmountUser?.pp}
                                     </td>
                                     <td>
-                                        <SimpleAmount amount={bti} /> {users}
+                                        <SimpleAmount amount={bti} /> {betAmountUser?.bti}
                                     </td>
                                     <td>
-                                        <SimpleAmount amount={igx} /> {users}
+                                        <SimpleAmount amount={igx} /> {betAmountUser?.igx}
                                     </td>
                                 </tr>
                             );
@@ -102,7 +107,7 @@ const HeaderInfo = () => {
                             <th>{t('pending')}</th>
                             <th>{t('confirmed')}</th>
                         </tr>
-                        {table3.map((item: any) => {
+                        {table3.map((item) => {
                             const { label, pending, confirmed } = item;
                             return (
                                 <tr key={label}>
@@ -124,7 +129,7 @@ const HeaderInfo = () => {
                             <th>&nbsp;</th>
                             <th>{t('人數')}</th>
                         </tr>
-                        {table4.map((item: any) => {
+                        {table4.map((item) => {
                             const { label, count } = item;
                             return (
                                 <tr key={label}>
