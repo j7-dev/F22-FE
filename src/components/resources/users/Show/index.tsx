@@ -14,8 +14,8 @@ import useColumns from './useColumns';
 import NotesForm from './NotesForm';
 import { useTranslation } from 'react-i18next';
 import { RiCoupon3Line } from 'react-icons/ri';
-import BalanceAdjustment from './BalanceAdjustment';
-import Create from '@/components/resources/coupons/Create';
+import CreateCoupon from '@/components/resources/coupons/Create';
+import CreateTxn from '@/components/resources/transactionRecords/Create';
 
 const index = () => {
     const { t } = useTranslation();
@@ -127,7 +127,7 @@ const index = () => {
                             <RiCoupon3Line className="mr-2" />
                             {t('Coupon')}
                         </p>
-                        <Create
+                        <CreateCoupon
                             title={<></>}
                             goBack={<></>}
                             breadcrumb={null}
@@ -146,7 +146,19 @@ const index = () => {
                             <DollarOutlined className="mr-2" />
                             {t('Balance Adjustment')}
                         </p>
-                        <BalanceAdjustment type="balance" />
+                        <CreateTxn
+                            title={<></>}
+                            goBack={<></>}
+                            breadcrumb={null}
+                            contentProps={{
+                                style: {
+                                    boxShadow: 'none',
+                                    padding: '0rem',
+                                    marginTop: '-4rem',
+                                    backgroundColor: 'transparent',
+                                },
+                            }}
+                        />
                     </div>
                 </Card>
             ),
