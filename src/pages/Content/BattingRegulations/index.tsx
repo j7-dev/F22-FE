@@ -7,7 +7,7 @@ const index: React.FC = () => {
         <div className="md:m-8 p-8 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl bg-white">
             <div className="flex flex-col items-center ">
                 <h2 className="font-bold text-5xl mt-5 tracking-tight">{t('Batting Regulation')}</h2>
-                <p className="text-neutral-500 text-xl mt-3">{t('카지노/슬롯 규정')}</p>
+                {/* <p className="text-neutral-500 text-xl mt-3">{t('카지노/슬롯 규정')}</p> */}
             </div>
             <div className="m-2 space-y-4 font-medium">
                 <p>

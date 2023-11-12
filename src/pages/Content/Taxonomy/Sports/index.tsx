@@ -12,10 +12,13 @@ const index: React.FC = () => {
     const isPc = useShowPc();
     const { t } = useTranslation();
     const { identity, data: token, isFetching, inSupport } = useGetBtiOperatorToken();
-    const operatorToken = token?.data?.token;
-    const addUrl = operatorToken ? `?operatorToken=${operatorToken}` : '';
 
     if (isFetching) return <Spin size="large" className="w-full h-screen flex justify-center items-center" />;
+
+    //產生Iframe
+    const Iframe = ({ addUrl }: { addUrl: string }) => <iframe style={{ minHeight: `calc(100vh - ${headerHeight}px - ${mobileBottomHeight}px - ${margin}px)` }} src={`https://prod20290-125166753.442hattrick.com/ko/korean-view${addUrl}`} className="w-full h-full border-0" />;
+    // 使用 React.memo 包裹组件
+    const MemoizedMyComponent = React.memo(Iframe);
 
     //如果未登入則不顯示,登入則顯示iframe
     const Container = () => {
@@ -41,8 +44,11 @@ const index: React.FC = () => {
                     }
                 />
             );
-        return <iframe style={{ minHeight: `calc(100vh - ${headerHeight}px - ${mobileBottomHeight}px - ${margin}px)` }} src={`https://prod20290-125166753.442hattrick.com/ko/korean-view${addUrl}`} className="w-full h-full border-0" />;
+        const operatorToken = token?.data?.token;
+        const addUrl = operatorToken ? `?operatorToken=${operatorToken}` : '';
+        return <MemoizedMyComponent addUrl={addUrl} />;
     };
+
     //取得id = header的元素高度
     const header = document.getElementById('header');
     const headerHeight = header?.clientHeight;
