@@ -15,7 +15,7 @@ const index: React.FC = () => {
     const { t } = useTranslation();
     const [eventContent, setEventContent] = useState<{ url?: string }[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [defaultPageSize, setDefaultPageSize] = useState(3);
+    const [defaultPageSize, setDefaultPageSize] = useState(isPc ? 9 : 10);
     const { modalProps, show } = useModal();
     const { data: eventList, isFetching } = useList({
         resource: 'cms-posts',
@@ -74,6 +74,7 @@ const index: React.FC = () => {
                             onShowSizeChange={(_current, pageSize) => {
                                 setDefaultPageSize(pageSize);
                             }}
+                            current={currentPage}
                             total={eventList?.total}
                             onChange={(clickPage) => {
                                 setCurrentPage(clickPage);
