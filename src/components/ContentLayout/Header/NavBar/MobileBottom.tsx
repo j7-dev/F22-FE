@@ -30,7 +30,7 @@ const MobileBottom = () => {
         };
 
     return (
-        <div className="mobileBottom bg-[#F8F9FF] pt-6 fixed bottom-0 left-0 h-fit w-full z-50">
+        <div className="md:hidden mobileBottom fixed bottom-0 left-0 h-fit w-full z-50">
             <div className="mobileSection md:hidden grid bg-white grid-cols-5 w-full px-3 pb-[30px] gap-2">
                 <div onClick={handleClick({ path: '/wallet', atom: 'deposit' })} className={`${inDeposit} btnWrap deposit pt-3`}>
                     <div className="flex flex-col justify-center items-center gap-1.5">

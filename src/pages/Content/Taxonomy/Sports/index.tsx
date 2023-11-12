@@ -41,14 +41,19 @@ const index: React.FC = () => {
                     }
                 />
             );
-        return <iframe style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)` }} src={`https://prod20290-125166753.442hattrick.com/ko/korean-view${addUrl}`} className="w-full h-full border-0" />;
+        return <iframe style={{ minHeight: `calc(100vh - ${headerHeight}px - ${mobileBottomHeight}px - ${margin}px)` }} src={`https://prod20290-125166753.442hattrick.com/ko/korean-view${addUrl}`} className="w-full h-full border-0" />;
     };
     //取得id = header的元素高度
     const header = document.getElementById('header');
     const headerHeight = header?.clientHeight;
+    //取得mobileBottom的高度
+    const mobileBottom = document.querySelector('.mobileBottom');
+    const mobileBottomHeight = mobileBottom?.clientHeight || 0;
+    //須扣除的外邊距 PC: 32px Mobile: 16px
+    const margin = isPc ? 36 * 2 : 16 * 2;
     return (
         <div className="sportPage md:my-9 md:gap-8 my-4 w-full">
-            <div style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)` }} className="bg-white flex justify-center items-center h-fit md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl overflow-hidden">
+            <div className="bg-white flex justify-center items-center h-fit md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl overflow-hidden">
                 <Container />
             </div>
         </div>
