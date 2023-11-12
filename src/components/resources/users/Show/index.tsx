@@ -169,7 +169,7 @@ const index = () => {
         <>
             <Show
                 isLoading={isLoading}
-                title={`【${theUser?.display_name}】 ${t('Member Detail')}`}
+                title={`【${theUser?.username}】 ${t('Member Detail')}`}
                 resource={identifier}
                 recordItemId={id}
                 canDelete={canDelete}

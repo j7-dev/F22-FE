@@ -1,4 +1,4 @@
-import { Table, Row, Col, Card, TablePaginationConfig, TableProps } from 'antd';
+import { Table, Row, Col, Card, TableProps } from 'antd';
 import type { ColumnType } from 'antd/es/table';
 import { useTable, List } from '@refinedev/antd';
 import Filter from './Filter';
@@ -72,6 +72,9 @@ const index = () => {
 
     const { tableProps, searchFormProps } = useTable({
         resource: 'transaction-records',
+        pagination: {
+            pageSize: 20,
+        },
         meta: {
             populate: {
                 user: {
@@ -208,8 +211,9 @@ const index = () => {
         columns: listType === 'DEPOSIT' ? depositColumns : withdrawColumns,
         rowKey: 'id',
         pagination: {
+            ...tableProps?.pagination,
             showSizeChanger: true,
-            total: (tableProps?.pagination as TablePaginationConfig)?.total,
+            pageSizeOptions: ['20', '50', '100', '500', '1000'],
         },
         rowSelection: {
             type: 'checkbox',

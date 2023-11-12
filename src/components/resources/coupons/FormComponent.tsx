@@ -50,7 +50,7 @@ const FormComponent: React.FC<{
                     <Input size="small" className="w-full" />
                 </Form.Item>
 
-                <ResourceSelect formItemProps={{ label: t('User'), name: ['user'], initialValue: default_user_id, hidden: isUserAdjustment }} fetchProps={{ resource: 'users', optionLabel: 'display_name', optionValue: 'id' }} selectProps={{ allowClear: true, size: 'small' }} />
+                <ResourceSelect formItemProps={{ label: t('User'), name: ['user'], initialValue: default_user_id, hidden: isUserAdjustment }} fetchProps={{ resource: 'users', optionLabel: 'username', optionValue: 'id' }} selectProps={{ allowClear: true, size: 'small' }} />
 
                 <Form.Item className="w-full" label={t('Amount')} name={['coupon_amount']} rules={[{ required: true, message: 'value is required' }]}>
                     <InputNumber size="small" min={0} className="w-full" />

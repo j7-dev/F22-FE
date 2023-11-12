@@ -7,19 +7,19 @@ import { useTranslation } from 'react-i18next';
 const index = () => {
     const { t } = useTranslation();
     const { data, isLoading } = useDashboard();
-    const winLossData = (data?.data?.data?.winLossRatio || []) as TLineData[];
-    const validBetData = (data?.data?.data?.validBet || []) as TLineData[];
-    const bettingAmountData = (data?.data?.data?.bettingAmount || []) as TLineData[];
+    const dpWdData = (data?.data?.data?.dpWd || []) as TLineData[];
+    const numberOfRegistrantsData = (data?.data?.data?.numberOfRegistrants || []) as TLineData[];
     const onlineMembersData = (data?.data?.data?.onlineMembers || []) as TLineData[];
     const totalDeposit = (data?.data?.data?.totalDeposit || []) as TLineData[];
+    const validBetData = (data?.data?.data?.validBet || []) as TLineData[];
 
-    const tableData: DataType[] = winLossData.map((item, i) => ({
+    const tableData: DataType[] = dpWdData.map((item, i) => ({
         date: item.date,
+        dpWd: (item?.value || 0).toLocaleString(),
+        numberOfRegistrants: (numberOfRegistrantsData?.[i]?.value || 0).toLocaleString(),
         onlineMembers: (onlineMembersData?.[i]?.value || 0).toLocaleString(),
-        bettingAmount: (bettingAmountData?.[i]?.value || 0).toLocaleString(),
-        validBet: (validBetData?.[i]?.value || 0).toLocaleString(),
-        winLoss: (item?.value || 0).toLocaleString(),
         totalDeposit: (totalDeposit?.[i]?.value || 0).toLocaleString(),
+        validBet: (validBetData?.[i]?.value || 0).toLocaleString(),
     }));
 
     const columns: ColumnsType<DataType> = [
@@ -28,20 +28,20 @@ const index = () => {
             dataIndex: 'date',
         },
         {
-            title: t('Online Members'),
-            dataIndex: 'onlineMembers',
+            title: t('DP-WD'),
+            dataIndex: 'dpWd',
         },
         {
-            title: t('Betting Amount'),
-            dataIndex: 'bettingAmount',
+            title: t('Number Of Registrants'),
+            dataIndex: 'numberOfRegistrants',
         },
         {
             title: t('Valid Bet'),
             dataIndex: 'validBet',
         },
         {
-            title: t('Win / Loss'),
-            dataIndex: 'winLoss',
+            title: t('Online Members'),
+            dataIndex: 'onlineMembers',
         },
         {
             title: t('Total Deposit'),

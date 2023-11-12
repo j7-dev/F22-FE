@@ -13,14 +13,13 @@ import { useTranslation } from 'react-i18next';
 const index = () => {
     const { tableProps } = useTable<DataType, HttpError>({
         resource: 'vips',
+        pagination: {
+            pageSize: 20,
+        },
         sorters: {
             initial: [
                 {
                     field: 'order',
-                    order: 'asc',
-                },
-                {
-                    field: 'updated_at',
                     order: 'asc',
                 },
             ],
@@ -40,7 +39,17 @@ const index = () => {
                         <CreateButton />
                     </div>
 
-                    <Table {...tableProps} rowKey="id">
+                    <Table
+                        {...{
+                            ...tableProps,
+                            pagination: {
+                                ...tableProps?.pagination,
+                                showSizeChanger: true,
+                                pageSizeOptions: ['20', '50', '100', '500', '1000'],
+                            },
+                        }}
+                        rowKey="id"
+                    >
                         <Table.Column dataIndex="order" title={t('level') as string} />
                         <Table.Column dataIndex="label" title={t('label') as string} />
                         <Table.Column dataIndex="turnover_rate" title={t('Turnover Rate') as string} render={(v) => `${v || 0}%`} />

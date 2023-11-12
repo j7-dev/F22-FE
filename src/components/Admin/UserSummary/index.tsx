@@ -171,7 +171,7 @@ const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
                 footer={null}
                 title={
                     <>
-                        <u>{user?.display_name}</u> bet records from <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD')}</u> to <u>{dayjs().format('YYYY-MM-DD')}</u>
+                        <u>{user?.username}</u> bet records from <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD')}</u> to <u>{dayjs().format('YYYY-MM-DD')}</u>
                     </>
                 }
             >

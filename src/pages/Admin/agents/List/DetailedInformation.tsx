@@ -14,6 +14,9 @@ const DetailedInformation = () => {
 
     const { tableProps, searchFormProps } = useTable({
         resource: 'users',
+        pagination: {
+            pageSize: 20,
+        },
         meta: {
             populate: {
                 role: {
@@ -91,6 +94,11 @@ const DetailedInformation = () => {
         size: 'small',
         columns,
         rowKey: 'userId',
+        pagination: {
+            ...tableProps?.pagination,
+            showSizeChanger: true,
+            pageSizeOptions: ['20', '50', '100', '500', '1000'],
+        },
     } as TableProps<DataType>;
 
     return (

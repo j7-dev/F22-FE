@@ -11,6 +11,9 @@ const index = () => {
     const { t } = useTranslation();
     const { tableProps } = useTable({
         resource: 'deposit-bonuses',
+        pagination: {
+            pageSize: 20,
+        },
         meta: {
             populate: {
                 vips: {
@@ -81,6 +84,11 @@ const index = () => {
         scroll: { x: 1000 },
         columns,
         rowKey: 'id',
+        pagination: {
+            ...tableProps?.pagination,
+            showSizeChanger: true,
+            pageSizeOptions: ['20', '50', '100', '500', '1000'],
+        },
     } as TableProps<DataType>;
 
     return (

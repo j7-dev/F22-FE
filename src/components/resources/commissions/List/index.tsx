@@ -16,7 +16,7 @@ const index = () => {
         meta: {
             populate: {
                 agents: {
-                    fields: ['id', 'display_name'],
+                    fields: ['id', 'display_name', 'username'],
                 },
             },
         },

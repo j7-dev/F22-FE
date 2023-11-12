@@ -5,9 +5,9 @@ export type TLineData = {
 
 export type DataType = {
     date: string;
+    dpWd: string;
+    numberOfRegistrants: string;
     onlineMembers: string;
-    bettingAmount: string;
-    validBet: string;
-    winLoss: string;
     totalDeposit: string;
+    validBet: string;
 };
