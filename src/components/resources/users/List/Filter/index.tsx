@@ -4,9 +4,15 @@ import { useSelect } from '@refinedev/antd';
 import { useUserSelect } from '@/hooks';
 import BooleanRadioButton from '@/components/form/BooleanRadioButton';
 import { useTranslation } from 'react-i18next';
+import { useGetIdentity } from '@refinedev/core';
+import { TMe } from '@/types';
 
 const { RangePicker } = DatePicker;
 const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
+    const { data: identity } = useGetIdentity<TMe>();
+    const role = identity?.role?.type || '';
+    const defaultAgentId = role === 'agent' ? identity?.id : undefined;
+
     const { t } = useTranslation();
     const { selectProps: vipSelectProps } = useSelect({
         resource: 'vips',
@@ -36,7 +42,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
                     <Form.Item label={t('VIP')} name={['vip']}>
                         <Select size="small" {...vipSelectProps} allowClear />
                     </Form.Item>
-                    <Form.Item label={t('Agent')} name={['agent']}>
+                    <Form.Item label={t('Agent')} name={['agent']} hidden={!!defaultAgentId}>
                         <Select size="small" {...agentSelectProps} allowClear />
                     </Form.Item>
 

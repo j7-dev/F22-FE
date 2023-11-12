@@ -2,15 +2,28 @@ import { DataType } from '../types';
 import { ShowButton, EditButton } from '@refinedev/antd';
 import { BooleanIndicator, DateTime } from '@/components/PureComponents';
 import { Link } from 'react-router-dom';
-import { TUser, TVip } from '@/types';
+import { TUser, TVip, TMe } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
 import { useBalanceColumns } from '@/hooks';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
+import { useGetIdentity } from '@refinedev/core';
 
 const useColumns = () => {
     const { t } = useTranslation();
     const allBalances = useBalanceColumns();
+    const { data: identity } = useGetIdentity<TMe>();
+    const role = identity?.role?.type || '';
+    const phone =
+        role === 'admin'
+            ? [
+                  {
+                      title: t('phone'),
+                      dataIndex: 'phone',
+                      key: 'phone',
+                  },
+              ]
+            : [];
 
     const columns: ColumnsType<DataType> = [
         {
@@ -36,11 +49,7 @@ const useColumns = () => {
             render: (agent: TUser) => (agent ? <Link to={`/refine/agent/show/${agent?.id}`}>{agent?.username}</Link> : null),
         },
         ...allBalances,
-        {
-            title: t('phone'),
-            dataIndex: 'phone',
-            key: 'phone',
-        },
+        ...phone,
         {
             title: t('vip'),
             dataIndex: 'vip',

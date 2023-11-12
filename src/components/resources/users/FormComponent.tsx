@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Form, Input, Switch, Radio, DatePicker, Select, FormProps, Checkbox, Typography } from 'antd';
-import { TRole, TRoleType, TUser, TVip, BANK_ACCOUNT_FIELDS, TCommission } from '@/types';
+import { TRole, TRoleType, TUser, TVip, BANK_ACCOUNT_FIELDS, TCommission, TMe } from '@/types';
 import dayjs, { Dayjs } from 'dayjs';
 import { isString, isObject } from 'lodash-es';
 import { useUserSelect, useGetSiteSetting } from '@/hooks';
@@ -10,6 +10,7 @@ import { keyToWord } from '@/utils';
 import { BankOutlined, MoneyCollectOutlined } from '@ant-design/icons';
 import CommissionTable from '@/components/Admin/CommissionTable';
 import { useTranslation } from 'react-i18next';
+import { useGetIdentity } from '@refinedev/core';
 
 const { Title } = Typography;
 
@@ -20,6 +21,8 @@ const FormComponent: React.FC<{
     defaultRoleType?: TRoleType;
     formLoading?: boolean;
 }> = ({ formType, formProps, handler, defaultRoleType = 'authenticated', formLoading }) => {
+    const { data: identity } = useGetIdentity<TMe>();
+    const role = identity?.role?.type || '';
     const form = formProps.form;
     const { t } = useTranslation();
     const [isEditing, setIsEditing] = useState(false);
@@ -168,18 +171,20 @@ const FormComponent: React.FC<{
                 </div>
             )}
 
-            <div className="bg-yellow-50 rounded-xl p-6 mt-16">
-                <Title level={5}>
-                    <BankOutlined className="mr-2" /> {t('Bank Account')}
-                </Title>
-                <div className="grid grid-cols-2 gap-6">
-                    {BANK_ACCOUNT_FIELDS.map((field) => (
-                        <Form.Item key={field} label={keyToWord(field)} name={['bank_account', field]}>
-                            <Input />
-                        </Form.Item>
-                    ))}
+            {role === 'admin' && (
+                <div className="bg-yellow-50 rounded-xl p-6 mt-16">
+                    <Title level={5}>
+                        <BankOutlined className="mr-2" /> {t('Bank Account')}
+                    </Title>
+                    <div className="grid grid-cols-2 gap-6">
+                        {BANK_ACCOUNT_FIELDS.map((field) => (
+                            <Form.Item key={field} label={keyToWord(field)} name={['bank_account', field]}>
+                                <Input />
+                            </Form.Item>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
 
             <div className="bg-blue-50 rounded-xl p-6 mt-16">
                 <Title level={5}>

@@ -1,15 +1,18 @@
 import { DateTime } from '@/components/PureComponents';
 import ReferralLink from '@/components/general/ReferralLink';
-import { TBankAccount, TVip } from '@/types';
+import { TBankAccount, TVip, TMe } from '@/types';
 import VipLink from '@/components/Admin/VipLink';
 import { useBalanceColumns } from '@/hooks';
 import BankAccount from '@/components/Admin/BankAccount';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
+import { useGetIdentity } from '@refinedev/core';
 
 const useColumns = () => {
     const allBalances = useBalanceColumns();
     const { t } = useTranslation();
+    const { data: identity } = useGetIdentity<TMe>();
+    const role = identity?.role?.type || '';
 
     const infoLeftColumns = [
         {
@@ -85,6 +88,18 @@ const useColumns = () => {
         },
     ];
 
+    const bank_account =
+        role === 'admin'
+            ? [
+                  {
+                      key: 'bank_account',
+                      title: t('Bank Account'),
+                      dataIndex: 'bank_account',
+                      render: (b: TBankAccount | null) => <BankAccount bank_account={b} display="text" />,
+                  },
+              ]
+            : [];
+
     const infoRightColumns = [
         ...allBalances,
         {
@@ -115,12 +130,7 @@ const useColumns = () => {
             dataIndex: 'allow_game_providers',
             render: (allow_game_providers: string[] | null) => (allow_game_providers || []).join(', '),
         },
-        {
-            key: 'bank_account',
-            title: t('Bank Account'),
-            dataIndex: 'bank_account',
-            render: (bank_account: TBankAccount | null) => <BankAccount bank_account={bank_account} display="text" />,
-        },
+        ...bank_account,
         {
             key: 'createdAt',
             title: t('Created At'),
