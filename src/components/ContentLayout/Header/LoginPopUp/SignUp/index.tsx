@@ -173,7 +173,7 @@ const index: React.FC = () => {
                         <Input.Password placeholder={t('Confirm Password')} prefix={<img src={password} />} iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)} bordered={false} />
                     </Form.Item>
                     <Form.Item name="userPhone" rules={[{ required: true, message: t('Please input your Phone') }, { validator: numberValidator }]}>
-                        <Input placeholder={t('Phone Number')} prefix={<img src={phoneNumber} />} bordered={false} pattern="/^[0-9]+$/" />
+                        <Input placeholder={t('Phone Number')} prefix={<img src={phoneNumber} />} bordered={false} />
                     </Form.Item>
                     <Form.Item name={['bank_account', 'owner_real_name']} rules={[{ required: true, message: t('Please input your Owner Real Name') }]}>
                         <Input placeholder={t('Full Name')} prefix={<img src={bankName} />} bordered={false} />
