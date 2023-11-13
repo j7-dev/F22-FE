@@ -14,6 +14,7 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
     const locale = useGetLocale();
     const changeLanguage = useSetLocale();
     const { data: user } = useGetIdentity<TMe>();
+    const role = user?.role?.type || '';
 
     const currentLocale = locale();
     const { colorSuccess, colorBgElevated } = useColor();
@@ -101,8 +102,7 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
     //TODO 統計API
     return (
         <AntdLayout.Header style={headerStyles}>
-            <HeaderInfo />
-
+            {role === 'admin' && <HeaderInfo />}
             <Dropdown menu={{ items: userOptions }} overlayClassName="w-60" trigger={['click']}>
                 <Avatar
                     className="cursor-pointer"

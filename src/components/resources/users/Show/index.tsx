@@ -1,6 +1,5 @@
 import { Card, Tabs, TabsProps } from 'antd';
 import { Show } from '@refinedev/antd';
-import { useCan } from '@/hooks';
 import { useShow, useResource, useGetIdentity } from '@refinedev/core';
 import ObjectTable from '@/components/general/ObjectTable';
 import MoneyLog from '@/components/Admin/MoneyLog';
@@ -23,7 +22,6 @@ const index = () => {
 
     const { t } = useTranslation();
     const { identifier } = useResource();
-    const { canDelete, canEdit } = useCan();
     const { id } = useParams<{ id: string }>();
     const { queryResult } = useShow({
         resource: 'users',
@@ -56,21 +54,6 @@ const index = () => {
     };
 
     const { infoLeftColumns, infoRightColumns } = useColumns();
-
-    const userNotes =
-        role === 'admin'
-            ? [
-                  {
-                      key: 'userNotes',
-                      label: t('User Notes'),
-                      children: (
-                          <Card bordered={false} title="User Notes">
-                              <NotesForm user_notes={theUser?.user_notes} />
-                          </Card>
-                      ),
-                  },
-              ]
-            : [];
 
     const items: TabsProps['items'] = [
         {
@@ -126,7 +109,15 @@ const index = () => {
                 </Card>
             ),
         },
-        ...userNotes,
+        {
+            key: 'userNotes',
+            label: t('User Notes'),
+            children: (
+                <Card bordered={false} title="User Notes">
+                    <NotesForm user_notes={theUser?.user_notes} />
+                </Card>
+            ),
+        },
         {
             key: 'balanceAdjustment',
             label: t('Balance Adjustment'),
@@ -182,8 +173,8 @@ const index = () => {
                 title={`【${theUser?.username}】 ${t('Member Detail')}`}
                 resource={identifier}
                 recordItemId={id}
-                canDelete={canDelete}
-                canEdit={canEdit}
+                canDelete={role === 'admin'}
+                canEdit={role === 'admin'}
                 contentProps={{
                     style: {
                         backgroundColor: 'transparent',
@@ -192,7 +183,18 @@ const index = () => {
                     },
                 }}
             >
-                <Tabs className="-mt-8" defaultActiveKey="moneyLog1" type="card" centered items={items} tabBarStyle={{ marginBottom: '0px' }} />
+                {role === 'admin' ? (
+                    <Tabs className="-mt-8" defaultActiveKey="moneyLog1" type="card" centered items={items} tabBarStyle={{ marginBottom: '0px' }} />
+                ) : (
+                    <div>
+                        <Card bordered={false} title={t('Info')}>
+                            <div className="grid grid-cols-2 xl:grid-cols-2 gap-6">
+                                <ObjectTable record={userData} columns={infoLeftColumns} />
+                                <ObjectTable record={userData} columns={infoRightColumns} />
+                            </div>
+                        </Card>
+                    </div>
+                )}
             </Show>
         </>
     );
