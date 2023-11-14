@@ -3,6 +3,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { searchPropsAtom } from './atom';
 import { useAtomValue } from 'jotai';
 import { useCustom, useApiUrl } from '@refinedev/core';
+import { useTranslation } from 'react-i18next';
 
 type DataType = {
     agentId: number;
@@ -17,54 +18,55 @@ type DataType = {
 };
 
 const DetailedInformation = () => {
+    const { t } = useTranslation();
     const searchProps = useAtomValue(searchPropsAtom);
     const dateRange = searchProps.dateRange || undefined;
 
     const columns: ColumnsType<DataType> = [
         {
-            title: 'agent',
+            title: t('Agent'),
             dataIndex: 'agent',
         },
         {
-            title: 'deposit',
+            title: t('Deposit'),
             dataIndex: 'deposit ',
         },
         {
-            title: 'withdraw',
+            title: t('Withdraw'),
             dataIndex: 'withdraw',
         },
         {
-            title: 'DPWD',
+            title: t('DPWD'),
             dataIndex: 'dpWd',
         },
         {
-            title: 'valid bet amount',
+            title: t('Valid Bet Amount'),
             dataIndex: 'validBet',
         },
         {
-            title: 'payout',
+            title: t('Payout'),
             dataIndex: 'payout',
         },
         {
-            title: 'winloss',
+            title: t('WinLoss'),
             dataIndex: 'winloss',
         },
         {
-            title: 'bonus & turnover bonus',
+            title: t('Bonus & Turnover Bonus'),
             dataIndex: 'coupon',
         },
         {
-            title: 'profit',
+            title: t('Profit'),
             dataIndex: 'profit',
         },
         {
             // 佣金比例
-            title: 'commission',
+            title: t('Commission'),
             dataIndex: 'commission',
         },
         {
             // 佣金結金額
-            title: 'commissionSettlement',
+            title: t('Commission Settlement'),
             dataIndex: 'commissionSettlement',
         },
     ];

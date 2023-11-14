@@ -11,7 +11,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
         <Card bordered={false}>
             <Form {...formProps} layout="vertical">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-4 gap-y-0">
-                    <Form.Item label={t('Register Date')} name={['dateRange']}>
+                    <Form.Item label={t('date')} name={['dateRange']}>
                         <RangePicker size="small" className="w-full" />
                     </Form.Item>
                     <Form.Item label={t('Account')} name={['username']}>

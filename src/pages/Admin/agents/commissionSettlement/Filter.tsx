@@ -2,9 +2,11 @@ import { Form, Button } from 'antd';
 import { searchPropsAtom, TSearchProps } from './atom';
 import { useSetAtom } from 'jotai';
 import DateRangePicker from '@/components/form/DateRangePicker';
+import { useTranslation } from 'react-i18next';
 
 const Filter: React.FC = () => {
     const setSearchProps = useSetAtom(searchPropsAtom);
+    const { t } = useTranslation();
 
     const handleFinish = (values: TSearchProps) => {
         setSearchProps(values);
@@ -16,7 +18,7 @@ const Filter: React.FC = () => {
                 <DateRangePicker />
                 <Form.Item className="self-end">
                     <Button size="small" htmlType="submit" type="primary" className="w-full">
-                        Filter
+                        {t('Search')}
                     </Button>
                 </Form.Item>
             </div>

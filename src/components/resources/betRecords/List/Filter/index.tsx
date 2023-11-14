@@ -26,7 +26,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
         <Card bordered={false}>
             <Form {...formProps} layout="vertical">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-4 gap-y-0">
-                    <Form.Item label={t('Date')} name={['dateRange']} initialValue={[dayjs().subtract(6, 'day').startOf('day'), dayjs().endOf('day')]}>
+                    <Form.Item label={t('date')} name={['dateRange']} initialValue={[dayjs().subtract(6, 'day').startOf('day'), dayjs().endOf('day')]}>
                         <RangePicker size="small" className="w-full" />
                     </Form.Item>
 

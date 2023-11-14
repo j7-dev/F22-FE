@@ -47,7 +47,7 @@ const CustomSider: typeof Sider = () => {
 
                 if (children.length > 0) {
                     return (
-                        <SubMenu key={nanoid()} icon={icon ?? <UnorderedListOutlined />} title={label}>
+                        <SubMenu key={nanoid()} icon={icon ?? <UnorderedListOutlined />} title={t(label)}>
                             {renderTreeView(children, theSelectedKey)}
                         </SubMenu>
                     );
@@ -63,7 +63,7 @@ const CustomSider: typeof Sider = () => {
                             }}
                             icon={icon ?? (isRoute && <UnorderedListOutlined />)}
                         >
-                            {route ? <Link to={route || '/'}>{t(label)}</Link> : label}
+                            {route ? <Link to={route || '/'}>{t(label)}</Link> : t(label)}
                             {!collapsed && isSelected && <div className="ant-menu-tree-arrow" />}
                         </Menu.Item>
                     </CanAccess>

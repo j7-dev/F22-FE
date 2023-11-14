@@ -10,7 +10,7 @@ import { TMe } from '@/types';
 import HeaderInfo from './HeaderInfo';
 
 const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     const locale = useGetLocale();
     const changeLanguage = useSetLocale();
     const { data: user } = useGetIdentity<TMe>();
@@ -72,7 +72,7 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
         // },
         {
             key: 'languages',
-            label: 'Languages',
+            label: t('Languages'),
             icon: <TranslationOutlined className="w-4" />,
             children: languages.sort().map((lang: string) => ({
                 key: lang,
@@ -92,7 +92,7 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
             key: 'logOut',
             label: (
                 <p className="m-0" onClick={handleLogOut}>
-                    Log Out
+                    {t('Log Out')}
                 </p>
             ),
             icon: <LoginOutlined className="w-4" />,

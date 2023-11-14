@@ -133,6 +133,7 @@ const index = () => {
 
     return (
         <List
+            title={t('Coupons')}
             resource="coupons"
             canCreate
             createButtonProps={{
