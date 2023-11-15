@@ -44,7 +44,7 @@ const index: React.FC = () => {
                 <img className="aspect-square w-2.5 md:w-4" src={convertAllIcon} alt="" />
                 <span className="font-bold text-white text-[6px] md:text-xs">{t('Convert All')}</span>
             </button>
-            <Modal title="Confirm Convert?" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title={t('Confirm Convert?')} open={isModalOpen} onOk={handleOk} okText="확인" cancelText="취소" onCancel={handleCancel}>
                 <div className="text-center">
                     <Spin spinning={isLoading} />
                 </div>

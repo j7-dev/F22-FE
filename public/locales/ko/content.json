@@ -525,5 +525,6 @@
     "Login Time": "접속 일시",
     "ip": "IP",
     "Login URL": "접속 URL",
-    "User Agent": "경로"
+    "User Agent": "경로",
+    "Confirm Convert?": "전액 전환 하시겠습니까?"
 }
