@@ -56,7 +56,7 @@ const index = () => {
 
                         <Table.Column dataIndex="deposit_upgrade_threshold" title={t('Upgrade - Deposit Amount') as string} />
                         <Table.Column dataIndex="valid_bet_amount_upgrade_threshold" title={t('Upgrade - Valid Bet') as string} />
-                        <Table.Column dataIndex="activated" title={t('status') as string} render={(activated) => <Tag color={activated ? '#87d068' : '#ff4d4f'}>{activated ? 'Enable' : 'Disable'}</Tag>} />
+                        <Table.Column dataIndex="activated" title={t('status') as string} render={(activated) => <Tag color={activated ? '#87d068' : '#ff4d4f'}>{activated ? 'ON' : 'OFF'}</Tag>} />
                         <Table.Column dataIndex="action" render={(_, record: DataType) => <EditButton record={record} />} />
                     </Table>
 

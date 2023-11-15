@@ -90,7 +90,7 @@ const FormComponent: React.FC<{
                     <Input size="small" />
                 </Form.Item>
                 <div>
-                    <Form.Item className="w-full" label="Amount" name={['amount']} rules={[{ required: true, message: 'amount is required' }]}>
+                    <Form.Item className="w-full" label={t('Amount')} name={['amount']} rules={[{ required: true, message: 'amount is required' }]}>
                         <InputNumber size="small" precision={0} className="w-full relative -top-[1px]" />
                     </Form.Item>
                 </div>

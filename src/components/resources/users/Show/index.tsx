@@ -74,7 +74,7 @@ const index = () => {
             key: 'moneyLog',
             label: t('Money Log'),
             children: (
-                <Card bordered={false} title="Money Log">
+                <Card bordered={false} title={t('Money Log')}>
                     <MoneyLog user_id={id} />
                 </Card>
             ),
@@ -83,7 +83,7 @@ const index = () => {
             key: 'loginDetail',
             label: t('Login History'),
             children: (
-                <Card bordered={false} title="Login History">
+                <Card bordered={false} title={t('Login History')}>
                     <LoginDetail user_id={id} />
                 </Card>
             ),
@@ -92,8 +92,8 @@ const index = () => {
             key: 'betRecordTable',
             label: t('Betting Records'),
             children: (
-                <Card bordered={false} title="Betting Records">
-                    <ListBettingRecords user_id={id} />
+                <Card bordered={false} title={t('Betting Records')}>
+                    <ListBettingRecords user_id={id} title={<></>} breadcrumb={null} />
                 </Card>
             ),
         },
@@ -101,7 +101,7 @@ const index = () => {
             key: 'turnoverBonus',
             label: t('Turnover Bonus'),
             children: (
-                <Card bordered={false} title="Turnover Bonus">
+                <Card bordered={false} title={t('Turnover Bonus')}>
                     <p>
                         {t('Turnover Bonus Rate')}: {theUser?.vip?.turnover_rate || 0}%
                     </p>
@@ -113,7 +113,7 @@ const index = () => {
             key: 'userNotes',
             label: t('User Notes'),
             children: (
-                <Card bordered={false} title="User Notes">
+                <Card bordered={false} title={t('User Notes')}>
                     <NotesForm user_notes={theUser?.user_notes} />
                 </Card>
             ),

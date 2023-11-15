@@ -5,6 +5,7 @@ import type { ColumnsType } from 'antd/es/table';
 import { DateTime } from '@/components/PureComponents';
 import { useGetSiteSetting } from '@/hooks';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
+import { useTranslation } from 'react-i18next';
 
 type DataType = {
     id: number;
@@ -20,36 +21,38 @@ const index: React.FC<{
     currency?: string;
     amount_type?: string;
 }> = ({ user_id, currency, amount_type }) => {
-    if (!user_id) return <p>can't get user_id</p>;
     const { default_currency, default_amount_type } = useGetSiteSetting();
+    const { t } = useTranslation();
+
+    if (!user_id) return <p>can't get user_id</p>;
 
     const columns: ColumnsType<DataType> = [
         {
-            title: 'date',
+            title: t('Date'),
             dataIndex: 'date',
             key: 'date',
             render: (date: string) => <DateTime value={date} />,
         },
         {
-            title: 'credit',
+            title: t('Credit'),
             dataIndex: 'credit',
             key: 'credit',
             render: (credit: number) => <SimpleAmount amount={credit} />,
         },
         {
-            title: 'debit',
+            title: t('Debit'),
             dataIndex: 'debit',
             key: 'debit',
             render: (debit: number) => <SimpleAmount amount={debit} />,
         },
         {
-            title: 'balance',
+            title: t('Balance'),
             dataIndex: 'balance_after_mutate',
             key: 'balance_after_mutate',
             render: (balance_after_mutate: number) => <SimpleAmount amount={balance_after_mutate} />,
         },
         {
-            title: 'description',
+            title: t('Description'),
             dataIndex: 'description',
             key: 'description',
         },

@@ -54,7 +54,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
                         <Select
                             size="small"
                             options={STATUSES.map((item: string) => ({
-                                label: item,
+                                label: t(item),
                                 value: item,
                             }))}
                             allowClear

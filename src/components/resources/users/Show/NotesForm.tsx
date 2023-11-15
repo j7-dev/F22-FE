@@ -3,6 +3,7 @@ import { Form, Input, Button, notification, Spin } from 'antd';
 import { useCustomMutation, useApiUrl } from '@refinedev/core';
 import { useParams } from 'react-router-dom';
 import { TUserNote, USER_NOTES_FIELDS } from '@/types';
+import { useTranslation } from 'react-i18next';
 
 const { TextArea } = Input;
 
@@ -10,6 +11,7 @@ const NotesForm = ({ user_notes }: { user_notes?: TUserNote }) => {
     const [form] = Form.useForm<TUserNote>();
     const apiUrl = useApiUrl();
     const { id } = useParams();
+    const { t } = useTranslation();
 
     const { mutate, isLoading } = useCustomMutation<TUserNote>();
 
@@ -56,7 +58,7 @@ const NotesForm = ({ user_notes }: { user_notes?: TUserNote }) => {
                 </div>
                 <Form.Item className="text-right mt-8">
                     <Button type="primary" htmlType="submit">
-                        Save
+                        {t('Save')}
                     </Button>
                 </Form.Item>
             </Form>

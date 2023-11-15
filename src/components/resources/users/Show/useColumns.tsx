@@ -133,13 +133,14 @@ const useColumns = () => {
         ...bank_account,
         {
             key: 'createdAt',
-            title: t('Created At'),
+            title: t('Join Date'),
             dataIndex: 'createdAt',
             render: (createdAt: string) => <DateTime value={createdAt} />,
         },
         {
+            //FIXME
             key: 'updatedAt',
-            title: t('Updated At'),
+            title: t('Last BetTime'),
             dataIndex: 'updatedAt',
             render: (updatedAt: string) => <DateTime value={updatedAt} />,
         },

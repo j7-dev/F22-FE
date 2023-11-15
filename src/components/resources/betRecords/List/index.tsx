@@ -1,6 +1,6 @@
 import { Table, Row, Col, Card, TableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { useTable, List } from '@refinedev/antd';
+import { useTable, List, ListProps } from '@refinedev/antd';
 import { DataType, TSearchProps } from './types';
 import { TUser } from '@/types';
 import { useTranslation } from 'react-i18next';
@@ -13,7 +13,7 @@ import { CrudFilters } from '@refinedev/core';
 import { gameProviderTxnEnum } from '@/utils';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 
-const index: React.FC<{ user_id?: string | number }> = ({ user_id }) => {
+const index: React.FC<{ user_id?: string | number } & ListProps> = ({ user_id, ...listProps }) => {
     const { t } = useTranslation();
     const { tableProps, searchFormProps } = useTable({
         resource: RESOURCE,
@@ -149,7 +149,7 @@ const index: React.FC<{ user_id?: string | number }> = ({ user_id }) => {
     const filterTagsKey = JSON.stringify(searchFormProps?.form?.getFieldsValue());
 
     return (
-        <List resource={RESOURCE} canCreate={false}>
+        <List resource={RESOURCE} canCreate={false} {...listProps}>
             <Row gutter={[16, 16]}>
                 <Col lg={24} xs={24}>
                     <Filter formProps={searchFormProps} />
