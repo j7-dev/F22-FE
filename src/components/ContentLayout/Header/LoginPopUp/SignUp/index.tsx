@@ -77,10 +77,10 @@ const index: React.FC = () => {
         setSignUp(false);
         setSignIn(true);
     };
-    //自定義驗證規則=>用戶名，只能輸入英文與數字，並且長度大於等於3，且不能重複註冊
+    //自定義驗證規則=>用戶名，只能輸入英文與數字，並且長度大於等於5
     const userNameValidateFunction = (_: object, value: string) => {
         // console.log('userNameValidateFunction', value);
-        if (value.length < 3) {
+        if (value.length < 5) {
             return Promise.reject(t('The length of user name must be greater than or equal to 3'));
         }
         if (!/^[A-Za-z0-9]+$/.test(value)) {
