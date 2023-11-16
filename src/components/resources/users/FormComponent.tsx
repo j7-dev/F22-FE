@@ -43,6 +43,7 @@ const FormComponent: React.FC<{
 
     const watchRole = Form.useWatch('role', form);
     const watchRoleType = Object.keys(rolesMapping).find((key) => rolesMapping?.[key] === watchRole);
+    const watchUsername = Form.useWatch('username', form);
 
     const { selectProps: vipSelectProps } = useSelect({
         resource: 'vips',
@@ -55,6 +56,7 @@ const FormComponent: React.FC<{
     });
 
     const support_payments = siteSetting?.support_payments || [];
+    const default_payments = ['TRANSFER'];
     const support_game_providers = siteSetting?.support_game_providers || [];
 
     useEffect(() => {
@@ -90,6 +92,12 @@ const FormComponent: React.FC<{
     const handleChangePassword = (checked: boolean) => {
         setIsEditing(checked);
     };
+
+    useEffect(() => {
+        if (watchUsername) {
+            form?.setFieldValue('email', `${watchUsername}@smtbet7.com`);
+        }
+    }, [watchUsername]);
 
     return (
         <Form {...formProps} onFinish={handler} layout="vertical">
@@ -130,6 +138,17 @@ const FormComponent: React.FC<{
                     />
                 </Form.Item>
 
+                <Form.Item name="email" label={t('email')} hidden>
+                    <Radio.Group
+                        options={[
+                            { label: 'Male', value: 'MALE' },
+                            { label: 'Female', value: 'FEMALE' },
+                        ]}
+                        optionType="button"
+                        buttonStyle="solid"
+                    />
+                </Form.Item>
+
                 <Form.Item name="birthday" label={t('birthday')} hidden>
                     {!isString(formProps.initialValues?.birthday) && formProps.initialValues?.birthday ? <DatePicker className="w-full" /> : <Input />}
                 </Form.Item>
@@ -138,7 +157,7 @@ const FormComponent: React.FC<{
                     <Switch />
                 </Form.Item>
 
-                <Form.Item name="allow_payments" label={t('Allow Payments')} initialValue={formType === 'create' ? support_payments : undefined}>
+                <Form.Item name="allow_payments" label={t('Allow Payments')} initialValue={formType === 'create' ? default_payments : undefined}>
                     <Checkbox.Group options={support_payments} />
                 </Form.Item>
 
@@ -199,15 +218,26 @@ const FormComponent: React.FC<{
                 </div>
             </div>
             <div className="grid grid-cols-2 gap-6 mt-16">
-                <div>
-                    <p className="mb-2">
-                        {t('change password')} <Switch size="small" onChange={handleChangePassword} className="ml-4" />
-                    </p>
+                {formType === 'create' && (
+                    <div>
+                        <p className="mb-2">{t('password')}</p>
 
-                    <Form.Item name="password" className="mt-4">
-                        <Input.Password disabled={!isEditing} />
-                    </Form.Item>
-                </div>
+                        <Form.Item name="password" className="mt-4">
+                            <Input.Password />
+                        </Form.Item>
+                    </div>
+                )}
+                {formType === 'edit' && (
+                    <div>
+                        <p className="mb-2">
+                            {t('change password')} <Switch size="small" onChange={handleChangePassword} className="ml-4" />
+                        </p>
+
+                        <Form.Item name="password" className="mt-4">
+                            <Input.Password disabled={!isEditing} />
+                        </Form.Item>
+                    </div>
+                )}
             </div>
         </Form>
     );
