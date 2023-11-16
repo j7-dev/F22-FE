@@ -81,7 +81,7 @@ const index: React.FC = () => {
     const userNameValidateFunction = (_: object, value: string) => {
         // console.log('userNameValidateFunction', value);
         if (value.length < 5) {
-            return Promise.reject(t('The length of user name must be greater than or equal to 3'));
+            return Promise.reject(t('The length of user name must be greater than or equal to 5'));
         }
         if (!/^[A-Za-z0-9]+$/.test(value)) {
             return Promise.reject(t('User name can only enter English and numbers'));

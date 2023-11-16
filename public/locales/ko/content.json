@@ -180,7 +180,7 @@
     "Please input your Password": "비밀번호를 입력해 주세요",
     "You have registered successfully, please wait for the administrator to confirm it": "회원가입 신청이 완료 되었습니다. 잠시 기다려 주시면 확인 후 처리 도와 드리겠습니다",
     "Don't have an account yet?": "아직 계정이 없으신가요?",
-    "The length of user name must be greater than or equal to 3": "아이디는 3자리 또는 그 이상이여야 합니다",
+    "The length of user name must be greater than or equal to 5": "아이디는 5자리 또는 그 이상이여야 합니다",
     "Search": "검색",
     "CodePay": "코드페이",
     "Transfer": "계좌입금",
