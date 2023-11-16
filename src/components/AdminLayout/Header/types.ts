@@ -15,6 +15,7 @@ export type TTable2 = {
     pp: number;
     bti: number;
     igx: number;
+    token: number;
 }[];
 
 export type TTable3 = {

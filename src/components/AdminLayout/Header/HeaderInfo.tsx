@@ -73,11 +73,11 @@ const HeaderInfo = () => {
                             <th>{t('evo')}</th>
                             <th>{t('pp')}</th>
                             <th>{t('bti')}</th>
-                            <th>{t('igx')}</th>
+                            <th>{t('token')}</th>
                         </tr>
 
                         {formattedTabled2.map((item) => {
-                            const { label = '', total = 0, evo = 0, pp = 0, bti = 0, igx = 0 } = item;
+                            const { label = '', total = 0, evo = 0, pp = 0, bti = 0, token = 0 } = item;
                             return (
                                 <tr key={label}>
                                     <th className="w-1/4">{t(label)}</th>
@@ -94,7 +94,7 @@ const HeaderInfo = () => {
                                         <SimpleAmount amount={bti} /> ({betAmountUser?.bti})
                                     </td>
                                     <td>
-                                        <SimpleAmount amount={igx} /> ({betAmountUser?.igx})
+                                        <SimpleAmount amount={token} /> ({betAmountUser?.token})
                                     </td>
                                 </tr>
                             );
