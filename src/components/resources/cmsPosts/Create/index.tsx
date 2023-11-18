@@ -1,6 +1,6 @@
 import FormComponent from '../FormComponent';
 import { useCreate, HttpError, useGo, useResource } from '@refinedev/core';
-import { Create, useForm } from '@refinedev/antd';
+import { Create, useForm, CreateProps } from '@refinedev/antd';
 import { TCommission, TCommissionFields } from '@/types';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
@@ -8,9 +8,11 @@ import { RESOURCE, POST_TYPE } from '../constants';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 
-const index: React.FC<{
-    notificationConfig?: ArgsProps;
-}> = ({ notificationConfig = {} }) => {
+const index: React.FC<
+    {
+        notificationConfig?: ArgsProps;
+    } & CreateProps
+> = ({ notificationConfig = {}, ...createProps }) => {
     const { t } = useTranslation();
     const { mutate: create } = useCreate();
     const go = useGo();
@@ -48,9 +50,10 @@ const index: React.FC<{
                 console.log(err);
             });
     };
+    saveButtonProps.children = t('Save');
 
     return (
-        <Create saveButtonProps={saveButtonProps}>
+        <Create saveButtonProps={saveButtonProps} {...createProps}>
             <FormComponent formType="create" formProps={formProps} formLoading={formLoading} handler={handleCreate} />
         </Create>
     );

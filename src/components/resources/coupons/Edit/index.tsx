@@ -57,6 +57,7 @@ const index: React.FC<{
                 console.log(err);
             });
     };
+    saveButtonProps.children = t('Save');
 
     return (
         <Edit saveButtonProps={saveButtonProps}>

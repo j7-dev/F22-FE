@@ -27,7 +27,7 @@ const index = () => {
     const rolesMapping = siteSetting?.roles || {};
     const { getStatusTag } = useGetStatusTag();
 
-    const listType = (listTypeLowerCase || '')?.toUpperCase() as TTransactionType & 'ALL';
+    const listType = (listTypeLowerCase || '')?.toUpperCase() as TTransactionType | 'ALL';
 
     const setSelectedRecords = useSetAtom(selectedRecordsAtom);
 
@@ -229,7 +229,7 @@ const index = () => {
     const filterTagsKey = JSON.stringify(searchFormProps?.form?.getFieldsValue());
 
     return (
-        <List>
+        <List title={t(`All ${listType}`)}>
             <Row gutter={[16, 16]}>
                 <Col lg={24} xs={24}>
                     <Filter formProps={searchFormProps} />

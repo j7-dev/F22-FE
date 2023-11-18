@@ -106,9 +106,7 @@ const FormComponent: React.FC<{
                     <Input.TextArea />
                 </Form.Item>
                 <Form.Item label="&nbsp;">
-                    <Button size="small" type="primary" {...saveButtonProps}>
-                        {t('Save')}
-                    </Button>
+                    <Button size="small" type="primary" {...saveButtonProps} />
                 </Form.Item>
             </div>
         </Form>

@@ -48,18 +48,13 @@ const index: React.FC<
             });
     };
 
+    saveButtonProps.children = t('Save');
+    if (isUserAdjustment) {
+        saveButtonProps.className = 'hidden';
+    }
+
     return (
-        <Create
-            {...createProps}
-            saveButtonProps={
-                isUserAdjustment
-                    ? {
-                          ...saveButtonProps,
-                          className: 'hidden',
-                      }
-                    : saveButtonProps
-            }
-        >
+        <Create {...createProps} saveButtonProps={saveButtonProps}>
             <FormComponent saveButtonProps={saveButtonProps} formType="create" formProps={formProps} formLoading={formLoading} handler={handleCreate} />
         </Create>
     );

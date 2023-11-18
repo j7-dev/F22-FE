@@ -6,6 +6,7 @@ const index = () => {
     const { t } = useTranslation();
     return (
         <List
+            title={t('All Agents')}
             canCreate
             createButtonProps={{
                 children: t('Create'),

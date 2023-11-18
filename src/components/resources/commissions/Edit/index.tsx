@@ -5,12 +5,14 @@ import { TCommission, TCommissionFields } from '@/types';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const index: React.FC<{
     notificationConfig?: ArgsProps;
 }> = ({ notificationConfig = {} }) => {
     const { id } = useParams();
     const { mutate: update } = useUpdate();
+    const { t } = useTranslation();
 
     const { form, formProps, saveButtonProps, formLoading } = useForm<TCommission, HttpError, TCommissionFields>({
         meta: {
@@ -48,6 +50,7 @@ const index: React.FC<{
                 console.log(err);
             });
     };
+    saveButtonProps.children = t('Save');
 
     return (
         <Edit saveButtonProps={saveButtonProps}>

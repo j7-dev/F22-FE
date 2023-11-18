@@ -56,7 +56,12 @@ const FormComponent: React.FC<{
                 </Form.Item>
 
                 <Form.Item name="allow_game_categories" label={t('Allow Game Categories')} initialValue={formType === 'create' ? game_categories : undefined}>
-                    <Checkbox.Group options={game_categories} />
+                    <Checkbox.Group
+                        options={game_categories.map((item) => ({
+                            label: t(item),
+                            value: item,
+                        }))}
+                    />
                 </Form.Item>
 
                 {/* <Form.Item className="w-full" label={t('Description')} name={['description']}>
@@ -66,9 +71,7 @@ const FormComponent: React.FC<{
                 <PeriodInput />
 
                 <Form.Item label="&nbsp;">
-                    <Button size="small" type="primary" {...saveButtonProps}>
-                        {t('Save')}
-                    </Button>
+                    <Button size="small" type="primary" {...saveButtonProps} />
                 </Form.Item>
             </div>
         </Form>

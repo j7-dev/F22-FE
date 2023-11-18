@@ -13,6 +13,7 @@ import { resources } from '@/resources';
 import '@/assets/scss/index.scss';
 import { ConfigProvider } from 'antd';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import ko from 'antd/locale/ko_KR';
 
 function App() {
     const { t, i18n } = useTranslation();
@@ -23,11 +24,29 @@ function App() {
         getLocale: () => i18n.language,
     };
 
+    const tResources = resources.map((resource) => {
+        const meta = resource?.meta;
+        if (meta && meta?.label) {
+            const tMeta = {
+                ...meta,
+                label: t(meta.label),
+            };
+
+            return {
+                ...resource,
+                meta: tMeta,
+            };
+        }
+
+        return resource;
+    });
+
     return (
         <BrowserRouter>
             <RefineKbarProvider>
                 <ColorModeContextProvider>
                     <ConfigProvider
+                        locale={ko}
                         theme={{
                             token: {
                                 colorPrimary: '#5932EA',
@@ -45,7 +64,7 @@ function App() {
                             dataProvider={DataProvider(`${API_URL}/api`, axiosInstance)}
                             routerProvider={routerBindings}
                             i18nProvider={i18nProvider}
-                            resources={resources}
+                            resources={tResources}
                             options={{
                                 syncWithLocation: false,
                                 warnWhenUnsavedChanges: false,
