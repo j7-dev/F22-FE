@@ -151,7 +151,7 @@ const index: React.FC = () => {
             centered
             closeIcon={<AiFillCloseCircle color="#FFFFFF" size={30} />}
             footer={null}
-            className="formWrap w-[600px] md:h-auto max-w-none"
+            className="formWrap md:w-[600px] md:h-auto w-screen max-w-none "
             classNames={{
                 mask: 'bg-[#000000d9] blur-sm',
                 content: 'bg-gradient-to-b from-[#BAA8FF] to-[#5932EA] shadow-[0px_0px_10px_4px_#D4C9FF33] py-[50px] md:px-[100px] px-[45px]',

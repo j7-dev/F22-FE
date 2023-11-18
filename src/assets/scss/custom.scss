@@ -242,3 +242,7 @@
 .ant-modal-confirm-body {
 	justify-content: center;
 }
+//ANTD Modal Z-index
+.ant-modal-wrap {
+	z-index: 2147483640 !important;
+}
