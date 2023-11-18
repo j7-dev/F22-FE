@@ -71,7 +71,7 @@ const FormComponent: React.FC<{
                 <PeriodInput />
 
                 <Form.Item label="&nbsp;">
-                    <Button size="small" type="primary" {...saveButtonProps} />
+                    <Button size="small" type="primary" {...saveButtonProps} className="block" />
                 </Form.Item>
             </div>
         </Form>
