@@ -10,12 +10,14 @@ import { useModal } from '@refinedev/antd';
 import ListBettingRecords from '@/components/resources/betRecords/List';
 import { gameProviderTxnEnum } from '@/utils';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
+import { useTranslation } from 'react-i18next';
 
 type TGameProviderTxnEnum = keyof typeof gameProviderTxnEnum;
 
 const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
     const user_id = user?.id;
     const siteSetting = useGetSiteSetting();
+    const { t } = useTranslation();
     const support_game_providers = (siteSetting?.support_game_providers || []) as TGameProviderTxnEnum[];
     const { data } = useList({
         resource: 'transaction-records',
@@ -95,7 +97,7 @@ const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
                 return acc;
             }, 0) * -1; // 付出去為負數
 
-        const txnAmountRefIds = [...new Set(allTxns.filter((t) => t.by === gameProviderTxnEnum?.[gameProvider]).map((t) => t?.ref_id))];
+        const txnAmountRefIds = [...new Set(allTxns.filter((txn) => txn.by === gameProviderTxnEnum?.[gameProvider]).map((txn) => txn?.ref_id))];
 
         return {
             gameProvider,
@@ -117,17 +119,17 @@ const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
             {latestDeposit ? (
                 <div>
                     <p>
-                        Latest Deposit:{' '}
+                        {t('Latest Deposit')}:{' '}
                         <span className="bg-yellow-200 px-3">
                             <SimpleAmount amount={latestDeposit?.amount} />
                         </span>{' '}
-                        at <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}</u>
+                        <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}</u>
                     </p>
                     <p>
-                        Date: from <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD')}</u> to <u>{dayjs().format('YYYY-MM-DD')}</u>
+                        {t('Date')}: <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}</u> 부터 <u>{dayjs().format('YYYY-MM-DD HH:mm:ss')}</u> 까지
                     </p>
                     <Button type="primary" onClick={() => show()}>
-                        Betting Records
+                        {t('Betting Records')}
                         <ExportOutlined className="ml-2" />
                     </Button>
                 </div>
@@ -148,7 +150,7 @@ const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
                     return (
                         <Table.Summary fixed>
                             <Table.Summary.Row>
-                                <Table.Summary.Cell index={0}>Total</Table.Summary.Cell>
+                                <Table.Summary.Cell index={0}>{t('Total')}</Table.Summary.Cell>
                                 <Table.Summary.Cell index={1}>{totalTxnAmount}</Table.Summary.Cell>
                                 <Table.Summary.Cell index={2}>
                                     <SimpleAmount amount={totalValidBetAmount} />
@@ -171,7 +173,7 @@ const index: React.FC<{ user: TUser | undefined }> = React.memo(({ user }) => {
                 footer={null}
                 title={
                     <>
-                        <u>{user?.username}</u> bet records from <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD')}</u> to <u>{dayjs().format('YYYY-MM-DD')}</u>
+                        <u>{user?.username}</u> 배팅기록 <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}</u> 부터 <u>{dayjs().format('YYYY-MM-DD HH:mm:ss')}</u> 까지
                     </>
                 }
             >

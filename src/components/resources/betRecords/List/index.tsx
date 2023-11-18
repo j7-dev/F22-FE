@@ -149,7 +149,7 @@ const index: React.FC<{ user_id?: string | number } & ListProps> = ({ user_id, .
     const filterTagsKey = JSON.stringify(searchFormProps?.form?.getFieldsValue());
 
     return (
-        <List resource={RESOURCE} canCreate={false} {...listProps}>
+        <List title={t('Bet records')} resource={RESOURCE} canCreate={false} {...listProps}>
             <Row gutter={[16, 16]}>
                 <Col lg={24} xs={24}>
                     <Filter formProps={searchFormProps} />

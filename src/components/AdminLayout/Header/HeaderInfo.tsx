@@ -78,24 +78,40 @@ const HeaderInfo = () => {
 
                         {formattedTabled2.map((item) => {
                             const { label = '', total = 0, evo = 0, pp = 0, bti = 0, token = 0 } = item;
+                            const fields = [
+                                {
+                                    label: 'total',
+                                    amount: total,
+                                },
+                                {
+                                    label: 'evo',
+                                    amount: evo,
+                                },
+                                {
+                                    label: 'pp',
+                                    amount: pp,
+                                },
+                                {
+                                    label: 'bti',
+                                    amount: bti,
+                                },
+                                {
+                                    label: 'token',
+                                    amount: token,
+                                },
+                            ];
+
                             return (
                                 <tr key={label}>
                                     <th className="w-1/4">{t(label)}</th>
-                                    <td>
-                                        <SimpleAmount amount={total} /> ({betAmountUser?.total})
-                                    </td>
-                                    <td>
-                                        <SimpleAmount amount={evo} /> ({betAmountUser?.evo})
-                                    </td>
-                                    <td>
-                                        <SimpleAmount amount={pp} /> ({betAmountUser?.pp})
-                                    </td>
-                                    <td>
-                                        <SimpleAmount amount={bti} /> ({betAmountUser?.bti})
-                                    </td>
-                                    <td>
-                                        <SimpleAmount amount={token} /> ({betAmountUser?.token})
-                                    </td>
+                                    {fields.map((field) => {
+                                        const userText = label === 'bet amount(users)' ? `(${betAmountUser?.[field.label as keyof typeof betAmountUser]})` : '';
+                                        return (
+                                            <td key={field.label}>
+                                                <SimpleAmount amount={field.amount} /> {userText}
+                                            </td>
+                                        );
+                                    })}
                                 </tr>
                             );
                         })}

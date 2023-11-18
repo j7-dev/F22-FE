@@ -19,6 +19,11 @@ import BankAccount from '@/components/Admin/BankAccount';
 import DepositBonusAmount from '@/components/Admin/DepositBonusAmount';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const index = () => {
     const { t } = useTranslation();
@@ -254,9 +259,9 @@ const index = () => {
                                     <Table.Summary fixed>
                                         <Table.Summary.Row>
                                             <Table.Summary.Cell index={0}></Table.Summary.Cell>
-                                            <Table.Summary.Cell index={1}>{t('Total')}</Table.Summary.Cell>
+                                            <Table.Summary.Cell index={1}></Table.Summary.Cell>
                                             <Table.Summary.Cell index={2}></Table.Summary.Cell>
-                                            <Table.Summary.Cell index={3}></Table.Summary.Cell>
+                                            <Table.Summary.Cell index={3}>{t('Total')}</Table.Summary.Cell>
                                             <Table.Summary.Cell index={4}></Table.Summary.Cell>
                                             <Table.Summary.Cell index={5}></Table.Summary.Cell>
 
