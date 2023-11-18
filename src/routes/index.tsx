@@ -1,4 +1,4 @@
-import { Outlet, Routes, Route, useLocation } from 'react-router-dom';
+import { Outlet, Routes, Route } from 'react-router-dom';
 import { Authenticated, useGetIdentity } from '@refinedev/core';
 import { ThemedLayoutV2 } from '@refinedev/antd';
 import { ErrorComponent } from '@/components/PureComponents';
@@ -14,13 +14,6 @@ import { TMe } from '@/types';
 import Login from '@/pages/Admin/login';
 
 const index = () => {
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const referralCode = searchParams.get('ref');
-    if (referralCode) {
-        localStorage.setItem('ref', referralCode);
-    }
-
     const { data: identity } = useGetIdentity<TMe>();
     const role = identity?.role?.type || '';
 
