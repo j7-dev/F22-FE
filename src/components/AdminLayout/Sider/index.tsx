@@ -83,7 +83,7 @@ const CustomSider: typeof Sider = () => {
                     zIndex: 999,
                     backgroundColor: token.colorBgContainer,
                     borderRight: `1px solid ${token.colorBgElevated}`,
-                    overflow: 'auto',
+                    // overflow: 'auto',
                     height: '100vh',
                     position: 'fixed',
                     left: 0,
@@ -150,7 +150,7 @@ const CustomSider: typeof Sider = () => {
                     {items}
                 </Menu>
             </AntdLayout.Sider>
-            <div className="block" style={{ width: isMobile || collapsed ? '80px' : siderWidth }}></div>
+            {!isMobile && <div className="block" style={{ width: collapsed ? '80px' : siderWidth }}></div>}
         </>
     );
 };

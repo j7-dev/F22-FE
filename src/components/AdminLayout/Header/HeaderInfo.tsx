@@ -29,7 +29,7 @@ const HeaderInfo = () => {
     const formattedTabled2 = table2.filter((item) => item.label !== 'bet users');
     return (
         <Spin spinning={isFetching}>
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto" style={{ maxWidth: 'calc(100vw - 6rem)' }}>
                 <div className="flex w-[1300px]">
                     <table className="table table-small table-nowrap th-left w-[300px]">
                         <tr>
