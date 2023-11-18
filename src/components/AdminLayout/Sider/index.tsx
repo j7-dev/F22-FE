@@ -7,7 +7,6 @@ import { UnorderedListOutlined, RightOutlined, LeftOutlined } from '@ant-design/
 import { nanoid } from 'nanoid';
 import logo from '@/assets/images/1002_logo_f.png';
 import logo_s from '@/assets/images/1002_logo_s.png';
-import { useTranslation } from 'react-i18next';
 import { TMe } from '@/types';
 
 const { useToken } = theme;
@@ -17,7 +16,6 @@ const CustomSider: typeof Sider = () => {
     const { data: identity } = useGetIdentity<TMe>();
     const role = identity?.role?.type || '';
     const { token } = useToken();
-    const { t } = useTranslation();
     const [collapsed, setCollapsed] = useState<boolean>(false);
     const { menuItems, selectedKey, defaultOpenKeys } = useMenu();
     const { SubMenu } = Menu;
@@ -47,7 +45,7 @@ const CustomSider: typeof Sider = () => {
 
                 if (children.length > 0) {
                     return (
-                        <SubMenu key={nanoid()} icon={icon ?? <UnorderedListOutlined />} title={t(label)}>
+                        <SubMenu key={nanoid()} icon={icon ?? <UnorderedListOutlined />} title={label}>
                             {renderTreeView(children, theSelectedKey)}
                         </SubMenu>
                     );
@@ -63,7 +61,7 @@ const CustomSider: typeof Sider = () => {
                             }}
                             icon={icon ?? (isRoute && <UnorderedListOutlined />)}
                         >
-                            {route ? <Link to={route || '/'}>{t(label)}</Link> : t(label)}
+                            {route ? <Link to={route || '/'}>{label}</Link> : label}
                             {!collapsed && isSelected && <div className="ant-menu-tree-arrow" />}
                         </Menu.Item>
                     </CanAccess>

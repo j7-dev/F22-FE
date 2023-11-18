@@ -42,7 +42,7 @@ const FormComponent: React.FC<{
                     <Input className="w-full" />
                 </Form.Item>
 
-                <Form.Item className="w-full" label={t('Send to Users')} name={['send_to_user_ids']} help="Leave empty to send to all users">
+                <Form.Item className="w-full" label={t('Send to Users')} name={['send_to_user_ids']} help={t('Leave empty to send to all users')}>
                     <Select {...selectProps} mode="multiple" />
                 </Form.Item>
             </div>

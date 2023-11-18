@@ -95,7 +95,7 @@ const index = () => {
         {
             title: t('Allow Game Categories'),
             dataIndex: 'allow_game_categories',
-            render: (v: string[]) => (Array.isArray(v) ? v.join(', ') : ''),
+            render: (v: string[]) => (Array.isArray(v) ? v.map((w) => `${t(w)}, `) : ''),
         },
         {
             title: t('Period'),

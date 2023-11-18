@@ -30,8 +30,8 @@ const Table = () => {
                             <th>{t('Yesterday')}</th>
                             <th>{t('This Week')}</th>
                             <th>{t('Last Week')}</th>
-                            <th>{t('This Month.')}</th>
-                            <th>{t('Last Month.')}</th>
+                            <th>{t('This Month')}</th>
+                            <th>{t('Last Month')}</th>
                         </tr>
                     </thead>
                     <tbody>

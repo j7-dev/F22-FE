@@ -47,9 +47,10 @@ const index: React.FC<{
                 console.log(err);
             });
     };
+    saveButtonProps.children = t('Save');
 
     return (
-        <Create saveButtonProps={saveButtonProps}>
+        <Create saveButtonProps={saveButtonProps} title={t('Create Member')}>
             <FormComponent formType="create" formProps={formProps} formLoading={formLoading} handler={handleCreate} defaultRoleType={defaultRoleType} />
         </Create>
     );

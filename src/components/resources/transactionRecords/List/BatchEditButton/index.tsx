@@ -45,11 +45,22 @@ const index: React.FC<TBatchEditButtonProps> = ({ status, text, type, className 
             },
         );
     };
+    const getText = (theText: 'Approve' | 'Cancel') => {
+        switch (theText) {
+            case 'Approve':
+                return t('Approve Selected');
+            case 'Cancel':
+                return t('Cancel Selected');
+
+            default:
+                return '';
+        }
+    };
 
     return (
         <Popconfirm className={className} title={`${t(text)} ${type}`} description={`"Are you sure to ${text.toLowerCase()} these ${type.toLowerCase()} ?"`} onConfirm={handleUpdate} okText="Yes" cancelText="No" okButtonProps={{ loading: isLoading }}>
             <Button size="small" shape="round" type="primary" icon={text === 'Approve' ? <CheckOutlined /> : <CloseOutlined />} disabled={!selectedRecords.length} danger={text !== 'Approve'}>
-                {t(text)} {t('Selected')} {selectedRecords.length ? `(${selectedRecords.length})` : null}
+                {getText(text)} {selectedRecords.length ? `(${selectedRecords.length})` : null}
             </Button>
         </Popconfirm>
     );

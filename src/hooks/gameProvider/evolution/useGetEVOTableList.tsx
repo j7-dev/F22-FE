@@ -28,8 +28,8 @@ export const useGetEVOTableList = () => {
             .map((item: TGame) => {
                 return {
                     ...item,
-                    gameName: t(item['Table Name'] as string, { ns: 'evo' }),
-                    gameID: item['Table ID'],
+                    gameName: t(item['Table Name'] as string),
+                    gameID: item['Direct Launch Table ID'],
                     gameImg: getGameTypeImg(item['Game Type'] as string),
                     gameCategory: mappingGameCategory({ gameProviderName: 'evolution' }),
                     gameProviderName: 'evolution',

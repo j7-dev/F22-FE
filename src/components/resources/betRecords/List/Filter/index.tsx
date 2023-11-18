@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { SearchOutlined } from '@ant-design/icons';
 import ResourceSelect from '@/components/form/ResourceSelect';
 import { useResource } from '@refinedev/core';
+import locale from 'antd/es/date-picker/locale/ko_KR';
+import 'dayjs/locale/ko';
 
 const { RangePicker } = DatePicker;
 const STATUSES = ['NORMAL', 'PENDING', 'CANCEL'];
@@ -27,7 +29,7 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
             <Form {...formProps} layout="vertical">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-4 gap-y-0">
                     <Form.Item label={t('date')} name={['dateRange']} initialValue={[dayjs().subtract(6, 'day').startOf('day'), dayjs().endOf('day')]}>
-                        <RangePicker size="small" className="w-full" />
+                        <RangePicker locale={locale} size="small" className="w-full" />
                     </Form.Item>
 
                     <Form.Item label={t('User')} name={['user']} hidden={!!user_id}>

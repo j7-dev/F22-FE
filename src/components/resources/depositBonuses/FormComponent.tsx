@@ -53,7 +53,12 @@ const FormComponent: React.FC<{
                 <ResourceSelect formItemProps={{ label: t('VIPS'), name: ['vips'] }} fetchProps={{ resource: 'vips', optionLabel: 'label', optionValue: 'id' }} selectProps={{ allowClear: true, mode: 'multiple' }} />
 
                 <Form.Item name="allow_game_categories" label={t('Allow Game Categories')} initialValue={formType === 'create' ? game_categories : undefined}>
-                    <Checkbox.Group options={game_categories} />
+                    <Checkbox.Group
+                        options={game_categories.map((item) => ({
+                            label: t(item),
+                            value: item,
+                        }))}
+                    />
                 </Form.Item>
             </div>
         </Form>

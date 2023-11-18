@@ -29,7 +29,7 @@ export const useEvoOpenGame = () => {
 
     const handleClick = ({ item, identity: _ }: { item: TGame; identity: TMe }) => {
         evoGameConfig.config.game.category = item['Game Type'] as string;
-        evoGameConfig.config.game.table.id = item['Table ID'] as string;
+        evoGameConfig.config.game.table.id = item['Direct Launch Table ID'] as string;
         openGame(
             {
                 url: `${API_URL}/api/evo/opengame`,

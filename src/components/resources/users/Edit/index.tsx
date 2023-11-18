@@ -75,9 +75,10 @@ const index: React.FC<{
                 console.log(err);
             });
     };
+    saveButtonProps.children = t('Save');
 
     return (
-        <Edit saveButtonProps={saveButtonProps}>
+        <Edit saveButtonProps={saveButtonProps} title={t('Edit Member')}>
             <FormComponent formType="edit" formProps={formProps} formLoading={formLoading} handler={handleUpdate} />
         </Edit>
     );

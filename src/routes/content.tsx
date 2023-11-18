@@ -25,6 +25,8 @@ const contentRoutes = () => {
     return (
         <>
             <Route path="/" element={<Home />} />
+            {/* 推廣連結 */}
+            <Route path="/ag/:ref" element={<Home />} />
             <Route path="/inPlay" element={<InPlay />} />
             <Route path="/sports" element={<Sports />} />
             <Route path="/golf" element={<Golf />} />

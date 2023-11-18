@@ -60,19 +60,13 @@ const index: React.FC<
     const isUserAdjustment = action === 'show' && identifier === 'members-list';
 
     // TODO 可以加上顯示API結果方便除錯
+    saveButtonProps.children = t('Save');
+    if (isUserAdjustment) {
+        saveButtonProps.className = 'hidden';
+    }
 
     return (
-        <Create
-            {...createProps}
-            saveButtonProps={
-                isUserAdjustment
-                    ? {
-                          ...saveButtonProps,
-                          className: 'hidden',
-                      }
-                    : saveButtonProps
-            }
-        >
+        <Create {...createProps} saveButtonProps={saveButtonProps}>
             <FormComponent formType="create" formProps={formProps} handler={handleCreate} saveButtonProps={saveButtonProps} />
         </Create>
     );

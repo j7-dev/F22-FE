@@ -1,6 +1,8 @@
 import { Form, DatePicker, Tag } from 'antd';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
+import locale from 'antd/es/date-picker/locale/ko_KR';
+import 'dayjs/locale/ko';
 
 const { RangePicker } = DatePicker;
 
@@ -39,7 +41,7 @@ const index = () => {
                 ]}
                 initialValue={[dayjs().startOf('week'), dayjs().endOf('week')]}
             >
-                <RangePicker size="small" className="w-full" />
+                <RangePicker locale={locale} size="small" className="w-full" />
             </Form.Item>
             <div className="flex absolute -top-100 left-0">
                 <Tag className="cursor-pointer" color="purple" onClick={handleThisWeek}>

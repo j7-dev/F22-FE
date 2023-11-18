@@ -47,7 +47,7 @@ const NotesForm = ({ user_notes }: { user_notes?: TUserNote }) => {
                 <div className="grid grid-cols-3 gap-6">
                     {USER_NOTES_FIELDS.map((field) => (
                         <div key={field}>
-                            <Form.Item name={[field.toString(), 'title']} initialValue={`Note${field + 1}`}>
+                            <Form.Item name={[field.toString(), 'title']} initialValue={`${t('Note')}${field + 1}`}>
                                 <Input />
                             </Form.Item>
                             <Form.Item name={[field.toString(), 'content']}>

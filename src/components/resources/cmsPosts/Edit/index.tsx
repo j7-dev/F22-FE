@@ -1,15 +1,17 @@
 import FormComponent from '../FormComponent';
 import { useUpdate, useResource, useInvalidate } from '@refinedev/core';
-import { Edit, useForm } from '@refinedev/antd';
+import { Edit, useForm, EditProps } from '@refinedev/antd';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
 import { useParams } from 'react-router-dom';
 import { RESOURCE } from '../constants';
 import { useTranslation } from 'react-i18next';
 
-const index: React.FC<{
-    notificationConfig?: ArgsProps;
-}> = ({ notificationConfig = {} }) => {
+const index: React.FC<
+    {
+        notificationConfig?: ArgsProps;
+    } & EditProps
+> = ({ notificationConfig = {}, ...editProps }) => {
     const { t } = useTranslation();
     const { id } = useParams();
     const { mutate: update } = useUpdate();
@@ -55,9 +57,10 @@ const index: React.FC<{
                 console.log(err);
             });
     };
+    saveButtonProps.children = t('Save');
 
     return (
-        <Edit saveButtonProps={saveButtonProps}>
+        <Edit saveButtonProps={saveButtonProps} {...editProps}>
             <FormComponent formType="edit" formProps={formProps} formLoading={formLoading} handler={handleCreate} />
         </Edit>
     );

@@ -4,12 +4,14 @@ import { Create, useForm } from '@refinedev/antd';
 import { TCommission, TCommissionFields } from '@/types';
 import { notification } from 'antd';
 import { ArgsProps } from 'antd/es/notification/interface';
+import { useTranslation } from 'react-i18next';
 
 const index: React.FC<{
     notificationConfig?: ArgsProps;
 }> = ({ notificationConfig = {} }) => {
     const { mutate: create } = useCreate();
     const go = useGo();
+    const { t } = useTranslation();
 
     const { form, formProps, saveButtonProps } = useForm<TCommission, HttpError, TCommissionFields>();
     const handleCreate = () => {
@@ -39,6 +41,7 @@ const index: React.FC<{
                 console.log(err);
             });
     };
+    saveButtonProps.children = t('Save');
 
     return (
         <Create saveButtonProps={saveButtonProps}>
