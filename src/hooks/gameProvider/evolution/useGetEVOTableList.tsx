@@ -27,7 +27,7 @@ export const useGetEVOTableList = () => {
                 return {
                     ...item,
                     gameName: item['Table Name'],
-                    gameID: item['Table ID'],
+                    gameID: item['Direct Launch Table ID'],
                     gameImg: getGameTypeImg(item['Game Type'] as string),
                     gameCategory: mappingGameCategory({ gameProviderName: 'evolution' }),
                     gameProviderName: 'evolution',

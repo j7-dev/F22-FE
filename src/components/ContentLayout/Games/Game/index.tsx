@@ -71,7 +71,7 @@ const index: React.FC<GameProps> = ({ data = {} }) => {
         } else {
             const newGameConfig = cloneDeep(gameconfig);
             newGameConfig.config.game.category = data['Game Type'];
-            newGameConfig.config.game.table.id = data['Table ID'] as string;
+            newGameConfig.config.game.table.id = data['Direct Launch Table ID'] as string;
             // setGameconfig(newGameConfig);
             // console.log('newGameConfig', newGameConfig);
 
