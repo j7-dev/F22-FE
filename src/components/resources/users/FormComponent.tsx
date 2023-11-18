@@ -34,10 +34,12 @@ const FormComponent: React.FC<{
     const rolesMapping = siteSetting?.roles || {};
     const roleSelectProps = {
         options: Object.keys(rolesMapping)
-            .filter((k) => k === 'agent')
+            .filter((k) => ['agent', 'authenticated'].includes(k))
             .map((key) => {
+                const label = key === 'authenticated' ? t('member') : t(key);
+
                 return {
-                    label: key,
+                    label,
                     value: rolesMapping?.[key],
                 };
             }) as DefaultOptionType[],
@@ -168,8 +170,8 @@ const FormComponent: React.FC<{
                     <Checkbox.Group options={support_game_providers} />
                 </Form.Item>
 
-                <Form.Item hidden={watchRoleType !== 'agent'} name="role" label={t('role')} initialValue={formType === 'create' ? rolesMapping?.[defaultRoleType] : undefined}>
-                    {watchRoleType !== 'agent' ? <Input /> : <Select {...roleSelectProps} />}
+                <Form.Item name="role" label={t('role')} initialValue={formType === 'create' ? rolesMapping?.[defaultRoleType] : undefined}>
+                    <Select {...roleSelectProps} />
                 </Form.Item>
                 {watchRoleType === 'authenticated' && (
                     <Form.Item name="vip" label={t('vip')}>
