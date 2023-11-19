@@ -52,7 +52,7 @@ const useColumns = () => {
             title: t('Referral'),
             dataIndex: 'referral',
             key: 'referral',
-            render: (referral: TUser) => (referral ? <Link to={`/refine/agent/show/${referral?.id}`}>{referral?.username}</Link> : null),
+            render: (referral: TUser) => (referral ? <Link to={`/refine/members/show/${referral?.id}`}>{referral?.username}</Link> : null),
         },
         ...allBalances,
         ...phone,
