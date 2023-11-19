@@ -10,7 +10,7 @@ import { TMe } from '@/types';
 import HeaderInfo from './HeaderInfo';
 
 const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
-    const { i18n, t } = useTranslation();
+    const { t } = useTranslation();
     const locale = useGetLocale();
     const changeLanguage = useSetLocale();
     const { data: user } = useGetIdentity<TMe>();
@@ -44,9 +44,7 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
 
     const displayName = user?.display_name || 'Unknown';
 
-    const languages = (i18n?.languages || []).filter((lang) => {
-        return lang === 'en' || lang === 'ko';
-    });
+    const languages = ['en', 'ko'];
 
     const userOptions: MenuProps['items'] = [
         {
@@ -74,16 +72,18 @@ const Header: React.FC<RefineThemedLayoutV2HeaderProps> = ({ sticky }) => {
             key: 'languages',
             label: t('Languages'),
             icon: <TranslationOutlined className="w-4" />,
-            children: languages.sort().map((lang: string) => ({
-                key: lang,
-                label: (
-                    <p className="m-0 flex justify-between w-24" onClick={() => changeLanguage(lang)}>
-                        {lang === 'en' ? 'English' : 'Korea'}
-                        {lang === currentLocale && <CheckOutlined style={{ color: colorSuccess }} />}
-                    </p>
-                ),
-                icon: <Avatar size={16} src={`/images/flags/${lang}.svg`} />,
-            })),
+            children: languages.sort().map((lang: string) => {
+                return {
+                    key: lang,
+                    label: (
+                        <p className="m-0 flex justify-between w-24" onClick={() => changeLanguage(lang)}>
+                            {lang === 'en' ? 'English' : 'Korea'}
+                            {lang === currentLocale && <CheckOutlined style={{ color: colorSuccess }} />}
+                        </p>
+                    ),
+                    icon: <Avatar size={16} src={`/images/flags/${lang}.svg`} />,
+                };
+            }),
         },
         {
             type: 'divider',

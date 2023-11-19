@@ -75,11 +75,9 @@ const FormComponent: React.FC<{
                 >
                     <Input size="small" />
                 </Form.Item>
-
                 <Form.Item name={['user_id']} label={t('User')} initialValue={Number(id)} hidden={isUserAdjustment}>
                     <Select size="small" {...userSelectProps} allowClear />
                 </Form.Item>
-
                 <div>
                     <p className="mb-2">{t("User's balance")}</p>
                     {watchUser && !isFetching && <SimpleAmount amount={Number(currencyBalanceAmount)} />}
@@ -94,19 +92,18 @@ const FormComponent: React.FC<{
                         <InputNumber size="small" precision={0} className="w-full relative -top-[1px]" />
                     </Form.Item>
                 </div>
-
                 <Form.Item hidden name={['currency']} initialValue={default_currency}>
                     <Input size="small" />
                 </Form.Item>
                 <Form.Item hidden name={['amount_type']} initialValue={default_amount_type}>
                     <Input size="small" />
                 </Form.Item>
-
                 <Form.Item name={['description']} label={t('description')} hidden={isUserAdjustment}>
                     <Input.TextArea />
                 </Form.Item>
+
                 <Form.Item label="&nbsp;">
-                    <Button size="small" type="primary" {...saveButtonProps} />
+                    <Button size="small" type="primary" {...saveButtonProps} className="block" />
                 </Form.Item>
             </div>
         </Form>
