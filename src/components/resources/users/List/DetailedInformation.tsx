@@ -140,6 +140,11 @@ const DetailedInformation = () => {
                     value: values?.agent,
                 },
                 {
+                    field: 'referral.id',
+                    operator: 'eq',
+                    value: values?.referral,
+                },
+                {
                     field: 'blocked',
                     operator: 'eq',
                     value: values?.blocked,
