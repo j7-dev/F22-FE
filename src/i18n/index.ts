@@ -12,7 +12,7 @@ i18n.use(Backend)
         backend: {
             loadPath: '/locales/{{lng}}/{{ns}}.json',
         },
-        ns: ['content', 'admin', 'evo'],
+        ns: ['content', 'admin', 'evo', 'pp'],
         defaultNS: 'content',
         fallbackLng: ['en'], // 若當前語言沒有對應的翻譯則使用這個語言
     });

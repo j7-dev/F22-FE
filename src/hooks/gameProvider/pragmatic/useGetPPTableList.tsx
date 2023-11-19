@@ -1,4 +1,5 @@
 import { useApiUrl, useCustom } from '@refinedev/core';
+import { useTranslation } from 'react-i18next';
 import { mappingGameCategory } from '@/utils/GameCategory';
 import { mappingRTP } from '@/utils/providerData/PPGameRTP';
 // import { useGetPPImg } from '@/hooks/gameProvider/pragmatic/useGetPPImg';
@@ -7,6 +8,7 @@ import { TGame } from '@/types/games';
 import { useGetSiteSetting } from '@/hooks/useGetSiteSetting';
 
 export const useGetPPTableList = () => {
+    const { t } = useTranslation();
     //取得網站設定support_game_providers是否有包含PP
     const { support_game_providers } = useGetSiteSetting();
     const inSupport = support_game_providers.includes('PP');
@@ -34,6 +36,7 @@ export const useGetPPTableList = () => {
             .map((item: TGame) => {
                 return {
                     ...item,
+                    gameName: t(item.gameName as string, { ns: 'pp' }),
                     gameCategory: mappingGameCategory({ gameProviderName: 'pragmaticPlay', gameProviderCategory: item.typeDescription }),
                     gameProviderName: 'pragmaticPlay',
                     casinoCategory: 'all', //TODO 之後在區分他的分類

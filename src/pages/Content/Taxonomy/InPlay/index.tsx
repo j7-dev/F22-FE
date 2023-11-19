@@ -41,7 +41,7 @@ const index: React.FC = () => {
                     }
                 />
             );
-        return <iframe style={{ minHeight: `calc(100vh - ${headerHeight}px - ${mobileBottomHeight}px - ${margin}px)` }} src={`https://prod20290-125166753.442hattrick.com/ko/korean-view${addUrl}#Live`} className="w-full h-full border-0" />;
+        return <iframe style={{ minHeight: `calc(100vh - ${headerHeight}px - ${mobileBottomHeight}px - ${margin}px)` }} src={`https://prod20290-125166753.442hattrick.com/ko/korean-view${addUrl}`} className="w-full h-full border-0" />;
     };
     //取得id = header的元素高度
     const header = document.getElementById('header');
