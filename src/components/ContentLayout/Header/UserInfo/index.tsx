@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSetAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { useGetIdentity } from '@refinedev/core';
@@ -10,7 +10,7 @@ import userBalanceIcon from '@/assets/images/topBar/userBalance.svg';
 import userBonusIcon from '@/assets/images/topBar/userBonus.svg';
 import userDepositIcon from '@/assets/images/topBar/userDeposit.svg';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
-import { useQueryClient } from '@tanstack/react-query';
+// import { useQueryClient } from '@tanstack/react-query';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
@@ -21,21 +21,21 @@ const index: React.FC = () => {
     const turnoverBonus = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'TURNOVER_BONUS')[0].amount || 0 : 0;
     const navigate = useNavigate();
     const setSection = useSetAtom(activeMenuAtom);
-    const queryClient = useQueryClient();
+    // const queryClient = useQueryClient();
 
     const handleNavigate = (goTo: string) => () => {
         setSection(goTo);
         navigate('/wallet');
     };
 
-    useEffect(() => {
-        // 每5秒重新取得用戶資料
-        const timer = setInterval(() => {
-            queryClient.invalidateQueries(['getUserIdentity']);
-        }, 5000);
+    // useEffect(() => {
+    //     // 每5秒重新取得用戶資料
+    //     const timer = setInterval(() => {
+    //         queryClient.invalidateQueries(['getUserIdentity']);
+    //     }, 5000);
 
-        return () => clearTimeout(timer);
-    }, []);
+    //     return () => clearTimeout(timer);
+    // }, []);
 
     return (
         <Spin spinning={isLoading}>
