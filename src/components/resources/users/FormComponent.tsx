@@ -183,7 +183,7 @@ const FormComponent: React.FC<{
 
                 {watchRoleType === 'authenticated' && (
                     <Form.Item name="agent" label={t('Agent')}>
-                        <Select {...agentSelectProps} />
+                        <Select {...agentSelectProps} allowClear />
                     </Form.Item>
                 )}
             </div>
