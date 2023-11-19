@@ -6,22 +6,18 @@ import { useNavigate } from 'react-router-dom';
 import { Spin } from 'antd';
 import { TMe } from '@/types';
 import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
-import userBalanceIcon from '@/assets/images/topBar/userBalance.svg';
-import userBonusIcon from '@/assets/images/topBar/userBonus.svg';
 import userDepositIcon from '@/assets/images/topBar/userDeposit.svg';
-import SimpleAmount from '@/components/Admin/SimpleAmount';
-// import { useQueryClient } from '@tanstack/react-query';
+import { BalanceAmount } from './Balance';
 
 const index: React.FC = () => {
     const { t } = useTranslation();
     const { data, isLoading } = useGetIdentity<TMe>();
     const userName = data?.username || 'userName';
     const vip = (data?.vip?.order as number) + 1 || 0;
-    const balance = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'CASH')[0].amount || 0 : 0;
-    const turnoverBonus = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'TURNOVER_BONUS')[0].amount || 0 : 0;
+    // const balance = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'CASH')[0].amount || 0 : 0;
+    // const turnoverBonus = data?.balances !== undefined ? data?.balances.filter((item) => item.currency === 'KRW' && item.amount_type === 'TURNOVER_BONUS')[0].amount || 0 : 0;
     const navigate = useNavigate();
     const setSection = useSetAtom(activeMenuAtom);
-    // const queryClient = useQueryClient();
 
     const handleNavigate = (goTo: string) => () => {
         setSection(goTo);
@@ -45,18 +41,7 @@ const index: React.FC = () => {
                     <span className=" text-[#5932EA] whitespace-nowrap ">{userName}</span>
                 </div>
                 <div className="userBalancesWrap flex justify-center items-center gap-2 px-2 py-1.5 rounded-2xl bg-[#ECE8FA]">
-                    <div className="userBalance flex gap-2 items-center ">
-                        <img src={userBalanceIcon} alt="" />
-                        <span>
-                            <SimpleAmount amount={Number(balance)} />
-                        </span>
-                    </div>
-                    <div className="userBonus flex gap-2 items-center ">
-                        <img src={userBonusIcon} alt="" />
-                        <span>
-                            <SimpleAmount amount={Number(turnoverBonus)} />
-                        </span>
-                    </div>
+                    <BalanceAmount userId={data?.id || 0} />
                     <div className="divider h-[17px] border-r border-0 border-solid border-[#9680EA] bg-[#9680EA] " />
                     <div onClick={handleNavigate('deposit')} className="userDeposit cursor-pointer flex gap-2 items-center px-3 py-1 bg-white rounded-2xl hover:text-[#828282]">
                         <img src={userDepositIcon} alt="" />
