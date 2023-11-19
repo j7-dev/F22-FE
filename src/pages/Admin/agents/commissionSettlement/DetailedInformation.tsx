@@ -4,6 +4,8 @@ import { searchPropsAtom } from './atom';
 import { useAtomValue } from 'jotai';
 import { useCustom, useApiUrl } from '@refinedev/core';
 import { useTranslation } from 'react-i18next';
+import UserLink from '@/components/Admin/UserLink';
+import { TUser } from '@/types';
 
 type DataType = {
     agentId: number;
@@ -26,10 +28,11 @@ const DetailedInformation = () => {
         {
             title: t('Agent'),
             dataIndex: 'agent',
+            render: (agent: TUser) => <UserLink user={agent} />,
         },
         {
             title: t('Deposit'),
-            dataIndex: 'deposit ',
+            dataIndex: 'deposit',
         },
         {
             title: t('Withdraw'),
@@ -40,8 +43,8 @@ const DetailedInformation = () => {
             dataIndex: 'dpWd',
         },
         {
-            title: t('Valid Bet Amount'),
-            dataIndex: 'validBet',
+            title: t('Bet Amount'),
+            dataIndex: 'betAmount',
         },
         {
             title: t('Payout'),
@@ -61,19 +64,20 @@ const DetailedInformation = () => {
         },
         {
             // 佣金比例
-            title: t('Commission'),
-            dataIndex: 'commission',
+            title: t('commission Rate'),
+            dataIndex: 'commissionRate',
+            render: (commissionRate: number) => `${commissionRate * 100}%`,
         },
         {
             // 佣金結金額
-            title: t('Commission Settlement'),
-            dataIndex: 'commissionSettlement',
+            title: t('Commission'),
+            dataIndex: 'commission',
         },
     ];
 
     const apiUrl = useApiUrl();
     const { data, isLoading } = useCustom({
-        url: `${apiUrl}/utility/statistic/daily`,
+        url: `${apiUrl}/utility/statistic/agent`,
         method: 'get',
         config: {
             query: {
@@ -88,7 +92,7 @@ const DetailedInformation = () => {
 
     return (
         <>
-            <Table pagination={false} rowKey="date" size="small" columns={columns} dataSource={dataSource} loading={isLoading} />
+            <Table pagination={false} rowKey="key" size="small" columns={columns} dataSource={dataSource} loading={isLoading} />
         </>
     );
 };
