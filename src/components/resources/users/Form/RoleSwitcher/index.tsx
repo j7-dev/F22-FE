@@ -12,7 +12,7 @@ const index = () => {
     const handleChange = (checked: boolean) => {
         setChecked(checked);
         form.setFieldsValue({
-            role: checked ? 'agent' : 'authenticated',
+            role: checked ? rolesMapping?.agent : rolesMapping?.authenticated,
         });
     };
     const [checked, setChecked] = useState(false);
