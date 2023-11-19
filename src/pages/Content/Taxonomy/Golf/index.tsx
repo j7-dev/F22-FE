@@ -44,7 +44,16 @@ const index: React.FC = () => {
         if (gameServer) {
             const addUrl = `${gameServer}?otp_id=${otpId}&login_id=${identity?.id}&lang=ko-KR`;
             if (isFetching) return <Spin size="large" className="w-full h-screen flex justify-center items-center" />;
-            window.open(addUrl);
+            //判斷是否為safari
+            const isSmartBet = /smartbet/i.test(navigator.userAgent);
+            const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+            if (isSafari || isSmartBet) {
+                //當前頁面跳轉
+                window.location.href = addUrl;
+            } else {
+                //否則開新分頁
+                window.open(addUrl, '_blank');
+            }
             return <></>;
         }
         return <></>;

@@ -110,6 +110,11 @@ export const Footer: React.FC = () => {
                                     <span className="md:text-xs text-[10px] text-[#333333] hover:underline ">{t('About Us')}</span>
                                 </Link>
                             </li>
+                            <li>
+                                <Link to="/golf">
+                                    <span className="md:text-xs text-[10px] text-white hover:underline ">{t('golf')}</span>
+                                </Link>
+                            </li>
                             {/* <li>
                                 <a href="itms-services://?action=download-manifest&url=https://f22-fe.vercel.app/ipa/app.plist" className="md:text-xs text-[10px] text-[#333333] hover:underline ">
                                     IPA下載
