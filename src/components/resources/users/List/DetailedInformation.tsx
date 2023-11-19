@@ -45,6 +45,9 @@ const DetailedInformation = () => {
                 agent: {
                     fields: ['display_name', 'username'],
                 },
+                referral: {
+                    fields: ['display_name', 'username'],
+                },
                 balances: {
                     fields: ['amount', 'currency', 'amount_type'],
                 },
@@ -135,6 +138,11 @@ const DetailedInformation = () => {
                     field: 'agent.id',
                     operator: 'eq',
                     value: values?.agent,
+                },
+                {
+                    field: 'referral.id',
+                    operator: 'eq',
+                    value: values?.referral,
                 },
                 {
                     field: 'blocked',

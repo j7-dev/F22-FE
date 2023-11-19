@@ -8,6 +8,7 @@ import { useGetIdentity } from '@refinedev/core';
 import { TMe } from '@/types';
 import locale from 'antd/es/date-picker/locale/ko_KR';
 import 'dayjs/locale/ko';
+import ResourceSelect from '@/components/form/ResourceSelect';
 
 const { RangePicker } = DatePicker;
 const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
@@ -47,6 +48,8 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
                     <Form.Item label={t('Agent')} name={['agent']} hidden={!!defaultAgentId}>
                         <Select size="small" {...agentSelectProps} allowClear />
                     </Form.Item>
+
+                    <ResourceSelect formItemProps={{ label: t('Referral'), name: ['referral'] }} fetchProps={{ resource: 'users', optionLabel: 'username', optionValue: 'id' }} selectProps={{ allowClear: true, size: 'small' }} />
 
                     {/* <BooleanRadioButton
                         formItemProps={{
