@@ -14,6 +14,7 @@ import { useGetIdentity } from '@refinedev/core';
 import PasswordInput from '@/components/form/PasswordInput';
 import locale from 'antd/es/date-picker/locale/ko_KR';
 import 'dayjs/locale/ko';
+import RoleSwitcher from './Form/RoleSwitcher';
 
 const { Title } = Typography;
 
@@ -170,14 +171,15 @@ const FormComponent: React.FC<{
                     <Checkbox.Group options={support_game_providers} />
                 </Form.Item>
 
-                <Form.Item name="role" label={t('role')} initialValue={formType === 'create' ? rolesMapping?.[defaultRoleType] : undefined}>
+                <RoleSwitcher />
+
+                <Form.Item hidden name="role" label={t('role')} initialValue={formType === 'create' ? rolesMapping?.[defaultRoleType] : undefined}>
                     <Select {...roleSelectProps} />
                 </Form.Item>
-                {watchRoleType === 'authenticated' && (
-                    <Form.Item name="vip" label={t('vip')}>
-                        <Select {...vipSelectProps} />
-                    </Form.Item>
-                )}
+
+                <Form.Item name="vip" label={t('vip')}>
+                    <Select {...vipSelectProps} />
+                </Form.Item>
 
                 {watchRoleType === 'authenticated' && (
                     <Form.Item name="agent" label={t('Agent')}>
