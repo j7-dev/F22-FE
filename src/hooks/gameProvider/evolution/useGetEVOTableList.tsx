@@ -1,11 +1,10 @@
 import { useList } from '@refinedev/core';
 import { useTranslation } from 'react-i18next';
-import { getGameTypeImg } from '@/components/ContentLayout/Games/Game/GameImg';
 import { mappingGameCategory } from '@/utils/GameCategory';
 import { mappingCasinoCategory, mappingCasinoCategoryIcon } from '@/utils/GameCategory/casinoCategory';
 import { TGame } from '@/types/games';
 import { useGetSiteSetting } from '@/hooks/useGetSiteSetting';
-
+import { useGetImage } from './useGetImage';
 export const useGetEVOTableList = () => {
     const { t } = useTranslation();
     //取得網站設定support_game_providers是否有包含EVO
@@ -28,9 +27,9 @@ export const useGetEVOTableList = () => {
             .map((item: TGame) => {
                 return {
                     ...item,
-                    gameName: t(item['Table Name'] as string, { ns: 'evo' }),
+                    gameName: t(item['Table Name'] as string),
                     gameID: item['Direct Launch Table ID'],
-                    gameImg: getGameTypeImg(item['Game Type'] as string),
+                    gameImg: useGetImage(item['Table Name'] as string),
                     gameCategory: mappingGameCategory({ gameProviderName: 'evolution' }),
                     gameProviderName: 'evolution',
                     casinoCategory: mappingCasinoCategory({ category: item['Game Type'] as string }),
