@@ -6,17 +6,25 @@ import { useCustom, useApiUrl } from '@refinedev/core';
 import { useTranslation } from 'react-i18next';
 import UserLink from '@/components/Admin/UserLink';
 import { TUser } from '@/types';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
 
 type DataType = {
-    agentId: number;
-    newMembers: string;
-    numberOfDepositors: string;
-    numberOfFirstDeposit: string;
-    numberOfDisable: string;
-    totalDeposits: string;
-    totalWithdraw: string;
-    profit: string;
-    commissionAmount: string;
+    key: number;
+    agent: {
+        id: number;
+        username?: string;
+        commission_rate?: number;
+    };
+    deposit: number;
+    withdraw: number;
+    dpWd: number;
+    betAmount: number;
+    payout: number;
+    winloss: number;
+    coupon: number;
+    profit: number;
+    commissionRate: number | string;
+    commission: number;
 };
 
 const DetailedInformation = () => {
@@ -28,50 +36,59 @@ const DetailedInformation = () => {
         {
             title: t('Agent'),
             dataIndex: 'agent',
-            render: (agent: TUser) => <UserLink user={agent} />,
+            render: (agent: TUser) => (agent?.id === 0 ? t('Total') : <UserLink user={agent} />),
         },
         {
             title: t('Deposit'),
             dataIndex: 'deposit',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: t('Withdraw'),
             dataIndex: 'withdraw',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: t('DPWD'),
             dataIndex: 'dpWd',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: t('Bet Amount'),
             dataIndex: 'betAmount',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: t('Payout'),
             dataIndex: 'payout',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: t('WinLoss'),
             dataIndex: 'winloss',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: t('Bonus & Turnover Bonus'),
             dataIndex: 'coupon',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             title: t('Profit'),
             dataIndex: 'profit',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
         {
             // 佣金比例
             title: t('commission Rate'),
             dataIndex: 'commissionRate',
-            render: (commissionRate: number) => `${commissionRate * 100}%`,
+            render: (commissionRate: number | string) => (typeof commissionRate === 'string' ? commissionRate : `${commissionRate * 100}%`),
         },
         {
             // 佣金結金額
             title: t('Commission'),
             dataIndex: 'commission',
+            render: (v: number) => <SimpleAmount amount={v} />,
         },
     ];
 
@@ -88,11 +105,40 @@ const DetailedInformation = () => {
     });
     const dataSource = data?.data?.data || [];
 
-    //TODO API 抓出某個AGENT底下的所有資料
+    const sumRecord = dataSource.reduce(
+        (acc: DataType, cur: DataType) => {
+            acc.deposit += cur.deposit;
+            acc.withdraw += cur.withdraw;
+            acc.dpWd += cur.dpWd;
+            acc.betAmount += cur.betAmount;
+            acc.payout += cur.payout;
+            acc.winloss += cur.winloss;
+            acc.coupon += cur.coupon;
+            acc.profit += cur.profit;
+            acc.commission += cur.commission;
+            return acc;
+        },
+        {
+            key: 25,
+            agent: {
+                id: 0,
+            },
+            deposit: 0,
+            withdraw: 0,
+            dpWd: 0,
+            betAmount: 0,
+            payout: 0,
+            winloss: 0,
+            coupon: 0,
+            profit: 0,
+            commissionRate: '-',
+            commission: 0,
+        },
+    );
 
     return (
         <>
-            <Table pagination={false} rowKey="key" size="small" columns={columns} dataSource={dataSource} loading={isLoading} />
+            <Table pagination={false} rowKey="key" size="small" columns={columns} dataSource={[sumRecord, ...dataSource]} loading={isLoading} />
         </>
     );
 };
