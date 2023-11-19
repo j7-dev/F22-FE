@@ -104,7 +104,7 @@ const index: React.FC<{ userInfo?: TUser }> = ({ userInfo }) => {
                 <div className="">
                     <div className="text-[#ACACAC] text-[8px] md:text-sm font-normal">{t('Rolling Point')}</div>
                     <div className="text-[#333333] text-base md:text-2xl font-semibold">
-                        <Amount amount={Number(turnoverBonus)} symbol />
+                        <Amount amount={Math.floor(Number(turnoverBonus))} symbol />
                     </div>
                     <ConvertBtn />
                 </div>
