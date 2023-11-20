@@ -1,3 +1,4 @@
+// import defaultImg from '@/assets/images/game_provider/evoIcon.svg';
 /**
  * 動態引入evo圖片
  * 目錄為/assets/images/EVO_Thumbnails/${var}.png
@@ -11,6 +12,7 @@ export const useGetImage = (gameName: string) => {
     const gameNameLower = removeCharsAfterSpace(gameName).toLowerCase().replace(/\s/g, '_');
     //絕對路徑為當前網址的根目錄
     const imgObj = new URL(`${basePath}/assets/images/EVO_Thumbnails/${gameNameLower}.png`, window.location.origin);
+
     const imgPath = imgObj.pathname;
     return imgPath;
 };
@@ -26,3 +28,15 @@ const removeCharsAfterSpace = (inputString: string) => {
     //使用 trim() 方法来删除字符串两端的多余空格
     return inputString.replace(pattern, '').trim();
 };
+
+//判斷路徑是否具有圖片檔案
+// const isImageExist = (url: string, callback: (arg: boolean) => void) => {
+//     const img = new Image();
+//     img.src = url;
+//     img.onload = function () {
+//         callback(true);
+//     };
+//     img.onerror = function () {
+//         callback(false);
+//     };
+// };
