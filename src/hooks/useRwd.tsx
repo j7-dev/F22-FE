@@ -25,7 +25,7 @@ export const useRwd = () => {
         isXl: windowWidth > 1280,
         isLg: windowWidth > 1080,
         isMd: windowWidth > 900,
-        isSm: windowWidth > 415,
+        isSm: windowWidth > 425,
         isXs: windowWidth > 0 && windowWidth < 415,
     };
 };

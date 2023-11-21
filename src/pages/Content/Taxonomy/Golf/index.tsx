@@ -6,6 +6,8 @@ import { signInAtom } from '@/components/ContentLayout/Header/LoginModule';
 import underConstructionIcon from '@/assets/images/game_provider/Under_construction.svg';
 import { useShowPc } from '@/hooks/useShowPc';
 import { useTranslation } from 'react-i18next';
+import igxImg from '@/assets/images/game_provider/igxIcon.svg';
+import golfImg from '@/assets/images/game_provider/golfImg.jpg';
 // import { useGetLocale } from '@refinedev/core';
 
 const index: React.FC = () => {
@@ -47,23 +49,51 @@ const index: React.FC = () => {
             //判斷是否為safari
             const isSmartBet = /smartbet/i.test(navigator.userAgent);
             const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-            if (isSafari || isSmartBet) {
-                //當前頁面跳轉
-                window.location.href = addUrl;
-            } else {
-                //否則開新分頁
-                window.open(addUrl, '_blank');
-            }
-            return <></>;
+
+            const handleClick = () => {
+                if (isSafari || isSmartBet) {
+                    //當前頁面跳轉
+                    window.location.href = addUrl;
+                } else {
+                    //否則開新分頁
+                    window.open(addUrl, '_blank');
+                }
+            };
+            return (
+                <>
+                    <div className="flex flex-col justify-center w-full h-full px-[85px] gap-5 md:justify-evenly md:flex-row md:py-16 md:px-[180px] sm:px-[220px] box-border">
+                        <div className="">
+                            <img src={golfImg} alt="" className="max-w-full h-full object-contain object-center" />
+                        </div>
+                        <div className="flex flex-col items-center justify-center gap-10 md:w-[430px]">
+                            <img src={igxImg} alt="" className="w-full" />
+                            <button onClick={handleClick} className="hidden md:block cursor-pointer w-full bg-[#492DB0] font-bold text-xl text-white border-0 rounded-2xl py-4">
+                                {t('시작')}
+                            </button>
+                            <p className="hidden md:block text-[#9680EA] text-base font-medium text-center">{t('If the new window does not pop up, please enable window pop-up in your browser settings')}</p>
+                        </div>
+                    </div>
+                    <div className="md:hidden px-6 pb-10 w-full">
+                        <button onClick={handleClick} className="cursor-pointer w-full bg-[#492DB0] font-bold text-xl text-white border-0 rounded-2xl py-4">
+                            {t('시작')}
+                        </button>
+                    </div>
+                </>
+            );
         }
         return <></>;
     };
     //取得id = header的元素高度
     const header = document.getElementById('header');
     const headerHeight = header?.clientHeight;
+    //取得mobileBottom的高度
+    const mobileBottom = document.querySelector('.mobileBottom');
+    const mobileBottomHeight = mobileBottom?.clientHeight || 0;
+    //須扣除的外邊距 PC: 32px Mobile: 16px
+    const margin = isPc ? 36 * 2 : 16 * 2;
     return (
         <div className="IGXPage md:my-9 md:gap-8 my-4 w-full h-auto">
-            <div style={{ minHeight: `calc(100vh - ${headerHeight}px - 72px)` }} className="bg-white flex justify-center items-center h-full md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl overflow-hidden">
+            <div style={{ height: `calc(100vh - ${headerHeight}px - ${mobileBottomHeight}px - ${margin}px)` }} className="bg-white flex flex-col justify-center items-center md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl overflow-hidden">
                 <Container />
             </div>
         </div>
