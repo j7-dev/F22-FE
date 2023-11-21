@@ -8,6 +8,7 @@ import { useShowPc } from '@/hooks/useShowPc';
 import { useTranslation } from 'react-i18next';
 import igxImg from '@/assets/images/game_provider/igxIcon.svg';
 import golfImg from '@/assets/images/game_provider/golfImg.jpg';
+// import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 // import { useGetLocale } from '@refinedev/core';
 
 const index: React.FC = () => {
@@ -61,11 +62,11 @@ const index: React.FC = () => {
             };
             return (
                 <>
-                    <div className="flex flex-col justify-center w-full h-full px-[85px] gap-5 md:justify-evenly md:flex-row md:py-16 md:px-[180px] sm:px-[220px] box-border">
-                        <div className="">
+                    <div className="grid grid-cols-11 w-full h-full gap-4 md:py-16md:px-8">
+                        <div className="sm:col-start-3 sm:col-span-3 col-start-2 col-span-9">
                             <img src={golfImg} alt="" className="max-w-full h-full object-contain object-center" />
                         </div>
-                        <div className="flex flex-col items-center justify-center gap-10 md:w-[430px]">
+                        <div className="sm:col-start-7 sm:col-span-3 col-start-2 col-span-9 flex flex-col items-center justify-center gap-10">
                             <img src={igxImg} alt="" className="w-full" />
                             <button onClick={handleClick} className="hidden md:block cursor-pointer w-full bg-[#492DB0] font-bold text-xl text-white border-0 rounded-2xl py-4">
                                 {t('시작')}
@@ -94,6 +95,12 @@ const index: React.FC = () => {
     return (
         <div className="IGXPage md:my-9 md:gap-8 my-4 w-full h-auto">
             <div style={{ height: `calc(100vh - ${headerHeight}px - ${mobileBottomHeight}px - ${margin}px)` }} className="bg-white flex flex-col justify-center items-center md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl overflow-hidden">
+                {/* <div className="hidden slotTitle w-full md:grid grid-cols-11 gap-4 border-0 border-solid border-b border-[#d5d8dc] md:shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] md:py-9">
+                    <div className=" col-span-1 flex justify-center">
+                        <img src={Icon_Main_Title} alt="" className="" />
+                    </div>
+                    <span className="hidden whitespace-nowrap col-span-1 font-bold text-3xl text-[#9680EA] md:flex items-center">{t('GOLF')}</span>
+                </div> */}
                 <Container />
             </div>
         </div>
