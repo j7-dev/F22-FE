@@ -41,18 +41,24 @@ const index: React.FC = () => {
             <div className="w-full my-4 text-center">
                 <span className="text-sm md:text-2xl font-bold text-black">{t('Bonus Details')}</span>
             </div>
-            <div className="w-full grid grid-cols-3 md:py-12 py-4 place-items-center rounded-2xl bg-[#F8F9FF]">
+            <div className="w-full grid grid-cols-3 place-items-stretch md:py-12 py-4 rounded-2xl bg-[#F8F9FF]">
                 <div className="flex flex-col w-full items-center gap-3 px-2">
-                    <span className="text-[8px] md:text-lg font-medium ">{t('Bonus Type')}</span>
-                    <span className="text-[#9680EA] text-base md:text-4xl font-bold text-center">{chosenBonus?.label ?? '-'}</span>
+                    <span className="text-[8px] md:text-xl font-medium ">{t('Bonus Type')}</span>
                 </div>
                 <div className="flex flex-col w-full items-center gap-3 border-0 md:border md:border-y-0 border-[#C6BBEE] border-solid">
-                    <span className="text-[8px] md:text-lg font-medium">{t('Deposit Bonus')}</span>
-                    <span className="text-[#9680EA] text-base md:text-4xl font-bold">{chosenBonus ? `${chosenBonus?.bonus_rate}%` : '-'}</span>
+                    <span className="text-[8px] md:text-xl font-medium">{t('Deposit Bonus')}</span>
                 </div>
                 <div className="flex flex-col w-full items-center gap-3 ">
-                    <span className="text-[8px] md:text-lg font-medium">{t('Rolling Percent into')}</span>
-                    <span className="text-[#9680EA] text-base md:text-4xl font-bold">{chosenBonus ? `${chosenBonus?.rolling_percentage}%` : '-'}</span>
+                    <span className="text-[8px] md:text-xl font-medium">{t('Rolling Percent into')}</span>
+                </div>
+                <div className=" flex flex-col w-full justify-center items-center gap-3 px-2">
+                    <span className="text-[#9680EA] text-base md:text-3xl font-bold text-center">{chosenBonus?.label ?? '-'}</span>
+                </div>
+                <div className=" flex flex-col w-full justify-center items-center gap-3 border-0 md:border md:border-y-0 border-[#C6BBEE] border-solid">
+                    <span className="text-[#9680EA] text-base md:text-3xl font-bold">{chosenBonus ? `${chosenBonus?.bonus_rate}%` : '-'}</span>
+                </div>
+                <div className=" flex flex-col w-full justify-center items-center gap-3 ">
+                    <span className="text-[#9680EA] text-base md:text-3xl font-bold">{chosenBonus ? `${chosenBonus?.rolling_percentage}%` : '-'}</span>
                 </div>
             </div>
         </div>

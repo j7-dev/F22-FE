@@ -8,8 +8,6 @@ import LanguageSwitch from '@/components/ContentLayout/Header/LanguageSwitch';
 import { socialMedia } from '@/utils/menuData/socialMedia';
 import { gameCategories } from '@/utils/GameCategory';
 import QRCode from 'qrcode';
-import logo from '@/assets/images/1002_logo_f.svg';
-import logo2 from '@/assets/images/1002_logo_s.svg';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 import { fakeProviderData } from '@/pages/Content/Home/Provider/ProviderData';
 import { useShowPc } from '@/hooks/useShowPc';
@@ -26,8 +24,8 @@ export const Footer: React.FC = () => {
     const [iosQrCode, setIosQrCode] = React.useState('');
     const generateQR = async ({ setAndroidUrl, setIosUrl }: { setAndroidUrl: string; setIosUrl: string }) => {
         try {
-            const androidResponse = await QRCode.toDataURL(setAndroidUrl);
-            const iosResponse = await QRCode.toDataURL(setIosUrl);
+            const androidResponse = await QRCode.toDataURL(setAndroidUrl, { margin: 0 });
+            const iosResponse = await QRCode.toDataURL(setIosUrl, { margin: 0 });
             setAndroidQrCode(androidResponse);
             setIosQrCode(iosResponse);
         } catch (err) {
@@ -40,30 +38,15 @@ export const Footer: React.FC = () => {
     }, []);
     return (
         <div className="bg-white w-full text-black font-normal z-10 ">
-            <div className="footerImgWrap grid md:grid-cols-11 md:pb-20 md:py-9 grid-cols-4 gap-4 w-full h-auto border-solid border-b-2 border-0 border-[#E0E0E0] py-6 px-4">
-                <div className="aboutWrap md:flex md:flex-col md:col-start-2 md:col-span-3 col-span-4 gap-4 grid grid-cols-4">
-                    <div className="footerLogo md:h-10 col-span-1 h-full text-center">
-                        <img src={showPc ? logo : logo2} alt="" className="md:w-full w-[30px] h-full object-left object-contain" />
+            <div className="footerImgWrap place-content-stretch grid md:grid-cols-11 md:pb-20 md:py-9 grid-cols-4 gap-4 w-full h-auto border-solid border-b-2 border-0 border-[#E0E0E0] py-6 px-4">
+                {/* Title */}
+                <div className="aboutTitle hidden md:flex md:flex-col md:col-start-2 md:col-span-3 gap-4 ">
+                    <div className=" md:h-10 col-span-1 h-full md:flex justify-start items-center text-center gap-3">
+                        <img src={Icon_Main_Title} alt="" />
+                        <span className="md:text-2xl text-[10px] font-bold text-black">{t('DOWNLOAD APP')}</span>
                     </div>
-                    {/* qr code */}
-                    <div className="pr-4 grid grid-cols-2 col-span-3">
-                        <div className="androidQrCode">
-                            <img src={androidQrCode} alt="" className="w-full" />
-                            <a href={androidUrl}>
-                                <img src={googlePlay} alt="" className="w-full px-2" />
-                            </a>
-                        </div>
-                        <div className="iosQrCode">
-                            <img src={iosQrCode} alt="" className="w-full" />
-                            <a href={iosUrl}>
-                                <img src={appStore} alt="" className="w-full px-2" />
-                            </a>
-                        </div>
-                    </div>
-                    {/* 電腦版翻譯選單 */}
-                    {showPc ? <LanguageSwitch /> : ''}
                 </div>
-                <div className="helpWrap w-full md:flex md:flex-col md:col-span-3 col-span-4 gap-4 grid grid-cols-4">
+                <div className="helpTitle w-full md:flex md:flex-col md:col-span-3 col-span-4 gap-4 grid grid-cols-4">
                     <div className="md:text-2xl md:h-10 text-[10px] font-bold text-black flex items-center justify-start gap-3 col-span-1">
                         {showPc ? (
                             <>
@@ -74,10 +57,43 @@ export const Footer: React.FC = () => {
                             <span className="w-full h-full flex justify-center items-center">{t('SMRAT BET')}</span>
                         )}
                     </div>
-                    <ul className="socialMedia md:grid-cols-4 gap-1.5 p-0 m-0 col-span-3 grid grid-cols-5">
+                </div>
+                <div className="hidden rightTitle w-full md:col-span-3 md:grid-cols-3 md:gap-4 col-span-4 md:grid grid-cols-4 gap-1">
+                    <div className="aboutUsTitle text-center md:col-span-1 md:flex md:flex-col md:gap-4 col-span-4 grid grid-cols-4">
+                        <span className="md:text-lg md:h-10 text-[10px] col-span-1 flex items-center justify-center text-black font-bold">{t('About Us')}</span>
+                    </div>
+                    <div className="betRuleTitle text-center md:col-span-1 md:flex md:flex-col md:gap-4 col-span-4 grid grid-cols-4">
+                        <span className="md:text-lg md:h-10 text-[10px] col-span-1 flex items-center justify-center text-black font-bold">{t('Bet Rule')}</span>
+                    </div>
+                    <div className="siteMapTitle text-center md:col-span-1 md:flex md:flex-col md:gap-4 col-span-4 grid grid-cols-4">
+                        <span className="md:text-lg md:h-10 text-[10px] col-span-1 flex items-center justify-center text-black font-bold">{t('Site Map')}</span>
+                    </div>
+                </div>
+                {/* Content */}
+                <div className="aboutContent hidden md:flex md:flex-col md:col-start-2 md:col-span-3 gap-4">
+                    {/* qr code */}
+                    <div className="pr-10 md:grid grid-cols-2 col-span-3 gap-4">
+                        <div className="androidQrCode flex flex-col gap-4">
+                            <img src={androidQrCode} alt="" className="w-full" />
+                            <a href={androidUrl}>
+                                <img src={googlePlay} alt="" className="w-full" />
+                            </a>
+                        </div>
+                        <div className="iosQrCode flex flex-col gap-4">
+                            <img src={iosQrCode} alt="" className="w-full" />
+                            <a href={iosUrl}>
+                                <img src={appStore} alt="" className="w-full" />
+                            </a>
+                        </div>
+                    </div>
+                    {/* 電腦版翻譯選單 */}
+                    {showPc ? <LanguageSwitch /> : ''}
+                </div>
+                <div className="helpWrap w-full md:flex md:flex-col md:col-span-3 col-span-4 gap-4 grid grid-cols-4">
+                    <ul className="socialMedia h-full md:grid-cols-4 gap-1.5 p-0 m-0 col-span-3 grid grid-cols-5 ">
                         {socialMedia.map((item) => {
                             return (
-                                <li key={nanoid()} className="md:aspect-auto md:h-[88px] aspect-square rounded-2xl cursor-pointer bg-[#BAA8FF33] duration-300 hover:shadow-[0_0px_15px_rgba(150,128,234,0.5)]">
+                                <li key={nanoid()} className="rounded-2xl cursor-pointer bg-[#BAA8FF33] duration-300 hover:shadow-[0_0px_15px_rgba(150,128,234,0.5)]">
                                     <div className="w-full h-full flex justify-center items-center">
                                         <Link to={item.link}>
                                             <div className="flex flex-col justify-center items-center">
@@ -91,19 +107,8 @@ export const Footer: React.FC = () => {
                         })}
                     </ul>
                 </div>
-                {/* 手機版翻譯選單 */}
-                {!showPc ? (
-                    <div className="col-span-4 gap-4 grid grid-cols-4">
-                        <div className="col-start-2 col-span-3">
-                            <LanguageSwitch />
-                        </div>
-                    </div>
-                ) : (
-                    ''
-                )}
-                <div className="hidden  rightZone w-full md:col-span-3 md:grid-cols-3 md:gap-4 col-span-4 md:grid grid-cols-4 gap-1">
+                <div className="hidden rightContent w-full md:col-span-3 md:grid-cols-3 md:gap-4 col-span-4 md:grid grid-cols-4 gap-1">
                     <div className="aboutWrap text-center md:col-span-1 md:flex md:flex-col md:gap-4 col-span-4 grid grid-cols-4">
-                        <span className="md:text-lg md:h-10 text-[10px] col-span-1 flex items-center justify-center text-black font-bold">{t('About Us')}</span>
                         <ul className="md:flex-col md:justify-center md:gap-0 col-span-3 flex flex-row justify-start items-center gap-1 p-0 m-0">
                             <li>
                                 <Link to="/about">
@@ -122,8 +127,7 @@ export const Footer: React.FC = () => {
                             </li> */}
                         </ul>
                     </div>
-                    <div className="betRuleWrap text-center md:col-span-1 md:flex md:flex-col md:gap-4 col-span-4 grid grid-cols-4">
-                        <span className="md:text-lg md:h-10 text-[10px] col-span-1 flex items-center justify-center text-black font-bold">{t('Bet Rule')}</span>
+                    <div className="betRuleContent text-center md:col-span-1 md:flex md:flex-col md:gap-4 col-span-4 grid grid-cols-4">
                         <ul className="md:flex-col md:justify-center md:gap-0 col-span-3 flex flex-row justify-start items-center gap-1 p-0 m-0">
                             {gameCategories.map((item) => {
                                 return (
@@ -136,8 +140,7 @@ export const Footer: React.FC = () => {
                             })}
                         </ul>
                     </div>
-                    <div className="siteMapWrap text-center md:col-span-1 md:flex md:flex-col md:gap-4 col-span-4 grid grid-cols-4">
-                        <span className="md:text-lg md:h-10 text-[10px] col-span-1 flex items-center justify-center text-black font-bold">{t('Site Map')}</span>
+                    <div className="siteMapContent text-center md:col-span-1 md:flex md:flex-col md:gap-4 col-span-4 grid grid-cols-4">
                         <ul className="md:flex-col md:justify-center md:gap-0 col-span-3 flex flex-row justify-start items-center gap-1 p-0 m-0">
                             {gameCategories.map((item) => {
                                 return (
@@ -156,7 +159,7 @@ export const Footer: React.FC = () => {
                 <ul className="grid grid-cols-5 pl-0 md:gap-4 gap-2">
                     {fakeProviderData.map((item) => {
                         return (
-                            <li key={nanoid()} className="md:h-[75px] h-[20px]">
+                            <li key={nanoid()} className="md:h-[55px] h-[20px]">
                                 <img src={item.ProviderImg2} alt="" className="w-full h-full object-contain" />
                             </li>
                         );
