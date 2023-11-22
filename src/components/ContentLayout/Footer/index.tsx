@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
                         <span className="md:text-2xl text-[10px] font-bold text-black">{t('DOWNLOAD APP')}</span>
                     </div>
                 </div>
-                <div className="helpTitle w-full md:flex md:flex-col md:col-span-3 col-span-4 gap-4 grid grid-cols-4">
+                <div className="helpTitle w-full md:col-span-3 col-span-1 gap-4 grid  grid-cols-1">
                     <div className="md:text-2xl md:h-10 text-[10px] font-bold text-black flex items-center justify-start gap-3 col-span-1">
                         {showPc ? (
                             <>
@@ -89,11 +89,11 @@ export const Footer: React.FC = () => {
                     {/* 電腦版翻譯選單 */}
                     {showPc ? <LanguageSwitch /> : ''}
                 </div>
-                <div className="helpWrap w-full md:flex md:flex-col md:col-span-3 col-span-4 gap-4 grid grid-cols-4">
+                <div className="helpWrap w-full col-span-3 gap-4 grid grid-cols-1">
                     <ul className="socialMedia h-full md:grid-cols-4 gap-1.5 p-0 m-0 col-span-3 grid grid-cols-5 ">
                         {socialMedia.map((item) => {
                             return (
-                                <li key={nanoid()} className="rounded-2xl cursor-pointer bg-[#BAA8FF33] duration-300 hover:shadow-[0_0px_15px_rgba(150,128,234,0.5)]">
+                                <li key={nanoid()} className="min-h-[50px] rounded-2xl cursor-pointer bg-[#BAA8FF33] duration-300 hover:shadow-[0_0px_15px_rgba(150,128,234,0.5)]">
                                     <div className="w-full h-full flex justify-center items-center">
                                         <Link to={item.link}>
                                             <div className="flex flex-col justify-center items-center">
