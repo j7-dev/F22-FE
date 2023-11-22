@@ -17,11 +17,13 @@ const EditCommission = lazy(() => import('@/pages/Admin/agents/commissionSetting
 const CommissionSettlement = lazy(() => import('@/pages/Admin/agents/commissionSettlement'));
 const AffCommissionTransactions = lazy(() => import('@/pages/Admin/agents/affCommissionTransactions'));
 const AffTransactions = lazy(() => import('@/pages/Admin/agents/affTransactions'));
-const VipSetting = lazy(() => import('@/pages/Admin/systemSetting/vipSetting'));
 const ListBettingRecords = lazy(() => import('@/pages/Admin/bettingManagement/List'));
 const ListDeposits = lazy(() => import('@/pages/Admin/payments/listDeposits'));
 const ListWithdraws = lazy(() => import('@/pages/Admin/payments/listWithdraws'));
 const SiteSetting = lazy(() => import('@/pages/Admin/systemSetting/siteSetting/List'));
+const ListVips = lazy(() => import('@/pages/Admin/systemSetting/vipSetting/List'));
+const CreateVips = lazy(() => import('@/pages/Admin/systemSetting/vipSetting/Create'));
+const EditVips = lazy(() => import('@/pages/Admin/systemSetting/vipSetting/Edit'));
 const ListDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/List'));
 const CreateDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/Create'));
 const EditDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/Edit'));
@@ -77,8 +79,10 @@ const adminRoutes = (role: string) => {
                         <Route path="betting-records" element={<ListBettingRecords />} />
                     </Route>
                     <Route path="/refine/system-setting/">
-                        <Route index element={<VipSetting />} />
-                        <Route path="vips" element={<VipSetting />} />
+                        <Route index element={<ListVips />} />
+                        <Route path="vips" element={<ListVips />} />
+                        <Route path="vips/create" element={<CreateVips />} />
+                        <Route path="vips/edit/:id" element={<EditVips />} />
                         <Route path="site-setting" element={<SiteSetting />} />
                         <Route path="site-notifications" element={<ListSiteNotifications />} />
                         <Route path="site-notifications/create" element={<CreateSiteNotifications />} />

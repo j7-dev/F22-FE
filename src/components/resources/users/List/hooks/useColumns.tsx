@@ -8,6 +8,7 @@ import { useBalanceColumns } from '@/hooks';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
 import { useGetIdentity } from '@refinedev/core';
+import UserLink from '@/components/Admin/UserLink';
 
 const useColumns = () => {
     const { t } = useTranslation();
@@ -46,13 +47,13 @@ const useColumns = () => {
             title: t('Agent'),
             dataIndex: 'agent',
             key: 'Agent',
-            render: (agent: TUser) => (agent ? <Link to={`/refine/agent/show/${agent?.id}`}>{agent?.username}</Link> : '本部'),
+            render: (agent: TUser) => (agent ? <UserLink user={agent} role="agent" /> : '本部'),
         },
         {
             title: t('Referral'),
             dataIndex: 'referral',
             key: 'referral',
-            render: (referral: TUser) => (referral ? <Link to={`/refine/members/show/${referral?.id}`}>{referral?.username}</Link> : null),
+            render: (referral: TUser) => <UserLink user={referral} />,
         },
         ...allBalances,
         ...phone,

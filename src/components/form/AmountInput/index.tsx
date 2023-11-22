@@ -24,7 +24,7 @@ const index: React.FC<{
                     amount_type: default_amount_type,
                 });
             }
-        }, 0);
+        }, 500);
 
         return () => {
             clearTimeout(timeout);
