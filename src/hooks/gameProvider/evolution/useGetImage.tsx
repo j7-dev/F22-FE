@@ -7,12 +7,11 @@
  */
 export const useGetImage = (gameName: string) => {
     //FIXME 這邊是判斷是否為開發模式，還可以怎麼優化？
-    const basePath = import.meta.env.MODE === 'development' ? 'src' : '';
+    // const basePath = import.meta.env.MODE === 'development' ? 'src' : '';
     //將遊戲名稱轉換成小寫並且空格轉換成底線
     const gameNameLower = removeCharsAfterSpace(gameName).toLowerCase().replace(/\s/g, '_');
     //絕對路徑為當前網址的根目錄
-    const imgObj = new URL(`${basePath}/assets/images/EVO_Thumbnails/${gameNameLower}.jpg`, window.location.origin);
-
+    const imgObj = new URL(`/images/EVO_Thumbnails/${gameNameLower}.jpg`, window.location.origin);
     const imgPath = imgObj.pathname;
     return imgPath;
 };
