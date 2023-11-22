@@ -47,7 +47,7 @@ const useColumns = () => {
             title: t('Agent'),
             dataIndex: 'agent',
             key: 'Agent',
-            render: (agent: TUser) => (agent ? <Link to={`/refine/agent/show/${agent?.id}`}>{agent?.username}</Link> : '本部'),
+            render: (agent: TUser) => (agent ? <UserLink user={agent} role="agent" /> : '本部'),
         },
         {
             title: t('Referral'),

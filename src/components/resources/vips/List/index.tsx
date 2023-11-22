@@ -1,12 +1,8 @@
-import { Table, Row, Col, Card, TableProps } from 'antd';
+import { Table, Row, Col, Card, TableProps, Tag } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { useTable, List, EditButton, DeleteButton } from '@refinedev/antd';
 import { DataType, TSearchProps } from './types';
-import { TUser, TPeriod } from '@/types';
 import { useTranslation } from 'react-i18next';
-import UserLink from '@/components/Admin/UserLink';
-import { BooleanIndicator } from '@/components/PureComponents';
-import Period from '@/components/Admin/Period';
 import { RESOURCE } from '../constants';
 import Filter from './Filter';
 import FilterTags from '@/components/Admin/FilterTags';
@@ -24,7 +20,7 @@ const index = () => {
                 user: {
                     fields: ['id', 'display_name', 'username'],
                 },
-                period: {
+                users_role: {
                     fields: '*',
                 },
             },
@@ -32,32 +28,17 @@ const index = () => {
         sorters: {
             initial: [
                 {
-                    field: 'createdAt',
-                    order: 'desc',
+                    field: 'order',
+                    order: 'asc',
                 },
             ],
         },
         onSearch: (values: TSearchProps) => {
             const filters = [
                 {
-                    field: 'createdAt',
-                    operator: 'gt',
-                    value: values?.dateRange ? values?.dateRange[0]?.startOf('day').format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
-                },
-                {
-                    field: 'createdAt',
-                    operator: 'lt',
-                    value: values?.dateRange ? values?.dateRange[1]?.endOf('day').format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
-                },
-                {
-                    field: 'is_claimed',
+                    field: 'activated',
                     operator: 'eq',
-                    value: values?.is_claimed,
-                },
-                {
-                    field: 'user.id',
-                    operator: 'eq',
-                    value: values?.user,
+                    value: values?.activated,
                 },
             ];
 
@@ -67,42 +48,30 @@ const index = () => {
 
     const columns: ColumnsType<DataType> = [
         {
-            title: t('#'),
-            dataIndex: 'id',
+            title: t('level'),
+            dataIndex: 'order',
         },
         {
-            title: t('Title'),
-            dataIndex: 'title',
+            title: t('label'),
+            dataIndex: 'label',
         },
         {
-            title: t('Description'),
-            dataIndex: 'description',
+            title: t('Turnover Rate'),
+            dataIndex: 'turnover_rate',
+            render: (v) => `${v || 0}%`,
         },
         {
-            title: t('Amount'),
-            dataIndex: 'coupon_amount',
+            title: t('Upgrade - Deposit Amount'),
+            dataIndex: 'deposit_upgrade_threshold',
         },
         {
-            title: t('Is Claimed'),
-            dataIndex: 'is_claimed',
-            render: (v: boolean) => <BooleanIndicator enabled={v} />,
+            title: t('Upgrade - Valid Bet'),
+            dataIndex: 'valid_bet_amount_upgrade_threshold',
         },
         {
-            title: t('User'),
-            dataIndex: 'user',
-            render: (user: TUser) => <UserLink user={user} />,
-        },
-        {
-            title: t('Allow Game Categories'),
-            dataIndex: 'allow_game_categories',
-            render: (v: string[]) => (Array.isArray(v) ? v.map((w) => `${t(w)}, `) : ''),
-        },
-        {
-            title: t('Period'),
-            dataIndex: 'period',
-            render: (period: TPeriod) => {
-                return <Period period={period} />;
-            },
+            title: t('status'),
+            dataIndex: 'activated',
+            render: (activated) => <Tag color={activated ? '#87d068' : '#ff4d4f'}>{activated ? 'ON' : 'OFF'}</Tag>,
         },
         {
             title: '',
@@ -133,7 +102,7 @@ const index = () => {
 
     return (
         <List
-            title={t('Coupons')}
+            title={t('Vip upgrade rules')}
             resource={RESOURCE}
             canCreate
             createButtonProps={{

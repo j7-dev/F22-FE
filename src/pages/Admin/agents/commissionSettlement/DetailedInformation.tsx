@@ -36,7 +36,7 @@ const DetailedInformation = () => {
         {
             title: t('Agent'),
             dataIndex: 'agent',
-            render: (agent: TUser) => (agent?.id === 0 ? t('Total') : <UserLink user={agent} />),
+            render: (agent: TUser) => (agent?.id === 0 ? t('Total') : <UserLink user={agent} role="agent" />),
         },
         {
             title: t('Deposit'),
