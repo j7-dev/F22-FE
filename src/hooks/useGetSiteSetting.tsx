@@ -1,8 +1,7 @@
 import { API_URL } from '@/utils';
 import { useAtomValue } from 'jotai';
 import { atomsWithQuery } from 'jotai-tanstack-query';
-import { axiosInstance } from '@/providers/strapi-v4';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { TRole, TVip } from '@/types';
 
 type TSiteSetting = {
@@ -33,7 +32,7 @@ type TRoles = {
 const [siteSettingAtom] = atomsWithQuery(() => ({
     queryKey: ['get-siteSetting'],
     queryFn: async () => {
-        const res: AxiosResponse<TSiteSetting> = await axiosInstance.get(`${API_URL}/api/site-setting`);
+        const res: AxiosResponse<TSiteSetting> = await axios.get(`${API_URL}/api/site-setting`);
         return res;
     },
     staleTime: 1000 * 60 * 60 * 24 * 7,
@@ -42,7 +41,7 @@ const [siteSettingAtom] = atomsWithQuery(() => ({
 const [rolesAtom] = atomsWithQuery(() => ({
     queryKey: ['get-roles'],
     queryFn: async () => {
-        const res: AxiosResponse<TRoles> = await axiosInstance.get(`${API_URL}/api/users-permissions/roles`);
+        const res: AxiosResponse<TRoles> = await axios.get(`${API_URL}/api/users-permissions/roles`);
         return res;
     },
     staleTime: 1000 * 60 * 60 * 24 * 7,

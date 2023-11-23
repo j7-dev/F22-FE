@@ -25,7 +25,7 @@ export type TUser = BaseType & {
     role: TRole;
     vip?: TVip;
     balances?: TBalance[];
-    angent?: TUser;
+    agent?: TUser;
     referral?: TUser;
     allow_payments?: string[] | null;
     allow_game_providers?: string[] | null;
