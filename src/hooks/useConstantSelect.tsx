@@ -5,7 +5,7 @@ import { TConstant } from 'types';
 import { SelectProps } from 'antd/lib/select';
 import { TooltipProps } from 'antd/lib/tooltip';
 
-const useConstantSelect = ({
+export const useConstantSelect = ({
     constants,
     hasTooltip = false,
     tooltipProps = {
@@ -55,5 +55,3 @@ const useConstantSelect = ({
         selectProps: defaultSelectProps,
     };
 };
-
-export default useConstantSelect;

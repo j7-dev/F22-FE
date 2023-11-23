@@ -1,8 +1,8 @@
-export { default as useColor } from './useColor';
-export { default as useColumnSearch } from './useColumnSearch';
+export * from './useColor';
+export * from './useColumnSearch';
 export { default as useUpdateRecord } from './useUpdateRecord';
-export { default as useConstantSelect } from './useConstantSelect';
-export { default as useCan } from './useCan';
+export * from './useConstantSelect';
+export * from './useGetUserRoleType';
 export * from './useGetSiteSetting';
 export * from './resources';
 export * from './custom';

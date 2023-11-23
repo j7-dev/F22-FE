@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 const index = () => {
     const { t } = useTranslation();
+
     return (
         <List
             title={t('All Members')}

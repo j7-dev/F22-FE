@@ -2,21 +2,20 @@ import { DataType } from '../types';
 import { ShowButton, EditButton } from '@refinedev/antd';
 import { BooleanIndicator, DateTime } from '@/components/PureComponents';
 import { Link } from 'react-router-dom';
-import { TUser, TVip, TMe } from '@/types';
+import { TUser, TVip } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
-import { useBalanceColumns } from '@/hooks';
+import { useBalanceColumns, useGetUserRoleType } from '@/hooks';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
-import { useGetIdentity } from '@refinedev/core';
 import UserLink from '@/components/Admin/UserLink';
 
 const useColumns = () => {
     const { t } = useTranslation();
     const allBalances = useBalanceColumns();
-    const { data: identity } = useGetIdentity<TMe>();
-    const role = identity?.role?.type || '';
+    const roleType = useGetUserRoleType();
+
     const phone =
-        role === 'admin'
+        roleType === 'admin'
             ? [
                   {
                       title: t('phone'),
@@ -119,7 +118,7 @@ const useColumns = () => {
             render: (_: any, record: DataType) => (
                 <p className="m-0 whitespace-nowrap">
                     <ShowButton size="small" type="primary" shape="circle" resource="users" recordItemId={record.id} hideText className="mr-2" />
-                    <EditButton size="small" type="primary" shape="circle" resource="users" recordItemId={record.id} hideText />
+                    {roleType === 'admin' && <EditButton size="small" type="primary" shape="circle" resource="users" recordItemId={record.id} hideText />}
                 </p>
             ),
         },
