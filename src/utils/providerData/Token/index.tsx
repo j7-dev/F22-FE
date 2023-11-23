@@ -12,8 +12,8 @@ import baccarat from '@/assets/images/game_provider/baccarat.jpeg';
 import horse from '@/assets/images/game_provider/horse.jpeg';
 import fw from '@/assets/images/game_provider/fw.jpeg';
 import allbet from '@/assets/images/game_provider/allbet.png';
-// import og from '@/assets/images/game_provider/og.png';
-// import pt from '@/assets/images/game_provider/pt.png';
+import og from '@/assets/images/game_provider/og.png';
+import pt from '@/assets/images/game_provider/pt.png';
 // import snail from '@/assets/images/game_provider/snail.jpg';
 import slot from '@/assets/images/game_provider/slot.jpg';
 import vsport from '@/assets/images/game_provider/vsport.jpeg';
@@ -152,15 +152,15 @@ export const tokenData: TGame[] = [
         gameCategory: 'casino',
         gameProviderName: 'token',
     },
-    // {
-    //     gameName: '플레이텍',
-    //     gameID: '플레이텍',
-    //     gtype: 'pt',
-    //     openFn: 'blank',
-    //     gameImg: pt,
-    //     gameCategory: 'casino',
-    //     gameProviderName: 'token',
-    // },
+    {
+        gameName: '플레이텍',
+        gameID: '플레이텍',
+        gtype: 'pt',
+        openFn: 'blank',
+        gameImg: pt,
+        gameCategory: 'casino',
+        gameProviderName: 'token',
+    },
     {
         gameName: '마이크로게이밍',
         gameID: '마이크로게이밍',
@@ -171,15 +171,15 @@ export const tokenData: TGame[] = [
         gameProviderName: 'token',
     },
     //打不開先隱藏
-    // {
-    //     gameName: '오리엔탈 게이밍',
-    //     gameID: '오리엔탈 게이밍',
-    //     gtype: 'og',
-    //     openFn: 'blank',
-    //     gameImg: og,
-    //     gameCategory: 'casino',
-    //     gameProviderName: 'token',
-    // },
+    {
+        gameName: '오리엔탈 게이밍',
+        gameID: '오리엔탈 게이밍',
+        gtype: 'og',
+        openFn: 'blank',
+        gameImg: og,
+        gameCategory: 'casino',
+        gameProviderName: 'token',
+    },
     {
         gameName: '올뱃',
         gameID: '올뱃',

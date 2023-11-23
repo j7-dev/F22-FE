@@ -10,22 +10,22 @@ export const useGetImage = (gameName: string) => {
     // const basePath = import.meta.env.MODE === 'development' ? 'src' : '';
     //將遊戲名稱轉換成小寫並且空格轉換成底線
     const gameNameLower = removeCharsAfterSpace(gameName).toLowerCase().replace(/\s/g, '_');
-    //絕對路徑為當前網址的根目錄
+    //絕對路徑為當前網址的根目錄=>public/images/EVO_Thumbnails/${var}.png
     const imgObj = new URL(`/images/EVO_Thumbnails/${gameNameLower}.jpg`, window.location.origin);
     const imgPath = imgObj.pathname;
     return imgPath;
 };
 
-//判斷一個字串在空格之後是否有1個英文字符或是2個以內的數字
+//判斷一個字串在空格之後是否有2個以內英文字符或是數字
 const removeCharsAfterSpace = (inputString: string) => {
     /**
-     * \s[0-9]{1,2}$ 匹配一个空格后面跟着1到2个数字的模式。
-     * [a-zA-Z]{1}$ 匹配一个单个英文字母的模式。
-     * \s*，表示匹配零个或多个空格
+     * \s\b[a-zA-Z]{1,2}\b 匹配2個以內英文字符的模式。
+     * \s\b\d{1,2}\b 匹配2個以內數字的模式。
+     * $ 匹配字串結尾
      */
     // const pattern =  /\s\b[a-zA-Z]\b|\s\b\d{1,2}\b/;
-    const pattern = /\s\b[a-zA-Z]{1,2}\b|\s\b\d{1,2}\b$/;
-    console.log(inputString.replace(pattern, ''));
+    const pattern = /\s\b\d{1,2}\b:$/;
+    // console.log(inputString.replace(pattern, ''));
     //使用 trim() 方法来删除字符串两端的多余空格
     return inputString.replace(pattern, '').trim();
 };

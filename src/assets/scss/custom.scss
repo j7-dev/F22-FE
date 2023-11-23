@@ -242,6 +242,15 @@
 .ant-modal-confirm-body {
 	justify-content: center;
 }
+//聊天室z-index
 #chat-widget-container {
 	z-index: 50 !important;
+}
+$defaultBg: url("/images/EVO_Thumbnails/evolution_bg.jpg");
+.singleGame {
+	.evolution {
+		&.gameWrap {
+			background-image: $defaultBg;
+		}
+	}
 }

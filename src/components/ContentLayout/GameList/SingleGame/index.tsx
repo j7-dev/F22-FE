@@ -125,7 +125,7 @@ const index: React.FC<SingleGameProp> = ({ gameItem }) => {
             <div className="onTheTopWrap z-20 absolute inset-0 w-full h-fit p-2.5">
                 <OnTheTop {...gameItem} />
             </div>
-            <div className="gameWrap w-full h-full relative ">
+            <div className={`${gameItem?.gameProviderName} gameWrap w-full h-full relative`}>
                 <img src={gameItem?.gameImg} alt="" className="aspect-square w-full h-full duration-500 group-hover:scale-125 object-cover" />
                 <div className="imgOverlay absolute top-0 w-full h-full bg-gradient-to-tr from-transparent via-transparent via-70% to-[#4D28EA]" />
                 <div className="gameInfo absolute bottom-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-transparent via-50% to-[#1A1A1A80] flex flex-col items-start justify-end md:px-5 py-2.5 px-2.5">
