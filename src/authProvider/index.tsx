@@ -38,7 +38,7 @@ export const authProvider: AuthBindings = {
 
         if (loginResult.status === 200 && confirmed) {
             const token = loginResult.data.jwt;
-            localStorage.setItem('API_TOKEN', token);
+            sessionStorage.setItem('API_TOKEN', token);
 
             // set header axios instance
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -65,7 +65,7 @@ export const authProvider: AuthBindings = {
     },
     logout: async (props) => {
         const redirectPath = props?.redirectPath || '/';
-        localStorage.removeItem('API_TOKEN');
+        sessionStorage.removeItem('API_TOKEN');
         return {
             success: true,
             redirectTo: redirectPath,
@@ -117,7 +117,7 @@ export const authProvider: AuthBindings = {
 
         if (status === 200 && confirmed) {
             const token = data?.jwt || '';
-            localStorage.setItem('API_TOKEN', token);
+            sessionStorage.setItem('API_TOKEN', token);
             // set header axios instance
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             return {
@@ -138,7 +138,7 @@ export const authProvider: AuthBindings = {
         return { error };
     },
     check: async () => {
-        const token = localStorage.getItem('API_TOKEN');
+        const token = sessionStorage.getItem('API_TOKEN');
         // TODO 跟後端CHECK
         if (token) {
             axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -159,7 +159,7 @@ export const authProvider: AuthBindings = {
     },
     getPermissions: async () => null,
     getIdentity: async () => {
-        const token = localStorage.getItem('API_TOKEN');
+        const token = sessionStorage.getItem('API_TOKEN');
         if (!token) {
             return null;
         }
@@ -173,6 +173,8 @@ export const authProvider: AuthBindings = {
         if (status === 200) {
             return data;
         }
+
+        sessionStorage.removeItem('API_TOKEN');
 
         return null;
     },

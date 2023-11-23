@@ -22,14 +22,14 @@ export const useChangePassword = () => {
                 values: payload,
                 config: {
                     headers: {
-                        Authorization: `Bearer ${localStorage.getItem('API_TOKEN')}`,
+                        Authorization: `Bearer ${sessionStorage.getItem('API_TOKEN')}`,
                     },
                 },
             },
             {
                 onSuccess: () => {
                     // 成功後登出帳號清除localStorage並且開啟登入視窗
-                    localStorage.removeItem('API_TOKEN');
+                    sessionStorage.removeItem('API_TOKEN');
                     Navigate('/');
                     setSignIn(true);
                 },
