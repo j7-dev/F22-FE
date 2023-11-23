@@ -17,7 +17,7 @@ export const authProvider: AuthBindings = {
         const confirmed = loginResult?.data?.user?.confirmed || false;
 
         if (!confirmed) {
-            const message = 'Your account is not confirmed yet';
+            const message = '계정이 아직 활성화 되지 않았습니다. 잠시만 기다려 주십시오';
             Modal.warning({
                 centered: true,
                 title: <div className="text-center">{message}</div>,
@@ -89,7 +89,7 @@ export const authProvider: AuthBindings = {
         const loginResult = await strapiAuthHelper.login(userName, password);
         const confirmed = loginResult?.data?.user?.confirmed || false;
         //FIXME 這邊的翻譯怎麼改
-        const message = 'Your account is not confirmed yet';
+        const message = '계정이 아직 활성화 되지 않았습니다. 잠시만 기다려 주십시오';
         if (!confirmed) {
             Modal.success({
                 centered: true,

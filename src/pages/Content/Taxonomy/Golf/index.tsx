@@ -45,8 +45,9 @@ const index: React.FC = () => {
             );
         //如果已登入且不維護中則顯示iframe
         if (gameServer) {
-            const addUrl = `${gameServer}?otp_id=${otpId}&login_id=${identity?.id}&lang=ko-KR`;
+            const addUrl = `${gameServer}?otp_id=${otpId}&login_id=${identity?.username}&lang=ko-KR`;
             if (isFetching) return <Spin size="large" className="w-full h-screen flex justify-center items-center" />;
+            // console.log('🚀 ~ addUrl:', addUrl);
             //判斷是否為safari
             const isSmartBet = /smartbet/i.test(navigator.userAgent);
             const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
