@@ -4,7 +4,7 @@ import { useGetIdentity, useGetLocale, useSetLocale, useLogout } from '@refinede
 import { Layout as AntdLayout, Avatar, Dropdown, MenuProps } from 'antd';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import useColor from '@/hooks/useColor';
+import { useColor } from '@/hooks';
 import { useQueryClient } from '@tanstack/react-query';
 import { TMe } from '@/types';
 import HeaderInfo from './HeaderInfo';

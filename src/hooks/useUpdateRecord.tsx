@@ -3,7 +3,7 @@ import { EditFilled, SaveFilled, CloseOutlined, DeleteFilled } from '@ant-design
 import { Form, Button, FormProps, Popconfirm } from 'antd';
 import { useDelete, BaseRecord } from '@refinedev/core';
 
-const useUpdateRecord = <FormatDataType extends BaseRecord>({ rowKey, resource, onFinish }: { rowKey: keyof FormatDataType; resource: string; onFinish?: (_values: { [key: string]: any; key: React.Key }) => void }) => {
+export const useUpdateRecord = <FormatDataType extends BaseRecord>({ rowKey, resource, onFinish }: { rowKey: keyof FormatDataType; resource: string; onFinish?: (_values: { [key: string]: any; key: React.Key }) => void }) => {
     const [form] = Form.useForm();
     const [editingKey, setEditingKey] = useState('');
     const { mutate: deleteFn } = useDelete();
@@ -132,5 +132,3 @@ const useUpdateRecord = <FormatDataType extends BaseRecord>({ rowKey, resource, 
         cancel,
     };
 };
-
-export default useUpdateRecord;
