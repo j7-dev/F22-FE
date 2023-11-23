@@ -91,6 +91,9 @@ const index = () => {
                         role: {
                             fields: ['id'],
                         },
+                        agent: {
+                            fields: ['id', 'display_name', 'username'],
+                        },
                     },
                 },
                 deposit_bonus: {
@@ -156,7 +159,9 @@ const index = () => {
         },
         {
             title: t('Agent'),
-            dataIndex: 'agent',
+            dataIndex: 'user',
+            key: 'agent',
+            render: (user: TUser) => <UserLink user={user?.agent} />,
         },
         {
             title: t('user'),
