@@ -18,26 +18,22 @@ export const useGetImage = (gameName: string) => {
 
 //判斷一個字串在空格之後是否有2個以內英文字符或是數字
 const removeCharsAfterSpace = (inputString: string) => {
-    /**
-     * \s\b[a-zA-Z]{1,2}\b 匹配2個以內英文字符的模式。
-     * \s\b\d{1,2}\b 匹配2個以內數字的模式。
-     * $ 匹配字串結尾
-     */
-    // const pattern =  /\s\b[a-zA-Z]\b|\s\b\d{1,2}\b/;
-    const pattern = /\s\b\d{1,2}\b:$/;
-    // console.log(inputString.replace(pattern, ''));
+    const patternDNT = /\sDNT/; //匹配DNT
+    const pattern = /\s\d{1,2}(?=[^\s]*$)/; //匹配2個以內數字
     //使用 trim() 方法来删除字符串两端的多余空格
-    return inputString.replace(pattern, '').trim();
+    // console.log(inputString.replace(patternDNT, '').replace(pattern, '').trim());
+    return inputString.replace(patternDNT, '').replace(pattern, '').trim();
 };
-
-//判斷路徑是否具有圖片檔案
-// const isImageExist = (url: string, callback: (arg: boolean) => void) => {
-//     const img = new Image();
-//     img.src = url;
-//     img.onload = function () {
-//         callback(true);
-//     };
-//     img.onerror = function () {
-//         callback(false);
-//     };
-// };
+//檢查是否有圖片
+export const checkImage = async (url: string): Promise<boolean> => {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = function () {
+            resolve(true); // 圖片存在
+        };
+        img.onerror = function () {
+            resolve(false); // 圖片不存在
+        };
+        img.src = url;
+    });
+};

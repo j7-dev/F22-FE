@@ -28,6 +28,7 @@
         "crypto-js": "^4.1.1",
         "currency-symbol-map": "^5.1.0",
         "dayjs-ext": "^2.2.0",
+        "export-to-csv": "^1.2.1",
         "fast-xml-parser": "^4.3.2",
         "i18next": "^20.1.0",
         "i18next-browser-languagedetector": "^6.1.1",
