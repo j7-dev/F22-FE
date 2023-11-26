@@ -1,12 +1,12 @@
-import { Card, Tabs, TabsProps } from 'antd';
+import { Card, Tabs, TabsProps, Alert, Popconfirm, Button } from 'antd';
 import { Show } from '@refinedev/antd';
-import { useShow, useResource, useGetIdentity } from '@refinedev/core';
+import { useShow, useResource, useUpdate } from '@refinedev/core';
 import ObjectTable from '@/components/general/ObjectTable';
 import MoneyLog from '@/components/Admin/MoneyLog';
 import LoginDetail from '@/components/Admin/LoginDetail';
 import ListBettingRecords from '@/components/resources/betRecords/List';
 import { useParams } from 'react-router-dom';
-import { TUser, TMe } from '@/types';
+import { TUser } from '@/types';
 import { DollarOutlined } from '@ant-design/icons';
 import useDpWdUserInfo from '../List/hooks/useDpWdUserInfo';
 import useColumns from './useColumns';
@@ -16,11 +16,12 @@ import { RiCoupon3Line } from 'react-icons/ri';
 import CreateCoupon from '@/components/resources/coupons/Create';
 import CreateTxn from '@/components/resources/transactionRecords/Create';
 import DailyStatistic from '@/pages/Admin/dashboard/dailyStatistic';
+import SimpleAmount from '@/components/Admin/SimpleAmount';
+import dayjs from 'dayjs';
+import { useGetUserRoleType } from '@/hooks';
 
 const index = () => {
-    const { data: identity } = useGetIdentity<TMe>();
-    const role = identity?.role?.type || '';
-
+    const roleType = useGetUserRoleType();
     const { t } = useTranslation();
     const { identifier } = useResource();
     const { id } = useParams<{ id: string }>();
@@ -46,6 +47,14 @@ const index = () => {
                 referral: {
                     fields: ['display_name', 'username'],
                 },
+                last_deposit: {
+                    fields: ['amount', 'created_at'],
+                    populate: {
+                        deposit_bonus: {
+                            fields: '*',
+                        },
+                    },
+                },
             },
         },
     });
@@ -62,6 +71,21 @@ const index = () => {
 
     const { infoLeftColumns, infoRightColumns } = useColumns();
 
+    const latestDeposit = theUser?.last_deposit;
+    const depositBonus = latestDeposit?.deposit_bonus;
+
+    const { mutate } = useUpdate();
+
+    const handleRemoveDepositBonus = () => {
+        mutate({
+            resource: 'users',
+            values: {
+                last_deposit: null,
+            },
+            id: theUser?.id,
+        });
+    };
+
     const items: TabsProps['items'] = [
         {
             key: 'userInfo',
@@ -73,6 +97,36 @@ const index = () => {
                             <ObjectTable record={userData} columns={infoLeftColumns} />
                             <ObjectTable record={userData} columns={infoRightColumns} />
                         </div>
+                        <Alert
+                            className="mt-4"
+                            message={latestDeposit ? t("User's Deposit Bonus") : t('No Deposit Bonus')}
+                            description={
+                                latestDeposit ? (
+                                    <>
+                                        <p>
+                                            {t('Latest Deposit')}:{' '}
+                                            <span className="bg-yellow-200 px-3">
+                                                <SimpleAmount amount={latestDeposit?.amount || 0} />
+                                            </span>{' '}
+                                            <u>{dayjs(latestDeposit?.createdAt).format('YYYY-MM-DD HH:mm:ss')}</u>
+                                        </p>
+                                        <p>{depositBonus?.label}</p>
+                                        <p>
+                                            {t('Allow Game Categories')}: {depositBonus?.allow_game_categories?.join(', ')}
+                                        </p>
+                                        {roleType === 'admin' && (
+                                            <Popconfirm title={t('Confirm?')} description="Remove user's deposit bonus?" onConfirm={handleRemoveDepositBonus} okText="Yes" cancelText="No">
+                                                <Button type="primary">{t("Remove user's deposit bonus")}</Button>
+                                            </Popconfirm>
+                                        )}
+                                    </>
+                                ) : (
+                                    ''
+                                )
+                            }
+                            type={latestDeposit ? 'info' : 'success'}
+                            showIcon
+                        />
                     </Card>
                 </div>
             ),
@@ -185,8 +239,8 @@ const index = () => {
                 title={`【${theUser?.username}】 ${t('Member Detail')}`}
                 resource={identifier}
                 recordItemId={id}
-                canDelete={role === 'admin'}
-                canEdit={role === 'admin'}
+                canDelete={roleType === 'admin'}
+                canEdit={roleType === 'admin'}
                 contentProps={{
                     style: {
                         backgroundColor: 'transparent',
@@ -195,7 +249,7 @@ const index = () => {
                     },
                 }}
             >
-                {role === 'admin' ? (
+                {roleType === 'admin' ? (
                     <Tabs className="-mt-8" defaultActiveKey="moneyLog1" type="card" centered items={items} tabBarStyle={{ marginBottom: '0px' }} />
                 ) : (
                     <div>
