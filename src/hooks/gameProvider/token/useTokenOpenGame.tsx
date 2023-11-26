@@ -20,6 +20,7 @@ export const useTokenOpenGame = () => {
                     method: 'post',
                     values: {
                         user_id: identity.id,
+                        gameCategory: item?.gameCategory,
                     },
                 },
                 {
@@ -62,6 +63,7 @@ export const useTokenOpenGame = () => {
                     values: {
                         user_id: identity.id,
                         gtype: item?.gtype,
+                        gameCategory: item?.gameCategory,
                     },
                 },
                 {
