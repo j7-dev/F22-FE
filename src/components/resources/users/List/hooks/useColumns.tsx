@@ -1,6 +1,6 @@
 import { DataType } from '../types';
 import { ShowButton, EditButton } from '@refinedev/antd';
-import { BooleanIndicator, DateTime } from '@/components/PureComponents';
+import { DateTime } from '@/components/PureComponents';
 import { Link } from 'react-router-dom';
 import { TUser, TVip } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
@@ -58,19 +58,11 @@ const useColumns = () => {
             render: (vip: TVip) => <Link to="/refine/system-setting/vips">{vip?.label}</Link>,
         },
         {
-            title: t('status'),
-            dataIndex: 'confirmed',
-            key: 'status',
+            title: t('Status'),
+            dataIndex: 'user_status',
+            key: 'user_status',
             align: 'center',
-            render: (confirmed: boolean) => (
-                <BooleanIndicator
-                    enabled={confirmed}
-                    tooltipProps={{
-                        title: confirmed ? 'Confirmed' : 'Not Confirmed',
-                        enabled: true,
-                    }}
-                />
-            ),
+            render: (user_status: string) => <>{user_status}</>,
         },
         {
             title: t('Total Deposits'),

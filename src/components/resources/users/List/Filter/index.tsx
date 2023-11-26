@@ -2,10 +2,9 @@ import { SearchOutlined } from '@ant-design/icons';
 import { Form, Input, Button, DatePicker, FormProps, Card, Select } from 'antd';
 import { useSelect } from '@refinedev/antd';
 import { useUserSelect } from '@/hooks';
-import BooleanRadioButton from '@/components/form/BooleanRadioButton';
 import { useTranslation } from 'react-i18next';
 import { useGetIdentity } from '@refinedev/core';
-import { TMe } from '@/types';
+import { TMe, USER_STATUSES } from '@/types';
 import locale from 'antd/es/date-picker/locale/ko_KR';
 import 'dayjs/locale/ko';
 import ResourceSelect from '@/components/form/ResourceSelect';
@@ -25,6 +24,10 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
     const { selectProps: agentSelectProps } = useUserSelect({
         roleType: 'agent',
     });
+    const userStatuses = USER_STATUSES.map((status) => ({
+        label: t(status),
+        value: status,
+    }));
 
     return (
         <Card bordered={false}>
@@ -51,26 +54,9 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
 
                     <ResourceSelect formItemProps={{ label: t('Referral'), name: ['referral'] }} fetchProps={{ resource: 'users', optionLabel: 'username', optionValue: 'id' }} selectProps={{ allowClear: true, size: 'small' }} />
 
-                    {/* <BooleanRadioButton
-                        formItemProps={{
-                            initialValue: undefined,
-                            label: 'blocked',
-                            name: ['blocked'],
-                        }}
-                        radioGroupProps={{
-                            size: 'small',
-                        }}
-                    /> */}
-                    <BooleanRadioButton
-                        formItemProps={{
-                            initialValue: undefined,
-                            label: t('Status'),
-                            name: ['confirmed'],
-                        }}
-                        radioGroupProps={{
-                            size: 'small',
-                        }}
-                    />
+                    <Form.Item label={t('Status')} name={['user_status']}>
+                        <Select size="small" options={userStatuses} allowClear />
+                    </Form.Item>
                     <Form.Item className="self-end">
                         <Button size="small" type="primary" htmlType="submit" className="w-full">
                             {t('Search')}

@@ -22,6 +22,11 @@ const useColumns = () => {
             dataIndex: 'username',
         },
         {
+            key: 'user_status',
+            title: t('Status'),
+            dataIndex: 'user_status',
+        },
+        {
             key: 'vip',
             title: t('vip'),
             dataIndex: 'vip',
