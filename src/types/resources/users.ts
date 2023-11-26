@@ -13,7 +13,7 @@ export type TMe = TUser & {
 
 export const USER_STATUSES = ['UNCONFIRMED', 'ACTIVE', 'INACTIVE', 'OUT'] as const;
 
-type TUSER_STATUSES = (typeof USER_STATUSES)[number];
+export type TUSER_STATUSES = (typeof USER_STATUSES)[number];
 
 export type TUser = BaseType & {
     username: string;

@@ -2,13 +2,14 @@ import { DataType } from '../types';
 import { ShowButton, EditButton } from '@refinedev/antd';
 import { DateTime } from '@/components/PureComponents';
 import { Link } from 'react-router-dom';
-import { TUser, TVip } from '@/types';
+import { TUser, TVip, TUSER_STATUSES } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
 import { useBalanceColumns, useGetUserRoleType } from '@/hooks';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
 import UserLink from '@/components/Admin/UserLink';
 import Phone from '@/components/Admin/Phone';
+import UserStatus from '@/components/Admin/UserStatus';
 
 const useColumns = () => {
     const { t } = useTranslation();
@@ -62,7 +63,7 @@ const useColumns = () => {
             dataIndex: 'user_status',
             key: 'user_status',
             align: 'center',
-            render: (user_status: string) => <>{user_status}</>,
+            render: (user_status: TUSER_STATUSES) => <UserStatus user_status={user_status} />,
         },
         {
             title: t('Total Deposits'),
