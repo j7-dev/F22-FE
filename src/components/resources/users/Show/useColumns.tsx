@@ -8,6 +8,7 @@ import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
 import { useGetIdentity } from '@refinedev/core';
 import UserLink from '@/components/Admin/UserLink';
+import Phone from '@/components/Admin/Phone';
 
 const useColumns = () => {
     const allBalances = useBalanceColumns();
@@ -129,6 +130,7 @@ const useColumns = () => {
             key: 'phone',
             title: t('Phone'),
             dataIndex: 'phone',
+            render: (phone: string) => <Phone phone={phone} />,
         },
         {
             key: 'allow_payments',
