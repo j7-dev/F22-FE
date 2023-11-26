@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Form, Button, DatePicker, FormProps, Select, Card } from 'antd';
 import dayjs from 'dayjs';
 import { useUserSelect } from '@/hooks';
@@ -25,16 +24,9 @@ const Filter: React.FC<{ formProps: FormProps }> = ({ formProps }) => {
         value: s,
     }));
 
-    const form = formProps.form;
-
     const { selectProps } = useUserSelect({
         roleType: 'authenticated',
     });
-
-    useEffect(() => {
-        form?.setFieldValue(['status'], 'PENDING');
-        form?.submit();
-    }, [listType]);
 
     return (
         <Card bordered={false}>
