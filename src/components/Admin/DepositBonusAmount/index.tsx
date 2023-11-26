@@ -17,9 +17,12 @@ const index: React.FC<{
 
     const final_bonus_amount = Math.min(deposit_bonus_amount, max_bonus_amount);
     return (
-        <Link to={`/refine/promotion/deposit-bonuses/edit/${deposit_bonus?.id}`}>
-            <SimpleAmount amount={final_bonus_amount} />
-        </Link>
+        <>
+            <div>
+                <SimpleAmount amount={final_bonus_amount} />
+            </div>
+            <Link to={`/refine/promotion/deposit-bonuses/edit/${deposit_bonus?.id}`}>{deposit_bonus?.label}</Link>
+        </>
     );
 };
 
