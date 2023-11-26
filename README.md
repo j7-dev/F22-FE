@@ -191,4 +191,6 @@ live games到 我们的casino分类
 Scratch card到 slot分类
 其他6個分類遊戲都不要
 
-
+專案 prefix:
+s7: smartbet7
+rc: Roca
