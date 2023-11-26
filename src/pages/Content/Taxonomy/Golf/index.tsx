@@ -20,6 +20,7 @@ const index: React.FC = () => {
     const { identity, isFetching, otpId, gameServer, inSupport } = useIgxTopId();
     const login_id = `${USERNAME_PREFIX}_${identity?.username}`;
 
+    console.log('⭐  login_id:', login_id);
     //如果未登入則不顯示,登入則顯示iframe
     const Container = () => {
         //如果未登入則顯示登入按鈕
