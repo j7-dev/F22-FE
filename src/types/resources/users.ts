@@ -11,6 +11,10 @@ export type TMe = TUser & {
     validBetAmount: number;
 };
 
+export const USER_STATUSES = ['UNCONFIRMED', 'ACTIVE', 'INACTIVE', 'OUT'] as const;
+
+export type TUSER_STATUSES = (typeof USER_STATUSES)[number];
+
 export type TUser = BaseType & {
     username: string;
     email: string;
@@ -35,6 +39,8 @@ export type TUser = BaseType & {
     deposit_bonus?: TDepositBonus | null;
     last_deposit?: TTransaction | null;
     commission_rate?: number;
+    is_test: boolean;
+    user_status?: TUSER_STATUSES;
 };
 
 export const BANK_ACCOUNT_FIELDS = ['bank_name', 'bank_account_number', 'owner_real_name'] as const;

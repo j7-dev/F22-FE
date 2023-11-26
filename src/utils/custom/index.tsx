@@ -16,7 +16,7 @@ export const statusColorEnum: {
 } = {
     SUCCESS: 'green',
     FAILED: 'volcano',
-    CANCEL: '#ccccc',
+    CANCEL: 'default',
     PENDING: 'orange',
 };
 

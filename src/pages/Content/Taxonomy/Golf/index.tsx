@@ -8,6 +8,7 @@ import { useShowPc } from '@/hooks/useShowPc';
 import { useTranslation } from 'react-i18next';
 import igxImg from '@/assets/images/game_provider/igxIcon.svg';
 import golfImg from '@/assets/images/game_provider/golfImg.jpg';
+import { USERNAME_PREFIX } from '@/utils';
 // import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 // import { useGetLocale } from '@refinedev/core';
 
@@ -17,6 +18,7 @@ const index: React.FC = () => {
     const { t } = useTranslation();
     //取得IGX的otp_id跟gameServer
     const { identity, isFetching, otpId, gameServer, inSupport } = useIgxTopId();
+    const login_id = `${USERNAME_PREFIX}_${identity?.username}`;
 
     //如果未登入則不顯示,登入則顯示iframe
     const Container = () => {
@@ -45,7 +47,9 @@ const index: React.FC = () => {
             );
         //如果已登入且不維護中則顯示iframe
         if (gameServer) {
-            const addUrl = `${gameServer}?otp_id=${otpId}&login_id=${identity?.username}&lang=ko-KR`;
+            console.log('⭐  login_id:', login_id);
+
+            const addUrl = `${gameServer}?otp_id=${otpId}&login_id=${login_id}&lang=ko-KR`;
             if (isFetching) return <Spin size="large" className="w-full h-screen flex justify-center items-center" />;
             // console.log('🚀 ~ addUrl:', addUrl);
             //判斷是否為safari

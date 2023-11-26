@@ -150,9 +150,9 @@ const DetailedInformation = () => {
                     value: values?.blocked,
                 },
                 {
-                    field: 'confirmed',
+                    field: 'user_status',
                     operator: 'eq',
-                    value: values?.confirmed,
+                    value: values?.user_status,
                 },
             ];
             return defaultFilters as CrudFilters;

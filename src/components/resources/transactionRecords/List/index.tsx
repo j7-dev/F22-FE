@@ -103,13 +103,6 @@ const index = () => {
         },
         filters: {
             permanent: permanentFilters,
-            initial: [
-                {
-                    field: 'status',
-                    operator: 'eq',
-                    value: 'PENDING',
-                },
-            ],
         },
         sorters: {
             initial: [

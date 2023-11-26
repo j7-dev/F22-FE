@@ -20,7 +20,7 @@ type DataType = {
     bettingMembers: number;
 };
 
-const DetailedInformation = () => {
+const DetailedInformation = ({ user_id }: { user_id?: number }) => {
     const { t } = useTranslation();
     const searchProps = useAtomValue(searchPropsAtom);
     const dateRange = searchProps.dateRange || undefined;
@@ -91,6 +91,8 @@ const DetailedInformation = () => {
         },
     ];
 
+    const filteredColumns = user_id ? columns.filter((c: any) => !['numberOfRegistrants', 'bettingMembers'].includes(c.dataIndex)) : columns;
+
     const apiUrl = useApiUrl();
     const { data, isLoading } = useCustom({
         url: `${apiUrl}/utility/statistic/daily`,
@@ -99,6 +101,7 @@ const DetailedInformation = () => {
             query: {
                 start: dateRange ? dateRange[0].startOf('day').format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
                 end: dateRange ? dateRange[1].endOf('day').format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
+                user_id,
             },
         },
     });
@@ -134,7 +137,7 @@ const DetailedInformation = () => {
 
     return (
         <>
-            <Table pagination={false} rowKey="date" size="small" columns={columns} dataSource={[sumRecord, ...dataSource]} loading={isLoading} />
+            <Table pagination={false} rowKey="date" size="small" columns={filteredColumns} dataSource={[sumRecord, ...dataSource]} loading={isLoading} />
         </>
     );
 };

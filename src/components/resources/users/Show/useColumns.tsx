@@ -1,12 +1,14 @@
 import { DateTime } from '@/components/PureComponents';
 import ReferralLink from '@/components/general/ReferralLink';
-import { TBankAccount, TVip, TMe } from '@/types';
+import { TBankAccount, TVip, TMe, TUser } from '@/types';
 import VipLink from '@/components/Admin/VipLink';
 import { useBalanceColumns } from '@/hooks';
 import BankAccount from '@/components/Admin/BankAccount';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
 import { useGetIdentity } from '@refinedev/core';
+import UserLink from '@/components/Admin/UserLink';
+import Phone from '@/components/Admin/Phone';
 
 const useColumns = () => {
     const allBalances = useBalanceColumns();
@@ -19,6 +21,11 @@ const useColumns = () => {
             key: 'username',
             title: t('Username'),
             dataIndex: 'username',
+        },
+        {
+            key: 'user_status',
+            title: t('Status'),
+            dataIndex: 'user_status',
         },
         {
             key: 'vip',
@@ -103,6 +110,18 @@ const useColumns = () => {
     const infoRightColumns = [
         ...allBalances,
         {
+            key: 'agent',
+            title: t('Agent'),
+            dataIndex: 'agent',
+            render: (agent: TUser) => (agent ? <UserLink user={agent} role="agent" /> : t('official')),
+        },
+        {
+            key: 'referral',
+            title: t('Referral'),
+            dataIndex: 'referral',
+            render: (referral: TUser) => (referral ? <UserLink user={referral} /> : t('official')),
+        },
+        {
             key: 'display_name',
             title: t('Display Name'),
             dataIndex: 'display_name',
@@ -111,6 +130,7 @@ const useColumns = () => {
             key: 'phone',
             title: t('Phone'),
             dataIndex: 'phone',
+            render: (phone: string) => <Phone phone={phone} />,
         },
         {
             key: 'allow_payments',

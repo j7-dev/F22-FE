@@ -1,29 +1,20 @@
 import { DataType } from '../types';
 import { ShowButton, EditButton } from '@refinedev/antd';
-import { BooleanIndicator, DateTime } from '@/components/PureComponents';
+import { DateTime } from '@/components/PureComponents';
 import { Link } from 'react-router-dom';
-import { TUser, TVip } from '@/types';
+import { TUser, TVip, TUSER_STATUSES } from '@/types';
 import type { ColumnsType } from 'antd/es/table';
 import { useBalanceColumns, useGetUserRoleType } from '@/hooks';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
 import UserLink from '@/components/Admin/UserLink';
+import Phone from '@/components/Admin/Phone';
+import UserStatus from '@/components/Admin/UserStatus';
 
 const useColumns = () => {
     const { t } = useTranslation();
     const allBalances = useBalanceColumns();
     const roleType = useGetUserRoleType();
-
-    const phone =
-        roleType === 'admin'
-            ? [
-                  {
-                      title: t('phone'),
-                      dataIndex: 'phone',
-                      key: 'phone',
-                  },
-              ]
-            : [];
 
     const columns: ColumnsType<DataType> = [
         {
@@ -55,7 +46,12 @@ const useColumns = () => {
             render: (referral: TUser) => (referral ? <UserLink user={referral} /> : t('official')),
         },
         ...allBalances,
-        ...phone,
+        {
+            title: t('phone'),
+            dataIndex: 'phone',
+            key: 'phone',
+            render: (phone: string) => <Phone phone={phone} />,
+        },
         {
             title: t('vip'),
             dataIndex: 'vip',
@@ -63,19 +59,11 @@ const useColumns = () => {
             render: (vip: TVip) => <Link to="/refine/system-setting/vips">{vip?.label}</Link>,
         },
         {
-            title: t('status'),
-            dataIndex: 'confirmed',
-            key: 'status',
+            title: t('Status'),
+            dataIndex: 'user_status',
+            key: 'user_status',
             align: 'center',
-            render: (confirmed: boolean) => (
-                <BooleanIndicator
-                    enabled={confirmed}
-                    tooltipProps={{
-                        title: confirmed ? 'Confirmed' : 'Not Confirmed',
-                        enabled: true,
-                    }}
-                />
-            ),
+            render: (user_status: TUSER_STATUSES) => <UserStatus user_status={user_status} />,
         },
         {
             title: t('Total Deposits'),

@@ -21,7 +21,7 @@ export const useIgxTopId = () => {
         method: 'get',
         config: {
             query: {
-                login_id: identity?.id,
+                login_id: identity?.username,
                 name: identity?.username,
             },
         },
