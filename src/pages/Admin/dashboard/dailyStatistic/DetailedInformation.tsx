@@ -91,6 +91,8 @@ const DetailedInformation = ({ user_id }: { user_id?: number }) => {
         },
     ];
 
+    const filteredColumns = user_id ? columns.filter((c: any) => !['numberOfRegistrants', 'bettingMembers'].includes(c.dataIndex)) : columns;
+
     const apiUrl = useApiUrl();
     const { data, isLoading } = useCustom({
         url: `${apiUrl}/utility/statistic/daily`,
@@ -135,7 +137,7 @@ const DetailedInformation = ({ user_id }: { user_id?: number }) => {
 
     return (
         <>
-            <Table pagination={false} rowKey="date" size="small" columns={columns} dataSource={[sumRecord, ...dataSource]} loading={isLoading} />
+            <Table pagination={false} rowKey="date" size="small" columns={filteredColumns} dataSource={[sumRecord, ...dataSource]} loading={isLoading} />
         </>
     );
 };
