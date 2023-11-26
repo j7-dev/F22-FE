@@ -67,11 +67,11 @@ const index: React.FC = () => {
             };
             return (
                 <>
-                    <div className="grid grid-cols-11 w-full h-full gap-4 md:py-16md:px-8">
-                        <div className="sm:col-start-3 sm:col-span-3 col-start-2 col-span-9">
+                    <div className="grid grid-cols-11 w-full h-full gap-4">
+                        <div className="sm:col-start-3 sm:col-span-3 col-start-4 col-span-5 flex sm:items-center items-end">
                             <img src={golfImg} alt="" className="max-w-full h-full object-contain object-center" />
                         </div>
-                        <div className="sm:col-start-7 sm:col-span-3 col-start-2 col-span-9 flex flex-col items-center justify-center gap-10">
+                        <div className="sm:col-start-7 sm:col-span-3 col-start-4 col-span-5 flex flex-col items-center sm:justify-center justify-start gap-10">
                             <img src={igxImg} alt="" className="w-full" />
                             <button onClick={handleClick} className="hidden md:block cursor-pointer w-full bg-[#492DB0] font-bold text-xl text-white border-0 rounded-2xl py-4">
                                 {t('시작')}
