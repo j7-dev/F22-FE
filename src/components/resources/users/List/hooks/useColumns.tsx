@@ -8,22 +8,12 @@ import { useBalanceColumns, useGetUserRoleType } from '@/hooks';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
 import UserLink from '@/components/Admin/UserLink';
+import Phone from '@/components/Admin/Phone';
 
 const useColumns = () => {
     const { t } = useTranslation();
     const allBalances = useBalanceColumns();
     const roleType = useGetUserRoleType();
-
-    const phone =
-        roleType === 'admin'
-            ? [
-                  {
-                      title: t('phone'),
-                      dataIndex: 'phone',
-                      key: 'phone',
-                  },
-              ]
-            : [];
 
     const columns: ColumnsType<DataType> = [
         {
@@ -55,7 +45,12 @@ const useColumns = () => {
             render: (referral: TUser) => (referral ? <UserLink user={referral} /> : t('official')),
         },
         ...allBalances,
-        ...phone,
+        {
+            title: t('phone'),
+            dataIndex: 'phone',
+            key: 'phone',
+            render: (phone: string) => <Phone phone={phone} />,
+        },
         {
             title: t('vip'),
             dataIndex: 'vip',
