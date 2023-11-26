@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Form, Input, Switch, Radio, DatePicker, Select, FormProps, Checkbox, Typography } from 'antd';
-import { TRole, TRoleType, TUser, TVip, BANK_ACCOUNT_FIELDS, TCommission, TMe } from '@/types';
+import { Form, Input, Radio, DatePicker, Select, FormProps, Checkbox, Typography } from 'antd';
+import { TRole, TRoleType, TUser, TVip, BANK_ACCOUNT_FIELDS, TCommission, TMe, USER_STATUSES } from '@/types';
 import dayjs, { Dayjs } from 'dayjs';
 import { isString, isObject } from 'lodash-es';
 import { useUserSelect, useGetSiteSetting } from '@/hooks';
@@ -63,6 +63,11 @@ const FormComponent: React.FC<{
     const support_payments = siteSetting?.support_payments || [];
     const default_payments = ['TRANSFER'];
     const support_game_providers = siteSetting?.support_game_providers || [];
+
+    const userStatuses = USER_STATUSES.map((status) => ({
+        label: t(status),
+        value: status,
+    }));
 
     useEffect(() => {
         if (!formLoading && formProps.initialValues) {
@@ -154,8 +159,8 @@ const FormComponent: React.FC<{
                     {!isString(formProps.initialValues?.birthday) && formProps.initialValues?.birthday ? <DatePicker locale={locale} className="w-full" /> : <Input />}
                 </Form.Item>
 
-                <Form.Item name="confirmed" valuePropName="checked" label={t('status')} initialValue={formType === 'create' ? true : undefined}>
-                    <Switch />
+                <Form.Item name="user_status" label={t('status')}>
+                    <Select size="small" options={userStatuses} allowClear />
                 </Form.Item>
 
                 <Form.Item name="allow_payments" label={t('Allow Payments')} initialValue={formType === 'create' ? default_payments : undefined}>
