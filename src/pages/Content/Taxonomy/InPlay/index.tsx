@@ -13,7 +13,7 @@ const index: React.FC = () => {
     const isPc = useShowPc();
     const { identity, data: token, isFetching, inSupport } = useGetBtiOperatorToken();
     const operatorToken = token?.data?.token;
-    const addUrl = operatorToken ? `?operatorToken=${operatorToken}#Live` : '';
+    const addUrl = operatorToken ? `?operatorToken=${operatorToken}` : '';
 
     if (isFetching) return <Spin size="large" className="w-full h-screen flex justify-center items-center" />;
 
