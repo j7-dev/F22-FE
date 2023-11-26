@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 import { RiCoupon3Line } from 'react-icons/ri';
 import CreateCoupon from '@/components/resources/coupons/Create';
 import CreateTxn from '@/components/resources/transactionRecords/Create';
+import DailyStatistic from '@/pages/Admin/dashboard/dailyStatistic';
 
 const index = () => {
     const { data: identity } = useGetIdentity<TMe>();
@@ -163,6 +164,11 @@ const index = () => {
                     </div>
                 </Card>
             ),
+        },
+        {
+            key: 'daily-statistic',
+            label: t('Daily Statistic'),
+            children: <DailyStatistic user_id={Number(id)} />,
         },
     ];
 

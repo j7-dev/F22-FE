@@ -20,7 +20,7 @@ type DataType = {
     bettingMembers: number;
 };
 
-const DetailedInformation = () => {
+const DetailedInformation = ({ user_id }: { user_id?: number }) => {
     const { t } = useTranslation();
     const searchProps = useAtomValue(searchPropsAtom);
     const dateRange = searchProps.dateRange || undefined;
@@ -99,6 +99,7 @@ const DetailedInformation = () => {
             query: {
                 start: dateRange ? dateRange[0].startOf('day').format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
                 end: dateRange ? dateRange[1].endOf('day').format('YYYY-MM-DD HH:mm:ss.SSSSSS') : undefined,
+                user_id,
             },
         },
     });
