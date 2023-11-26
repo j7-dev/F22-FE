@@ -40,6 +40,12 @@ const index = () => {
                 balances: {
                     fields: '*',
                 },
+                agent: {
+                    fields: ['display_name', 'username'],
+                },
+                referral: {
+                    fields: ['display_name', 'username'],
+                },
             },
         },
     });
