@@ -20,7 +20,6 @@ const index: React.FC = () => {
     const { identity, isFetching, otpId, gameServer, inSupport } = useIgxTopId();
     const login_id = `${USERNAME_PREFIX}_${identity?.username}`;
 
-    console.log('⭐  login_id:', login_id);
     //如果未登入則不顯示,登入則顯示iframe
     const Container = () => {
         //如果未登入則顯示登入按鈕
@@ -48,6 +47,8 @@ const index: React.FC = () => {
             );
         //如果已登入且不維護中則顯示iframe
         if (gameServer) {
+            console.log('⭐  login_id:', login_id);
+
             const addUrl = `${gameServer}?otp_id=${otpId}&login_id=${login_id}&lang=ko-KR`;
             if (isFetching) return <Spin size="large" className="w-full h-screen flex justify-center items-center" />;
             // console.log('🚀 ~ addUrl:', addUrl);
