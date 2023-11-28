@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2 # 使用官方的Checkout action來檢出你的代碼
+        uses: actions/checkout@v2 # 使用官方的Checkout action來檢出你的代碼 
 
       - name: Set SSH Host
         id: set-ssh-host
