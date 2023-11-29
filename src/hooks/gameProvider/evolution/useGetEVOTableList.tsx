@@ -19,22 +19,34 @@ export const useGetEVOTableList = () => {
             enabled: inSupport,
         },
     });
+    //原始資料
+    const listData = fetchData?.data || [];
+    //Evo Lobby
     //Casino 的遊戲商加上統一的formProviderCategory來分類
-    //近來的資料先排除rng-類別並加上gameProviderName和gameImg
+    //轉化資料=>近來的資料先排除rng-類別並加上gameProviderName和gameImg
     const data =
-        (fetchData?.data || undefined)
-            ?.filter((item) => !(item['Game Type'] as string).startsWith('rng-'))
-            .map((item: TGame) => {
-                return {
-                    ...item,
-                    gameName: t(item['Table Name'] as string, { ns: 'evo' }),
-                    gameID: item['Direct Launch Table ID'],
-                    gameImg: useGetImage(item['Table Name'] as string),
-                    gameCategory: mappingGameCategory({ gameProviderName: 'evolution' }),
-                    gameProviderName: 'evolution',
-                    casinoCategory: mappingCasinoCategory({ category: item['Game Type'] as string }),
-                    casinoCategoryIcon: mappingCasinoCategoryIcon({ category: item['Game Type'] as string }),
-                };
-            }) || ([] as TGame[]);
+        [
+            ...listData
+                .filter((item) => !(item['Game Type'] as string).startsWith('rng-'))
+                .map((item: TGame) => {
+                    return {
+                        ...item,
+                        gameName: t(item['Table Name'] as string, { ns: 'evo' }),
+                        gameID: item['Direct Launch Table ID'],
+                        gameImg: useGetImage(item['Table Name'] as string),
+                        gameCategory: mappingGameCategory({ gameProviderName: 'evolution' }),
+                        gameProviderName: 'evolution',
+                        casinoCategory: mappingCasinoCategory({ category: item['Game Type'] as string }),
+                        casinoCategoryIcon: mappingCasinoCategoryIcon({ category: item['Game Type'] as string }),
+                    };
+                }),
+            {
+                gameName: 'Evolution Lobby',
+                gameImg: useGetImage('Evolution Lobby'),
+                gameCategory: 'casino',
+                gameProviderName: 'evolution',
+                casinoCategory: 'all',
+            },
+        ] || ([] as TGame[]);
     return { data, isFetching };
 };

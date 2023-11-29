@@ -10,13 +10,13 @@ import { API_URL } from '@/utils';
 //TODO 移除game{}
 const evoGameConfig = {
     config: {
-        // game: {
-        //     category: '',
-        //     interface: 'view1',
-        //     table: {
-        //         id: '',
-        //     },
-        // },
+        game: {
+            category: '',
+            interface: 'view1',
+            table: {
+                id: '',
+            },
+        },
         channel: {
             wrapped: false,
             mobile: false,
@@ -27,10 +27,44 @@ const evoGameConfig = {
 export const useEvoOpenGame = () => {
     const { mutate: openGame, isLoading } = useCustomMutation();
 
-    const handleClick = ({ _item, identity: _ }: { _item: TGame; identity: TMe }) => {
-        // console.log('🚀 ~ item:', item);
-        // evoGameConfig.config.game.category = item['Game Type'] as string;
-        // evoGameConfig.config.game.table.id = item['Direct Launch Table ID'] as string;
+    const handleClick = ({ item, identity: _ }: { item: TGame; identity: TMe }) => {
+        //測試用，如果為Evolution Lobby則不帶config.game開啟遊戲
+        if (item.gameName === 'Evolution Lobby') {
+            openGame(
+                {
+                    url: `${API_URL}/api/evo/opengame`,
+                    method: 'post',
+                    values: {
+                        channel: {
+                            wrapped: false,
+                            mobile: false,
+                        },
+                    },
+                },
+                {
+                    onSuccess: (entryData) => {
+                        const url = entryData.data.entry;
+                        //判斷是否為safari
+                        const isSmartBet = /smartbet/i.test(navigator.userAgent);
+                        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+                        if (isSafari || isSmartBet) {
+                            //當前頁面跳轉
+                            window.location.href = url;
+                        } else {
+                            //否則開新分頁
+                            window.open(url, '_blank');
+                        }
+                    },
+                    onError: (error) => {
+                        console.log('error', error);
+                    },
+                },
+            );
+            return;
+        }
+        //一般遊戲
+        evoGameConfig.config.game.category = item['Game Type'] as string;
+        evoGameConfig.config.game.table.id = item['Direct Launch Table ID'] as string;
         openGame(
             {
                 url: `${API_URL}/api/evo/opengame`,

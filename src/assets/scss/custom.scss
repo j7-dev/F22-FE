@@ -251,6 +251,7 @@ $defaultBg: url("/images/EVO_Thumbnails/evolution_bg.jpg");
 	.evolution {
 		&.gameWrap {
 			background-image: $defaultBg;
+			background-size: cover;
 		}
 	}
 }
