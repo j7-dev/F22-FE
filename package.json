@@ -47,6 +47,7 @@
         "react-icons": "^4.10.1",
         "react-lazy-load-image-component": "^1.6.0",
         "react-query": "^3.39.3",
+        "react-quill": "^2.0.0",
         "react-router-dom": "^6.8.1",
         "react-slick": "^0.29.0",
         "react-virtualized-auto-sizer": "^1.0.20",

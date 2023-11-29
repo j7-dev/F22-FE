@@ -27,12 +27,18 @@ const EditVips = lazy(() => import('@/pages/Admin/systemSetting/vipSetting/Edit'
 const ListDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/List'));
 const CreateDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/Create'));
 const EditDepositBonuses = lazy(() => import('@/pages/Admin/depositBonuses/Edit'));
-const ListSiteNotifications = lazy(() => import('@/pages/Admin/systemSetting/siteNotifications/List'));
-const CreateSiteNotifications = lazy(() => import('@/pages/Admin/systemSetting/siteNotifications/Create'));
-const EditSiteNotifications = lazy(() => import('@/pages/Admin/systemSetting/siteNotifications/Edit'));
 const ListCoupons = lazy(() => import('@/pages/Admin/coupons/List'));
 const CreateCoupons = lazy(() => import('@/pages/Admin/coupons/Create'));
 const EditCoupons = lazy(() => import('@/pages/Admin/coupons/Edit'));
+const ListSiteNotifications = lazy(() => import('@/pages/Admin/systemSetting/siteNotifications/List'));
+const CreateSiteNotifications = lazy(() => import('@/pages/Admin/systemSetting/siteNotifications/Create'));
+const EditSiteNotifications = lazy(() => import('@/pages/Admin/systemSetting/siteNotifications/Edit'));
+const ListModals = lazy(() => import('@/pages/Admin/systemSetting/modal/List'));
+const CreateModals = lazy(() => import('@/pages/Admin/systemSetting/modal/Create'));
+const EditModals = lazy(() => import('@/pages/Admin/systemSetting/modal/Edit'));
+const ListBanners = lazy(() => import('@/pages/Admin/systemSetting/banner/List'));
+const CreateBanners = lazy(() => import('@/pages/Admin/systemSetting/banner/Create'));
+const EditBanners = lazy(() => import('@/pages/Admin/systemSetting/banner/Edit'));
 
 const adminRoutes = (role: string) => {
     return (
@@ -87,6 +93,12 @@ const adminRoutes = (role: string) => {
                         <Route path="site-notifications" element={<ListSiteNotifications />} />
                         <Route path="site-notifications/create" element={<CreateSiteNotifications />} />
                         <Route path="site-notifications/edit/:id" element={<EditSiteNotifications />} />
+                        <Route path="modal" element={<ListModals />} />
+                        <Route path="modal/create" element={<CreateModals />} />
+                        <Route path="modal/edit/:id" element={<EditModals />} />
+                        <Route path="banner" element={<ListBanners />} />
+                        <Route path="banner/create" element={<CreateBanners />} />
+                        <Route path="banner/edit/:id" element={<EditBanners />} />
                     </Route>
                     <Route path="/refine/promotion/">
                         <Route index path="deposit-bonuses" element={<ListDepositBonuses />} />

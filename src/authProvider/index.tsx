@@ -1,6 +1,6 @@
 import { AuthBindings } from '@refinedev/core';
 import { AuthHelper } from './AuthHelper';
-import { API_URL } from '@/utils';
+import { API_URL, IS_LOCAL } from '@/utils';
 import { axiosInstance } from '@/providers/strapi-v4/';
 import axios from 'axios';
 import { Modal } from 'antd';
@@ -174,7 +174,9 @@ export const authProvider: AuthBindings = {
             return data;
         }
 
-        sessionStorage.removeItem('API_TOKEN');
+        if (!IS_LOCAL) {
+            sessionStorage.removeItem('API_TOKEN');
+        }
 
         return null;
     },

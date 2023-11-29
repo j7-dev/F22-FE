@@ -44,6 +44,7 @@ const index: React.FC = () => {
             {
                 onSuccess: () => {
                     // 成功後登出帳號清除localStorage並且開啟登入視窗
+
                     sessionStorage.removeItem('API_TOKEN');
                     Navigate('/');
                     setSignIn(true);
