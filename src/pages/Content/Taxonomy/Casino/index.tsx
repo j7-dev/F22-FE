@@ -78,7 +78,11 @@ const index: React.FC = () => {
     const { data: evoData, isFetching: evoIsFetching } = useGetEVOTableList();
     // console.log('🚀 ~ evoData:', evoData);
     const { data: ppData, isFetching: ppIsFetching } = useGetPPTableList();
-    const ppGameData = ppData.filter((item) => item.gameCategory === 'casino');
+    const ppGameData = ppData
+        .filter((item) => item.gameCategory === 'casino')
+        //只篩選出gameName 包含 Lobby字眼的遊戲
+        .filter((item) => item.gameName?.includes('Lobby'));
+
     // console.log('🚀 ~ ppGameData:', ppGameData);
     const tokenGamesData = tokenData.filter((item) => item.gameCategory === 'casino');
 
