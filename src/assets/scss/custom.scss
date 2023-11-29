@@ -244,6 +244,9 @@
 }
 //聊天室z-index
 #chat-widget-container {
+	@media screen and (max-width: 500px) {
+		bottom: 75px !important;
+	}
 	z-index: 50 !important;
 }
 $defaultBg: url("/images/EVO_Thumbnails/evolution_bg.jpg");

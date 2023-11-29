@@ -16,7 +16,7 @@ const index = () => {
         return () => clearTimeout(timer);
     }, []);
     if (showComponent) {
-        return <LiveChatWidget license="16519437" visibility="maximized" />;
+        return <LiveChatWidget license="16519437" visibility="minimized" />;
     }
     return <></>;
 };
