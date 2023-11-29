@@ -8,3 +8,4 @@ export const CODEPAY_APP_URL = import.meta.env.VITE_CODEPAY_APP_URL || '';
 export const CODEPAY_SIMPLE_ADDRESS_TO = import.meta.env.VITE_CODEPAY_SIMPLE_ADDRESS_TO || '';
 export const RECAPTCHA_SITE_KEY = import.meta.env.VITE_GOOGLE_RECAPTCHA_SITE_KEY || '6Le1nQwpAAAAAMchNBPaN647HajEbTZZ2cGV6xUx';
 export const USERNAME_PREFIX = import.meta.env.VITE_USERNAME_PREFIX || 's7';
+export const IS_LOCAL = API_URL.includes('localhost');

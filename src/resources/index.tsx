@@ -242,4 +242,28 @@ export const resources = [
             label: 'Site Notify',
         },
     },
+    {
+        name: 'cms-marketing-contents',
+        identifier: 'MODAL',
+        list: '/refine/system-setting/modal',
+        create: '/refine/system-setting/modal/create',
+        edit: '/refine/system-setting/modal/edit/:id',
+        delete: '/refine/system-setting/modal/delete/:id',
+        meta: {
+            parent: 'system-setting',
+            label: 'Modal Management',
+        },
+    },
+    {
+        name: 'cms-marketing-contents',
+        identifier: 'BANNER',
+        list: '/refine/system-setting/banner',
+        create: '/refine/system-setting/banner/create',
+        edit: '/refine/system-setting/banner/edit/:id',
+        delete: '/refine/system-setting/banner/delete/:id',
+        meta: {
+            parent: 'system-setting',
+            label: 'Banner Management',
+        },
+    },
 ];

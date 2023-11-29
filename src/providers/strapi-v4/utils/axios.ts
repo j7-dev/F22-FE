@@ -1,5 +1,6 @@
 import { notification } from 'antd';
 import axios from 'axios';
+import { IS_LOCAL } from '@/utils';
 
 const axiosInstance = axios.create();
 
@@ -14,7 +15,9 @@ axiosInstance.interceptors.response.use(
         const message = typeof response === 'string' ? response : response?.message || JSON.stringify(response);
 
         if (!requestUrl.toLowerCase().includes('/api/users/me')) {
-            sessionStorage.removeItem('API_TOKEN');
+            if (!IS_LOCAL) {
+                sessionStorage.removeItem('API_TOKEN');
+            }
             notification.error({
                 message,
             });
