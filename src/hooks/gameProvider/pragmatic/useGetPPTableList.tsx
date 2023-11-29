@@ -6,7 +6,7 @@ import { mappingRTP } from '@/utils/providerData/PPGameRTP';
 import ProviderS_PragmaticPlay from '@/assets/images/game_provider/ProviderS_PragmaticPlay.svg';
 import { TGame } from '@/types/games';
 import { useGetSiteSetting } from '@/hooks/useGetSiteSetting';
-
+//TODO getCasinoGames的回傳會提供lobby ID=>測試
 export const useGetPPTableList = () => {
     const { t } = useTranslation();
     //取得網站設定support_game_providers是否有包含PP

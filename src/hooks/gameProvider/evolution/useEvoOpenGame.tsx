@@ -7,16 +7,16 @@ import { useCustomMutation } from '@refinedev/core';
 import { TGame } from '@/types/games';
 import { TMe } from '@/types';
 import { API_URL } from '@/utils';
-
+//TODO 移除game{}
 const evoGameConfig = {
     config: {
-        game: {
-            category: '',
-            interface: 'view1',
-            table: {
-                id: '',
-            },
-        },
+        // game: {
+        //     category: '',
+        //     interface: 'view1',
+        //     table: {
+        //         id: '',
+        //     },
+        // },
         channel: {
             wrapped: false,
             mobile: false,
@@ -27,9 +27,10 @@ const evoGameConfig = {
 export const useEvoOpenGame = () => {
     const { mutate: openGame, isLoading } = useCustomMutation();
 
-    const handleClick = ({ item, identity: _ }: { item: TGame; identity: TMe }) => {
-        evoGameConfig.config.game.category = item['Game Type'] as string;
-        evoGameConfig.config.game.table.id = item['Direct Launch Table ID'] as string;
+    const handleClick = ({ _item, identity: _ }: { _item: TGame; identity: TMe }) => {
+        // console.log('🚀 ~ item:', item);
+        // evoGameConfig.config.game.category = item['Game Type'] as string;
+        // evoGameConfig.config.game.table.id = item['Direct Launch Table ID'] as string;
         openGame(
             {
                 url: `${API_URL}/api/evo/opengame`,

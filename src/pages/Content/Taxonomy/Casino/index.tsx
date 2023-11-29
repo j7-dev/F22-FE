@@ -76,6 +76,7 @@ const index: React.FC = () => {
 
     //取得遊戲列表
     const { data: evoData, isFetching: evoIsFetching } = useGetEVOTableList();
+    // console.log('🚀 ~ evoData:', evoData);
     const { data: ppData, isFetching: ppIsFetching } = useGetPPTableList();
     const ppGameData = ppData.filter((item) => item.gameCategory === 'casino');
     // console.log('🚀 ~ ppGameData:', ppGameData);
