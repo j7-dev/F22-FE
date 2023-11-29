@@ -1,8 +1,10 @@
 /*
 手機版popupLarGames 圖片設定
 */
-$allGamesFavicon: url("@/assets/images/Icon_Menu_Outlined_All_Popular.svg");
-$allGamesFaviconWhite: url("@/assets/images/Icon_Menu_Filled_All_Popular.svg");
+$recommendGamesFavicon: url("@/assets/images/Icon_Menu_Outlined_All_Popular.svg");
+$recommendGamesFaviconWhite: url("@/assets/images/Icon_Menu_Filled_All_Popular.svg");
+$favoriteIconWhite: url("@/assets/images/game_provider/slot_favorite_icon.svg");
+$favoriteIcon: url("@/assets/images/game_provider/slot_favorite_icon2.svg");
 $inPlayFavicon: url("@/assets/images/Icon_Menu_Outlined_In_Play.svg");
 $inPlayFaviconWhite: url("@/assets/images/Icon_Menu_Filled_In_Play.svg");
 $sportsFavicon: url("@/assets/images/Icon_Menu_Outlined_Sports.svg");
@@ -29,9 +31,14 @@ $eventsFaviconWhite: url("@/assets/images/Icon_Menu_Filled_Event.svg");
 				background-position: center;
 				background-repeat: no-repeat;
 			}
-			&.allGames {
+			&.recommendGames {
 				.favicon {
-					background-image: $allGamesFavicon;
+					background-image: $recommendGamesFavicon;
+				}
+			}
+			&.favorite {
+				.favicon {
+					background-image: $favoriteIcon;
 				}
 			}
 			&.inPlay {
@@ -73,9 +80,14 @@ $eventsFaviconWhite: url("@/assets/images/Icon_Menu_Filled_Event.svg");
 				color: white;
 				font-weight: 900;
 				background-color: #5932ea;
-				&.allGames {
+				&.recommendGames {
 					.favicon {
-						background-image: $allGamesFaviconWhite;
+						background-image: $recommendGamesFaviconWhite;
+					}
+				}
+				&.favorite {
+					.favicon {
+						background-image: $favoriteIconWhite;
 					}
 				}
 				&.inPlay {

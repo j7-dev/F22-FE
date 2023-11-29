@@ -15,21 +15,15 @@ export const mappingIncludesProvider = ({ providerData, category }: { providerDa
     return providerData.filter((providerItem) => providerItem.gameCategories.includes(category.value));
 };
 export const gameCategories: TGameCategory[] = [
-    {
-        label: 'In Play',
-        value: 'inPlay',
-        path: 'inPlay',
-    },
+    // {
+    //     label: 'In Play',
+    //     value: 'inPlay',
+    //     path: 'inPlay',
+    // },
     {
         label: 'Sports',
         value: 'sports',
         path: 'sports',
-    },
-    //TODO IGX先隱藏
-    {
-        label: 'Golf',
-        value: 'golf',
-        path: 'golf',
     },
     {
         label: 'Casino',
@@ -45,6 +39,11 @@ export const gameCategories: TGameCategory[] = [
         label: 'Games',
         value: 'games',
         path: 'games',
+    },
+    {
+        label: 'Golf',
+        value: 'golf',
+        path: 'golf',
     },
     {
         label: 'Events',

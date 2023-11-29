@@ -98,7 +98,7 @@ const index: React.FC = () => {
                         <div className="col-span-1 flex justify-center">
                             <img src={Icon_Main_Title} alt="" className="" />
                         </div>
-                        <span className="col-span-1 font-bold text-3xl text-[#9680EA] -ml-3">{t('SLOT')}</span>
+                        <span className="col-span-1 font-bold text-3xl text-[#9680EA] ">{t('SLOT')}</span>
                         <div className="col-start-7 col-span-4 relative flex">
                             <SearchBar onFilter={filterGame} />
                         </div>

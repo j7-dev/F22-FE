@@ -25,7 +25,7 @@ const index: React.FC<TGameListProp> = React.memo(({ gameData = [], gridColumnCo
     // const { handleDownload } = useExportCsv();
     const { t } = useTranslation();
     const { isLg, isMd } = useRwd();
-    if (gameData.length === 0)
+    if (gameData?.length === 0)
         return (
             <Empty
                 className="flex flex-col items-center "
@@ -59,7 +59,7 @@ const index: React.FC<TGameListProp> = React.memo(({ gameData = [], gridColumnCo
     };
 
     return (
-        <div className="gameList grid md:grid-cols-11 px-4 md:p-0 md:mx-0 w-full">
+        <div className="gameList grid md:grid-cols-11 p-4  md:p-0 md:mx-0 w-full">
             {/* <button onClick={handleDownload({ gameData })}>Export Button</button> */}
             <div className="col-span-9 md:col-start-2 grid h-screen md:-mx-2">
                 <AutoSizer className="autoSizerWrap">

@@ -9,7 +9,7 @@ import { useShowPc } from '@/hooks/useShowPc';
 const index = ({ gameData }: { gameData: TGame[] }) => {
     const isPc = useShowPc();
     const { t } = useTranslation();
-    if (gameData.length === 0)
+    if (gameData?.length === 0)
         return (
             <Empty
                 className="flex flex-col items-center "
@@ -25,9 +25,9 @@ const index = ({ gameData }: { gameData: TGame[] }) => {
             />
         );
     return (
-        <div className="gameList grid md:grid-cols-11 md:px-0 px-4">
+        <div className="gameList grid md:grid-cols-11 md:px-0 p-4 md:pt-0">
             <div className="col-span-9 md:col-start-2 h-fit grid grid-cols-2 gap-4 md:grid-cols-4">
-                {gameData.map((item) => {
+                {gameData?.map((item) => {
                     return <SingleGame key={nanoid()} gameItem={item} />;
                 })}
             </div>

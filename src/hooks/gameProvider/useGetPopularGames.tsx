@@ -7,18 +7,21 @@ import { gameCategories } from '@/utils/GameCategory';
 import { sampleSize } from 'lodash-es';
 import { TGameCategory } from '@/types/games/gameCategory';
 import btiIcon from '@/assets/images/game_provider/bti_icon.png';
-// import igxIcon from '@/assets/images/game_provider/igx.png';
+import igxIcon from '@/assets/images/game_provider/igx.png';
 import { tokenData } from '@/utils/providerData/Token';
+import { useIsFavorite } from '@/hooks/useIsFavorite';
 
 export const useGetPopularGames = () => {
     const { t } = useTranslation();
+    //取得收藏遊戲方法
+    const { isFavorite } = useIsFavorite();
     //取得pp遊戲資料
     const { data: ppData, isFetching: ppLoading } = useGetPPTableList();
     //取得evo遊戲資料
-    const { data: evoData, isFetching: evoLoading } = useGetEVOTableList();
+    const { data: evoData } = useGetEVOTableList();
 
     //取得所有資料後再重組
-    const isLoading = evoLoading || ppLoading;
+    const isLoading = ppLoading;
 
     //只取得Slot Games 18款遊戲資料
     const slotGames = isLoading ? [] : ([...ppData].filter((item) => item.gameCategory === 'slot') || [])?.slice(0, 16);
@@ -45,21 +48,21 @@ export const useGetPopularGames = () => {
     ];
     //TODO IGX有問題先隱藏
     //Golf Games 為IGX
-    // const golfGamesData = [
-    //     {
-    //         gameName: t('Golf'),
-    //         gameCategory: 'golf',
-    //         gameProviderName: 'golf',
-    //         gameImg: igxIcon,
-    //     },
-    // ];
+    const golfGamesData = [
+        {
+            gameName: t('Golf'),
+            gameCategory: 'golf',
+            gameProviderName: 'golf',
+            gameImg: igxIcon,
+        },
+    ];
 
     //取得Token遊戲資料
     const tokenGamesData = tokenData;
 
     //重組所有遊戲資料
     const allGamesArray = useMemo(() => {
-        return isLoading ? [] : [...liveGamesData, ...slotGames, ...sportGamesData, ...inPlayGamesData, ...tokenGamesData];
+        return isLoading ? [] : [...liveGamesData, ...slotGames, ...sportGamesData, ...inPlayGamesData, ...tokenGamesData, ...golfGamesData];
     }, [isLoading]);
 
     // 獲取隨機的6個元素
@@ -70,9 +73,14 @@ export const useGetPopularGames = () => {
     //根據gameCategories map出PopularGamesData
     const PopularGamesData: TPopularGamesData = [
         {
-            label: 'All Games',
-            value: 'allGames',
+            label: 'Recommend Games',
+            value: 'recommendGames',
             gameData: sixPoplarAllGames as TGame[],
+        },
+        {
+            label: 'Favorite',
+            value: 'favorite',
+            gameData: allGamesArray.filter((game) => isFavorite(game)) as TGame[],
         },
         ...(gameCategories
             .filter((CategoryItem: TGameCategory) => CategoryItem.value !== 'events') //過濾掉events

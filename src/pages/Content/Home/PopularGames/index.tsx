@@ -11,7 +11,7 @@ import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
 const index: React.FC = () => {
     const { t } = useTranslation();
     const showPc = useShowPc();
-    const [activeTab, setActiveTab] = useState('allGames');
+    const [activeTab, setActiveTab] = useState('recommendGames');
     const [gameDataList, setGameDataList] = useState([]);
     //取得遊戲列表
     const { PopularGamesData, isLoading } = useGetPopularGames();
@@ -64,7 +64,7 @@ const index: React.FC = () => {
     };
     //首次載入時，將全部遊戲放入gameDataList
     useEffect(() => {
-        setGameDataList(PopularGamesData.filter((item) => item.value === activeTab)[0].gameData as []);
+        setGameDataList(PopularGamesData?.filter((item) => item.value === activeTab)[0]?.gameData as []);
     }, [isLoading]);
     return (
         <div className="relative PopularGames md:w-full">
