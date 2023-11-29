@@ -25,7 +25,7 @@ export const useOpenGame = () => {
         }
 
         if (item.gameProviderName === 'evolution') {
-            handleClickEvo({ item, identity });
+            handleClickEvo({ _item: item, identity });
         } else if (item.gameProviderName === 'pragmaticPlay') {
             handleClickPp({ item, identity });
         } else if (item.gameProviderName === 'sports') {

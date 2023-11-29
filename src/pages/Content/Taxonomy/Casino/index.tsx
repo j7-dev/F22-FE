@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { nanoid } from 'nanoid';
-import { Spin, Button } from 'antd';
+import {
+    Spin,
+    // , Button
+} from 'antd';
 import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTableList';
 import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
 import { useGameFilter } from '@/hooks/gameProvider/useGameFilter';
 import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
-import { useShowPc } from '@/hooks/useShowPc';
-import { casinoCategory } from '@/utils/GameCategory/casinoCategory';
+// import { useShowPc } from '@/hooks/useShowPc';
+// import { casinoCategory } from '@/utils/GameCategory/casinoCategory';
 import { tokenData } from '@/utils/providerData/Token';
 import { TGame } from '@/types/games';
 import Banner from '@/components/ContentLayout/Banner';
@@ -15,29 +18,29 @@ import GameList from '@/components/ContentLayout/GameList';
 import NewsMarquee from '@/components/ContentLayout/NewsMarquee';
 import SearchBar from '@/components/ContentLayout/SearchBar';
 import Icon_Main_Title from '@/assets/images/icon_main_title.svg';
-import slot_favorite_icon from '@/assets/images/game_provider/slot_favorite_icon.svg';
-import slot_favorite_icon2 from '@/assets/images/game_provider/slot_favorite_icon2.svg';
-import allImg from '@/assets/images/casino/Icon_CasinoFilter_All.svg';
-import allImg2 from '@/assets/images/casino/Icon_CasinoFilter_All2.svg';
+// import slot_favorite_icon from '@/assets/images/game_provider/slot_favorite_icon.svg';
+// import slot_favorite_icon2 from '@/assets/images/game_provider/slot_favorite_icon2.svg';
+// import allImg from '@/assets/images/casino/Icon_CasinoFilter_All.svg';
+// import allImg2 from '@/assets/images/casino/Icon_CasinoFilter_All2.svg';
 
 //TODO 有空再把這邊做優化整理，太長了
 
 //由五大分類而來的分類表
-const fxnCasinoCategory = [
-    {
-        img: allImg,
-        mbImg: allImg2,
-        name: 'All',
-        Category: 'all',
-    },
-    {
-        img: slot_favorite_icon,
-        mbImg: slot_favorite_icon2,
-        name: 'Favorite',
-        Category: 'favorite',
-    },
-    ...casinoCategory,
-];
+// const fxnCasinoCategory = [
+//     {
+//         img: allImg,
+//         mbImg: allImg2,
+//         name: 'All',
+//         Category: 'all',
+//     },
+//     {
+//         img: slot_favorite_icon,
+//         mbImg: slot_favorite_icon2,
+//         name: 'Favorite',
+//         Category: 'favorite',
+//     },
+//     ...casinoCategory,
+// ];
 //Casino遊戲商
 const casinoProvider = [
     {
@@ -59,7 +62,7 @@ const casinoProvider = [
 ];
 
 const index: React.FC = () => {
-    const showPc = useShowPc();
+    // const showPc = useShowPc();
     const { t } = useTranslation();
     //跑馬燈
     const { data } = useGetMarketingContent({ position: 'header' });
@@ -112,11 +115,11 @@ const index: React.FC = () => {
         const filterGameList = filterGameFn({ provider: provider, category: chosenCategory, gameData: rawGameList as TGame[] });
         setGameDataList(filterGameList);
     };
-    const handleCategoryChange = (category: string) => () => {
-        setChosenCategory(category);
-        const filterGameList = filterGameFn({ provider: chosenProvider, category: category, gameData: rawGameList as TGame[] });
-        setGameDataList(filterGameList);
-    };
+    // const handleCategoryChange = (category: string) => () => {
+    //     setChosenCategory(category);
+    //     const filterGameList = filterGameFn({ provider: chosenProvider, category: category, gameData: rawGameList as TGame[] });
+    //     setGameDataList(filterGameList);
+    // };
 
     //搜尋遊戲函式，傳入SearchBar組件
     const filterGame = (searchGame: string) => {
@@ -142,7 +145,7 @@ const index: React.FC = () => {
             <NewsMarquee className="md:hidden" speed={15} marqueeText={marqueeText} />
             <div className="casinoSection relative md:w-full">
                 <div className="md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl md:py-4">
-                    <div className="slotTitle md:grid grid-cols-11 gap-4 border-0 border-solid border-b border-[#d5d8dc] md:shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] md:pt-9">
+                    <div className="slotTitle md:grid grid-cols-11 gap-4 border-0 border-solid border-b border-[#d5d8dc] md:shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] md:pt-9 md:mb-4">
                         <div className="hidden col-span-1 md:flex justify-center">
                             <img src={Icon_Main_Title} alt="" className="" />
                         </div>
@@ -161,7 +164,7 @@ const index: React.FC = () => {
                             })}
                         </div>
                     </div>
-                    <div className="filterSection flex flex-col gap-2 py-3 md:pt-4">
+                    {/* <div className="filterSection flex flex-col gap-2 py-3 md:pt-4">
                         <div className="casinoCategorySection px-4 overflow-x-scroll md:grid md:grid-cols-11 md:px-0 md:overflow-hidden">
                             <div className="w-fit flex flex-nowrap col-span-3 grid-cols-7 gap-1 md:w-full md:grid md:col-start-2 md:col-span-9 ">
                                 {fxnCasinoCategory.map((item) => {
@@ -176,7 +179,7 @@ const index: React.FC = () => {
                                 })}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div className="block px-4 md:hidden">
                         <SearchBar onFilter={filterGame} />
