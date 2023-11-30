@@ -35,9 +35,8 @@ export const useEvoOpenGame = () => {
                     url: `${API_URL}/api/evo/opengame`,
                     method: 'post',
                     values: {
-                        channel: {
-                            wrapped: false,
-                            mobile: false,
+                        config: {
+                            channel: { wrapped: false, mobile: false },
                         },
                     },
                 },
