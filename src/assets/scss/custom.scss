@@ -249,12 +249,12 @@
 	}
 	z-index: 50 !important;
 }
-$defaultBg: url("/images/EVO_Thumbnails/evolution_bg.jpg");
-.singleGame {
-	.evolution {
-		&.gameWrap {
-			background-image: $defaultBg;
-			background-size: cover;
-		}
-	}
-}
+// $defaultBg: url("/images/EVO_Thumbnails/evolution_bg.jpg");
+// .singleGame {
+// 	.evolution {
+// 		&.gameWrap {
+// 			background-image: $defaultBg;
+// 			background-size: cover;
+// 		}
+// 	}
+// }

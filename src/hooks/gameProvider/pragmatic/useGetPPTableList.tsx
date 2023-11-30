@@ -6,6 +6,7 @@ import { mappingRTP } from '@/utils/providerData/PPGameRTP';
 import ProviderS_PragmaticPlay from '@/assets/images/game_provider/ProviderS_PragmaticPlay.svg';
 import { TGame } from '@/types/games';
 import { useGetSiteSetting } from '@/hooks/useGetSiteSetting';
+import ppLobbyImg from '@/assets/images/game_provider/03PP.png';
 //TODO getCasinoGames的回傳會提供lobby ID=>測試
 export const useGetPPTableList = () => {
     const { t } = useTranslation();
@@ -40,7 +41,7 @@ export const useGetPPTableList = () => {
                     gameCategory: mappingGameCategory({ gameProviderName: 'pragmaticPlay', gameProviderCategory: item.typeDescription }),
                     gameProviderName: 'pragmaticPlay',
                     casinoCategory: 'all', //TODO 之後在區分他的分類
-                    gameImg: `${gameServerDomain}/game_pic/rec/325/${item.gameID}.png`,
+                    gameImg: item.gameName == 'Live Casino Lobby' ? ppLobbyImg : `${gameServerDomain}/game_pic/rec/325/${item.gameID}.png`,
                     gameListFavIcon: ProviderS_PragmaticPlay,
                     gameRTP: mappingRTP(item.gameID as string),
                 };

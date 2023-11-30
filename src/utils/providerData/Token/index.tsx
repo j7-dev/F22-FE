@@ -1,9 +1,9 @@
 import { TGame } from '@/types/games';
-import cq9 from '@/assets/images/game_provider/cq9.jpg';
-import wm from '@/assets/images/game_provider/wm.jpg';
-import aecasino from '@/assets/images/game_provider/aecasino.jpg';
-import agcasino from '@/assets/images/game_provider/agcasino.jpg';
-import mglive from '@/assets/images/game_provider/mglive.jpg';
+import cq9 from '@/assets/images/game_provider/04CQ9.png';
+import wm from '@/assets/images/game_provider/09WM.png';
+import aecasino from '@/assets/images/game_provider/02AEcasino.png';
+import agcasino from '@/assets/images/game_provider/10AG.png';
+import mglive from '@/assets/images/game_provider/06MG.png';
 import roulette from '@/assets/images/game_provider/roulette.jpeg';
 import hilo from '@/assets/images/game_provider/hilo.jpeg';
 import hilo5s from '@/assets/images/game_provider/hilo5s.jpeg';

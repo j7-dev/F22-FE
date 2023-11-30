@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { nanoid } from 'nanoid';
-import { Spin, Button } from 'antd';
+import { Spin } from 'antd';
 import { useGetEVOTableList } from '@/hooks/gameProvider/evolution/useGetEVOTableList';
 import { useGetPPTableList } from '@/hooks/gameProvider/pragmatic/useGetPPTableList';
 import { useGameFilter } from '@/hooks/gameProvider/useGameFilter';
 import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
-import { useShowPc } from '@/hooks/useShowPc';
+// import { useShowPc } from '@/hooks/useShowPc';
 // import { casinoCategory } from '@/utils/GameCategory/casinoCategory';
 import { tokenData } from '@/utils/providerData/Token';
 import { TGame } from '@/types/games';
@@ -58,7 +58,7 @@ const fxnCasinoCategory = [
 // ];
 
 const index: React.FC = () => {
-    const showPc = useShowPc();
+    // const showPc = useShowPc();
     const { t } = useTranslation();
     //跑馬燈
     const { data } = useGetMarketingContent({ position: 'header' });
@@ -142,7 +142,7 @@ const index: React.FC = () => {
             <NewsMarquee className="md:hidden" speed={15} marqueeText={marqueeText} />
             <div className="casinoSection relative md:w-full">
                 <div className="md:mx-4 md:shadow-[0_4px_20px_0px_rgba(163,112,237,0.25)] rounded-2xl">
-                    <div className="slotTitle md:grid grid-cols-11 gap-4 py-9 border-0 border-solid border-b border-[#d5d8dc] md:shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
+                    <div className="hidden slotTitle md:grid grid-cols-11 gap-4 py-9 border-0 border-solid border-b border-[#d5d8dc] md:shadow-[0_4.5px_0_0_#0000000D,0_3.5px_0_0_#FFFFFF,0_1.5px_0_0_#0000001A] ">
                         <div className="hidden col-span-1 md:flex justify-center">
                             <img src={Icon_Main_Title} alt="" className="" />
                         </div>
@@ -161,17 +161,17 @@ const index: React.FC = () => {
                             })}
                         </div> */}
                     </div>
-                    <div className="filterSection flex flex-col gap-2 py-3 md:pt-4">
+                    <div className="filterSection flex flex-col gap-2 pb-3 md:pt-4">
                         <div className="casinoCategorySection px-4 overflow-x-scroll md:grid md:grid-cols-11 md:px-0 md:overflow-hidden">
-                            <div className="w-fit flex flex-nowrap col-span-3 grid-cols-7 gap-1 md:w-full md:grid md:col-start-2 md:col-span-9 ">
+                            <div className="w-fit flex flex-nowrap col-span-3 grid-cols-5 gap-2 md:w-full md:grid md:col-start-2 md:col-span-9">
                                 {fxnCasinoCategory.map((item) => {
                                     return (
-                                        <Button key={nanoid()} onClick={handleCategoryChange(item.Category)} className={` ${chosenCategory == item.Category ? 'font-bold bg-[#5932EA] border-[#5932EA]' : 'font-medium md:bg-[#C6BBEE] border-[#9680EA]'} h-fit basis-full flex-1 col-span-1 cursor-pointer rounded-2xl md:w-full md:border-0 px-2 py-1 md:px-4 md:py-2.5`}>
-                                            <div className="flex items-center md:gap-2 gap-1">
-                                                <img src={showPc ? item.img : chosenCategory == item.Category ? item.img : item.mbImg} className="md:w-9 w-5 h-full object-center object-contain" alt="" />
-                                                <span className={`${chosenCategory == item.Category ? 'text-white' : 'text-[#9680EA]'} md:text-white md:text-base text-xs `}>{t(item.name)}</span>
+                                        <div key={nanoid()} onClick={handleCategoryChange(item.Category)} className={` ${chosenCategory == item.Category ? 'bg-[#5932EA]' : 'bg-[#9680EA]'} col-span-1 cursor-pointer rounded-2xl w-36 md:w-full`}>
+                                            <div className="md:px-4 p-3 flex h-full items-center md:gap-2 gap-1">
+                                                <img src={item.img} className="md:w-9 w-6 h-full object-center object-contain" alt="" />
+                                                <span className={`whitespace-nowrap md:whitespace-normal font-medium md:text-base text-xs text-white`}>{t(item.name)}</span>
                                             </div>
-                                        </Button>
+                                        </div>
                                     );
                                 })}
                             </div>
