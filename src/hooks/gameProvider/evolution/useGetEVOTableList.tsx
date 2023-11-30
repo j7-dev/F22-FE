@@ -4,7 +4,8 @@
 // import { mappingCasinoCategory, mappingCasinoCategoryIcon } from '@/utils/GameCategory/casinoCategory';
 import { TGame } from '@/types/games';
 import { useGetSiteSetting } from '@/hooks/useGetSiteSetting';
-import { useGetImage } from './useGetImage';
+// import { useGetImage } from './useGetImage';
+import evoLobbyImg from '@/assets/images/game_provider/01EVO.png';
 export const useGetEVOTableList = () => {
     // const { t } = useTranslation();
     //取得網站設定support_game_providers是否有包含EVO
@@ -42,7 +43,7 @@ export const useGetEVOTableList = () => {
               //     }),
               {
                   gameName: 'Evolution Lobby',
-                  gameImg: useGetImage('Evolution Lobby'),
+                  gameImg: evoLobbyImg,
                   gameID: 'evolutionLobby',
                   gameCategory: 'casino',
                   gameProviderName: 'evolution',
