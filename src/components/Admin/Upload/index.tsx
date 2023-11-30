@@ -21,11 +21,10 @@ const props: UploadProps = {
             });
             console.log('⭐  result:', result);
 
-            return result;
+            return undefined;
         }
-        return '' as any;
+        return undefined;
     },
-    beforeUpload: () => false,
     onChange: async (info) => {
         console.log('⭐  info:', info);
         const file = info.fileList[0]?.originFileObj;
@@ -48,13 +47,18 @@ const props: UploadProps = {
 };
 
 const MyUpload: React.FC = () => (
-    <Dragger {...props}>
-        <p className="ant-upload-drag-icon">
-            <InboxOutlined />
-        </p>
-        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-        <p className="ant-upload-hint">Support for a single or bulk upload. Strictly prohibited from uploading company data or other banned files.</p>
-    </Dragger>
+    <>
+        <Dragger {...props}>
+            <p className="ant-upload-drag-icon">
+                <InboxOutlined />
+            </p>
+            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+            <p className="ant-upload-hint">Support for a single or bulk upload. Strictly prohibited from uploading company data or other banned files.</p>
+        </Dragger>
+        {/* <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
+            <img alt="example" style={{ width: '100%' }} src={previewImage} />
+        </Modal> */}
+    </>
 );
 
 export default MyUpload;

@@ -116,9 +116,9 @@ const useColumns = () => {
             render: (agent: TUser) => (agent ? <UserLink user={agent} role="agent" /> : t('official')),
         },
         {
-            key: 'referral',
-            title: t('Referral'),
-            dataIndex: 'referral',
+            key: 'referrer',
+            title: t('Referrer'),
+            dataIndex: 'referrer',
             render: (referral: TUser) => (referral ? <UserLink user={referral} /> : t('official')),
         },
         {

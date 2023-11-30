@@ -19,6 +19,7 @@ import DailyStatistic from '@/pages/Admin/dashboard/dailyStatistic';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import dayjs from 'dayjs';
 import { useGetUserRoleType } from '@/hooks';
+import UserSummary2 from '@/components/Admin/UserSummary2';
 
 const index = () => {
     const roleType = useGetUserRoleType();
@@ -229,6 +230,11 @@ const index = () => {
             key: 'daily-statistic',
             label: t('Daily Statistic'),
             children: <DailyStatistic user_id={Number(id)} />,
+        },
+        {
+            key: 'referral-infomation',
+            label: t('Referral Information'),
+            children: <UserSummary2 user_id={Number(id)} />,
         },
     ];
 
