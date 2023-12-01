@@ -158,11 +158,14 @@ const useColumns = () => {
             render: (createdAt: string) => <DateTime value={createdAt} />,
         },
         {
-            //FIXME
-            key: 'updatedAt',
+            key: 'latestBetAt',
             title: t('Last BetTime'),
-            dataIndex: 'updatedAt',
-            render: (updatedAt: string) => <DateTime value={updatedAt} />,
+            dataIndex: 'latestBetAt',
+            render: (v: string) => <DateTime value={v} />,
+        },
+        {
+            title: t('Count Referrals'),
+            dataIndex: 'referrals',
         },
     ];
 

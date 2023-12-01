@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { TUser } from '@/types';
 import { DollarOutlined } from '@ant-design/icons';
 import useDpWdUserInfo from '../List/hooks/useDpWdUserInfo';
+import useUserAdditionalInfo from '../List/hooks/useUserAdditionalInfo';
 import useColumns from './useColumns';
 import NotesForm from './NotesForm';
 import { useTranslation } from 'react-i18next';
@@ -64,10 +65,13 @@ const index = () => {
     const theUser = (data?.data || {}) as TUser;
 
     const { data: dpWdUserInfoData } = useDpWdUserInfo({ user_ids: [Number(id)] });
+    const { data: userAdditionalInfo } = useUserAdditionalInfo({ user_id: Number(id) });
+
     const { user_id: _user_id, ...dpWdUserInfo } = dpWdUserInfoData?.data?.data?.[0] || {};
     const userData = {
         ...theUser,
         ...dpWdUserInfo,
+        ...userAdditionalInfo,
     };
 
     const { infoLeftColumns, infoRightColumns } = useColumns();
