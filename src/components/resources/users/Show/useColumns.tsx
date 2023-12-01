@@ -164,6 +164,7 @@ const useColumns = () => {
             render: (v: string) => <DateTime value={v} />,
         },
         {
+            key: 'referrals',
             title: t('Count Referrals'),
             dataIndex: 'referrals',
         },

@@ -1,30 +1,30 @@
 import React from 'react';
 import { InboxOutlined } from '@ant-design/icons';
 import { Upload, UploadProps } from 'antd';
-import { API_URL } from '@/utils';
-import { axiosInstance } from '@/providers/strapi-v4/utils/axios';
+// import { API_URL } from '@/utils';
+// import { axiosInstance } from '@/providers/strapi-v4/utils/axios';
 
 const { Dragger } = Upload;
 
 const props: UploadProps = {
     name: 'files',
     multiple: false,
-    action: async (file) => {
-        console.log('⭐  file:', file);
-        if (file) {
-            const formData = new FormData();
-            formData.append('files', file);
-            const result = await axiosInstance.post(`${API_URL}/api/upload`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            console.log('⭐  result:', result);
+    // action: async (file) => {
+    //     console.log('⭐  file:', file);
+    //     if (file) {
+    //         const formData = new FormData();
+    //         formData.append('files', file);
+    //         const result = await axiosInstance.post(`${API_URL}/api/upload`, formData, {
+    //             headers: {
+    //                 'Content-Type': 'multipart/form-data',
+    //             },
+    //         });
+    //         console.log('⭐  result:', result);
 
-            return undefined;
-        }
-        return undefined;
-    },
+    //         return undefined;
+    //     }
+    //     return undefined;
+    // },
     onChange: async (info) => {
         console.log('⭐  info:', info);
         const file = info.fileList[0]?.originFileObj;
