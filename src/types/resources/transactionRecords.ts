@@ -1,6 +1,6 @@
 import { TUser, BaseType, TDepositBonus, AmountType } from '@/types';
 
-export const transactionTypes = ['DEPOSIT', 'WITHDRAW', 'MANUAL', 'COUPON', 'DEBIT', 'CREDIT', 'CANCEL'] as const;
+export const transactionTypes = ['DEPOSIT', 'WITHDRAW', 'MANUAL', 'COUPON', 'DEBIT', 'CREDIT', 'BET', 'CANCEL'] as const;
 export const transactionBy = ['SYSTEM', 'ADMIN', 'USER'] as const;
 export const transactionStatus = ['SUCCESS', 'CANCEL', 'PENDING'] as const;
 

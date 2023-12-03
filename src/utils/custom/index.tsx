@@ -1,4 +1,5 @@
 import { Tag } from 'antd';
+import { invert } from 'lodash-es';
 
 export const iso8601Format = 'YYYY-MM-DDTHH:mm:ss.SSS[Z]';
 
@@ -32,3 +33,5 @@ export const gameProviderTxnEnum = {
     TOKEN: 'TOKENGP',
     IGX: 'IGX',
 };
+
+export const invertGameProviderTxnEnum = invert(gameProviderTxnEnum);
