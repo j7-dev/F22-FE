@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useGetMarketingContent } from '@/hooks/useGetMarketingContent';
 import SingleModal from './Modal';
 
 const index: React.FC = () => {
-    const [openPopup, setOpenPopup] = useState(true);
     //彈窗
-    const { data } = useGetMarketingContent({ position: 'MODAL' });
-
+    const { data, isLoading } = useGetMarketingContent({ position: 'MODAL' });
     // 從 localStorage 中讀取存儲的數據
     const fxnData = data?.filter((item) => {
         const reminderData = localStorage.getItem(`${item.id}_reminderData`) || 0;
@@ -20,20 +18,22 @@ const index: React.FC = () => {
         // 超過有效期或是首次出現，則出現彈窗
         return true;
     });
-    //如果沒有資料，則不顯示
-    if (!fxnData?.length) return <></>;
-    //FIXME 還有更好的做法嗎?
-    //把handleSetOpenPopup函數傳入SingleModal執行，每次執行都會+1，當等於fxnData?.length時，代表所有彈窗都關閉了，則把openPopup關閉
-    let closePopup = 0;
+    //首次出現彈窗的彈窗數
+    const [firstPopup, setFirstPopup] = useState(0);
+    //關閉彈窗的次數
+    const [closePopup, setClosePopup] = useState(0);
     const handleSetOpenPopup = () => {
-        closePopup++;
-        if (closePopup === fxnData?.length) {
-            setOpenPopup(false);
-        }
+        setClosePopup(closePopup + 1);
     };
+    useEffect(() => {
+        if (fxnData?.length) setFirstPopup(fxnData?.length);
+    }, [isLoading]);
+    //如果沒有資料或是關閉彈出的次數等於顯示的彈窗數，則不顯示
+    if (!fxnData?.length || (closePopup == firstPopup && firstPopup !== 0)) return <></>;
+
     return (
         <>
-            <div className={`${openPopup ? 'flex' : 'hidden'} ModalMarketing justify-center gap-10 fixed left-0 top-0 z-50 w-screen h-screen p-10 bg-[#000000d9]`}>
+            <div className={` ModalMarketing flex justify-center gap-10 fixed left-0 top-0 z-50 w-screen h-screen p-10 bg-[#000000d9]`}>
                 {fxnData?.map((item) => (
                     <SingleModal item={item} fun={handleSetOpenPopup} />
                 ))}
