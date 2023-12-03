@@ -2,8 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSetAtom, useAtom } from 'jotai';
 import { Form, Input, Button, Modal, Radio, notification } from 'antd';
-import { useRegister, useGetLocale } from '@refinedev/core';
-import ReCAPTCHA from 'react-google-recaptcha';
+import { useRegister } from '@refinedev/core';
 import { signInAtom, signUpAtom } from '@/components/ContentLayout/Header/LoginModule';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { TRegisterPayload } from '@/types';
@@ -15,10 +14,9 @@ import bankNumber from '@/assets/images/loginFrom/bankNumber.svg';
 import bankName from '@/assets/images/loginFrom/bankName.svg';
 import bankCode from '@/assets/images/loginFrom/bankCode.svg';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { RECAPTCHA_SITE_KEY } from '@/utils/env';
+import SliderCaptcha, { ActionType } from 'rc-slider-captcha';
 
 const index: React.FC = () => {
-    const locale = useGetLocale()(); //取得語系
     const { t } = useTranslation();
     //判斷Modal是否打開
     const [signUp, setSignUp] = useAtom(signUpAtom);
@@ -28,26 +26,11 @@ const index: React.FC = () => {
 
     const { mutate: register, isLoading } = useRegister<TRegisterPayload>();
     const [form] = Form.useForm();
-    const [verifyError, setVerifyError] = useState('');
     const [submitTable, setSubmitTable] = useState(false);
-    //Google驗證
-    const reCaptchaRef = useRef<ReCAPTCHA>(null);
-    const [reCaptcha, setReCaptcha] = useState<null | string>(null);
-    //成功回調
-    const onChange = (value: string | null) => {
-        setVerifyError('');
-        setReCaptcha(value);
-    };
-    //錯誤回調
-    const onErrored = () => {
-        setVerifyError('Verification Failed');
-        setReCaptcha(null);
-    };
-    //過期回調
-    const onExpired = () => {
-        setVerifyError('Verification Expired');
-        setReCaptcha(null);
-    };
+    //滑塊驗證
+    const actionRef = useRef<ActionType>();
+    const [captchaState, setCaptchaState] = useState(false);
+
     //點擊註冊會員
     const handleSignUp = (values: TRegisterPayload) => {
         const sendValues = {
@@ -134,7 +117,7 @@ const index: React.FC = () => {
             //成功回調
             () => {
                 //判斷是否有錯誤訊息，沒有的話就可以提交表單
-                if (form.getFieldsError(['userName'])[0].errors.length === 0 && reCaptcha !== null) return setSubmitTable(true);
+                if (form.getFieldsError(['userName'])[0].errors.length === 0 && captchaState) return setSubmitTable(true);
                 setSubmitTable(false);
             },
             //失敗回調
@@ -142,7 +125,11 @@ const index: React.FC = () => {
                 setSubmitTable(false);
             },
         );
-    }, [values, reCaptcha]);
+    }, [values, captchaState]);
+    //一個簡易的組件設定內距
+    const TipText = ({ text }: { text: string }) => {
+        return <span className="px-10">{t(text)}</span>;
+    };
 
     return (
         <Modal
@@ -160,7 +147,7 @@ const index: React.FC = () => {
             <div className="signUpFromSection text-center flex flex-col md:gap-2.5 w-full h-full">
                 <span className="text-[30px] text-center font-semibold text-white md:mb-9 mb-8">{t('User Sign Up')}</span>
                 {/* 錯誤訊息 */}
-                {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>}
+                {/* {verifyError && <p className="text-danger text-red-600 font-bold">{verifyError}</p>} */}
                 <Form form={form} onFinish={handleSignUp} className="signUp">
                     <Form.Item hidden name="userEmail" />
                     <Form.Item name="userName" rules={[{ required: true, message: t('Please input your Name') }, { validator: userNameValidateFunction }]}>
@@ -191,7 +178,29 @@ const index: React.FC = () => {
                             </Radio>
                         </Radio.Group>
                     </Form.Item>
-                    <ReCAPTCHA ref={reCaptchaRef} hl={locale} onChange={(token: string | null) => onChange(token)} onErrored={() => onErrored()} onExpired={() => onExpired()} className="flex justify-center" sitekey={RECAPTCHA_SITE_KEY} />
+                    <div className="flex justify-center">
+                        <SliderCaptcha
+                            mode="slider"
+                            tipText={{
+                                default: <TipText text="Please hold down the slider and drag it to the far right" />,
+                                moving: <TipText text="Please hold down the slider and drag it to the far right" />,
+                                error: <TipText text="Verification failed, please try again" />,
+                                success: <TipText text="Verification successful" />,
+                            }}
+                            errorHoldDuration={1000}
+                            onVerify={(data) => {
+                                // console.log(data);
+                                // 默认背景图宽度 320 减去默认拼图宽度 60 所以滑轨宽度是 260
+                                if (data.x === 260) {
+                                    setCaptchaState(true);
+                                    return Promise.resolve();
+                                }
+                                setCaptchaState(false);
+                                return Promise.reject();
+                            }}
+                            actionRef={actionRef}
+                        />
+                    </div>
                     <Form.Item className="mb-0">
                         <Button loading={isLoading} disabled={!submitTable} className="border-0 mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">
                             {t('Sign Up')}
