@@ -19,7 +19,7 @@ import logo from '@/assets/images/1002_logo_f.svg';
 import logo2 from '@/assets/images/1002_logo_s.svg';
 import logo_footer from '@/assets/images/newMenuIcon/logo_icon+text.svg';
 import iosPopupImgPC from '@/assets/images/howToInstallApp/Smart_Bet_download_Web.jpg';
-import iosPopupImgMobile from '@/assets/images/howToInstallApp/Smart_Bet_download_Mobile.png';
+// import iosPopupImgMobile from '@/assets/images/howToInstallApp/Smart_Bet_download_Mobile.png';
 import androidPopupImgPC from '@/assets/images/howToInstallApp/Smart_Bet_download_Web_Android.jpg';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
@@ -30,8 +30,8 @@ export const Footer: React.FC = () => {
     const { show: showAndroid, modalProps: modalAndroid } = useModal();
     const { show: showIos, modalProps: modalIos } = useModal();
     //QRCode
-    const androidUrl = `https://${window.location.hostname}/apk/app.apk`;
-    const iosUrl = `itms-services://?action=download-manifest&url=https://${window.location.hostname}/ipa/app.plist`;
+    // const androidUrl = `https://${window.location.hostname}/apk/app.apk`;
+    // const iosUrl = `itms-services://?action=download-manifest&url=https://${window.location.hostname}/ipa/app.plist`;
     // const [androidQrCode, setAndroidQrCode] = React.useState('');
     // const [iosQrCode, setIosQrCode] = React.useState('');
     // const generateQR = async ({ setAndroidUrl, setIosUrl }: { setAndroidUrl: string; setIosUrl: string }) => {
@@ -86,12 +86,7 @@ export const Footer: React.FC = () => {
                     {/* qr code */}
                     <div className="md:pr-10 grid grid-cols-2 col-span-3 gap-4">
                         <div className="androidQrCode flex flex-col gap-4 justify-center">
-                            {/* <img src={androidQrCode} alt="" className="w-full" /> */}
-                            {/* TODO 未來看看有沒有辦法合併 */}
-                            <a href={androidUrl} className="md:hidden">
-                                <img src={googlePlay} alt="" className="w-full" />
-                            </a>
-                            <a onClick={showAndroid} className="hidden md:block cursor-pointer">
+                            <a onClick={showAndroid} className="cursor-pointer">
                                 <img src={googlePlay} alt="" className="w-full" />
                             </a>
                             <Modal {...modalAndroid} classNames={{ mask: 'md:bg-[#000000d9] blur-sm', content: 'p-0 rounded-2xl overflow-hidden' }} closeIcon={<AiFillCloseCircle color="black" size={30} />} footer={null} centered>
@@ -99,15 +94,11 @@ export const Footer: React.FC = () => {
                             </Modal>
                         </div>
                         <div className="iosQrCode flex flex-col gap-4 justify-center ">
-                            {/* <img src={iosQrCode} alt="" className="w-full" /> */}
                             <a onClick={showIos} className="cursor-pointer">
                                 <img src={appStore} alt="" className="w-full" />
                             </a>
                             <Modal {...modalIos} className="w-auto" classNames={{ mask: 'md:bg-[#000000d9] blur-sm', content: 'bg-[#ebe3f9] p-0 rounded-2xl overflow-hidden' }} closeIcon={<AiFillCloseCircle color="black" size={30} />} footer={null} centered>
-                                <img src={showPc ? iosPopupImgPC : iosPopupImgMobile} alt="" className="w-full md:h-screen" />
-                                <a href={iosUrl} className="md:hidden justify-center flex mb-10">
-                                    <img src={appStore} alt="" className="w-1/2" />
-                                </a>
+                                <img src={iosPopupImgPC} alt="" className="w-full md:h-screen" />
                             </Modal>
                         </div>
                     </div>

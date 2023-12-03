@@ -584,5 +584,8 @@
     "PP": "프라그마틱",
     "Recommend Games": "추천게임",
     "Referral Information": "추천리스트",
-    "Count Referrals": "지인추천수"
+    "Count Referrals": "지인추천수",
+    "Please hold down the slider and drag it to the far right": "눌러서 오른쪽 끝까지 슬라이드 하세요",
+    "Verification successful": "인증성공",
+    "Verification failed, please try again": "인증 실패, 다시 시도하세요"
 }

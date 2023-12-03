@@ -9,11 +9,18 @@ import WallerContainer from './WallerContainer';
 import GameNavContainer from './GameNavContainer';
 import appStore from '@/assets/images/sideBar/appStore.png';
 import googlePlay from '@/assets/images/sideBar/googlePlay.png';
+import { Modal } from 'antd';
+import { useModal } from '@refinedev/antd';
+import iosPopupImgMobile from '@/assets/images/howToInstallApp/Smart_Bet_download_Mobile.png';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 export const activeMenuAtom = atom('');
 export const mbSidebarAtom = atom(false); //手機版選單是否打開
 
 export const Sidebar: React.FC = () => {
+    const androidUrl = `https://${window.location.hostname}/apk/app.apk`;
+    const iosUrl = `itms-services://?action=download-manifest&url=https://${window.location.hostname}/ipa/app.plist`;
+    const { show: showIos, modalProps: modalIos } = useModal();
     const sidebarRef = useRef<HTMLDivElement>(null);
     const { t } = useTranslation();
     const [mbSidebar, setMbSidebar] = useAtom(mbSidebarAtom);
@@ -63,12 +70,21 @@ export const Sidebar: React.FC = () => {
                 <WallerContainer />
                 {/* 手機版IPA與APK下載連結 */}
                 <div className="appDownload md:hidden flex flex-col gap-2 mt-[50px] w-full px-6">
-                    <a href={`itms-services://?action=download-manifest&url=https://${window.location.hostname}/ipa/app.plist`} className="">
+                    {/* <a href={androidUrl} className="">
                         <img src={appStore} alt="" className="w-[144px]" />
-                    </a>
-                    <a href="/apk/smtbet7.apk" className="">
+                    </a> */}
+                    <a href={androidUrl} className="">
                         <img src={googlePlay} alt="" className="w-[144px]" />
                     </a>
+                    <a onClick={showIos} className="cursor-pointer">
+                        <img src={appStore} alt="" className="w-[144px]" />
+                    </a>
+                    <Modal {...modalIos} className="w-auto" classNames={{ mask: 'md:bg-[#000000d9] blur-sm', content: 'bg-[#ebe3f9] p-0 rounded-2xl overflow-hidden' }} closeIcon={<AiFillCloseCircle color="black" size={30} />} footer={null} centered>
+                        <img src={iosPopupImgMobile} alt="" className="w-full md:h-screen" />
+                        <a href={iosUrl} className="md:hidden justify-center flex mb-10">
+                            <img src={appStore} alt="" className="w-1/2" />
+                        </a>
+                    </Modal>
                 </div>
                 {/* 手機版登出 */}
                 {isLogin ? (
