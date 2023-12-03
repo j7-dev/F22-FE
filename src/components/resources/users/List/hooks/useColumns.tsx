@@ -41,9 +41,9 @@ const useColumns = () => {
         },
         {
             title: t('Referral'),
-            dataIndex: 'referral',
-            key: 'referral',
-            render: (referral: TUser) => (referral ? <UserLink user={referral} /> : t('official')),
+            dataIndex: 'referrer',
+            key: 'referrer',
+            render: (referrer: TUser) => (referrer ? <UserLink user={referrer} /> : t('official')),
         },
         ...allBalances,
         {

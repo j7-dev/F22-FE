@@ -17,7 +17,9 @@ const EditCommission = lazy(() => import('@/pages/Admin/agents/commissionSetting
 const CommissionSettlement = lazy(() => import('@/pages/Admin/agents/commissionSettlement'));
 const AffCommissionTransactions = lazy(() => import('@/pages/Admin/agents/affCommissionTransactions'));
 const AffTransactions = lazy(() => import('@/pages/Admin/agents/affTransactions'));
-const ListBettingRecords = lazy(() => import('@/pages/Admin/bettingManagement/List'));
+const ListBettingRecords = lazy(() => import('@/pages/Admin/bettingManagement/ListBettingRecords'));
+const ListMemberBettingRecords = lazy(() => import('@/pages/Admin/bettingManagement/ListMemberBettingRecords'));
+
 const ListDeposits = lazy(() => import('@/pages/Admin/payments/listDeposits'));
 const ListWithdraws = lazy(() => import('@/pages/Admin/payments/listWithdraws'));
 const SiteSetting = lazy(() => import('@/pages/Admin/systemSetting/siteSetting/List'));
@@ -83,6 +85,7 @@ const adminRoutes = (role: string) => {
                     <Route path="/refine/betting-management/">
                         <Route index element={<ListBettingRecords />} />
                         <Route path="betting-records" element={<ListBettingRecords />} />
+                        <Route path="member-betting-records" element={<ListMemberBettingRecords />} />
                     </Route>
                     <Route path="/refine/system-setting/">
                         <Route index element={<ListVips />} />

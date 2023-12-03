@@ -45,7 +45,7 @@ const DetailedInformation = () => {
                 agent: {
                     fields: ['display_name', 'username'],
                 },
-                referral: {
+                referrer: {
                     fields: ['display_name', 'username'],
                 },
                 balances: {

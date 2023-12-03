@@ -144,6 +144,30 @@ const index: React.FC<{ user_id?: string | number } & ListProps> = ({ user_id, .
             showSizeChanger: true,
             pageSizeOptions: ['20', '50', '100', '500', '1000'],
         },
+        summary: (pageData) => {
+            const totalDebitAmount = pageData?.reduce((acc, cur) => acc + (cur?.debit_amount || 0), 0) * -1;
+            const totalCreditAmount = pageData?.reduce((acc, cur) => acc + (cur?.credit_amount || 0), 0) * -1;
+            const totalWinLoss = totalDebitAmount + totalCreditAmount;
+
+            return (
+                <>
+                    <Table.Summary.Row>
+                        <Table.Summary.Cell index={0}>Current Page Total</Table.Summary.Cell>
+                        <Table.Summary.Cell index={1}></Table.Summary.Cell>
+                        <Table.Summary.Cell index={2}></Table.Summary.Cell>
+                        <Table.Summary.Cell index={3}>
+                            <SimpleAmount amount={totalDebitAmount} />
+                        </Table.Summary.Cell>
+                        <Table.Summary.Cell index={4}>
+                            <SimpleAmount amount={totalCreditAmount} />
+                        </Table.Summary.Cell>
+                        <Table.Summary.Cell index={5}>
+                            <SimpleAmount amount={totalWinLoss} />
+                        </Table.Summary.Cell>
+                    </Table.Summary.Row>
+                </>
+            );
+        },
     } as TableProps<DataType>;
 
     const filterTagsKey = JSON.stringify(searchFormProps?.form?.getFieldsValue());
@@ -160,7 +184,6 @@ const index: React.FC<{ user_id?: string | number } & ListProps> = ({ user_id, .
                             <FilterTags key={filterTagsKey} form={searchFormProps.form} />
                         </div>
                         <Table {...formattedTableProps} />
-                        <hr className="my-8" />
                     </Card>
                 </Col>
             </Row>
