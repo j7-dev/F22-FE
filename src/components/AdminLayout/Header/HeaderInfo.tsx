@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { useCustom, useApiUrl } from '@refinedev/core';
 import { Spin } from 'antd';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
 import { TTable1, TTable2, TTable3, TTable4 } from './types';
+import { useAudio, audioCondition } from './utils';
 
 const HeaderInfo = () => {
     const apiUrl = useApiUrl();
@@ -27,6 +29,17 @@ const HeaderInfo = () => {
 
     const betAmountUser = table2.find((item) => item.label === 'bet users');
     const formattedTabled2 = table2.filter((item) => item.label !== 'bet users');
+    const { Audio, play } = useAudio();
+
+    const meetPlayCondition = audioCondition(table3);
+
+    useEffect(() => {
+        if (meetPlayCondition) {
+            console.log('⭐  meetPlayCondition:', meetPlayCondition);
+            play();
+        }
+    }, [meetPlayCondition]);
+
     return (
         <Spin spinning={isFetching}>
             <div className="overflow-x-auto" style={{ maxWidth: 'calc(100vw - 6rem)' }}>
@@ -165,6 +178,7 @@ const HeaderInfo = () => {
                     </table>
                 </div>
             </div>
+            <Audio />
         </Spin>
     );
 };
