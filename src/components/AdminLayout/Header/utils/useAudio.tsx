@@ -14,7 +14,7 @@ const useAudio = () => {
     };
 
     const Audio = () => (
-        <audio ref={audio} controls>
+        <audio ref={audio} controls className="hidden">
             <source src={audioUrl} type="audio/mp3" />
             Your browser does not support the audio element.
         </audio>
