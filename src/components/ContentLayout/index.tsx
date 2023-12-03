@@ -4,7 +4,7 @@ import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import GamePopup from './Games/Game/Popup'; //TODO 這是3小?的彈窗,之後有時間移除
 import LiveChatWidget from './LiveChatWidget';
-// import CmsModal from './CmsModal';
+import CmsModal from './CmsModal';
 const Layout = () => {
     //取得mobileBottom的高度
     const mobileBottom = document.querySelector('.mobileBottom');
@@ -22,7 +22,7 @@ const Layout = () => {
                 <GamePopup />
             </div>
             <LiveChatWidget />
-            {/* <CmsModal /> */}
+            <CmsModal />
         </div>
     );
 };
