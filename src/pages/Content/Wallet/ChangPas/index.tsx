@@ -4,7 +4,7 @@ import { Input, Button, Form, Modal } from 'antd';
 import { useModal } from '@refinedev/antd';
 import { useChangePassword } from '@/hooks/resources/useChangePassword';
 import ChangPasIcon from '@/assets/images/newMyPage/ChangPas.svg';
-import passwordIcon from '@/assets/images/loginFrom/password.svg';
+import psdIcon from '@/assets/images/loginFrom/password.svg';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 const index: React.FC = () => {
@@ -48,13 +48,13 @@ const index: React.FC = () => {
                         <Form form={form} onFinish={(values) => changePassword(values)} className="h-full">
                             <div className="flex flex-col justify-between">
                                 <Form.Item name="currentPassword" rules={[{ required: true, message: 'Please input your Password' }]}>
-                                    <Input.Password prefix={<img src={passwordIcon} />} placeholder={t('Change Password')} />
+                                    <Input.Password prefix={<img src={psdIcon} />} placeholder={t('Change Password')} />
                                 </Form.Item>
                                 <Form.Item name="newPas">
-                                    <Input.Password prefix={<img src={passwordIcon} />} placeholder={t('New Password')} />
+                                    <Input.Password prefix={<img src={psdIcon} />} placeholder={t('New Password')} />
                                 </Form.Item>
                                 <Form.Item name="checkPas" rules={[{ required: true, message: 'Please input your Password' }, { validator: validateFunction }]}>
-                                    <Input.Password prefix={<img src={passwordIcon} />} placeholder={t('Check Password')} />
+                                    <Input.Password prefix={<img src={psdIcon} />} placeholder={t('Check Password')} />
                                 </Form.Item>
                                 <Form.Item noStyle>
                                     <Button loading={isLoading} className="border-0 mt-6 flex w-[200px] m-auto h-10 items-center rounded-2xl text-xl font-semibold bg-white text-[#5932EA] justify-center shadow-[2px_4px_4px_0px_#4F2AEA2B]" htmlType="submit">

@@ -4,7 +4,7 @@ import { useSetAtom, useAtom } from 'jotai';
 import { Form, Input, Button, Modal } from 'antd';
 import { useLogin, useIsAuthenticated } from '@refinedev/core';
 import { signInAtom, signUpAtom } from '@/components/ContentLayout/Header/LoginModule';
-import passwordIcon from '@/assets/images/loginFrom/password.svg';
+import psdIcon from '@/assets/images/loginFrom/password.svg';
 import userNameIcon from '@/assets/images/loginFrom/userName.svg';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import SliderCaptcha, { ActionType } from 'rc-slider-captcha';
@@ -102,7 +102,7 @@ const index: React.FC = () => {
                             <Input placeholder={t('User Name')} prefix={<img src={userNameIcon} />} bordered={false} />
                         </Form.Item>
                         <Form.Item name="userPas" rules={[{ required: true, message: t('Please input your Password') }]}>
-                            <Input.Password placeholder={t('User Password')} prefix={<img src={passwordIcon} />} bordered={false} />
+                            <Input.Password placeholder={t('User Password')} prefix={<img src={psdIcon} />} bordered={false} />
                         </Form.Item>
                         <div className="flex justify-center">
                             <SliderCaptcha

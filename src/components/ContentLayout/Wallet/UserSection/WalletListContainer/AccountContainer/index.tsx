@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import { useTranslation } from 'react-i18next';
 import { activeMenuAtom } from '@/components/ContentLayout/Sidebar';
 import historyIcon from '@/assets/images/history-icon.svg';
-import passwordIcon from '@/assets/images/password-icon.svg';
+import psdIcon from '@/assets/images/password-icon.svg';
 import { AiOutlineDown } from 'react-icons/ai';
 
 const index: React.FC = () => {
@@ -32,7 +32,7 @@ const index: React.FC = () => {
                     <span className="text-sm font-bold text-[#2B3240]">{t('Cash History')}</span>
                 </div>
                 <div className={`h-10 gap-2.5  rounded-lg flex justify-start items-center px-2 hover:bg-[#F3F3F4] cursor-pointer ${selectedSection === 'changePassword' ? 'bg-[#F3F3F4]' : ''}`} onClick={() => handleClick('changePassword')}>
-                    <img src={passwordIcon as unknown as string} alt="" />
+                    <img src={psdIcon as unknown as string} alt="" />
                     <span className="text-sm font-bold text-[#2B3240]">{t('Change Password')}</span>
                 </div>
             </div>
