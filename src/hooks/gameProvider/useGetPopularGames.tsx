@@ -27,7 +27,17 @@ export const useGetPopularGames = () => {
     const slotGames = isLoading ? [] : ([...ppData].filter((item) => item.gameCategory === 'slot') || [])?.slice(0, 16);
 
     //只取得Casino 18款遊戲資料
-    const liveGamesData = isLoading ? [] : ([...evoData, ...ppData.filter((item) => item.gameCategory === 'casino')] || [])?.slice(0, 16);
+    const liveGamesData = isLoading
+        ? []
+        : (
+              [
+                  ...evoData,
+                  ...ppData
+                      .filter((item) => item.gameCategory === 'casino')
+                      //只篩選出gameName 包含 Lobby字眼的遊戲
+                      .filter((item) => item.gameName?.includes('Live Casino Lobby')),
+              ] || []
+          )?.slice(0, 16);
     //設定Sport Games 為BTI
     const sportGamesData = [
         {
