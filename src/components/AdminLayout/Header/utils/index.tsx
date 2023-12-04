@@ -1,2 +1,2 @@
 export { default as useAudio } from './useAudio';
-export { default as audioCondition } from './audioCondition';
+export { default as playAudioCondition } from './playAudioCondition';

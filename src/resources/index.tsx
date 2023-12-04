@@ -159,6 +159,15 @@ export const resources = [
         },
     },
     {
+        name: 'member-betting-records',
+        identifier: 'member-betting-records',
+        list: '/refine/betting-management/member-betting-records',
+        meta: {
+            parent: 'betting-management',
+            label: 'Member Betting Records',
+        },
+    },
+    {
         name: 'promotion',
         meta: {
             label: 'Promotion',

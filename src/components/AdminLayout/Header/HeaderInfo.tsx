@@ -4,7 +4,9 @@ import { Spin } from 'antd';
 import SimpleAmount from '@/components/Admin/SimpleAmount';
 import { useTranslation } from 'react-i18next';
 import { TTable1, TTable2, TTable3, TTable4 } from './types';
-import { useAudio, audioCondition } from './utils';
+import { useAudio, playAudioCondition } from './utils';
+import { ArrowRightOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 const HeaderInfo = () => {
     const apiUrl = useApiUrl();
@@ -31,14 +33,14 @@ const HeaderInfo = () => {
     const formattedTabled2 = table2.filter((item) => item.label !== 'bet users');
     const { Audio, play } = useAudio();
 
-    const meetPlayCondition = audioCondition(table3);
-
     useEffect(() => {
-        if (meetPlayCondition) {
-            console.log('⭐  meetPlayCondition:', meetPlayCondition);
+        sessionStorage.setItem('table3', JSON.stringify(table3));
+
+        const isChange = playAudioCondition(table3);
+        if (isChange) {
             play();
         }
-    }, [meetPlayCondition]);
+    }, [JSON.stringify(table3)]);
 
     return (
         <Spin spinning={isFetching}>
@@ -138,10 +140,15 @@ const HeaderInfo = () => {
                         </tr>
                         {table3.map((item) => {
                             const { label, pending, confirmed } = item;
+                            const link = getLink(label);
                             return (
                                 <tr key={label}>
-                                    <th className="w-1/4">{t(label)}</th>
-                                    <td>{pending}</td>
+                                    <th className="w-1/4">
+                                        <Link to={link}>
+                                            {t(label)} <ArrowRightOutlined />
+                                        </Link>
+                                    </th>
+                                    <td className={pending > 0 ? 'bg-red-300' : ''}>{pending}</td>
                                     <td>{confirmed}</td>
                                 </tr>
                             );
@@ -182,5 +189,18 @@ const HeaderInfo = () => {
         </Spin>
     );
 };
+
+function getLink(label: string) {
+    switch (label) {
+        case 'deposit':
+            return '/refine/payments/deposit/list';
+        case 'withdraw':
+            return '/refine/payments/withdraw/list';
+        case 'register':
+            return '/refine/members/list';
+        default:
+            return '/refine/home';
+    }
+}
 
 export default HeaderInfo;

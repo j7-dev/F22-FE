@@ -5,11 +5,8 @@ const useAudio = () => {
     const audioUrl = `${window.location.origin}/audio/notice.mp3`;
 
     const play = () => {
-        console.log('⭐  audio.current:', audio.current);
-
         if (audio.current) {
             audio.current.play();
-            console.log('⭐  played:');
         }
     };
 
